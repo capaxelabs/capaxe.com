@@ -1,6 +1,5 @@
 'use client';
-import { motion } from "framer-motion";
-import Image from "next/image";
+import { motion } from "motion/react";
 import { ShoppingBagIcon, CodeBracketIcon, PhoneIcon } from '@heroicons/react/24/outline';
 import { siteConfig } from '@/config/site';
 import { menuConfig } from '@/config/menu';
