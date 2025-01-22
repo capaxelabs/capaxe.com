@@ -28,5 +28,33 @@ export const siteConfig: SiteConfig = {
         email: 'contact@capaxelabs.com',
         phone: '+1 (555) 123-4567',
         address: '123 Tech Street, Silicon Valley, CA 94025'
+    },
+    hero: {
+        title: 'Capaxe Labs',
+        subtitle: '(Silicon Valley Based)',
+        description: 'Professional Shopify development and web solutions for growing businesses.',
+        slides: [
+            '/hero-slide1.jpg',
+            '/hero-slide2.jpg',
+            '/hero-slide3.jpg'
+        ]
+    },
+    services: {
+        title: 'Our Services',
+        description: 'We deliver cutting-edge Shopify solutions that drive e-commerce success.',
+        items: [
+            {
+                title: 'Shopify Development',
+                description: 'Custom Shopify store development tailored to your needs'
+            },
+            {
+                title: 'E-commerce Solutions',
+                description: 'End-to-end e-commerce implementation and optimization'
+            },
+            {
+                title: 'Technical Support',
+                description: '24/7 technical support for your online store'
+            }
+        ]
     }
 } 
