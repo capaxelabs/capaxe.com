@@ -15,6 +15,20 @@ export interface SiteConfig {
         github: string
         linkedin: string
     }
+    hero: {
+        title: string
+        subtitle: string
+        description: string
+        slides: string[]
+    }
+    services: {
+        title: string
+        description: string
+        items: {
+            title: string
+            description: string
+        }[]
+    }
     contact: {
         email: string
         phone: string
