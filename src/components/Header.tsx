@@ -23,7 +23,7 @@ export const Header = () => {
     return (
         <div className="fixed top-0 left-0 w-full z-50 flex justify-center">
             <motion.header
-                className={`mx-4 mt-4 w-full max-w-5xl rounded-lg transition-all duration-300 ${isScrolled ? 'bg-white/80 backdrop-blur-md shadow-lg' : 'bg-white/50 backdrop-blur-sm'
+                className={`mx-4 mt-4 w-full max-w-5xl rounded-lg transition-all duration-300 ${isScrolled ? 'bg-white/80 backdrop-blur-md shadow-lg' : 'bg-white/50 backdrop-blur-xs'
                     }`}
                 initial={{ y: -100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}

@@ -26,8 +26,8 @@ import { siteConfig } from "@/config/site";
 
 const LogoHero = () => {
     return (
-        <section className="h-[90vh] bg-background pb-20">
-            <div className="w-full px-8 py-20  md:py-20 flex flex-col items-center">
+        <section className="h-[90vh] bg-background pb-20 flex flex-col justify-between">
+            <div className="flex-1 w-full px-8 flex flex-col items-center justify-center">
                 <h1 className="text-center text-4xl md:text-6xl max-w-xl font-semibold">
                     {siteConfig.hero.title}
                 </h1>
@@ -39,27 +39,29 @@ const LogoHero = () => {
                 </button>
             </div>
 
-            <div className="flex  overflow-hidden">
-                <TranslateWrapper>
-                    <LogoItemsTop />
-                </TranslateWrapper>
-                <TranslateWrapper>
-                    <LogoItemsTop />
-                </TranslateWrapper>
-                <TranslateWrapper>
-                    <LogoItemsTop />
-                </TranslateWrapper>
-            </div>
-            <div className="flex overflow-hidden mt-4">
-                <TranslateWrapper reverse>
-                    <LogoItemsBottom />
-                </TranslateWrapper>
-                <TranslateWrapper reverse>
-                    <LogoItemsBottom />
-                </TranslateWrapper>
-                <TranslateWrapper reverse>
-                    <LogoItemsBottom />
-                </TranslateWrapper>
+            <div className="mt-auto">
+                <div className="flex overflow-hidden">
+                    <TranslateWrapper>
+                        <LogoItemsTop />
+                    </TranslateWrapper>
+                    <TranslateWrapper>
+                        <LogoItemsTop />
+                    </TranslateWrapper>
+                    <TranslateWrapper>
+                        <LogoItemsTop />
+                    </TranslateWrapper>
+                </div>
+                <div className="flex overflow-hidden mt-4">
+                    <TranslateWrapper reverse>
+                        <LogoItemsBottom />
+                    </TranslateWrapper>
+                    <TranslateWrapper reverse>
+                        <LogoItemsBottom />
+                    </TranslateWrapper>
+                    <TranslateWrapper reverse>
+                        <LogoItemsBottom />
+                    </TranslateWrapper>
+                </div>
             </div>
         </section>
     );

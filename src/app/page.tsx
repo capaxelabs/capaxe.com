@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+
 import { motion, useScroll, useTransform } from "motion/react";
 import { ShoppingBagIcon, CodeBracketIcon, PhoneIcon } from '@heroicons/react/24/outline';
 import { siteConfig } from '@/config/site';
@@ -75,7 +75,7 @@ export default function Home() {
             <div className="grid md:grid-cols-3 gap-8">
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className="p-6 rounded-xl bg-gradient-to-br from-purple-100 to-blue-100 shadow-lg"
+                className="p-6 rounded-xl bg-linear-to-br from-purple-100 to-blue-100 shadow-lg"
               >
                 <ShoppingBagIcon className="w-12 h-12 text-purple-600 mb-4" />
                 <h3 className="text-xl font-semibold mb-2">Shopify Store Development</h3>
@@ -84,7 +84,7 @@ export default function Home() {
 
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className="p-6 rounded-xl bg-gradient-to-br from-blue-100 to-purple-100 shadow-lg"
+                className="p-6 rounded-xl bg-linear-to-br from-blue-100 to-purple-100 shadow-lg"
               >
                 <CodeBracketIcon className="w-12 h-12 text-blue-600 mb-4" />
                 <h3 className="text-xl font-semibold mb-2">Web Development</h3>
@@ -93,7 +93,7 @@ export default function Home() {
 
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className="p-6 rounded-xl bg-gradient-to-br from-purple-100 to-blue-100 shadow-lg"
+                className="p-6 rounded-xl bg-linear-to-br from-purple-100 to-blue-100 shadow-lg"
               >
                 <PhoneIcon className="w-12 h-12 text-purple-600 mb-4" />
                 <h3 className="text-xl font-semibold mb-2">24/7 Support</h3>

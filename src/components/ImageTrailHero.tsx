@@ -1,7 +1,6 @@
 import React, { MouseEventHandler, ReactNode, useRef } from "react";
 import { motion, useAnimate } from "motion/react";
-import { FiArrowDownCircle, FiDollarSign } from "react-icons/fi";
-import { SiApple } from "react-icons/si";
+import { FiArrowDownCircle } from "react-icons/fi";
 import Image from 'next/image';
 import { siteConfig } from '@/config/site';
 
@@ -40,7 +39,7 @@ export const ImageTrailHero = () => {
 
 const NavBar = () => {
     return (
-        <nav className="absolute left-0 right-0 top-0 z-[99999999]">
+        <nav className="absolute left-0 right-0 top-0 z-99999999">
             <div className="bg-slate-900 text-center">
                 <p className="flex items-center justify-center gap-1 py-0.5 text-sm font-medium uppercase text-slate-100">
                     <span>Get your Shopify store up and running</span>
@@ -79,7 +78,7 @@ const NavBar = () => {
 
 const Copy = () => {
     return (
-        <div className="z-[999999] absolute left-0 right-0 bottom-10">
+        <div className="z-999999 absolute left-0 right-0 bottom-10">
             <div className="mx-auto flex max-w-7xl items-center justify-between p-4 md:p-8">
                 <div className="mx-auto text-center">
                     <div className="flex items-center justify-center gap-4 mb-6">
@@ -252,13 +251,20 @@ const MouseImageTrail = ({
             {children}
 
             {images.map((img, index) => (
-                <img
-                    className="pointer-events-none absolute left-0 top-0 h-36 w-auto rounded-xl border-2 border-slate-900 bg-slate-800 object-cover opacity-0"
-                    src={img}
-                    alt={`Mouse move image ${index}`}
+                <div
                     key={index}
+                    className="pointer-events-none absolute left-0 top-0 h-36 w-auto rounded-xl border-2 border-slate-900 bg-slate-800 opacity-0 overflow-hidden"
                     data-mouse-move-index={index}
-                />
+                >
+                    <Image
+                        src={img}
+                        alt={`Mouse move image ${index}`}
+                        width={144}
+                        height={144}
+                        className="object-cover"
+                        unoptimized
+                    />
+                </div>
             ))}
         </div>
     );
