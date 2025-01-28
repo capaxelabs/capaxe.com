@@ -1,10 +1,11 @@
 import React from 'react';
 import { FiSearch, FiZap, FiTrendingUp, FiSmile } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
+import { CTABottom } from '@/components/CTA';
 
 const SeoPerformancePage = () => {
     return (
-        <div className="p-6 bg-gray-50 min-h-screen flex flex-col items-center">
+        <div className="p-6 pt-32 bg-gray-50 min-h-screen flex flex-col items-center">
             <h1 className="text-4xl font-bold text-gray-800 mb-4">SEO & Performance Optimization</h1>
             <p className="text-lg text-gray-600 text-center max-w-2xl mb-8">
                 Boost your Shopify store’s visibility and speed to attract more customers, improve user experience, and maximize conversions.
@@ -61,6 +62,7 @@ const SeoPerformancePage = () => {
                     Learn More About Our Services
                 </Button>
             </div>
+            <CTABottom />
         </div>
     );
 };

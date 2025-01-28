@@ -6,7 +6,8 @@ import { CTABottom } from '@/components/CTA';
 const AppDevelopmentPage = () => {
     return (
         <>
-            <div className="p-6 bg-gray-50 min-h-screen flex flex-col items-center">
+
+            <div className="p-6 pt-32 bg-gray-50 min-h-screen flex flex-col items-center">
                 <h1 className="text-4xl font-bold text-gray-800 mb-4">Shopify App Development</h1>
                 <p className="text-lg text-gray-600 text-center max-w-2xl mb-8">
                     Take your Shopify store to the next level with our expert app development services. Whether it's a
@@ -47,6 +48,7 @@ const AppDevelopmentPage = () => {
                     </Button>
                 </div>
             </div>
+
             <CTABottom />
         </>
     );

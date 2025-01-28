@@ -6,7 +6,7 @@ import { CTABottom } from '@/components/CTA';
 const StoreDevelopmentPage = () => {
     return (
         <>
-            <div className="p-6 bg-gray-50 min-h-screen flex flex-col items-center">
+            <div className="p-6 pt-32 bg-gray-50 min-h-screen flex flex-col items-center">
                 <h1 className="text-4xl font-bold text-gray-800 mb-4">Custom Shopify Store Development</h1>
                 <p className="text-lg text-gray-600 text-center max-w-2xl mb-8">
                     Build a powerful and engaging Shopify store tailored to your business needs.
@@ -58,8 +58,9 @@ const StoreDevelopmentPage = () => {
                         Explore Our Portfolio
                     </Button>
                 </div>
-                <CTABottom />
+
             </div>
+            <CTABottom />
         </>
     );
 };

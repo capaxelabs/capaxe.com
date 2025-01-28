@@ -98,35 +98,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-        {/* Footer */}
-        <footer className="bg-purple-900 text-white py-8">
-          <div className="container mx-auto px-6">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
-              {/* Solutions */}
-              <div>
-                <h3 className="font-semibold mb-4">Solutions</h3>
-                <ul className="space-y-2">
-                  {menuConfig.footerNav.solutions.map((item) => (
-                    <li key={item.href}>
-                      <a
-                        href={item.href}
-                        className="hover:text-gray-300 transition-colors"
-                        {...(item.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                      >
-                        {item.title}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              {/* Add other footer sections similarly */}
-            </div>
-            <div className="border-t border-white/10 pt-8 text-center">
-              <p>© 2024 {siteConfig.name}. All rights reserved.</p>
-            </div>
-          </div>
-        </footer>
       </div>
     </>
   );
