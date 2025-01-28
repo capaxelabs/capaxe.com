@@ -40,6 +40,8 @@ export interface MenuItem {
     title: string
     href: string
     external?: boolean
+    icon?: React.ReactNode
+    isButton?: boolean
 }
 
 export interface MenuConfig {

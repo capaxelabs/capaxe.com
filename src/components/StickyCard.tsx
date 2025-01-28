@@ -3,11 +3,11 @@ import React, { useRef } from "react";
 import { IconType } from "react-icons";
 import {
     FiArrowRight,
-    FiAward,
-    FiCalendar,
-    FiCopy,
-    FiDatabase,
+    FiShoppingCart,
+    FiTrendingUp,
+    FiUsers,
 } from "react-icons/fi";
+import { SiReact } from "react-icons/si";
 
 export const StickyCards = () => {
     const ref = useRef(null);
@@ -91,38 +91,38 @@ type CardType = {
 const CARDS: CardType[] = [
     {
         id: 1,
-        Icon: FiCalendar,
-        title: "A new type of Calendar",
+        Icon: FiShoppingCart,
+        title: "Custom Shopify Stores",
         description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi illo officia atque iure voluptatibus necessitatibus odit cupiditate reprehenderit iusto quaerat!",
-        ctaClasses: "bg-violet-300",
-        routeTo: "#",
+            "We specialize in building tailored Shopify stores designed to enhance user experience and drive sales.",
+        ctaClasses: "bg-blue-300",
+        routeTo: "/services/store-development",
     },
     {
         id: 2,
-        Icon: FiDatabase,
-        title: "#1 in data privacy",
+        Icon: SiReact,
+        title: "Shopify App Development",
         description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi illo officia atque iure voluptatibus necessitatibus odit cupiditate reprehenderit iusto quaerat!",
-        ctaClasses: "bg-pink-300",
-        routeTo: "#",
+            "Expand your store’s functionality with custom Shopify apps that meet your unique business needs.",
+        ctaClasses: "bg-green-300",
+        routeTo: "/services/app-development",
     },
     {
         id: 3,
-        Icon: FiCopy,
-        title: "Use your existing tools",
+        Icon: FiTrendingUp,
+        title: "SEO & Performance Optimization",
         description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi illo officia atque iure voluptatibus necessitatibus odit cupiditate reprehenderit iusto quaerat!",
-        ctaClasses: "bg-red-300",
-        routeTo: "#",
+            "Optimize your Shopify store for speed and search engines to attract more customers and boost conversions.",
+        ctaClasses: "bg-yellow-300",
+        routeTo: "/services/seo-performance",
     },
     {
         id: 4,
-        Icon: FiAward,
-        title: "Customers love us",
+        Icon: FiUsers,
+        title: "Migration & Integration",
         description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi illo officia atque iure voluptatibus necessitatibus odit cupiditate reprehenderit iusto quaerat!",
-        ctaClasses: "bg-amber-300",
-        routeTo: "#",
+            "Seamlessly migrate to Shopify or integrate third-party tools to streamline your business operations.",
+        ctaClasses: "bg-purple-300",
+        routeTo: "/services/migration-integration",
     },
 ];

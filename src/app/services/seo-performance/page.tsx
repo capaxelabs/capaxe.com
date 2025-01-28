@@ -1,0 +1,68 @@
+import React from 'react';
+import { FiSearch, FiZap, FiTrendingUp, FiSmile } from "react-icons/fi";
+import { Button } from "@/components/ui/button";
+
+const SeoPerformancePage = () => {
+    return (
+        <div className="p-6 bg-gray-50 min-h-screen flex flex-col items-center">
+            <h1 className="text-4xl font-bold text-gray-800 mb-4">SEO & Performance Optimization</h1>
+            <p className="text-lg text-gray-600 text-center max-w-2xl mb-8">
+                Boost your Shopify store’s visibility and speed to attract more customers, improve user experience, and maximize conversions.
+                Our expert services ensure your store ranks higher in search engines and delivers lightning-fast performance.
+            </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 mb-8">
+                <div className="bg-white shadow-lg rounded-lg p-6 text-center hover:shadow-2xl transition">
+                    <FiSearch className="text-4xl text-blue-500 mb-4 mx-auto" />
+                    <h2 className="text-xl font-semibold text-gray-800 mb-2">SEO Optimization</h2>
+                    <p className="text-gray-600">
+                        Optimize your store for search engines with strategic keywords, metadata, and content to rank higher and drive organic traffic.
+                    </p>
+                </div>
+                <div className="bg-white shadow-lg rounded-lg p-6 text-center hover:shadow-2xl transition">
+                    <FiZap className="text-4xl text-green-500 mb-4 mx-auto" />
+                    <h2 className="text-xl font-semibold text-gray-800 mb-2">Performance Enhancement</h2>
+                    <p className="text-gray-600">
+                        Ensure fast loading times, smooth navigation, and optimized assets to deliver a seamless shopping experience.
+                    </p>
+                </div>
+            </div>
+
+            <h2 className="text-3xl font-bold text-gray-800 mb-4">Why Performance Matters</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                <div className="bg-white shadow-lg rounded-lg p-6 text-center hover:shadow-2xl transition">
+                    <FiTrendingUp className="text-4xl text-orange-500 mb-4 mx-auto" />
+                    <h3 className="text-xl font-semibold text-gray-800 mb-2">Higher Conversion Rates</h3>
+                    <p className="text-gray-600">
+                        A faster website ensures customers can browse and purchase products without delays, reducing cart abandonment.
+                    </p>
+                </div>
+                <div className="bg-white shadow-lg rounded-lg p-6 text-center hover:shadow-2xl transition">
+                    <FiSmile className="text-4xl text-purple-500 mb-4 mx-auto" />
+                    <h3 className="text-xl font-semibold text-gray-800 mb-2">Improved User Experience</h3>
+                    <p className="text-gray-600">
+                        Speedy stores provide an enjoyable shopping experience, encouraging repeat visits and customer loyalty.
+                    </p>
+                </div>
+                <div className="bg-white shadow-lg rounded-lg p-6 text-center hover:shadow-2xl transition">
+                    <FiZap className="text-4xl text-red-500 mb-4 mx-auto" />
+                    <h3 className="text-xl font-semibold text-gray-800 mb-2">Better SEO Rankings</h3>
+                    <p className="text-gray-600">
+                        Search engines prioritize fast-loading websites, giving you an edge over competitors in organic rankings.
+                    </p>
+                </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4">
+                <Button className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+                    Get a Free SEO Audit
+                </Button>
+                <Button className="px-6 py-3 bg-gray-100 text-gray-800 rounded-lg hover:bg-gray-200">
+                    Learn More About Our Services
+                </Button>
+            </div>
+        </div>
+    );
+};
+
+export default SeoPerformancePage;

@@ -2,6 +2,7 @@
 
 import { motion } from 'motion/react';
 import { Header } from '@/components/Header';
+import { CTABottom } from '@/components/CTA';
 
 const projects = [
     {
@@ -44,86 +45,72 @@ const projects = [
 
 export default function PortfolioPage() {
     return (
-        <div className="min-h-screen bg-background">
-            <Header />
+        <>
+            <div className="min-h-screen bg-background">
+                <Header />
 
-            {/* Hero Section */}
-            <section className="pt-32 pb-16 px-4">
-                <div className="max-w-6xl mx-auto text-center">
-                    <motion.h1
-                        className="text-5xl md:text-6xl font-bold mb-6"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5 }}
-                    >
-                        Our Portfolio
-                    </motion.h1>
-                    <motion.p
-                        className="text-xl text-gray-600 max-w-2xl mx-auto"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.2 }}
-                    >
-                        Explore our latest projects and see how we&apos;ve helped businesses grow
-                    </motion.p>
-                </div>
-            </section>
-
-            {/* Portfolio Grid */}
-            <section className="py-16 px-4">
-                <div className="max-w-6xl mx-auto">
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {projects.map((project, index) => (
-                            <motion.div
-                                key={index}
-                                className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.5, delay: index * 0.1 }}
-                                whileHover={{ y: -5 }}
-                            >
-                                <div className="h-48 bg-purple-100" />
-                                <div className="p-6">
-                                    <span className="text-sm text-purple-600 font-medium">
-                                        {project.category}
-                                    </span>
-                                    <h3 className="text-xl font-semibold mt-2 mb-3">
-                                        {project.title}
-                                    </h3>
-                                    <p className="text-gray-600">
-                                        {project.description}
-                                    </p>
-                                    <motion.button
-                                        className="mt-4 text-purple-600 font-medium hover:text-purple-700 transition-colors"
-                                        whileHover={{ x: 5 }}
-                                    >
-                                        View Project →
-                                    </motion.button>
-                                </div>
-                            </motion.div>
-                        ))}
+                {/* Hero Section */}
+                <section className="pt-32 pb-16 px-4">
+                    <div className="max-w-6xl mx-auto text-center">
+                        <motion.h1
+                            className="text-5xl md:text-6xl font-bold mb-6"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5 }}
+                        >
+                            Our Portfolio
+                        </motion.h1>
+                        <motion.p
+                            className="text-xl text-gray-600 max-w-2xl mx-auto"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: 0.2 }}
+                        >
+                            Explore our latest projects and see how we&apos;ve helped businesses grow
+                        </motion.p>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            {/* CTA Section */}
-            <section className="py-16 px-4 bg-purple-50">
-                <div className="max-w-4xl mx-auto text-center">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                        Ready to Start Your Project?
-                    </h2>
-                    <p className="text-xl text-gray-600 mb-8">
-                        Let&apos;s create something amazing together
-                    </p>
-                    <motion.button
-                        className="bg-purple-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-purple-700 transition-colors"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                    >
-                        Get in Touch
-                    </motion.button>
-                </div>
-            </section>
-        </div>
+                {/* Portfolio Grid */}
+                <section className="py-16 px-4">
+                    <div className="max-w-6xl mx-auto">
+                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {projects.map((project, index) => (
+                                <motion.div
+                                    key={index}
+                                    className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                                    whileHover={{ y: -5 }}
+                                >
+                                    <div className="h-48 bg-purple-100" />
+                                    <div className="p-6">
+                                        <span className="text-sm text-purple-600 font-medium">
+                                            {project.category}
+                                        </span>
+                                        <h3 className="text-xl font-semibold mt-2 mb-3">
+                                            {project.title}
+                                        </h3>
+                                        <p className="text-gray-600">
+                                            {project.description}
+                                        </p>
+                                        <motion.button
+                                            className="mt-4 text-purple-600 font-medium hover:text-purple-700 transition-colors"
+                                            whileHover={{ x: 5 }}
+                                        >
+                                            View Project →
+                                        </motion.button>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+
+            </div>
+            <CTABottom />
+        </>
     );
 } 

@@ -64,7 +64,7 @@ export const SliderWithText = () => {
                         transition={{ delay: 0.3 }}
                     >
                         <h1 className="text-8xl font-bold mb-4">{siteConfig.name}</h1>
-                        <p className="text-xl text-gray-400 italic mb-8">{siteConfig.hero.subtitle}</p>
+                        <p className="text-xl text-foreground italic mb-8">{siteConfig.hero.subtitle}</p>
                         <p className="text-2xl">
                             {siteConfig.hero.description}
                         </p>

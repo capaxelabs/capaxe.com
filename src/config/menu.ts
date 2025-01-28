@@ -1,4 +1,5 @@
 import { MenuConfig } from "@/types";
+
 export const menuConfig: MenuConfig = {
     mainNav: [
         {
@@ -7,15 +8,26 @@ export const menuConfig: MenuConfig = {
         },
         {
             title: 'Services',
-            href: '/#services',
+            href: '/services',
+
         },
         {
             title: 'About',
-            href: '/#about',
+            href: '/about',
+        },
+        {
+            title: 'Portfolio',
+            href: '/portfolio',
+        },
+        {
+            title: 'Case Studies',
+            href: '/case-studies',
+
         },
         {
             title: 'Contact',
-            href: '/#contact',
+            href: '/contact',
+            isButton: true,
         },
     ],
     footerNav: {
@@ -41,10 +53,6 @@ export const menuConfig: MenuConfig = {
             {
                 title: 'About Us',
                 href: '/about',
-            },
-            {
-                title: 'Careers',
-                href: '/careers',
             },
             {
                 title: 'Blog',
