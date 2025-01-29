@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import Link from 'next/link';
 import { FiMenu, FiX } from 'react-icons/fi';
-import { Button } from './ui/button';
+
 import { siteConfig } from '@/config/site';
 import { menuConfig } from '@/config/menu';
 
@@ -41,9 +41,12 @@ export const Header = () => {
                         <div className="hidden md:flex items-center gap-8">
                             {menuConfig.mainNav.map((item) => (
                                 item.isButton ? (
-                                    <Button key={item.href} className="bg-indigo-600 text-white text-base md:text-lg font-medium px-8 py-2 shadow-[3px_3px_0_black] hover:shadow-[1px_1px_0_black] hover:translate-x-[3px] hover:translate-y-[3px] transition-all">
+                                    <a
+                                        key={item.href}
+                                        href={item.href}
+                                        className="bg-indigo-600 text-white text-base md:text-lg font-medium px-8 py-2 shadow-[3px_3px_0_black] hover:shadow-[1px_1px_0_black] hover:translate-x-[3px] hover:translate-y-[3px] transition-all">
                                         {item.title}
-                                    </Button>
+                                    </a>
                                 ) : (
                                     <Link
                                         key={item.href}

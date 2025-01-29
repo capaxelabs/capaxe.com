@@ -2,7 +2,6 @@
 
 import { motion } from 'motion/react';
 import { Header } from '@/components/Header';
-import Image from 'next/image';
 import { useParams } from 'next/navigation';
 
 // This would typically come from a CMS or API
@@ -41,7 +40,7 @@ const portfolioDetails = {
 
 export default function PortfolioDetail() {
     const params = useParams();
-    const slug = params.slug as string;
+    const slug = params.slug as keyof typeof portfolioDetails;
     const project = portfolioDetails[slug];
 
     if (!project) return <div>Project not found</div>;

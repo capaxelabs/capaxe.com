@@ -7,7 +7,7 @@ import { ArrowDownIcon } from '@heroicons/react/24/outline';
 import dynamic from 'next/dynamic';
 
 // Dynamically import the PDF viewer to avoid SSR issues
-const PDFViewer = dynamic(() => import('@/components/PDFViewer'), {
+const PDFViewer = dynamic(() => import('@/components/PDFViewer').then(mod => mod.PDFViewer), {
     ssr: false,
     loading: () => (
         <div className="w-full h-[800px] bg-gray-100 rounded-xl animate-pulse" />
@@ -64,7 +64,7 @@ const caseStudiesDetails = {
 
 export default function CaseStudyDetail() {
     const params = useParams();
-    const id = params.id as string;
+    const id = params.id as keyof typeof caseStudiesDetails;
     const study = caseStudiesDetails[id];
 
     if (!study) return <div>Case study not found</div>;
@@ -151,7 +151,7 @@ export default function CaseStudyDetail() {
                             <div className="bg-purple-50 p-8 rounded-xl mb-8">
                                 <h2 className="text-2xl font-bold mb-6">Client Testimonial</h2>
                                 <blockquote className="text-gray-600 italic mb-4">
-                                    "{study.testimonial.quote}"
+                                    &ldquo;{study.testimonial.quote}&rdquo;
                                 </blockquote>
                                 <div className="font-medium">
                                     <div className="text-purple-600">{study.testimonial.author}</div>

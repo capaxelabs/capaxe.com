@@ -3,7 +3,6 @@
 import { motion, useScroll, useTransform } from "motion/react";
 import { ShoppingBagIcon, CodeBracketIcon, PhoneIcon } from '@heroicons/react/24/outline';
 import { siteConfig } from '@/config/site';
-import { menuConfig } from '@/config/menu';
 import LogoHero from '@/components/LogoHero';
 import { StickyCards } from '@/components/StickyCard';
 import { Header } from '@/components/Header';

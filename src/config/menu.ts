@@ -85,15 +85,19 @@ export const menuConfig: MenuConfig = {
         legal: [
             {
                 title: 'Privacy Policy',
-                href: '/privacy',
+                href: '/legal/privacy-policy',
             },
             {
                 title: 'Terms of Service',
-                href: '/terms',
+                href: '/legal/terms-of-service',
+            },
+            {
+                title: 'Refund Policy',
+                href: '/legal/refund-policy',
             },
             {
                 title: 'Cookie Policy',
-                href: '/cookies',
+                href: '/legal/cookie-policy',
             },
         ],
     },

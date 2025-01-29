@@ -10,9 +10,9 @@ const AppDevelopmentPage = () => {
             <div className="p-6 pt-32 bg-gray-50 min-h-screen flex flex-col items-center">
                 <h1 className="text-4xl font-bold text-gray-800 mb-4">Shopify App Development</h1>
                 <p className="text-lg text-gray-600 text-center max-w-2xl mb-8">
-                    Take your Shopify store to the next level with our expert app development services. Whether it's a
+                    Take your Shopify store to the next level with our expert app development services. Whether it&apos;s a
                     custom app tailored to your business needs or a public app designed to serve thousands of merchants,
-                    we’ve got you covered.
+                    we&apos;ve got you covered.
                 </p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
