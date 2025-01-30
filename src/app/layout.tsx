@@ -4,6 +4,7 @@ import "./globals.css";
 import Script from 'next/script'
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { GoogleTagManager } from '@next/third-parties/google'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,15 +38,7 @@ export default function RootLayout({
             window.pdfjsLib.GlobalWorkerOptions.workerSrc = '//cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
           `}
         </Script>
-
-        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-4LEYQRNTJG"></Script>
-        <Script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'G-4LEYQRNTJG');
-        </Script>
+        <GoogleTagManager gtmId="G-4LEYQRNTJG" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
