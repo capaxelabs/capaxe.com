@@ -56,5 +56,40 @@ export const siteConfig: SiteConfig = {
                 description: '24/7 technical support for your online store'
             }
         ]
+    },
+    retainer: {
+        title: 'Retainer Plans',
+        description: 'We offer flexible retainer plans to suit your business needs.',
+        items: [
+            {
+                title: 'Growth Plan',
+                description: 'For businesses that require custom development & API integrations.',
+                monthly: '$1,000',
+                yearly: '$6,000',
+                features: [
+                    '20 development hours/month',
+                    'Shopify store tweaks, bug fixes & performance optimization',
+                    'UI/UX improvements for Shopify themes & Hydrogen stores',
+                    'Priority email support',
+                    'Monthly report on implemented changes',
+                ]
+            },
+            {
+                title: 'Scale Plan',
+                description: 'For businesses that require continuous custom development & API integrations.',
+                monthly: '$1,500',
+                yearly: '$15,000',
+                features: [
+                    '35 development hours/month',
+                    'Shopify store tweaks, bug fixes & performance optimization',
+                    'UI/UX improvements for Shopify themes & Hydrogen stores',
+                    'Priority email support',
+                    'Monthly report on implemented changes',
+                    '24/7 priority support',
+                    'Cutsom app development in yearly plan',
+                ]
+            },
+
+        ]
     }
 } 

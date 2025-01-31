@@ -33,6 +33,17 @@ export interface SiteConfig {
         email: string
         phone: string
         address: string
+    },
+    retainer: {
+        title: string
+        description: string
+        items: {
+            title: string
+            description: string
+            monthly: string
+            yearly: string
+            features: string[]
+        }[]
     }
 }
 
@@ -52,4 +63,5 @@ export interface MenuConfig {
         support: MenuItem[]
         legal: MenuItem[]
     }
+
 } 

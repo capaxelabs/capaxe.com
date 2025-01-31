@@ -24,7 +24,7 @@ export const menuConfig: MenuConfig = {
             { title: 'Press', href: '/press' },
         ],
         support: [
-            { title: 'Documentation', href: '/docs' },
+            // { title: 'Documentation', href: '/docs' },
             { title: 'FAQ', href: '/faq' },
             { title: 'Contact', href: '/contact' },
         ],

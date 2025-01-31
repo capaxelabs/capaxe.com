@@ -1,6 +1,5 @@
 import React from 'react';
 import { FiArrowRight, FiRefreshCcw, FiDatabase, FiSettings } from "react-icons/fi";
-import { Button } from "@/components/ui/button";
 import { CTABottom } from '@/components/CTA';
 
 const MigrationIntegrationPage = () => {
@@ -13,7 +12,7 @@ const MigrationIntegrationPage = () => {
                     BigCommerce, and Magento while ensuring data integrity and minimal downtime. Enhance your store’s
                     functionality with third-party tool integrations for a smooth business workflow.
                 </p>
-
+        
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
                     <div className="bg-white shadow-lg rounded-lg p-6 text-center hover:shadow-2xl transition">
                         <FiArrowRight className="text-4xl text-blue-500 mb-4 mx-auto" />
@@ -46,12 +45,12 @@ const MigrationIntegrationPage = () => {
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-4">
-                    <Button className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+                    <a href="/contact" className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
                         Request a Free Migration Audit
-                    </Button>
-                    <Button className="px-6 py-3 bg-gray-100 text-gray-800 rounded-lg hover:bg-gray-200">
+                    </a>
+                    <a href="/services/shopify-development" className="px-6 py-3 bg-gray-100 text-gray-800 rounded-lg hover:bg-gray-200">
                         Learn More About Our Process
-                    </Button>
+                    </a>
                 </div>
 
             </div>

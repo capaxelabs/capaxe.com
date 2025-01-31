@@ -9,7 +9,7 @@ export function WhatsAppButton() {
             href="https://wa.me/917019620967"
             target="_blank"
             rel="noopener noreferrer"
-            className="fixed bottom-6 left-6 z-50 p-3 bg-transparent rounded-full shadow-lg cursor-pointer"
+            className="fixed bottom-6 right-6 z-50 p-3 bg-transparent rounded-full shadow-lg cursor-pointer"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             initial={{ opacity: 0, y: 20 }}
