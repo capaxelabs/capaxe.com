@@ -9,7 +9,10 @@ export const menuConfig: MenuConfig = {
         {
             title: 'Services',
             href: '/services',
-
+        },
+        {
+            title: 'Retainer',
+            href: '/retainer',
         },
         {
             title: 'About',
@@ -22,7 +25,6 @@ export const menuConfig: MenuConfig = {
         {
             title: 'Case Studies',
             href: '/case-studies',
-
         },
         {
             title: 'Contact',
@@ -35,6 +37,10 @@ export const menuConfig: MenuConfig = {
             {
                 title: 'Shopify Development',
                 href: '/services/shopify-development',
+            },
+            {
+                title: 'Retainer Plans',
+                href: '/retainer',
             },
             {
                 title: 'Web Development',
@@ -75,12 +81,7 @@ export const menuConfig: MenuConfig = {
             {
                 title: 'Contact',
                 href: '/contact',
-            },
-            {
-                title: 'Support Portal',
-                href: 'https://support.capaxelabs.com',
-                external: true,
-            },
+            }
         ],
         legal: [
             {
