@@ -2,6 +2,8 @@
 
 https://courageous-assistant-668050.framer.app/
 
+[Blog example ](https://github.com/travisvn/next-mdx-template/blob/main/lib/helpers.ts)
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
