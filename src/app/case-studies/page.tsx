@@ -5,49 +5,8 @@ import { Header } from '@/components/Header';
 import Link from 'next/link';
 import { ArrowDownIcon } from '@heroicons/react/24/outline';
 import { CTABottom } from '@/components/CTA';
+import { caseStudies } from '@/data/caseStudy';
 
-// This would typically come from a CMS or API
-const caseStudies = [
-    {
-        id: 'shopify-migration',
-        title: "Shopify Migration Success Story",
-        client: "Fashion Retailer",
-        description: "How we helped a fashion retailer migrate from Magento to Shopify Plus, resulting in a 45% increase in sales.",
-        metrics: {
-            salesIncrease: "45%",
-            loadingSpeed: "2.1s",
-            conversionRate: "3.2%"
-        },
-        thumbnail: "/case-studies/fashion-retailer.jpg",
-        pdfUrl: "/case-studies/fashion-retailer.pdf"
-    },
-    {
-        id: 'custom-app-development',
-        title: "Custom App Development Case Study",
-        client: "Beauty Brand",
-        description: "Development of a custom Shopify app for a beauty brand that automated inventory management across 50+ stores.",
-        metrics: {
-            timeReduction: "75%",
-            errorReduction: "95%",
-            roi: "250%"
-        },
-        thumbnail: "/case-studies/beauty-brand.jpg",
-        pdfUrl: "/case-studies/beauty-brand.pdf"
-    },
-    {
-        id: 'performance-optimization',
-        title: "E-commerce Performance Optimization",
-        client: "Electronics Store",
-        description: "How we improved site speed and user experience for a high-traffic electronics store.",
-        metrics: {
-            speedImprovement: "65%",
-            bounceRateReduction: "40%",
-            revenueIncrease: "25%"
-        },
-        thumbnail: "/case-studies/electronics-store.jpg",
-        pdfUrl: "/case-studies/electronics-store.pdf"
-    }
-];
 
 export default function CaseStudies() {
     return (

@@ -3,7 +3,7 @@
 import { motion } from 'motion/react';
 import { Header } from '@/components/Header';
 import { MapPinIcon, PhoneIcon, EnvelopeIcon } from '@heroicons/react/24/outline';
-
+import Image from 'next/image';
 export default function ContactPage() {
     return (
         <div className="min-h-screen bg-background">
@@ -100,8 +100,8 @@ export default function ContactPage() {
                                         <div>
                                             <h3 className="font-medium">Address</h3>
                                             <p className="text-gray-600">
-                                                123 Business Street<br />
-                                                San Francisco, CA 94105
+                                                Koramangala, Bangalore<br />
+                                                Karnataka, India
                                             </p>
                                         </div>
                                     </div>
@@ -109,33 +109,26 @@ export default function ContactPage() {
                                         <PhoneIcon className="w-6 h-6 text-purple-600 mt-1" />
                                         <div>
                                             <h3 className="font-medium">Phone</h3>
-                                            <p className="text-gray-600">+1 (555) 123-4567</p>
+                                            <a href="tel:+91 70196 20967" className="text-gray-600">+91 70196 20967</a>
                                         </div>
                                     </div>
                                     <div className="flex items-start gap-4">
                                         <EnvelopeIcon className="w-6 h-6 text-purple-600 mt-1" />
                                         <div>
                                             <h3 className="font-medium">Email</h3>
-                                            <p className="text-gray-600">contact@example.com</p>
+                                            <a href="mailto:info@capaxe.com" className="text-gray-600">info [at] capaxe.com</a>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start gap-4">
+                                        <Image src="/whatsapp.svg" alt="Whatsapp" width={24} height={24} />
+                                        <div>
+                                            <h3 className="font-medium">Whatsapp</h3>
+                                            <a href="wa.me/917019620967" className="text-gray-600">Chat with us</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div>
-                                <h2 className="text-2xl font-bold mb-6">Business Hours</h2>
-                                <div className="space-y-2">
-                                    <p className="text-gray-600">
-                                        <span className="font-medium">Monday - Friday:</span> 9:00 AM - 6:00 PM
-                                    </p>
-                                    <p className="text-gray-600">
-                                        <span className="font-medium">Saturday:</span> 10:00 AM - 4:00 PM
-                                    </p>
-                                    <p className="text-gray-600">
-                                        <span className="font-medium">Sunday:</span> Closed
-                                    </p>
-                                </div>
-                            </div>
                         </motion.div>
                     </div>
                 </div>

@@ -5,7 +5,7 @@ import { Header } from '@/components/Header';
 import { useParams } from 'next/navigation';
 import { ArrowDownIcon } from '@heroicons/react/24/outline';
 import dynamic from 'next/dynamic';
-
+import { caseStudiesDetails } from '@/data/caseStudy';
 // Dynamically import the PDF viewer to avoid SSR issues
 const PDFViewer = dynamic(() => import('@/components/PDFViewer').then(mod => mod.PDFViewer), {
     ssr: false,
@@ -15,52 +15,6 @@ const PDFViewer = dynamic(() => import('@/components/PDFViewer').then(mod => mod
 });
 
 // This would typically come from a CMS or API
-const caseStudiesDetails = {
-    'shopify-migration': {
-        title: "Shopify Migration Success Story",
-        client: "Fashion Retailer",
-        description: "How we helped a fashion retailer migrate from Magento to Shopify Plus, resulting in a 45% increase in sales.",
-        challenge: `The client faced multiple challenges with their existing Magento store:
-        • Slow loading times affecting user experience
-        • High maintenance costs
-        • Limited scalability during peak seasons
-        • Complex backend management requiring technical expertise`,
-        solution: `Our team implemented a comprehensive migration strategy:
-        1. Data Analysis and Planning
-        • Conducted thorough audit of existing data
-        • Created detailed migration roadmap
-        • Identified potential risks and mitigation strategies
-
-        2. Custom Development
-        • Built custom Shopify Plus theme
-        • Developed data migration scripts
-        • Implemented advanced features and integrations
-
-        3. Testing and Optimization
-        • Performed extensive testing
-        • Optimized site performance
-        • Conducted staff training`,
-        results: `The migration resulted in significant improvements:
-        • 45% increase in sales
-        • 65% reduction in maintenance costs
-        • 2.1s average page load time
-        • 3.2% conversion rate (up from 2.1%)
-        • Improved inventory management
-        • Enhanced user experience`,
-        testimonial: {
-            quote: "The migration process was smooth and the results exceeded our expectations. Our team can now focus on growing the business instead of managing technical issues.",
-            author: "Sarah Johnson",
-            position: "E-commerce Director"
-        },
-        metrics: {
-            salesIncrease: "45%",
-            loadingSpeed: "2.1s",
-            conversionRate: "3.2%"
-        },
-        pdfUrl: "/case-studies/fashion-retailer.pdf"
-    },
-    // Add more case studies here
-};
 
 export default function CaseStudyDetail() {
     const params = useParams();
@@ -74,7 +28,7 @@ export default function CaseStudyDetail() {
             <Header />
 
             {/* Hero Section */}
-            <section className="pt-32 pb-16 px-4">
+            <section className="pt-40 pb-16 px-4">
                 <div className="max-w-6xl mx-auto">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
