@@ -4,7 +4,7 @@ import "./globals.css";
 import Script from 'next/script'
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { GoogleTagManager } from '@next/third-parties/google'
+import { GoogleAnalytics } from '@next/third-parties/google'
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 
 const geistSans = Geist({
@@ -39,7 +39,7 @@ export default function RootLayout({
             window.pdfjsLib.GlobalWorkerOptions.workerSrc = '//cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
           `}
         </Script>
-        <GoogleTagManager gtmId="G-4LEYQRNTJG" />
+        <GoogleAnalytics gaId="G-4LEYQRNTJG" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
