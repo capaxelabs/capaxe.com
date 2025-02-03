@@ -19,6 +19,22 @@ const formSchema = z.object({
     email: z.string().email({
         message: "Please enter a valid email address.",
     }),
+    companyName: z.string().min(2, {
+        message: "Company name must be at least 2 characters.",
+    }),
+    serviceType: z.enum(['store_development', 'app_development', 'store_customization', 'app_customization', 'maintenance', 'other'], {
+        required_error: "Please select a service type.",
+    }),
+    projectType: z.enum(['new_project', 'existing_project'], {
+        required_error: "Please select a project type.",
+    }),
+    storeUrl: z.string().optional(),
+    budget: z.enum(['less_than_5k', '5k_to_10k', '10k_to_25k', 'more_than_25k'], {
+        required_error: "Please select your budget range.",
+    }),
+    timeline: z.enum(['immediate', 'within_1_month', 'within_3_months', 'flexible'], {
+        required_error: "Please select your timeline.",
+    }),
     message: z.string().min(10, {
         message: "Message must be at least 10 characters.",
     }),
@@ -35,12 +51,19 @@ export default function ContactPage() {
         handleSubmit,
         formState: { errors },
         setValue,
-        reset
+        reset,
+        watch
     } = useForm<FormSchemaType>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: "",
             email: "",
+            companyName: "",
+            serviceType: undefined,
+            projectType: undefined,
+            storeUrl: "",
+            budget: undefined,
+            timeline: undefined,
             message: "",
         },
     });
@@ -127,48 +150,161 @@ export default function ContactPage() {
                         >
                             <h2 className="text-2xl font-bold mb-6">Send us a message</h2>
                             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                            Name
+                                        </label>
+                                        <input
+                                            {...register("name")}
+                                            type="text"
+                                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                            placeholder="Your name"
+                                        />
+                                        {errors.name && (
+                                            <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
+                                        )}
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                            Email
+                                        </label>
+                                        <input
+                                            {...register("email")}
+                                            type="email"
+                                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                            placeholder="your@email.com"
+                                        />
+                                        {errors.email && (
+                                            <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+                                        )}
+                                    </div>
+                                </div>
+
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                                        Name
+                                        Company Name
                                     </label>
                                     <input
-                                        {...register("name")}
+                                        {...register("companyName")}
                                         type="text"
                                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                                        placeholder="Your name"
+                                        placeholder="Your company name"
                                     />
-                                    {errors.name && (
-                                        <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
+                                    {errors.companyName && (
+                                        <p className="mt-1 text-sm text-red-600">{errors.companyName.message}</p>
                                     )}
                                 </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                                        Email
-                                    </label>
-                                    <input
-                                        {...register("email")}
-                                        type="email"
-                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                                        placeholder="your@email.com"
-                                    />
-                                    {errors.email && (
-                                        <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
-                                    )}
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                            Service Type
+                                        </label>
+                                        <select
+                                            {...register("serviceType")}
+                                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                        >
+                                            <option value="">Select a service</option>
+                                            <option value="store_development">Shopify Store Development</option>
+                                            <option value="app_development">Shopify App Development</option>
+                                            <option value="store_customization">Store Customization</option>
+                                            <option value="app_customization">App Customization</option>
+                                            <option value="maintenance">Maintenance & Support</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                        {errors.serviceType && (
+                                            <p className="mt-1 text-sm text-red-600">{errors.serviceType.message}</p>
+                                        )}
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                            Project Type
+                                        </label>
+                                        <select
+                                            {...register("projectType")}
+                                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                        >
+                                            <option value="">Select project type</option>
+                                            <option value="new_project">New Project</option>
+                                            <option value="existing_project">Existing Project</option>
+                                        </select>
+                                        {errors.projectType && (
+                                            <p className="mt-1 text-sm text-red-600">{errors.projectType.message}</p>
+                                        )}
+                                    </div>
                                 </div>
+
+                                {watch('projectType') === 'existing_project' && (
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                            Existing Store URL (optional)
+                                        </label>
+                                        <input
+                                            {...register("storeUrl")}
+                                            type="text"
+                                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                            placeholder="https://your-store.myshopify.com"
+                                        />
+                                    </div>
+                                )}
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                            Budget Range (USD)
+                                        </label>
+                                        <select
+                                            {...register("budget")}
+                                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                        >
+                                            <option value="">Select budget range</option>
+                                            <option value="less_than_5k">Less than $5,000</option>
+                                            <option value="5k_to_10k">$5,000 - $10,000</option>
+                                            <option value="10k_to_25k">$10,000 - $25,000</option>
+                                            <option value="more_than_25k">More than $25,000</option>
+                                        </select>
+                                        {errors.budget && (
+                                            <p className="mt-1 text-sm text-red-600">{errors.budget.message}</p>
+                                        )}
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                            Timeline
+                                        </label>
+                                        <select
+                                            {...register("timeline")}
+                                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                        >
+                                            <option value="">Select timeline</option>
+                                            <option value="immediate">Immediate Start</option>
+                                            <option value="within_1_month">Within 1 Month</option>
+                                            <option value="within_3_months">Within 3 Months</option>
+                                            <option value="flexible">Flexible</option>
+                                        </select>
+                                        {errors.timeline && (
+                                            <p className="mt-1 text-sm text-red-600">{errors.timeline.message}</p>
+                                        )}
+                                    </div>
+                                </div>
+
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                                        Message
+                                        Project Requirements & Details
                                     </label>
                                     <textarea
                                         {...register("message")}
                                         rows={4}
                                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                                        placeholder="Your message"
+                                        placeholder="Please describe your project requirements, features needed, and any specific challenges you'd like us to address."
                                     />
                                     {errors.message && (
                                         <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>
                                     )}
                                 </div>
+
                                 <Turnstile
                                     sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
                                     onVerify={(token) => setValue('cfTurnstileResponse', token)}
@@ -178,6 +314,7 @@ export default function ContactPage() {
                                     size='invisible'
                                     tabIndex={0}
                                 />
+
                                 <motion.button
                                     type="submit"
                                     disabled={isLoading}
@@ -234,6 +371,40 @@ export default function ContactPage() {
                                 </div>
                             </div>
 
+                            {/* Added Working Hours Section */}
+                            <div>
+                                <h2 className="text-2xl font-bold mb-6">Working Hours</h2>
+                                <div className="space-y-2">
+                                    <p className="text-gray-600">
+                                        <span className="font-medium">Monday - Friday:</span> 9:00 AM - 6:00 PM IST
+                                    </p>
+                                    <p className="text-gray-600">
+                                        <span className="font-medium">Saturday:</span> 10:00 AM - 2:00 PM IST
+                                    </p>
+                                    <p className="text-gray-600">
+                                        <span className="font-medium">Sunday:</span> Closed
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Added FAQ Section */}
+                            <div>
+                                <h2 className="text-2xl font-bold mb-6">Quick FAQs</h2>
+                                <div className="space-y-4">
+                                    <div>
+                                        <h3 className="font-medium text-lg mb-2">What's your typical response time?</h3>
+                                        <p className="text-gray-600">We usually respond to all inquiries within 24 business hours.</p>
+                                    </div>
+                                    <div>
+                                        <h3 className="font-medium text-lg mb-2">Do you work with international clients?</h3>
+                                        <p className="text-gray-600">Yes, we work with clients globally and can accommodate different time zones.</p>
+                                    </div>
+                                    <div>
+                                        <h3 className="font-medium text-lg mb-2">What happens after I submit the form?</h3>
+                                        <p className="text-gray-600">Our team will review your requirements and schedule a discovery call to discuss your project in detail.</p>
+                                    </div>
+                                </div>
+                            </div>
                         </motion.div>
                     </div>
                 </div>
