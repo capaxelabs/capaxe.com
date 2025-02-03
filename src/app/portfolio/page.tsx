@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { Header } from '@/components/Header';
 import { CTABottom } from '@/components/CTA';
 
 const projects = [
@@ -47,7 +46,6 @@ export default function PortfolioPage() {
     return (
         <>
             <div className="min-h-screen bg-background">
-                <Header />
 
                 {/* Hero Section */}
                 <section className="pt-32 pb-16 px-4">

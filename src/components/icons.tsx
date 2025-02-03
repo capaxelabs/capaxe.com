@@ -28,7 +28,6 @@ import {
   X,
   Files,
   LogIn,
-  LayoutDashboard,
   LayoutDashboardIcon,
   CircuitBoardIcon,
   type XIcon as LucideIcon

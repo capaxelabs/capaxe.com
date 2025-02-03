@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { Header } from '@/components/Header';
 import Link from 'next/link';
 import { ArrowDownIcon } from '@heroicons/react/24/outline';
 import { CTABottom } from '@/components/CTA';
@@ -11,7 +10,6 @@ import { caseStudies } from '@/data/caseStudy';
 export default function CaseStudies() {
     return (
         <div className="min-h-screen bg-background">
-            <Header />
 
             {/* Hero Section */}
             <section className="pt-32 pb-16 px-4">
