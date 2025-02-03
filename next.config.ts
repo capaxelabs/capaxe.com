@@ -9,6 +9,20 @@ const withMDX = createMDX({
 const nextConfig: NextConfig = {
   /* config options here */
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '*.amazonaws.com',
+        pathname: '/**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'avatars.githubusercontent.com',
+        pathname: '/**'
+      }
+    ]
+  },
   experimental: {
     mdxRs: true,
   },
