@@ -41,11 +41,9 @@ export default function RootLayout({
         </Script>
         <GoogleAnalytics gaId="G-4LEYQRNTJG" />
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Header />
-        <main>
+        <main className="min-h-screen bg-background">
           {children}
         </main>
         <WhatsAppButton />

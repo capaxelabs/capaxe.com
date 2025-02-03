@@ -5,7 +5,6 @@ import { ShoppingBagIcon, CodeBracketIcon, PhoneIcon } from '@heroicons/react/24
 import { siteConfig } from '@/config/site';
 import LogoHero from '@/components/LogoHero';
 import { StickyCards } from '@/components/StickyCard';
-import { Header } from '@/components/Header';
 
 export default function Home() {
 
@@ -14,7 +13,6 @@ export default function Home() {
 
       <div className="min-h-screen bg-gradient-to-b from-purple-800 to-blue-900 text-white">
         {/* Hero Section with Fixed Slider */}
-        <Header />
         <LogoHero />
 
         {/* Parallax Section */}

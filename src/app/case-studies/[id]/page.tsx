@@ -24,8 +24,7 @@ export default function CaseStudyDetail() {
     if (!study) return <div>Case study not found</div>;
 
     return (
-        <div className="min-h-screen bg-background">
-            <Header />
+        <div className="min-h-screen bg-background"><Header />
 
             {/* Hero Section */}
             <section className="pt-40 pb-16 px-4">

@@ -1,8 +1,8 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { Header } from '@/components/Header';
 import { useParams } from 'next/navigation';
+import { CTABottom } from '@/components/CTA';
 
 // This would typically come from a CMS or API
 const portfolioDetails = {
@@ -46,11 +46,9 @@ export default function PortfolioDetail() {
     if (!project) return <div>Project not found</div>;
 
     return (
-        <div className="min-h-screen bg-background">
-            <Header />
-
+        <>
             {/* Hero Section */}
-            <section className="pt-32 pb-16 px-4">
+            <section className="pt-24 pb-16 px-4">
                 <div className="max-w-6xl mx-auto">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -165,6 +163,9 @@ export default function PortfolioDetail() {
                     </div>
                 </div>
             </section>
-        </div>
+
+            {/* Standard CTA Section */}
+            <CTABottom />
+        </>
     );
 } 
