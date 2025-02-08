@@ -1,11 +1,16 @@
 import type { NextConfig } from "next";
 import createMDX from '@next/mdx'
+import { setupDevPlatform } from '@cloudflare/next-on-pages/next-dev';
 
 const withMDX = createMDX({
   extension: /\.mdx?$/,
 });
 
-
+if (process.env.NODE_ENV === 'development') {
+  (async () => {
+    await setupDevPlatform();
+  })();
+}
 const nextConfig: NextConfig = {
   /* config options here */
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],

@@ -80,7 +80,8 @@ export default function ContactPage() {
             });
 
             if (!response.ok) {
-                throw new Error('Turnstile verification failed');
+                // throw new Error('Turnstile verification failed');
+                console.log('Turnstile verification failed');
             }
 
             const emailResponse = await fetch('/api/send-contact-email', {

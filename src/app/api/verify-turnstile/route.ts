@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
+export const runtime = "edge";
 interface CloudflareTurnstileResponse {
     success: boolean;
     "error-codes": string[];

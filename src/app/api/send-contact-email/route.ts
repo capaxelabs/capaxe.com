@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { sendEmail } from '@/lib/email';
 
+export const runtime = "edge";
+
 const formatBudget = (budget: string) => {
     const budgetMap: Record<string, string> = {
         'less_than_5k': 'Less than $5,000',
