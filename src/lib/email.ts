@@ -1,16 +1,33 @@
-import nodemailer from 'nodemailer'
+export async function sendEmail(
+  emailHtml: string,
+  to: string,
+  subject: string,
+  attachments: File[] = [],
+  cc?: string
+) {
+  const formData = new FormData();
+  formData.append('to', to);
+  formData.append('from', process.env.SMTP_FROM || '');
+  formData.append('subject', subject);
+  formData.append('html', emailHtml);
 
-export async function sendEmail(emailHtml: string, to: string, subject: string, attachements: []) {
-
-  const transporter = nodemailer.createTransport(process.env.SMTP_SERVER)
-  const options = {
-    from: process.env.SMTP_FROM,
-    to,
-    subject,
-    html: emailHtml,
-    attachments: attachements
+  if (cc) {
+    formData.append('cc', cc);
   }
-  const send = await transporter.sendMail(options)
 
-  return send
+  // Add attachments if any
+  attachments.forEach((file) => {
+    formData.append('attachments', file);
+  });
+
+  const response = await fetch('https://mail-worker.m4k.workers.dev', {
+    method: 'POST',
+    body: formData,
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to send email: ${response.statusText}`);
+  }
+
+  return await response.json();
 }

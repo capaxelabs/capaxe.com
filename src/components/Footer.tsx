@@ -7,7 +7,7 @@ export const Footer = () => {
 
     return (
         <>
-            <footer className="bg-purple-900">
+            <footer className="bg-purple-900 text-">
                 <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 gap-8 lg:grid-cols-4">
                         {/* Company Info */}
@@ -28,7 +28,7 @@ export const Footer = () => {
                                     <li key={item.href}>
                                         <Link
                                             href={item.href}
-                                            className="text-base text-gray-200 hover:text-gray-900"
+                                            className="text-base text-gray-200 hover:text-gray-300"
                                         >
                                             {item.title}
                                         </Link>
@@ -45,7 +45,7 @@ export const Footer = () => {
                                     <li key={item.href}>
                                         <Link
                                             href={item.href}
-                                            className="text-base text-gray-200 hover:text-gray-900"
+                                            className="text-base text-gray-200 hover:text-gray-300"
                                         >
                                             {item.title}
                                         </Link>
@@ -65,14 +65,14 @@ export const Footer = () => {
                                                 href={item.href}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="text-base text-gray-200 hover:text-gray-900"
+                                                className="text-base text-gray-200 hover:text-gray-300"
                                             >
                                                 {item.title}
                                             </a>
                                         ) : (
                                             <Link
                                                 href={item.href}
-                                                className="text-base text-gray-200 hover:text-gray-900"
+                                                className="text-base text-gray-200 hover:text-gray-300"
                                             >
                                                 {item.title}
                                             </Link>
@@ -95,7 +95,7 @@ export const Footer = () => {
                                         <li key={item.href}>
                                             <Link
                                                 href={item.href}
-                                                className="text-sm text-gray-200 hover:text-gray-900"
+                                                className="text-sm text-gray-200 hover:text-gray-300"
                                             >
                                                 {item.title}
                                             </Link>

@@ -1,14 +1,20 @@
 import { Metadata } from 'next';
+import { siteConfig } from '@/config/site';
 
 export const metadata: Metadata = {
-    title: 'E-commerce Solutions | Capaxe Labs',
-    description: 'Comprehensive e-commerce solutions to help your business succeed online. Custom development, integrations, and optimization services.',
+    title: `E-commerce Solutions | ${siteConfig.name}`,
+    description: 'Comprehensive e-commerce solutions to help your business succeed online. From store setup to optimization and growth strategies.',
+    openGraph: {
+        title: `E-commerce Solutions | ${siteConfig.name}`,
+        description: 'Comprehensive e-commerce solutions to help your business succeed online. From store setup to optimization and growth strategies.',
+        type: 'website',
+    },
 };
 
 export default function EcommerceSolutionsPage() {
     return (
         <div className="bg-white">
-            <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto pt-32 py-16 px-4 sm:px-6 lg:px-8">
                 <div className="text-center">
                     <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">
                         E-commerce Solutions

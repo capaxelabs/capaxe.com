@@ -1,14 +1,20 @@
 import { Metadata } from 'next';
+import { siteConfig } from '@/config/site';
 
 export const metadata: Metadata = {
-    title: 'Shopify Development Services | Capaxe Labs',
-    description: 'Professional Shopify development services to create and optimize your online store. Custom themes, apps, and integrations.',
+    title: `Shopify Development Services | ${siteConfig.name}`,
+    description: 'Expert Shopify development services to build high-performing online stores. Custom themes, apps, and integrations to help your business grow.',
+    openGraph: {
+        title: `Shopify Development Services | ${siteConfig.name}`,
+        description: 'Expert Shopify development services to build high-performing online stores. Custom themes, apps, and integrations to help your business grow.',
+        type: 'website',
+    },
 };
 
 export default function ShopifyDevelopmentPage() {
     return (
         <div className="bg-white">
-            <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto pt-32 py-16 px-4 sm:px-6 lg:px-8">
                 <div className="text-center">
                     <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">
                         Shopify Development Services

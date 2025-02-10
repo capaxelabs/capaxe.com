@@ -42,6 +42,11 @@ export default function RetainerPage() {
                                         </li>
                                     ))}
                                 </ul>
+                                <div className="mt-6 text-center">
+                                    <Link href="/contact" className="inline-block px-6 py-3 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-colors">
+                                        Get Started
+                                    </Link>
+                                </div>
                             </div>
                         ))}
 

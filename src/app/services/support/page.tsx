@@ -1,14 +1,20 @@
 import { Metadata } from 'next';
+import { siteConfig } from '@/config/site';
 
 export const metadata: Metadata = {
-    title: 'Technical Support Services | Capaxe Labs',
-    description: 'Professional technical support services for your web and e-commerce solutions. 24/7 support, maintenance, and troubleshooting.',
+    title: `Technical Support Services | ${siteConfig.name}`,
+    description: 'Reliable technical support services for your e-commerce business. 24/7 maintenance, troubleshooting, and optimization to keep your store running smoothly.',
+    openGraph: {
+        title: `Technical Support Services | ${siteConfig.name}`,
+        description: 'Reliable technical support services for your e-commerce business. 24/7 maintenance, troubleshooting, and optimization to keep your store running smoothly.',
+        type: 'website',
+    },
 };
 
 export default function TechnicalSupportPage() {
     return (
         <div className="bg-white">
-            <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto pt-32 py-16 px-4 sm:px-6 lg:px-8">
                 <div className="text-center">
                     <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">
                         Technical Support Services

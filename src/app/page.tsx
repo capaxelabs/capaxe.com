@@ -11,13 +11,13 @@ export default function Home() {
   return (
     <>
 
-      <div className="min-h-screen bg-gradient-to-b from-purple-800 to-blue-900 text-white">
+      <div className="min-h-screen ">
         {/* Hero Section with Fixed Slider */}
         <LogoHero />
 
         {/* Parallax Section */}
         <motion.section
-          className="relative h-screen bg-purple-900 flex items-center justify-center"
+          className="relative h-screen bg-purple-200 flex items-center justify-center"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1 }}
@@ -45,7 +45,7 @@ export default function Home() {
                   transition={{ delay: index * 0.2 }}
                 >
                   <h3 className="text-2xl font-bold mb-4">{service.title}</h3>
-                  <p className="text-gray-300">{service.description}</p>
+                  <p className="text-gray-800">{service.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -97,7 +97,7 @@ export default function Home() {
         </section>
 
         {/* Retainer Benefits Section */}
-        <section className="py-16 bg-gradient-to-r from-purple-900 to-blue-900 text-white">
+        <section className="py-16 bg-purple-50 ">
           <div className="container mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -106,59 +106,32 @@ export default function Home() {
               className="text-center mb-12"
             >
               <h2 className="text-4xl font-bold mb-4">Shopify Retainer Plans</h2>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              <p className="text-xl  max-w-3xl mx-auto">
                 Get dedicated Shopify support to scale your business. Choose the plan that fits your needs and let us handle your technical requirements.
               </p>
             </motion.div>
 
             <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2 }}
-                className="bg-white/10 p-8 rounded-xl backdrop-blur-lg"
-              >
-                <h3 className="text-2xl font-bold mb-2">Growth Plan</h3>
-                <p className="text-purple-300 text-lg mb-4">₹50,000/month ($600/month)</p>
-                <ul className="space-y-3">
-                  <li className="flex items-center">
-                    <span className="text-green-400 mr-2">✓</span>
-                    20 development hours/month
-                  </li>
-                  <li className="flex items-center">
-                    <span className="text-green-400 mr-2">✓</span>
-                    Store tweaks & optimization
-                  </li>
-                  <li className="flex items-center">
-                    <span className="text-green-400 mr-2">✓</span>
-                    UI/UX improvements
-                  </li>
-                </ul>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.4 }}
-                className="bg-white/10 p-8 rounded-xl backdrop-blur-lg"
-              >
-                <h3 className="text-2xl font-bold mb-2">Scale Plan</h3>
-                <p className="text-purple-300 text-lg mb-4">₹1,00,000/month ($1,200/month)</p>
-                <ul className="space-y-3">
-                  <li className="flex items-center">
-                    <span className="text-green-400 mr-2">✓</span>
-                    40 development hours/month
-                  </li>
-                  <li className="flex items-center">
-                    <span className="text-green-400 mr-2">✓</span>
-                    Custom app development
-                  </li>
-                  <li className="flex items-center">
-                    <span className="text-green-400 mr-2">✓</span>
-                    API integrations & automation
-                  </li>
-                </ul>
-              </motion.div>
+              {siteConfig.retainer.items.map((item, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className="bg-white/10 p-8 rounded-xl backdrop-blur-lg"
+                >
+                  <h3 className="text-2xl font-bold mb-2">{item.title}</h3>
+                  <p className="text-purple-800 text-lg mb-4">{item.monthly}/month (${item.yearly}/month)</p>
+                  <ul className="space-y-3">
+                    {item.features.map((feature, index) => (
+                      <li key={index} className="flex items-center">
+                        <span className="text-green-400 mr-2">✓</span>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              ))}
             </div>
 
             <motion.div

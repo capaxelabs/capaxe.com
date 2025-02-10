@@ -1,5 +1,19 @@
 
-export const caseStudies = [
+export type CaseStudy = {
+    id: string;
+    title: string;
+    client: string;
+    description: string;
+    metrics: {
+        salesIncrease: string;
+        loadingSpeed: string;
+        conversionRate: string;
+    };
+    thumbnail: string;
+    pdfUrl: string;
+};
+
+export const caseStudies: CaseStudy[] = [
     {
         id: 'shopify-migration',
         title: "Shopify Migration Success Story",
@@ -41,7 +55,19 @@ export const caseStudies = [
     }
 ];
 
-export const caseStudiesDetails = {
+export type CaseStudyDetails = {
+    title: string;
+    client: string;
+    description: string;
+    challenge: string;
+    solution: string;
+    results: string;
+    testimonial: Record<string, string>;
+    metrics: Record<string, string>;
+    pdfUrl: string;
+};
+
+export const caseStudiesDetails: Record<string, CaseStudyDetails> = {
     'shopify-migration': {
         title: "Shopify Migration Success Story",
         client: "Fashion Retailer",
