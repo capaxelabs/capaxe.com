@@ -11,12 +11,21 @@ import cloudflare from "@astrojs/cloudflare";
 export default defineConfig({
   site: "https://www.capaxe.com",
   integrations: [mdx(), sitemap(), react()],
+  output: "server",
   adapter: cloudflare({
+    imageService: "passthrough",
     platformProxy: {
       enabled: true,
     },
   }),
   vite: {
     plugins: [tailwindcss()],
+    resolve: {
+      // Use react-dom/server.edge instead of react-dom/server.browser for React 19.
+      // Without this, MessageChannel from node:worker_threads needs to be polyfilled.
+      alias: {
+        "react-dom/server": "react-dom/server.edge",
+      },
+    },
   },
 });
