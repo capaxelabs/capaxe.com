@@ -1,0 +1,141 @@
+---
+import { menuConfig } from "@/config/menu";
+
+import { siteConfig } from "@/config/site";
+---
+
+<div class="fixed top-0 left-0 w-full z-50 flex justify-center">
+  <header id="main-header" class="mx-4 mt-4 w-full max-w-5xl rounded-lg transition-all duration-300 bg-white/50">
+    <nav class="px-6 py-4">
+      <div class="flex items-center justify-between">
+        <!-- Logo -->
+        <a href="/" class="text-2xl font-bold text-foreground">
+          {siteConfig.name}
+        </a>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center gap-8">
+          {
+            menuConfig.mainNav.map((item) =>
+              item.isButton ? (
+                <a
+                  href={item.href}
+                  class="flex items-center gap-2 rounded px-3 py-2 text-base font-medium uppercase text-white transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 md:text-lg bg-indigo-600 shadow-[4px_4px_0px_black] hover:shadow-[8px_8px_0px_black]"
+                >
+                  {item.title}
+                </a>
+              ) : (
+                <a href={item.href} class="text-gray-600 hover:text-gray-900 transition-colors">
+                  {item.title}
+                </a>
+              )
+            )
+          }
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button id="menu-toggle" class="md:hidden text-gray-600 hover:text-gray-900">
+          <svg
+            id="menu-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="block"
+            ><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg
+          >
+          <svg
+            id="close-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="hidden"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg
+          >
+        </button>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="md:hidden hidden">
+        <div class="flex flex-col gap-4 pt-4 pb-2">
+          {
+            menuConfig.mainNav.map((item) =>
+              item.isButton ? (
+                <a
+                  href={item.href}
+                  class="flex items-center gap-2 rounded px-6 py-4 text-base font-medium uppercase text-black transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 md:text-lg shadow-[4px_4px_0px_white] hover:shadow-[8px_8px_0px_white]"
+                >
+                  <span>{item.title}</span>
+                </a>
+              ) : (
+                <a href={item.href} class="text-gray-600 hover:text-gray-900 transition-colors px-2 py-1">
+                  {item.title}
+                </a>
+              )
+            )
+          }
+        </div>
+      </div>
+    </nav>
+  </header>
+</div>
+
+<script>
+  // Handle mobile menu toggle
+  const menuToggle = document.getElementById("menu-toggle");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const menuIcon = document.getElementById("menu-icon");
+  const closeIcon = document.getElementById("close-icon");
+
+  let isOpen = false;
+
+  menuToggle?.addEventListener("click", () => {
+    isOpen = !isOpen;
+    if (isOpen) {
+      mobileMenu?.classList.remove("hidden");
+      menuIcon?.classList.add("hidden");
+      closeIcon?.classList.remove("hidden");
+    } else {
+      mobileMenu?.classList.add("hidden");
+      menuIcon?.classList.remove("hidden");
+      closeIcon?.classList.add("hidden");
+    }
+  });
+
+  // Handle scroll effect
+  const header = document.getElementById("main-header");
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 20) {
+      header?.classList.add("bg-white/80", "backdrop-blur-md", "shadow-lg");
+      header?.classList.remove("bg-white/50");
+    } else {
+      header?.classList.remove("bg-white/80", "backdrop-blur-md", "shadow-lg");
+      header?.classList.add("bg-white/50");
+    }
+  });
+
+  // Add initial animation (simulate the motion animation from React component)
+  document.addEventListener("DOMContentLoaded", () => {
+    if (header) {
+      header.style.transform = "translateY(-100px)";
+      header.style.opacity = "0";
+
+      setTimeout(() => {
+        header.style.transition = "transform 0.5s ease, opacity 0.5s ease";
+        header.style.transform = "translateY(0)";
+        header.style.opacity = "1";
+      }, 100);
+    }
+  });
+</script>

@@ -1,0 +1,98 @@
+---
+import { siteConfig } from "@/config/site";
+import { menuConfig } from "@/config/menu";
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-purple-900">
+  <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-4">
+      <!-- Company Info -->
+      <div>
+        <a href="/" class="text-2xl font-bold text-white">
+          {siteConfig.name}
+        </a>
+        <p class="mt-4 text-gray-200 max-w-xs">
+          {siteConfig.description}
+        </p>
+      </div>
+
+      <!-- Solutions -->
+      <div>
+        <h3 class="text-sm font-semibold text-white uppercase tracking-wider">Solutions</h3>
+        <ul class="mt-4 space-y-4">
+          {
+            menuConfig.footerNav.solutions.map((item) => (
+              <li>
+                <a href={item.href} class="text-base text-gray-200 hover:text-gray-300">
+                  {item.title}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Company -->
+      <div>
+        <h3 class="text-sm font-semibold text-white uppercase tracking-wider">Company</h3>
+        <ul class="mt-4 space-y-4">
+          {
+            menuConfig.footerNav.company.map((item) => (
+              <li>
+                <a href={item.href} class="text-base text-gray-200 hover:text-gray-300">
+                  {item.title}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Support -->
+      <div>
+        <h3 class="text-sm font-semibold text-white uppercase tracking-wider">Support</h3>
+        <ul class="mt-4 space-y-4">
+          {
+            menuConfig.footerNav.support.map((item) => (
+              <li>
+                {item.external ? (
+                  <a href={item.href} target="_blank" rel="noopener noreferrer" class="text-base text-gray-200 hover:text-gray-300">
+                    {item.title}
+                  </a>
+                ) : (
+                  <a href={item.href} class="text-base text-gray-200 hover:text-gray-300">
+                    {item.title}
+                  </a>
+                )}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom Section -->
+    <div class="mt-12 border-t border-gray-200 pt-8">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <p class="text-base text-gray-400">
+          &copy; {currentYear}
+          {siteConfig.name}. All rights reserved.
+        </p>
+        <div class="mt-4 md:mt-0">
+          <ul class="flex space-x-6">
+            {
+              menuConfig.footerNav.legal.map((item) => (
+                <li>
+                  <a href={item.href} class="text-sm text-gray-200 hover:text-gray-300">
+                    {item.title}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

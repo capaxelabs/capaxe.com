@@ -1,9 +1,9 @@
-import { SiteConfig } from "@/types";
+import type { SiteConfig } from "~/types";
 
 export const siteConfig: SiteConfig = {
     name: 'Capaxe Labs',
     description: 'Professional Shopify development and web solutions for growing businesses.',
-    url: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+    url: 'http://localhost:5173',
     ogImage: '/og-image.jpg',
     keywords: [
         'Shopify Development',
@@ -65,31 +65,155 @@ export const siteConfig: SiteConfig = {
                 title: 'Growth Plan',
                 description: 'For businesses that require custom development & API integrations.',
                 monthly: '$1,000',
-                yearly: '$6,000',
+                yearly: '$10,000',
                 features: [
                     '20 development hours/month',
                     'Shopify store tweaks, bug fixes & performance optimization',
                     'UI/UX improvements for Shopify themes & Hydrogen stores',
                     'Priority email support',
-                    'Monthly report on implemented changes',
+                    'Monthly report on implemented changes'
                 ]
             },
             {
-                title: 'Scale Plan',
-                description: 'For businesses that require continuous custom development & API integrations.',
-                monthly: '$1,500',
-                yearly: '$15,000',
+                title: 'Standard Retainer',
+                description: 'Perfect for established Shopify stores that need regular maintenance and small enhancements.',
+                monthly: '$1,999',
+                yearly: '$19,990',
                 features: [
-                    '35 development hours/month',
+                    '40 development hours per month',
+                    'Dedicated Shopify expert',
+                    'Priority support (24-48 hour response)',
                     'Shopify store tweaks, bug fixes & performance optimization',
-                    'UI/UX improvements for Shopify themes & Hydrogen stores',
-                    'Priority email support',
-                    'Monthly report on implemented changes',
-                    '24/7 priority support',
-                    'Cutsom app development in yearly plan',
+                    'Monthly performance report',
+                    'Bug fixes and troubleshooting',
+                    'Small feature enhancements',
+                    'Custom app development in yearly plan',
+                    'Headless store development in yearly plan'
                 ]
             },
-
+            {
+                title: 'Premium Retainer',
+                description: 'Ideal for growing businesses that need ongoing development and strategic guidance.',
+                monthly: '$3,499',
+                yearly: '$34,990',
+                features: [
+                    '50 development hours per month',
+                    'Dedicated Shopify expert team',
+                    'VIP support (24 hour response)',
+                    'Weekly check-ins',
+                    'Monthly strategy sessions',
+                    'App integration and customization',
+                    'Performance optimization',
+                    'Custom app development in yearly plan',
+                    'Headless store development in yearly plan'
+                ]
+            }
         ]
-    }
+    },
+    servicesDtail: [
+        {
+            title: "Shopify Store Development",
+            description: "Custom Shopify stores built from the ground up to meet your specific business needs.",
+            icon: "store",
+            href: "/services/shopify-development",
+            features: [
+                "Custom theme development",
+                "Store setup and migration",
+                "Third-party integrations",
+                "Performance optimization",
+                "Mobile-responsive design",
+            ]
+        },
+        {
+            title: "Shopify App Development",
+            description: "Tailor-made applications to extend Shopify's functionality for your business.",
+            icon: "app",
+            href: "/services/app-development",
+            features: [
+                "Custom app development",
+                "Public app development",
+                "Seamless integrations",
+                "API integrations",
+                "App maintenance and support",
+            ]
+        },
+        {
+            title: "Web Development",
+            description: "Modern web solutions built with cutting-edge technologies.",
+            icon: "web",
+            href: "/services/web-development",
+            features: [
+                "Frontend development",
+                "Backend development",
+                "Full stack solutions",
+                "Responsive design",
+                "Progressive web apps",
+            ]
+        },
+        {
+            title: "SEO & Performance",
+            description: "Boost your store's visibility and speed to attract more customers and improve user experience.",
+            icon: "seo",
+            href: "/services/seo-performance",
+            features: [
+                "SEO optimization",
+                "Performance enhancement",
+                "Higher conversion rates",
+                "Improved user experience",
+                "Better SEO rankings",
+            ]
+        },
+        {
+            title: "E-commerce Solutions",
+            description: "Complete e-commerce solutions to power your online business.",
+            icon: "ecommerce",
+            href: "/services/ecommerce-solutions",
+            features: [
+                "Platform development",
+                "Integration services",
+                "Analytics & optimization",
+                "Payment gateway integration",
+                "Shipping provider integration",
+            ]
+        },
+        {
+            title: "Technical Support",
+            description: "24/7 expert technical support to keep your digital presence running smoothly.",
+            icon: "support",
+            href: "/services/support",
+            features: [
+                "24/7 support",
+                "Maintenance services",
+                "Expert troubleshooting",
+                "Security updates",
+                "Performance monitoring",
+            ]
+        },
+        {
+            title: "Store Development",
+            description: "Build a powerful and engaging store tailored to your business needs.",
+            icon: "store-dev",
+            href: "/services/store-development",
+            features: [
+                "Liquid theme development",
+                "Hydrogen + Oxygen deployment",
+                "Headless storefront development",
+                "Custom features & integrations",
+                "End-to-end development",
+            ]
+        },
+        {
+            title: "Migration & Integration",
+            description: "Seamlessly migrate your existing store or integrate with third-party platforms.",
+            icon: "migration",
+            href: "/services/migration",
+            features: [
+                "WooCommerce migration",
+                "Magento migration",
+                "Custom integrations",
+                "Data migration",
+                "API integrations",
+            ]
+        }
+    ]
 } 

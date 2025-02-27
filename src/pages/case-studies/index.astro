@@ -1,0 +1,65 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { SITE_TITLE } from "@/consts";
+import { ArrowDownIcon } from "@heroicons/react/24/outline";
+import { caseStudies } from "@/config/caseStudy";
+import CTABottom from "@/components/CTA.astro";
+---
+
+<Layout title={`Case Studies | ${SITE_TITLE}`} description="Explore our detailed case studies and success stories">
+  <div class="min-h-screen bg-background">
+    {/* Hero Section */}
+    <section class="pt-32 pb-16 px-4">
+      <div class="max-w-6xl mx-auto text-center">
+        <h1 class="text-5xl md:text-6xl font-bold mb-6">Case Studies</h1>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+          Explore how we&apos;ve helped businesses achieve their goals through innovative solutions
+        </p>
+      </div>
+    </section>
+
+    {/* Case Studies Grid */}
+    <section class="py-16 px-4">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-8">
+          {
+            caseStudies.map((study, index) => (
+              <div key={study.id} class="bg-white rounded-xl overflow-hidden shadow-lg">
+                <div class="p-8">
+                  <div class="flex justify-between items-start mb-6">
+                    <div>
+                      <h2 class="text-2xl font-bold mb-2">{study.title}</h2>
+                      <p class="text-purple-600 font-medium">{study.client}</p>
+                    </div>
+                    <a href={study.pdfUrl} download class="flex items-center gap-2 text-purple-600 hover:text-purple-700" whileHover={{ y: -2 }}>
+                      <ArrowDownIcon class="w-5 h-5" />
+                      <span>Download PDF</span>
+                    </a>
+                  </div>
+
+                  <p class="text-gray-600 mb-6">{study.description}</p>
+
+                  <div class="grid grid-cols-3 gap-4 mb-6">
+                    {Object.entries(study.metrics).map(([key, value]) => (
+                      <div key={key} class="bg-purple-50 p-4 rounded-lg text-center">
+                        <div class="text-2xl font-bold text-purple-600">{value}</div>
+                        <div class="text-sm text-gray-600">{key.replace(/([A-Z])/g, " $1").trim()}</div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <a href={`/case-studies/${study.id}`} class="inline-block">
+                    <button class="bg-purple-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-purple-700 transition-colors">
+                      View Full Case Study
+                    </button>
+                  </a>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+    <CTABottom />
+  </div>
+</Layout>

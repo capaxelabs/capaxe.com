@@ -1,0 +1,9 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ReactHome from "../components/ReactHome.jsx";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+---
+
+<Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+  <ReactHome client:load />
+</Layout>

@@ -1,0 +1,210 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { SITE_TITLE } from "../consts";
+---
+
+<Layout title={`FAQ | ${SITE_TITLE}`} description="Frequently asked questions about our services">
+  <main class="container mx-auto px-4 py-12">
+    <h1 class="text-4xl font-bold mb-8">Frequently Asked Questions</h1>
+
+    <div class="max-w-3xl mx-auto">
+      <p class="text-lg mb-12">Find answers to common questions about our services, processes, and how we can help your business grow online.</p>
+
+      <!-- FAQ Categories -->
+      <div class="flex flex-wrap justify-center gap-4 mb-12">
+        <button class="px-6 py-2 bg-blue-600 text-white rounded-full">All</button>
+        <button class="px-6 py-2 bg-gray-200 hover:bg-gray-300 rounded-full">Services</button>
+        <button class="px-6 py-2 bg-gray-200 hover:bg-gray-300 rounded-full">Process</button>
+        <button class="px-6 py-2 bg-gray-200 hover:bg-gray-300 rounded-full">Pricing</button>
+        <button class="px-6 py-2 bg-gray-200 hover:bg-gray-300 rounded-full">Support</button>
+      </div>
+
+      <!-- FAQ Items -->
+      <div class="space-y-6">
+        <!-- FAQ Item 1 -->
+        <div class="border border-gray-200 rounded-lg overflow-hidden">
+          <button class="flex justify-between items-center w-full px-6 py-4 text-left bg-white hover:bg-gray-50">
+            <span class="text-lg font-medium">What services do you offer?</span>
+            <svg class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div class="px-6 py-4 bg-gray-50">
+            <p>
+              We offer a comprehensive range of digital services including Shopify development, custom app development, e-commerce solutions,
+              migration and integration services, SEO and performance optimization, and ongoing technical support. You can view our complete list of
+              services on our <a href="/services" class="text-blue-600 hover:underline">Services page</a>.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 2 -->
+        <div class="border border-gray-200 rounded-lg overflow-hidden">
+          <button class="flex justify-between items-center w-full px-6 py-4 text-left bg-white hover:bg-gray-50">
+            <span class="text-lg font-medium">How long does it take to complete a project?</span>
+            <svg class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div class="hidden px-6 py-4 bg-gray-50">
+            <p>
+              Project timelines vary based on complexity, scope, and requirements. A simple Shopify store might take 2-4 weeks, while a complex custom
+              application could take 3-6 months or more. During our initial consultation, we'll provide you with a detailed timeline based on your
+              specific project needs.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 3 -->
+        <div class="border border-gray-200 rounded-lg overflow-hidden">
+          <button class="flex justify-between items-center w-full px-6 py-4 text-left bg-white hover:bg-gray-50">
+            <span class="text-lg font-medium">How much does a typical project cost?</span>
+            <svg class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div class="hidden px-6 py-4 bg-gray-50">
+            <p>
+              Our project costs vary depending on the complexity, features required, and timeline. We provide custom quotes tailored to your specific
+              business needs after understanding your requirements. For ongoing support and maintenance, we offer flexible <a
+                href="/retainer"
+                class="text-blue-600 hover:underline">retainer plans</a
+              > starting at $999 per month.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 4 -->
+        <div class="border border-gray-200 rounded-lg overflow-hidden">
+          <button class="flex justify-between items-center w-full px-6 py-4 text-left bg-white hover:bg-gray-50">
+            <span class="text-lg font-medium">What is your development process?</span>
+            <svg class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div class="hidden px-6 py-4 bg-gray-50">
+            <p>Our development process typically includes the following phases:</p>
+            <ol class="list-decimal pl-5 mt-2 space-y-1">
+              <li>Discovery and needs analysis</li>
+              <li>Proposal and project planning</li>
+              <li>Design and wireframing</li>
+              <li>Development and implementation</li>
+              <li>Quality assurance and testing</li>
+              <li>Launch and deployment</li>
+              <li>Post-launch support and maintenance</li>
+            </ol>
+            <p class="mt-2">We follow agile methodologies to ensure flexibility and regular communication throughout the project.</p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 5 -->
+        <div class="border border-gray-200 rounded-lg overflow-hidden">
+          <button class="flex justify-between items-center w-full px-6 py-4 text-left bg-white hover:bg-gray-50">
+            <span class="text-lg font-medium">Do you offer ongoing support after project completion?</span>
+            <svg class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div class="hidden px-6 py-4 bg-gray-50">
+            <p>
+              Yes, we offer ongoing support and maintenance through our flexible <a href="/retainer" class="text-blue-600 hover:underline"
+                >retainer plans</a
+              >. These plans include regular updates, bug fixes, feature enhancements, and technical support to ensure your digital presence continues
+              to perform optimally. We also offer ad-hoc support for specific needs if you prefer not to commit to a monthly retainer.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 6 -->
+        <div class="border border-gray-200 rounded-lg overflow-hidden">
+          <button class="flex justify-between items-center w-full px-6 py-4 text-left bg-white hover:bg-gray-50">
+            <span class="text-lg font-medium">Can you help with migrating from another platform to Shopify?</span>
+            <svg class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div class="hidden px-6 py-4 bg-gray-50">
+            <p>
+              Yes, we specialize in platform migrations to Shopify from platforms like WooCommerce, Magento, BigCommerce, and other e-commerce
+              systems. Our migration services include data transfer (products, customers, orders), design implementation, custom functionality
+              migration, SEO preservation, and thorough testing to ensure a smooth transition with minimal disruption to your business.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 7 -->
+        <div class="border border-gray-200 rounded-lg overflow-hidden">
+          <button class="flex justify-between items-center w-full px-6 py-4 text-left bg-white hover:bg-gray-50">
+            <span class="text-lg font-medium">How do you handle project communication?</span>
+            <svg class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div class="hidden px-6 py-4 bg-gray-50">
+            <p>
+              We believe in transparent and regular communication throughout the project lifecycle. We use project management tools to provide you
+              with real-time updates on progress. Depending on the project scope, we schedule weekly or bi-weekly check-in meetings and provide
+              detailed reports. You'll have a dedicated project manager as your main point of contact who will be available to address any questions
+              or concerns.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 8 -->
+        <div class="border border-gray-200 rounded-lg overflow-hidden">
+          <button class="flex justify-between items-center w-full px-6 py-4 text-left bg-white hover:bg-gray-50">
+            <span class="text-lg font-medium">What if I need changes after the project is completed?</span>
+            <svg class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div class="hidden px-6 py-4 bg-gray-50">
+            <p>
+              We offer a 30-day warranty period after project completion for any bug fixes or minor adjustments. For new features or significant
+              changes, we can provide these services either through a new project proposal or as part of an ongoing retainer plan. Our goal is to
+              build a long-term relationship with our clients, so we're always available to help as your business evolves and grows.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-12 text-center">
+        <p class="text-lg mb-6">Don't see your question here?</p>
+        <a href="/contact" class="inline-block bg-blue-600 text-white py-3 px-8 rounded-md hover:bg-blue-700 transition">Contact Us</a>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  // Simple FAQ toggle functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const faqButtons = document.querySelectorAll('.border.border-gray-200 button');
+    
+    faqButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const content = button.nextElementSibling as HTMLElement | null;
+        if (content) {
+          content.classList.toggle('hidden');
+          
+          // Update the arrow icon
+          const svg = button.querySelector('svg');
+          if (svg) {
+            if (content.classList.contains('hidden')) {
+              svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>';
+            } else {
+              svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>';
+            }
+          }
+        }
+      });
+    });
+    
+    // Open the first FAQ by default
+    if (faqButtons.length > 0) {
+      const firstButton = faqButtons[0] as HTMLElement;
+      firstButton.click();
+    }
+  });
+</script>
+

@@ -1,128 +1,57 @@
-import { MotionValue, useScroll, motion, useTransform } from "motion/react";
-import React, { useRef } from "react";
-import { IconType } from "react-icons";
-import {
-    FiArrowRight,
-    FiShoppingCart,
-    FiTrendingUp,
-    FiUsers,
-} from "react-icons/fi";
-import { SiReact } from "react-icons/si";
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from "motion/react";
 
-export const StickyCards = () => {
-    const ref = useRef(null);
+export const StickyCards: React.FC = () => {
+    const containerRef = useRef(null);
     const { scrollYProgress } = useScroll({
-        target: ref,
-        offset: ["start start", "end start"],
+        target: containerRef,
+        offset: ["start end", "end start"]
     });
 
     return (
-        <>
-            <div ref={ref} className="relative">
-                {CARDS.map((c, idx) => (
-                    <Card
-                        key={c.id}
-                        card={c}
-                        scrollYProgress={scrollYProgress}
-                        position={idx + 1}
-                    />
-                ))}
+        <section ref={containerRef} className="relative py-40 bg-white">
+            <div className="container mx-auto px-6">
+                <div className="sticky top-20 pt-10 pb-20">
+                    <h2 className="text-4xl font-bold text-center mb-20">Why Choose Us</h2>
+
+                    <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                        <motion.div
+                            className="bg-gradient-to-br from-purple-50 to-blue-50 p-8 rounded-xl shadow-lg"
+                            style={{
+                                opacity: useTransform(scrollYProgress, [0, 0.3, 0.6], [0.3, 1, 0.3]),
+                                scale: useTransform(scrollYProgress, [0, 0.3, 0.6], [0.8, 1, 0.8]),
+                            }}
+                        >
+                            <h3 className="text-2xl font-bold mb-4">Expert Team</h3>
+                            <p className="text-gray-700">Our team of skilled professionals brings years of experience and deep expertise to every project.</p>
+                        </motion.div>
+
+                        <motion.div
+                            className="bg-gradient-to-br from-purple-50 to-blue-50 p-8 rounded-xl shadow-lg"
+                            style={{
+                                opacity: useTransform(scrollYProgress, [0.2, 0.5, 0.8], [0.3, 1, 0.3]),
+                                scale: useTransform(scrollYProgress, [0.2, 0.5, 0.8], [0.8, 1, 0.8]),
+                            }}
+                        >
+                            <h3 className="text-2xl font-bold mb-4">Innovative Solutions</h3>
+                            <p className="text-gray-700">We leverage cutting-edge technologies to deliver innovative solutions that drive real results.</p>
+                        </motion.div>
+
+                        <motion.div
+                            className="bg-gradient-to-br from-purple-50 to-blue-50 p-8 rounded-xl shadow-lg"
+                            style={{
+                                opacity: useTransform(scrollYProgress, [0.4, 0.7, 1], [0.3, 1, 0.3]),
+                                scale: useTransform(scrollYProgress, [0.4, 0.7, 1], [0.8, 1, 0.8]),
+                            }}
+                        >
+                            <h3 className="text-2xl font-bold mb-4">Client-Focused</h3>
+                            <p className="text-gray-700">We prioritize your business goals and work closely with you to achieve measurable success.</p>
+                        </motion.div>
+                    </div>
+                </div>
             </div>
-            {/* <div className="h-screen bg-black" /> */}
-        </>
+        </section>
     );
 };
 
-interface CardProps {
-    position: number;
-    card: CardType;
-    scrollYProgress: MotionValue;
-}
-
-const Card = ({ position, card, scrollYProgress }: CardProps) => {
-    const scaleFromPct = (position - 1) / CARDS.length;
-    const y = useTransform(scrollYProgress, [scaleFromPct, 1], [0, -CARD_HEIGHT]);
-
-    const isOddCard = position % 2;
-
-    return (
-        <motion.div
-            style={{
-                height: CARD_HEIGHT,
-                y: position === CARDS.length ? undefined : y,
-                background: isOddCard ? "black" : "white",
-                color: isOddCard ? "white" : "black",
-            }}
-            className="sticky top-0 flex w-full origin-top flex-col items-center justify-center px-4"
-        >
-            <card.Icon className="mb-4 text-4xl" />
-            <h3 className="mb-6 text-center text-4xl font-semibold md:text-6xl">
-                {card.title}
-            </h3>
-            <p className="mb-8 max-w-lg text-center text-sm md:text-base">
-                {card.description}
-            </p>
-            <a
-                href={card.routeTo}
-                className={`flex items-center gap-2 rounded px-6 py-4 text-base font-medium uppercase text-black transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 md:text-lg ${card.ctaClasses
-                    } ${isOddCard
-                        ? "shadow-[4px_4px_0px_white] hover:shadow-[8px_8px_0px_white]"
-                        : "shadow-[4px_4px_0px_black] hover:shadow-[8px_8px_0px_black]"
-                    }`}
-            >
-                <span>Learn more</span>
-                <FiArrowRight />
-            </a>
-        </motion.div>
-    );
-};
-
-const CARD_HEIGHT = 500;
-
-type CardType = {
-    id: number;
-    Icon: IconType;
-    title: string;
-    description: string;
-    ctaClasses: string;
-    routeTo: string;
-};
-
-const CARDS: CardType[] = [
-    {
-        id: 1,
-        Icon: FiShoppingCart,
-        title: "Custom Shopify Stores",
-        description:
-            "We specialize in building tailored Shopify stores designed to enhance user experience and drive sales.",
-        ctaClasses: "bg-blue-300",
-        routeTo: "/services/store-development",
-    },
-    {
-        id: 2,
-        Icon: SiReact,
-        title: "Shopify App Development",
-        description:
-            "Expand your store’s functionality with custom Shopify apps that meet your unique business needs.",
-        ctaClasses: "bg-green-300",
-        routeTo: "/services/app-development",
-    },
-    {
-        id: 3,
-        Icon: FiTrendingUp,
-        title: "SEO & Performance Optimization",
-        description:
-            "Optimize your Shopify store for speed and search engines to attract more customers and boost conversions.",
-        ctaClasses: "bg-yellow-300",
-        routeTo: "/services/seo-performance",
-    },
-    {
-        id: 4,
-        Icon: FiUsers,
-        title: "Migration & Integration",
-        description:
-            "Seamlessly migrate to Shopify or integrate third-party tools to streamline your business operations.",
-        ctaClasses: "bg-purple-300",
-        routeTo: "/services/migration-integration",
-    },
-];
+export default StickyCards; 

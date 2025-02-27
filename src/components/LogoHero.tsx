@@ -21,7 +21,8 @@ import {
     SiGenius,
     SiGodaddy,
 } from "react-icons/si";
-import { IconType } from "react-icons";
+import type { IconType } from "react-icons";
+import type { SiteConfig } from "@/types";
 import { siteConfig } from "@/config/site";
 
 const LogoHero = () => {
@@ -34,7 +35,7 @@ const LogoHero = () => {
                 <p className="text-center max-w-xl my-6 text-foreground">
                     {siteConfig.hero.description}
                 </p>
-                <button className="flex items-center gap-2 rounded px-3 py-2 text-base font-medium uppercase text-white transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 md:text-lg bg-purple-900 shadow-[4px_4px_0px_black] hover:shadow-[8px_8px_0px_black]">
+                <button type="button" className="flex items-center gap-2 rounded px-3 py-2 text-base font-medium uppercase text-white transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 md:text-lg bg-purple-900 shadow-[4px_4px_0px_black] hover:shadow-[8px_8px_0px_black]">
                     Get in touch
                 </button>
             </div>
@@ -72,7 +73,7 @@ const TranslateWrapper = ({ children, reverse, }: { children: React.ReactNode; r
         <motion.div
             initial={{ translateX: reverse ? "-100%" : "0%" }}
             animate={{ translateX: reverse ? "0%" : "-100%" }}
-            transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+            transition={{ duration: 50, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
             className="flex gap-4 px-2"
         >
             {children}
@@ -84,7 +85,7 @@ const LogoItem = ({ Icon }: { Icon: IconType }) => {
     return (
         <a
             href="/"
-            rel="nofollow"
+            rel="nofollow noreferrer"
             target="_blank"
             className="w-16 md:w-24 h-16 md:h-24 flex justify-center items-center hover:bg-slate-200 text-black transition-colors"
         >
