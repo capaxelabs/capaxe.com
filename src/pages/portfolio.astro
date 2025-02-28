@@ -1,145 +1,169 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import CTABottom from "@/components/CTA.astro";
 import { SITE_TITLE } from "../consts";
 ---
 
 <Layout title={`Portfolio | ${SITE_TITLE}`} description="Our portfolio of successful projects">
-  <main class="container mx-auto px-4 py-12">
-    <h1 class="text-4xl font-bold mb-8">Our Portfolio</h1>
-
-    <div class="mb-12">
-      <p class="text-lg mb-6">
-        Explore our portfolio of successful projects across various industries. We take pride in delivering high-quality solutions that help our
-        clients achieve their business goals.
-      </p>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <!-- Portfolio Item 1 -->
-      <div class="bg-white rounded-lg overflow-hidden shadow-md">
-        <div class="relative">
-          <img src="https://via.placeholder.com/600x400" alt="E-commerce Store" class="w-full h-64 object-cover" />
-          <div class="absolute top-0 right-0 bg-blue-600 text-white text-xs font-bold px-3 py-1 m-2 rounded">E-commerce</div>
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold mb-2">Luxury Fashion Boutique</h3>
-          <p class="text-gray-600 mb-4">
-            A custom Shopify store for a high-end fashion retailer with integrated inventory management and personalized shopping experiences.
-          </p>
-          <div class="flex flex-wrap gap-2 mb-4">
-            <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">Shopify</span>
-            <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">Custom Theme</span>
-            <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">API Integration</span>
+  <div class="min-h-screen bg-background">
+    {/* Hero Section */}
+    <section class="pt-32 pb-16 px-4">
+      <div class="max-w-6xl mx-auto text-center">
+        <h1 class="text-5xl md:text-6xl font-bold mb-6">Our Portfolio</h1>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+          Explore our portfolio of successful projects across various industries. We take pride in delivering high-quality solutions that help our
+          clients achieve their business goals.
+        </p>
+      </div>
+    </section>
+    <section class="py-16 px-4">
+      <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Portfolio Item 1 -->
+        <div class="bg-white rounded-lg overflow-hidden shadow-md">
+          <div class="relative">
+            <img
+              src="https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+              alt="Luxury fashion store with clothing displays"
+              class="w-full h-64 object-cover"
+            />
+            <div class="absolute top-0 right-0 bg-blue-600 text-white text-xs font-bold px-3 py-1 m-2 rounded">E-commerce</div>
           </div>
-          <a href="/case-studies/luxury-fashion-boutique" class="text-blue-600 hover:underline">View Case Study →</a>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Luxury Fashion Boutique</h3>
+            <p class="text-gray-600 mb-4">
+              A custom Shopify store for a high-end fashion retailer with integrated inventory management and personalized shopping experiences.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">Shopify</span>
+              <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">Custom Theme</span>
+              <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">API Integration</span>
+            </div>
+            <a href="/case-studies/luxury-fashion-boutique" class="text-blue-600 hover:underline">View Case Study →</a>
+          </div>
+        </div>
+
+        <!-- Portfolio Item 2 -->
+        <div class="bg-white rounded-lg overflow-hidden shadow-md">
+          <div class="relative">
+            <img
+              src="https://plus.unsplash.com/premium_photo-1712761999986-0686ec32ad91?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+              alt="Person using fitness app on smartphone"
+              class="w-full h-64 object-cover"
+            />
+            <div class="absolute top-0 right-0 bg-green-600 text-white text-xs font-bold px-3 py-1 m-2 rounded">Mobile App</div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Fitness Tracking Platform</h3>
+            <p class="text-gray-600 mb-4">
+              A comprehensive fitness tracking mobile app with social features, workout plans, and nutrition tracking capabilities.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">React Native</span>
+              <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">Node.js</span>
+              <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">MongoDB</span>
+            </div>
+            <a href="/case-studies/fitness-tracking-platform" class="text-blue-600 hover:underline">View Case Study →</a>
+          </div>
+        </div>
+
+        <!-- Portfolio Item 3 -->
+        <div class="bg-white rounded-lg overflow-hidden shadow-md">
+          <div class="relative">
+            <img
+              src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+              alt="Data analytics dashboard on computer screen"
+              class="w-full h-64 object-cover"
+            />
+            <div class="absolute top-0 right-0 bg-purple-600 text-white text-xs font-bold px-3 py-1 m-2 rounded">SaaS</div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Marketing Analytics Dashboard</h3>
+            <p class="text-gray-600 mb-4">
+              A powerful marketing analytics platform that consolidates data from multiple sources into actionable insights.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">Vue.js</span>
+              <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">Django</span>
+              <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">PostgreSQL</span>
+            </div>
+            <a href="/case-studies/marketing-analytics-dashboard" class="text-blue-600 hover:underline">View Case Study →</a>
+          </div>
+        </div>
+
+        <!-- Portfolio Item 4 -->
+        <div class="bg-white rounded-lg overflow-hidden shadow-md">
+          <div class="relative">
+            <img
+              src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+              alt="Student using educational platform on laptop"
+              class="w-full h-64 object-cover"
+            />
+            <div class="absolute top-0 right-0 bg-red-600 text-white text-xs font-bold px-3 py-1 m-2 rounded">Web App</div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Educational Learning Platform</h3>
+            <p class="text-gray-600 mb-4">
+              An interactive e-learning platform with course management, user progress tracking, and integrated payment system.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">React</span>
+              <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">Express.js</span>
+              <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">MySQL</span>
+            </div>
+            <a href="/case-studies/educational-learning-platform" class="text-blue-600 hover:underline">View Case Study →</a>
+          </div>
+        </div>
+
+        <!-- Portfolio Item 5 -->
+        <div class="bg-white rounded-lg overflow-hidden shadow-md">
+          <div class="relative">
+            <img
+              src="https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+              alt="Organic produce marketplace with fresh vegetables"
+              class="w-full h-64 object-cover"
+            />
+            <div class="absolute top-0 right-0 bg-blue-600 text-white text-xs font-bold px-3 py-1 m-2 rounded">E-commerce</div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Organic Food Marketplace</h3>
+            <p class="text-gray-600 mb-4">
+              A multi-vendor marketplace for organic food products with complex inventory management and delivery scheduling.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">Shopify Plus</span>
+              <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">Custom Apps</span>
+              <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">Third-party API</span>
+            </div>
+            <a href="/case-studies/organic-food-marketplace" class="text-blue-600 hover:underline">View Case Study →</a>
+          </div>
+        </div>
+
+        <!-- Portfolio Item 6 -->
+        <div class="bg-white rounded-lg overflow-hidden shadow-md">
+          <div class="relative">
+            <img
+              src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+              alt="Restaurant with mobile ordering system in use"
+              class="w-full h-64 object-cover"
+            />
+            <div class="absolute top-0 right-0 bg-green-600 text-white text-xs font-bold px-3 py-1 m-2 rounded">Mobile App</div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Restaurant Ordering System</h3>
+            <p class="text-gray-600 mb-4">
+              A comprehensive mobile ordering solution for restaurants with inventory tracking, kitchen management, and customer loyalty features.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">Flutter</span>
+              <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">Firebase</span>
+              <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">Stripe</span>
+            </div>
+            <a href="/case-studies/restaurant-ordering-system" class="text-blue-600 hover:underline">View Case Study →</a>
+          </div>
         </div>
       </div>
+    </section>
 
-      <!-- Portfolio Item 2 -->
-      <div class="bg-white rounded-lg overflow-hidden shadow-md">
-        <div class="relative">
-          <img src="https://via.placeholder.com/600x400" alt="Mobile App" class="w-full h-64 object-cover" />
-          <div class="absolute top-0 right-0 bg-green-600 text-white text-xs font-bold px-3 py-1 m-2 rounded">Mobile App</div>
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold mb-2">Fitness Tracking Platform</h3>
-          <p class="text-gray-600 mb-4">
-            A comprehensive fitness tracking mobile app with social features, workout plans, and nutrition tracking capabilities.
-          </p>
-          <div class="flex flex-wrap gap-2 mb-4">
-            <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">React Native</span>
-            <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">Node.js</span>
-            <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">MongoDB</span>
-          </div>
-          <a href="/case-studies/fitness-tracking-platform" class="text-blue-600 hover:underline">View Case Study →</a>
-        </div>
-      </div>
-
-      <!-- Portfolio Item 3 -->
-      <div class="bg-white rounded-lg overflow-hidden shadow-md">
-        <div class="relative">
-          <img src="https://via.placeholder.com/600x400" alt="SaaS Platform" class="w-full h-64 object-cover" />
-          <div class="absolute top-0 right-0 bg-purple-600 text-white text-xs font-bold px-3 py-1 m-2 rounded">SaaS</div>
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold mb-2">Marketing Analytics Dashboard</h3>
-          <p class="text-gray-600 mb-4">
-            A powerful marketing analytics platform that consolidates data from multiple sources into actionable insights.
-          </p>
-          <div class="flex flex-wrap gap-2 mb-4">
-            <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">Vue.js</span>
-            <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">Django</span>
-            <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">PostgreSQL</span>
-          </div>
-          <a href="/case-studies/marketing-analytics-dashboard" class="text-blue-600 hover:underline">View Case Study →</a>
-        </div>
-      </div>
-
-      <!-- Portfolio Item 4 -->
-      <div class="bg-white rounded-lg overflow-hidden shadow-md">
-        <div class="relative">
-          <img src="https://via.placeholder.com/600x400" alt="Web Application" class="w-full h-64 object-cover" />
-          <div class="absolute top-0 right-0 bg-red-600 text-white text-xs font-bold px-3 py-1 m-2 rounded">Web App</div>
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold mb-2">Educational Learning Platform</h3>
-          <p class="text-gray-600 mb-4">
-            An interactive e-learning platform with course management, user progress tracking, and integrated payment system.
-          </p>
-          <div class="flex flex-wrap gap-2 mb-4">
-            <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">React</span>
-            <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">Express.js</span>
-            <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">MySQL</span>
-          </div>
-          <a href="/case-studies/educational-learning-platform" class="text-blue-600 hover:underline">View Case Study →</a>
-        </div>
-      </div>
-
-      <!-- Portfolio Item 5 -->
-      <div class="bg-white rounded-lg overflow-hidden shadow-md">
-        <div class="relative">
-          <img src="https://via.placeholder.com/600x400" alt="E-commerce Store" class="w-full h-64 object-cover" />
-          <div class="absolute top-0 right-0 bg-blue-600 text-white text-xs font-bold px-3 py-1 m-2 rounded">E-commerce</div>
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold mb-2">Organic Food Marketplace</h3>
-          <p class="text-gray-600 mb-4">
-            A multi-vendor marketplace for organic food products with complex inventory management and delivery scheduling.
-          </p>
-          <div class="flex flex-wrap gap-2 mb-4">
-            <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">Shopify Plus</span>
-            <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">Custom Apps</span>
-            <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">Third-party API</span>
-          </div>
-          <a href="/case-studies/organic-food-marketplace" class="text-blue-600 hover:underline">View Case Study →</a>
-        </div>
-      </div>
-
-      <!-- Portfolio Item 6 -->
-      <div class="bg-white rounded-lg overflow-hidden shadow-md">
-        <div class="relative">
-          <img src="https://via.placeholder.com/600x400" alt="Mobile App" class="w-full h-64 object-cover" />
-          <div class="absolute top-0 right-0 bg-green-600 text-white text-xs font-bold px-3 py-1 m-2 rounded">Mobile App</div>
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold mb-2">Restaurant Ordering System</h3>
-          <p class="text-gray-600 mb-4">
-            A comprehensive mobile ordering solution for restaurants with inventory tracking, kitchen management, and customer loyalty features.
-          </p>
-          <div class="flex flex-wrap gap-2 mb-4">
-            <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">Flutter</span>
-            <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">Firebase</span>
-            <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">Stripe</span>
-          </div>
-          <a href="/case-studies/restaurant-ordering-system" class="text-blue-600 hover:underline">View Case Study →</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="mt-16 text-center">
-      <p class="text-lg mb-6">Interested in working with us on your next project?</p>
-      <a href="/contact" class="inline-block bg-blue-600 text-white py-3 px-8 rounded-md hover:bg-blue-700 transition">Get in Touch</a>
-    </div>
-  </main>
+    <CTABottom />
+  </div>
 </Layout>
-

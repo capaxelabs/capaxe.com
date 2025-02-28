@@ -1,14 +1,13 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import { SITE_TITLE } from "@/consts";
-import { ArrowDownIcon } from "@heroicons/react/24/outline";
-import { caseStudies } from "@/config/caseStudy";
 import CTABottom from "@/components/CTA.astro";
+import { caseStudies } from "@/config/caseStudy";
 ---
 
 <Layout title={`Case Studies | ${SITE_TITLE}`} description="Explore our detailed case studies and success stories">
   <div class="min-h-screen bg-background">
-    {/* Hero Section */}
+    <!-- Hero Section -->
     <section class="pt-32 pb-16 px-4">
       <div class="max-w-6xl mx-auto text-center">
         <h1 class="text-5xl md:text-6xl font-bold mb-6">Case Studies</h1>
@@ -18,21 +17,34 @@ import CTABottom from "@/components/CTA.astro";
       </div>
     </section>
 
-    {/* Case Studies Grid */}
+    <!-- Case Studies Grid -->
     <section class="py-16 px-4">
       <div class="max-w-6xl mx-auto">
         <div class="grid md:grid-cols-2 gap-8">
           {
-            caseStudies.map((study, index) => (
-              <div key={study.id} class="bg-white rounded-xl overflow-hidden shadow-lg">
+            caseStudies.map((study) => (
+              <div class="bg-white rounded-xl overflow-hidden shadow-lg">
                 <div class="p-8">
                   <div class="flex justify-between items-start mb-6">
                     <div>
                       <h2 class="text-2xl font-bold mb-2">{study.title}</h2>
                       <p class="text-purple-600 font-medium">{study.client}</p>
                     </div>
-                    <a href={study.pdfUrl} download class="flex items-center gap-2 text-purple-600 hover:text-purple-700" whileHover={{ y: -2 }}>
-                      <ArrowDownIcon class="w-5 h-5" />
+                    <a href={study.pdfUrl} download class="flex items-center gap-2 text-purple-600 hover:text-purple-700">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="w-5 h-5"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"
+                        />
+                      </svg>
                       <span>Download PDF</span>
                     </a>
                   </div>
@@ -41,7 +53,7 @@ import CTABottom from "@/components/CTA.astro";
 
                   <div class="grid grid-cols-3 gap-4 mb-6">
                     {Object.entries(study.metrics).map(([key, value]) => (
-                      <div key={key} class="bg-purple-50 p-4 rounded-lg text-center">
+                      <div class="bg-purple-50 p-4 rounded-lg text-center">
                         <div class="text-2xl font-bold text-purple-600">{value}</div>
                         <div class="text-sm text-gray-600">{key.replace(/([A-Z])/g, " $1").trim()}</div>
                       </div>

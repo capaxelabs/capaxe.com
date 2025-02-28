@@ -7,6 +7,22 @@ import react from "@astrojs/react";
 
 import cloudflare from "@astrojs/cloudflare";
 
+const isProduction = process.env.NODE_ENV === "production";
+
+let resolve;
+
+if (isProduction) {
+  console.log("Production mode");
+  // Use react-dom/server.edge instead of react-dom/server.browser for React 19.
+  // Without this, MessageChannel from node:worker_threads needs to be polyfilled.
+  // Comment below for local development
+  resolve = {
+    alias: {
+      "react-dom/server": "react-dom/server.edge",
+    },
+  };
+}
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://www.capaxe.com",
@@ -24,5 +40,6 @@ export default defineConfig({
     ssr: {
       external: [],
     },
+    resolve,
   },
 });

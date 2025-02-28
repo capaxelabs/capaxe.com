@@ -1,7 +1,9 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from "motion/react";
+import type { SiteConfig } from "@/types";
 
-export const StickyCards: React.FC = () => {
+export const StickyCards = ({ siteConfig }: { siteConfig: SiteConfig }) => {
+
     const containerRef = useRef(null);
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -10,9 +12,9 @@ export const StickyCards: React.FC = () => {
 
     return (
         <section ref={containerRef} className="relative py-40 bg-white">
-            <div className="container mx-auto px-6">
+            <div className=" mx-auto px-6">
                 <div className="sticky top-20 pt-10 pb-20">
-                    <h2 className="text-4xl font-bold text-center mb-20">Why Choose Us</h2>
+                    <h2 className="section-title text-4xl font-bold text-center mb-20">Why Choose Us</h2>
 
                     <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                         <motion.div

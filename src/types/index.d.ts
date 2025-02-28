@@ -1,4 +1,5 @@
 export interface SiteConfig {
+    legalName: string
     name: string
     description: string
     url: string
@@ -35,16 +36,27 @@ export interface SiteConfig {
         address: string
     },
     retainer: {
+
         title: string
         description: string
         items: {
+            id: number
             title: string
             description: string
             monthly: string
             yearly: string
+            popular: boolean
             features: string[]
         }[]
     }
+    servicesDetail: {
+        id: number
+        title: string
+        description: string
+        icon: string
+        href: string
+        features: string[]
+    }[]
 }
 
 export interface MenuItem {
@@ -62,6 +74,7 @@ export interface MenuConfig {
         company: MenuItem[]
         support: MenuItem[]
         legal: MenuItem[]
+        caseStudies: MenuItem[]
     }
 
 } 

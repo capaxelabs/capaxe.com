@@ -1,6 +1,7 @@
-import type { SiteConfig } from "~/types";
+import type { SiteConfig } from "@/types";
 
 export const siteConfig: SiteConfig = {
+    legalName: 'Capaxe Labs',
     name: 'Capaxe Labs',
     description: 'Professional Shopify development and web solutions for growing businesses.',
     url: 'http://localhost:5173',
@@ -117,8 +118,9 @@ export const siteConfig: SiteConfig = {
             }
         ]
     },
-    servicesDtail: [
+    servicesDetail: [
         {
+            id: 1,
             title: "Shopify Store Development",
             description: "Custom Shopify stores built from the ground up to meet your specific business needs.",
             icon: "store",
@@ -132,6 +134,7 @@ export const siteConfig: SiteConfig = {
             ]
         },
         {
+            id: 2,
             title: "Shopify App Development",
             description: "Tailor-made applications to extend Shopify's functionality for your business.",
             icon: "app",
@@ -145,6 +148,7 @@ export const siteConfig: SiteConfig = {
             ]
         },
         {
+            id: 3,
             title: "Web Development",
             description: "Modern web solutions built with cutting-edge technologies.",
             icon: "web",
@@ -158,6 +162,7 @@ export const siteConfig: SiteConfig = {
             ]
         },
         {
+            id: 4,
             title: "SEO & Performance",
             description: "Boost your store's visibility and speed to attract more customers and improve user experience.",
             icon: "seo",
@@ -171,6 +176,7 @@ export const siteConfig: SiteConfig = {
             ]
         },
         {
+            id: 5,
             title: "E-commerce Solutions",
             description: "Complete e-commerce solutions to power your online business.",
             icon: "ecommerce",
@@ -184,6 +190,7 @@ export const siteConfig: SiteConfig = {
             ]
         },
         {
+            id: 6,
             title: "Technical Support",
             description: "24/7 expert technical support to keep your digital presence running smoothly.",
             icon: "support",
@@ -197,6 +204,7 @@ export const siteConfig: SiteConfig = {
             ]
         },
         {
+            id: 7,
             title: "Store Development",
             description: "Build a powerful and engaging store tailored to your business needs.",
             icon: "store-dev",
@@ -210,6 +218,7 @@ export const siteConfig: SiteConfig = {
             ]
         },
         {
+            id: 8,
             title: "Migration & Integration",
             description: "Seamlessly migrate your existing store or integrate with third-party platforms.",
             icon: "migration",

@@ -1,0 +1,38 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { SITE_TITLE } from "../../consts";
+---
+
+<Layout title={`Shopify Maintenance | ${SITE_TITLE}`} description="Shopify Maintenance">
+  <div class="bg-white">
+    <div class="max-w-7xl mx-auto pt-32 py-16 px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">Shopify Development Services</h1>
+        <p class="mt-5 max-w-xl mx-auto text-xl text-gray-500">Custom Shopify solutions to help your business grow online</p>
+      </div>
+
+      <div class="mt-16">
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {/* Custom Theme Development */}
+          <div class="bg-purple-50 rounded-lg p-6">
+            <h3 class="text-lg font-medium text-gray-900">Custom Theme Development</h3>
+            <p class="mt-2 text-gray-500">Unique, responsive themes tailored to your brand and business needs.</p>
+          </div>
+
+          {/* App Development */}
+          <div class="bg-purple-50 rounded-lg p-6">
+            <h3 class="text-lg font-medium text-gray-900">App Development</h3>
+            <p class="mt-2 text-gray-500">Custom Shopify apps to extend your store's functionality.</p>
+          </div>
+
+          {/* Store Optimization */}
+          <div class="bg-purple-50 rounded-lg p-6">
+            <h3 class="text-lg font-medium text-gray-900">Store Optimization</h3>
+
+            <p class="mt-2 text-gray-500">Performance optimization and conversion rate improvements.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

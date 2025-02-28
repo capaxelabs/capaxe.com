@@ -1,9 +1,47 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import ReactHome from "../components/ReactHome.jsx";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import { ShoppingBagIcon, CodeBracketIcon, PhoneIcon } from "@heroicons/react/24/outline";
+import LogoHero from "@/components/home/LogoHero";
+import { siteConfig } from "@/config/site";
+import StickyCards from "@/components/home/StickyCard";
+import RetainerPlansSection from "@/components/RetainerPlan";
+import { ServiceLanding } from "@/components/home/HomeComponents";
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-  <ReactHome client:load />
+  <div class="min-h-screen">
+    <LogoHero siteConfig={siteConfig} client:load />
+    <ServiceLanding siteConfig={siteConfig} client:load />
+    <!-- Sticky Cards -->
+    <StickyCards siteConfig={siteConfig} client:load />
+
+    <section class="py-16 bg-white max-w-6xl mx-auto">
+      <div class="container mx-auto px-6">
+        <h2 class="section-title text-3xl font-bold text-center text-purple-900 mb-12">Our Services</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="p-6 rounded-xl bg-linear-to-br from-purple-100 to-blue-100 shadow-lg">
+            <ShoppingBagIcon className="w-12 h-12 text-purple-600 mb-4" />
+            <h3 class="text-xl text-foreground font-semibold mb-2">Custom Shopify Store Development</h3>
+            <p class="text-foreground">Tailor-made Shopify solutions designed to elevate your brand and boost sales.</p>
+          </div>
+
+          <div class="p-6 rounded-xl bg-linear-to-br from-blue-100 to-purple-100 shadow-lg">
+            <CodeBracketIcon className="w-12 h-12 text-blue-600 mb-4" />
+            <h3 class="text-xl text-foreground font-semibold mb-2">Professional Web Development</h3>
+            <p class="text-foreground">Leverage the latest technologies to create stunning, high-performance websites.</p>
+          </div>
+
+          <div class="p-6 rounded-xl bg-linear-to-br from-purple-100 to-blue-100 shadow-lg">
+            <PhoneIcon className="w-12 h-12 text-purple-600 mb-4" />
+            <h3 class="text-xl text-foreground font-semibold mb-2">24/7 Dedicated Support</h3>
+            <p class="text-foreground">Experience peace of mind with our round-the-clock technical support services.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* Retainer Benefits Section */}
+    <RetainerPlansSection client:load />
+  </div>
 </Layout>

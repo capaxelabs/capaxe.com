@@ -6,7 +6,7 @@ const currentYear = new Date().getFullYear();
 
 <footer class="bg-purple-900">
   <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-1 gap-8 lg:grid-cols-4">
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-5">
       <!-- Company Info -->
       <div>
         <a href="/" class="text-2xl font-bold text-white">
@@ -23,6 +23,22 @@ const currentYear = new Date().getFullYear();
         <ul class="mt-4 space-y-4">
           {
             menuConfig.footerNav.solutions.map((item) => (
+              <li>
+                <a href={item.href} class="text-base text-gray-200 hover:text-gray-300">
+                  {item.title}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Case Studies   -->
+      <div>
+        <h3 class="text-sm font-semibold text-white uppercase tracking-wider">Case Studies</h3>
+        <ul class="mt-4 space-y-4">
+          {
+            menuConfig.footerNav.caseStudies.map((item) => (
               <li>
                 <a href={item.href} class="text-base text-gray-200 hover:text-gray-300">
                   {item.title}

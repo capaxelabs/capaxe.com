@@ -178,19 +178,19 @@ import { SITE_TITLE } from "../consts";
 
 <script>
   // Simple FAQ toggle functionality
-  document.addEventListener('DOMContentLoaded', () => {
-    const faqButtons = document.querySelectorAll('.border.border-gray-200 button');
-    
-    faqButtons.forEach(button => {
-      button.addEventListener('click', () => {
+  document.addEventListener("DOMContentLoaded", () => {
+    const faqButtons = document.querySelectorAll(".border.border-gray-200 button");
+
+    faqButtons.forEach((button) => {
+      button.addEventListener("click", () => {
         const content = button.nextElementSibling as HTMLElement | null;
         if (content) {
-          content.classList.toggle('hidden');
-          
+          content.classList.toggle("hidden");
+
           // Update the arrow icon
-          const svg = button.querySelector('svg');
+          const svg = button.querySelector("svg");
           if (svg) {
-            if (content.classList.contains('hidden')) {
+            if (content.classList.contains("hidden")) {
               svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>';
             } else {
               svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>';
@@ -199,7 +199,7 @@ import { SITE_TITLE } from "../consts";
         }
       });
     });
-    
+
     // Open the first FAQ by default
     if (faqButtons.length > 0) {
       const firstButton = faqButtons[0] as HTMLElement;
@@ -207,4 +207,3 @@ import { SITE_TITLE } from "../consts";
     }
   });
 </script>
-

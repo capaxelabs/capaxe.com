@@ -15,69 +15,11 @@ interface Plan {
     popular: boolean;
 }
 
-const plans: Plan[] = [
-    {
-        id: 1,
-        name: "Essential",
-        description: "Perfect for small businesses looking to maintain their Shopify store.",
-        price: 499,
-        duration: "monthly",
-        features: [
-            "10 hours of development work",
-            "24/7 emergency support",
-            "Monthly performance report",
-            "Theme updates and maintenance",
-            "Basic SEO optimization"
-        ],
-        popular: false
-    },
-    {
-        id: 2,
-        name: "Growth",
-        description: "Ideal for growing businesses that need regular improvements and support.",
-        price: 999,
-        duration: "monthly",
-        features: [
-            "25 hours of development work",
-            "24/7 emergency support",
-            "Bi-weekly performance reports",
-            "Conversion rate optimization",
-            "Custom feature development",
-            "Advanced SEO strategies",
-            "Integration support"
-        ],
-        popular: true
-    },
-    {
-        id: 3,
-        name: "Enterprise",
-        description: "For established businesses requiring comprehensive development and strategy.",
-        price: 1999,
-        duration: "monthly",
-        features: [
-            "50 hours of development work",
-            "24/7 priority support",
-            "Weekly strategy calls",
-            "Dedicated project manager",
-            "Custom app development",
-            "Advanced analytics implementation",
-            "Conversion rate optimization",
-            "Competitor analysis",
-            "A/B testing and optimization"
-        ],
-        popular: false
-    }
-];
-
 const RetainerPlansSection = () => {
     const [selectedBillingCycle, setSelectedBillingCycle] = useState<"monthly" | "yearly">("monthly");
 
     const handlePurchase = (plan: Plan) => {
-        toast({
-            title: "Plan Selected",
-            description: `You've selected the ${plan.name} plan. We'll contact you shortly to get started.`,
-            duration: 5000,
-        });
+        toast.success(`You've selected the ${plan.name} plan. We'll contact you shortly to get started.`);
     };
 
     const getYearlyPrice = (monthlyPrice: number) => {
@@ -87,7 +29,7 @@ const RetainerPlansSection = () => {
     return (
         <>
 
-            <section id="retainer-plans" className="section">
+            <section id="retainer-plans" className="section max-w-6xl mx-auto">
                 <div className="container mx-auto">
                     <div className="text-center max-w-3xl mx-auto">
                         <span className="inline-block px-3 py-1 rounded-full bg-primary-200 text-primary-700 text-xs font-medium mb-4">
@@ -128,7 +70,7 @@ const RetainerPlansSection = () => {
                         {siteConfig.retainer.items.map((item: any, index: number) => (
                             <Card
                                 key={item.id}
-                                className={`relative overflow-hidden rounded-xl border transition-all duration-300 hover:shadow-elegant ${item.popular
+                                className={`relative overflow-hidden bg-white rounded-2xl shadow-xl p-3 border-2 border-purple-100 hover:border-purple-500 transition-all ${item.popular
                                     ? "border-primary-400 shadow-soft"
                                     : "border-gray-200 hover:border-primary-300"
                                     }`}
@@ -140,21 +82,21 @@ const RetainerPlansSection = () => {
                                         </div>
                                     </div>
                                 )}
-                                <div className="p-8">
-                                    <h3 className="text-2xl font-semibold mb-3" style={{ fontFamily: "'Playfair Display', serif" }}>{item.name}</h3>
+                                <div className="p-4">
+                                    <h3 className="text-2xl font-semibold mb-3" >{item.title}</h3>
                                     <p className="text-gray-600 text-sm mb-6">{item.description}</p>
                                     <div className="flex items-baseline mb-6">
-                                        <span className="text-4xl font-bold">
+                                        <span className="text-5xl font-bold">
                                             {selectedBillingCycle === "monthly" ? item.monthly : item.yearly}
                                         </span>
-                                        <span className="text-gray-500 ml-2">
-                                            per {selectedBillingCycle === "monthly" ? "month" : "year"}
+                                        <span className="text-gray-500 text-2xl font-semibold ml-2">
+                                            /{selectedBillingCycle === "monthly" ? "month" : "year"}
                                         </span>
                                     </div>
                                     <ul className="space-y-3 mb-8">
                                         {item.features.map((feature: any, index: number) => (
                                             <li key={index} className="flex items-start">
-                                                <Check className="text-primary-400 h-5 w-5 mr-3 shrink-0 mt-0.5" />
+                                                <span className="text-purple-600 mr-2">✅</span>
                                                 <span className="text-sm text-gray-600">{feature}</span>
                                             </li>
                                         ))}

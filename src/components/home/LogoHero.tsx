@@ -23,9 +23,8 @@ import {
 } from "react-icons/si";
 import type { IconType } from "react-icons";
 import type { SiteConfig } from "@/types";
-import { siteConfig } from "@/config/site";
 
-const LogoHero = () => {
+const LogoHero = ({ siteConfig }: { siteConfig: SiteConfig }) => {
     return (
         <section className="h-[90vh] bg-background pb-20 flex flex-col justify-between">
             <div className="flex-1 w-full px-8 flex flex-col items-center justify-center">

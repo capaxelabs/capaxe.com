@@ -52,7 +52,7 @@ export const OurServices = () => {
                 <motion.h2
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
-                    className="text-3xl font-bold text-center text-purple-900 mb-12"
+                    className="section-title text-3xl font-bold text-center text-purple-900 mb-12"
                 >
                     Our Services
                 </motion.h2>

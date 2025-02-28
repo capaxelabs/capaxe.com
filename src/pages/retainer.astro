@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import { SITE_TITLE } from "../consts";
 import { siteConfig } from "@/config/site";
+import CTABottom from "@/components/CTA.astro";
 ---
 
 <Layout title={`Retainer Plans | ${SITE_TITLE}`} description="Our retainer plans for ongoing support and development">
@@ -42,15 +43,8 @@ import { siteConfig } from "@/config/site";
             </div>
           ))
         }
-
-        <div class="mt-16 text-center">
-          <p class="text-xl font-semibold text-gray-900">📌 Need more hours?</p>
-          <p class="mt-2 text-gray-500">
-            Custom retainers are available—
-            <a href="/contact" class="text-purple-600 hover:text-purple-500"> let's talk! </a>
-          </p>
-        </div>
       </div>
     </div>
   </div>
+  <CTABottom title="📌 Need more hours?" description="Custom retainers are available" buttonText="Let's talk!" />
 </Layout>

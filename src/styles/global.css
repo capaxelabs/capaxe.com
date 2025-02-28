@@ -219,7 +219,7 @@
 
   .section-title::after {
     content: "";
-    @apply absolute left-0 -bottom-3 w-16 h-1 bg-primary-400;
+    @apply absolute  -bottom-3 w-16 h-1 bg-primary-400;
   }
 
   .section-subtitle {

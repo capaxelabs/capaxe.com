@@ -1,0 +1,40 @@
+---
+import CTABottom from "@/components/CTA.astro";
+import Layout from "@/layouts/Layout.astro";
+import { SITE_TITLE } from "@/consts";
+---
+
+<Layout title={`Web Development | ${SITE_TITLE}`} description="Web Development">
+  <div class="bg-white">
+    <div class="max-w-7xl mx-auto pt-32 py-16 px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">Web Development Services</h1>
+        <p class="mt-5 max-w-xl mx-auto text-xl text-gray-500">Modern web solutions built with cutting-edge technologies</p>
+        Modern web solutions built with cutting-edge technologies
+      </div>
+    </div>
+
+    <div class="mt-16">
+      <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {/* Frontend Development */}
+        <div class="bg-purple-50 rounded-lg p-6">
+          <h3 class="text-lg font-medium text-gray-900">Frontend Development</h3>
+          <p class="mt-2 text-gray-500">Responsive, modern, and user-friendly interfaces using React, Next.js, and more.</p>
+        </div>
+      </div>
+
+      {/* Backend Development */}
+      <div class="bg-purple-50 rounded-lg p-6">
+        <h3 class="text-lg font-medium text-gray-900">Backend Development</h3>
+        <p class="mt-2 text-gray-500">Scalable and secure backend solutions with Node.js, Python, and other technologies.</p>
+      </div>
+    </div>
+
+    {/* Full Stack Solutions */}
+    <div class="bg-purple-50 rounded-lg p-6">
+      <h3 class="text-lg font-medium text-gray-900">Full Stack Solutions</h3>
+      <p class="mt-2 text-gray-500">End-to-end web applications with seamless integration and optimal performance.</p>
+    </div>
+  </div>
+</Layout>
+<CTABottom />
