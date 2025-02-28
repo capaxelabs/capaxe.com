@@ -8,29 +8,39 @@ import { SITE_TITLE } from "@/consts";
 
 <Layout title={`Mobile App Development | ${SITE_TITLE}`} description="Mobile App Development">
   <div class="p-6 pt-32 bg-gray-50 min-h-screen flex flex-col items-center">
-    <h1 class="text-4xl font-bold text-gray-800 mb-4">Mobile App Development</h1>
-    <p class="text-lg text-gray-600 text-center max-w-2xl mb-8">
-      Take your Shopify store to the next level with our expert app development services. Whether it&apos;s a custom app tailored to your business
-      needs or a public app designed to serve thousands of merchants, we&apos;ve got you covered.
-    </p>
+    <section class="pt-32 pb-16 px-4">
+      <div class="max-w-6xl mx-auto text-center">
+        <h1 class="text-5xl md:text-6xl font-bold mb-6">Mobile App Development</h1>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+          Take your Shopify store to the next level with our expert app development services. Whether it&apos;s a custom app tailored to your business
+          needs or a public app designed to serve thousands of merchants, we&apos;ve got you covered.
+        </p>
+      </div>
+    </section>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-      <div class="bg-white shadow-lg rounded-lg p-6 text-center hover:shadow-2xl transition">
-        <FiCode className="text-4xl text-blue-500 mb-4 mx-auto" />
-        <h2 class="text-xl font-semibold text-gray-800 mb-2">Mobile App Development</h2>
-        <p class="text-gray-600">Build apps tailored to your specific requirements, integrating unique features that make your store stand out.</p>
+    <section class="py-16 px-4">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          <div class="bg-white shadow-lg rounded-lg p-6 text-center hover:shadow-2xl transition">
+            <FiCode className="text-4xl text-blue-500 mb-4 mx-auto" />
+            <h2 class="text-xl font-semibold text-gray-800 mb-2">Mobile App Development</h2>
+            <p class="text-gray-600">
+              Build apps tailored to your specific requirements, integrating unique features that make your store stand out.
+            </p>
+          </div>
+          <div class="bg-white shadow-lg rounded-lg p-6 text-center hover:shadow-2xl transition">
+            <FiTool className="text-4xl text-green-500 mb-4 mx-auto" />
+            <h2 class="text-xl font-semibold text-gray-800 mb-2">Mobile App Development</h2>
+            <p class="text-gray-600">Create scalable public apps that can be listed on the Shopify App Store to reach a global audience.</p>
+          </div>
+          <div class="bg-white shadow-lg rounded-lg p-6 text-center hover:shadow-2xl transition">
+            <FiCloud className="text-4xl text-purple-500 mb-4 mx-auto" />
+            <h2 class="text-xl font-semibold text-gray-800 mb-2">Seamless Integrations</h2>
+            <p class="text-gray-600">Integrate third-party tools and services seamlessly into your Shopify store for enhanced functionality.</p>
+          </div>
+        </div>
       </div>
-      <div class="bg-white shadow-lg rounded-lg p-6 text-center hover:shadow-2xl transition">
-        <FiTool className="text-4xl text-green-500 mb-4 mx-auto" />
-        <h2 class="text-xl font-semibold text-gray-800 mb-2">Mobile App Development</h2>
-        <p class="text-gray-600">Create scalable public apps that can be listed on the Shopify App Store to reach a global audience.</p>
-      </div>
-      <div class="bg-white shadow-lg rounded-lg p-6 text-center hover:shadow-2xl transition">
-        <FiCloud className="text-4xl text-purple-500 mb-4 mx-auto" />
-        <h2 class="text-xl font-semibold text-gray-800 mb-2">Seamless Integrations</h2>
-        <p class="text-gray-600">Integrate third-party tools and services seamlessly into your Shopify store for enhanced functionality.</p>
-      </div>
-    </div>
+    </section>
 
     <div class="flex flex-col sm:flex-row gap-4">
       <Button className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600"> Get a Free Consultation </Button>

@@ -28,6 +28,9 @@ export interface SiteConfig {
         items: {
             title: string
             description: string
+            icon: string
+            features: string[]
+            href: string
         }[]
     }
     contact: {
@@ -50,7 +53,6 @@ export interface SiteConfig {
         }[]
     }
     servicesDetail: {
-        id: number
         title: string
         description: string
         icon: string

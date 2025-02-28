@@ -90,18 +90,6 @@ export const POST: APIRoute = async ({ request }) => {
         // Extract validated data
         const validatedData = result.data;
 
-        console.log(
-            validatedData.name,
-            validatedData.email,
-            validatedData.companyName,
-            validatedData.serviceType,
-            validatedData.projectType,
-            validatedData.storeUrl,
-            validatedData.budget,
-            validatedData.timeline,
-            validatedData.message
-        );
-
         // Generate email HTML using the template function from email.ts
         const emailHtml = handleContactFormSubmission(validatedData as EmailContactFormData);
 

@@ -45,16 +45,130 @@ export const siteConfig: SiteConfig = {
         description: 'We deliver cutting-edge Shopify solutions that drive e-commerce success.',
         items: [
             {
-                title: 'Shopify Development',
-                description: 'Custom Shopify store development tailored to your needs'
+                title: 'Custom App Development',
+                href: '/services/custom-app-development',
+                description: "Tailor-made applications to extend Shopify's functionality for your business.",
+                icon: "app",
+                features: [
+                    "Custom app development",
+                    "Public app development",
+                    "Seamless integrations",
+                ]
+            },
+            {
+                title: 'Public App Development',
+                href: '/services/public-app-development',
+                description: "Public apps are pre-built applications that can be used by any Shopify store.",
+                icon: "app",
+                features: [
+                    "Public app development",
+                    "Seamless integrations",
+                    "Performance optimization",
+                    "Mobile-responsive design",
+                    "API integrations",
+                    "Customization options",
+                    "Regular updates",
+                    "Regular maintenance",
+                    "Regular support",
+                ]
+            },
+            {
+                title: 'Mobile App Development',
+                href: '/services/mobile-app-development',
+                description: "Custom mobile apps to extend Shopify's functionality for your business.",
+                icon: "app",
+                features: [
+                    "Mobile app development",
+                    "Seamless integrations",
+                    "Performance optimization",
+                    "Mobile-responsive design",
+                ]
             },
             {
                 title: 'E-commerce Solutions',
-                description: 'End-to-end e-commerce implementation and optimization'
+                href: '/services/ecommerce-solutions',
+                description: "Complete e-commerce solutions to power your online business.",
+                icon: "ecommerce",
+                features: [
+                    "E-commerce solutions",
+                    "Seamless integrations",
+                    "Performance optimization",
+                    "Mobile-responsive design",
+                ]
             },
             {
-                title: 'Technical Support',
-                description: '24/7 technical support for your online store'
+                title: 'Migration Integration',
+                href: '/services/migration-integration',
+                description: "Seamlessly migrate your existing store or integrate with third-party platforms.",
+                icon: "migration",
+                features: [
+                    "Migration integration",
+                    "Seamless integrations",
+                    "Performance optimization",
+                    "Mobile-responsive design",
+                ]
+            },
+            {
+                title: 'SEO & Performance',
+                href: '/services/seo-performance',
+                description: "Boost your store's visibility and speed to attract more customers and improve user experience.",
+                icon: "seo",
+                features: [
+                    "SEO optimization",
+                    "Performance enhancement",
+                    "Higher conversion rates",
+                    "Improved user experience",
+                ]
+            },
+            {
+                title: 'Shopify Maintenance',
+                href: '/services/shopify-maintenance',
+                description: "Regular maintenance to keep your store running smoothly.",
+                icon: "maintenance",
+                features: [
+                    "Regular maintenance",
+                    "Regular support",
+                    "Regular updates",
+                ]
+            },
+            {
+                title: 'Store Development',
+                href: '/services/store-development',
+                description: "Build a powerful and engaging store tailored to your business needs.",
+                icon: "store",
+                features: [
+                    "Liquid theme development",
+                    "Hydrogen + Oxygen deployment",
+                    "Headless storefront development",
+                    "Custom features & integrations",
+                    "End-to-end development",
+                ]
+            },
+            {
+                title: 'Web Development',
+                href: '/services/web-development',
+                description: "Modern web solutions built with cutting-edge technologies.",
+                icon: "web",
+                features: [
+                    "Frontend development",
+                    "Backend development",
+                    "Full stack solutions",
+                    "Responsive design",
+                    "Progressive web apps",
+                ]
+            },
+            {
+                title: "Shopify Store Development",
+                description: "Custom Shopify stores built from the ground up to meet your specific business needs.",
+                icon: "store",
+                href: "/services/store-development",
+                features: [
+                    "Custom theme development",
+                    "Store setup and migration",
+                    "Third-party integrations",
+                    "Performance optimization",
+                    "Mobile-responsive design",
+                ]
             }
         ]
     },
@@ -117,119 +231,5 @@ export const siteConfig: SiteConfig = {
                 ]
             }
         ]
-    },
-    servicesDetail: [
-        {
-            id: 1,
-            title: "Shopify Store Development",
-            description: "Custom Shopify stores built from the ground up to meet your specific business needs.",
-            icon: "store",
-            href: "/services/shopify-development",
-            features: [
-                "Custom theme development",
-                "Store setup and migration",
-                "Third-party integrations",
-                "Performance optimization",
-                "Mobile-responsive design",
-            ]
-        },
-        {
-            id: 2,
-            title: "Shopify App Development",
-            description: "Tailor-made applications to extend Shopify's functionality for your business.",
-            icon: "app",
-            href: "/services/app-development",
-            features: [
-                "Custom app development",
-                "Public app development",
-                "Seamless integrations",
-                "API integrations",
-                "App maintenance and support",
-            ]
-        },
-        {
-            id: 3,
-            title: "Web Development",
-            description: "Modern web solutions built with cutting-edge technologies.",
-            icon: "web",
-            href: "/services/web-development",
-            features: [
-                "Frontend development",
-                "Backend development",
-                "Full stack solutions",
-                "Responsive design",
-                "Progressive web apps",
-            ]
-        },
-        {
-            id: 4,
-            title: "SEO & Performance",
-            description: "Boost your store's visibility and speed to attract more customers and improve user experience.",
-            icon: "seo",
-            href: "/services/seo-performance",
-            features: [
-                "SEO optimization",
-                "Performance enhancement",
-                "Higher conversion rates",
-                "Improved user experience",
-                "Better SEO rankings",
-            ]
-        },
-        {
-            id: 5,
-            title: "E-commerce Solutions",
-            description: "Complete e-commerce solutions to power your online business.",
-            icon: "ecommerce",
-            href: "/services/ecommerce-solutions",
-            features: [
-                "Platform development",
-                "Integration services",
-                "Analytics & optimization",
-                "Payment gateway integration",
-                "Shipping provider integration",
-            ]
-        },
-        {
-            id: 6,
-            title: "Technical Support",
-            description: "24/7 expert technical support to keep your digital presence running smoothly.",
-            icon: "support",
-            href: "/services/support",
-            features: [
-                "24/7 support",
-                "Maintenance services",
-                "Expert troubleshooting",
-                "Security updates",
-                "Performance monitoring",
-            ]
-        },
-        {
-            id: 7,
-            title: "Store Development",
-            description: "Build a powerful and engaging store tailored to your business needs.",
-            icon: "store-dev",
-            href: "/services/store-development",
-            features: [
-                "Liquid theme development",
-                "Hydrogen + Oxygen deployment",
-                "Headless storefront development",
-                "Custom features & integrations",
-                "End-to-end development",
-            ]
-        },
-        {
-            id: 8,
-            title: "Migration & Integration",
-            description: "Seamlessly migrate your existing store or integrate with third-party platforms.",
-            icon: "migration",
-            href: "/services/migration",
-            features: [
-                "WooCommerce migration",
-                "Magento migration",
-                "Custom integrations",
-                "Data migration",
-                "API integrations",
-            ]
-        }
-    ]
+    }
 } 

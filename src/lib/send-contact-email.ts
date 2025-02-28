@@ -22,7 +22,6 @@ export async function sendContactFormEmail(
 
         // Create a subject line that includes the company name
         const subject = `New Inquiry from ${formData.name} at ${formData.companyName}`;
-        console.log(emailHtml);
         // Send the email
         const result = await sendEmail(
             emailHtml,

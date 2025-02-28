@@ -206,17 +206,14 @@ export async function sendEmail(
     };
 
     try {
-        console.log(`Sending email to ${to} with subject "${subject}"`);
 
         const response = await fetch('https://mail-worker.capaxe.workers.dev', requestOptions);
-        console.log(`Mail worker response status: ${response.status} ${response.statusText}`);
 
         // Log response headers for debugging
         const headers: Record<string, string> = {};
         response.headers.forEach((value, key) => {
             headers[key] = value;
         });
-        console.log('Response headers:', headers);
 
         if (!response.ok) {
             throw new Error(`Failed to send email: ${response.statusText}`);
@@ -224,22 +221,18 @@ export async function sendEmail(
 
         // Check if the response is empty
         const text = await response.text();
-        console.log(`Response body (${text.length} chars):`, text.substring(0, 100) + (text.length > 100 ? '...' : ''));
 
         if (!text) {
             // Return a default success response if the API doesn't return anything
-            console.log('Empty response from mail worker, returning default success');
             return { success: true, message: "Email sent successfully" };
         }
 
         // Try to parse as JSON, but handle non-JSON responses gracefully
         try {
             const jsonResult = JSON.parse(text);
-            console.log('Parsed JSON response:', jsonResult);
             return jsonResult;
         } catch (e) {
             // If it's not valid JSON, just return the text
-            console.log('Response is not valid JSON, returning as text');
             return { success: true, message: text };
         }
     } catch (error) {

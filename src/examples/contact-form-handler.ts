@@ -84,12 +84,11 @@ async function exampleUsage() {
     };
 
     const result = await handleContactFormSubmission(formData);
-    console.log(result);
 
     // In a real API route, you would return the result
-    // return new Response(JSON.stringify(result), {
-    //     headers: { 'Content-Type': 'application/json' }
-    // });
+    return new Response(JSON.stringify(result), {
+        headers: { 'Content-Type': 'application/json' }
+    });
 }
 
 // Uncomment to test

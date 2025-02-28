@@ -5,10 +5,11 @@ import { motion } from "motion/react";
 import { ShoppingBagIcon } from "@heroicons/react/24/outline";
 import { siteConfig } from "@/config/site";
 import CTABottom from "@/components/CTA.astro";
+import ServiceCTA from "@/components/ServiceCTA";
 ---
 
 <Layout title={`Services | ${SITE_TITLE}`} description="Our professional services">
-  <div class="min-h-screen bg-background">
+  <div class="p-6 pt-32 bg-gray-50 min-h-screen flex flex-col items-center">
     {/* Hero Section */}
     <section class="pt-32 pb-16 px-4">
       <div class="max-w-6xl mx-auto text-center">
@@ -25,18 +26,21 @@ import CTABottom from "@/components/CTA.astro";
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {
             siteConfig.services.items.map((service: any, index: number) => (
-              <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
-                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-6">
-                  <ShoppingBagIcon className="w-6 h-6 text-purple-600" />
+              <a href={service.href}>
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+                  <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-6">
+                    <ShoppingBagIcon className="w-6 h-6 text-purple-600" />
+                  </div>
+                  <h3 class="text-2xl font-semibold mb-4">{service.title}</h3>
+                  <p class="text-gray-600">{service.description}</p>
                 </div>
-                <h3 class="text-2xl font-semibold mb-4">{service.title}</h3>
-                <p class="text-gray-600">{service.description}</p>
-              </div>
+              </a>
             ))
           }
         </div>
       </div>
     </section>
-    <CTABottom />
+    <ServiceCTA />
   </div>
+  <CTABottom />
 </Layout>
