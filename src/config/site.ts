@@ -58,14 +58,17 @@ export const siteConfig: SiteConfig = {
         ]
     },
     retainer: {
-        title: 'Retainer Plans',
-        description: 'We offer flexible retainer plans to suit your business needs.',
+
+        title: 'Ongoing Support for Your Success',
+        description: 'Choose from our flexible retainer plans designed to provide continuous improvements and support for your Shopify store. Partner with us for long-term success.',
         items: [
             {
+                id: 1,
                 title: 'Growth Plan',
                 description: 'For businesses that require custom development & API integrations.',
                 monthly: '$1,000',
                 yearly: '$10,000',
+                popular: false,
                 features: [
                     '20 development hours/month',
                     'Shopify store tweaks, bug fixes & performance optimization',
@@ -75,10 +78,12 @@ export const siteConfig: SiteConfig = {
                 ]
             },
             {
+                id: 2,
                 title: 'Standard Retainer',
                 description: 'Perfect for established Shopify stores that need regular maintenance and small enhancements.',
                 monthly: '$1,999',
                 yearly: '$19,990',
+                popular: true,
                 features: [
                     '40 development hours per month',
                     'Dedicated Shopify expert',
@@ -92,10 +97,12 @@ export const siteConfig: SiteConfig = {
                 ]
             },
             {
+                id: 3,
                 title: 'Premium Retainer',
                 description: 'Ideal for growing businesses that need ongoing development and strategic guidance.',
                 monthly: '$3,499',
                 yearly: '$34,990',
+                popular: false,
                 features: [
                     '50 development hours per month',
                     'Dedicated Shopify expert team',

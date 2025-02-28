@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from "motion/react";
 import { siteConfig } from '../config/site';
 import LogoHero from './LogoHero';
 import { StickyCards } from './StickyCard';
+import RetainerPlansSection from '@/components/RetainerPlan';
 
 // Import heroicons components
 const ShoppingBagIcon = (props) => (
@@ -28,6 +29,7 @@ export default function Home() {
         <>
             <div className="min-h-screen ">
                 {/* Hero Section with Fixed Slider */}
+
                 <LogoHero />
 
                 {/* Parallax Section */}
@@ -112,58 +114,8 @@ export default function Home() {
                 </section>
 
                 {/* Retainer Benefits Section */}
-                <section className="py-16 bg-purple-50 ">
-                    <div className="container mx-auto px-6">
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8 }}
-                            className="text-center mb-12"
-                        >
-                            <h2 className="text-4xl font-bold mb-4">Shopify Retainer Plans</h2>
-                            <p className="text-xl  max-w-3xl mx-auto">
-                                Get dedicated Shopify support to scale your business. Choose the plan that fits your needs and let us handle your technical requirements.
-                            </p>
-                        </motion.div>
+                <RetainerPlansSection />
 
-                        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                            {siteConfig.retainer.items.map((item, index) => (
-                                <motion.div
-                                    key={index}
-                                    initial={{ opacity: 0, x: -20 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: 0.2 }}
-                                    className="bg-white/10 p-8 rounded-xl backdrop-blur-lg"
-                                >
-                                    <h3 className="text-2xl font-bold mb-2">{item.title}</h3>
-                                    <p className="text-purple-800 text-lg mb-4">{item.monthly}/month (${item.yearly}/month)</p>
-                                    <ul className="space-y-3">
-                                        {item.features.map((feature, index) => (
-                                            <li key={index} className="flex items-center">
-                                                <span className="text-green-400 mr-2">✓</span>
-                                                {feature}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </motion.div>
-                            ))}
-                        </div>
-
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.6 }}
-                            className="text-center mt-12"
-                        >
-                            <a
-                                href="/retainer"
-                                className="inline-block bg-purple-600 text-white px-8 py-3 rounded-lg hover:bg-purple-700 transition-colors"
-                            >
-                                View All Plans
-                            </a>
-                        </motion.div>
-                    </div>
-                </section>
             </div>
         </>
     );
