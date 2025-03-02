@@ -30,9 +30,6 @@ export const BaseTemplate: React.FC<BaseTemplateProps> = ({
     return (
         <Html>
             <Head>
-                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                <meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
-                <meta name="x-apple-disable-message-reformatting" />
                 <title>{title}</title>
             </Head>
             <Preview>{previewText || title}</Preview>

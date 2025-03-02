@@ -1,7 +1,6 @@
-import { sendEmail, createContactFormEmail } from '@/lib/email';
+import { siteConfig } from '@/config/site';
+import { sendContactFormAutoReply, sendContactFormEmail } from '@/lib/email';
 import type { ContactFormData as EmailContactFormData } from '@/lib/email';
-import { sendContactFormAutoReply } from '@/lib/send-contact-email';
-import { sendContactFormEmail } from '@/lib/send-contact-email';
 import type { APIRoute } from 'astro';
 import { z } from 'zod';
 
@@ -32,7 +31,7 @@ export async function handleContactFormSubmission(formData: ContactFormData) {
         // Send the contact form email to the admin
         const adminEmailResult = await sendContactFormEmail(
             validatedData,
-            'mukesh@capaxe.com', // Primary recipient
+            siteConfig.contact.contactEmail
         );
 
         // Send an auto-reply to the customer
@@ -91,9 +90,9 @@ export const POST: APIRoute = async ({ request }) => {
         const validatedData = result.data;
 
         // Generate email HTML using the template function from email.ts
-        const emailHtml = handleContactFormSubmission(validatedData as EmailContactFormData);
+        const emailHtml = await handleContactFormSubmission(validatedData as EmailContactFormData);
 
-        return new Response(JSON.stringify({ success: true }), { status: 200 });
+        return new Response(JSON.stringify({ success: true, emailHtml }), { status: 200 });
     } catch (error) {
         console.error('Error sending contact email:', error);
         return new Response(JSON.stringify({ error: 'Failed to send email' }), { status: 500 });

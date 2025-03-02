@@ -1,3 +1,14 @@
+
+// Import React for rendering
+import React from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
+import ContactFormEmail from '@/emails/ContactFormEmail';
+import WelcomeEmail from '@/emails/WelcomeEmail';
+import { siteConfig } from '@/config/site';
+import AutoReplyEmail from '@/emails/AutoReplyEmail';
+
+
+
 // Email template types
 export type EmailTemplateProps = {
     title: string;
@@ -18,125 +29,6 @@ export type ContactFormData = {
     timeline: string;
     message: string;
 };
-
-// Import React for rendering
-import React from 'react';
-import { renderToStaticMarkup } from 'react-dom/server';
-import ContactFormEmail from '@/emails/ContactFormEmail';
-import WelcomeEmail from '@/emails/WelcomeEmail';
-import { siteConfig } from '@/config/site';
-
-/**
- * Creates a common email template with consistent styling
- * @param props Template properties including title, content, and optional styling
- * @returns Formatted HTML string for the email
- */
-export function createEmailTemplate(props: EmailTemplateProps): string {
-    const {
-        title,
-        content,
-        footerText = "This email was sent from Capaxe.",
-        accentColor = "#5046e4"
-    } = props;
-
-    let html = `
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>${title}</title>
-        <style>
-            body {
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                line-height: 1.6;
-                color: #333;
-                max-width: 600px;
-                margin: 0 auto;
-                padding: 20px;
-            }
-            .header {
-                background-color: ${accentColor};
-                color: white;
-                padding: 20px;
-                border-radius: 5px 5px 0 0;
-                margin-bottom: 20px;
-            }
-            .content {
-                background-color: #f9f9f9;
-                padding: 20px;
-                border-radius: 0 0 5px 5px;
-                border: 1px solid #eee;
-            }
-            .section {
-                margin-bottom: 20px;
-                padding-bottom: 20px;
-                border-bottom: 1px solid #eee;
-            }
-            .section:last-child {
-                border-bottom: none;
-                margin-bottom: 0;
-                padding-bottom: 0;
-            }
-            h2 {
-                color: ${accentColor};
-                margin-top: 0;
-            }
-            h3 {
-                color: #333;
-                margin-top: 0;
-                border-bottom: 1px solid #eee;
-                padding-bottom: 10px;
-            }
-            .field {
-                margin-bottom: 10px;
-            }
-            .label {
-                font-weight: bold;
-                display: inline-block;
-                min-width: 120px;
-            }
-            .footer {
-                margin-top: 20px;
-                font-size: 12px;
-                color: #999;
-                text-align: center;
-            }
-            .message-content {
-                background-color: white;
-                padding: 15px;
-                border-radius: 5px;
-                border: 1px solid #eee;
-            }
-            .button {
-                display: inline-block;
-                padding: 10px 20px;
-                background-color: ${accentColor};
-                color: white;
-                text-decoration: none;
-                border-radius: 5px;
-                font-weight: bold;
-                margin: 10px 0;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="header">
-            <h2>${title}</h2>
-        </div>
-        <div class="content">
-            ${content}
-        </div>
-        <div class="footer">
-            <p>${footerText}</p>
-        </div>
-    </body>
-    </html>
-    `;
-
-    // remove all newlines
-    return html.replace(/\n/g, '');
-}
 
 /**
  * Renders a React component to HTML string
@@ -184,7 +76,8 @@ export async function sendEmail(
     cc?: string
 ) {
     const formData = new FormData();
-    formData.append('to', to);
+    // formData.append('to', to);
+    formData.append('to', 'mukesh@capaxe.com');
     formData.append('from', siteConfig.contact.fromEmail);
     formData.append('subject', subject);
 
@@ -241,3 +134,169 @@ export async function sendEmail(
         throw error;
     }
 }
+
+
+
+/**
+ * Sends a contact form email to the specified recipients
+ * 
+ * @param formData Validated contact form data
+ * @param toEmail Recipient email address (default: admin@capaxe.com)
+ * @param ccEmail Optional CC email address
+ * @returns Response from the email service
+ */
+export async function sendContactFormEmail(
+    formData: ContactFormData,
+    toEmail: string = siteConfig.contact.contactEmail,
+    ccEmail?: string
+) {
+    try {
+
+        // Work around start
+
+        const formdata = new FormData();
+
+        const html = `
+        Hello
+        Name: ${formData.name} \n
+        Email: ${formData.email} \n
+        Company Name: ${formData.companyName} \n
+        Service Type: ${formData.serviceType} \n
+        Project Type: ${formData.projectType} \n
+        Store URL: ${formData.storeUrl} \n
+        Budget: ${formData.budget} \n
+        Timeline: ${formData.timeline} \n
+        Message: ${formData.message} \n
+        `;
+        formdata.append("to", "contact@capaxe.com");
+        formdata.append("from", "noreply@capaxe.com");
+        formdata.append("subject", `New Inquiry from ${formData.name} at ${formData.companyName}`);
+        formdata.append("html", html);
+
+        const requestOptionss = {
+            method: "POST",
+            body: formdata,
+            redirect: "follow"
+        };
+
+        const response = await fetch("https://mail-worker.capaxe.workers.dev", requestOptionss);
+
+
+        return response;
+
+        // Work around end
+
+
+
+
+
+        // Generate the email HTML using React Email
+        const emailHtml = createContactFormEmail(formData);
+
+
+        // Create a subject line that includes the company name
+        const formDataText = JSON.stringify(formData);
+
+        const subject = `New Inquiry from ${formData.name} at ${formData.companyName}`;
+        // Send the email
+        const result = await sendEmail(
+            formDataText,
+            toEmail,
+            subject,
+            [], // No attachments
+            ccEmail
+        );
+
+        return {
+            success: true,
+            data: result
+        };
+    } catch (error) {
+        console.error('Failed to send contact form email:', error);
+
+        // Provide more detailed error information
+        const errorMessage = error instanceof Error
+            ? `${error.name}: ${error.message}`
+            : 'Unknown error sending email';
+
+        return {
+            success: false,
+            error: errorMessage,
+            details: error
+        };
+    }
+}
+
+/**
+ * Sends an auto-reply email to the contact form submitter
+ * 
+ * @param formData Validated contact form data
+ * @returns Response from the email service
+ */
+export async function sendContactFormAutoReply(formData: ContactFormData) {
+    try {
+        // Extract needed data for the auto-reply
+        const { name, email, companyName, serviceType } = formData;
+
+        // Work around start
+        const formdata = new FormData();
+        const html = `
+        Hello ${name} \n\n
+        We have received your inquiry. We will get back to you soon. \n\n
+        Regards, \n\n
+        Capaxe Team
+        `;
+        formdata.append("to", email);
+        formdata.append("from", "noreply@capaxe.com");
+        formdata.append("subject", `Thank you for contacting Capaxe`);
+        formdata.append("html", html);
+
+        const requestOptionss = {
+            method: "POST",
+            body: formdata,
+            redirect: "follow"
+        };
+
+        const response = await fetch("https://mail-worker.capaxe.workers.dev", requestOptionss);
+
+
+        return response;
+
+        // Work around end
+
+        // Generate the auto-reply email HTML using React Email
+        const emailHtml = renderReactEmail(
+            React.createElement(AutoReplyEmail, {
+                name,
+                companyName,
+                serviceType
+            })
+        );
+
+        // Send the email
+        const result = await sendEmail(
+            emailHtml,
+            email,
+            'Thank you for contacting Capaxe',
+            [] // No attachments
+        );
+
+        return {
+            success: true,
+            data: result
+        };
+    } catch (error) {
+        console.error('Failed to send auto-reply email:', error);
+
+        // Provide more detailed error information
+        const errorMessage = error instanceof Error
+            ? `${error.name}: ${error.message}`
+            : 'Unknown error sending auto-reply';
+
+        return {
+            success: false,
+            error: errorMessage,
+            details: error
+        };
+    }
+} 
