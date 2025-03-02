@@ -24,6 +24,7 @@ import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import ContactFormEmail from '@/emails/ContactFormEmail';
 import WelcomeEmail from '@/emails/WelcomeEmail';
+import { siteConfig } from '@/config/site';
 
 /**
  * Creates a common email template with consistent styling
@@ -184,7 +185,7 @@ export async function sendEmail(
 ) {
     const formData = new FormData();
     formData.append('to', to);
-    formData.append('from', process.env.SMTP_FROM || 'anita@capaxe.com');   
+    formData.append('from', siteConfig.contact.fromEmail);
     formData.append('subject', subject);
 
     // Use the HTML as-is without adding DOCTYPE

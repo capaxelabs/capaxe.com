@@ -2,7 +2,7 @@ import type { ContactFormData } from './email';
 import { createContactFormEmail, renderReactEmail, sendEmail } from './email';
 import React from 'react';
 import AutoReplyEmail from '../emails/AutoReplyEmail';
-
+import { siteConfig } from '@/config/site';
 /**
  * Sends a contact form email to the specified recipients
  * 
@@ -13,7 +13,7 @@ import AutoReplyEmail from '../emails/AutoReplyEmail';
  */
 export async function sendContactFormEmail(
     formData: ContactFormData,
-    toEmail: string = 'contact@capaxe.com',
+    toEmail: string = siteConfig.contact.email,
     ccEmail?: string
 ) {
     try {

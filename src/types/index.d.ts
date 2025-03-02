@@ -34,9 +34,11 @@ export interface SiteConfig {
         }[]
     }
     contact: {
-        email: string
+        contactEmail: string
+        salesEmail: string
         phone: string
         address: string
+        fromEmail: string
     },
     retainer: {
 
@@ -52,13 +54,6 @@ export interface SiteConfig {
             features: string[]
         }[]
     }
-    servicesDetail: {
-        title: string
-        description: string
-        icon: string
-        href: string
-        features: string[]
-    }[]
 }
 
 export interface MenuItem {

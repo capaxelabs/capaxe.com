@@ -300,7 +300,7 @@ export default function ContactFormReact({ siteConfig }: { siteConfig: SiteConfi
                                         <EnvelopeIcon className="w-6 h-6 text-purple-600 mt-1" />
                                         <div>
                                             <h3 className="font-medium">Email</h3>
-                                            <a href={`mailto:${siteConfig.contact.email}`} className="text-gray-600">{siteConfig.contact.email}</a>
+                                            <a href={`mailto:${siteConfig.contact.contactEmail}`} className="text-gray-600">{siteConfig.contact.contactEmail}</a>
                                         </div>
                                     </div>
                                     <div className="flex items-start gap-4">

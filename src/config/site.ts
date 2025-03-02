@@ -1,6 +1,7 @@
 import type { SiteConfig } from "@/types";
 
 export const siteConfig: SiteConfig = {
+
     legalName: 'Capaxe Labs',
     name: 'Capaxe Labs',
     description: 'Professional Shopify development and web solutions for growing businesses.',
@@ -26,9 +27,11 @@ export const siteConfig: SiteConfig = {
         linkedin: 'https://linkedin.com/company/capaxelabs'
     },
     contact: {
-        email: 'contact@capaxe.com',
+        contactEmail: 'contact@capaxe.com',
+        salesEmail: 'sales@capaxe.com',
         phone: '+91 70196 20967',
-        address: 'Kalina, Santacruz (E), Mumbai, Maharashtra, India'
+        address: 'Kalina, Santacruz (E), Mumbai, Maharashtra, India',
+        fromEmail: 'anita@capaxe.com'
     },
     hero: {
         title: 'Capaxe Labs',
