@@ -101,7 +101,7 @@ const RetainerPlansSection = () => {
                                             </li>
                                         ))}
                                     </ul>
-                                    <Button
+                                    {/* <Button
                                         onClick={() => handlePurchase(item)}
                                         className={`w-full ${item.popular
                                             ? "bg-primary-400 hover:bg-primary-500 text-white"
@@ -110,7 +110,13 @@ const RetainerPlansSection = () => {
                                     >
                                         <ShoppingCart className="mr-2 h-4 w-4" />
                                         Select {item.name} Plan
-                                    </Button>
+                                    </Button> */}
+
+                                    <a href="/contact" className="text-primary-500 hover:text-primary-600">
+                                        <Button className="bg-primary-400 hover:bg-primary-500 text-white">
+                                            Contact Us
+                                        </Button>
+                                    </a>
                                 </div>
                             </Card>
                         ))}
@@ -122,9 +128,11 @@ const RetainerPlansSection = () => {
                             We understand that every business has unique needs. Contact us to discuss a custom
                             retainer plan tailored specifically to your Shopify store requirements.
                         </p>
-                        <Button className="bg-primary-400 hover:bg-primary-500 text-white">
-                            Contact Us for Custom Plans
-                        </Button>
+                        <a href="/contact" className="text-primary-500 hover:text-primary-600">
+                            <Button className="bg-primary-400 hover:bg-primary-500 text-white">
+                                Contact Us for Custom Plans
+                            </Button>
+                        </a>
                     </div>
                 </div>
             </section>

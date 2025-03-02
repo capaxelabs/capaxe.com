@@ -184,7 +184,7 @@ export async function sendEmail(
 ) {
     const formData = new FormData();
     formData.append('to', to);
-    formData.append('from', process.env.SMTP_FROM || 'anita@capaxe.com');
+    formData.append('from', process.env.SMTP_FROM || 'anita@capaxe.com');   
     formData.append('subject', subject);
 
     // Use the HTML as-is without adding DOCTYPE

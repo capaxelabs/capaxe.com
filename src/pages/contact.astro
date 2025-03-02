@@ -1,9 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { SITE_TITLE } from "../consts";
-import ContactForm from "@/components/ContactForm.astro";
+import { siteConfig } from "@/config/site";
+import ContactFormReact from "@/components/ContactFormReact";
 ---
 
-<Layout title={`Contact Us | ${SITE_TITLE}`} description="Get in touch with our team">
-  <ContactForm />
+<Layout title={`Contact Us | ${siteConfig.name}`} description="Get in touch with our team">
+  <ContactFormReact client:load siteConfig={siteConfig} />
 </Layout>

@@ -45,51 +45,6 @@ export const ServiceLanding = ({ siteConfig }: { siteConfig: SiteConfig }) => {
 }
 
 
-export const OurServices = () => {
-    return (
-        <section className="py-16 bg-white">
-            <div className="container mx-auto px-6">
-                <motion.h2
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    className="section-title text-3xl font-bold text-center text-purple-900 mb-12"
-                >
-                    Our Services
-                </motion.h2>
-                <div className="grid md:grid-cols-3 gap-8">
-                    <motion.div
-                        whileHover={{ scale: 1.05 }}
-                        className="p-6 rounded-xl bg-linear-to-br from-purple-100 to-blue-100 shadow-lg"
-                    >
-                        <ShoppingBagIcon className="w-12 h-12 text-purple-600 mb-4" />
-                        <h3 className="text-xl text-foreground font-semibold mb-2">Custom Shopify Store Development</h3>
-                        <p className="text-foreground">Tailor-made Shopify solutions designed to elevate your brand and boost sales.</p>
-                    </motion.div>
-
-                    <motion.div
-                        whileHover={{ scale: 1.05 }}
-                        className="p-6 rounded-xl bg-linear-to-br from-blue-100 to-purple-100 shadow-lg"
-                    >
-                        <CodeBracketIcon className="w-12 h-12 text-blue-600 mb-4" />
-                        <h3 className="text-xl text-foreground font-semibold mb-2">Professional Web Development</h3>
-                        <p className="text-foreground">Leverage the latest technologies to create stunning, high-performance websites.</p>
-                    </motion.div>
-
-                    <motion.div
-                        whileHover={{ scale: 1.05 }}
-                        className="p-6 rounded-xl bg-linear-to-br from-purple-100 to-blue-100 shadow-lg"
-                    >
-                        <PhoneIcon className="w-12 h-12 text-purple-600 mb-4" />
-                        <h3 className="text-xl text-foreground font-semibold mb-2">24/7 Dedicated Support</h3>
-                        <p className="text-foreground">Experience peace of mind with our round-the-clock technical support services.</p>
-                    </motion.div>
-                </div>
-            </div>
-        </section>
-    )
-}
-
-
 export const RetainerBenefits = ({ siteConfig }: { siteConfig: SiteConfig }) => {
     return (
         <section className="py-16 bg-gradient-to-br from-purple-50 to-indigo-50">

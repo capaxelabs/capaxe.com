@@ -26,9 +26,9 @@ export const siteConfig: SiteConfig = {
         linkedin: 'https://linkedin.com/company/capaxelabs'
     },
     contact: {
-        email: 'contact@capaxelabs.com',
-        phone: '+1 (555) 123-4567',
-        address: '123 Tech Street, Silicon Valley, CA 94025'
+        email: 'contact@capaxe.com',
+        phone: '+91 70196 20967',
+        address: 'Kalina, Santacruz (E), Mumbai, Maharashtra, India'
     },
     hero: {
         title: 'Capaxe Labs',

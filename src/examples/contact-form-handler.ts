@@ -27,8 +27,7 @@ export async function handleContactFormSubmission(formData: unknown) {
         // Send the contact form email to the admin
         const adminEmailResult = await sendContactFormEmail(
             validatedData,
-            'admin@capaxe.com', // Primary recipient
-            'sales@capaxe.com'  // CC recipient
+            'contact@capaxe.com', // Primary recipient
         );
 
         // Send an auto-reply to the customer
@@ -72,9 +71,9 @@ export async function handleContactFormSubmission(formData: unknown) {
 async function exampleUsage() {
     // This would come from your form submission
     const formData = {
-        name: "John Doe",
-        email: "john@example.com",
-        companyName: "Example Store",
+        name: "Mukesh",
+        email: "mukesh@capaxe.com",
+        companyName: "Capaxe Labs",
         serviceType: "store_development",
         projectType: "new_project",
         storeUrl: "https://example-store.myshopify.com",

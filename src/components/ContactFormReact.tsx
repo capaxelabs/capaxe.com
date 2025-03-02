@@ -4,6 +4,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import type { SiteConfig } from "@/types";
 
 // Define our own SubmitHandler type that matches react-hook-form's definition
 type SubmitHandler<TFieldValues> = (
@@ -42,7 +43,7 @@ const formSchema = z.object({
 
 type FormSchemaType = z.infer<typeof formSchema>;
 
-export default function ContactFormReact() {
+export default function ContactFormReact({ siteConfig }: { siteConfig: SiteConfig }) {
     const [isLoading, setIsLoading] = useState(false);
     const {
         register,
@@ -284,8 +285,7 @@ export default function ContactFormReact() {
                                         <div>
                                             <h3 className="font-medium">Address</h3>
                                             <p className="text-gray-600">
-                                                Koramangala, Bangalore<br />
-                                                Karnataka, India
+                                                {siteConfig.contact.address}
                                             </p>
                                         </div>
                                     </div>
@@ -293,14 +293,14 @@ export default function ContactFormReact() {
                                         <PhoneIcon className="w-6 h-6 text-purple-600 mt-1" />
                                         <div>
                                             <h3 className="font-medium">Phone</h3>
-                                            <a href="tel:+91 70196 20967" className="text-gray-600">+91 70196 20967</a>
+                                            <a href={`tel:${siteConfig.contact.phone}`} className="text-gray-600">{siteConfig.contact.phone}</a>
                                         </div>
                                     </div>
                                     <div className="flex items-start gap-4">
                                         <EnvelopeIcon className="w-6 h-6 text-purple-600 mt-1" />
                                         <div>
                                             <h3 className="font-medium">Email</h3>
-                                            <a href="mailto:info@capaxe.com" className="text-gray-600">info [at] capaxe.com</a>
+                                            <a href={`mailto:${siteConfig.contact.email}`} className="text-gray-600">{siteConfig.contact.email}</a>
                                         </div>
                                     </div>
                                     <div className="flex items-start gap-4">

@@ -13,7 +13,7 @@ import AutoReplyEmail from '../emails/AutoReplyEmail';
  */
 export async function sendContactFormEmail(
     formData: ContactFormData,
-    toEmail: string = 'mukesh@capaxe.com',
+    toEmail: string = 'contact@capaxe.com',
     ccEmail?: string
 ) {
     try {
