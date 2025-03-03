@@ -94,32 +94,22 @@ export const menuConfig: MenuConfig = {
                 href: "/contact",
             },
         ],
-        support: [
-            {
-                title: "Contact",
-                href: "/contact",
-            },
-            {
-                title: "Retainer Plans",
-                href: "/retainer",
-            },
-            {
-                title: "Privacy Policy",
-                href: "/privacy-policy",
-            },
-            {
-                title: "Terms of Service",
-                href: "/terms-of-service",
-            },
-        ],
         legal: [
             {
                 title: "Privacy Policy",
-                href: "/privacy-policy",
+                href: "/legal/privacy-policy",
             },
             {
                 title: "Terms of Service",
-                href: "/terms-of-service",
+                href: "/legal/terms-of-service",
+            },
+            {
+                title: "Cookie Policy",
+                href: "/legal/cookie-policy",
+            },
+            {
+                title: "Refund Policy",
+                href: "/legal/refund-policy",
             },
         ],
         caseStudies: [

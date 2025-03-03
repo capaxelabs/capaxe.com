@@ -84,7 +84,6 @@ export interface MenuConfig {
     footerNav: {
         solutions: MenuItem[]
         company: MenuItem[]
-        support: MenuItem[]
         legal: MenuItem[]
         caseStudies: MenuItem[]
     }

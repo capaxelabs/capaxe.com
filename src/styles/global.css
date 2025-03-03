@@ -14,8 +14,16 @@
   --color-popover: hsl(var(--popover));
   --color-popover-foreground: hsl(var(--popover-foreground));
 
-  --color-primary: hsl(var(--primary));
-  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-primary: #9b87f5;
+  --color-primary-foreground: #ffffff;
+  --color-primary-100: #f2eeff;
+  --color-primary-200: #e5deff;
+  --color-primary-300: #d6bcfa;
+  --color-primary-400: #9b87f5;
+  --color-primary-500: #7e69ab;
+  --color-primary-600: #5b4c7b;
+  --color-primary-700: #3d324e;
+  --color-primary-800: #1a1f2c;
 
   --color-secondary: hsl(var(--secondary));
   --color-secondary-foreground: hsl(var(--secondary-foreground));
@@ -32,17 +40,6 @@
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
-
-  --color-primary: #9b87f5;
-  --color-primary-foreground: #ffffff;
-  --color-primary-100: #f2eeff;
-  --color-primary-200: #e5deff;
-  --color-primary-300: #d6bcfa;
-  --color-primary-400: #9b87f5;
-  --color-primary-500: #7e69ab;
-  --color-primary-600: #5b4c7b;
-  --color-primary-700: #3d324e;
-  --color-primary-800: #1a1f2c;
 
   --color-chart-1: hsl(var(--chart-1));
   --color-chart-2: hsl(var(--chart-2));
@@ -68,6 +65,10 @@
 
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
+  --animate-spin: spin 1s linear infinite;
+  --animate-ping: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+  --animate-pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-bounce: bounce 1s infinite;
 
   @keyframes accordion-down {
     from {
@@ -85,29 +86,145 @@
       height: 0;
     }
   }
-}
-
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
-@layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
   }
-}
+  @keyframes ping {
+    75%,
+    100% {
+      transform: scale(2);
+      opacity: 0;
+    }
+  }
+  @keyframes pulse {
+    50% {
+      opacity: 0.5;
+    }
+  }
+  @keyframes bounce {
+    0%,
+    100% {
+      transform: translateY(-25%);
+      animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+    50% {
+      transform: none;
+      animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+  }
 
-@layer utilities {
-  body {
-    font-family: Arial, Helvetica, sans-serif;
+  --animate-fade-in-scale: fade-in-scale 0.3s ease-out;
+  @keyframes fade-in-scale {
+    0% {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  --animate-fade-in-scale: fade-in-scale 0.3s ease-out;
+  @keyframes fade-in-scale {
+    0% {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  --animate-fade-up: fade-up 0.3s ease-out;
+  @keyframes fade-up {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  --animation-accordion-down: "accordion-down 0.2s ease-out";
+  --animation-accordion-up: "accordion-up 0.2s ease-out";
+  --animation-fade-in: "fade-in 0.5s ease-out";
+  --animation-fade-up: "fade-up 0.7s ease-out";
+  --animation-slide-in: "slide-in 0.5s ease-out";
+  --animation-scale-in: "scale-in 0.5s ease-out";
+  --animation-float: "float 6s ease-in-out infinite";
+
+  @keyframes accordion-down {
+    from {
+      height: "0";
+    }
+    to {
+      height: "var(--radix-accordion-content-height)";
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: "var(--radix-accordion-content-height)";
+    }
+    to {
+      height: "0";
+    }
+  }
+  @keyframes fade-in {
+    '0%': {
+      opacity: "0";
+    }
+    ,
+    '100%': {
+      opacity: "1";
+    }
+  }
+  @keyframes fade-up {
+    '0%': {
+      opacity: "0";
+      transform: "translateY(20px)";
+    }
+    ,
+    '100%': {
+      opacity: "1";
+      transform: "translateY(0)";
+    }
+  }
+  @keyframes slide-in {
+    '0%': {
+      transform: "translateX(-20px)";
+      opacity: "0";
+    }
+    ,
+    '100%': {
+      transform: "translateX(0)";
+      opacity: "1";
+    }
+  }
+  @keyframes scale-in {
+    '0%': {
+      transform: "scale(0.95)";
+      opacity: "0";
+    }
+    ,
+    '100%': {
+      transform: "scale(1)";
+      opacity: "1";
+    }
+  }
+  @keyframes float {
+    '0%, 100%': {
+      transform: "translateY(0)";
+    }
+    ,
+    '50%': {
+      transform: "translateY(-10px)";
+    }
   }
 }
 
@@ -183,16 +300,49 @@
   }
 }
 
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
 @layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display;
   }
 }
 
 @layer utilities {
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
   .clip-path-slant {
     clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
   }
@@ -219,15 +369,13 @@
 
   .section-title::after {
     content: "";
-    @apply absolute  -bottom-3 w-16 h-1 bg-primary-400;
+    @apply absolute left-0 -bottom-3 w-16 h-1 bg-primary-400;
   }
 
   .section-subtitle {
     @apply text-lg md:text-xl text-gray-600 max-w-2xl mb-16;
   }
-}
 
-@layer utilities {
   /* Custom styles for blog content */
   .blog-content :global(h2) {
     @apply text-2xl font-bold mt-8 mb-4;
@@ -256,5 +404,65 @@
   }
   .blog-content :global(a) {
     @apply text-primary hover:underline;
+  }
+}
+
+@layer components {
+  .logo {
+    height: 6em;
+    padding: 1.5em;
+    will-change: filter;
+    transition: filter 300ms;
+  }
+  .logo:hover {
+    filter: drop-shadow(0 0 2em #646cffaa);
+  }
+  .logo.react:hover {
+    filter: drop-shadow(0 0 2em #61dafbaa);
+  }
+
+  @keyframes logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    a:nth-of-type(2) .logo {
+      animation: logo-spin infinite 20s linear;
+    }
+  }
+
+  .card {
+    padding: 2em;
+  }
+
+  .read-the-docs {
+    color: #888;
+  }
+
+  /* Custom Animations */
+  .reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s cubic-bezier(0.13, 0.82, 0.31, 1);
+  }
+
+  .reveal-on-scroll.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Smooth Scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Navbar Glass Effect */
+  .navbar-glass {
+    @apply fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-white/80 dark:bg-black/30 border-b border-gray-200/50 dark:border-gray-800/50;
   }
 }
