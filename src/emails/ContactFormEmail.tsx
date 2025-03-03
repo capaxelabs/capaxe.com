@@ -2,6 +2,7 @@ import React from 'react';
 import { Section, Text, Link } from '@react-email/components';
 import BaseTemplate from './BaseTemplate';
 import type { ContactFormData } from '@/lib/email';
+import { siteConfig } from '@/config/site';
 
 interface ContactFormEmailProps {
     data: ContactFormData;
@@ -10,36 +11,17 @@ interface ContactFormEmailProps {
 export const ContactFormEmail: React.FC<ContactFormEmailProps> = ({ data }) => {
     // Format helpers
     const formatBudget = (budget: string) => {
-        const budgetMap: Record<string, string> = {
-            'less_than_5k': 'Less than $5,000',
-            '5k_to_10k': '$5,000 - $10,000',
-            '10k_to_25k': '$10,000 - $25,000',
-            'more_than_25k': 'More than $25,000'
-        };
+        const budgetMap: Record<string, string> = siteConfig.contactForm.budget;
         return budgetMap[budget] || budget;
     };
 
     const formatTimeline = (timeline: string) => {
-        const timelineMap: Record<string, string> = {
-            'immediate': 'Immediate Start',
-            'within_1_month': 'Within 1 Month',
-            'within_3_months': 'Within 3 Months',
-            'flexible': 'Flexible'
-        };
+        const timelineMap: Record<string, string> = siteConfig.contactForm.timeline;
         return timelineMap[timeline] || timeline;
     };
 
     const formatServiceType = (serviceType: string) => {
-        const serviceMap: Record<string, string> = {
-            'new_project': 'New Project',
-            'retainer': 'Retainer / Subscription',
-            'store_development': 'Shopify Store Development',
-            'app_development': 'Shopify App Development',
-            'store_customization': 'Store Customization',
-            'app_customization': 'App Customization',
-            'maintenance': 'Maintenance & Support',
-            'other': 'Other'
-        };
+        const serviceMap: Record<string, string> = siteConfig.contactForm.serviceTypes;
         return serviceMap[serviceType] || serviceType;
     };
 

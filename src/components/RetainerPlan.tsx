@@ -4,31 +4,44 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { siteConfig } from "@/config/site";
-
-interface Plan {
-    id: number;
-    name: string;
-    description: string;
-    price: number;
-    duration: string;
-    features: string[];
-    popular: boolean;
-}
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import RetainerRequestForm from "@/components/RetainerRequestForm";
+import type { Plan } from "@/types";
 
 const RetainerPlansSection = () => {
     const [selectedBillingCycle, setSelectedBillingCycle] = useState<"monthly" | "yearly">("monthly");
+    const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const handlePurchase = (plan: Plan) => {
-        toast.success(`You've selected the ${plan.name} plan. We'll contact you shortly to get started.`);
+    const handlePurchase = (item: any) => {
+        // Convert the item from siteConfig to the Plan type
+        const plan: Plan = {
+            id: item.id,
+            name: item.title,
+            description: item.description,
+            price: selectedBillingCycle === "monthly"
+                ? parseFloat(item.monthly.replace(/[^0-9.]/g, ''))
+                : parseFloat(item.yearly.replace(/[^0-9.]/g, '')),
+            duration: selectedBillingCycle,
+            features: item.features,
+            popular: item.popular
+        };
+
+        setSelectedPlan(plan);
+        setIsModalOpen(true);
     };
 
     const getYearlyPrice = (monthlyPrice: number) => {
         return Math.floor(monthlyPrice * 10); // 20% discount for yearly billing
     };
 
+    const handleModalClose = () => {
+        setIsModalOpen(false);
+        setSelectedPlan(null);
+    };
+
     return (
         <>
-
             <section id="retainer-plans" className="section max-w-6xl mx-auto">
                 <div className="container mx-auto">
                     <div className="text-center max-w-3xl mx-auto">
@@ -101,7 +114,7 @@ const RetainerPlansSection = () => {
                                             </li>
                                         ))}
                                     </ul>
-                                    {/* <Button
+                                    <Button
                                         onClick={() => handlePurchase(item)}
                                         className={`w-full ${item.popular
                                             ? "bg-primary-400 hover:bg-primary-500 text-white"
@@ -109,14 +122,8 @@ const RetainerPlansSection = () => {
                                             }`}
                                     >
                                         <ShoppingCart className="mr-2 h-4 w-4" />
-                                        Select {item.name} Plan
-                                    </Button> */}
-
-                                    <a href="/contact" className="text-primary-500 hover:text-primary-600">
-                                        <Button className="bg-primary-400 hover:bg-primary-500 text-white">
-                                            Contact Us
-                                        </Button>
-                                    </a>
+                                        Select {item.title} Plan
+                                    </Button>
                                 </div>
                             </Card>
                         ))}
@@ -128,15 +135,46 @@ const RetainerPlansSection = () => {
                             We understand that every business has unique needs. Contact us to discuss a custom
                             retainer plan tailored specifically to your Shopify store requirements.
                         </p>
-                        <a href="/contact" className="text-primary-500 hover:text-primary-600">
-                            <Button className="bg-primary-400 hover:bg-primary-500 text-white">
-                                Contact Us for Custom Plans
-                            </Button>
-                        </a>
+                        <Button
+                            onClick={() => {
+                                // Create a custom plan object
+                                const customPlan: Plan = {
+                                    id: 999,
+                                    name: "Custom Plan",
+                                    description: "A custom plan tailored to your specific needs",
+                                    price: 0,
+                                    duration: "custom",
+                                    features: [],
+                                    popular: false
+                                };
+                                setSelectedPlan(customPlan);
+                                setIsModalOpen(true);
+                            }}
+                            className="bg-primary-400 hover:bg-primary-500 text-white"
+                        >
+                            Contact Us for Custom Plans
+                        </Button>
                     </div>
                 </div>
             </section>
 
+            {/* Retainer Request Modal */}
+            <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+                <DialogContent className="sm:max-w-[500px]">
+                    <DialogHeader>
+                        <DialogTitle className="text-2xl">Request {selectedPlan?.name} Plan</DialogTitle>
+                        <DialogDescription>
+                            Fill out the form below to request the {selectedPlan?.name} plan. We'll get back to you shortly.
+                        </DialogDescription>
+                    </DialogHeader>
+                    {selectedPlan && (
+                        <RetainerRequestForm
+                            plan={selectedPlan}
+                            onSuccess={handleModalClose}
+                        />
+                    )}
+                </DialogContent>
+            </Dialog>
         </>
     );
 };

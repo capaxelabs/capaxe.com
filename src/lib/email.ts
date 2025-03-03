@@ -30,6 +30,21 @@ export type ContactFormData = {
     message: string;
 };
 
+
+export function generateEmailHtml(html: string, title: string, prefix: string): string {
+    const emailHtml = `
+    <html>
+        <head>
+            <title>${title}</title>
+        </head>
+        <body>
+            ${html}
+        </body>
+    </html>
+    `;
+    return emailHtml;
+}
+
 /**
  * Renders a React component to HTML string
  * @param component React component to render
@@ -152,65 +167,33 @@ export async function sendContactFormEmail(
 ) {
     try {
 
-        // Work around start
-
-        const formdata = new FormData();
-
         const html = `
-        Hello
-        Name: ${formData.name} \n
-        Email: ${formData.email} \n
-        Company Name: ${formData.companyName} \n
-        Service Type: ${formData.serviceType} \n
-        Project Type: ${formData.projectType} \n
-        Store URL: ${formData.storeUrl} \n
-        Budget: ${formData.budget} \n
-        Timeline: ${formData.timeline} \n
-        Message: ${formData.message} \n
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+            <h2 style="color: #6366f1;">New Inquiry from ${formData.name} at ${formData.companyName}</h2>
+            <p><strong>Name:</strong> ${formData.name}</p>
+            <p><strong>Email:</strong> ${formData.email}</p>
+            <p><strong>Company Name:</strong> ${formData.companyName}</p>
+            <p><strong>Service Type:</strong> ${formData.serviceType}</p>
+            <p><strong>Project Type:</strong> ${formData.projectType}</p>
+            <p><strong>Store URL:</strong> ${formData.storeUrl}</p>
+            <p><strong>Budget:</strong> ${formData.budget}</p>
+            <p><strong>Timeline:</strong> ${formData.timeline}</p>
+            <p><strong>Message:</strong> ${formData.message}</p>
+        </div>
         `;
-        formdata.append("to", "contact@capaxe.com");
-        formdata.append("from", "noreply@capaxe.com");
-        formdata.append("subject", `New Inquiry from ${formData.name} at ${formData.companyName}`);
-        formdata.append("html", html);
 
-        const requestOptionss = {
-            method: "POST",
-            body: formdata,
-            redirect: "follow"
-        };
+        const subjectCapaxe = `New Inquiry from ${formData.name} at ${formData.companyName}`;
+        const contactEmailHtml = generateEmailHtml(html, subjectCapaxe, subjectCapaxe);
 
-        const response = await fetch("https://mail-worker.capaxe.workers.dev", requestOptionss);
-
-
-        return response;
-
-        // Work around end
-
-
-
-
-
-        // Generate the email HTML using React Email
-        const emailHtml = createContactFormEmail(formData);
-
-
-        // Create a subject line that includes the company name
-        const formDataText = JSON.stringify(formData);
-
-        const subject = `New Inquiry from ${formData.name} at ${formData.companyName}`;
-        // Send the email
-        const result = await sendEmail(
-            formDataText,
+        const contactEmailResult = await sendEmail(
+            contactEmailHtml,
             toEmail,
-            subject,
-            [], // No attachments
-            ccEmail
+            subjectCapaxe,
+            []
         );
 
-        return {
-            success: true,
-            data: result
-        };
+        return contactEmailResult;
+
     } catch (error) {
         console.error('Failed to send contact form email:', error);
 
@@ -241,7 +224,7 @@ export async function sendContactFormAutoReply(formData: ContactFormData) {
         // Work around start
         const formdata = new FormData();
         const html = `
-        Hello ${name} \n\n
+        Hello ${name},  \n\n
         We have received your inquiry. We will get back to you soon. \n\n
         Regards, \n\n
         Capaxe Team

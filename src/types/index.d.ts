@@ -54,6 +54,21 @@ export interface SiteConfig {
             features: string[]
         }[]
     }
+    contactForm: {
+        serviceTypes: Record<string, string>
+        budget: Record<string, string>
+        timeline: Record<string, string>
+    }
+}
+
+export interface Plan {
+    id: number;
+    name: string;
+    description: string;
+    price: number;
+    duration: string;
+    features: string[];
+    popular: boolean;
 }
 
 export interface MenuItem {
@@ -73,5 +88,4 @@ export interface MenuConfig {
         legal: MenuItem[]
         caseStudies: MenuItem[]
     }
-
 } 

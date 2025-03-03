@@ -234,5 +234,32 @@ export const siteConfig: SiteConfig = {
                 ]
             }
         ]
+    },
+
+    contactForm: {
+        serviceTypes: {
+            'new_project': 'New Project',
+            'retainer': 'Retainer / Subscription',
+            'store_development': 'Shopify Store Development',
+            'app_development': 'Shopify App Development',
+            'store_customization': 'Store Customization',
+            'app_customization': 'App Customization',
+            'maintenance': 'Maintenance & Support',
+            'other': 'Other'
+        },
+        budget: {
+            'less_than_5k': 'Less than $5,000',
+            '5k_to_10k': '$5,000 - $10,000',
+            '10k_to_25k': '$10,000 - $25,000',
+            'more_than_25k': 'More than $25,000'
+        },
+        timeline: {
+            'immediate': 'Immediate Start',
+            'within_1_month': 'Within 1 Month',
+            'within_3_months': 'Within 3 Months',
+            'flexible': 'Flexible'
+        }
+
+
     }
-} 
+}
