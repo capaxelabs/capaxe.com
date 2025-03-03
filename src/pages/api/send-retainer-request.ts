@@ -22,7 +22,6 @@ type RetainerRequestData = z.infer<typeof retainerRequestSchema>;
 async function sendRetainerRequestEmail(data: RetainerRequestData) {
     try {
 
-
         // Create HTML for the email
         const emailPart = `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -44,12 +43,28 @@ async function sendRetainerRequestEmail(data: RetainerRequestData) {
         // Send email to admin
         const adminEmailResult = await sendEmail(
             emailHtml,
-            siteConfig.contact.contactEmail,
+            siteConfig.contact.salesEmail,
             `New Retainer Request: ${data.planName} Plan from ${data.name}`,
             [],
             siteConfig.contact.salesEmail
         );
 
+
+        return {
+            success: adminEmailResult.success,
+            message: "Retainer request sent successfully"
+        };
+    } catch (error) {
+        console.error("Error sending retainer request email:", error);
+        return {
+            success: false,
+            message: "Failed to send retainer request email"
+        };
+    }
+}
+
+async function sendRetainerRequestAutoReply(data: RetainerRequestData) {
+    try {
         // Send confirmation email to customer
         const customerEmailPart = `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -76,17 +91,18 @@ async function sendRetainerRequestEmail(data: RetainerRequestData) {
         );
 
         return {
-            success: adminEmailResult.success && customerEmailResult.success,
-            message: "Retainer request sent successfully"
+            success: customerEmailResult.success,
+            message: "Retainer request auto-reply sent successfully"
         };
     } catch (error) {
-        console.error("Error sending retainer request email:", error);
+        console.error("Error sending retainer request auto-reply:", error);
         return {
             success: false,
-            message: "Failed to send retainer request email"
+            message: "Failed to send retainer request auto-reply"
         };
     }
 }
+
 
 export const POST: APIRoute = async ({ request }) => {
     try {
@@ -111,11 +127,17 @@ export const POST: APIRoute = async ({ request }) => {
         // Send the emails
         const emailResult = await sendRetainerRequestEmail(validatedData);
 
-        if (emailResult.success) {
-            return new Response(JSON.stringify({ success: true }), { status: 200 });
-        } else {
-            return new Response(JSON.stringify({ error: emailResult.message }), { status: 500 });
-        }
+        // Send an auto-reply to the customer
+        const autoReplyResult = await sendRetainerRequestAutoReply(validatedData);
+
+        // Return the results
+        return {
+            success: emailResult.success && autoReplyResult.success,
+            message: emailResult.success ? "Retainer request sent successfully" : emailResult.message,
+            autoReplyResult
+        };
+
+
     } catch (error) {
         console.error('Error processing retainer request:', error);
         return new Response(JSON.stringify({ error: 'Failed to process request' }), { status: 500 });
