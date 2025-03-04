@@ -16,14 +16,6 @@ export const menuConfig: MenuConfig = {
             href: "/case-studies",
         },
         {
-            title: "Blog",
-            href: "/blog",
-        },
-        {
-            title: "About",
-            href: "/about",
-        },
-        {
             title: "Retainer Plans",
             href: "/retainer",
         },

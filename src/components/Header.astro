@@ -5,12 +5,12 @@ import { siteConfig } from "@/config/site";
 ---
 
 <div class="fixed top-0 left-0 w-full z-50 flex justify-center">
-  <header id="main-header" class="mx-4 mt-4 w-full max-w-5xl rounded-lg transition-all duration-300 bg-white/50">
+  <header id="main-header" class="mx-4 mt-4 w-full max-w-5xl rounded-lg transition-all duration-300">
     <nav class="px-6 py-4">
       <div class="flex items-center justify-between">
         <!-- Logo -->
         <a href="/" class="text-2xl font-bold text-foreground">
-          {siteConfig.name}
+          <img src="/logo.svg" alt="Capaxe Labs" class="w-10 h-10" />
         </a>
 
         <!-- Desktop Menu -->
@@ -118,10 +118,10 @@ import { siteConfig } from "@/config/site";
   window.addEventListener("scroll", () => {
     if (window.scrollY > 20) {
       header?.classList.add("bg-white/80", "backdrop-blur-md", "shadow-lg");
-      header?.classList.remove("bg-white/50");
+      //header?.classList.remove("bg-white/50");
     } else {
       header?.classList.remove("bg-white/80", "backdrop-blur-md", "shadow-lg");
-      header?.classList.add("bg-white/50");
+      // header?.classList.add("bg-white/50");
     }
   });
 
