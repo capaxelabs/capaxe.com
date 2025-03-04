@@ -8,10 +8,14 @@ const currentYear = new Date().getFullYear();
   <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 gap-8 lg:grid-cols-4">
       <!-- Company Info -->
+
       <div>
-        <a href="/" class="text-2xl font-bold text-white">
-          {siteConfig.name}
-        </a>
+        <div class="flex items-center gap-2">
+          <img src="/logo.svg" alt="Capaxe Labs" class="w-10 h-10" />
+          <a href="/" class="text-2xl font-bold text-white">
+            {siteConfig.name}
+          </a>
+        </div>
         <p class="mt-4 text-gray-200 max-w-xs">
           {siteConfig.description}
         </p>
