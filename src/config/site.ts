@@ -2,7 +2,7 @@ import type { SiteConfig } from "@/types";
 
 export const siteConfig: SiteConfig = {
 
-    legalName: 'Capaxe Labs',
+    legalName: 'Capaxe Labs LLP',
     name: 'Capaxe Labs',
     description: 'Professional Shopify development and web solutions for growing businesses.',
     url: 'http://localhost:5173',
@@ -35,7 +35,7 @@ export const siteConfig: SiteConfig = {
     },
     hero: {
         title: 'Capaxe Labs',
-        subtitle: '(Silicon Valley Based)',
+        subtitle: '(India Silicon Valley Based)',
         description: 'Professional Shopify development and web solutions for growing businesses.',
         slides: [
             '/hero-slide1.jpg',
