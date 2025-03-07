@@ -162,9 +162,9 @@ const RetainerPlansSection = () => {
             <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
                 <DialogContent className="sm:max-w-[500px]">
                     <DialogHeader>
-                        <DialogTitle className="text-2xl">Request {selectedPlan?.name} Plan</DialogTitle>
+                        <DialogTitle className="text-2xl">Request {selectedPlan?.name}</DialogTitle>
                         <DialogDescription>
-                            Fill out the form below to request the {selectedPlan?.name} plan. We'll get back to you shortly.
+                            Fill out the form below to request the {selectedPlan?.name}. We'll get back to you shortly.
                         </DialogDescription>
                     </DialogHeader>
                     {selectedPlan && (
