@@ -230,7 +230,7 @@ export const siteConfig: SiteConfig = {
                     'App integration and customization',
                     'Performance optimization',
                     'Custom app development in yearly plan',
-                    'Headless store development in yearly plan'
+                    'Headless store development in yearly plan',
                 ]
             }
         ]

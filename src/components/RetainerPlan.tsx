@@ -20,8 +20,8 @@ const RetainerPlansSection = () => {
             name: item.title,
             description: item.description,
             price: selectedBillingCycle === "monthly"
-                ? parseFloat(item.monthly.replace(/[^0-9.]/g, ''))
-                : parseFloat(item.yearly.replace(/[^0-9.]/g, '')),
+                ? Number.parseFloat(item.monthly.replace(/[^0-9.]/g, ''))
+                : Number.parseFloat(item.yearly.replace(/[^0-9.]/g, '')),
             duration: selectedBillingCycle,
             features: item.features,
             popular: item.popular
@@ -59,6 +59,7 @@ const RetainerPlansSection = () => {
                     <div className="flex justify-center mb-12">
                         <div className="inline-flex rounded-full p-1 bg-gray-100">
                             <button
+                                type="button"
                                 onClick={() => setSelectedBillingCycle("monthly")}
                                 className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${selectedBillingCycle === "monthly"
                                     ? "bg-white shadow-sm"
@@ -68,6 +69,7 @@ const RetainerPlansSection = () => {
                                 Monthly
                             </button>
                             <button
+                                type="button"
                                 onClick={() => setSelectedBillingCycle("yearly")}
                                 className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${selectedBillingCycle === "yearly"
                                     ? "bg-white shadow-sm"
