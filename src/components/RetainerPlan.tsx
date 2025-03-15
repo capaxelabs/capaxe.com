@@ -132,6 +132,7 @@ const RetainerPlansSection = () => {
                                     <p className="text-gray-600 text-sm mb-6">{item.description}</p>
                                     <div className="flex flex-col mb-6">
                                         <div className="flex items-baseline">
+
                                             <span className="text-5xl font-bold">
                                                 {getMonthlyPrice(item, selectedBillingCycle)}
                                             </span>
@@ -139,10 +140,18 @@ const RetainerPlansSection = () => {
                                                 /month
                                             </span>
                                         </div>
+                                        {selectedBillingCycle !== "monthly" && (
+                                            <div className="flex items-baseline line-through ">
+                                                <span className="text-gray-400 text-xl font-semibold mr-2">
+                                                    {item.monthly} /month
+                                                </span>
+
+                                            </div>
+                                        )}
                                         <p className="text-sm text-gray-500 mt-2">
                                             {selectedBillingCycle === "quarterly"
-                                                ? "Billed quarterly"
-                                                : "Billed annually"}
+                                                ? "Billed quarterly (10% discount)"
+                                                : "Billed annually (20% discount)"}
                                         </p>
                                     </div>
                                     <ul className="space-y-3 mb-8">
