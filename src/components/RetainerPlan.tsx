@@ -8,20 +8,54 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import RetainerRequestForm from "@/components/RetainerRequestForm";
 import type { Plan } from "@/types";
 
+// Define the type for items in siteConfig.retainer.items
+interface RetainerPlanItem {
+    id: number;
+    title: string;
+    description: string;
+    monthly: string;  // Price for monthly billing
+    yearly: string;   // Price for yearly billing
+    features: string[];
+    popular: boolean;
+}
+
 const RetainerPlansSection = () => {
-    const [selectedBillingCycle, setSelectedBillingCycle] = useState<"monthly" | "yearly">("monthly");
+    const [selectedBillingCycle, setSelectedBillingCycle] = useState<"quarterly" | "yearly">("quarterly");
     const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const handlePurchase = (item: any) => {
+    // Calculate monthly price based on the selected billing cycle
+    const getMonthlyPrice = (item: RetainerPlanItem, cycle: "quarterly" | "yearly"): string => {
+        if (cycle === "quarterly") {
+            // For quarterly, use monthly price with a 10% discount
+            const monthlyPrice = Number.parseFloat(item.monthly.replace(/[^0-9.]/g, ''));
+            const discountedPrice = monthlyPrice * 0.9;
+            return `$${discountedPrice.toFixed(0)}`;
+        }
+
+        // For yearly, convert the yearly price to monthly equivalent (with 20% discount)
+        const yearlyPrice = Number.parseFloat(item.yearly.replace(/[^0-9.]/g, ''));
+        const monthlyEquivalent = yearlyPrice / 12;
+        return `$${monthlyEquivalent.toFixed(0)}`;
+    };
+
+    // Calculate total price for the selected billing cycle (for the Plan object)
+    const getTotalPrice = (item: RetainerPlanItem): number => {
+        if (selectedBillingCycle === "quarterly") {
+            const monthlyPrice = Number.parseFloat(item.monthly.replace(/[^0-9.]/g, ''));
+            return monthlyPrice * 3 * 0.9; // 3 months with 10% discount
+        }
+
+        return Number.parseFloat(item.yearly.replace(/[^0-9.]/g, ''));
+    };
+
+    const handlePurchase = (item: RetainerPlanItem) => {
         // Convert the item from siteConfig to the Plan type
         const plan: Plan = {
             id: item.id,
             name: item.title,
             description: item.description,
-            price: selectedBillingCycle === "monthly"
-                ? Number.parseFloat(item.monthly.replace(/[^0-9.]/g, ''))
-                : Number.parseFloat(item.yearly.replace(/[^0-9.]/g, '')),
+            price: getTotalPrice(item),
             duration: selectedBillingCycle,
             features: item.features,
             popular: item.popular
@@ -29,10 +63,6 @@ const RetainerPlansSection = () => {
 
         setSelectedPlan(plan);
         setIsModalOpen(true);
-    };
-
-    const getYearlyPrice = (monthlyPrice: number) => {
-        return Math.floor(monthlyPrice * 10); // 20% discount for yearly billing
     };
 
     const handleModalClose = () => {
@@ -60,13 +90,13 @@ const RetainerPlansSection = () => {
                         <div className="inline-flex rounded-full p-1 bg-gray-100">
                             <button
                                 type="button"
-                                onClick={() => setSelectedBillingCycle("monthly")}
-                                className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${selectedBillingCycle === "monthly"
+                                onClick={() => setSelectedBillingCycle("quarterly")}
+                                className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${selectedBillingCycle === "quarterly"
                                     ? "bg-white shadow-sm"
                                     : "text-gray-600 hover:text-gray-900"
                                     }`}
                             >
-                                Monthly
+                                Quarterly <span className="text-xs font-bold text-primary-500">Save 10%</span>
                             </button>
                             <button
                                 type="button"
@@ -82,7 +112,7 @@ const RetainerPlansSection = () => {
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-8">
-                        {siteConfig.retainer.items.map((item: any, index: number) => (
+                        {siteConfig.retainer.items.map((item: RetainerPlanItem, index: number) => (
                             <Card
                                 key={item.id}
                                 className={`relative overflow-hidden bg-white rounded-2xl shadow-xl p-3 border-2 border-purple-100 hover:border-purple-500 transition-all ${item.popular
@@ -100,17 +130,24 @@ const RetainerPlansSection = () => {
                                 <div className="p-4">
                                     <h3 className="text-2xl font-semibold mb-3" >{item.title}</h3>
                                     <p className="text-gray-600 text-sm mb-6">{item.description}</p>
-                                    <div className="flex items-baseline mb-6">
-                                        <span className="text-5xl font-bold">
-                                            {selectedBillingCycle === "monthly" ? item.monthly : item.yearly}
-                                        </span>
-                                        <span className="text-gray-500 text-2xl font-semibold ml-2">
-                                            /{selectedBillingCycle === "monthly" ? "month" : "year"}
-                                        </span>
+                                    <div className="flex flex-col mb-6">
+                                        <div className="flex items-baseline">
+                                            <span className="text-5xl font-bold">
+                                                {getMonthlyPrice(item, selectedBillingCycle)}
+                                            </span>
+                                            <span className="text-gray-500 text-2xl font-semibold ml-2">
+                                                /month
+                                            </span>
+                                        </div>
+                                        <p className="text-sm text-gray-500 mt-2">
+                                            {selectedBillingCycle === "quarterly"
+                                                ? "Billed quarterly"
+                                                : "Billed annually"}
+                                        </p>
                                     </div>
                                     <ul className="space-y-3 mb-8">
-                                        {item.features.map((feature: any, index: number) => (
-                                            <li key={index} className="flex items-start">
+                                        {item.features.map((feature: string, featureIndex: number) => (
+                                            <li key={`${item.id}-feature-${featureIndex}`} className="flex items-start">
                                                 <span className="text-purple-600 mr-2">✅</span>
                                                 <span className="text-sm text-gray-600">{feature}</span>
                                             </li>
