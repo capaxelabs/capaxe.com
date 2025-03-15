@@ -1,11 +1,27 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { SITE_TITLE } from "@/consts";
+import { siteConfig } from "@/config/site";
 import CTABottom from "@/components/CTA.astro";
 import { caseStudies } from "@/config/caseStudy";
+import { createSEO } from "@/utils/seo";
+import type { SEOProps } from "@/utils/seo";
+
+interface Props {
+  seo?: SEOProps;
+  title?: string;
+  description?: string;
+}
+
+const seo = createSEO({
+  pageName: `Case Studies | ${siteConfig.name}`,
+  description: "Explore our detailed case studies and success stories",
+  contentType: "service",
+  pathname: "/case-studies"
+});
+
 ---
 
-<Layout title={`Case Studies | ${SITE_TITLE}`} description="Explore our detailed case studies and success stories">
+<Layout seo={seo}>
   <div class="min-h-screen bg-background">
     <!-- Hero Section -->
     <section class="pt-32 pb-16 px-4">

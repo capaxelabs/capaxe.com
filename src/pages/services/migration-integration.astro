@@ -2,11 +2,43 @@
 import { FiArrowRight, FiRefreshCcw, FiDatabase, FiSettings } from "react-icons/fi";
 import CTABottom from "@/components/CTA.astro";
 import Layout from "@/layouts/Layout.astro";
-import { SITE_TITLE } from "@/consts";
+import { siteConfig } from "@/config/site";
 import ServiceCTA from "@/components/ServiceCTA";
+import { createSEO } from "@/utils/seo";
+import type { SEOProps } from "@/utils/seo";
+
+interface Props {
+  seo?: SEOProps;
+  title?: string;
+  description?: string;
+}
+// Page-specific SEO metadata using the utility
+const seo = createSEO({
+  pageName: "Migration & Integration",
+  description: "Migration & Integration Services",
+  keywords: "shopify migration, ecommerce migration, integration services, e-commerce migration, shopify integration",
+  image: "/images/services/migration-integration.jpg",
+  contentType: "service",
+  pathname: "/services/migration-integration"
+});
+
+// Override structuredData if needed
+seo.structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Migration & Integration",  
+  "description": seo.description,
+  "provider": {
+    "@type": "Organization",
+    "name": siteConfig.name,
+    "url": siteConfig.url
+  },
+  "serviceType": "Migration & Integration",
+  "areaServed": "Worldwide"
+};
 ---
 
-<Layout title={`Migration & Integration | ${SITE_TITLE}`} description="Migration & Integration Services">
+<Layout seo={seo} >
   <div class="p-6 pt-32 bg-gray-50 min-h-screen flex flex-col items-center">
     <section class="pt-32 pb-16 px-4">
       <div class="max-w-6xl mx-auto text-center">

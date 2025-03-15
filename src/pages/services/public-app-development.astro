@@ -3,11 +3,43 @@ import { FiCode, FiTool, FiCloud } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
 import CTABottom from "@/components/CTA.astro";
 import Layout from "@/layouts/Layout.astro";
-import { SITE_TITLE } from "@/consts";
+import { siteConfig } from "@/config/site";
 import ServiceCTA from "@/components/ServiceCTA";
+import { createSEO } from "@/utils/seo";
+import type { SEOProps } from "@/utils/seo";
+
+interface Props {
+  seo?: SEOProps;
+  title?: string;
+  description?: string;
+}
+// Page-specific SEO metadata using the utility
+const seo = createSEO({
+  pageName: "Public App Development",
+  description: "Public App Development",
+  keywords: "public app development, shopify app development, e-commerce apps",
+  image: "/images/services/public-app-development.jpg",
+  contentType: "service",
+  pathname: "/services/public-app-development"
+});
+
+// Override structuredData if needed
+seo.structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Public App Development",
+  "description": seo.description,
+  "provider": {
+    "@type": "Organization",
+    "name": siteConfig.name,
+    "url": siteConfig.url
+  },
+  "serviceType": "Public App Development",
+  "areaServed": "Worldwide"
+};
 ---
 
-<Layout title={`Public App Development | ${SITE_TITLE}`} description="Public App Development">
+<Layout seo={seo} >
   <div class="p-6 pt-32 bg-gray-50 min-h-screen flex flex-col items-center">
     <section class="pt-32 pb-16 px-4">
       <div class="max-w-6xl mx-auto text-center">

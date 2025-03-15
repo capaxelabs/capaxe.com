@@ -1,9 +1,16 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { SITE_TITLE } from "@/consts";
+import { siteConfig } from "@/config/site";
 import { caseStudiesDetails } from "@/config/caseStudy";
 import CTABottom from "@/components/CTA.astro";
+import { createSEO } from "@/utils/seo";
+import type { SEOProps } from "@/utils/seo";
 
+interface Props {
+  seo?: SEOProps;
+  title?: string;
+  description?: string;
+}
 const { id } = Astro.params;
 const caseStudyDetail = caseStudiesDetails[id as string];
 
@@ -11,9 +18,15 @@ const caseStudyDetail = caseStudiesDetails[id as string];
 if (!caseStudyDetail) {
   return Astro.redirect("/case-studies");
 }
+
+const seo = createSEO({
+  pageName: caseStudyDetail.title,
+  description: caseStudyDetail.description,
+  pathname: `/case-studies/${id}`
+});
 ---
 
-<Layout title={`${caseStudyDetail.title} | ${SITE_TITLE}`} description={caseStudyDetail.description}>
+<Layout seo={seo}>
   <div class="min-h-screen bg-background">
     <!-- Hero Section -->
     <section class="pt-40 pb-16 px-4">

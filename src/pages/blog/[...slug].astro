@@ -2,7 +2,7 @@
 import { type CollectionEntry, getCollection } from "astro:content";
 import BlogPost from "@/layouts/BlogPost.astro";
 import { render } from "astro:content";
-
+import type { RenderResult } from "astro:content";
 export const prerender = true;
 
 export async function getStaticPaths() {
@@ -16,7 +16,7 @@ export async function getStaticPaths() {
 
 // This is what your component receives
 const { post } = Astro.props;
-let rendered;
+let rendered: RenderResult;
 
 if (post) {
   rendered = await render(post);
@@ -26,5 +26,5 @@ if (post) {
 ---
 
 <BlogPost {...post.data}>
-  <rendered.Content />
+  {rendered && <rendered.Content />}
 </BlogPost>

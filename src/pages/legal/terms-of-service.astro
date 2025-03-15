@@ -1,10 +1,24 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { SITE_TITLE } from "@/consts";
 import { siteConfig } from "@/config/site";
----
+import { createSEO } from "@/utils/seo";
+import type { SEOProps } from "@/utils/seo";
 
-<Layout title={`Terms of Service | ${SITE_TITLE}`} description="Our terms of service outline the rules and regulations for using our services">
+interface Props {
+  seo?: SEOProps;
+  title?: string;
+  description?: string;
+}
+
+const seo = createSEO({
+  pageName: `Terms of Service | ${siteConfig.name}`,
+  description: "Our terms of service outline the rules and regulations for using our services",
+  contentType: "service",
+  pathname: "/legal/terms-of-service"
+}); 
+
+---
+<Layout seo={seo}>
   <main class="container mx-auto px-4 py-12">
     <div class="max-w-6xl mx-auto">
       <section class="pt-32 pb-16 px-4">

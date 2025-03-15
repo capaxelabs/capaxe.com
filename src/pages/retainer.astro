@@ -3,11 +3,27 @@ import Layout from "@/layouts/Layout.astro";
 import { siteConfig } from "@/config/site";
 import RetainerPlansSection from "@/components/RetainerPlan";
 import BenefitSection from "@/components/BenefitSection";
-const title = "Retainer Plans | Capaxe Labs";
-const description = "Choose from our flexible retainer plans designed to provide continuous improvements and support for your Shopify store.";
+import CTABottom from "@/components/CTA.astro";
+
+import { createSEO } from "@/utils/seo";
+import type { SEOProps } from "@/utils/seo";
+
+interface Props {
+  seo?: SEOProps;
+  title?: string;
+  description?: string;
+}
+
+const seo = createSEO({
+  pageName: `Retainer Plans | ${siteConfig.name}`,
+  description: "Choose from our flexible retainer plans designed to provide continuous improvements and support for your Shopify store.",
+  keywords: "Retainer Plans, Shopify, Capaxe Labs",
+  pathname: "/retainer",
+});
+
 ---
 
-<Layout title={title} description={description}>
+<Layout seo={seo}>
   <div class="min-h-screen">
 
     <div class="py-32 bg-gradient-to-b from-white to-primary-100">
@@ -79,5 +95,27 @@ const description = "Choose from our flexible retainer plans designed to provide
         </div>
       </div>
     </section>
+
+    <section class="py-16 px-4">
+      <div class="max-w-6xl mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-6">Ready to Get Started?</h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+          Take the next step towards growing your Shopify store with our expert team by your side.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/consultation">
+            <button class="px-6 py-3 bg-primary-500 text-white rounded-lg font-medium hover:bg-primary-600 transition-colors">
+              Book a Consultation
+            </button>
+          </a>
+          <a href="/portfolio">
+            <button class="px-6 py-3 bg-gray-100 text-gray-800 rounded-lg font-medium hover:bg-gray-200 transition-colors">
+              View Our Portfolio
+            </button>
+          </a>
+        </div>
+      </div>
+    </section>
+    <CTABottom />
   </div>
 </Layout>

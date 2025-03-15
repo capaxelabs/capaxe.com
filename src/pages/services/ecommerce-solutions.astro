@@ -1,11 +1,28 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { SITE_TITLE } from "@/consts";
+import { siteConfig } from "@/config/site";
 import CTABottom from "@/components/CTA.astro";
 import ServiceCTA from "@/components/ServiceCTA";
+import { createSEO } from "@/utils/seo";
+import type { SEOProps } from "@/utils/seo";
+
+interface Props {
+  seo?: SEOProps;
+  title?: string;
+  description?: string;
+}
+// Page-specific SEO metadata using the utility
+const seo = createSEO({
+  pageName: "E-commerce Solutions",
+  description: "Complete e-commerce solutions to power your online business",
+  keywords: "e-commerce solutions, online business, e-commerce platforms, online store development",
+  image: "/images/services/ecommerce-solutions.jpg",
+  contentType: "service",
+  pathname: "/services/ecommerce-solutions"
+});
 ---
 
-<Layout title={`E-commerce Solutions | ${SITE_TITLE}`} description="E-commerce Solutions">
+<Layout seo={seo} >
   <div class="p-6 pt-32 bg-gray-50 min-h-screen flex flex-col items-center">
     <section class="pt-32 pb-16 px-4">
       <div class="max-w-6xl mx-auto text-center">

@@ -1,8 +1,5 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
-import { ShoppingBagIcon, CodeBracketIcon, PhoneIcon } from "@heroicons/react/24/outline";
-import LogoHero from "@/components/home/LogoHero";
 import { siteConfig } from "@/config/site";
 import StickyCards from "@/components/home/StickyCard";
 import RetainerPlansSection from "@/components/RetainerPlan";
@@ -10,7 +7,7 @@ import { ServiceLanding } from "@/components/home/HomeComponents";
 import HeroSection from "@/components/HeroSection.astro";
 ---
 
-<Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+<Layout title={siteConfig.name} description={siteConfig.description}>
   <div class="min-h-screen">
     <HeroSection />
     <!-- <LogoHero siteConfig={siteConfig} client:load /> -->

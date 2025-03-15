@@ -1,14 +1,29 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { SITE_TITLE } from "../../consts";
-import { motion } from "motion/react";
-import { ShoppingBagIcon } from "@heroicons/react/24/outline";
 import { siteConfig } from "@/config/site";
 import CTABottom from "@/components/CTA.astro";
 import ServiceCTA from "@/components/ServiceCTA";
+import { createSEO } from "@/utils/seo";
+import type { SEOProps } from "@/utils/seo";
+import { ShoppingBagIcon } from "lucide-react";
+
+interface Props {
+  seo?: SEOProps;
+  title?: string;
+  description?: string;
+}
+const seo = createSEO({
+  pageName: "Services",
+  description: "Our professional services",
+  keywords: "shopify services, e-commerce services, web development services, custom software development",
+  image: "/images/services/services.jpg",
+  contentType: "service",
+  pathname: "/services"
+});
+
 ---
 
-<Layout title={`Services | ${SITE_TITLE}`} description="Our professional services">
+<Layout seo={seo} >
   <div class="p-6 pt-32 bg-gray-50 min-h-screen flex flex-col items-center">
     {/* Hero Section */}
     <section class="pt-32 pb-16 px-4">

@@ -4,16 +4,29 @@ import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import FormattedDate from "../components/FormattedDate.astro";
+import { createSEO } from "@/utils/seo";
+import type { SEOProps } from "@/utils/seo";
 
 type Props = CollectionEntry<"blog">["data"];
 
 const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+
+// Create SEO object for blog post
+const seo: SEOProps = createSEO({
+  pageName: title,
+  description: description,
+  publishDate: new Date(pubDate),
+  updateDate: updatedDate ? new Date(updatedDate) : undefined,
+  image: heroImage,
+  contentType: "blog",
+  pathname: "/blog"
+});
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead seo={seo} />
   </head>
   <body>
     <Header />

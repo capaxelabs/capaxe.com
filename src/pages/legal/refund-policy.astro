@@ -1,10 +1,24 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { SITE_TITLE } from "@/consts";
 import { siteConfig } from "@/config/site";
----
+import { createSEO } from "@/utils/seo";
+import type { SEOProps } from "@/utils/seo";
 
-<Layout title={`Refund Policy | ${SITE_TITLE}`} description="Our refund policy details our terms for refunds and cancellations">
+interface Props {
+  seo?: SEOProps;
+  title?: string;
+  description?: string;
+}
+
+const seo = createSEO({
+  pageName: `Refund Policy | ${siteConfig.name}`,
+  description: "Our refund policy details our terms for refunds and cancellations",
+  contentType: "service",
+  pathname: "/legal/refund-policy"
+});
+
+---
+<Layout seo={seo}>
   <main class="container mx-auto px-4 py-12">
     <div class="max-w-6xl mx-auto">
       <section class="pt-32 pb-16 px-4">
@@ -115,7 +129,7 @@ import { siteConfig } from "@/config/site";
               will apply to all services engaged after the posting date.
             </p>
             <p>
-              If you have any questions about our refund policy, please contact us at {siteConfig.contact.email} or call {siteConfig.contact.phone}.
+              If you have any questions about our refund policy, please contact us at {siteConfig.contact.contactEmail} or call {siteConfig.contact.phone}.
             </p>
           </section>
         </div>

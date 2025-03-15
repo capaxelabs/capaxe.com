@@ -1,12 +1,39 @@
 ---
 import CTABottom from "@/components/CTA.astro";
 import Layout from "@/layouts/Layout.astro";
-import { SITE_TITLE } from "@/consts";
+import { siteConfig } from "@/config/site";
 import ServiceCTA from "@/components/ServiceCTA";
 import { FiCode } from "react-icons/fi";
+import { createSEO } from "@/utils/seo";
+import type { SEOProps } from "@/utils/seo";
+
+// Page-specific SEO metadata using the utility
+const seo = createSEO({
+  pageName: "Web Development",
+  description: "Modern web solutions built with cutting-edge technologies",
+  keywords: "web development, frontend development, backend development, full stack development, web design, web development services",
+  image: "/images/services/web-development.jpg",
+  contentType: "service",
+  pathname: "/services/web-development"
+});
+
+// Override structuredData if needed
+seo.structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Web Development",
+  "description": seo.description,
+  "provider": {
+    "@type": "Organization",
+    "name": siteConfig.name,
+    "url": siteConfig.url
+  },
+  "serviceType": "Web Development",
+  "areaServed": "Worldwide"
+};
 ---
 
-<Layout title={`Web Development | ${SITE_TITLE}`} description="Web Development">
+<Layout seo={seo} >
   <div class="p-6 pt-32 bg-gray-50 min-h-screen flex flex-col items-center">
     <section class="pt-32 pb-16 px-4">
       <div class="max-w-6xl mx-auto text-center">

@@ -4,17 +4,27 @@ import FormattedDate from "../../components/FormattedDate.astro";
 import Layout from "../../layouts/Layout.astro";
 import CTABottom from "@/components/CTA.astro";
 import { siteConfig } from "@/config/site";
+import { createSEO } from "@/utils/seo";
+
 const posts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-const title = `Blog | ${siteConfig.name}`;
-const description = siteConfig.description;
+// Create SEO object for the blog index page
+const seo = createSEO({
+  pageName: "Blog",
+  description: "Insights, updates, and expert perspectives on the latest industry trends.",
+  keywords: "blog, articles, insights, industry trends, tech news",
+  // You can provide a specific image for the blog page
+  image: "/images/blog-hero.jpg",
+  contentType: "blog",
+  pathname: "/blog"
+});
 
 // Split posts into featured and regular
 const featuredPost = posts[0];
 const regularPosts = posts.slice(1);
 ---
 
-<Layout title={title} description={description}>
+<Layout seo={seo}>
   <div class="min-h-screen bg-background">
     <section class="pt-32 pb-12 px-4 bg-gradient-to-b from-background to-gray-50 dark:from-background dark:to-gray-900/20">
       <div class="max-w-6xl mx-auto text-center">
@@ -42,25 +52,18 @@ const regularPosts = posts.slice(1);
                       class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                   </div>
-                  <div class="p-8 md:w-1/2 flex flex-col justify-between">
-                    <div>
-                      <div class="flex items-center mb-4">
-                        <span class="bg-primary/10 text-primary text-xs font-medium px-3 py-1 rounded-full">Featured</span>
-                        <span class="ml-3 text-sm text-gray-500 dark:text-gray-400">
-                          <FormattedDate date={featuredPost.data.pubDate} />
-                        </span>
-                      </div>
-                      <h3 class="text-2xl font-bold mb-4 group-hover:text-primary transition-colors">{featuredPost.data.title}</h3>
-                      <p class="text-gray-600 dark:text-gray-400 line-clamp-3">{featuredPost.data.description}</p>
+                  <div class="md:w-1/2 p-8">
+                    <div class="mb-4 text-sm text-gray-500 dark:text-gray-400">
+                      <FormattedDate date={featuredPost.data.pubDate} />
                     </div>
-                    <div class="mt-6">
-                      <span class="inline-flex items-center text-primary font-medium group-hover:underline">
-                        Read more
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                        </svg>
-                      </span>
-                    </div>
+                    <h3 class="text-2xl font-bold mb-4 group-hover:text-primary transition-colors">{featuredPost.data.title}</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6 line-clamp-3">{featuredPost.data.description}</p>
+                    <span class="inline-flex items-center text-primary font-medium group-hover:underline">
+                      Read article
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </span>
                   </div>
                 </div>
               </a>

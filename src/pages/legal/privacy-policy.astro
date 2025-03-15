@@ -1,10 +1,23 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import { SITE_TITLE } from "../../consts";
-import { siteConfig } from "../../config/site";
+import Layout from "@/layouts/Layout.astro";
+import { siteConfig } from "@/config/site";
+import { createSEO } from "@/utils/seo";
+import type { SEOProps } from "@/utils/seo";
+interface Props {
+  seo?: SEOProps;
+  title?: string;
+  description?: string;
+}
+
+const seo = createSEO({
+  pageName: "Privacy Policy",
+  description: "Our privacy policy details how we collect, use, and protect your information",
+  contentType: "basic",
+  pathname: "/legal/privacy-policy"
+});
 ---
 
-<Layout title={`Privacy Policy | ${SITE_TITLE}`} description="Our privacy policy details how we collect, use, and protect your information">
+<Layout seo={seo}>
   <main class="container mx-auto px-4 py-12">
     <div class="max-w-6xl mx-auto">
       <section class="pt-32 pb-16 px-4">
@@ -139,7 +152,7 @@ import { siteConfig } from "../../config/site";
           <h2>Contact Us</h2>
           <p>If you have any questions about this Privacy Policy, please contact us at:</p>
           <ul>
-            <li>Email: {siteConfig.contactEmail}</li>
+            <li>Email: {siteConfig.contact.contactEmail}</li>
             <li>Phone: {siteConfig.contact.phone}</li>
             <li>Mail: {siteConfig.contact.address}</li>
           </ul>

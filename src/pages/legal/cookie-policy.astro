@@ -1,9 +1,26 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { SITE_TITLE } from "../../consts";
+import { siteConfig } from "@/config/site";
+
+import { createSEO } from "@/utils/seo";
+import type { SEOProps } from "@/utils/seo";
+
+interface Props {
+  seo?: SEOProps;
+  title?: string;
+  description?: string;
+}
+
+
+const seo = createSEO({
+  pageName: `Cookie Policy | ${siteConfig.name}`,
+  description: "Our cookie policy explains how we use cookies on our website",
+  contentType: "basic",
+  pathname: "/legal/cookie-policy"
+});
 ---
 
-<Layout title={`Cookie Policy | ${SITE_TITLE}`} description="Our cookie policy explains how we use cookies on our website">
+<Layout seo={seo}>
   <main class="container mx-auto px-4 py-12">
     <div class="max-w-6xl mx-auto">
       <section class="pt-32 pb-16 px-4">

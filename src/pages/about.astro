@@ -1,58 +1,116 @@
 ---
-import Layout from "../layouts/BlogPost.astro";
+import Layout from "@/layouts/Layout.astro";
+import { createSEO } from "@/utils/seo";
+import type { SEOProps } from "@/utils/seo";
+import CTABottom from "@/components/CTA.astro";
+interface Props {
+  seo?: SEOProps;
+  title?: string;
+  description?: string;
+}
+const seo = createSEO({
+  pageName: "About Us",
+  description: "About Capaxe Labs",
+  keywords: "Capaxe Labs, Shopify development, web development, e-commerce solutions, web design",
+  image: "/images/about/about.jpg",
+  contentType: "basic",
+  pathname: "/about"
+});
+
+// Override structuredData if needed
+seo.structuredData = {
+  "@context": "https://schema.org", 
+  "@type": "Organization",
+  "name": "Capaxe Labs",
+  "url": "https://capaxelabs.com",
+  "logo": "/images/logo.svg",
+  "description": "Capaxe Labs is a Silicon Valley of India based team of passionate Shopify experts and web developers dedicated to empowering e-commerce businesses.",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "123 Main St",
+    "city": "San Francisco",
+    "state": "CA",
+    "postalCode": "94101",
+    "country": "United States"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+1234567890",
+    "contactType": "customer service",
+    "email": "contact@capaxelabs.com"
+  },
+  "sameAs": [
+    "https://www.facebook.com/capaxelabs",
+    "https://www.twitter.com/capaxelabs",
+    "https://www.instagram.com/capaxelabs",
+    "https://www.linkedin.com/company/capaxelabs"
+  ]
+};
 ---
 
-<Layout
-  title="About Us"
-  description="we are a team of developers who are passionate about building web applications"
-  pubDate={new Date("February 04 2025")}
-  heroImage="/blog-placeholder-about.jpg"
->
+<Layout seo={seo} >
+
   <div class="about-content">
-    <h2 class="text-3xl font-bold mb-6">Who We Are</h2>
-    <p class="mb-6">
-      Capaxe Labs is a Silicon Valley of India based team of passionate Shopify experts and web developers dedicated to empowering e-commerce
-      businesses. Founded on the principles of technical excellence and client-focused solutions, we've established ourselves as trusted partners for
-      businesses looking to thrive in the digital marketplace.
-    </p>
+    <section class="pt-32 pb-16 px-4">
+      <div class="max-w-6xl mx-auto text-center">
+        <h1 class="text-5xl md:text-6xl font-bold mb-6">About Us</h1>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+          Capaxe Labs is a Silicon Valley of India based team of passionate Shopify experts and web developers dedicated to empowering e-commerce
+          businesses. Founded on the principles of technical excellence and client-focused solutions, we've established ourselves as trusted partners for
+          businesses looking to thrive in the digital marketplace.
+        </p>
+      </div>
+    </section>
 
-    <h2 class="text-3xl font-bold mb-6">Our Mission</h2>
-    <p class="mb-6">
+    <section class="py-16 px-4">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">Our Mission</h2>
+        <p class="mb-6">
+            Our mission is to deliver cutting-edge Shopify solutions that drive e-commerce success. We believe in creating digital experiences that not only
+          look beautiful but also perform exceptionally well, helping our clients achieve their business goals and exceed customer expectations.
+        </p>
+      </div>
+    
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">Our Mission</h2>
+        <p class="mb-6">
       Our mission is to deliver cutting-edge Shopify solutions that drive e-commerce success. We believe in creating digital experiences that not only
-      look beautiful but also perform exceptionally well, helping our clients achieve their business goals and exceed customer expectations.
-    </p>
-
-    <h2 class="text-3xl font-bold mb-6">Our Expertise</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-      <div class="bg-white p-6 rounded-lg shadow-sm">
-        <h3 class="text-xl font-bold mb-3">Shopify Development</h3>
-        <p>
-          From custom theme development to complex store setups, we specialize in creating tailored Shopify experiences that convert visitors into
-          customers.
+          look beautiful but also perform exceptionally well, helping our clients achieve their business goals and exceed customer expectations.
         </p>
       </div>
-      <div class="bg-white p-6 rounded-lg shadow-sm">
-        <h3 class="text-xl font-bold mb-3">Custom App Development</h3>
-        <p>We build bespoke applications that extend Shopify's functionality, solving unique business challenges and streamlining operations.</p>
+    </section>
+    <section class="py-16 px-4">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">Our Expertise</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <div class="bg-white p-6 rounded-lg shadow-sm">
+            <h3 class="text-xl font-bold mb-3">Shopify Development</h3>
+            <p>
+              From custom theme development to complex store setups, we specialize in creating tailored Shopify experiences that convert visitors into
+              customers.
+            </p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-sm">
+            <h3 class="text-xl font-bold mb-3">E-commerce Solutions</h3>
+            <p>
+              Our comprehensive e-commerce solutions include everything from store setup and migration to performance optimization and ongoing
+              maintenance.
+            </p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-sm">
+            <h3 class="text-xl font-bold mb-3">Web Development</h3>
+            <p>We create modern, responsive websites using cutting-edge technologies that provide exceptional user experiences across all devices.</p>
+          </div>
+        </div>  
       </div>
-      <div class="bg-white p-6 rounded-lg shadow-sm">
-        <h3 class="text-xl font-bold mb-3">E-commerce Solutions</h3>
-        <p>
-          Our comprehensive e-commerce solutions include everything from store setup and migration to performance optimization and ongoing
-          maintenance.
-        </p>
-      </div>
-      <div class="bg-white p-6 rounded-lg shadow-sm">
-        <h3 class="text-xl font-bold mb-3">Web Development</h3>
-        <p>We create modern, responsive websites using cutting-edge technologies that provide exceptional user experiences across all devices.</p>
-      </div>
-    </div>
-
-    <h2 class="text-3xl font-bold mb-6">Why Choose Us</h2>
-    <ul class="list-disc pl-6 mb-8">
-      <li class="mb-3">
+    </section>
+    <section class="py-16 px-4">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">Why Choose Us</h2>
+        <ul class="list-disc pl-6 mb-8">
+          <li class="mb-3">
         <strong>Technical Excellence:</strong> Our team stays at the forefront of e-commerce technology to deliver innovative solutions.
-      </li>
+        </li>
       <li class="mb-3">
         <strong>Client-Focused Approach:</strong> We listen carefully to your needs and tailor our services to meet your specific business goals.
       </li>
@@ -64,21 +122,16 @@ import Layout from "../layouts/BlogPost.astro";
         <strong>Ongoing Support:</strong> We offer flexible retainer plans to provide continuous improvements and support for long-term success.
       </li>
     </ul>
-
-    <h2 class="text-3xl font-bold mb-6">Our Team</h2>
-    <p class="mb-6">
-      Behind Capaxe Labs is a diverse team of developers, designers, and e-commerce strategists who bring a wealth of experience and creativity to
-      every project. We're united by our passion for building exceptional digital experiences and our commitment to helping businesses succeed online.
-    </p>
-
-    <div class="bg-gray-50 p-6 rounded-lg border border-gray-200 mb-8">
-      <h2 class="text-2xl font-bold mb-4">Ready to transform your e-commerce business?</h2>
-      <p class="mb-4">
-        Whether you're looking to launch a new Shopify store, enhance your existing one, or need ongoing development support, we're here to help.
-      </p>
-      <a href="/contact" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition-colors"
-        >Get in Touch</a
-      >
     </div>
+
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl font-bold mb-6">Our Team</h2>
+      <p class="mb-6">
+      Behind Capaxe Labs is a diverse team of developers, designers, and e-commerce strategists who bring a wealth of experience and creativity to
+        every project. We're united by our passion for building exceptional digital experiences and our commitment to helping businesses succeed online.
+      </p>
+    </div>
+
   </div>
+  <CTABottom />
 </Layout>
