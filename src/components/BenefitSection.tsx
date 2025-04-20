@@ -24,7 +24,7 @@ const BenefitCard = ({ icon, title, description, cta, ctaLink, delay, gradient }
                 {icon}
             </div>
 
-            <h3 className="text-xl md:text-2xl font-display font-semibold mb-3 text-white">{title}</h3>
+            <h3 className="text-xl md:text-2xl font-semibold mb-3 text-white">{title}</h3>
             <p className="text-white/80 mb-6 text-sm md:text-base">{description}</p>
 
             <Button variant="secondary" className="group relative overflow-hidden" asChild>
@@ -131,7 +131,7 @@ const BenefitSection = () => {
                     <span className="inline-block px-3 py-1 rounded-full bg-primary-200 text-primary-700 text-xs font-medium mb-4">
                         Why Choose Our Retainer
                     </span>
-                    <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-primary-800">
+                    <h2 className="text-4xl md:text-5xl font-bold mb-6 text-primary-800">
                         Comprehensive Shopify Support
                     </h2>
                     <p className="text-lg text-gray-600 mb-8">

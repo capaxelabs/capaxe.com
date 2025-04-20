@@ -57,7 +57,6 @@
 
   /* Font Variables */
   --font-sans: "Inter", sans-serif; /* Default sans-serif font */
-  --font-display: "Playfair Display", serif; /* Font for headings */
 
   /* Radius Variables (Based on the main --radius) */
   --radius-lg: var(--radius);
@@ -287,34 +286,18 @@
     font-feature-settings:
       "rlig" 1,
       "calt" 1; /* Enable common ligatures and contextual alternates */
-    /* Font family is inherited from html, which uses --font-sans by default */
-  }
-
-  /* Default heading font */
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-display; /* Apply the display font defined in @theme */
+    font-family: var(--font-sans);
   }
 
   /* Smooth scrolling behavior */
   html {
     scroll-behavior: smooth;
+    font-family: var(--font-sans);
   }
 }
 
 /* Utilities layer: Custom utility classes */
 @layer utilities {
-  /*
-    Removed: body { font-family: Arial, Helvetica, sans-serif; }
-    Reason: Conflicted with --font-sans defined in @theme. Assuming 'Inter' is the desired default.
-  */
-
-  /* Base styles for headings (consider applying utilities directly in HTML instead) */
-  /* Note: font-display is already applied in @layer base */
   h2 {
     @apply text-2xl font-bold mb-6;
   }
@@ -327,11 +310,6 @@
   h5 {
     @apply text-base font-bold mb-4;
   }
-
-  /*
-    Removed: a { @apply cursor-pointer; }
-    Reason: Redundant, default browser behavior for links.
-  */
 
   /* Custom utility classes */
   .clip-path-slant {
@@ -355,7 +333,7 @@
   }
 
   .section-title {
-    @apply text-4xl md:text-5xl font-display font-semibold mb-6 relative;
+    @apply text-4xl md:text-5xl  font-semibold mb-6 relative;
   }
 
   .section-title::after {
@@ -426,11 +404,6 @@
 
 /* Components layer: Custom component styles */
 @layer components {
-  /*
-    Removed: .logo, .logo:hover, .logo.react:hover, @keyframes logo-spin, .card, .read-the-docs
-    Reason: Assumed to be unused template styles. Restore if needed.
-  */
-
   /* Custom reveal-on-scroll animation component */
   .reveal-on-scroll {
     opacity: 0;
@@ -447,9 +420,4 @@
     @apply fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-background/80 border-b border-border/50;
     /* Adjusted to use theme variables */
   }
-
-  /*
-    Removed: html { scroll-behavior: smooth; }
-    Reason: Moved to @layer base.
-   */
 }
