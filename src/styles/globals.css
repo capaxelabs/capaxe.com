@@ -1,19 +1,25 @@
+/* Import base Tailwind styles */
+/* @import "tailwindcss"; */
+/* /* @import "tailwindcss/preflight"; */
+/* @import "tailwindcss/utilities"; */
+
+/* Register the animation plugin */
+/* @plugin 'tailwindcss-animate'; */
 @import "tailwindcss";
+@plugin "tailwindcss-animate";
 
-@plugin 'tailwindcss-animate';
-
+/* Define a custom variant for dark mode targeting elements within a .dark parent */
 @custom-variant dark (&:is(.dark *));
 
+/* Theme configuration block */
 @theme {
+  /* Color Variables (Mapped to HSL values below) */
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
-
   --color-card: hsl(var(--card));
   --color-card-foreground: hsl(var(--card-foreground));
-
   --color-popover: hsl(var(--popover));
   --color-popover-foreground: hsl(var(--popover-foreground));
-
   --color-primary: hsl(var(--primary));
   --color-primary-foreground: hsl(var(--primary-foreground));
   --color-primary-100: hsl(var(--primary-100));
@@ -24,29 +30,22 @@
   --color-primary-600: hsl(var(--primary-600));
   --color-primary-700: hsl(var(--primary-700));
   --color-primary-800: hsl(var(--primary-800));
-
   --color-secondary: hsl(var(--secondary));
   --color-secondary-foreground: hsl(var(--secondary-foreground));
-
   --color-muted: hsl(var(--muted));
   --color-muted-foreground: hsl(var(--muted-foreground));
-
   --color-accent: hsl(var(--accent));
   --color-accent-foreground: hsl(var(--accent-foreground));
-
   --color-destructive: hsl(var(--destructive));
   --color-destructive-foreground: hsl(var(--destructive-foreground));
-
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
-
   --color-chart-1: hsl(var(--chart-1));
   --color-chart-2: hsl(var(--chart-2));
   --color-chart-3: hsl(var(--chart-3));
   --color-chart-4: hsl(var(--chart-4));
   --color-chart-5: hsl(var(--chart-5));
-
   --color-sidebar: hsl(var(--sidebar-background));
   --color-sidebar-foreground: hsl(var(--sidebar-foreground));
   --color-sidebar-primary: hsl(var(--sidebar-primary));
@@ -56,27 +55,38 @@
   --color-sidebar-border: hsl(var(--sidebar-border));
   --color-sidebar-ring: hsl(var(--sidebar-ring));
 
-  --font-sans: "Inter", sans-serif;
-  --font-display: "Playfair Display", serif;
+  /* Font Variables */
+  --font-sans: "Inter", sans-serif; /* Default sans-serif font */
+  --font-display: "Playfair Display", serif; /* Font for headings */
 
+  /* Radius Variables (Based on the main --radius) */
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
 
+  /* Custom Animation Variables */
+  /* Note: spin, ping, pulse, bounce animations are likely provided by the */
+  /* 'tailwindcss-animate' plugin, so definitions here are removed. */
+  /* Use plugin classes like 'animate-spin', 'animate-ping', etc. */
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
-  --animate-spin: spin 1s linear infinite;
-  --animate-ping: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
-  --animate-pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  --animate-bounce: bounce 1s infinite;
+  --animate-fade-in-scale: fade-in-scale 0.3s ease-out;
+  --animate-fade-up: fade-up 0.3s ease-out; /* Adjusted timing from original second definition */
+  --animate-slide-in: slide-in 0.5s ease-out;
+  --animate-scale-in: scale-in 0.5s ease-out; /* Renamed from fade-in-scale to match keyframe */
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-fade-in: fade-in 0.5s ease-out; /* Added based on second set of definitions */
+  --animate-gradient-shift: gradientShift 15s ease infinite; /* Added for ServiceLanding component */
 
+  /* Custom Keyframes Definitions */
+  /* Note: Removed duplicates and built-ins potentially covered by the plugin */
   @keyframes accordion-down {
     from {
       height: 0;
     }
     to {
       height: var(--radix-accordion-content-height);
-    }
+    } /* Assuming Radix UI usage */
   }
   @keyframes accordion-up {
     from {
@@ -86,149 +96,85 @@
       height: 0;
     }
   }
-  @keyframes spin {
+  @keyframes fade-in-scale {
+    /* Renamed from second fade-in-scale definition */
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
     to {
-      transform: rotate(360deg);
-    }
-  }
-  @keyframes ping {
-    75%,
-    100% {
-      transform: scale(2);
-      opacity: 0;
-    }
-  }
-  @keyframes pulse {
-    50% {
-      opacity: 0.5;
-    }
-  }
-  @keyframes bounce {
-    0%,
-    100% {
-      transform: translateY(-25%);
-      animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-    }
-    50% {
-      transform: none;
-      animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-    }
-  }
-
-  --animate-fade-in-scale: fade-in-scale 0.3s ease-out;
-  @keyframes fade-in-scale {
-    0% {
-      opacity: 0;
-      transform: scale(0.95);
-    }
-    100% {
       opacity: 1;
       transform: scale(1);
     }
   }
-
-  --animate-fade-in-scale: fade-in-scale 0.3s ease-out;
-  @keyframes fade-in-scale {
-    0% {
-      opacity: 0;
-      transform: scale(0.95);
-    }
-    100% {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
-  --animate-fade-up: fade-up 0.3s ease-out;
   @keyframes fade-up {
-    0% {
+    from {
       opacity: 0;
       transform: translateY(20px);
     }
-    100% {
+    to {
       opacity: 1;
       transform: translateY(0);
     }
   }
-
-  --animation-accordion-down: "accordion-down 0.2s ease-out";
-  --animation-accordion-up: "accordion-up 0.2s ease-out";
-  --animation-fade-in: "fade-in 0.5s ease-out";
-  --animation-fade-up: "fade-up 0.7s ease-out";
-  --animation-slide-in: "slide-in 0.5s ease-out";
-  --animation-scale-in: "scale-in 0.5s ease-out";
-  --animation-float: "float 6s ease-in-out infinite";
-
-  @keyframes accordion-down {
-    from {
-      height: "0";
-    }
-    to {
-      height: "var(--radix-accordion-content-height)";
-    }
-  }
-  @keyframes accordion-up {
-    from {
-      height: "var(--radix-accordion-content-height)";
-    }
-    to {
-      height: "0";
-    }
-  }
   @keyframes fade-in {
-    '0%': {
-      opacity: "0";
+    /* Added based on second set of definitions */
+    from {
+      opacity: 0;
     }
-    ,
-    '100%': {
-      opacity: "1";
-    }
-  }
-  @keyframes fade-up {
-    '0%': {
-      opacity: "0";
-      transform: "translateY(20px)";
-    }
-    ,
-    '100%': {
-      opacity: "1";
-      transform: "translateY(0)";
+    to {
+      opacity: 1;
     }
   }
   @keyframes slide-in {
-    '0%': {
-      transform: "translateX(-20px)";
-      opacity: "0";
+    /* Added based on second set of definitions */
+    from {
+      transform: translateX(-20px);
+      opacity: 0;
     }
-    ,
-    '100%': {
-      transform: "translateX(0)";
-      opacity: "1";
+    to {
+      transform: translateX(0);
+      opacity: 1;
     }
   }
   @keyframes scale-in {
-    '0%': {
-      transform: "scale(0.95)";
-      opacity: "0";
+    /* Added based on second set of definitions */
+    from {
+      transform: scale(0.95);
+      opacity: 0;
     }
-    ,
-    '100%': {
-      transform: "scale(1)";
-      opacity: "1";
+    to {
+      transform: scale(1);
+      opacity: 1;
     }
   }
   @keyframes float {
-    '0%, 100%': {
-      transform: "translateY(0)";
+    /* Added based on second set of definitions */
+    0%,
+    100% {
+      transform: translateY(0);
     }
-    ,
-    '50%': {
-      transform: "translateY(-10px)";
+    50% {
+      transform: translateY(-10px);
     }
   }
+  @keyframes gradientShift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  /* Removed @keyframes spin, ping, pulse, bounce - rely on plugin */
 }
 
+/* Base layer: Default styles for HTML elements */
 @layer base {
+  /* Root HSL color definitions (Light Mode) */
   :root {
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
@@ -262,7 +208,7 @@
     --chart-3: 340 100% 63%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
+    --radius: 0.5rem; /* Base border radius */
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 217 89% 61%;
@@ -272,6 +218,8 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217 89% 61%;
   }
+
+  /* Dark Mode HSL color definitions */
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
@@ -314,71 +262,78 @@
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217 89% 61%;
   }
-}
 
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
-@layer base {
+  /*
+    Tailwind v3 compatibility for default border color.
+    v4 defaults border-color to `currentColor`.
+    Consider removing this if you only target v4 and have updated components accordingly.
+  */
   *,
   ::after,
   ::before,
   ::backdrop,
   ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
+    border-color: var(--color-gray-200, currentColor); /* Fallback might need adjustment if --color-gray-200 isn't defined */
   }
 
-  * {
-    @apply border-border;
-  }
+  /*
+    Removed: * { @apply border-border; }
+    Reason: Too broad. Apply border utilities (e.g., `border border-border`) directly in HTML/components where needed.
+  */
 
+  /* Default body styles */
   body {
     @apply bg-background text-foreground;
     font-feature-settings:
       "rlig" 1,
-      "calt" 1;
+      "calt" 1; /* Enable common ligatures and contextual alternates */
+    /* Font family is inherited from html, which uses --font-sans by default */
   }
 
+  /* Default heading font */
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
-    @apply font-display;
+    @apply font-display; /* Apply the display font defined in @theme */
+  }
+
+  /* Smooth scrolling behavior */
+  html {
+    scroll-behavior: smooth;
   }
 }
 
+/* Utilities layer: Custom utility classes */
 @layer utilities {
-  body {
-    font-family: Arial, Helvetica, sans-serif;
-  }
+  /*
+    Removed: body { font-family: Arial, Helvetica, sans-serif; }
+    Reason: Conflicted with --font-sans defined in @theme. Assuming 'Inter' is the desired default.
+  */
 
+  /* Base styles for headings (consider applying utilities directly in HTML instead) */
+  /* Note: font-display is already applied in @layer base */
   h2 {
     @apply text-2xl font-bold mb-6;
   }
-
   h3 {
     @apply text-xl font-bold mb-4;
   }
-
   h4 {
     @apply text-lg font-bold mb-4;
   }
-
   h5 {
     @apply text-base font-bold mb-4;
   }
 
-  a {
-    @apply cursor-pointer;
-  }
+  /*
+    Removed: a { @apply cursor-pointer; }
+    Reason: Redundant, default browser behavior for links.
+  */
 
+  /* Custom utility classes */
   .clip-path-slant {
     clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
   }
@@ -409,10 +364,12 @@
   }
 
   .section-subtitle {
-    @apply text-lg md:text-xl text-gray-600 max-w-2xl mb-16;
+    @apply text-lg md:text-xl text-gray-600 max-w-2xl mb-16; /* Consider using text-muted-foreground */
   }
 
-  /* Custom styles for blog content */
+  /* Custom styles for blog content (e.g., from Markdown) */
+  /* Verify the `:global()` syntax if not using a framework like SvelteKit */
+  /* Standard CSS would be `.blog-content h2 { ... }` */
   .blog-content :global(h2) {
     @apply text-2xl font-bold mt-8 mb-4;
   }
@@ -424,81 +381,75 @@
   }
   .blog-content :global(ul),
   .blog-content :global(ol) {
-    @apply mb-6 pl-6;
-  }
+    @apply mb-6 pl-6 list-disc;
+  } /* Added list-disc for default */
+  .blog-content :global(ol) {
+    @apply list-decimal;
+  } /* Override for ordered lists */
   .blog-content :global(li) {
     @apply mb-2;
   }
   .blog-content :global(pre) {
-    @apply rounded-lg p-4 mb-6 overflow-x-auto;
-  }
+    @apply bg-muted rounded-lg p-4 mb-6 overflow-x-auto;
+  } /* Use theme color */
   .blog-content :global(img) {
-    @apply rounded-lg my-8 mx-auto;
-  }
+    @apply rounded-lg my-8 mx-auto block;
+  } /* Ensure block display */
   .blog-content :global(blockquote) {
-    @apply border-l-4 border-primary pl-4 italic my-6;
-  }
+    @apply border-l-4 border-primary pl-4 italic my-6 text-muted-foreground;
+  } /* Use theme colors */
   .blog-content :global(a) {
     @apply text-primary hover:underline;
   }
+
+  /* Animation utilities for ServiceLanding component */
+  .animate-float {
+    animation: float 20s ease-in-out infinite;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.8s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.5s ease-out forwards;
+  }
+
+  .animate-gradient-shift {
+    animation: gradientShift 15s ease infinite;
+  }
 }
 
+/* Components layer: Custom component styles */
 @layer components {
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
-  }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-  }
-  .logo.react:hover {
-    filter: drop-shadow(0 0 2em #61dafbaa);
-  }
+  /*
+    Removed: .logo, .logo:hover, .logo.react:hover, @keyframes logo-spin, .card, .read-the-docs
+    Reason: Assumed to be unused template styles. Restore if needed.
+  */
 
-  @keyframes logo-spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    a:nth-of-type(2) .logo {
-      animation: logo-spin infinite 20s linear;
-    }
-  }
-
-  .card {
-    padding: 2em;
-  }
-
-  .read-the-docs {
-    color: #888;
-  }
-
-  /* Custom Animations */
+  /* Custom reveal-on-scroll animation component */
   .reveal-on-scroll {
     opacity: 0;
     transform: translateY(20px);
     transition: all 0.8s cubic-bezier(0.13, 0.82, 0.31, 1);
   }
-
   .reveal-on-scroll.revealed {
     opacity: 1;
     transform: translateY(0);
   }
 
-  /* Smooth Scrolling */
-  html {
-    scroll-behavior: smooth;
+  /* Navbar Glass Effect Component Style */
+  .navbar-glass {
+    @apply fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-background/80 border-b border-border/50;
+    /* Adjusted to use theme variables */
   }
 
-  /* Navbar Glass Effect */
-  .navbar-glass {
-    @apply fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-white/80 dark:bg-black/30 border-b border-gray-200/50 dark:border-gray-800/50;
-  }
+  /*
+    Removed: html { scroll-behavior: smooth; }
+    Reason: Moved to @layer base.
+   */
 }

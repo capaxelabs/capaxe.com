@@ -23,15 +23,29 @@ export interface SiteConfig {
         slides: string[]
     }
     services: {
-        title: string
-        description: string
-        items: {
+        shopify: {
             title: string
             description: string
-            icon: string
-            features: string[]
-            href: string
-        }[]
+            items: {
+                title: string
+                description: string
+                icon: string
+                features: string[]
+                href: string
+            }[]
+        },
+        snowflake: {
+            title: string
+            description: string
+            items: {
+                title: string
+                description: string
+                icon: string
+                features: string[]
+                href: string
+            }[]
+        }
+
     }
     contact: {
         contactEmail: string

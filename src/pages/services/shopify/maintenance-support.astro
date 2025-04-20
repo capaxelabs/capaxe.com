@@ -1,5 +1,5 @@
 ---
-import Layout from "../../layouts/Layout.astro";
+import Layout from "@/layouts/Layout.astro";
 import { siteConfig } from "@/config/site";
 import ServiceCTA from "@/components/ServiceCTA";
 import CTABottom from "@/components/CTA.astro";
@@ -11,26 +11,26 @@ const seo = createSEO({
   pageName: "Shopify Maintenance",
   description: "Shopify Maintenance Services",
   keywords: "shopify maintenance, ecommerce maintenance, website maintenance, shopify support, e-commerce maintenance",
-  image: "/images/services/shopify-maintenance.jpg" // Make sure this image exists in your public folder
+  image: "/images/services/shopify-maintenance.jpg", // Make sure this image exists in your public folder
 });
 
 // Override structuredData if needed
 seo.structuredData = {
   "@context": "https://schema.org",
   "@type": "Service",
-  "name": "Shopify Maintenance",
-  "description": seo.description,
-  "provider": {
+  name: "Shopify Maintenance",
+  description: seo.description,
+  provider: {
     "@type": "Organization",
-    "name": siteConfig.name,
-    "url": siteConfig.url
+    name: siteConfig.name,
+    url: siteConfig.url,
   },
-  "serviceType": "Shopify Maintenance",
-  "areaServed": "Worldwide"
+  serviceType: "Shopify Maintenance",
+  areaServed: "Worldwide",
 };
 ---
 
-<Layout seo={seo} >
+<Layout seo={seo}>
   <div class="p-6 pt-32 bg-gray-50 min-h-screen flex flex-col items-center">
     <section class="pt-32 pb-16 px-4">
       <div class="max-w-6xl mx-auto text-center">

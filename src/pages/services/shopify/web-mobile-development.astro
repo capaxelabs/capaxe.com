@@ -15,26 +15,27 @@ interface Props {
 // Page-specific SEO metadata using the utility
 const seo = createSEO({
   pageName: "Mobile App Development",
-  description: "Professional mobile app development services for iOS and Android platforms, helping businesses create seamless mobile experiences for their customers.",
+  description:
+    "Professional mobile app development services for iOS and Android platforms, helping businesses create seamless mobile experiences for their customers.",
   keywords: "mobile app development, iOS app development, Android app development, cross-platform apps",
   image: "/images/services/mobile-app-development.jpg",
   contentType: "service",
-  pathname: "/services/mobile-app-development"
+  pathname: "/services/mobile-app-development",
 });
 
 // Override structuredData if needed
 seo.structuredData = {
   "@context": "https://schema.org",
   "@type": "Service",
-  "name": "Mobile App Development",
-  "description": seo.description,
-  "provider": {
+  name: "Mobile App Development",
+  description: seo.description,
+  provider: {
     "@type": "Organization",
-    "name": siteConfig.name,
-    "url": siteConfig.url
+    name: siteConfig.name,
+    url: siteConfig.url,
   },
-  "serviceType": "Mobile App Development",
-  "areaServed": "Worldwide"
+  serviceType: "Mobile App Development",
+  areaServed: "Worldwide",
 };
 ---
 

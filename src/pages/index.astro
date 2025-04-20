@@ -1,9 +1,8 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import Layout from "@/layouts/Layout.astro";
 import { siteConfig } from "@/config/site";
-import StickyCards from "@/components/home/StickyCard";
+import { StickyCards, ServiceLanding } from "@/components/home/HomeComponents";
 import RetainerPlansSection from "@/components/RetainerPlan";
-import { ServiceLanding } from "@/components/home/HomeComponents";
 import HeroSection from "@/components/HeroSection.astro";
 ---
 
@@ -11,7 +10,6 @@ import HeroSection from "@/components/HeroSection.astro";
   <div class="min-h-screen">
     <HeroSection />
     <!-- <LogoHero siteConfig={siteConfig} client:load /> -->
-    <!-- Sticky Cards -->
     <StickyCards siteConfig={siteConfig} client:load />
     <ServiceLanding siteConfig={siteConfig} client:load />
     {/* Retainer Benefits Section */}

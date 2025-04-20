@@ -213,7 +213,7 @@ const ColorPaletteSwitcher: React.FC = () => {
                 )}
             </div>
 
-            <Button
+            {/* <Button
                 variant="outline"
                 size="sm"
                 onClick={toggleDarkMode}
@@ -242,7 +242,7 @@ const ColorPaletteSwitcher: React.FC = () => {
                         <span>Dark</span>
                     </>
                 )}
-            </Button>
+            </Button> */}
         </div>
     );
 };
