@@ -1,8 +1,12 @@
 ---
 import { menuConfig } from "@/config/menu";
-
+import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
+import ColorPaletteSwitcher from "./ColorPaletteSwitcher";
+import ThemeInitializer from "@/components/ThemeInitializer.astro";
 ---
+
+<ThemeInitializer />
 
 <div class="fixed top-0 left-0 w-full z-50 flex justify-center">
   <header id="main-header" class="mx-4 mt-4 w-full max-w-5xl rounded-lg transition-all duration-300">
@@ -19,11 +23,8 @@ import { siteConfig } from "@/config/site";
           {
             menuConfig.mainNav.map((item) =>
               item.isButton ? (
-                <a
-                  href={item.href}
-                  class="flex items-center gap-2 rounded px-3 py-2 text-base font-medium uppercase text-white transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 md:text-lg bg-indigo-600 shadow-[4px_4px_0px_black] hover:shadow-[8px_8px_0px_black]"
-                >
-                  {item.title}
+                <a href={item.href}>
+                  <Button variant="outline">{item.title}</Button>
                 </a>
               ) : (
                 <a href={item.href} class="text-gray-600 hover:text-gray-900 transition-colors">
@@ -32,6 +33,7 @@ import { siteConfig } from "@/config/site";
               )
             )
           }
+          <ColorPaletteSwitcher client:load />
         </div>
 
         <!-- Mobile Menu Button -->
@@ -72,11 +74,8 @@ import { siteConfig } from "@/config/site";
           {
             menuConfig.mainNav.map((item) =>
               item.isButton ? (
-                <a
-                  href={item.href}
-                  class="flex items-center gap-2 rounded px-6 py-4 text-base font-medium uppercase text-black transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 md:text-lg shadow-[4px_4px_0px_white] hover:shadow-[8px_8px_0px_white]"
-                >
-                  <span>{item.title}</span>
+                <a href={item.href}>
+                  <Button variant="outline">{item.title}</Button>
                 </a>
               ) : (
                 <a href={item.href} class="text-gray-600 hover:text-gray-900 transition-colors px-2 py-1">
@@ -85,6 +84,9 @@ import { siteConfig } from "@/config/site";
               )
             )
           }
+          <div class="px-2 py-1">
+            <ColorPaletteSwitcher client:load />
+          </div>
         </div>
       </div>
     </nav>

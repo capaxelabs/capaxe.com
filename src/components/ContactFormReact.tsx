@@ -268,7 +268,7 @@ export default function ContactFormReact({ siteConfig }: { siteConfig: SiteConfi
                                 <button
                                     type="submit"
                                     disabled={isLoading}
-                                    className="w-full bg-purple-600 text-white py-3 rounded-lg font-medium hover:bg-purple-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="w-full bg-primary-600 text-white py-3 rounded-lg font-medium hover:bg-primary-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                     {isLoading ? "Sending..." : "Send Message"}
                                 </button>
@@ -281,7 +281,7 @@ export default function ContactFormReact({ siteConfig }: { siteConfig: SiteConfi
                                 <h2 className="text-2xl font-bold mb-6">Contact Information</h2>
                                 <div className="space-y-4">
                                     <div className="flex items-start gap-4">
-                                        <MapPinIcon className="w-6 h-6 text-purple-600 mt-1" />
+                                        <MapPinIcon className="w-6 h-6 text-primary-600 mt-1" />
                                         <div>
                                             <h3 className="font-medium">Address</h3>
                                             <p className="text-gray-600">
@@ -290,14 +290,14 @@ export default function ContactFormReact({ siteConfig }: { siteConfig: SiteConfi
                                         </div>
                                     </div>
                                     <div className="flex items-start gap-4">
-                                        <PhoneIcon className="w-6 h-6 text-purple-600 mt-1" />
+                                        <PhoneIcon className="w-6 h-6 text-primary-600 mt-1" />
                                         <div>
                                             <h3 className="font-medium">Phone</h3>
                                             <a href={`tel:${siteConfig.contact.phone}`} className="text-gray-600">{siteConfig.contact.phone}</a>
                                         </div>
                                     </div>
                                     <div className="flex items-start gap-4">
-                                        <EnvelopeIcon className="w-6 h-6 text-purple-600 mt-1" />
+                                        <EnvelopeIcon className="w-6 h-6 text-primary-600 mt-1" />
                                         <div>
                                             <h3 className="font-medium">Email</h3>
                                             <a href={`mailto:${siteConfig.contact.contactEmail}`} className="text-gray-600">{siteConfig.contact.contactEmail}</a>

@@ -18,18 +18,19 @@ const seo = createSEO({
   keywords: "shopify services, e-commerce services, web development services, custom software development",
   image: "/images/services/services.jpg",
   contentType: "service",
-  pathname: "/services"
+  pathname: "/services",
 });
-
 ---
 
-<Layout seo={seo} >
-  <div class="p-6 pt-32 bg-gray-50 min-h-screen flex flex-col items-center">
-    {/* Hero Section */}
-    <section class="pt-32 pb-16 px-4">
+<Layout seo={seo}>
+  <div class="min-h-screen">
+    <section class="pt-32 pb-16 px-4 bg-gradient-to-b from-white to-primary-50">
       <div class="max-w-6xl mx-auto text-center">
-        <h1 class="text-5xl md:text-6xl font-bold mb-6">Our Services</h1>
-        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+        <span class="inline-block px-3 py-1 rounded-full bg-primary-200 text-primary-700 text-xs font-medium mb-4 animate-fade-in">
+          Our Expertise
+        </span>
+        <h1 class="text-5xl md:text-6xl font-display font-bold mb-6 text-gray-900 animate-fade-in">Professional Services</h1>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto mb-8 animate-fade-in">
           {siteConfig.services.description}
         </p>
       </div>

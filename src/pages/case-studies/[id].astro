@@ -22,7 +22,7 @@ if (!caseStudyDetail) {
 const seo = createSEO({
   pageName: caseStudyDetail.title,
   description: caseStudyDetail.description,
-  pathname: `/case-studies/${id}`
+  pathname: `/case-studies/${id}`,
 });
 ---
 
@@ -35,12 +35,12 @@ const seo = createSEO({
           <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-8 gap-6">
             <div>
               <h1 class="text-4xl md:text-6xl font-bold mb-4">{caseStudyDetail.title}</h1>
-              <p class="text-xl text-purple-600">{caseStudyDetail.client}</p>
+              <p class="text-xl text-primary-600">{caseStudyDetail.client}</p>
             </div>
             <a
               href={caseStudyDetail.pdfUrl}
               download
-              class="flex items-center gap-2 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors"
+              class="flex items-center gap-2 bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors"
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                 <path
@@ -59,13 +59,13 @@ const seo = createSEO({
     </section>
 
     <!-- Metrics Section -->
-    <section class="py-16 px-4 bg-purple-50">
+    <section class="py-16 px-4 bg-primary-50">
       <div class="max-w-6xl mx-auto">
         <div class="grid md:grid-cols-3 gap-8">
           {
             Object.entries(caseStudyDetail.metrics).map(([key, value]) => (
               <div class="bg-white p-6 rounded-xl shadow-lg text-center fade-in">
-                <div class="text-3xl font-bold text-purple-600 mb-2">{value}</div>
+                <div class="text-3xl font-bold text-primary-600 mb-2">{value}</div>
                 <div class="text-gray-600">{key.replace(/([A-Z])/g, " $1").trim()}</div>
               </div>
             ))
@@ -90,13 +90,13 @@ const seo = createSEO({
           </div>
 
           <div class="fade-in-right">
-            <div class="bg-purple-50 p-8 rounded-xl mb-8">
+            <div class="bg-primary-50 p-8 rounded-xl mb-8">
               <h2 class="text-2xl font-bold mb-6">Client Testimonial</h2>
               <blockquote class="text-gray-600 italic mb-4">
                 &ldquo;{caseStudyDetail.testimonial.quote}&rdquo;
               </blockquote>
               <div class="font-medium">
-                <div class="text-purple-600">{caseStudyDetail.testimonial.author}</div>
+                <div class="text-primary-600">{caseStudyDetail.testimonial.author}</div>
                 <div class="text-gray-500">{caseStudyDetail.testimonial.position}</div>
               </div>
             </div>
@@ -108,7 +108,7 @@ const seo = createSEO({
                 <iframe src={caseStudyDetail.pdfUrl} class="w-full h-[600px]" title="PDF Preview"></iframe>
               </div>
               <p class="text-sm text-gray-500 mt-2">
-                If the preview doesn't load, <a href={caseStudyDetail.pdfUrl} class="text-purple-600 hover:underline">download the PDF</a> directly.
+                If the preview doesn't load, <a href={caseStudyDetail.pdfUrl} class="text-primary-600 hover:underline">download the PDF</a> directly.
               </p>
             </div>
           </div>
@@ -166,4 +166,3 @@ const seo = createSEO({
     }
   }
 </style>
-

@@ -78,7 +78,7 @@ const RetainerPlansSection = () => {
                         <span className="inline-block px-3 py-1 rounded-full bg-primary-200 text-primary-700 text-xs font-medium mb-4">
                             Retainer Plans
                         </span>
-                        <h2 className="section-title text-center mx-auto after:left-1/2 after:-translate-x-1/2">
+                        <h2 className="section-title text-center mx-auto">
                             {siteConfig.retainer.title}
                         </h2>
                         <p className="section-subtitle text-center mx-auto">
@@ -140,7 +140,7 @@ const RetainerPlansSection = () => {
                                                 /month
                                             </span>
                                         </div>
-                                        {selectedBillingCycle !== "monthly" && (
+                                        {selectedBillingCycle === "quarterly" && (
                                             <div className="flex items-baseline line-through ">
                                                 <span className="text-gray-400 text-xl font-semibold mr-2">
                                                     {item.monthly} /month
@@ -157,7 +157,7 @@ const RetainerPlansSection = () => {
                                     <ul className="space-y-3 mb-8">
                                         {item.features.map((feature: string, featureIndex: number) => (
                                             <li key={`${item.id}-feature-${featureIndex}`} className="flex items-start">
-                                                <span className="text-purple-600 mr-2">✅</span>
+                                                <span className="text-primary-600 mr-2">✅</span>
                                                 <span className="text-sm text-gray-600">{feature}</span>
                                             </li>
                                         ))}
@@ -169,8 +169,7 @@ const RetainerPlansSection = () => {
                                             : "border-2 border-primary-400 bg-transparent hover:bg-primary-100 text-primary-500"
                                             }`}
                                     >
-                                        <ShoppingCart className="mr-2 h-4 w-4" />
-                                        Select {item.title} Plan
+                                        {item.popular ? "Get Started" : "Learn More"}
                                     </Button>
                                 </div>
                             </Card>
