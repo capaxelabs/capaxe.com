@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 
 // Define color palette options
@@ -94,6 +94,37 @@ const ColorPaletteSwitcher: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [activePalette, setActivePalette] = useState('Default');
     const [isDarkMode, setIsDarkMode] = useState(false);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [popupPosition, setPopupPosition] = useState<'top' | 'bottom'>('bottom');
+
+    // Handle click outside and position adjustment
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+                setIsOpen(false);
+            }
+        };
+
+        const adjustPosition = () => {
+            if (containerRef.current) {
+                const rect = containerRef.current.getBoundingClientRect();
+                const spaceAbove = rect.top;
+                const spaceBelow = window.innerHeight - rect.bottom;
+                const popupHeight = 200; // Approximate height of popup
+
+                setPopupPosition(spaceAbove > popupHeight ? 'top' : 'bottom');
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        window.addEventListener('resize', adjustPosition);
+        adjustPosition();
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+            window.removeEventListener('resize', adjustPosition);
+        };
+    }, []);
 
     // Apply color palette to CSS variables
     const applyPalette = (palette: typeof colorPalettes[0]) => {
@@ -176,7 +207,7 @@ const ColorPaletteSwitcher: React.FC = () => {
     }, []);
 
     return (
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 relative" ref={containerRef}>
             <div className="relative">
                 <Button
                     variant="outline"
@@ -185,11 +216,10 @@ const ColorPaletteSwitcher: React.FC = () => {
                     className="flex items-center gap-2"
                 >
                     <span className="w-4 h-4 rounded-full" style={{ backgroundColor: `hsl(${activePalette === 'Default' ? '217 89% 61%' : colorPalettes.find(p => p.name === activePalette)?.primary || '217 89% 61%'})` }}></span>
-                    <span>Theme</span>
                 </Button>
 
                 {isOpen && (
-                    <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg z-50 border border-gray-200 dark:border-gray-700">
+                    <div className={`absolute ${popupPosition === 'top' ? 'bottom-full mb-2' : 'top-full mt-2'} -right-38 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg z-[100] border border-gray-200 dark:border-gray-700 overflow-visible transform translate-y-0`}>
                         <div className="py-1">
                             {colorPalettes.map((palette) => (
                                 <button
