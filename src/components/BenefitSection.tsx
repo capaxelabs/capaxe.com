@@ -68,7 +68,7 @@ const BenefitSection = () => {
             title: "Shopify Development Retainer",
             description: "Launch the best features with the best tech to convert more customers. Our Shopify retainer includes access to our expert development team who can build bespoke features unique to your business.",
             cta: "View Development Options",
-            ctaLink: "/services/shopify-development",
+            ctaLink: "/services/shopify/shopify-development",
             gradient: "bg-gradient-to-br from-primary-600 to-primary-400",
             delay: 0
         },
@@ -77,7 +77,7 @@ const BenefitSection = () => {
             title: "Design Excellence",
             description: "Engage customers with premium designs that embody your brand. Our specialists create UI designs with conversions and growth at the core, helping you stand out from competitors.",
             cta: "Explore Design Services",
-            ctaLink: "/services/shopify-design",
+            ctaLink: "/services/shopify/shopify-design",
             gradient: "bg-gradient-to-br from-violet-600 to-fuchsia-500",
             delay: 1
         },
@@ -86,7 +86,7 @@ const BenefitSection = () => {
             title: "Conversion Rate Optimization",
             description: "Our CRO services help Shopify store owners sustainably grow and hit conversion targets through web design, development, and strategy consultancy to improve your metrics at every stage.",
             cta: "Learn About CRO",
-            ctaLink: "/services/conversion-rate-optimization",
+            ctaLink: "/services/shopify/conversion-rate-optimization",
             gradient: "bg-gradient-to-br from-blue-500 to-cyan-400",
             delay: 2
         },
@@ -95,7 +95,7 @@ const BenefitSection = () => {
             title: "Technical Support Services",
             description: "We're here when you need us. Our team provides expert support for your entire team's questions and queries, getting to know your store inside out to be your trusted partner.",
             cta: "View Support Options",
-            ctaLink: "/services/shopify-support",
+            ctaLink: "/services/shopify/shopify-support",
             gradient: "bg-gradient-to-br from-emerald-500 to-teal-400",
             delay: 3
         },
@@ -104,7 +104,7 @@ const BenefitSection = () => {
             title: "Growth & Strategy",
             description: "Experience, expertise and strategies for growth. We work as your strategic partner to improve conversion rates through design improvements, feature development, and continuous optimization.",
             cta: "Explore Growth Plans",
-            ctaLink: "/services/shopify-growth",
+            ctaLink: "/services/shopify/shopify-growth",
             gradient: "bg-gradient-to-br from-amber-500 to-orange-400",
             delay: 4
         },
