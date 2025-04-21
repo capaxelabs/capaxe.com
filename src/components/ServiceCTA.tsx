@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button'
 
 export default function ServiceCTA() {
     return (
-        <div className="flex flex-col sm:flex-row gap-4">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center m-5">
             <Button className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600" asChild>
                 <a href="/consultation">Get a Free Consultation</a>
             </Button>

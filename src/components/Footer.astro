@@ -27,7 +27,7 @@ const currentYear = new Date().getFullYear();
         <h3 class="text-sm font-semibold text-white uppercase tracking-wider">Solutions</h3>
         <ul class="mt-4 space-y-4">
           {
-            menuConfig.footerNav.solutions.map((item) => (
+            siteConfig.services.shopify.items.map((item) => (
               <li>
                 <a href={item.href} class="text-base text-gray-200 hover:text-gray-300">
                   {item.title}
@@ -81,7 +81,7 @@ const currentYear = new Date().getFullYear();
         <div class="mt-4 md:mt-0">
           <ul class="flex space-x-6">
             {
-              menuConfig.footerNav.legal.map((item) => (
+              siteConfig.services.shopify.items.map((item) => (
                 <li>
                   <a href={item.href} class="text-sm text-gray-200 hover:text-gray-300">
                     {item.title}

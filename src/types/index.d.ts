@@ -96,7 +96,6 @@ export interface MenuItem {
 export interface MenuConfig {
     mainNav: MenuItem[]
     footerNav: {
-        solutions: MenuItem[]
         company: MenuItem[]
         legal: MenuItem[]
         caseStudies: MenuItem[]

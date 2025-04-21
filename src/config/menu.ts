@@ -26,44 +26,7 @@ export const menuConfig: MenuConfig = {
         },
     ],
     footerNav: {
-        solutions: [
-            {
-                title: "Shopify Store Development",
-                href: "/services/store-development",
-            },
-            {
-                title: "Custom App Development",
-                href: "/services/custom-app-development",
-            },
-            {
-                title: "Public App Development",
-                href: "/services/public-app-development",
-            },
-            {
-                title: "Mobile App Development",
-                href: "/services/mobile-app-development",
-            },
-            {
-                title: "E-commerce Solutions",
-                href: "/services/ecommerce-solutions",
-            },
-            {
-                title: "Migration & Integration",
-                href: "/services/migration-integration",
-            },
-            {
-                title: "SEO & Performance",
-                href: "/services/seo-performance",
-            },
-            {
-                title: "Shopify Maintenance",
-                href: "/services/shopify-maintenance",
-            },
-            {
-                title: "Retainer Plans",
-                href: "/retainer",
-            },
-        ],
+        
         company: [
             {
                 title: "About Us",
