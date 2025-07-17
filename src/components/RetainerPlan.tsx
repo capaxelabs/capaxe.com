@@ -20,7 +20,7 @@ interface RetainerPlanItem {
 }
 
 const RetainerPlansSection = () => {
-    const [selectedBillingCycle, setSelectedBillingCycle] = useState<"quarterly" | "yearly">("quarterly");
+    const [selectedBillingCycle, setSelectedBillingCycle] = useState<"quarterly" | "yearly">("yearly");
     const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -145,7 +145,13 @@ const RetainerPlansSection = () => {
                                                 <span className="text-gray-400 text-xl font-semibold mr-2">
                                                     {item.monthly} /month
                                                 </span>
-
+                                            </div>
+                                        )}
+                                        {selectedBillingCycle === "yearly" && (
+                                            <div className="flex items-baseline line-through ">
+                                                <span className="text-gray-400 text-xl font-semibold mr-2">
+                                                    {item.monthly} /month
+                                                </span>
                                             </div>
                                         )}
                                         <p className="text-sm text-gray-500 mt-2">

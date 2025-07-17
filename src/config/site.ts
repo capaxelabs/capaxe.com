@@ -154,55 +154,66 @@ export const siteConfig: SiteConfig = {
         items: [
             {
                 id: 1,
-                title: 'Growth Plan',
-                description: 'For businesses that require custom development & API integrations.',
-                monthly: '$1,000',
-                yearly: '$10,000',
+                title: 'Starter – 15h',
+                description: 'Perfect for small businesses or new Shopify stores needing reliable, on-demand support and improvements.',
+                monthly: '$1,200',
+                yearly: '$11,520', // 20% discount if billed yearly
                 popular: false,
                 features: [
-                    '20 development hours/month',
-                    'Shopify store tweaks, bug fixes & performance optimization',
-                    'UI/UX improvements for Shopify themes & Hydrogen stores',
-                    'Priority email support',
-                    'Monthly report on implemented changes'
+                    'Monthly strategy meetings',
+                    'Monthly website audits',
+                    'Cancel anytime',
+                    'Real-time chat support',
+                    'Non-urgent: reply within 48h',
+                    'Critical issues: immediate action',
+                    'Most tasks completed in 24h',
+                    'Dedicated PM & Shopify developer',
+                    'Project collaboration in ClickUp or your preferred tool',
+                    'Regular progress & performance updates'
                 ]
             },
             {
                 id: 2,
-                title: 'Standard Retainer',
-                description: 'Perfect for established Shopify stores that need regular maintenance and small enhancements.',
+                title: 'Growth – 30h',
+                description: 'Best for growing businesses with more complex Shopify needs, including CRO and advanced support.',
                 monthly: '$1,999',
-                yearly: '$19,990',
+                yearly: '$19,990', // 20% discount if billed yearly
                 popular: true,
                 features: [
-                    '40 development hours per month',
-                    'Dedicated Shopify expert',
-                    'Priority support (24-48 hour response)',
-                    'Shopify store tweaks, bug fixes & performance optimization',
-                    'Monthly performance report',
-                    'Bug fixes and troubleshooting',
-                    'Small feature enhancements',
-                    'Custom app development in yearly plan',
-                    'Headless store development in yearly plan'
+                    'On-request growth strategy meetings',
+                    'On-request website audits',
+                    'Regular CRO audits with actionable insights',
+                    'Cancel anytime',
+                    'Real-time chat support',
+                    'Priority response within 24h',
+                    'Critical issues: immediate action',
+                    'Most tasks completed in 24h',
+                    'Dedicated PM & Tech Lead',
+                    'Dedicated & backup Shopify developer',
+                    'Project collaboration in ClickUp or your preferred tool',
+                    'Regular progress & performance updates'
                 ]
             },
             {
                 id: 3,
-                title: 'Premium Retainer',
-                description: 'Ideal for growing businesses that need ongoing development and strategic guidance.',
-                monthly: '$3,499',
-                yearly: '$34,990',
+                title: 'Enterprise – 50h',
+                description: 'Tailored for high-growth or large Shopify businesses with demanding, ongoing dev & design needs.',
+                monthly: '$3,200',
+                yearly: '$30,720', // 20% discount if billed yearly
                 popular: false,
                 features: [
-                    '50 development hours per month',
-                    'Dedicated Shopify expert team',
-                    'VIP support (24 hour response)',
-                    'Weekly check-ins',
-                    'Monthly strategy sessions',
-                    'App integration and customization',
-                    'Performance optimization',
-                    'Custom app development in yearly plan',
-                    'Headless store development in yearly plan',
+                    'Frequent growth strategy sessions (2–3/mo)',
+                    'Weekly website audits',
+                    'Advanced CRO audits & best practices for conversion growth',
+                    'Cancel anytime',
+                    'Real-time chat support',
+                    'Priority initial response within 12h',
+                    'Critical issues: immediate action',
+                    'Most tasks resolved within 12h',
+                    'Senior PM & Tech Lead',
+                    '2 dedicated & 2 backup Shopify developers',
+                    'Project collaboration in ClickUp or your preferred tool',
+                    'Regular progress & performance updates'
                 ]
             }
         ]
