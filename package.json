@@ -3,12 +3,13 @@
 	"type": "module",
 	"version": "0.0.1",
 	"scripts": {
-		"dev": "astro dev",
-		"build": "astro build",
-		"preview": "astro build && wrangler pages dev",
 		"astro": "astro",
-		"deploy": "astro build && wrangler pages deploy",
-		"cf-typegen": "wrangler types"
+		"build": "astro build",
+		"cf-typegen": "wrangler types",
+		"check": "astro build && tsc && wrangler deploy --dry-run",
+		"deploy": "wrangler deploy",
+		"dev": "astro dev",
+		"preview": "astro build && wrangler dev"
 	},
 	"dependencies": {
 		"@astrojs/cloudflare": "^12.5.0",
