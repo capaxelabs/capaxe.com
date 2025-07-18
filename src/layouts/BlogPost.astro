@@ -1,113 +1,85 @@
 ---
-import type { CollectionEntry } from "astro:content";
-import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
-import FormattedDate from "../components/FormattedDate.astro";
-import { createSEO } from "@/utils/seo";
-import type { SEOProps } from "@/utils/seo";
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
 
-type Props = CollectionEntry<"blog">["data"];
+type Props = CollectionEntry<'blog'>['data'];
 
 const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
-
-// Create SEO object for blog post
-const seo: SEOProps = createSEO({
-  pageName: title,
-  description: description,
-  publishDate: new Date(pubDate),
-  updateDate: updatedDate ? new Date(updatedDate) : undefined,
-  image: heroImage,
-  contentType: "blog",
-  pathname: "/blog"
-});
 ---
 
-<!doctype html>
 <html lang="en">
-  <head>
-    <BaseHead seo={seo} />
-  </head>
-  <body>
-    <Header />
-    <main class="min-h-screen bg-background">
-      {/* Hero Section */}
-      <div class="w-full bg-gradient-to-b from-background to-gray-50 dark:from-background dark:to-gray-900/20">
-        <div class="max-w-4xl mx-auto px-4 pt-32 pb-12">
-          <div class="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400 mb-6">
-            <a href="/blog" class="hover:text-primary transition-colors">Blog</a>
-            <span>•</span>
-            <FormattedDate date={pubDate} />
-            {
-              updatedDate && (
-                <>
-                  <span>•</span>
-                  <span class="italic">
-                    Updated: <FormattedDate date={updatedDate} />
-                  </span>
-                </>
-              )
-            }
-          </div>
-          <h1 class="text-4xl md:text-5xl font-bold mb-6">{title}</h1>
-          <p class="text-xl text-gray-600 dark:text-gray-400">{description}</p>
-        </div>
-      </div>
+	<head>
+		<BaseHead title={title} description={description} />
+		<style>
+			main {
+				width: calc(100% - 2em);
+				max-width: 100%;
+				margin: 0;
+			}
+			.hero-image {
+				width: 100%;
+			}
+			.hero-image img {
+				display: block;
+				margin: 0 auto;
+				border-radius: 12px;
+				box-shadow: var(--box-shadow);
+			}
+			.prose {
+				width: 720px;
+				max-width: calc(100% - 2em);
+				margin: auto;
+				padding: 1em;
+				color: rgb(var(--gray-dark));
+			}
+			.title {
+				margin-bottom: 1em;
+				padding: 1em 0;
+				text-align: center;
+				line-height: 1;
+			}
+			.title h1 {
+				margin: 0 0 0.5em 0;
+			}
+			.date {
+				margin-bottom: 0.5em;
+				color: rgb(var(--gray));
+			}
+			.last-updated-on {
+				font-style: italic;
+			}
+		</style>
+	</head>
 
-      <article class="max-w-4xl mx-auto px-4 py-12">
-        {
-          heroImage && (
-            <div class="mb-12 overflow-hidden rounded-xl shadow-xl">
-              <img width={1020} height={510} src={heroImage} alt={title} class="w-full h-auto object-cover" />
-            </div>
-          )
-        }
-
-        <div class="blog-content prose prose-lg dark:prose-invert max-w-none">
-          <slot />
-        </div>
-
-        <div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-800">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <a href="/blog" class="inline-flex items-center text-primary hover:underline">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-              </svg>
-              Back to all articles
-            </a>
-            <div class="flex space-x-4">
-              <a
-                href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(Astro.url.href)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-gray-500 hover:text-blue-400 transition-colors"
-              >
-                <span class="sr-only">Share on Twitter</span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path
-                    d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"
-                  ></path>
-                </svg>
-              </a>
-              <a
-                href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(Astro.url.href)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-gray-500 hover:text-blue-700 transition-colors"
-              >
-                <span class="sr-only">Share on LinkedIn</span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path
-                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
-                  ></path>
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <Footer />
-    </main>
-  </body>
+	<body>
+		<Header />
+		<main>
+			<article>
+				<div class="hero-image">
+					{heroImage && <img width={1020} height={510} src={heroImage} alt="" />}
+				</div>
+				<div class="prose">
+					<div class="title">
+						<div class="date">
+							<FormattedDate date={pubDate} />
+							{
+								updatedDate && (
+									<div class="last-updated-on">
+										Last updated on <FormattedDate date={updatedDate} />
+									</div>
+								)
+							}
+						</div>
+						<h1>{title}</h1>
+						<hr />
+					</div>
+					<slot />
+				</div>
+			</article>
+		</main>
+		<Footer />
+	</body>
 </html>
