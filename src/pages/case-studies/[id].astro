@@ -5,6 +5,8 @@ import { caseStudiesDetails } from "@/config/caseStudy";
 import CTABottom from "@/components/CTA.astro";
 import { createSEO } from "@/utils/seo";
 import type { SEOProps } from "@/utils/seo";
+import { getCollection } from "astro:content";
+export const prerender = true;
 
 interface Props {
   seo?: SEOProps;
@@ -17,6 +19,14 @@ const caseStudyDetail = caseStudiesDetails[id as string];
 // Handle case when the case study ID doesn't exist
 if (!caseStudyDetail) {
   return Astro.redirect("/case-studies");
+}
+
+export async function getStaticPaths() {
+  const caseStudies = await getCollection("case-studies");
+  return caseStudies.map((caseStudy) => ({
+    params: { id: caseStudy.id },
+    props: { caseStudy },
+  }));
 }
 
 const seo = createSEO({
