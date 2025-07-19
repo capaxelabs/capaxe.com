@@ -1,0 +1,96 @@
+---
+import { FiSearch, FiZap, FiTrendingUp, FiSmile } from "react-icons/fi";
+import CTABottom from "@/components/CTA.astro";
+import Layout from "@/layouts/Layout.astro";
+import { siteConfig } from "@/config/site";
+import ServiceCTA from "@/components/ServiceCTA";
+import { createSEO } from "@/utils/seo";
+import type { SEOProps } from "@/utils/seo";
+
+interface Props {
+  seo?: SEOProps;
+  title?: string;
+  description?: string;
+}
+// Page-specific SEO metadata using the utility
+const seo = createSEO({
+  pageName: "SEO & Performance Optimization",
+  description: "Boost your Shopify store’s visibility and speed to attract more customers, improve user experience, and maximize conversions. Our expert services ensure your store ranks higher in search engines and delivers lightning-fast performance.",
+  keywords: "SEO, performance optimization, Shopify SEO, search engine optimization, website speed, user experience, conversion rate optimization",
+  image: "/images/services/seo-performance.jpg",
+  contentType: "service",
+  pathname: "/services/seo-performance"
+});
+
+// Override structuredData if needed
+seo.structuredData = {  
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "SEO & Performance Optimization",
+  "description": seo.description,
+  "provider": {
+    "@type": "Organization",
+    "name": siteConfig.name,
+    "url": siteConfig.url
+  },
+  "serviceType": "SEO & Performance Optimization",
+  "areaServed": "Worldwide"
+};
+
+---
+
+<Layout seo={seo}>
+  <div class="p-6 pt-32 bg-gray-50 min-h-screen flex flex-col items-center">
+    <section class="pt-32 pb-16 px-4">
+      <div class="max-w-6xl mx-auto text-center">
+        <h1 class="text-5xl md:text-6xl font-bold mb-6">Conversion Rate Optimization (CRO)</h1>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+          Boost your Shopify store’s visibility and speed to attract more customers, improve user experience, and maximize conversions. Our expert
+          services ensure your store ranks higher in search engines and delivers lightning-fast performance.
+        </p>
+      </div>
+    </section>
+
+    <section class="py-16 px-4">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 mb-8">
+          <div class="bg-white shadow-lg rounded-lg p-6 text-center hover:shadow-2xl transition">
+            <FiSearch className="text-4xl text-blue-500 mb-4 mx-auto" />
+            <h2 class="text-xl font-semibold text-gray-800 mb-2">SEO Optimization</h2>
+            <p class="text-gray-600">
+              Optimize your store for search engines with strategic keywords, metadata, and content to rank higher and drive organic traffic.
+            </p>
+          </div>
+          <div class="bg-white shadow-lg rounded-lg p-6 text-center hover:shadow-2xl transition">
+            <FiZap className="text-4xl text-green-500 mb-4 mx-auto" />
+            <h2 class="text-xl font-semibold text-gray-800 mb-2">Performance Enhancement</h2>
+            <p class="text-gray-600">Ensure fast loading times, smooth navigation, and optimized assets to deliver a seamless shopping experience.</p>
+          </div>
+        </div>
+
+        <h2 class="text-3xl font-bold text-gray-800 mb-4">Why Performance Matters</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          <div class="bg-white shadow-lg rounded-lg p-6 text-center hover:shadow-2xl transition">
+            <FiTrendingUp className="text-4xl text-orange-500 mb-4 mx-auto" />
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">Higher Conversion Rates</h3>
+            <p class="text-gray-600">
+              A faster website ensures customers can browse and purchase products without delays, reducing cart abandonment.
+            </p>
+          </div>
+          <div class="bg-white shadow-lg rounded-lg p-6 text-center hover:shadow-2xl transition">
+            <FiSmile className="text-4xl text-purple-500 mb-4 mx-auto" />
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">Improved User Experience</h3>
+            <p class="text-gray-600">Speedy stores provide an enjoyable shopping experience, encouraging repeat visits and customer loyalty.</p>
+          </div>
+          <div class="bg-white shadow-lg rounded-lg p-6 text-center hover:shadow-2xl transition">
+            <FiZap className="text-4xl text-red-500 mb-4 mx-auto" />
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">Better SEO Rankings</h3>
+            <p class="text-gray-600">Search engines prioritize fast-loading websites, giving you an edge over competitors in organic rankings.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <ServiceCTA />
+  </div>
+  <CTABottom />
+</Layout>

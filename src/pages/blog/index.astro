@@ -1,111 +1,117 @@
 ---
-import BaseHead from '../../components/BaseHead.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
-import { getCollection } from 'astro:content';
-import FormattedDate from '../../components/FormattedDate.astro';
+import { getCollection } from "astro:content";
+import FormattedDate from "../../components/FormattedDate.astro";
+import Layout from "../../layouts/Layout.astro";
+import CTABottom from "@/components/CTA.astro";
+import { siteConfig } from "@/config/site";
+import { createSEO } from "@/utils/seo";
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const posts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+// Create SEO object for the blog index page
+const seo = createSEO({
+  pageName: "Blog",
+  description: "Insights, updates, and expert perspectives on the latest industry trends.",
+  keywords: "blog, articles, insights, industry trends, tech news",
+  // You can provide a specific image for the blog page
+  image: "/images/blog-hero.jpg",
+  contentType: "blog",
+  pathname: "/blog"
+});
+
+// Split posts into featured and regular
+const featuredPost = posts[0];
+const regularPosts = posts.slice(1);
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<style>
-			main {
-				width: 960px;
-			}
-			ul {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 2rem;
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
-			}
-			ul li {
-				width: calc(50% - 1rem);
-			}
-			ul li * {
-				text-decoration: none;
-				transition: 0.2s ease;
-			}
-			ul li:first-child {
-				width: 100%;
-				margin-bottom: 1rem;
-				text-align: center;
-			}
-			ul li:first-child img {
-				width: 100%;
-			}
-			ul li:first-child .title {
-				font-size: 2.369rem;
-			}
-			ul li img {
-				margin-bottom: 0.5rem;
-				border-radius: 12px;
-			}
-			ul li a {
-				display: block;
-			}
-			.title {
-				margin: 0;
-				color: rgb(var(--black));
-				line-height: 1;
-			}
-			.date {
-				margin: 0;
-				color: rgb(var(--gray));
-			}
-			ul li a:hover h4,
-			ul li a:hover .date {
-				color: rgb(var(--accent));
-			}
-			ul a:hover img {
-				box-shadow: var(--box-shadow);
-			}
-			@media (max-width: 720px) {
-				ul {
-					gap: 0.5em;
-				}
-				ul li {
-					width: 100%;
-					text-align: center;
-				}
-				ul li:first-child {
-					margin-bottom: 0;
-				}
-				ul li:first-child .title {
-					font-size: 1.563em;
-				}
-			}
-		</style>
-	</head>
-	<body>
-		<Header />
-		<main>
-			<section>
-				<ul>
-					{
-						posts.map((post) => (
-							<li>
-								<a href={`/blog/${post.id}/`}>
-									<img width={720} height={360} src={post.data.heroImage} alt="" />
-									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
-								</a>
-							</li>
-						))
-					}
-				</ul>
-			</section>
-		</main>
-		<Footer />
-	</body>
-</html>
+<Layout seo={seo}>
+  <div class="min-h-screen bg-background">
+    <section class="pt-32 pb-12 px-4 bg-gradient-to-b from-background to-gray-50 dark:from-background dark:to-gray-900/20">
+      <div class="max-w-6xl mx-auto text-center">
+        <h1 class="text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70">Our Blog</h1>
+        <p class="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          Insights, updates, and expert perspectives on the latest industry trends.
+        </p>
+      </div>
+    </section>
+
+    {
+      featuredPost && (
+        <section class="py-12 px-4">
+          <div class="max-w-6xl mx-auto">
+            <h2 class="text-2xl font-bold mb-8 border-l-4 border-primary pl-4">Featured Post</h2>
+            <div class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg transition-all hover:shadow-xl">
+              <a href={`/blog/${featuredPost.id}/`} class="block group">
+                <div class="md:flex">
+                  <div class="md:w-1/2 overflow-hidden">
+                    <img
+                      width={720}
+                      height={360}
+                      src={featuredPost.data.heroImage}
+                      alt={featuredPost.data.title}
+                      class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  </div>
+                  <div class="md:w-1/2 p-8">
+                    <div class="mb-4 text-sm text-gray-500 dark:text-gray-400">
+                      <FormattedDate date={featuredPost.data.pubDate} />
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 group-hover:text-primary transition-colors">{featuredPost.data.title}</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6 line-clamp-3">{featuredPost.data.description}</p>
+                    <span class="inline-flex items-center text-primary font-medium group-hover:underline">
+                      Read article
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </span>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </section>
+      )
+    }
+
+    <section class="py-12 px-4">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-2xl font-bold mb-8 border-l-4 border-primary pl-4">Latest Articles</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {
+            regularPosts.map((post) => (
+              <div class="group bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col h-full">
+                <a href={`/blog/${post.id}/`} class="block flex-1 flex flex-col">
+                  <div class="overflow-hidden h-48">
+                    <img
+                      width={720}
+                      height={360}
+                      src={post.data.heroImage}
+                      alt={post.data.title}
+                      class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  </div>
+                  <div class="p-6 flex-1 flex flex-col">
+                    <div class="mb-4 text-sm text-gray-500 dark:text-gray-400">
+                      <FormattedDate date={post.data.pubDate} />
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-primary transition-colors">{post.data.title}</h3>
+                    {post.data.description && <p class="text-gray-600 dark:text-gray-400 line-clamp-2 mb-4">{post.data.description}</p>}
+                    <div class="mt-auto pt-4">
+                      <span class="inline-flex items-center text-primary font-medium group-hover:underline">
+                        Read article
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                      </span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+  </div>
+  <CTABottom />
+</Layout>

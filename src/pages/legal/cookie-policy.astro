@@ -1,0 +1,193 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { siteConfig } from "@/config/site";
+
+import { createSEO } from "@/utils/seo";
+import type { SEOProps } from "@/utils/seo";
+
+interface Props {
+  seo?: SEOProps;
+  title?: string;
+  description?: string;
+}
+
+
+const seo = createSEO({
+  pageName: `Cookie Policy | ${siteConfig.name}`,
+  description: "Our cookie policy explains how we use cookies on our website",
+  contentType: "basic",
+  pathname: "/legal/cookie-policy"
+});
+---
+
+<Layout seo={seo}>
+  <main class="container mx-auto px-4 py-12">
+    <div class="max-w-6xl mx-auto">
+      <section class="pt-32 pb-16 px-4">
+        <div class="max-w-6xl mx-auto text-center">
+          <h1 class="text-4xl font-bold mb-8">Cookie Policy</h1>
+        </div>
+      </section>
+
+      <section class="py-16 px-4">
+        <div class="max-w-6xl mx-auto">
+          <div class="max-w-3xl mx-auto prose prose-lg">
+            <p class="text-gray-500 mb-8">Last updated: February 1, 2025</p>
+
+            <section class="mb-10">
+              <h2>What Are Cookies</h2>
+              <p>
+                Cookies are small pieces of text sent to your web browser by a website you visit. A cookie file is stored in your web browser and
+                allows the website or a third-party to recognize you and make your next visit easier and the website more useful to you.
+              </p>
+              <p>
+                Cookies can be "persistent" or "session" cookies. Persistent cookies remain on your device when you go offline, while session cookies
+                are deleted as soon as you close your web browser.
+              </p>
+            </section>
+
+            <section class="mb-10">
+              <h2>How We Use Cookies</h2>
+              <p>When you use and access our website, we may place a number of cookies files in your web browser.</p>
+              <p>We use cookies for the following purposes:</p>
+              <ul>
+                <li>
+                  <strong>Essential Cookies:</strong> These cookies are required for the operation of our website. They include, for example, cookies that
+                  enable you to log into secure areas of our website or use a shopping cart.
+                </li>
+                <li>
+                  <strong>Analytical/Performance Cookies:</strong> These allow us to recognize and count the number of visitors and to see how visitors
+                  move around our website when they are using it. This helps us to improve the way our website works, for example, by ensuring that users
+                  find what they are looking for easily.
+                </li>
+                <li>
+                  <strong>Functionality Cookies:</strong> These are used to recognize you when you return to our website. This enables us to personalize
+                  our content for you, greet you by name, and remember your preferences (for example, your choice of language or region).
+                </li>
+                <li>
+                  <strong>Targeting Cookies:</strong> These cookies record your visit to our website, the pages you have visited, and the links you have
+                  followed. We will use this information to make our website and the advertising displayed on it more relevant to your interests.
+                </li>
+              </ul>
+            </section>
+
+            <section class="mb-10">
+              <h2>Third-Party Cookies</h2>
+              <p>
+                In addition to our own cookies, we may also use various third-party cookies to report usage statistics of the website and deliver
+                advertisements on and through the website.
+              </p>
+              <p>Some examples of third-party cookies we use:</p>
+              <ul>
+                <li>
+                  <strong>Google Analytics:</strong> To help analyze how users use the site. The information generated about your use of the website will
+                  be transmitted to and stored by Google on servers in the United States. Google will use this information for the purpose of evaluating
+                  your use of the website, compiling reports on website activity, and providing other services relating to website activity and internet
+                  usage.
+                </li>
+                <li>
+                  <strong>Google Ads:</strong> To display relevant advertisements to you based on your interests.
+                </li>
+                <li>
+                  <strong>Facebook Pixel:</strong> To measure the effectiveness of our Facebook advertising and build targeted audiences for future ads.
+                </li>
+                <li>
+                  <strong>Hotjar:</strong> To better understand our users' needs and to optimize this service and experience.
+                </li>
+              </ul>
+            </section>
+
+            <section class="mb-10">
+              <h2>What Are Your Choices Regarding Cookies</h2>
+              <p>
+                If you'd like to delete cookies or instruct your web browser to delete or refuse cookies, please visit the help pages of your web
+                browser.
+              </p>
+              <p>
+                Please note, however, that if you delete cookies or refuse to accept them, you might not be able to use all of the features we offer,
+                you may not be able to store your preferences, and some of our pages might not display properly.
+              </p>
+              <p>Information about cookies in popular browsers:</p>
+              <ul>
+                <li>
+                  <a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener" class="text-blue-600 hover:underline"
+                    >Google Chrome</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://support.mozilla.org/en-US/kb/enable-and-disable-cookies-website-preferences"
+                    target="_blank"
+                    rel="noopener"
+                    class="text-blue-600 hover:underline">Mozilla Firefox</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://support.apple.com/guide/safari/manage-cookies-and-website-data-sfri11471/mac"
+                    target="_blank"
+                    rel="noopener"
+                    class="text-blue-600 hover:underline">Apple Safari</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://support.microsoft.com/en-us/help/17442/windows-internet-explorer-delete-manage-cookies"
+                    target="_blank"
+                    rel="noopener"
+                    class="text-blue-600 hover:underline">Microsoft Internet Explorer</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://support.microsoft.com/en-us/microsoft-edge/delete-cookies-in-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09"
+                    target="_blank"
+                    rel="noopener"
+                    class="text-blue-600 hover:underline">Microsoft Edge</a
+                  >
+                </li>
+              </ul>
+            </section>
+
+            <section class="mb-10">
+              <h2>Cookie Management Tools</h2>
+              <p>You may opt-out of targeted advertising by using the preference forms of our advertising partners:</p>
+              <ul>
+                <li><a href="https://adssettings.google.com/" target="_blank" rel="noopener" class="text-blue-600 hover:underline">Google</a></li>
+                <li>
+                  <a href="https://www.facebook.com/about/ads/" target="_blank" rel="noopener" class="text-blue-600 hover:underline">Facebook</a>
+                </li>
+              </ul>
+              <p>In addition, you can manage cookies through tools like:</p>
+              <ul>
+                <li>
+                  <a href="https://www.networkadvertising.org/choices/" target="_blank" rel="noopener" class="text-blue-600 hover:underline"
+                    >Network Advertising Initiative (NAI) Opt-Out Tool</a
+                  >
+                </li>
+                <li>
+                  <a href="https://optout.aboutads.info/" target="_blank" rel="noopener" class="text-blue-600 hover:underline"
+                    >Digital Advertising Alliance (DAA) WebChoices Tool</a
+                  >
+                </li>
+              </ul>
+            </section>
+
+            <section>
+              <h2>Changes to This Cookie Policy</h2>
+              <p>
+                We may update our Cookie Policy from time to time. We will notify you of any changes by posting the new Cookie Policy on this page and
+                updating the "last updated" date.
+              </p>
+              <p>
+                You are advised to review this Cookie Policy periodically for any changes. Changes to this Cookie Policy are effective when they are
+                posted on this page.
+              </p>
+              <p>If you have any questions about our Cookie Policy, please contact us at privacy@example.com.</p>
+            </section>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</Layout>

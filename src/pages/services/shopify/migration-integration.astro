@@ -1,0 +1,83 @@
+---
+import { FiArrowRight, FiRefreshCcw, FiDatabase, FiSettings } from "react-icons/fi";
+import CTABottom from "@/components/CTA.astro";
+import Layout from "@/layouts/Layout.astro";
+import { siteConfig } from "@/config/site";
+import ServiceCTA from "@/components/ServiceCTA";
+import { createSEO } from "@/utils/seo";
+import type { SEOProps } from "@/utils/seo";
+
+interface Props {
+  seo?: SEOProps;
+  title?: string;
+  description?: string;
+}
+// Page-specific SEO metadata using the utility
+const seo = createSEO({
+  pageName: "Migration & Integration",
+  description: "Migration & Integration Services",
+  keywords: "shopify migration, ecommerce migration, integration services, e-commerce migration, shopify integration",
+  image: "/images/services/migration-integration.jpg",
+  contentType: "service",
+  pathname: "/services/migration-integration"
+});
+
+// Override structuredData if needed
+seo.structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Migration & Integration",  
+  "description": seo.description,
+  "provider": {
+    "@type": "Organization",
+    "name": siteConfig.name,
+    "url": siteConfig.url
+  },
+  "serviceType": "Migration & Integration",
+  "areaServed": "Worldwide"
+};
+---
+
+<Layout seo={seo} >
+  <div class="p-6 pt-32 bg-gray-50 min-h-screen flex flex-col items-center">
+    <section class="pt-32 pb-16 px-4">
+      <div class="max-w-6xl mx-auto text-center">
+        <h1 class="text-5xl md:text-6xl font-bold mb-6">Migration & Integration Services</h1>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+          Transition your online store to Shopify seamlessly. We specialize in migrating from WooCommerce, BigCommerce, and Magento while ensuring
+          data integrity and minimal downtime. Enhance your store’s functionality with third-party tool integrations for a smooth business workflow.
+        </p>
+      </div>
+    </section>
+    <section class="py-16 px-4">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          <div class="bg-white shadow-lg rounded-lg p-6 text-center hover:shadow-2xl transition">
+            <FiArrowRight className="text-4xl text-blue-500 mb-4 mx-auto" />
+            <h2 class="text-xl font-semibold text-gray-800 mb-2">WooCommerce to Shopify</h2>
+            <p class="text-gray-600">Migrate from WooCommerce to Shopify with ease, preserving all your products, orders, and customer data.</p>
+          </div>
+          <div class="bg-white shadow-lg rounded-lg p-6 text-center hover:shadow-2xl transition">
+            <FiRefreshCcw className="text-4xl text-green-500 mb-4 mx-auto" />
+            <h2 class="text-xl font-semibold text-gray-800 mb-2">BigCommerce to Shopify</h2>
+            <p class="text-gray-600">Transition from BigCommerce to Shopify while enhancing performance and simplifying management.</p>
+          </div>
+          <div class="bg-white shadow-lg rounded-lg p-6 text-center hover:shadow-2xl transition">
+            <FiDatabase className="text-4xl text-purple-500 mb-4 mx-auto" />
+            <h2 class="text-xl font-semibold text-gray-800 mb-2">Magento to Shopify</h2>
+            <p class="text-gray-600">Move from Magento to Shopify for a more user-friendly platform, faster performance, and better scalability.</p>
+          </div>
+          <div class="bg-white shadow-lg rounded-lg p-6 text-center hover:shadow-2xl transition">
+            <FiSettings className="text-4xl text-yellow-500 mb-4 mx-auto" />
+            <h2 class="text-xl font-semibold text-gray-800 mb-2">Third-Party Integrations</h2>
+            <p class="text-gray-600">
+              Connect your Shopify store with essential tools like CRMs, ERPs, and marketing platforms to streamline operations.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <ServiceCTA />
+  </div>
+  <CTABottom />
+</Layout>

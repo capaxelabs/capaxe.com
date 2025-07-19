@@ -1,0 +1,75 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { siteConfig } from "@/config/site";
+import CTABottom from "@/components/CTA.astro";
+import ServiceCTA from "@/components/ServiceCTA";
+import { createSEO } from "@/utils/seo";
+import type { SEOProps } from "@/utils/seo";
+
+interface Props {
+  seo?: SEOProps;
+  title?: string;
+  description?: string;
+}
+
+// Page-specific SEO metadata using the utility
+const seo = createSEO({
+  pageName: "Shopify Technical Support",
+  description: "Expert technical support for your digital presence",
+  keywords: "technical support, Priority Support, expert support, digital presence, website support, e-commerce support",
+  image: "/images/services/technical-support.jpg",
+  contentType: "service",
+  pathname: "/services/support"
+});
+
+// Override structuredData if needed
+seo.structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Shopify Technical Support",
+  "description": seo.description,
+  "provider": {
+    "@type": "Organization",
+    "name": siteConfig.name,
+    "url": siteConfig.url
+  },
+  "serviceType": "Shopify Technical Support",
+  "areaServed": "Worldwide"
+};
+---
+
+<Layout seo={seo} >
+  <div class="p-6 pt-32 bg-gray-50 min-h-screen flex flex-col items-center">
+    <section class="pt-32 pb-16 px-4">
+      <div class="max-w-6xl mx-auto text-center">
+        <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">Technical Support Services</h1>
+        <p class="mt-5 max-w-xl mx-auto text-xl text-gray-500">24/7 expert technical support for your digital presence</p>
+      </div>
+    </section>
+    <section class="py-16 px-4">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {/* 24/7 Support */}
+          <div class="bg-purple-50 rounded-lg p-6">
+            <h3 class="text-lg font-medium text-gray-900">Priority Support</h3>
+            <p class="mt-2 text-gray-500">Round-the-clock technical support for your critical business needs.</p>
+          </div>
+
+          {/* Maintenance */}
+          <div class="bg-purple-50 rounded-lg p-6">
+            <h3 class="text-lg font-medium text-gray-900">Maintenance Services</h3>
+            <p class="mt-2 text-gray-500">Regular updates, security patches, and performance optimization.</p>
+          </div>
+
+          {/* Troubleshooting */}
+          <div class="bg-purple-50 rounded-lg p-6">
+            <h3 class="text-lg font-medium text-gray-900">Expert Troubleshooting</h3>
+            <p class="mt-2 text-gray-500">Quick resolution of technical issues and expert problem-solving.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <ServiceCTA />
+  </div>
+  <CTABottom />
+</Layout>

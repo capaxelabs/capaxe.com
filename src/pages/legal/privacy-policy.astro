@@ -1,0 +1,163 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { siteConfig } from "@/config/site";
+import { createSEO } from "@/utils/seo";
+import type { SEOProps } from "@/utils/seo";
+interface Props {
+  seo?: SEOProps;
+  title?: string;
+  description?: string;
+}
+
+const seo = createSEO({
+  pageName: "Privacy Policy",
+  description: "Our privacy policy details how we collect, use, and protect your information",
+  contentType: "basic",
+  pathname: "/legal/privacy-policy"
+});
+---
+
+<Layout seo={seo}>
+  <main class="container mx-auto px-4 py-12">
+    <div class="max-w-6xl mx-auto">
+      <section class="pt-32 pb-16 px-4">
+        <div class="max-w-6xl mx-auto text-center">
+          <h1 class="text-4xl font-bold mb-8">Privacy Policy</h1>
+        </div>
+      </section>
+
+      <div class="max-w-3xl mx-auto prose prose-lg">
+        <p class="text-gray-500 mb-8">Last updated: February 1, 2025</p>
+
+        <section class="mb-10">
+          <h2>Introduction</h2>
+          <p>
+            At {siteConfig.legalName}, we respect your privacy and are committed to protecting your personal data. This privacy policy will inform you
+            about how we look after your personal data when you visit our website and tell you about your privacy rights and how the law protects you.
+          </p>
+          <p>
+            This privacy policy applies to all information collected through our website, as well as any related services, sales, marketing, or
+            events.
+          </p>
+        </section>
+
+        <section class="mb-10">
+          <h2>The Data We Collect</h2>
+          <p>
+            We collect several different types of information for various purposes to provide and improve our service to you. The types of data we may
+            collect include:
+          </p>
+          <ul>
+            <li>
+              <strong>Personal Data:</strong> Name, email address, phone number, address, and other similar contact data.
+            </li>
+            <li>
+              <strong>Usage Data:</strong> Information about how you use our website and services.
+            </li>
+            <li>
+              <strong>Technical Data:</strong> IP address, browser type and version, time zone setting, browser plug-in types and versions, operating system,
+              and platform.
+            </li>
+            <li>
+              <strong>Marketing Data:</strong> Preferences in receiving marketing from us and our third parties.
+            </li>
+          </ul>
+        </section>
+
+        <section class="mb-10">
+          <h2>How We Use Your Data</h2>
+          <p>We use your data for the following purposes:</p>
+          <ul>
+            <li>To provide and maintain our website</li>
+            <li>To notify you about changes to our services</li>
+            <li>To allow you to participate in interactive features of our website</li>
+            <li>To provide customer support</li>
+            <li>To gather analysis or valuable information so that we can improve our website</li>
+            <li>To monitor the usage of our website</li>
+            <li>To detect, prevent and address technical issues</li>
+            <li>To provide you with news, special offers, and general information about other goods, services, and events which we offer</li>
+          </ul>
+        </section>
+
+        <section class="mb-10">
+          <h2>Legal Basis for Processing</h2>
+          <p>
+            We will only use your personal data when the law allows us to. Most commonly, we will use your personal data in the following
+            circumstances:
+          </p>
+          <ul>
+            <li>Where we need to perform the contract we are about to enter into or have entered into with you</li>
+            <li>
+              Where it is necessary for our legitimate interests (or those of a third party) and your interests and fundamental rights do not override
+              those interests
+            </li>
+            <li>Where we need to comply with a legal obligation</li>
+            <li>Where you have provided consent for us to process your personal data</li>
+          </ul>
+        </section>
+
+        <section class="mb-10">
+          <h2>Data Security</h2>
+          <p>
+            We have implemented appropriate security measures to prevent your personal data from being accidentally lost, used, or accessed in an
+            unauthorized way, altered, or disclosed. In addition, we limit access to your personal data to those employees, agents, contractors, and
+            other third parties who have a business need to know.
+          </p>
+        </section>
+
+        <section class="mb-10">
+          <h2>Data Retention</h2>
+          <p>
+            We will only retain your personal data for as long as reasonably necessary to fulfill the purposes we collected it for, including for the
+            purposes of satisfying any legal, regulatory, tax, accounting, or reporting requirements.
+          </p>
+        </section>
+
+        <section class="mb-10">
+          <h2>Your Legal Rights</h2>
+          <p>Under certain circumstances, you have rights under data protection laws in relation to your personal data, including the right to:</p>
+          <ul>
+            <li>Request access to your personal data</li>
+            <li>Request correction of your personal data</li>
+            <li>Request erasure of your personal data</li>
+            <li>Object to processing of your personal data</li>
+            <li>Request restriction of processing your personal data</li>
+            <li>Request transfer of your personal data</li>
+            <li>Right to withdraw consent</li>
+          </ul>
+        </section>
+
+        <section class="mb-10">
+          <h2>Cookies Policy</h2>
+          <p>
+            Our website uses cookies to distinguish you from other users of our website. This helps us to provide you with a good experience when you
+            browse our website and also allows us to improve our site. For detailed information on the cookies we use and the purposes for which we
+            use them, see our <a href="/legal/cookie-policy" class="text-blue-600 hover:underline">Cookie Policy</a>.
+          </p>
+        </section>
+
+        <section class="mb-10">
+          <h2 class="text-2xl font-bold mb-6">Changes to This Privacy Policy</h2>
+          <p>
+            We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and
+            updating the "last updated" date.
+          </p>
+          <p>
+            You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are
+            posted on this page.
+          </p>
+        </section>
+
+        <section>
+          <h2>Contact Us</h2>
+          <p>If you have any questions about this Privacy Policy, please contact us at:</p>
+          <ul>
+            <li>Email: {siteConfig.contact.contactEmail}</li>
+            <li>Phone: {siteConfig.contact.phone}</li>
+            <li>Mail: {siteConfig.contact.address}</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </main>
+</Layout>

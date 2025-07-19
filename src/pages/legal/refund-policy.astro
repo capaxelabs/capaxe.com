@@ -1,0 +1,139 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { siteConfig } from "@/config/site";
+import { createSEO } from "@/utils/seo";
+import type { SEOProps } from "@/utils/seo";
+
+interface Props {
+  seo?: SEOProps;
+  title?: string;
+  description?: string;
+}
+
+const seo = createSEO({
+  pageName: `Refund Policy | ${siteConfig.name}`,
+  description: "Our refund policy details our terms for refunds and cancellations",
+  contentType: "service",
+  pathname: "/legal/refund-policy"
+});
+
+---
+<Layout seo={seo}>
+  <main class="container mx-auto px-4 py-12">
+    <div class="max-w-6xl mx-auto">
+      <section class="pt-32 pb-16 px-4">
+        <div class="max-w-6xl mx-auto text-center">
+          <h1 class="text-4xl font-bold mb-8">Refund Policy</h1>
+        </div>
+      </section>
+
+      <section class="py-16 px-4">
+        <div class="max-w-3xl mx-auto prose prose-lg">
+          <p class="text-gray-500 mb-8">Last updated: February 1, 2025</p>
+
+          <section class="mb-10">
+            <h2>Overview</h2>
+            <p>
+              At {siteConfig.legalName}, we are committed to ensuring your satisfaction with our services. This refund policy outlines the
+              circumstances under which we will provide refunds for our services.
+            </p>
+            <p>
+              By engaging our services, you agree to this refund policy. Please read it carefully before proceeding with any purchase or engagement.
+            </p>
+          </section>
+
+          <section class="mb-10">
+            <h2>Project-Based Services</h2>
+            <p>For custom development projects and other project-based services:</p>
+            <ul>
+              <li>
+                <strong>Initial Deposit:</strong> The initial deposit (typically 50% of the total project cost) is non-refundable once we have commenced
+                work on your project. This covers our initial research, planning, and allocation of resources.
+              </li>
+              <li>
+                <strong>Milestone Payments:</strong> Payments made at project milestones are non-refundable upon completion and approval of the respective
+                milestone deliverables.
+              </li>
+              <li>
+                <strong>Project Cancellation:</strong> If you decide to cancel the project after work has begun:
+                <ul>
+                  <li>You will be billed for all work completed up to the cancellation date</li>
+                  <li>Any prepaid amount exceeding the value of work completed will be refunded within 14 business days</li>
+                </ul>
+              </li>
+            </ul>
+          </section>
+
+          <section class="mb-10">
+            <h2>Retainer Services</h2>
+            <p>For our monthly retainer plans and ongoing services:</p>
+            <ul>
+              <li>
+                <strong>Monthly Retainers:</strong> Retainer fees are billed in advance and are non-refundable for the current month.
+              </li>
+              <li>
+                <strong>Cancellation:</strong> You may cancel a retainer plan at any time with 30 days' written notice. No refund will be provided for
+                the current billing period, but you will not be charged for subsequent periods.
+              </li>
+              <li>
+                <strong>Unused Hours:</strong> Any unused hours in a given month typically do not roll over to the next month and are not refundable, as
+                per the terms of our retainer agreement.
+              </li>
+            </ul>
+          </section>
+
+          <section class="mb-10">
+            <h2>Exceptional Circumstances</h2>
+            <p>In exceptional circumstances, we may consider refunds on a case-by-case basis. These may include:</p>
+            <ul>
+              <li>Major unforeseen events preventing us from delivering the agreed-upon services</li>
+              <li>Substantial failure on our part to deliver the promised services according to the agreed specifications</li>
+              <li>Other extraordinary circumstances as determined by our management team</li>
+            </ul>
+            <p>In such cases, please contact us directly to discuss your situation.</p>
+          </section>
+
+          <section class="mb-10">
+            <h2>How to Request a Refund</h2>
+            <p>To request a refund, please email us at accounting@example.com with the following information:</p>
+            <ul>
+              <li>Your name and company name (if applicable)</li>
+              <li>The service or project for which you are requesting a refund</li>
+              <li>Date of purchase/engagement</li>
+              <li>Reason for the refund request</li>
+              <li>Any relevant documentation or correspondence</li>
+            </ul>
+            <p>We will review your request and respond within 5 business days.</p>
+          </section>
+
+          <section class="mb-10">
+            <h2>Refund Processing</h2>
+            <p>
+              Approved refunds will be processed using the same payment method used for the original transaction, unless otherwise agreed. Refunds
+              typically take 5-10 business days to appear in your account, depending on your payment provider.
+            </p>
+          </section>
+
+          <section class="mb-10">
+            <h2>Client Satisfaction Guarantee</h2>
+            <p>
+              While we maintain a structured refund policy, our primary goal is your satisfaction. If you are dissatisfied with any aspect of our
+              service, we encourage you to contact your project manager or account representative immediately so we can address your concerns.
+            </p>
+          </section>
+
+          <section>
+            <h2>Changes to This Policy</h2>
+            <p>
+              We reserve the right to modify this refund policy at any time. Changes will be effective immediately upon posting to our website, and
+              will apply to all services engaged after the posting date.
+            </p>
+            <p>
+              If you have any questions about our refund policy, please contact us at {siteConfig.contact.contactEmail} or call {siteConfig.contact.phone}.
+            </p>
+          </section>
+        </div>
+      </section>
+    </div>
+  </main>
+</Layout>
