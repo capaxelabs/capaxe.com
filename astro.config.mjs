@@ -7,6 +7,10 @@ import cloudflare from "@astrojs/cloudflare";
 
 import react from "@astrojs/react";
 
+const alias = import.meta.env.PROD ? {
+  "react-dom/server": "react-dom/server.edge",
+} : undefined;
+
 // https://astro.build/config
 export default defineConfig({
   site: "https:/www.capaxe.com",
@@ -16,7 +20,9 @@ export default defineConfig({
       enabled: true,
     },
   }),
+  
   vite: {
     plugins: [tailwindcss()],
+    resolve: { alias },
   },
 });
