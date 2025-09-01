@@ -99,10 +99,10 @@ export const AutoReplyEmail: React.FC<AutoReplyEmailProps> = ({
                 </Text>
                 <Section style={{ textAlign: 'center', margin: '24px 0' }}>
                     <Button
-                        href="https://capaxe.com/portfolio"
+                        href="https://capaxe.com/case-studies"
                         style={buttonStyle}
                     >
-                        View Portfolio
+                        View Case Studies
                     </Button>
                     <Button
                         href="https://capaxe.com/services"

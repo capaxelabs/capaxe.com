@@ -1,39 +1,68 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { siteConfig } from "@/config/site";
-import { caseStudiesDetails } from "@/config/caseStudy";
 import CTABottom from "@/components/CTA.astro";
 import { createSEO } from "@/utils/seo";
-import type { SEOProps } from "@/utils/seo";
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
+import type { RenderResult } from "astro:content";
+import ProjectCarousel from "@/components/ProjectCarousel.tsx";
 export const prerender = true;
 
-interface Props {
-  seo?: SEOProps;
-  title?: string;
-  description?: string;
-}
-const { id } = Astro.params;
-const caseStudyDetail = caseStudiesDetails[id as string];
-
-// Handle case when the case study ID doesn't exist
-if (!caseStudyDetail) {
-  return Astro.redirect("/case-studies");
-}
-
 export async function getStaticPaths() {
-  const caseStudies = await getCollection("case-studies");
+  const caseStudies = await getCollection("caseStudies");
   return caseStudies.map((caseStudy) => ({
     params: { id: caseStudy.id },
     props: { caseStudy },
   }));
 }
 
+const { caseStudy } = Astro.props;
+let rendered: RenderResult | null = null;
+
+if (caseStudy) {
+  rendered = await render(caseStudy);
+} else {
+  console.error("Case study not found");
+}
+
 const seo = createSEO({
-  pageName: caseStudyDetail.title,
-  description: caseStudyDetail.description,
-  pathname: `/case-studies/${id}`,
+  pageName: caseStudy.data.title,
+  description: caseStudy.data.description,
+  pathname: `/case-studies/${caseStudy.id}`,
 });
+
+// Define slide data for layaway solution
+const layawaySlides = [
+  {
+    image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=600&q=80",
+    alt: "Modern dashboard interface with analytics",
+    title: "Customer Dashboard",
+    description: "Secure passwordless login and payment management interface"
+  },
+  {
+    image: "https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=600&q=80",
+    alt: "Payment processing and financial technology",
+    title: "Payment Integration",
+    description: "Stripe + Plaid integration for ACH-based automated payments"
+  },
+  {
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=600&q=80",
+    alt: "Admin dashboard with charts and analytics",
+    title: "Admin Panel",
+    description: "Merchant configuration and layaway plan management"
+  },
+  {
+    image: "https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=600&q=80",
+    alt: "Mobile app interface showing payment plans",
+    title: "Mobile Experience",
+    description: "Responsive design for seamless mobile payments"
+  },
+  {
+    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=600&q=80",
+    alt: "Security and encryption visualization",
+    title: "Security Features",
+    description: "Bank-level security with PCI compliance"
+  }
+];
 ---
 
 <Layout seo={seo}>
@@ -44,84 +73,64 @@ const seo = createSEO({
         <div class="fade-in">
           <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-8 gap-6">
             <div>
-              <h1 class="text-4xl md:text-6xl font-bold mb-4">{caseStudyDetail.title}</h1>
-              <p class="text-xl text-primary-600">{caseStudyDetail.client}</p>
+              <h1 class="text-4xl md:text-6xl font-bold mb-4">{caseStudy.data.title}</h1>
+              <p class="text-xl text-primary-600">{caseStudy.data.client}</p>
             </div>
-            <a
-              href={caseStudyDetail.pdfUrl}
-              download
-              class="flex items-center gap-2 bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"></path>
-              </svg>
-              <span>Download PDF</span>
-            </a>
           </div>
-          <p class="text-xl text-gray-600 max-w-2xl">
-            {caseStudyDetail.description}
+          <p class="text-xl text-gray-600 max-w-2xl mb-8">
+            {caseStudy.data.description}
           </p>
         </div>
       </div>
     </section>
 
-    <!-- Metrics Section -->
+    <!-- Project Details Section -->
     <section class="py-16 px-4 bg-primary-50">
       <div class="max-w-6xl mx-auto">
         <div class="grid md:grid-cols-3 gap-8">
-          {
-            Object.entries(caseStudyDetail.metrics).map(([key, value]) => (
-              <div class="bg-white p-6 rounded-xl shadow-lg text-center fade-in">
-                <div class="text-3xl font-bold text-primary-600 mb-2">{value}</div>
-                <div class="text-gray-600">{key.replace(/([A-Z])/g, " $1").trim()}</div>
-              </div>
-            ))
-          }
+          <div class="bg-white p-6 rounded-xl shadow-lg text-center fade-in">
+            <div class="text-3xl font-bold text-primary-600 mb-2">{caseStudy.data.timeframe}</div>
+            <div class="text-gray-600">Project Duration</div>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-lg text-center fade-in">
+            <div class="text-3xl font-bold text-primary-600 mb-2">{caseStudy.data.techStack.length}</div>
+            <div class="text-gray-600">Technologies Used</div>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-lg text-center fade-in">
+            <div class="text-3xl font-bold text-primary-600 mb-2">{caseStudy.data.client}</div>
+            <div class="text-gray-600">Client</div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Content Sections -->
+    <!-- Tech Stack Section -->
     <section class="py-16 px-4">
       <div class="max-w-6xl mx-auto">
-        <div class="grid md:grid-cols-2 gap-12">
-          <div class="fade-in-left">
-            <h2 class="text-2xl font-bold mb-6">The Challenge</h2>
-            <p class="text-gray-600 whitespace-pre-line mb-8">{caseStudyDetail.challenge}</p>
+        <h2 class="text-3xl font-bold text-center mb-12">Technology Stack</h2>
+        <div class="flex flex-wrap justify-center gap-4 mb-16">
+          {caseStudy.data.techStack.map((tech) => (
+            <span class="bg-primary-100 text-primary-800 px-4 py-2 rounded-full font-medium">{tech}</span>
+          ))}
+        </div>
+      </div>
+    </section>
 
-            <h2 class="text-2xl font-bold mb-6">Our Solution</h2>
-            <p class="text-gray-600 whitespace-pre-line mb-8">{caseStudyDetail.solution}</p>
+    <!-- Project Screenshots Section - Only for layaway-solution -->
+    {caseStudy.id === 'layaway-solution' && (
+      <section class="py-16 px-4 bg-white">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="text-3xl font-bold text-center mb-12">Project Screenshots</h2>
+          <ProjectCarousel client:load slides={layawaySlides} className="my-8" />
+        </div>
+      </section>
+    )}
 
-            <h2 class="text-2xl font-bold mb-6">Results</h2>
-            <p class="text-gray-600 whitespace-pre-line">{caseStudyDetail.results}</p>
-          </div>
-
-          <div class="fade-in-right">
-            <div class="bg-primary-50 p-8 rounded-xl mb-8">
-              <h2 class="text-2xl font-bold mb-6">Client Testimonial</h2>
-              <blockquote class="text-gray-600 italic mb-4">
-                &ldquo;{caseStudyDetail.testimonial.quote}&rdquo;
-              </blockquote>
-              <div class="font-medium">
-                <div class="text-primary-600">{caseStudyDetail.testimonial.author}</div>
-                <div class="text-gray-500">{caseStudyDetail.testimonial.position}</div>
-              </div>
-            </div>
-
-            <!-- PDF Preview -->
-            <div class="sticky top-24">
-              <h2 class="text-2xl font-bold mb-6">Case Study PDF Preview</h2>
-              <div class="rounded-xl overflow-hidden shadow-lg">
-                <iframe src={caseStudyDetail.pdfUrl} class="w-full h-[600px]" title="PDF Preview"></iframe>
-              </div>
-              <p class="text-sm text-gray-500 mt-2">
-                If the preview doesn't load, <a href={caseStudyDetail.pdfUrl} class="text-primary-600 hover:underline">download the PDF</a> directly.
-              </p>
-            </div>
-          </div>
+    <!-- Content Section -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <div class="prose prose-lg prose-primary mx-auto fade-in">
+          {rendered && <rendered.Content />}
         </div>
       </div>
     </section>

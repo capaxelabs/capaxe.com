@@ -23,7 +23,7 @@ const HeroSection = () => {
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4">
                             <Button size="lg" className="bg-primary-400 hover:bg-primary-500 text-white" asChild>
-                                <a href="/portfolio">
+                                <a href="/case-studies">
                                     View Our Work
                                     <ArrowRight className="ml-2 h-4 w-4" />
                                 </a>

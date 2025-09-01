@@ -1,5 +1,4 @@
 import type { MenuConfig } from "@/types";
-import { caseStudies } from "@/config/caseStudy";
 
 export const menuConfig: MenuConfig = {
     mainNav: [

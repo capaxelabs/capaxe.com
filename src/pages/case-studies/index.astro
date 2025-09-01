@@ -2,7 +2,7 @@
 import Layout from "@/layouts/Layout.astro";
 import { siteConfig } from "@/config/site";
 import CTABottom from "@/components/CTA.astro";
-import { caseStudies } from "@/config/caseStudy";
+import { getCollection } from "astro:content";
 import { createSEO } from "@/utils/seo";
 import type { SEOProps } from "@/utils/seo";
 
@@ -11,6 +11,8 @@ interface Props {
   title?: string;
   description?: string;
 }
+
+const caseStudies = await getCollection("caseStudies");
 
 const seo = createSEO({
   pageName: `Case Studies | ${siteConfig.name}`,
@@ -44,37 +46,33 @@ const seo = createSEO({
                 <div class="p-8">
                   <div class="flex justify-between items-start mb-6">
                     <div>
-                      <h2 class="text-2xl font-bold mb-2">{study.title}</h2>
-                      <p class="text-primary-600 font-medium">{study.client}</p>
+                      <h2 class="text-2xl font-bold mb-2">{study.data.title}</h2>
+                      <p class="text-primary-600 font-medium">{study.data.client}</p>
                     </div>
-                    <a href={study.pdfUrl} download class="flex items-center gap-2 text-primary-600 hover:text-primary-700">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke-width="1.5"
-                        stroke="currentColor"
-                        class="w-5 h-5"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"
-                        />
-                      </svg>
-                      <span>Download PDF</span>
-                    </a>
                   </div>
 
-                  <p class="text-gray-600 mb-6">{study.description}</p>
+                  <p class="text-gray-600 mb-6">{study.data.description}</p>
 
-                  <div class="grid grid-cols-3 gap-4 mb-6">
-                    {Object.entries(study.metrics).map(([key, value]) => (
-                      <div class="bg-primary-50 p-4 rounded-lg text-center">
-                        <div class="text-2xl font-bold text-primary-600">{value}</div>
-                        <div class="text-sm text-gray-600">{key.replace(/([A-Z])/g, " $1").trim()}</div>
-                      </div>
-                    ))}
+                  <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div class="bg-primary-50 p-4 rounded-lg text-center">
+                      <div class="text-lg font-bold text-primary-600">{study.data.timeframe}</div>
+                      <div class="text-sm text-gray-600">Timeframe</div>
+                    </div>
+                    <div class="bg-primary-50 p-4 rounded-lg text-center">
+                      <div class="text-lg font-bold text-primary-600">{study.data.techStack.length}</div>
+                      <div class="text-sm text-gray-600">Technologies</div>
+                    </div>
+                  </div>
+
+                  <div class="mb-6">
+                    <div class="flex flex-wrap gap-2">
+                      {study.data.techStack.slice(0, 3).map((tech) => (
+                        <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">{tech}</span>
+                      ))}
+                      {study.data.techStack.length > 3 && (
+                        <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">+{study.data.techStack.length - 3} more</span>
+                      )}
+                    </div>
                   </div>
 
                   <a href={`/case-studies/${study.id}`} class="inline-block">

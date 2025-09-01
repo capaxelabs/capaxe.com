@@ -8,7 +8,7 @@ export default function ServiceCTA() {
                 <a href="/consultation">Get a Free Consultation</a>
             </Button>
             <Button className="px-6 py-3 bg-gray-100 text-gray-800 rounded-lg hover:bg-gray-200" asChild>
-                <a href="/portfolio">View Our Portfolio</a>
+                <a href="/case-studies">View Our Case Studies</a>
             </Button>
         </div>
     )

@@ -14,7 +14,15 @@ const alias = import.meta.env.PROD ? {
 // https://astro.build/config
 export default defineConfig({
   site: "https:/www.capaxe.com",
-  integrations: [mdx(), sitemap(), react()],
+  integrations: [
+    mdx({
+      shikiConfig: {
+        theme: 'github-dark',
+      },
+    }), 
+    sitemap(), 
+    react()
+  ],
   adapter: cloudflare({
     platformProxy: {
       enabled: true,
