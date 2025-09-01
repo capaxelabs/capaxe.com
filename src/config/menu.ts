@@ -69,15 +69,15 @@ export const menuConfig: MenuConfig = {
         caseStudies: [
             {
                 title: "Shopify Store Redesign",
-                href: "/case-studies/shopify-store-redesign",
+                href: "/case-studies/cld9-headless-storefront",
             },
             {
                 title: "Custom App Development",
-                href: "/case-studies/custom-app-development",
+                href: "/case-studies/layaway-solution",
             },
             {
                 title: "E-commerce Migration",
-                href: "/case-studies/ecommerce-migration",
+                href: "/case-studies/furniture-headless-store",
             },
         ],
     },
