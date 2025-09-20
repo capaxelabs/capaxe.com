@@ -7,7 +7,7 @@ interface Props extends SEOProps {}
 const { 
   title = siteConfig.name, 
   description = siteConfig.description,
-  image = "/images/og.jpg",
+  image = "/og.jpg",
   keywords,
   canonical,
   type = "website",
@@ -47,11 +47,12 @@ const canonicalURL = canonical || new URL(Astro.url.pathname, Astro.site).toStri
 {author && <meta property="article:author" content={author} />}
 
 <!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:domain" content="capaxe.com" />
 <meta property="twitter:url" content={Astro.url} />
-<meta property="twitter:title" content={title} />
-<meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(image, Astro.site)} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={new URL(image, Astro.site)} />
 
 <!-- Schema.org structured data -->
 {structuredData && (
