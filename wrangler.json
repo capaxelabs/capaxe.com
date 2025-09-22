@@ -12,6 +12,7 @@
   },
   "upload_source_maps": true,
   "vars": {
-    "TURNSTILE_SECRET_KEY": "0x4AAAAAAA7TMZX_7wqPk8_NKB7eoM5Exag"
+    "TURNSTILE_SECRET_KEY": "0x4AAAAAAA7TMZX_7wqPk8_NKB7eoM5Exag",
+    "EMAIL_API_KEY": "CPb591c23286eb45dc8c08e1642d3225ba"
   }
 }

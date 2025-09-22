@@ -10,10 +10,8 @@ export const POST: APIRoute = async ({ request }) => {
     const { name, email, storeUrl } = body as { name: string; email: string; storeUrl: string };
 
     // Send confirmation email to user
-    await sendEmail({
-      to: email,
-      subject: 'Your Shopify SEO Audit Report is Being Generated',
-      html: `
+    await sendEmail(
+      `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h1 style="color: #6B46C1;">Thank you for requesting an SEO Audit!</h1>
           <p>Hi ${name},</p>
@@ -29,13 +27,13 @@ export const POST: APIRoute = async ({ request }) => {
           <p style="margin-top: 20px;">Best regards,<br>The Capaxe Team</p>
         </div>
       `,
-    });
+      email,
+      'Your Shopify SEO Audit Report is Being Generated'
+    );
 
     // Send notification to admin
-    await sendEmail({
-      to: process.env.ADMIN_EMAIL!,
-      subject: 'New SEO Audit Request',
-      html: `
+    await sendEmail(
+      `
         <div style="font-family: Arial, sans-serif;">
           <h2>New SEO Audit Request</h2>
           <p><strong>Name:</strong> ${name}</p>
@@ -44,7 +42,9 @@ export const POST: APIRoute = async ({ request }) => {
           <p><strong>Timestamp:</strong> ${new Date().toISOString()}</p>
         </div>
       `,
-    });
+      process.env.ADMIN_EMAIL!,
+      'New SEO Audit Request'
+    );
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,

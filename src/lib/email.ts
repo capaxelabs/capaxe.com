@@ -91,12 +91,9 @@ export async function sendEmail(
     cc?: string
 ) {
     const formData = new FormData();
-    // formData.append('to', to);
-    formData.append('to', 'mukesh@capaxe.com');
+    formData.append('to', to);
     formData.append('from', siteConfig.contact.fromEmail);
     formData.append('subject', subject);
-
-    // Use the HTML as-is without adding DOCTYPE
     formData.append('html', emailHtml.trim());
 
     if (cc) {
@@ -110,13 +107,15 @@ export async function sendEmail(
 
     const requestOptions = {
         method: "POST",
+        headers: {
+            'x-api-key': process.env.EMAIL_API_KEY || "CPb591c23286eb45dc8c08e1642d3225ba"
+        },
         body: formData,
         redirect: "follow" as RequestRedirect
     };
 
     try {
-
-        const response = await fetch('https://mail-worker.capaxe.workers.dev', requestOptions);
+        const response = await fetch('https://tools.capaxe.com/email', requestOptions);
 
         // Log response headers for debugging
         const headers: Record<string, string> = {};
@@ -221,12 +220,11 @@ export async function sendContactFormAutoReply(formData: ContactFormData) {
         // Extract needed data for the auto-reply
         const { name, email, companyName, serviceType } = formData;
 
-        // Work around start
         const formdata = new FormData();
         const html = `
-        Hello ${name},  \n\n
-        We have received your inquiry. We will get back to you soon. \n\n
-        Regards, \n\n
+        Hello ${name},<br><br>
+        We have received your inquiry. We will get back to you soon.<br><br>
+        Regards,<br><br>
         Capaxe Team
         `;
         formdata.append("to", email);
@@ -234,18 +232,18 @@ export async function sendContactFormAutoReply(formData: ContactFormData) {
         formdata.append("subject", `Thank you for contacting Capaxe`);
         formdata.append("html", html);
 
-        const requestOptionss = {
+        const requestOptions = {
             method: "POST",
+            headers: {
+                'x-api-key': process.env.EMAIL_API_KEY!
+            },
             body: formdata,
-            redirect: "follow"
+            redirect: "follow" as RequestRedirect
         };
 
-        const response = await fetch("https://mail-worker.capaxe.workers.dev", requestOptionss);
-
+        const response = await fetch("https://tools.capaxe.com/email", requestOptions);
 
         return response;
-
-        // Work around end
 
         // Generate the auto-reply email HTML using React Email
         const emailHtml = renderReactEmail(
