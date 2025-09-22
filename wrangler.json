@@ -10,5 +10,8 @@
   "observability": {
     "enabled": true
   },
-  "upload_source_maps": true
+  "upload_source_maps": true,
+  "vars": {
+    "TURNSTILE_SECRET_KEY": "0x4AAAAAAA7TMZX_7wqPk8_NKB7eoM5Exag"
+  }
 }
