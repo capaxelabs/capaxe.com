@@ -211,7 +211,12 @@ export const siteConfig: SiteConfig = {
             'within_3_months': 'Within 3 Months',
             'flexible': 'Flexible'
         }
-
-
-    }
+    },
+    clientLogos: [
+        { src: "/logos/clients/aos.webp", alt: "AOS", name: "AOS" },
+        { src: "/logos/clients/cld9.png", alt: "CLD9", name: "CLD9" },
+        { src: "/logos/clients/pickinglist.webp", alt: "Picking List", name: "Picking List" },
+        { src: "/logos/clients/renderease.avif", alt: "RenderEase", name: "RenderEase" },
+        { src: "/logos/clients/renderease.png", alt: "RenderEase PNG", name: "RenderEase" }
+    ]
 }

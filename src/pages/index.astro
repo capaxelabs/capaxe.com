@@ -4,12 +4,13 @@ import { siteConfig } from "@/config/site";
 import { StickyCards, ServiceLanding } from "@/components/home/HomeComponents";
 import RetainerPlansSection from "@/components/RetainerPlan";
 import HeroSection from "@/components/HeroSection.astro";
+import ClientLogos from "@/components/ClientLogos";
 ---
 
 <Layout title={siteConfig.name} description={siteConfig.description}>
   <div class="min-h-screen">
     <HeroSection />
-    <!-- <LogoHero siteConfig={siteConfig} client:load /> -->
+    <ClientLogos siteConfig={siteConfig} client:load />
     <StickyCards siteConfig={siteConfig} client:load />
     <ServiceLanding siteConfig={siteConfig} client:load />
     {/* Retainer Benefits Section */}

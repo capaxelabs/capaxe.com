@@ -73,6 +73,11 @@ export interface SiteConfig {
         budget: Record<string, string>
         timeline: Record<string, string>
     }
+    clientLogos?: {
+        src: string
+        alt: string
+        name: string
+    }[]
 }
 
 export interface Plan {
