@@ -1,0 +1,300 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { siteConfig } from "@/config/site";
+import ContactFormReact from "@/components/ContactFormReact";
+import ChatContactForm from "@/components/ChatContactForm";
+import { createSEO } from "@/utils/seo";
+
+const seo = createSEO({
+    pageName: `Contact Us | ${siteConfig.name}`,
+    description:
+        "Get in touch with our team. Choose between our traditional form or chat-style inquiry.",
+    contentType: "service",
+    pathname: "/contact",
+});
+---
+
+<Layout seo={seo}>
+    <section id="retainer-plans" class="section max-w-6xl mx-auto">
+        <div class="container mx-auto">
+            <div class="text-center max-w-3xl mx-auto">
+                <span
+                    class="inline-block px-3 py-1 rounded-full bg-primary-200 text-primary-700 text-xs font-medium mb-4"
+                    >Retainer Plans</span
+                ><h2 class="section-title text-center mx-auto">
+                    Ongoing Support for Your Success
+                </h2><p class="section-subtitle text-center mx-auto">
+                    Choose from our flexible retainer plans designed to provide
+                    continuous improvements and support for your Shopify store.
+                    Partner with us for long-term success.
+                </p>
+            </div><div class="flex justify-center mb-12">
+                <div class="inline-flex rounded-full p-1 bg-gray-100">
+                    <button
+                        type="button"
+                        class="px-6 py-2 rounded-full text-sm font-medium transition-all text-gray-600 hover:text-gray-900"
+                        >Quarterly <span
+                            class="text-xs font-bold text-primary-500"
+                            >Save 10%</span
+                        ></button
+                    ><button
+                        type="button"
+                        class="px-6 py-2 rounded-full text-sm font-medium transition-all bg-white shadow-sm"
+                        >Yearly <span class="text-xs font-bold text-primary-500"
+                            >Save 20%</span
+                        ></button>
+                </div>
+            </div><div class="grid md:grid-cols-3 gap-8">
+                <div
+                    data-slot="card"
+                    class="text-card-foreground flex flex-col gap-6 relative overflow-hidden bg-white rounded-2xl shadow-xl p-3 border-2 transition-all border-gray-200 hover:border-primary-300"
+                >
+                    <div class="p-4">
+                        <h3 class="text-2xl font-semibold mb-3">
+                            Starter – 15h
+                        </h3><p class="text-gray-600 text-sm mb-6">
+                            Perfect for small businesses or new Shopify stores
+                            needing reliable, on-demand support and
+                            improvements.
+                        </p><div class="flex flex-col mb-6">
+                            <div class="flex items-baseline">
+                                <span class="text-5xl font-bold">$960</span
+                                ><span
+                                    class="text-gray-500 text-2xl font-semibold ml-2"
+                                    >/month</span>
+                            </div><div class="flex items-baseline line-through">
+                                <span
+                                    class="text-gray-400 text-xl font-semibold mr-2"
+                                    >$1,200 /month</span>
+                            </div><p class="text-sm text-gray-500 mt-2">
+                                Billed annually (20% discount)
+                            </p>
+                        </div><ul class="space-y-3 mb-8">
+                            <li class="flex items-start">
+                                <span class="text-primary-600 mr-2">✅</span
+                                ><span class="text-sm text-gray-600"
+                                    >Monthly strategy meetings</span>
+                            </li><li class="flex items-start">
+                                <span class="text-primary-600 mr-2">✅</span
+                                ><span class="text-sm text-gray-600"
+                                    >Monthly website audits</span>
+                            </li><li class="flex items-start">
+                                <span class="text-primary-600 mr-2">✅</span
+                                ><span class="text-sm text-gray-600"
+                                    >Cancel anytime</span>
+                            </li><li class="flex items-start">
+                                <span class="text-primary-600 mr-2">✅</span
+                                ><span class="text-sm text-gray-600"
+                                    >Real-time chat support</span>
+                            </li><li class="flex items-start">
+                                <span class="text-primary-600 mr-2">✅</span
+                                ><span class="text-sm text-gray-600"
+                                    >Non-urgent: reply within 48h</span>
+                            </li><li class="flex items-start">
+                                <span class="text-primary-600 mr-2">✅</span
+                                ><span class="text-sm text-gray-600"
+                                    >Critical issues: immediate action</span>
+                            </li><li class="flex items-start">
+                                <span class="text-primary-600 mr-2">✅</span
+                                ><span class="text-sm text-gray-600"
+                                    >Most tasks completed in 24h</span>
+                            </li><li class="flex items-start">
+                                <span class="text-primary-600 mr-2">✅</span
+                                ><span class="text-sm text-gray-600"
+                                    >Dedicated PM &amp; Shopify developer</span>
+                            </li><li class="flex items-start">
+                                <span class="text-primary-600 mr-2">✅</span
+                                ><span class="text-sm text-gray-600"
+                                    >Project collaboration in ClickUp or your
+                                    preferred tool</span>
+                            </li><li class="flex items-start">
+                                <span class="text-primary-600 mr-2">✅</span
+                                ><span class="text-sm text-gray-600"
+                                    >Regular progress &amp; performance updates</span>
+                            </li>
+                        </ul><button
+                            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-10 px-4 py-2 w-full border-2 border-primary-400 bg-transparent hover:bg-primary-100 text-primary-500"
+                            >Learn More</button>
+                    </div>
+                </div><div
+                    data-slot="card"
+                    class="text-card-foreground flex flex-col gap-6 relative overflow-hidden bg-white rounded-2xl shadow-xl p-3 border-2 hover:border-purple-500 transition-all border-primary-400 shadow-soft"
+                >
+                    <div class="absolute top-0 right-0">
+                        <div
+                            class="bg-primary-400 text-white text-xs font-bold px-4 py-1 transform rotate-45 translate-x-[30%] translate-y-[40%] shadow-sm"
+                        >
+                            POPULAR
+                        </div>
+                    </div><div class="p-4">
+                        <h3 class="text-2xl font-semibold mb-3">
+                            Growth – 30h
+                        </h3><p class="text-gray-600 text-sm mb-6">
+                            Best for growing businesses with more complex
+                            Shopify needs, including CRO and advanced support.
+                        </p><div class="flex flex-col mb-6">
+                            <div class="flex items-baseline">
+                                <span class="text-5xl font-bold">$1666</span
+                                ><span
+                                    class="text-gray-500 text-2xl font-semibold ml-2"
+                                    >/month</span>
+                            </div><div class="flex items-baseline line-through">
+                                <span
+                                    class="text-gray-400 text-xl font-semibold mr-2"
+                                    >$1,999 /month</span>
+                            </div><p class="text-sm text-gray-500 mt-2">
+                                Billed annually (20% discount)
+                            </p>
+                        </div><ul class="space-y-3 mb-8">
+                            <li class="flex items-start">
+                                <span class="text-primary-600 mr-2">✅</span
+                                ><span class="text-sm text-gray-600"
+                                    >On-request growth strategy meetings</span>
+                            </li><li class="flex items-start">
+                                <span class="text-primary-600 mr-2">✅</span
+                                ><span class="text-sm text-gray-600"
+                                    >On-request website audits</span>
+                            </li><li class="flex items-start">
+                                <span class="text-primary-600 mr-2">✅</span
+                                ><span class="text-sm text-gray-600"
+                                    >Regular CRO audits with actionable insights</span>
+                            </li><li class="flex items-start">
+                                <span class="text-primary-600 mr-2">✅</span
+                                ><span class="text-sm text-gray-600"
+                                    >Cancel anytime</span>
+                            </li><li class="flex items-start">
+                                <span class="text-primary-600 mr-2">✅</span
+                                ><span class="text-sm text-gray-600"
+                                    >Real-time chat support</span>
+                            </li><li class="flex items-start">
+                                <span class="text-primary-600 mr-2">✅</span
+                                ><span class="text-sm text-gray-600"
+                                    >Priority response within 24h</span>
+                            </li><li class="flex items-start">
+                                <span class="text-primary-600 mr-2">✅</span
+                                ><span class="text-sm text-gray-600"
+                                    >Critical issues: immediate action</span>
+                            </li><li class="flex items-start">
+                                <span class="text-primary-600 mr-2">✅</span
+                                ><span class="text-sm text-gray-600"
+                                    >Most tasks completed in 24h</span>
+                            </li><li class="flex items-start">
+                                <span class="text-primary-600 mr-2">✅</span
+                                ><span class="text-sm text-gray-600"
+                                    >Dedicated PM &amp; Tech Lead</span>
+                            </li><li class="flex items-start">
+                                <span class="text-primary-600 mr-2">✅</span
+                                ><span class="text-sm text-gray-600"
+                                    >Dedicated &amp; backup Shopify developer</span>
+                            </li><li class="flex items-start">
+                                <span class="text-primary-600 mr-2">✅</span
+                                ><span class="text-sm text-gray-600"
+                                    >Project collaboration in ClickUp or your
+                                    preferred tool</span>
+                            </li><li class="flex items-start">
+                                <span class="text-primary-600 mr-2">✅</span
+                                ><span class="text-sm text-gray-600"
+                                    >Regular progress &amp; performance updates</span>
+                            </li>
+                        </ul><button
+                            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-10 px-4 py-2 w-full bg-primary-400 hover:bg-primary-500 text-white"
+                            >Get Started</button>
+                    </div>
+                </div><div
+                    data-slot="card"
+                    class="text-card-foreground flex flex-col gap-6 relative overflow-hidden bg-white rounded-2xl shadow-xl p-3 border-2 transition-all border-gray-200 hover:border-primary-300"
+                >
+                    <div class="p-4">
+                        <h3 class="text-2xl font-semibold mb-3">
+                            Enterprise – 50h
+                        </h3><p class="text-gray-600 text-sm mb-6">
+                            Tailored for high-growth or large Shopify businesses
+                            with demanding, ongoing dev &amp; design needs.
+                        </p><div class="flex flex-col mb-6">
+                            <div class="flex items-baseline">
+                                <span class="text-5xl font-bold">$2560</span
+                                ><span
+                                    class="text-gray-500 text-2xl font-semibold ml-2"
+                                    >/month</span>
+                            </div><div class="flex items-baseline line-through">
+                                <span
+                                    class="text-gray-400 text-xl font-semibold mr-2"
+                                    >$3,200 /month</span>
+                            </div><p class="text-sm text-gray-500 mt-2">
+                                Billed annually (20% discount)
+                            </p>
+                        </div><ul class="space-y-3 mb-8">
+                            <li class="flex items-start">
+                                <span class="text-primary-600 mr-2">✅</span
+                                ><span class="text-sm text-gray-600"
+                                    >Frequent growth strategy sessions (2–3/mo)</span>
+                            </li><li class="flex items-start">
+                                <span class="text-primary-600 mr-2">✅</span
+                                ><span class="text-sm text-gray-600"
+                                    >Weekly website audits</span>
+                            </li><li class="flex items-start">
+                                <span class="text-primary-600 mr-2">✅</span
+                                ><span class="text-sm text-gray-600"
+                                    >Advanced CRO audits &amp; best practices
+                                    for conversion growth</span>
+                            </li><li class="flex items-start">
+                                <span class="text-primary-600 mr-2">✅</span
+                                ><span class="text-sm text-gray-600"
+                                    >Cancel anytime</span>
+                            </li><li class="flex items-start">
+                                <span class="text-primary-600 mr-2">✅</span
+                                ><span class="text-sm text-gray-600"
+                                    >Real-time chat support</span>
+                            </li><li class="flex items-start">
+                                <span class="text-primary-600 mr-2">✅</span
+                                ><span class="text-sm text-gray-600"
+                                    >Priority initial response within 12h</span>
+                            </li><li class="flex items-start">
+                                <span class="text-primary-600 mr-2">✅</span
+                                ><span class="text-sm text-gray-600"
+                                    >Critical issues: immediate action</span>
+                            </li><li class="flex items-start">
+                                <span class="text-primary-600 mr-2">✅</span
+                                ><span class="text-sm text-gray-600"
+                                    >Most tasks resolved within 12h</span>
+                            </li><li class="flex items-start">
+                                <span class="text-primary-600 mr-2">✅</span
+                                ><span class="text-sm text-gray-600"
+                                    >Senior PM &amp; Tech Lead</span>
+                            </li><li class="flex items-start">
+                                <span class="text-primary-600 mr-2">✅</span
+                                ><span class="text-sm text-gray-600"
+                                    >2 dedicated &amp; 2 backup Shopify
+                                    developers</span>
+                            </li><li class="flex items-start">
+                                <span class="text-primary-600 mr-2">✅</span
+                                ><span class="text-sm text-gray-600"
+                                    >Project collaboration in ClickUp or your
+                                    preferred tool</span>
+                            </li><li class="flex items-start">
+                                <span class="text-primary-600 mr-2">✅</span
+                                ><span class="text-sm text-gray-600"
+                                    >Regular progress &amp; performance updates</span>
+                            </li>
+                        </ul><button
+                            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-10 px-4 py-2 w-full border-2 border-primary-400 bg-transparent hover:bg-primary-100 text-primary-500"
+                            >Learn More</button>
+                    </div>
+                </div>
+            </div><div class="bg-primary-100 rounded-xl p-8 mt-16 text-center">
+                <h3
+                    class="text-2xl font-semibold mb-4"
+                    style="font-family:'Playfair Display', serif"
+                >
+                    Need a Custom Plan?
+                </h3><p class="text-gray-600 mb-6 max-w-2xl mx-auto">
+                    We understand that every business has unique needs. Contact
+                    us to discuss a custom retainer plan tailored specifically
+                    to your Shopify store requirements.
+                </p><button
+                    class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-10 px-4 py-2 bg-primary-400 hover:bg-primary-500 text-white"
+                    >Contact Us for Custom Plans</button>
+            </div>
+        </div>
+    </section>
+</Layout>

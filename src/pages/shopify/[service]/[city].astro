@@ -1,0 +1,161 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import CTABottom from "@/components/CTA.astro";
+import { createSEO } from "@/utils/seo";
+import { siteConfig } from "@/config/site";
+import {
+  pseoServices,
+  pseoCities,
+  type PSEOService,
+  type PSEOCity,
+  buildTargetKeywords
+} from "@/config/pseo";
+
+interface Props {
+  service: PSEOService;
+  city: PSEOCity;
+  uniqueValueProp: string;
+}
+
+export function getStaticPaths() {
+  return pseoServices.flatMap((service, serviceIndex) =>
+    pseoCities.map((city, cityIndex) => ({
+      params: { service: service.slug, city: city.slug },
+      props: {
+        service,
+        city,
+        uniqueValueProp:
+          service.uniqueValueProps[(serviceIndex + cityIndex) % service.uniqueValueProps.length]
+      }
+    }))
+  );
+}
+
+const { service, city, uniqueValueProp } = Astro.props as Props;
+
+const serviceBenefit = service.serviceBenefit;
+const localChallenge = city.localChallenge;
+const targetKeywords = buildTargetKeywords(service, city);
+const keywords = targetKeywords.join(", ");
+
+const seo = createSEO({
+  pageName: `${service.name} in ${city.name}`,
+  description: `${service.metaDescription} We help ${city.name} brands overcome ${localChallenge}.`,
+  keywords,
+  pathname: `/shopify/${service.slug}/${city.slug}`,
+  contentType: "service"
+});
+
+seo.structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: service.name,
+  description: seo.description,
+  provider: {
+    "@type": "Organization",
+    name: siteConfig.name,
+    url: siteConfig.url
+  },
+  serviceType: service.name,
+  areaServed: city.name
+};
+---
+
+<Layout seo={seo}>
+  <section class="pt-32 pb-16 px-4 bg-white">
+    <div class="max-w-5xl mx-auto space-y-6">
+      <h1 class="text-4xl md:text-5xl font-bold">
+        Premier {service.name} Experts in {city.name}
+      </h1>
+      <p class="text-lg text-gray-600">
+        Are you an e-commerce brand based in {city.name} looking to maximize your Shopify investment? Capaxe is your specialized partner for
+        high-performance {service.name.toLowerCase()} services. We understand the specific demands of {localChallenge} and deliver tailored
+        solutions that translate directly into {serviceBenefit}.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-16 px-4 bg-gray-50">
+    <div class="max-w-5xl mx-auto space-y-4">
+      <h2 class="text-3xl font-semibold">The {city.name} Edge: Why Localized {service.name} Matters</h2>
+      <p class="text-lg text-gray-600">
+        In a rapidly moving market like {city.name}, generic solutions won&apos;t cut it. Your e-commerce store needs to be more than just functional;
+        it needs to be an optimized revenue engine. Our team combines deep technical expertise with a keen understanding of local user behavior and
+        market trends.
+      </p>
+      <p class="text-lg text-gray-600">
+        Whether you require a complete platform rebuild, a complex third-party app integration, or specialized performance tuning, we focus on
+        delivering a {uniqueValueProp}. We don&apos;t just build or fix; we architect for scale and conversion.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-16 px-4 bg-white">
+    <div class="max-w-5xl mx-auto space-y-6">
+      <h2 class="text-3xl font-semibold">Our Focused {service.name} Process</h2>
+      <p class="text-lg text-gray-600">
+        Our approach to {service.name} is transparent, data-driven, and focused on tangible outcomes. We follow a proven three-step process to ensure
+        project success:
+      </p>
+      <ol class="space-y-6 list-decimal list-inside text-gray-600">
+        <li class="space-y-2">
+          <h3 class="text-2xl font-semibold text-gray-900">Discovery &amp; Strategy</h3>
+          <p>
+            We begin with an in-depth assessment of your current platform, your goals, and your target audience in {city.name}. This ensures our
+            {service.name.toLowerCase()} plan aligns perfectly with your business KPIs and sets the foundation for {serviceBenefit}.
+          </p>
+        </li>
+        <li class="space-y-2">
+          <h3 class="text-2xl font-semibold text-gray-900">Execution &amp; Quality Assurance</h3>
+          <p>
+            Leveraging Astro’s modern architecture for speed, we execute the {service.name.toLowerCase()} work using best-in-class coding standards.
+            For example:
+          </p>
+          <ul class="list-disc list-inside space-y-2 pl-4">
+            <li>Development: Clean, reusable Liquid and modern JavaScript designed to minimize technical debt.</li>
+            <li>Migration: 100% data fidelity with preserved order history, customer accounts, and SEO value through structured redirects.</li>
+            <li>
+              Speed Optimization: Critical CSS prioritization, elimination of render-blocking resources, and advanced image compression for
+              lightning-fast Core Web Vitals.
+            </li>
+          </ul>
+        </li>
+        <li class="space-y-2">
+          <h3 class="text-2xl font-semibold text-gray-900">Launch &amp; Post-Launch Support</h3>
+          <p>
+            Following rigorous testing across devices and browsers, we handle a smooth deployment. Our commitment extends past the launch with
+            guaranteed post-implementation support to ensure your new or updated store in {city.name} performs flawlessly.
+          </p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="py-16 px-4 bg-gray-50">
+    <div class="max-w-5xl mx-auto space-y-6 text-center">
+      <h2 class="text-3xl font-semibold">Ready to Elevate Your Shopify Store in {city.name}?</h2>
+      <p class="text-lg text-gray-600">
+        Stop losing customers to slow load times or cumbersome checkout flows. Partner with Capaxe for expert {service.name.toLowerCase()} that
+        gives you a competitive advantage in {city.name}.
+      </p>
+      <a
+        class="inline-flex items-center justify-center rounded-md bg-black px-6 py-3 text-white text-lg font-medium transition hover:bg-gray-800"
+        href="/contact"
+      >
+        Contact us today for a free project consultation
+      </a>
+    </div>
+  </section>
+
+  <section class="px-4 pb-16">
+    <div class="max-w-5xl mx-auto">
+      <p class="text-xs text-gray-400" aria-hidden="true">
+        Capaxe provides comprehensive Shopify and Astro services across the US, including top cities like New York, Los Angeles, Chicago, Houston,
+        Phoenix, Philadelphia, San Antonio, San Diego, Dallas, and San Jose.
+      </p>
+      <p class="sr-only">Target Keywords: {targetKeywords.join(", ")}</p>
+    </div>
+  </section>
+
+  <CTABottom />
+</Layout>
