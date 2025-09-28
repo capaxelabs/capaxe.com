@@ -1,7 +1,9 @@
 import { motion, useScroll, useTransform } from "motion/react"
 import type { SiteConfig } from "@/types"
 import { ShoppingBagIcon, CodeBracketIcon, PhoneIcon } from '@heroicons/react/24/outline';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import ChatContactForm from "@/components/ChatContactForm";
 
 export const ServiceLanding = ({ siteConfig }: { siteConfig: SiteConfig }) => {
     return (
@@ -108,55 +110,159 @@ export const RetainerBenefits = ({ siteConfig }: { siteConfig: SiteConfig }) => 
 
 
 export const StickyCards = ({ siteConfig }: { siteConfig: SiteConfig }) => {
-
     const containerRef = useRef(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const { scrollYProgress } = useScroll({
         target: containerRef,
         offset: ["start end", "end start"]
     });
 
+    const features = [
+        {
+            icon: "🚀",
+            title: "Expert Team",
+            description: "Our team of skilled professionals brings years of experience and deep expertise to every project.",
+            gradient: "from-blue-500 to-cyan-500",
+            bgGradient: "from-blue-50 to-cyan-50"
+        },
+        {
+            icon: "💡",
+            title: "Innovative Solutions",
+            description: "We leverage cutting-edge technologies to deliver innovative solutions that drive real results.",
+            gradient: "from-purple-500 to-pink-500",
+            bgGradient: "from-purple-50 to-pink-50"
+        },
+        {
+            icon: "🎯",
+            title: "Client-Focused",
+            description: "We prioritize your business goals and work closely with you to achieve measurable success.",
+            gradient: "from-green-500 to-emerald-500",
+            bgGradient: "from-green-50 to-emerald-50"
+        },
+        {
+            icon: "⚡",
+            title: "Fast Delivery",
+            description: "Quick turnaround times without compromising on quality. Get your projects delivered on schedule.",
+            gradient: "from-orange-500 to-red-500",
+            bgGradient: "from-orange-50 to-red-50"
+        },
+        {
+            icon: "🔧",
+            title: "Custom Solutions",
+            description: "Tailored approaches that fit your unique business needs and technical requirements.",
+            gradient: "from-indigo-500 to-blue-500",
+            bgGradient: "from-indigo-50 to-blue-50"
+        },
+        {
+            icon: "📈",
+            title: "Proven Results",
+            description: "Track record of successful projects that have delivered measurable business growth and ROI.",
+            gradient: "from-teal-500 to-green-500",
+            bgGradient: "from-teal-50 to-green-50"
+        }
+    ];
+
     return (
-        <section ref={containerRef} className="relative py-40 bg-white">
-            <div className=" mx-auto px-6">
-                <div className="sticky top-20 pt-10 pb-20">
-                    <h2 className="section-title text-4xl font-bold text-center mb-20">Why Choose Us</h2>
+        <section ref={containerRef} className="relative py-20 bg-gradient-to-br from-gray-50 to-white">
+            <div className="max-w-7xl mx-auto px-6">
+                {/* Header Section */}
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                    className="text-center mb-16"
+                >
+                    <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-700 via-blue-600 to-teal-500">
+                        Why Choose Us
+                    </h2>
+                    <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                        Experience the difference with our comprehensive approach to delivering exceptional results that exceed expectations.
+                    </p>
+                </motion.div>
 
-                    <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                {/* Features Grid - Vertical Layout */}
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+                    {features.map((feature, index) => (
                         <motion.div
-                            className="bg-gradient-to-br from-purple-50 to-blue-50 p-8 rounded-xl shadow-lg"
-                            style={{
-                                opacity: useTransform(scrollYProgress, [0, 0.3, 0.6], [0.3, 1, 0.3]),
-                                scale: useTransform(scrollYProgress, [0, 0.3, 0.6], [0.8, 1, 0.8]),
+                            key={index}
+                            initial={{ opacity: 0, y: 50 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            whileHover={{ y: -8, scale: 1.02 }}
+                            transition={{ 
+                                delay: index * 0.1,
+                                duration: 0.6,
+                                type: "spring",
+                                stiffness: 100
                             }}
+                            className={`relative group bg-gradient-to-br ${feature.bgGradient} p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-white/50 backdrop-blur-sm`}
                         >
-                            <h3 className="text-2xl font-bold mb-4">Expert Team</h3>
-                            <p className="text-gray-700">Our team of skilled professionals brings years of experience and deep expertise to every project.</p>
-                        </motion.div>
+                            {/* Gradient overlay on hover */}
+                            <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-300`} />
+                            
+                            {/* Icon */}
+                            <div className="relative z-10 mb-6">
+                                <div className={`w-16 h-16 bg-gradient-to-r ${feature.gradient} rounded-2xl flex items-center justify-center text-2xl shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                                    <span className="filter drop-shadow-sm">{feature.icon}</span>
+                                </div>
+                            </div>
 
-                        <motion.div
-                            className="bg-gradient-to-br from-purple-50 to-blue-50 p-8 rounded-xl shadow-lg"
-                            style={{
-                                opacity: useTransform(scrollYProgress, [0.2, 0.5, 0.8], [0.3, 1, 0.3]),
-                                scale: useTransform(scrollYProgress, [0.2, 0.5, 0.8], [0.8, 1, 0.8]),
-                            }}
-                        >
-                            <h3 className="text-2xl font-bold mb-4">Innovative Solutions</h3>
-                            <p className="text-gray-700">We leverage cutting-edge technologies to deliver innovative solutions that drive real results.</p>
-                        </motion.div>
+                            {/* Content */}
+                            <div className="relative z-10">
+                                <h3 className={`text-2xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r ${feature.gradient} group-hover:scale-105 transform transition-all duration-300`}>
+                                    {feature.title}
+                                </h3>
+                                <p className="text-gray-700 leading-relaxed group-hover:text-gray-800 transition-colors duration-300">
+                                    {feature.description}
+                                </p>
+                            </div>
 
-                        <motion.div
-                            className="bg-gradient-to-br from-purple-50 to-blue-50 p-8 rounded-xl shadow-lg"
-                            style={{
-                                opacity: useTransform(scrollYProgress, [0.4, 0.7, 1], [0.3, 1, 0.3]),
-                                scale: useTransform(scrollYProgress, [0.4, 0.7, 1], [0.8, 1, 0.8]),
-                            }}
-                        >
-                            <h3 className="text-2xl font-bold mb-4">Client-Focused</h3>
-                            <p className="text-gray-700">We prioritize your business goals and work closely with you to achieve measurable success.</p>
+                            {/* Decorative elements */}
+                            <div className="absolute top-4 right-4 w-20 h-20 bg-gradient-to-br from-white/20 to-white/5 rounded-full blur-xl opacity-50 group-hover:opacity-70 transition-opacity duration-300" />
+                            <div className="absolute bottom-4 left-4 w-12 h-12 bg-gradient-to-br from-white/10 to-transparent rounded-full blur-lg opacity-30 group-hover:opacity-50 transition-opacity duration-300" />
                         </motion.div>
-                    </div>
+                    ))}
                 </div>
+
+                {/* Bottom CTA Section */}
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2, duration: 0.8 }}
+                    className="text-center mt-16"
+                >
+                    <div className="bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl p-8 shadow-xl">
+                        <h3 className="text-3xl font-bold text-white mb-4">
+                            Ready to Get Started?
+                        </h3>
+                        <p className="text-xl text-purple-100 mb-6 max-w-2xl mx-auto">
+                            Let's discuss how we can help transform your business with our expertise and innovative solutions.
+                        </p>
+                        <button
+                            onClick={() => setIsModalOpen(true)}
+                            className="inline-block bg-white text-purple-600 px-8 py-4 rounded-xl font-semibold hover:bg-gray-50 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+                        >
+                            💬 Start Your Project Today
+                        </button>
+                    </div>
+                </motion.div>
             </div>
+
+            {/* Chat Contact Modal */}
+            <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+                <DialogContent className="sm:max-w-2xl max-h-[90vh] overflow-hidden p-0">
+                    <DialogHeader className="px-6 pt-6 pb-0">
+                        <DialogTitle className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600">
+                            Start Your Project Conversation
+                        </DialogTitle>
+                    </DialogHeader>
+                    <div className="px-6 pb-6">
+                        <p className="text-muted-foreground mb-6">
+                            Let's discuss your project through our interactive chat. We'll gather all the details we need to give you an accurate quote.
+                        </p>
+                        <ChatContactForm />
+                    </div>
+                </DialogContent>
+            </Dialog>
         </section>
     );
 };

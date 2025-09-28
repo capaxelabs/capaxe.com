@@ -28,6 +28,18 @@ const caseStudies = defineCollection({
 		timeframe: z.string(),
 		techStack: z.array(z.string()),
 		heroImage: z.string().optional(),
+		// Logo configuration
+		logos: z.object({
+			client: z.object({
+				src: z.string(),
+				alt: z.string().optional(),
+			}).optional(),
+			technologies: z.array(z.object({
+				name: z.string(),
+				src: z.string(),
+				alt: z.string().optional(),
+			})).optional(),
+		}).optional(),
 		// Transform string to Date object
 		pubDate: z.coerce.date(),
 		updatedDate: z.coerce.date().optional(),

@@ -44,25 +44,21 @@ const seo = createSEO({
             caseStudies.map((study) => (
               <div class="bg-white rounded-xl overflow-hidden shadow-lg">
                 <div class="p-8">
-                  <div class="flex justify-between items-start mb-6">
-                    <div>
+                  <div class="flex items-start mb-6">
+                    <div class="flex-shrink-0 mr-4">
+                      <img 
+                        src={study.data.logos?.client?.src || `/logos/clients/${study.data.client.toLowerCase().replace(/[^a-z0-9]/g, '-')}.png`} 
+                        alt={study.data.logos?.client?.alt || study.data.client} 
+                        class="h-12 w-auto client-logo-card"
+                      />
+                    </div>
+                    <div class="flex-1">
                       <h2 class="text-2xl font-bold mb-2">{study.data.title}</h2>
                       <p class="text-primary-600 font-medium">{study.data.client}</p>
                     </div>
                   </div>
 
                   <p class="text-gray-600 mb-6">{study.data.description}</p>
-
-                  <div class="grid grid-cols-2 gap-4 mb-6">
-                    <div class="bg-primary-50 p-4 rounded-lg text-center">
-                      <div class="text-lg font-bold text-primary-600">{study.data.timeframe}</div>
-                      <div class="text-sm text-gray-600">Timeframe</div>
-                    </div>
-                    <div class="bg-primary-50 p-4 rounded-lg text-center">
-                      <div class="text-lg font-bold text-primary-600">{study.data.techStack.length}</div>
-                      <div class="text-sm text-gray-600">Technologies</div>
-                    </div>
-                  </div>
 
                   <div class="mb-6">
                     <div class="flex flex-wrap gap-2">
@@ -90,3 +86,37 @@ const seo = createSEO({
     <CTABottom />
   </div>
 </Layout>
+
+<style>
+  .client-logo-card {
+    transition: opacity 0.3s ease;
+    object-fit: contain;
+  }
+</style>
+
+<script>
+  // Handle logo fallbacks for case study cards
+  document.addEventListener('DOMContentLoaded', function() {
+    const clientLogos = document.querySelectorAll('.client-logo-card');
+    clientLogos.forEach(img => {
+      img.addEventListener('error', function() {
+        const baseSrc = this.src.replace(/\.(png|jpg|jpeg|svg|webp|avif)$/, '');
+        const formats = ['webp', 'avif', 'svg', 'jpg', 'jpeg'];
+        
+        let formatIndex = 0;
+        const tryNextFormat = () => {
+          if (formatIndex < formats.length) {
+            this.src = baseSrc + '.' + formats[formatIndex];
+            formatIndex++;
+          } else {
+            // All formats failed, hide the image
+            this.style.display = 'none';
+          }
+        };
+        
+        this.onerror = tryNextFormat;
+        tryNextFormat();
+      });
+    });
+  });
+</script>

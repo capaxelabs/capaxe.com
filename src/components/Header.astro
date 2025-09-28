@@ -3,12 +3,13 @@ import { menuConfig } from "@/config/menu";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
 import ThemeInitializer from "@/components/ThemeInitializer.astro";
+import BookingButton from "@/components/BookingButton";
 ---
 
 <ThemeInitializer />
 
 <div class="fixed top-0 left-0 w-full z-50 flex justify-center">
-  <header id="main-header" class="w-full max-w-5xl mt-4 rounded-lg transition-all duration-300">
+  <header id="main-header" class="w-full max-w-5xl mt-4 rounded-lg">
     <nav class="px-6 py-4">
       <div class="flex items-center justify-between">
         <!-- Logo -->
@@ -22,9 +23,15 @@ import ThemeInitializer from "@/components/ThemeInitializer.astro";
           {
             menuConfig.mainNav.map((item) =>
               item.isButton ? (
-                <a href={item.href}>
-                  <Button variant="outline">{item.title}</Button>
-                </a>
+                item.isCalBooking ? (
+                  <BookingButton client:load variant="outline">
+                    {item.title}
+                  </BookingButton>
+                ) : (
+                  <a href={item.href}>
+                    <Button variant="outline">{item.title}</Button>
+                  </a>
+                )
               ) : (
                 <a href={item.href} class="text-gray-600 hover:text-gray-900 transition-colors">
                   {item.title}
@@ -99,11 +106,17 @@ import ThemeInitializer from "@/components/ThemeInitializer.astro";
               {
                 menuConfig.mainNav.map((item) =>
                   item.isButton ? (
-                    <a href={item.href} class="w-full">
-                      <Button variant="outline" className="w-full">
+                    item.isCalBooking ? (
+                      <BookingButton client:load variant="outline" className="w-full">
                         {item.title}
-                      </Button>
-                    </a>
+                      </BookingButton>
+                    ) : (
+                      <a href={item.href} class="w-full">
+                        <Button variant="outline" className="w-full">
+                          {item.title}
+                        </Button>
+                      </a>
+                    )
                   ) : (
                     <a href={item.href} class="text-xl text-gray-600 hover:text-gray-900 transition-colors py-2">
                       {item.title}

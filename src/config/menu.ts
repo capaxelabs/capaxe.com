@@ -21,7 +21,12 @@ export const menuConfig: MenuConfig = {
         {
             title: "Contact",
             href: "/contact",
+        },
+        {
+            title: "Book a call",
+            href: "#",
             isButton: true,
+            isCalBooking: true,
         },
     ],
     footerNav: {

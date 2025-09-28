@@ -91,6 +91,7 @@ export interface MenuItem {
     external?: boolean
     icon?: React.ReactNode
     isButton?: boolean
+    isCalBooking?: boolean
 }
 
 export interface MenuConfig {

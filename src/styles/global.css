@@ -415,3 +415,35 @@
     /* Adjusted to use theme variables */
   }
 }
+
+@layer utilities {
+  .tab-button {
+    @apply text-muted-foreground;
+  }
+  
+  .tab-button.active {
+    @apply bg-gradient-to-r from-primary-600 to-primary-700 text-white shadow-lg;
+  }
+  
+  .tab-button:not(.active):hover {
+    @apply text-foreground bg-muted;
+  }
+
+  /* Custom scrollbar for chat window */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+  
+  .scrollbar-thumb-border::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--border));
+    border-radius: 0.5rem;
+  }
+  
+  .scrollbar-track-muted::-webkit-scrollbar-track {
+    background-color: hsl(var(--muted));
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+}

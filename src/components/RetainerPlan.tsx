@@ -1,12 +1,10 @@
 import { useState } from "react";
-import { Check, ShoppingCart } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
 import { siteConfig } from "@/config/site";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import RetainerRequestForm from "@/components/RetainerRequestForm";
-import type { Plan } from "@/types";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import Cal from "@calcom/embed-react";
+import ChatContactForm from "@/components/ChatContactForm";
 
 // Define the type for items in siteConfig.retainer.items
 interface RetainerPlanItem {
@@ -20,54 +18,13 @@ interface RetainerPlanItem {
 }
 
 const RetainerPlansSection = () => {
-    const [selectedBillingCycle, setSelectedBillingCycle] = useState<"quarterly" | "yearly">("yearly");
-    const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedPlan, setSelectedPlan] = useState<RetainerPlanItem | null>(null);
+    const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+    const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
-    // Calculate monthly price based on the selected billing cycle
-    const getMonthlyPrice = (item: RetainerPlanItem, cycle: "quarterly" | "yearly"): string => {
-        if (cycle === "quarterly") {
-            // For quarterly, use monthly price with a 10% discount
-            const monthlyPrice = Number.parseFloat(item.monthly.replace(/[^0-9.]/g, ''));
-            const discountedPrice = monthlyPrice * 0.9;
-            return `$${discountedPrice.toFixed(0)}`;
-        }
-
-        // For yearly, convert the yearly price to monthly equivalent (with 20% discount)
-        const yearlyPrice = Number.parseFloat(item.yearly.replace(/[^0-9.]/g, ''));
-        const monthlyEquivalent = yearlyPrice / 12;
-        return `$${monthlyEquivalent.toFixed(0)}`;
-    };
-
-    // Calculate total price for the selected billing cycle (for the Plan object)
-    const getTotalPrice = (item: RetainerPlanItem): number => {
-        if (selectedBillingCycle === "quarterly") {
-            const monthlyPrice = Number.parseFloat(item.monthly.replace(/[^0-9.]/g, ''));
-            return monthlyPrice * 3 * 0.9; // 3 months with 10% discount
-        }
-
-        return Number.parseFloat(item.yearly.replace(/[^0-9.]/g, ''));
-    };
-
-    const handlePurchase = (item: RetainerPlanItem) => {
-        // Convert the item from siteConfig to the Plan type
-        const plan: Plan = {
-            id: item.id,
-            name: item.title,
-            description: item.description,
-            price: getTotalPrice(item),
-            duration: selectedBillingCycle,
-            features: item.features,
-            popular: item.popular
-        };
-
-        setSelectedPlan(plan);
-        setIsModalOpen(true);
-    };
-
-    const handleModalClose = () => {
-        setIsModalOpen(false);
-        setSelectedPlan(null);
+    const handleBookCall = (item: RetainerPlanItem) => {
+        setSelectedPlan(item);
+        setIsBookingModalOpen(true);
     };
 
     return (
@@ -86,96 +43,61 @@ const RetainerPlansSection = () => {
                         </p>
                     </div>
 
-                    <div className="flex justify-center mb-12">
-                        <div className="inline-flex rounded-full p-1 bg-gray-100">
-                            <button
-                                type="button"
-                                onClick={() => setSelectedBillingCycle("quarterly")}
-                                className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${selectedBillingCycle === "quarterly"
-                                    ? "bg-white shadow-sm"
-                                    : "text-gray-600 hover:text-gray-900"
-                                    }`}
-                            >
-                                Quarterly <span className="text-xs font-bold text-primary-500">Save 10%</span>
-                            </button>
-                            <button
-                                type="button"
-                                onClick={() => setSelectedBillingCycle("yearly")}
-                                className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${selectedBillingCycle === "yearly"
-                                    ? "bg-white shadow-sm"
-                                    : "text-gray-600 hover:text-gray-900"
-                                    }`}
-                            >
-                                Yearly <span className="text-xs font-bold text-primary-500">Save 20%</span>
-                            </button>
-                        </div>
+
+                    {/* Monthly plan description outside the cards */}
+                    <div className="max-w-2xl mx-auto mb-12 text-center">
+                        <p className="text-lg text-gray-600">
+                            Ideal for companies with a budget, growing need for design support to address several problem statements at once.
+                        </p>
                     </div>
 
-                    <div className="grid md:grid-cols-3 gap-8">
-                        {siteConfig.retainer.items.map((item: RetainerPlanItem, index: number) => (
+                    <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                        {siteConfig.retainer.items.map((item: RetainerPlanItem) => (
                             <Card
                                 key={item.id}
-                                className={`relative overflow-hidden bg-white rounded-2xl shadow-xl p-3 border-2 border-purple-100 hover:border-purple-500 transition-all ${item.popular
-                                    ? "border-primary-400 shadow-soft"
+                                className={`relative overflow-hidden bg-white rounded-xl shadow-lg border hover:shadow-xl transition-all flex flex-col ${item.popular
+                                    ? "border-primary-400 ring-2 ring-primary-100"
                                     : "border-gray-200 hover:border-primary-300"
                                     }`}
                             >
                                 {item.popular && (
                                     <div className="absolute top-0 right-0">
-                                        <div className="bg-primary-400 text-white text-xs font-bold px-4 py-1 transform rotate-45 translate-x-[30%] translate-y-[40%] shadow-sm">
-                                            POPULAR
+                                        <div className="bg-primary-400 text-white text-xs font-bold px-3 py-1 transform rotate-45 translate-x-[30%] translate-y-[40%] shadow-sm">
+                                            Most popular
                                         </div>
                                     </div>
                                 )}
-                                <div className="p-4">
-                                    <h3 className="text-2xl font-semibold mb-3" >{item.title}</h3>
-                                    <p className="text-gray-600 text-sm mb-6">{item.description}</p>
-                                    <div className="flex flex-col mb-6">
-                                        <div className="flex items-baseline">
-
-                                            <span className="text-5xl font-bold">
-                                                {getMonthlyPrice(item, selectedBillingCycle)}
-                                            </span>
-                                            <span className="text-gray-500 text-2xl font-semibold ml-2">
-                                                /month
+                                <div className="p-6 flex-1 flex flex-col">
+                                    <div className="text-center flex-1">
+                                        <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
+                                        {/* Show description for Fixed plan, not Monthly plan since it's outside */}
+                                        {item.id === 1 && (
+                                            <p className="text-gray-600 text-sm mb-6">{item.description}</p>
+                                        )}
+                                        <div className="mb-6">
+                                            <span className="text-2xl font-bold text-primary-600">
+                                                {item.monthly}
                                             </span>
                                         </div>
-                                        {selectedBillingCycle === "quarterly" && (
-                                            <div className="flex items-baseline line-through ">
-                                                <span className="text-gray-400 text-xl font-semibold mr-2">
-                                                    {item.monthly} /month
-                                                </span>
-                                            </div>
+                                        {item.features.length > 0 && (
+                                            <ul className="space-y-2 mb-6 text-left flex-1">
+                                                {item.features.map((feature: string, featureIndex: number) => (
+                                                    <li key={`${item.id}-feature-${featureIndex}`} className="flex items-start">
+                                                        <span className="text-primary-600 mr-2 text-sm">✓</span>
+                                                        <span className="text-sm text-gray-600">{feature}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
                                         )}
-                                        {selectedBillingCycle === "yearly" && (
-                                            <div className="flex items-baseline line-through ">
-                                                <span className="text-gray-400 text-xl font-semibold mr-2">
-                                                    {item.monthly} /month
-                                                </span>
-                                            </div>
-                                        )}
-                                        <p className="text-sm text-gray-500 mt-2">
-                                            {selectedBillingCycle === "quarterly"
-                                                ? "Billed quarterly (10% discount)"
-                                                : "Billed annually (20% discount)"}
-                                        </p>
                                     </div>
-                                    <ul className="space-y-3 mb-8">
-                                        {item.features.map((feature: string, featureIndex: number) => (
-                                            <li key={`${item.id}-feature-${featureIndex}`} className="flex items-start">
-                                                <span className="text-primary-600 mr-2">✅</span>
-                                                <span className="text-sm text-gray-600">{feature}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
                                     <Button
-                                        onClick={() => handlePurchase(item)}
-                                        className={`w-full ${item.popular
+                                        onClick={() => handleBookCall(item)}
+                                        className={`w-full mt-auto ${item.popular
                                             ? "bg-primary-400 hover:bg-primary-500 text-white"
                                             : "border-2 border-primary-400 bg-transparent hover:bg-primary-100 text-primary-500"
                                             }`}
                                     >
-                                        {item.popular ? "Get Started" : "Learn More"}
+                                        Book a call
                                     </Button>
                                 </div>
                             </Card>
@@ -189,43 +111,48 @@ const RetainerPlansSection = () => {
                             retainer plan tailored specifically to your Shopify store requirements.
                         </p>
                         <Button
-                            onClick={() => {
-                                // Create a custom plan object
-                                const customPlan: Plan = {
-                                    id: 999,
-                                    name: "Custom Plan",
-                                    description: "A custom plan tailored to your specific needs",
-                                    price: 0,
-                                    duration: "custom",
-                                    features: [],
-                                    popular: false
-                                };
-                                setSelectedPlan(customPlan);
-                                setIsModalOpen(true);
-                            }}
+                            onClick={() => setIsContactModalOpen(true)}
                             className="bg-primary-400 hover:bg-primary-500 text-white"
                         >
-                            Contact Us for Custom Plans
+                            💬 Contact Us for Custom Plans
                         </Button>
                     </div>
                 </div>
             </section>
 
-            {/* Retainer Request Modal */}
-            <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-                <DialogContent className="sm:max-w-[500px]">
+            {/* Cal.com Booking Modal */}
+            <Dialog open={isBookingModalOpen} onOpenChange={setIsBookingModalOpen}>
+                <DialogContent className="sm:max-w-4xl max-h-[80vh] overflow-hidden">
                     <DialogHeader>
-                        <DialogTitle className="text-2xl">Request {selectedPlan?.name}</DialogTitle>
-                        <DialogDescription>
-                            Fill out the form below to request the {selectedPlan?.name}. We'll get back to you shortly.
-                        </DialogDescription>
+                        <DialogTitle className="text-2xl">
+                            Book a Call - {selectedPlan?.title}
+                        </DialogTitle>
                     </DialogHeader>
-                    {selectedPlan && (
-                        <RetainerRequestForm
-                            plan={selectedPlan}
-                            onSuccess={handleModalClose}
-                        />
-                    )}
+                    <div className="h-[600px] overflow-auto">
+                        {selectedPlan && (
+                            <Cal
+                                calLink="capaxe" // Replace with your actual Cal.com link
+                                config={{
+                                    name: "",
+                                    email: "",
+                                    notes: `Interested in ${selectedPlan.title} - ${selectedPlan.description}`,
+                                    theme: "light"
+                                }}
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    overflow: "scroll"
+                                }}
+                            />
+                        )}
+                    </div>
+                </DialogContent>
+            </Dialog>
+
+            {/* Chat Contact Modal for Custom Plans */}
+            <Dialog open={isContactModalOpen} onOpenChange={setIsContactModalOpen}>
+                <DialogContent className="sm:max-w-2xl max-h-[90vh] overflow-hidden p-0 w-auto">
+                    <ChatContactForm />
                 </DialogContent>
             </Dialog>
         </>

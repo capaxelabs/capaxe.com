@@ -148,72 +148,41 @@ export const siteConfig: SiteConfig = {
         }
     },
     retainer: {
-
-        title: 'Ongoing Support for Your Success',
-        description: 'Choose from our flexible retainer plans designed to provide continuous improvements and support for your Shopify store. Partner with us for long-term success.',
+        title: 'Pricing is simple. No lengthy contracts. No managing employees. No headaches.',
+        description: '',
         items: [
             {
                 id: 1,
-                title: 'Starter – 15h',
-                description: 'Perfect for small businesses or new Shopify stores needing reliable, on-demand support and improvements.',
-                monthly: '$1,200',
-                yearly: '$11,520', // 20% discount if billed yearly
-                popular: false,
+                title: 'Fixed or Milestone plan',
+                description: 'Ideal for individuals or startups on a budget with an fairely defined fixed scope and want to build to validate their idea/vision.',
+                monthly: 'Book a call to know more',
+                yearly: '',
+                popular: true,
                 features: [
-                    'Monthly strategy meetings',
-                    'Monthly website audits',
-                    'Cancel anytime',
-                    'Real-time chat support',
-                    'Non-urgent: reply within 48h',
-                    'Critical issues: immediate action',
-                    'Most tasks completed in 24h',
-                    'Dedicated PM & Shopify developer',
-                    'Project collaboration in ClickUp or your preferred tool',
-                    'Regular progress & performance updates'
+                    'Clearly defined project scope & deliverables',
+                    'Fixed pricing with no surprises',
+                    'Milestone-based payment structure',
+                    'Perfect for MVP development',
+                    'Ideal for budget-conscious startups',
+                    'Timeline-driven project completion'
                 ]
             },
             {
                 id: 2,
-                title: 'Growth – 30h',
-                description: 'Best for growing businesses with more complex Shopify needs, including CRO and advanced support.',
-                monthly: '$1,999',
-                yearly: '$19,990', // 20% discount if billed yearly
-                popular: true,
-                features: [
-                    'On-request growth strategy meetings',
-                    'On-request website audits',
-                    'Regular CRO audits with actionable insights',
-                    'Cancel anytime',
-                    'Real-time chat support',
-                    'Priority response within 24h',
-                    'Critical issues: immediate action',
-                    'Most tasks completed in 24h',
-                    'Dedicated PM & Tech Lead',
-                    'Dedicated & backup Shopify developer',
-                    'Project collaboration in ClickUp or your preferred tool',
-                    'Regular progress & performance updates'
-                ]
-            },
-            {
-                id: 3,
-                title: 'Enterprise – 50h',
-                description: 'Tailored for high-growth or large Shopify businesses with demanding, ongoing dev & design needs.',
-                monthly: '$3,200',
-                yearly: '$30,720', // 20% discount if billed yearly
+                title: 'Monthly plan',
+                description: 'Ideal for companies with a budget, growing need for design support to address several problem statements at once.',
+                monthly: 'Book a call to know more',
+                yearly: '',
                 popular: false,
                 features: [
-                    'Frequent growth strategy sessions (2–3/mo)',
-                    'Weekly website audits',
-                    'Advanced CRO audits & best practices for conversion growth',
-                    'Cancel anytime',
-                    'Real-time chat support',
-                    'Priority initial response within 12h',
-                    'Critical issues: immediate action',
-                    'Most tasks resolved within 12h',
-                    'Senior PM & Tech Lead',
-                    '2 dedicated & 2 backup Shopify developers',
-                    'Project collaboration in ClickUp or your preferred tool',
-                    'Regular progress & performance updates'
+                    'Dedicated Shopify developer & project manager',
+                    'Monthly strategy meetings & website audits',
+                    'Real-time chat support with priority response',
+                    'Bug fixes & feature enhancements',
+                    'Performance optimization & monitoring',
+                    'Regular progress updates & reporting',
+                    'Cancel anytime - no long-term contracts',
+                    'Project collaboration in your preferred tools'
                 ]
             }
         ]
