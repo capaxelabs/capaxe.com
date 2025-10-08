@@ -131,7 +131,7 @@ const RetainerPlansSection = () => {
                     <div className="h-[600px] overflow-auto">
                         {selectedPlan && (
                             <Cal
-                                calLink="capaxe" // Replace with your actual Cal.com link
+                                calLink="capaxe/30min" // Replace with your actual Cal.com link
                                 config={{
                                     name: "",
                                     email: "",

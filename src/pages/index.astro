@@ -5,6 +5,7 @@ import { StickyCards, ServiceLanding } from "@/components/home/HomeComponents";
 import RetainerPlansSection from "@/components/RetainerPlan";
 import HeroSection from "@/components/HeroSection.astro";
 import ClientLogos from "@/components/ClientLogos";
+import BookAppointment from "@/components/BookAppointment";
 ---
 
 <Layout title={siteConfig.name} description={siteConfig.description}>
@@ -13,6 +14,7 @@ import ClientLogos from "@/components/ClientLogos";
     <ClientLogos siteConfig={siteConfig} client:load />
     <StickyCards siteConfig={siteConfig} client:load />
     <ServiceLanding siteConfig={siteConfig} client:load />
+    <!-- <BookAppointment client:load /> -->
     {/* Retainer Benefits Section */}
     <RetainerPlansSection client:load />
   </div>
