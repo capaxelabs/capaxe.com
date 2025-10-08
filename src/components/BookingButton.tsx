@@ -34,12 +34,14 @@ const BookingButton = ({ children, className, variant = "outline" }: BookingButt
         <DialogContent className="sm:max-w-4xl max-h-[80vh] overflow-hidden">
           
             <Cal
-              calLink="capaxe" // Replace with your actual Cal.com link
+              calLink="capaxe/30min" // Direct link to 30min event type
+              
               config={{
-                name: "",
+                name: "Mukesh Yadav",
                 email: "",
                 notes: "Book a consultation call with Capaxe Labs",
                 theme: "light"
+                
               }}
               style={{
                 width: "100%",

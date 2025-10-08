@@ -17,8 +17,6 @@ const CalProviderWrapper: React.FC<CalProviderWrapperProps> = ({ children }) => 
     return <>{children}</>;
   }
 
-  // For public booking (no managed users), we can initialize CalProvider with minimal config
-  // The Booker component will work for public Cal.com profiles without OAuth
   return (
     <CalProvider
       clientId="" // Not needed for public booking
