@@ -1,0 +1,89 @@
+---
+title: "How to Use LiquidDoc to Document Your Shopify Snippets and Blocks"
+description: "Learn how to implement Shopify's native LiquidDoc feature to create structured, self-documenting code that improves maintainability and supercharges AI development tools."
+pubDate: 'Oct 31 2025'
+heroImage: '/shopify-capaxe-labs.png'
+---
+
+In modern theme development, the quality of your code is not just measured by its output, but by its clarity and maintainability. As themes become more complex and team collaboration more common, clear documentation is no longer a luxury—it's a necessity.
+
+Furthermore, with the rise of AI-assisted development, the context we provide in our code directly impacts the quality of the suggestions we receive.
+
+This is where **LiquidDoc**, a native Shopify feature, becomes an essential tool in the professional developer's toolkit. It's a simple, structured way to document your reusable components, making your code easier for both humans and AI to understand.
+
+---
+
+## **What is LiquidDoc?**
+
+LiquidDoc is a standardized format for adding documentation directly within your Liquid snippet and block files. It uses a combination of YAML-like front matter and special tags to define what a component does, what parameters it accepts, and how to use it.
+
+**Crucially, LiquidDoc is for `snippets` and `blocks` only.** It is not supported in `sections`, where documentation and settings are handled by the `{% schema %}` tag.
+
+A well-documented snippet using LiquidDoc looks like this:
+
+```liquid
+{% comment %}
+  @name Product Card
+  @description Renders a single product card for use in grids or carousels.
+
+  @param {Object} product - The product object to render.
+  @param {String} [image_size] - The desired size for the product image. Defaults to 'medium'.
+
+  @example
+  {% render 'product-card', product: my_product, image_size: 'large' %}
+{% endcomment %}
+
+<div class="product-card">
+  <img src="{{ product.featured_image | img_url: image_size | default: 'medium' }}" alt="{{ product.featured_image.alt }}">
+  <h3>{{ product.title }}</h3>
+</div>
+```
+
+---
+
+## **Why LiquidDoc is a Game-Changer**
+
+Implementing LiquidDoc might seem like extra work, but the long-term benefits are massive.
+
+### **1. Improved Maintainability and Collaboration**
+When you or another developer revisits a component months later, the LiquidDoc block provides immediate context. There's no need to reverse-engineer the code to understand its purpose or what parameters it expects. This dramatically speeds up maintenance and reduces the risk of introducing bugs.
+
+### **2. Supercharging AI and Agentic Development**
+This is perhaps the most modern and compelling reason to adopt LiquidDoc. AI coding assistants and tools that use Figma's MCP rely on context to provide accurate suggestions.
+
+As noted by Shopify expert Vitalii Ponomarov, "Most AI-assisted coding fails on Shopify projects because the model doesn't have the right context about Liquid, the API schema, or object patterns."
+
+LiquidDoc provides that explicit context. When an AI agent sees a LiquidDoc block, it understands:
+-   The component's purpose.
+-   The required and optional parameters.
+-   The data types of those parameters.
+-   A clear example of how to use the component correctly.
+
+This allows the AI to generate more accurate code, validate your implementations, and catch errors before you do.
+
+### **3. Enforcing Best Practices**
+The act of writing LiquidDoc forces you to think more clearly about the components you're building. It encourages you to design a clean, explicit API for your snippets and blocks, leading to a more modular and well-architected theme.
+
+---
+
+## **How to Implement LiquidDoc: The Core Tags**
+
+Implementing LiquidDoc is simple. You just need to know a few key tags within a `{% comment %}` block at the top of your file.
+
+-   `@name`: A human-readable name for your component.
+-   `@description`: A brief explanation of what the component does.
+-   `@param {Type} [name] - Description`: Defines a parameter.
+    -   `{Type}`: The expected data type (e.g., `{Object}`, `{String}`, `{Number}`).
+    -   `[name]`: The parameter name. Use square brackets for optional parameters (e.g., `[image_size]`).
+    -   `- Description`: A clear explanation of the parameter.
+-   `@example`: A code block showing a clear example of how to render the component.
+
+---
+
+## **Final Thoughts: A Mark of Professionalism**
+
+In the evolving landscape of Shopify development, writing self-documenting code is a mark of professionalism. LiquidDoc is a simple, powerful, and officially supported way to achieve this.
+
+It elevates your code from a set of instructions into a well-documented, reusable asset that is easier for your team, your future self, and your AI coding partners to understand and build upon.
+
+**❓ Have you integrated LiquidDoc into your workflow? What has been the biggest benefit?**

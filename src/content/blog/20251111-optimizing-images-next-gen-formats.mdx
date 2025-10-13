@@ -1,0 +1,105 @@
+---
+title: "Optimizing Images in Shopify: A Guide to Next-Gen Formats (AVIF & WebP)"
+description: "Explore how to use Shopify's native image filters and external tools like Imgix to serve next-generation image formats like AVIF and WebP, drastically improving site speed."
+pubDate: 'Nov 11 2025'
+heroImage: '/shopify-capaxe-labs.png'
+---
+
+In the world of e-commerce, page speed is not just a technical metric—it's a critical component of the user experience that directly impacts conversion rates. And the single biggest contributor to slow-loading pages is, without a doubt, unoptimized images.
+
+For years, we've relied on JPEGs and PNGs, but a new generation of image formats has emerged. **AVIF** and **WebP** offer significantly smaller file sizes at a comparable or even higher quality, making them essential for any performance-focused Shopify theme.
+
+The good news is that Shopify has made it incredibly easy to serve these next-gen formats automatically. This guide will walk you through the modern, best-practice approach to image optimization in Liquid, and also touch on advanced techniques for ultimate control.
+
+---
+
+## **Why Next-Gen Formats Matter**
+
+Before diving into the code, it's important to understand the "why."
+
+-   **WebP:** Developed by Google, WebP offers file sizes that are, on average, **25-35% smaller** than equivalent JPEGs. It is now supported by all modern browsers.
+-   **AVIF:** A newer format, AVIF pushes compression even further, often achieving file sizes **50% smaller** than JPEG. It also has excellent browser support.
+
+By serving these formats, you can dramatically reduce your page weight, leading to faster load times, a better Lighthouse score, and a smoother experience for your customers.
+
+---
+
+## **The Modern Way: Let Shopify Do the Work with `image_tag`**
+
+The single best way to handle image optimization in a modern Shopify theme is to use the `image_tag` filter. This filter was updated for Online Store 2.0 to be incredibly intelligent.
+
+When you use `image_tag`, Shopify automatically generates a complete `<picture>` element. This element includes:
+-   A source for the **AVIF** format.
+-   A source for the **WebP** format.
+-   A fallback `<img>` tag with the original format (e.g., JPEG or PNG) for older browsers.
+
+The browser will then automatically download the first format it supports, ensuring that users get the smallest possible file size without any manual intervention.
+
+**How to Use It:**
+
+Instead of manually building an `<img>` tag, simply pass your image object to the `image_tag` filter.
+
+**Old Way (Manual `<img>` tag):**
+```liquid
+<img src="{{ product.featured_image | img_url: '800x' }}"
+     width="800"
+     height="{{ 800 | divided_by: product.featured_image.aspect_ratio | round }}"
+     loading="lazy"
+     alt="{{ product.featured_image.alt | escape }}">
+```
+
+**Modern Way (`image_tag`):**
+```liquid
+{{ product.featured_image | image_tag: widths: '400, 800, 1200', sizes: '(min-width: 768px) 50vw, 100vw' }}
+```
+
+### **Breaking Down the `image_tag` Filter:**
+-   `product.featured_image`: The image object you want to render.
+-   `widths: '400, 800, 1200'`: This is the magic. You provide a comma-separated list of image widths you need. Shopify will generate a `srcset` for each format, providing different sizes for different screen resolutions.
+-   `sizes: '(min-width: 768px) 50vw, 100vw'`: This is the standard HTML `sizes` attribute, which tells the browser how much of the viewport the image will occupy at different screen sizes. This helps it choose the most optimal width from the `srcset`.
+
+This single line of Liquid produces a highly optimized, responsive, and future-proof HTML output. **For 99% of use cases, this is the only method you should be using.**
+
+---
+
+## **Advanced Technique: Manual Control and External Services**
+
+While `image_tag` is the recommended approach, there are times when you might need more granular control.
+
+### **Manual `<picture>` Element**
+
+You can manually construct a `<picture>` element using the `format` parameter on the `img_url` filter.
+
+```liquid
+<picture>
+  <source srcset="{{ product.featured_image | img_url: '800x', format: 'avif' }}" type="image/avif">
+  <source srcset="{{ product.featured_image | img_url: '800x', format: 'webp' }}" type="image/webp">
+  <img src="{{ product.featured_image | img_url: '800x' }}">
+</picture>
+```
+This gives you more control but is also more verbose and harder to maintain.
+
+### **Using a Third-Party Service like Imgix**
+
+As mentioned in the "i only speak liquid" newsletter, services like Imgix can act as a proxy for your Shopify images, offering on-the-fly transformations and optimizations that go beyond Shopify's native capabilities.
+
+You could write a Liquid snippet that rewrites a Shopify image URL to an Imgix URL, adding parameters for auto-formatting, quality adjustments, and more.
+
+```liquid
+{% comment %} Example of rewriting a URL for Imgix {% endcomment %}
+{% assign shopify_cdn_url = product.featured_image | img_url: 'master' %}
+{% assign imgix_url = 'https://your-imgix-source.imgix.net/' | append: shopify_cdn_url | append: '?auto=format,compress&w=800' %}
+
+<img src="{{ imgix_url }}">
+```
+This approach offers the ultimate in control but adds a layer of complexity and potential cost. It's best reserved for enterprise-level stores with highly specific image optimization needs.
+
+---
+
+## **Final Thoughts: A Simple Path to a Faster Store**
+
+Image optimization is one of the highest-impact changes you can make to improve your theme's performance. Thanks to Shopify's intelligent `image_tag` filter, implementing a modern, next-gen image strategy has never been easier.
+
+Audit your theme today. If you're still building manual `<img>` tags, it's time to upgrade. Your customers—and your Lighthouse score—will thank you for it.
+
+**❓ What is your go-to strategy for image optimization in Shopify themes?**

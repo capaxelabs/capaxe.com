@@ -1,0 +1,120 @@
+---
+title: "10 Time-Saving Shopify CLI Commands Every Developer Should Know"
+description: "Move beyond `theme dev` and `theme push`. This listicle highlights powerful but lesser-known Shopify CLI commands for managing themes, data, and development stores more efficiently."
+pubDate: 'Nov 06 2025'
+heroImage: '/shopify-capaxe-labs.png'
+---
+
+For modern Shopify developers, the Shopify CLI is the undisputed command center of our workflow. We all know the basics like `shopify theme dev` and `shopify app dev`, but the CLI is packed with a host of powerful, lesser-known commands that can save you hours of manual work.
+
+Mastering these commands is the difference between a good workflow and a great one. They can help you scaffold projects, manage test data, and debug issues with a speed and efficiency that the Shopify Admin simply can't match.
+
+Here are 10 time-saving Shopify CLI commands that every professional developer should have in their toolkit.
+
+---
+
+### **1. `shopify theme init`**
+
+While you can clone a theme from GitHub, this command is the official and fastest way to get a fresh copy of Dawn, Shopify's reference theme. It's the perfect starting point for any new theme project.
+
+```bash
+# Clones the latest version of Dawn into a new directory
+shopify theme init
+```
+
+### **2. `shopify theme share`**
+
+Need to show a work-in-progress theme to a client or colleague without deploying it? This command uploads your local theme as a temporary, shareable preview. It's an essential tool for gathering feedback.
+
+```bash
+# Generates a preview link that's valid for 90 days
+shopify theme share
+```
+
+### **3. `shopify theme check`**
+
+This is your built-in linter for Shopify themes. It runs a comprehensive check on your code, flagging everything from Liquid syntax errors and performance issues to accessibility problems and broken translations. Running this before every deploy can save you from pushing bugs to production.
+
+```bash
+# Run a full theme check
+shopify theme check
+
+# Run it automatically on every file save while developing
+shopify theme dev --theme-check
+```
+
+### **4. `shopify populate products`**
+
+Setting up a new development store with realistic data is a tedious task. This command allows you to instantly generate a specified number of dummy products, complete with images, variants, and descriptions.
+
+```bash
+# Generate 25 new products in your connected store
+shopify populate products 25
+```
+*Pro-tip: You can also use `shopify populate customers` and `shopify populate drafts` to generate other types of data.*
+
+### **5. `shopify app function run`**
+
+Testing Shopify Functions can be slow if you have to deploy them for every change. This command lets you invoke a function locally, passing it a JSON payload that mimics the input it would receive from Shopify. This makes for a much faster debugging and iteration cycle.
+
+```bash
+# Run a function locally with a specific input
+shopify app function run --input='{"cart": {"lines": []}}'
+```
+
+### **6. `shopify app generate extension`**
+
+This is the universal starting point for adding any new functionality to your app. Whether you're building a theme app extension, a checkout UI extension, or a Shopify Function, this command provides an interactive prompt to scaffold all the necessary boilerplate for you.
+
+```bash
+# Start the interactive extension generator
+shopify app generate extension
+```
+
+### **7. `shopify project switch`**
+
+For agency developers or freelancers who work on multiple projects at once, this command is a lifesaver. It allows you to quickly switch the CLI's context between different Shopify apps or themes without having to constantly log in and out or manage multiple `.env` files.
+
+```bash
+# Open an interactive prompt to switch your project context
+shopify project switch
+```
+
+### **8. `shopify theme pull`**
+
+Sometimes you need to grab a copy of a theme that's already live on a store. This command allows you to download a full theme, either by selecting from a list or by providing a specific Theme ID.
+
+```bash
+# Pull from a list of themes on the connected store
+shopify theme pull
+
+# Pull a specific theme by its ID
+shopify theme pull --themeid 123456789
+```
+
+### **9. `shopify theme language-server`**
+
+This is a powerful command for developers who want a more intelligent code editor. It runs a Language Server Protocol (LSP) that can provide your editor (like VS Code with the official Shopify Liquid extension) with rich autocompletion, error highlighting, and documentation for Liquid objects, tags, and filters.
+
+```bash
+# This command is typically run automatically by the VS Code extension
+# but you can run it manually to debug issues.
+shopify theme language-server
+```
+
+### **10. `shopify auth logout`**
+
+A simple but essential command for anyone working in a team or agency setting. If you're sharing a machine or just want to ensure your sessions are secure, this allows you to quickly log out of all your Shopify CLI sessions.
+
+```bash
+# Log out of your Shopify account and Partner organization
+shopify auth logout
+```
+
+---
+
+## **Final Thoughts: Master Your Tools**
+
+The Shopify CLI is a deep and powerful tool that is constantly evolving. By moving beyond the basic commands and integrating these workflow enhancers into your daily routine, you can significantly speed up your development process, reduce errors, and become a more efficient and effective Shopify developer.
+
+**❓ What's your favorite lesser-known CLI command?**

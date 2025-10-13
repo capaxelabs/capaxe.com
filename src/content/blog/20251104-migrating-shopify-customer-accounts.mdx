@@ -1,0 +1,119 @@
+---
+title: "A Developer's Guide to Migrating from Legacy to New Shopify Customer Accounts"
+description: "A technical walkthrough of the migration process from theme-based customer accounts to the new extensible system, covering code auditing, logic porting, and common challenges."
+pubDate: 'Nov 04 2025'
+heroImage: '/shopify-capaxe-labs.png'
+---
+
+Shopify is fundamentally changing how customer accounts work, moving from a theme-based system to a standardized, app-extensible platform. For developers, this migration is not just a simple toggle in the admin; it requires a strategic shift in how we approach account customization.
+
+While the new system offers enhanced security and a consistent UI, it means that all your existing customizations within the `customers/*.liquid` templates will no longer apply. This functionality must be rebuilt as **Customer Account UI Extensions**.
+
+This guide provides a technical walkthrough for developers on how to plan and execute a smooth migration, ensuring no functionality is lost in the transition.
+
+---
+
+## **The Core Shift: From Liquid Templates to UI Extensions**
+
+The most critical concept to grasp is the architectural change:
+
+-   **Legacy Accounts:** The entire experience was rendered by your theme's Liquid files (e.g., `customers/account.liquid`, `customers/order.liquid`). Customizations involved directly editing this code.
+-   **New Accounts:** The pages are hosted and rendered by Shopify. The UI is consistent across all stores. Customizations are exclusively handled by **apps** that use **Customer Account UI Extensions** to inject new functionality into predefined "targets" on the page.
+
+Your job during migration is to identify every piece of custom logic in your old Liquid templates and replicate it using this new extension-based model.
+
+---
+
+## **Your Pre-Migration Checklist: An Audit is Crucial**
+
+Before you even think about flipping the switch in the Shopify Admin, you must perform a thorough audit of your existing customer account section.
+
+### **1. Identify All Customizations**
+Go through every file in the `/customers` directory of your theme and identify any code that is not part of the default theme. Look for:
+-   **Custom Forms:** Wishlist forms, product review submissions, or custom data collection.
+-   **Metafield Displays:** Code that shows customer-specific or order-specific metafields.
+-   **Third-Party App Integrations:** Snippets from loyalty, subscription, or support apps that were manually added.
+-   **Custom Business Logic:** Unique features like displaying download links for digital products, showing return eligibility, or offering a "reorder" button.
+
+### **2. Categorize Each Customization**
+For each custom feature you identify, determine its purpose and how it might be rebuilt:
+-   **Is it purely presentational?** (e.g., showing a customer's loyalty points balance). This is a prime candidate for a simple UI extension.
+-   **Does it require data input?** (e.g., a form to update a customer's birthday). This will require an extension that makes an API call, either to the Shopify API or to a custom app backend.
+-   **Is it from a public app?** Check if the app provider has an updated version that supports the new customer accounts. Many have already built the necessary extensions.
+
+---
+
+## **Executing the Migration: Porting Your Logic**
+
+Once you have your audit, you can begin the process of rebuilding your features as extensions.
+
+### **Step 1: Create a Customer Account UI Extension**
+Using the Shopify CLI, you'll scaffold a new UI extension. This will be the container for all your new account functionality.
+
+```bash
+shopify app extension generate
+```
+Choose "Customer Account UI Extension" and select your preferred language (React, JavaScript, etc.).
+
+### **Step 2: Rebuild a Feature (Example: Displaying a Metafield)**
+Let's say your old `customers/account.liquid` file had code to display a customer's "Membership Level" from a metafield.
+
+**Old Liquid Code:**
+```liquid
+<h3>Your Membership Level: {{ customer.metafields.my_fields.membership_level.value }}</h3>
+```
+
+**New Extension Approach:**
+You would create a new extension that targets the `customer.account.order-status.block.render` location. Inside your extension's code (e.g., in React), you would use a GraphQL query to fetch the customer's metafield and render it using Polaris components.
+
+```jsx
+// Example in a React extension
+import { useApi, reactExtension, Text } from '@shopify/ui-extensions-react/customer-account';
+
+export default reactExtension(
+  'customer.account.order-status.block.render',
+  () => <MembershipStatus />
+);
+
+function MembershipStatus() {
+  const { query } = useApi();
+  const [membershipLevel, setMembershipLevel] = useState('');
+
+  useEffect(() => {
+    query(`{
+      customer {
+        metafield(namespace: "my_fields", key: "membership_level") {
+          value
+        }
+      }
+    }`).then(({ data }) => {
+      setMembershipLevel(data.customer.metafield.value);
+    });
+  }, [query]);
+
+  if (!membershipLevel) return null;
+
+  return <Text>Your Membership Level: {membershipLevel}</Text>;
+}
+```
+
+### **Step 3: Test and Deploy**
+Use the Shopify CLI's dev server to test your extension in a development store. Once you've replicated all the necessary functionality, you can deploy your app and enable the new customer accounts in the admin.
+
+---
+
+## **Common Challenges and Solutions**
+
+-   **Styling:** You cannot use custom CSS. All UI must be built using Shopify's provided [Polaris components](https://shopify.dev/docs/api/customer-account-ui-extensions/components). This ensures consistency and security but requires a shift in mindset.
+-   **Complex Forms:** For forms that need to write data back to Shopify (e.g., updating a customer metafield), your extension will need to make an authenticated API call to your app's backend, which then calls the Shopify Admin API.
+-   **Full-Page Customizations:** You can no longer create entirely new custom pages within the account section. You are limited to injecting functionality into the specific [targets](https://shopify.dev/docs/api/customer-account-ui-extensions/targets) that Shopify provides.
+
+---
+
+## **Final Thoughts: The Future is Extensible**
+
+Migrating to the new customer accounts is a significant but necessary step. It requires a move away from monolithic Liquid templates and toward a modern, app-based, component-driven architecture.
+
+By embracing this new model, you are aligning your work with the future of the Shopify platform, enabling you to build more secure, scalable, and maintainable solutions for your clients.
+
+**❓ What is the most complex feature you've had to migrate to a UI extension?**

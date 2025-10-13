@@ -1,0 +1,132 @@
+---
+title: 'Building a "Super Collections" Page Without Killing Your Site Speed'
+description: "Tackle the challenge of displaying multiple collections on a single page by exploring performant ways to fetch and render product data, avoiding common Liquid performance pitfalls."
+pubDate: 'Nov 01 2025'
+heroImage: '/shopify-capaxe-labs.png'
+---
+
+The "Super Collections" page is a common request from ambitious merchants. It's a single, curated page that showcases multiple collections, often with a handful of products from each. Done right, it can be a powerful tool for discovery and merchandising.
+
+Done wrong, it can be a performance catastrophe.
+
+One of the most notorious performance killers in the Shopify world is a poorly built page like this. We've seen a real-world example where a page displaying twenty collections with fifty products each took a staggering **20 seconds** to even start loading. The culprit? A series of deeply nested Liquid loops.
+
+But it doesn't have to be this way. You can build a rich, multi-collection page that is also fast. The key is to fundamentally rethink how you loop through your data.
+
+---
+
+## **The Problem: Why Nested Loops Destroy Performance**
+
+Let's diagnose the issue. A naive approach to building a super collections page might look something like this:
+
+```liquid
+{% comment %} The list of collection handles is defined in the section settings {% endcomment %}
+{% for collection_handle in section.settings.collections_to_show %}
+  {% assign collection = collections[collection_handle] %}
+  <h2>{{ collection.title }}</h2>
+
+  <div class="product-grid">
+    {% comment %} DANGER: The first nested loop {% endcomment %}
+    {% for product in collection.products limit: 5 %}
+      <div class="product-card">
+        <h4>{{ product.title }}</h4>
+        <ul>
+          {% comment %} DANGER: The second, even deeper nested loop {% endcomment %}
+          {% for variant in product.variants %}
+            <li>{{ variant.title }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endfor %}
+  </div>
+{% endfor %}
+```
+
+If you're showing 10 collections, 5 products per collection, and each product has 3 variants, the innermost loop runs `10 * 5 * 3 = 150` times. But the `product` loop runs 50 times. The total number of iterations is far higher than it needs to be, and this complexity grows exponentially as you add more data.
+
+This is what causes the server to "think" for so long, delaying the page render.
+
+---
+
+## **The Solution: Fetch, Don't Nest**
+
+The professional approach is to avoid deep nesting by being more strategic about how you access your data. While you can't completely eliminate loops, you can significantly reduce their complexity.
+
+### **Step 1: Unroll the Outermost Loop**
+
+Instead of looping through a dynamic list of collections, define them as individual settings in your schema. This might seem less flexible, but it's often a worthwhile trade-off for performance and clarity.
+
+**Schema Change:**
+```json
+"settings": [
+  {
+    "type": "collection",
+    "id": "collection_1",
+    "label": "First Collection"
+  },
+  {
+    "type": "collection",
+    "id": "collection_2",
+    "label": "Second Collection"
+  },
+  // ... and so on
+]
+```
+
+### **Step 2: Render a Reusable Snippet**
+
+Now, in your section, instead of a `for` loop, you'll have a series of `render` calls.
+
+**Section Code:**
+```liquid
+{% if section.settings.collection_1 != blank %}
+  {% render 'super-collection-grid', collection_handle: section.settings.collection_1 %}
+{% endif %}
+
+{% if section.settings.collection_2 != blank %}
+  {% render 'super-collection-grid', collection_handle: section.settings.collection_2 %}
+{% endif %}
+```
+
+### **Step 3: Optimize the Snippet**
+
+Inside your `super-collection-grid.liquid` snippet, you can now focus on optimizing the product loop. The key is to do as much as possible within this single loop and avoid nesting further if you can.
+
+**Snippet (`super-collection-grid.liquid`):**
+```liquid
+{% assign collection = collections[collection_handle] %}
+<h2>{{ collection.title }}</h2>
+
+<div class="product-grid">
+  {% for product in collection.products limit: 5 %}
+    {% comment %}
+      Instead of looping through variants here, we can often get what we need
+      from the product object directly, or with clever use of filters.
+    {% endcomment %}
+    {% assign first_available_variant = product.first_available_variant %}
+
+    <div class="product-card">
+      <h4>{{ product.title }}</h4>
+      <p>Starts at {{ first_available_variant.price | money }}</p>
+      <p>{{ product.variants.size }} options available</p>
+    </div>
+  {% endfor %}
+</div>
+```
+In this optimized snippet, we've completely removed the nested variant loop. We're instead using properties like `product.first_available_variant` and `product.variants.size` which are much more performant.
+
+---
+
+## **When You Absolutely Must Nest: The `capture` Technique**
+
+Sometimes, you truly do need to iterate through variants for each product. In these cases, fall back to the `capture` technique to ensure you are only looping through the product's variants *once* to build all the different HTML parts you need. This is still far better than multiple, separate nested loops.
+
+---
+
+## **Final Thoughts: Performance is an Architectural Choice**
+
+Building a "Super Collections" page is a perfect example of how theme architecture directly impacts site speed. By consciously avoiding nested loops and opting for a more explicit, snippet-based approach, you can deliver the rich merchandising experience your client wants without sacrificing the performance their customers demand.
+
+Before you write your next `for` loop inside another `for` loop, take a moment to consider the cost. There is almost always a faster way.
+
+**❓ What other performance-killing Liquid patterns have you encountered in the wild?**

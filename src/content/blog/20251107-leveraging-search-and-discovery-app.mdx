@@ -1,0 +1,135 @@
+---
+title: "How to Leverage Shopify's Search & Discovery App for Advanced Filtering"
+description: "A developer's guide to customizing the output and styling of Shopify's native Search & Discovery app to seamlessly integrate its powerful filtering with any custom theme."
+pubDate: 'Nov 07 2025'
+heroImage: '/shopify-capaxe-labs.png'
+---
+
+Shopify's free **Search & Discovery app** is a powerhouse. It gives merchants an incredible amount of control over their collection filters, search results, and product recommendations, all from an intuitive interface in the Shopify Admin.
+
+For developers, however, the app can sometimes feel like a "black box." While it's great at providing the filtering logic, its default frontend output doesn't always align with the unique design of a custom theme. How do you transform its standard list of checkboxes into beautiful, custom-branded color swatches or range sliders?
+
+The key is to understand that the app provides the *data*, but you still have full control over the *presentation*. This guide will show you how to tap into the app's data objects to build a completely custom filtering experience in your theme.
+
+---
+
+## **How the App Works: Data Injection**
+
+When the Search & Discovery app is active, it injects a wealth of data into the `search` and `collection` Liquid objects. The most important of these for filtering is `collection.filters` (or `search.filters` on a search results page).
+
+This object is an array of all the available filters that a merchant has configured in the app, such as "Color," "Size," or "Price." Each filter object in the array contains all the information you need to render it, including:
+-   `filter.label`: The display name of the filter (e.g., "Color").
+-   `filter.type`: The type of filter (e.g., `list`, `price_range`).
+-   `filter.values`: An array of all the possible filter values (e.g., "Red," "Blue," "Green").
+-   `filter.active_values`: An array of the values that are currently active.
+
+Our job is to loop through this `collection.filters` array and render each filter not with the default markup, but with our own custom Liquid.
+
+---
+
+## **Step 1: Building the Filter Form**
+
+The entire filtering interface must be wrapped in a `<form>` tag. The app's JavaScript listens for changes within this form to automatically reload the product grid.
+
+```liquid
+<form id="CollectionFiltersForm">
+  {% for filter in collection.filters %}
+    {% comment %} We will render each filter type here {% endcomment %}
+  {% endfor %}
+</form>
+```
+
+---
+
+## **Step 2: Rendering Custom Filter Types**
+
+Now, we can loop through the filters and use a `case` statement to handle each `filter.type` differently. This is where you can get creative.
+
+Let's say we want to render "Color" filters as swatches and all other list-based filters as checkboxes.
+
+```liquid
+<form id="CollectionFiltersForm">
+  {% for filter in collection.filters %}
+    {% case filter.type %}
+      {% when 'list' %}
+        {% if filter.label == 'Color' %}
+          {% comment %} Render as color swatches {% endcomment %}
+          <div class="filter-group">
+            <h4>{{ filter.label }}</h4>
+            <ul class="filter-group--swatches">
+              {% for value in filter.values %}
+                <li>
+                  <input type="checkbox"
+                         name="{{ value.param_name }}"
+                         value="{{ value.value }}"
+                         id="filter-{{ value.label | handle }}"
+                         {% if value.active %}checked{% endif %}>
+                  <label for="filter-{{ value.label | handle }}"
+                         style="background-color: {{ value.label }};">
+                    <span class="visually-hidden">{{ value.label }}</span>
+                  </label>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% else %}
+          {% comment %} Render as standard checkboxes {% endcomment %}
+          <div class="filter-group">
+            <h4>{{ filter.label }}</h4>
+            <ul class="filter-group--checkboxes">
+              {% for value in filter.values %}
+                <li>
+                  <input type="checkbox"
+                         name="{{ value.param_name }}"
+                         value="{{ value.value }}"
+                         id="filter-{{ value.label | handle }}"
+                         {% if value.active %}checked{% endif %}>
+                  <label for="filter-{{ value.label | handle }}">
+                    {{ value.label }} ({{ value.count }})
+                  </label>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+
+      {% when 'price_range' %}
+        {% comment %} You could build a custom range slider here {% endcomment %}
+        <div class="filter-group">
+          <h4>{{ filter.label }}</h4>
+          <!-- Custom range slider HTML and JS would go here -->
+        </div>
+    {% endcase %}
+  {% endfor %}
+</form>
+```
+
+### **Key Takeaways from the Code:**
+
+-   **Custom Logic:** We check `if filter.label == 'Color'` to single out a specific filter for unique presentation.
+-   **Value Object:** Each `value` in `filter.values` is an object containing everything you need:
+    -   `value.label`: The human-readable text (e.g., "Red").
+    -   `value.param_name` & `value.value`: The `name` and `value` attributes for the form input.
+    -   `value.active`: A boolean that is `true` if this value is currently being filtered.
+    -   `value.count`: The number of products that match this filter value.
+-   **Accessibility:** For the color swatches, we still use a checkbox for accessibility and a `visually-hidden` span inside the label to provide context for screen readers.
+
+---
+
+## **Step 3: Handling the AJAX Refresh**
+
+The Search & Discovery app's JavaScript will automatically handle the form submission and AJAX refresh of the product grid. However, you need to ensure your theme's HTML is structured correctly for this to work.
+
+Your collection grid, pagination, and filter form must be wrapped in an element with an `id` that the app can target. By default, this is often `shopify-section-main-collection-product-grid`.
+
+If your custom theme uses a different structure, you may need to add a small amount of JavaScript to listen for the app's events (`'shopify:section:load'`) and correctly re-initialize any theme-specific JavaScript (like carousels or quick-add modals) after the grid is refreshed.
+
+---
+
+## **Final Thoughts: The Best of Both Worlds**
+
+By tapping into the `collection.filters` object, you get the best of both worlds: merchants get the powerful, user-friendly interface of the Search & Discovery app to manage their filters, and you retain complete creative control over how those filters are rendered on the storefront.
+
+It's the perfect example of how to bend Shopify's native tools to fit a highly custom theme, delivering a seamless experience for both the merchant and the customer.
+
+**❓ What's the most creative custom filter you've ever built for a Shopify theme?**

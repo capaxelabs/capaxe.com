@@ -1,0 +1,68 @@
+---
+title: "Automating Your Shopify Workflow with n8n"
+description: "An introduction to the powerful workflow automation tool n8n, with practical examples for how Shopify developers can automate repetitive tasks like reporting, data syncing, and store management."
+pubDate: 'Nov 16 2025'
+heroImage: '/shopify-capaxe-labs.png'
+---
+
+As developers, we build automations for a living, yet our own workflows are often filled with manual, repetitive tasks. From generating daily sales reports to syncing data between platforms or scaffolding new client projects, these small tasks add up, draining our time and focus.
+
+But what if you could automate your own automations?
+
+Enter **n8n** (pronounced "n-eight-n"), a powerful, flexible, and developer-friendly workflow automation platform. Unlike simpler tools, n8n offers the code-level control and self-hosting capabilities that make it a perfect fit for a developer's toolkit. It's a platform for orchestrating complex processes that can save you countless hours.
+
+Let's explore what n8n is and look at a few practical workflows that you can implement today to streamline your Shopify development process.
+
+---
+
+## **What is n8n and Why is it for Developers?**
+
+n8n is a "fair-code" licensed tool that allows you to connect to virtually any app or service via its extensive library of nodes and build multi-step workflows.
+
+What makes it stand out for developers?
+-   **Code-Level Control:** When a pre-built node isn't enough, you can write your own JavaScript or TypeScript directly within a "Code" node to transform data or implement custom logic.
+-   **Self-Hosting:** You can run n8n on your own infrastructure, giving you complete control over your data, security, and costs.
+-   **Powerful Debugging:** It offers a visual "test mode" that allows you to see the data flowing through each step of your workflow, making it easy to debug and refine your logic.
+-   **Extensive Integrations:** It has hundreds of nodes for everything from Shopify and Stripe to Google Sheets, Slack, and generic HTTP requests.
+
+---
+
+## **Workflow 1: Automated Daily Sales Reports in Slack**
+
+Manually pulling sales data for a client or your own team is a classic time-sink. Let's automate it.
+
+**The Goal:** Every day at 9 AM, get the previous day's sales total from Shopify and post it to a Slack channel.
+
+**The n8n Workflow:**
+1.  **Schedule Trigger Node:** Configure this to run every day at a specific time.
+2.  **Date & Time Node:** Generate the dates for "yesterday" in the required format for Shopify's API.
+3.  **Shopify Node:** Use the "Order" resource and the "Get All" operation. Use the dates from the previous node to filter for orders created in the last day.
+4.  **Code Node:** Loop through the orders returned by the Shopify node, sum up their `total_price`, and format a clean message string.
+5.  **Slack Node:** Send the formatted message to your desired channel.
+
+**The Result:** A fully automated, hands-off daily report that keeps you and your clients in the loop without any manual effort.
+
+---
+
+## **Workflow 2: Syncing New Shopify Customers to a Google Sheet**
+
+Keeping a CRM or a simple spreadsheet of customers updated is another common manual task.
+
+**The Goal:** When a new customer is created in Shopify, add their name, email, and total order count to a new row in a Google Sheet.
+
+**The n8n Workflow:**
+1.  **Shopify Trigger Node:** Set this to listen for the "Customer Create" event. This gives you an instant, webhook-based trigger.
+2.  **Shopify Node:** Use the customer ID from the trigger to fetch the full customer object, as the trigger payload may be minimal. This allows you to get details like `orders_count`.
+3.  **Google Sheets Node:** Configure it to "Append or Update Row" in your specified sheet. Map the customer's `first_name`, `last_name`, `email`, and `orders_count` from the previous node to the correct columns.
+
+**The Result:** A real-time, automated customer list that can be used for marketing, analysis, or as a simple backup, with zero data entry required.
+
+---
+
+## **Final Thoughts: Build Your Own Internal Tools**
+
+These examples are just the beginning. You could extend these workflows to automate theme deployments, create development stores, sync metafield data with an external CMS, or orchestrate any other multi-step process you find yourself doing manually.
+
+Tools like n8n empower developers to build their own suite of powerful, bespoke internal tools. By investing a small amount of time in automating your own repetitive tasks, you can reclaim hours of focus and apply your expert skills to the complex, high-value problems that truly matter.
+
+**❓ What's the one repetitive task in your workflow that you would love to automate?**

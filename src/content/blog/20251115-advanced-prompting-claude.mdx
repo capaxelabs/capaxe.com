@@ -1,0 +1,110 @@
+---
+title: "Advanced Prompting for Shopify Development: A Guide to Using Claude Effectively"
+description: "Based on recommendations from Shopify experts, this post provides specific prompting techniques and examples for generating high-quality Liquid, JavaScript, and GraphQL code for Shopify."
+pubDate: 'Nov 15 2025'
+heroImage: '/shopify-capaxe-labs.png'
+---
+
+In the rapidly evolving world of AI-assisted development, the quality of your output is a direct reflection of the quality of your input. For Shopify developers, this means that mastering the art of **prompt engineering** is quickly becoming as important as mastering Liquid or JavaScript.
+
+An effective prompt can turn an AI like Anthropic's Claude into a powerful junior developer, capable of generating accurate, efficient, and context-aware code. A poor prompt, on the other hand, leads to generic, incorrect, or "hallucinated" code that costs more time to fix than it saves.
+
+Drawing on expert recommendations, this guide moves beyond basic questions and dives into the advanced prompting techniques that professional Shopify developers are using to get the most out of their AI coding assistants.
+
+---
+
+## **The Core Principle: You Are the Senior Developer**
+
+The most effective mental model for working with an AI is to treat it as a talented but inexperienced junior developer. It's fast, eager, and has a vast knowledge base, but it lacks context, nuance, and real-world experience.
+
+Your job is to act as the senior developer in this pairing. You must provide:
+1.  **Clear, Unambiguous Instructions:** Tell it exactly what to do.
+2.  **Rich Context:** Give it all the information it needs to succeed.
+3.  **Specific Constraints:** Tell it what *not* to do and what standards to follow.
+
+A great prompt is not a question; it's a detailed spec.
+
+---
+
+## **Advanced Prompting Techniques for Shopify**
+
+Let's break down the key components of a professional-grade prompt.
+
+### **1. Set the Persona and Role**
+
+Begin your prompt by telling the AI who it is. This primes the model to respond in a specific style and draw upon the most relevant parts of its training data.
+
+**Good Prompt:**
+> "You are an expert Shopify theme developer specializing in modern, performant Liquid code."
+
+This is far more effective than just asking a question, as it sets a clear expectation for the quality and type of response.
+
+### **2. Provide Rich, Specific Context**
+
+This is the most critical part of any advanced prompt. The more relevant context you provide, the better the output will be.
+
+-   **Provide the Schema:** When asking for Liquid for a section, provide the entire `{% schema %}`. This allows the AI to see the exact `settings` and `blocks` it has to work with.
+-   **Provide the API Docs:** When working with GraphQL, don't just ask for a query. Provide the relevant parts of the GraphQL schema for the objects you are querying. (See our guide on [Understanding Shopify's GraphQL Schema for Agentic Development](/blog/20251108-graphql-schema-agentic-development)).
+-   **Provide Existing Code:** If you want the AI to add to or refactor a piece of code, give it the entire file or function. This allows it to understand the surrounding logic and match the existing coding style.
+
+### **3. Give Step-by-Step Instructions**
+
+Don't ask the AI to solve a complex problem in one go. Break it down into a clear, logical sequence of steps.
+
+**Good Prompt:**
+> "I am building a 'Featured Products' section. Follow these steps:
+> 1. Create a `for` loop that iterates through `collection.products`.
+> 2. Inside the loop, render the 'product-card' snippet, passing the `product` object.
+> 3. After the loop, render a 'button' theme block. The text for the button should come from `section.settings.button_text`."
+
+This structured approach prevents the AI from making incorrect assumptions and ensures the output matches your desired logic.
+
+### **4. Define Clear Constraints and "Don'ts"**
+
+Tell the AI what it should avoid. This is crucial for enforcing best practices and avoiding common pitfalls.
+
+**Good Prompt:**
+> "Generate the Liquid for a product grid.
+> **Constraints:**
+> - Do not use a nested `for` loop inside the main product loop.
+> - All CSS classes must follow the BEM naming convention.
+> - Do not use any inline styles."
+
+### **5. Ask for a Specific Output Format**
+
+Be explicit about the format you want the response in. This is especially useful for getting complete, ready-to-use code blocks.
+
+**Good Prompt:**
+> "Provide the complete code for the `sections/my-section.liquid` file. The response should be a single Liquid code block, with the `{% schema %}` tag included at the end."
+
+---
+
+## **Putting It All Together: An Example**
+
+Let's combine these techniques into a single, powerful prompt.
+
+> **Persona:** "You are an expert Shopify theme developer specializing in performant, accessible Liquid code."
+>
+> **Task:** "I need to create a new section that displays a grid of products from a selected collection."
+>
+> **Context:** "The section will use the `product-card.liquid` snippet to render each product. Here is the LiquidDoc for that snippet: [Paste LiquidDoc here]."
+>
+> **Instructions:**
+> "1. Define a schema with a `collection` setting so the merchant can pick the collection.
+> 2. In the Liquid, loop through the products of the selected collection.
+> 3. Inside the loop, render the `product-card` snippet for each product.
+> 4. Add a `style` tag to the top of the file to create a 4-column grid using CSS Grid."
+>
+> **Constraints:**
+> "- Do not add any settings to the schema other than the `collection` picker.
+> - Do not use any JavaScript."
+>
+> **Output Format:** "Provide the full code for the `sections/featured-collection.liquid` file in a single code block."
+
+---
+
+## **Final Thoughts: Prompting is a Skill**
+
+Mastering prompt engineering is a skill that requires practice, but it's an investment that pays enormous dividends. By moving from simple questions to detailed, context-rich specifications, you can transform your AI assistant from a novelty into an indispensable member of your development team.
+
+**❓ What is your most effective prompting technique for getting great code from an AI?**

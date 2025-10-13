@@ -1,0 +1,82 @@
+---
+title: "Getting Started with Figma MCP for Shopify: A Beginner's Guide"
+description: "A step-by-step tutorial for developers new to Figma's Model Context Protocol (MCP), covering the core concepts and how to generate your first Liquid section from a Figma design."
+pubDate: 'Nov 14 2025'
+heroImage: '/shopify-capaxe-labs.png'
+---
+
+The gap between design and development has been a long-standing source of friction in web development. A beautiful, intricate design in Figma can quickly become a source of frustration during the manual, error-prone process of translating it into clean, functional code.
+
+**Figma's Model Context Protocol (MCP)** is a revolutionary technology designed to bridge this gap. It allows AI coding assistants to connect directly to your Figma files, understand the design's structure, and generate high-quality code with unprecedented accuracy.
+
+For Shopify developers, this is a game-changer. It promises to automate the most tedious parts of theme development, freeing us up to focus on complex logic and unique user experiences.
+
+If you're new to MCP, it can seem a bit abstract. This guide will provide a practical, step-by-step introduction to the core concepts and show you how to generate your first Liquid section.
+
+---
+
+## **The Core Concept: From "What It Looks Like" to "What It Is"**
+
+Traditional "design-to-code" tools work by analyzing the visual output of a design. They see a blue box with text and try to replicate it with CSS.
+
+MCP is different. It gives the AI access to the *semantic structure* of the Figma file. The AI doesn't just see a blue box; it sees a "Button" component with a specific "Primary" variant, a defined `border-radius` token, and an `auto-layout` with 16px of padding.
+
+This deep, structural context is what allows the AI to generate code that is not just visually similar, but also well-structured, component-based, and true to the original design intent.
+
+---
+
+## **Prerequisites**
+
+To get started, you'll need an AI-powered code editor that supports MCP. The most popular one in the Shopify community right now is **Cursor**, but other tools are rapidly adding support.
+
+---
+
+## **Step-by-Step: Generating a Simple Liquid Section**
+
+Let's walk through a typical workflow for generating a simple "Image with Text" section for a Shopify theme.
+
+### **Step 1: Design with Structure in Figma**
+
+The quality of your generated code is directly proportional to the quality of your Figma design. For MCP to work effectively, you must use modern Figma features:
+-   **Auto Layout:** Use auto layout for all spacing and alignment. This is the single most important practice.
+-   **Components and Variants:** Define reusable elements like buttons and cards as components.
+-   **Text and Color Styles:** Use named styles for your typography and colors.
+
+For our "Image with Text" section, you would create a main frame with auto layout, with two nested frames: one for the image and one for the text content (heading, paragraph, and a button component).
+
+### **Step 2: Connect Your Code Editor to Figma**
+
+In your code editor (e.g., Cursor), you'll typically use a command to connect to Figma. This will open a prompt where you can paste the URL of your Figma file.
+
+Once connected, the AI now has a live link to your design's structure.
+
+### **Step 3: Prompt the AI with Context**
+
+This is where the magic happens. Instead of a vague prompt, you can now reference the design directly.
+
+First, create a new file, `image-with-text.liquid`, in the `sections` directory of your theme.
+
+Then, in your editor's AI chat, you can select the specific frame in your Figma file that you want to generate and write a prompt like this:
+
+> "Generate the Liquid and `{% schema %}` for a new Shopify section based on the 'Image with Text' frame I've selected from the connected Figma file. The heading, text, and button should all be configurable settings in the schema. The image should be an `image_picker` setting."
+
+### **Step 4: Review and Refine the Output**
+
+The AI will generate the complete Liquid and JSON schema for your new section. It will interpret the auto layout to create the correct HTML structure and CSS, and it will use the text and color styles from Figma to inform the schema settings.
+
+The output won't always be 100% perfect. You may need to:
+-   Tweak the schema to add more specific setting types (e.g., changing a `text` input to `richtext`).
+-   Refine the CSS to handle responsive behavior more precisely.
+-   Add any complex Liquid logic that the AI might have missed.
+
+Even with these refinements, the process is dramatically faster. The AI has done 80-90% of the tedious boilerplate work, allowing you to focus on the finishing touches.
+
+---
+
+## **Final Thoughts: A New Partner in Development**
+
+Figma's MCP is not a tool that will replace developers. It's a tool that will *augment* them. It automates the most time-consuming and least creative part of our job—turning a finished design into structured code—and frees us up to be better architects, problem-solvers, and engineers.
+
+The developers who embrace this new, AI-assisted workflow will have a massive advantage, delivering higher-quality work in a fraction of the time. The revolution is here, and it starts with connecting your editor to your design.
+
+**❓ Have you tried using an MCP-enabled tool in your workflow? What was your experience?**

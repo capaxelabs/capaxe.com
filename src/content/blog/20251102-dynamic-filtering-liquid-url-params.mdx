@@ -1,0 +1,122 @@
+---
+title: "Dynamic Filtering with Liquid and URL Parameters in Shopify"
+description: "A back-to-basics guide on building a simple, JavaScript-free collection filtering system using only Liquid objects and URL query parameters."
+pubDate: 'Nov 02 2025'
+heroImage: '/shopify-capaxe-labs.png'
+---
+
+In an era of complex JavaScript frameworks and feature-rich apps, it's easy to forget the power of the fundamentals. While Shopify's Search & Discovery app is a fantastic tool for advanced filtering, sometimes all you need is a simple, fast, and reliable way to filter a collection by its tags.
+
+And you can build it with **zero JavaScript**.
+
+By leveraging Shopify's built-in URL parameters and the `collection.current_tags` Liquid object, you can create a robust filtering system that is both incredibly performant and easy to implement. This "back-to-basics" approach is a perfect way to understand the core mechanics of data filtering in Shopify.
+
+Let's build a simple tag-based filter for a collection page.
+
+---
+
+## **The Core Concepts: How Shopify Handles Filtering**
+
+The magic behind this technique lies in how Shopify interprets URLs on a collection page.
+
+When you visit a URL like `/collections/all/red`, Shopify understands that you want to see the "all" collection, but only the products that have the tag "red". It automatically filters the `collection.products` object for you and populates the `collection.current_tags` array with the active tag ("red").
+
+Our job as theme developers is simply to:
+1.  Read the `collection.current_tags` object to see which filters are active.
+2.  Display a list of all available tags.
+3.  Generate the correct links for adding or removing tag filters.
+
+---
+
+## **Step 1: Displaying the Active Filters**
+
+First, let's show the user which filters are currently applied. This is a simple matter of looping through the `collection.current_tags` array.
+
+```liquid
+{% if collection.current_tags.size > 0 %}
+  <div class="active-filters">
+    <h4>Active Filters:</h4>
+    <ul>
+      {% for tag in collection.current_tags %}
+        <li>
+          {{ tag }}
+          {% comment %} We'll add the "remove" link in a later step {% endcomment %}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}
+```
+This block of code will only render if at least one tag filter is active, and it will list each of the active tags.
+
+---
+
+## **Step 2: Listing All Available Filter Tags**
+
+Next, we need to show the user all the possible tags they can filter by. The `collection.all_tags` object gives us a complete list of every tag present on the products within the current collection.
+
+```liquid
+<div class="filter-sidebar">
+  <h4>Filter By:</h4>
+  <ul>
+    {% for tag in collection.all_tags %}
+      {% comment %} We need to check if the tag is already active {% endcomment %}
+      {% if collection.current_tags contains tag %}
+        <li class="active">
+          {{ tag }}
+          {% comment %} This is where the "remove" link will go {% endcomment %}
+        </li>
+      {% else %}
+        <li>
+          {% comment %} This is where the "add" link will go {% endcomment %}
+          {{ tag }}
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>
+```
+This code loops through every available tag and uses a simple `if` statement to check if the tag is already present in the `current_tags` array, allowing us to style it differently.
+
+---
+
+## **Step 3: Generating the "Add" and "Remove" Links**
+
+This is the most crucial part. We need to generate the correct URLs to add or remove a tag filter without losing the other active filters. Shopify's `link_to_add_tag` and `link_to_remove_tag` filters make this incredibly easy.
+
+Let's update our previous code block with the real links.
+
+```liquid
+<div class="filter-sidebar">
+  <h4>Filter By:</h4>
+  <ul>
+    {% for tag in collection.all_tags %}
+      {% if collection.current_tags contains tag %}
+        <li class="active">
+          {{ tag | link_to_remove_tag: tag }}
+        </li>
+      {% else %}
+        <li>
+          {{ tag | link_to_add_tag: tag }}
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>
+```
+
+**What's happening here?**
+-   `{{ tag | link_to_add_tag: tag }}`: This filter generates a complete `<a>` tag. The link's `href` will be the current collection URL with the new tag appended. For example, if you are on `/collections/all/red` and you click a link for "small", this filter will generate a link to `/collections/all/red+small`.
+-   `{{ tag | link_to_remove_tag: tag }}`: This does the opposite. If you are on `/collections/all/red+small` and click the "red" link, it will generate a link to `/collections/all/small`.
+
+Shopify handles all the URL logic for you, including the `+` separators for multiple tags.
+
+---
+
+## **Final Thoughts: The Power of Simplicity**
+
+In just a few lines of Liquid, we've built a fully functional, performant, and no-JavaScript filtering system. It's a perfect solution for stores with a straightforward product taxonomy and a great example of how much can be accomplished by leveraging Shopify's core features.
+
+Before reaching for a complex app or writing a single line of JavaScript, always ask yourself: "Can I do this with Liquid and a URL?" You'll often be surprised by the answer.
+
+**❓ What other powerful features have you built using only Liquid?**

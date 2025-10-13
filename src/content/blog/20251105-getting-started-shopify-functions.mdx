@@ -1,0 +1,177 @@
+---
+title: "Getting Started with Shopify Functions: A Practical Tutorial"
+description: "A beginner-friendly, step-by-step guide to writing your first Shopify Function in JavaScript to create a custom product discount."
+pubDate: 'Nov 05 2025'
+heroImage: '/shopify-capaxe-labs.png'
+---
+
+For years, customizing Shopify's core backend logic—like discounts, shipping rates, and payment methods—was a complex task, often requiring hacky workarounds or expensive Shopify Plus scripts.
+
+With the introduction of **Shopify Functions**, that has all changed.
+
+Shopify Functions are small, single-purpose pieces of code that run on Shopify's fast and secure infrastructure, allowing you to customize the backend of your store with your own business logic. They are deployed with your app and configured by merchants directly in the Shopify Admin, creating a seamless and powerful experience.
+
+This guide will walk you through the entire process of creating your very first Shopify Function—a simple product discount—using JavaScript and the Shopify CLI.
+
+---
+
+## **What Problem Do Shopify Functions Solve?**
+
+Imagine you want to create a specific discount: "Buy a coffee mug, get 15% off any bag of coffee beans."
+
+With traditional discount codes, this is difficult or impossible to implement. With Shopify Functions, you can write this custom logic directly.
+
+Functions allow you to build:
+-   **Custom Discounts:** "Buy X, get Y," tiered discounts, or discounts based on customer tags.
+-   **Shipping Method Logic:** Hide or rename shipping rates based on cart contents.
+-   **Payment Method Customization:** Reorder or hide payment options based on the customer's country.
+
+---
+
+## **Prerequisites**
+
+Before we start, make sure you have the following:
+1.  A Shopify Partner account and a development store.
+2.  The latest version of the Shopify CLI installed.
+3.  Node.js and npm (or your preferred package manager) installed.
+
+---
+
+## **Step-by-Step: Building a "Buy X, Get Y" Discount**
+
+Our goal is to create a function that applies a 15% discount to any product with the "Coffee" type if the cart also contains a product with the "Mug" type.
+
+### **Step 1: Generate a New App and Function Extension**
+
+First, use the Shopify CLI to create a new app. Then, navigate into your app's directory and generate a new function extension.
+
+```bash
+# Create a new app (choose the "remix" template)
+npm init @shopify/app@latest
+
+# Navigate into your new app directory
+cd my-shopify-app
+
+# Generate the function extension
+shopify app generate extension
+```
+
+When prompted, choose **"Function - Product Discounts (JavaScript)"** and give it a name like "buy-x-get-y-discount".
+
+### **Step 2: Understand the File Structure**
+
+The CLI will generate a new directory under `extensions/buy-x-get-y-discount`. The most important file is `src/index.js`. This is where your logic will go.
+
+You'll see some boilerplate code. Let's replace it with our custom logic.
+
+### **Step 3: Write the Discount Logic**
+
+Open `src/index.js` and replace its contents with the following:
+
+```javascript
+// @ts-check
+import { DiscountApplicationStrategy } from "../generated/api";
+
+/**
+ * @typedef {import("../generated/api").RunInput} RunInput
+ * @typedef {import("../generated/api").FunctionRunResult} FunctionRunResult
+ * @typedef {import("../generated/api").Target} Target
+ * @typedef {import("../generated/api").ProductVariant} ProductVariant
+ */
+
+/**
+ * @type {FunctionRunResult}
+ */
+const EMPTY_DISCOUNT = {
+  discountApplicationStrategy: DiscountApplicationStrategy.First,
+  discounts: [],
+};
+
+export default /**
+ * @param {RunInput} input
+ * @returns {FunctionRunResult}
+ */
+function run(input) {
+  // Define the product types we're looking for
+  const MUG_TYPE = "Mug";
+  const COFFEE_TYPE = "Coffee";
+
+  // Find out if a mug is in the cart
+  const hasMug = input.cart.lines.some(line =>
+    line.merchandise.__typename == "ProductVariant" && line.merchandise.product.productType == MUG_TYPE
+  );
+
+  // If there's no mug, we don't apply any discount
+  if (!hasMug) {
+    return EMPTY_DISCOUNT;
+  }
+
+  // Find all the coffee products in the cart that are eligible for the discount
+  const targets = input.cart.lines
+    .filter(line =>
+      line.merchandise.__typename == "ProductVariant" && line.merchandise.product.productType == COFFEE_TYPE
+    )
+    .map(line => /** @type {Target} */ ({
+      productVariant: {
+        id: line.merchandise.id
+      }
+    }));
+
+  // If there are no coffee products, there's nothing to discount
+  if (!targets.length) {
+    return EMPTY_DISCOUNT;
+  }
+
+  // We've found our conditions! Apply the discount.
+  return {
+    discounts: [
+      {
+        // Apply the discount to the targets we identified
+        targets,
+        // The discount value
+        value: {
+          percentage: {
+            value: "15.0"
+          }
+        }
+      }
+    ],
+    discountApplicationStrategy: DiscountApplicationStrategy.First,
+  };
+};
+```
+
+This code is heavily commented to explain each step, but the core logic is simple:
+1.  It checks if a product of type "Mug" exists in the cart.
+2.  If it does, it finds all products of type "Coffee".
+3.  It then returns a discount object that applies a 15% discount to those specific coffee products.
+
+### **Step 4: Deploy Your App and Function**
+
+Now, deploy your app. The Shopify CLI will bundle your function into a WebAssembly module and upload it to Shopify.
+
+```bash
+npm run deploy
+```
+
+Follow the prompts to install the app on your development store.
+
+### **Step 5: Configure the Discount in the Shopify Admin**
+
+The final step is to make this discount available to the merchant.
+1.  Go to your Shopify Admin and navigate to **Discounts**.
+2.  Click **"Create discount"** and select **"Product discount"**.
+3.  You will now see your custom function listed as a discount type! It will be named after your app (e.g., "Buy X Get Y Discount from My Shopify App").
+4.  Select it, give it a name (e.g., "Coffee & Mug Deal"), and save.
+
+That's it! The discount is now active. If you go to your storefront and add a "Mug" and a "Coffee" product to your cart, the 15% discount will be automatically applied to the coffee.
+
+---
+
+## **Final Thoughts: The Power of Backend Customization**
+
+Shopify Functions are a paradigm shift for the platform. They provide a secure, scalable, and upgrade-safe way to inject custom business logic where it was never before possible.
+
+By mastering Functions, you can move beyond simple theme customizations and start delivering truly bespoke e-commerce solutions that solve your clients' most complex business challenges.
+
+**❓ What custom logic would you build with your first Shopify Function?**

@@ -1,0 +1,130 @@
+---
+title: "Say Goodbye to Nested Loops: A Guide to Refactoring Your Shopify Liquid"
+description: "A deep dive into the performance problems caused by nested loops in Liquid and step-by-step instructions on how to refactor common patterns for a faster theme."
+pubDate: 'Oct 29 2025'
+heroImage: '/shopify-capaxe-labs.png'
+---
+
+In Shopify theme development, few things can degrade performance as quickly and as silently as a **nested loop**. While they may seem harmless, an inefficient loop structure can force Shopify's servers to perform tens of thousands of operations, adding critical seconds to your page load time before a single pixel is even rendered.
+
+This isn't a theoretical problem. A real-world store saw its "super collections" page take **20 seconds** to load, all because of a series of nested loops processing collections, products, and variants.
+
+If you're serious about site speed, learning to identify and refactor nested loops is a non-negotiable skill. This guide will provide practical, step-by-step instructions for refactoring one of the most common and performance-damaging patterns in Shopify themes.
+
+---
+
+## **The Problem: The Innocent-Looking Nested Loop**
+
+Let's consider a common scenario: you want to display a grid of products, and for each product, you need to show a list of its available color swatches.
+
+A junior developer's first instinct might be to write something like this:
+
+**The Slow Way (Nested Loop):**
+```liquid
+<div class="product-grid">
+  {% for product in collection.products %}
+    <div class="product-card">
+      <h3>{{ product.title }}</h3>
+
+      <div class="swatches">
+        {% comment %} DANGER: Nested loop ahead! {% endcomment %}
+        {% for variant in product.variants %}
+          {% if variant.available %}
+            <span class="swatch" style="background-color: {{ variant.option1 }};"></span>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
+</div>
+```
+On a collection page with 50 products, each having 5 variants, this code will execute `50 * 5 = 250` iterations just for the inner loop. While this might be acceptable, it doesn't scale. What if you have 10 variants? Or need to loop through variant metafields as well? The complexity grows exponentially.
+
+More importantly, there's a much faster way.
+
+---
+
+## **The Solution: Consolidate and Refactor**
+
+The key to optimizing loops is to do as much work as possible within a single iteration. We can refactor the above code to eliminate the nested loop entirely by using a combination of `assign`, `capture`, and string filters.
+
+### **Step 1: Create a Master List of All Variants**
+
+First, instead of looping through each product's variants one by one, let's create a single, flat array of all variants for all products in the collection.
+
+```liquid
+{% assign all_variants = collection.products | map: 'variants' | join: ',' %}
+```
+This line is a bit dense, so let's break it down:
+-   `map: 'variants'`: This creates an array of arrays, where each inner array is the list of variants for a product.
+-   `join: ','`: This is a clever trick to flatten the array of arrays into a single, comma-separated string of variant objects.
+
+### **Step 2: Loop Once and Capture the Output**
+
+Now, we can loop through our single `all_variants` string. Inside this loop, we'll use `capture` to build the HTML for each product card.
+
+```liquid
+{% liquid
+  assign product_cards = ''
+  assign current_product_id = ''
+%}
+
+{% for variant in all_variants %}
+  {% if variant.product.id != current_product_id %}
+    {% if current_product_id != '' %}
+      {% comment %} Close the previous product card {% endcomment %}
+          </div>
+        </div>
+      {% endcapture %}
+      {% assign product_cards = product_cards | append: temp_card %}
+    {% endif %}
+
+    {% assign current_product_id = variant.product.id %}
+
+    {% capture temp_card %}
+      {% comment %} Start a new product card {% endcomment %}
+      <div class="product-card">
+        <h3>{{ variant.product.title }}</h3>
+        <div class="swatches">
+  {% endif %}
+
+  {% comment %} Add the swatch for the current variant {% endcomment %}
+  {% if variant.available %}
+    <span class="swatch" style="background-color: {{ variant.option1 }};"></span>
+  {% endif %}
+{% endfor %}
+
+{% comment %} Don't forget to close the very last card! {% endcomment %}
+      </div>
+    </div>
+{% endcapture %}
+{% assign product_cards = product_cards | append: temp_card %}
+
+<div class="product-grid">
+  {{ product_cards }}
+</div>
+```
+
+### **What's Happening Here?**
+
+This is an advanced technique, so let's walk through the logic:
+1.  We initialize an empty string `product_cards` to hold all our final HTML.
+2.  We loop through our flat list of `all_variants`.
+3.  We use `current_product_id` to track when we move from one product's variants to the next.
+4.  When `variant.product.id` changes, it means we're starting a new product. We close the previously captured card, append it to our master `product_cards` string, and start capturing a new `temp_card`.
+5.  For each variant in the loop, we simply append its swatch to the `temp_card` we're currently building.
+6.  After the loop finishes, we make sure to append the very last card that was being built.
+
+---
+
+## **The Result: A Blazing-Fast Theme**
+
+While the refactored code is more complex, the performance gains are enormous. You have replaced an `O(n*m)` operation (a nested loop) with an `O(n)` operation (a single loop).
+
+For a page with thousands of variants, this can be the difference between a 2-second load time and a 20-second load time.
+
+This is just one example, but the principle is universal. Look for nested loops in your code—especially in critical templates like `collection.liquid` and `product.liquid`—and challenge yourself to refactor them into a single, efficient loop.
+
+Your users, and your Lighthouse score, will thank you.
+
+**❓ What's the worst nested loop you've ever found and refactored in a Shopify theme?**
