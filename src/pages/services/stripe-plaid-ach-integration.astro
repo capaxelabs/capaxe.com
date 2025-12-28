@@ -1,0 +1,275 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { createSEO } from '@/utils/seo';
+import FAQSchema from '@/components/FAQSchema.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import CTABottom from '@/components/CTA.astro';
+
+const faqs = [
+  {
+    question: "Do you integrate Stripe and Plaid with Shopify?",
+    answer: "Yes. Capaxe Labs specializes in integrating Stripe payment processing and Plaid ACH bank transfers with Shopify. We build custom payment flows for subscriptions, installments, marketplace commissions, and complex payment routing. Our integrations handle Stripe Elements, Stripe Tax, Stripe Connect, and Plaid Link."
+  },
+  {
+    question: "What is Stripe ACH and how does it work with Shopify?",
+    answer: "Stripe ACH allows customers to pay via direct bank account transfers instead of credit cards. We integrate Plaid for bank account verification and Stripe for processing ACH payments. This reduces transaction fees (0.8% vs 2.9% for cards) and enables automated recurring payments for subscriptions and installment plans."
+  },
+  {
+    question: "Can you build custom Stripe checkout flows?",
+    answer: "Yes. We build fully custom Stripe checkout experiences using Stripe Elements, Payment Intents API, and webhooks. Our implementations include custom payment forms, multi-currency support, saved payment methods, 3D Secure authentication, and integration with Shopify's order management system."
+  },
+  {
+    question: "Do you integrate Stripe Connect for marketplaces?",
+    answer: "Yes. We implement Stripe Connect for Shopify marketplaces and platforms. This includes onboarding sellers with Stripe accounts, splitting payments between platform and sellers, handling marketplace commissions, managing payouts, and compliance with payment regulations."
+  },
+  {
+    question: "How does Plaid Link work for bank verification?",
+    answer: "Plaid Link is a secure widget that lets customers connect their bank accounts. We integrate Plaid Link into Shopify checkout to verify bank accounts instantly, retrieve account and routing numbers securely, enable ACH payments through Stripe, and provide a seamless user experience without manual account entry."
+  },
+  {
+    question: "Can you handle recurring billing with Stripe?",
+    answer: "Yes. We build custom subscription and recurring billing systems using Stripe Subscriptions API. This includes flexible billing cycles, prorated upgrades/downgrades, failed payment retry logic, dunning management, usage-based billing, and full integration with Shopify's subscription system."
+  },
+  {
+    question: "What is Stripe Tax and do you integrate it?",
+    answer: "Stripe Tax automatically calculates sales tax, VAT, and GST for transactions. We integrate Stripe Tax with Shopify to handle multi-jurisdiction tax compliance, automatic tax calculation at checkout, tax reporting, and remittance preparation. This simplifies tax compliance for international sales."
+  },
+  {
+    question: "How long does a Stripe/Plaid integration take?",
+    answer: "A basic Stripe payment integration takes 2-3 weeks. Complex implementations with ACH, Plaid, subscriptions, and custom payment flows take 6-10 weeks. Stripe Connect marketplace integrations take 8-12 weeks. Timeline depends on specific requirements and payment complexity."
+  }
+];
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://www.capaxe.com' },
+  { name: 'Services', url: 'https://www.capaxe.com/services' },
+  { name: 'Stripe & Plaid ACH Integration', url: 'https://www.capaxe.com/services/stripe-plaid-ach-integration' }
+];
+
+const seo = createSEO({
+  pageName: 'Stripe & Plaid ACH Integration for Shopify',
+  description: 'Custom Stripe and Plaid ACH payment integrations for Shopify. Build advanced payment flows with bank transfers, subscriptions, and marketplace payments.',
+  keywords: 'Stripe Shopify, Plaid integration, ACH payments, Stripe Connect, payment gateway, bank transfers, Shopify payments',
+  contentType: 'service',
+  pathname: '/services/stripe-plaid-ach-integration'
+});
+---
+
+<Layout seo={seo}>
+  <FAQSchema faqs={faqs} />
+
+  <div class="container mx-auto px-4 py-12 max-w-5xl">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <h1 class="text-4xl md:text-5xl font-bold mb-6">Stripe & Plaid ACH Integration for Shopify</h1>
+
+    <p class="text-xl text-gray-600 mb-12">
+      Advanced payment integrations combining Stripe's powerful payment processing with Plaid's bank account verification for lower-cost ACH transfers, subscriptions, and complex payment flows.
+    </p>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">What is Stripe & Plaid ACH Integration?</h2>
+      <p class="mb-4">
+        Stripe and Plaid integration enables direct bank account payments (ACH) on Shopify stores. Plaid securely verifies customer bank accounts, while Stripe processes the ACH payments with lower fees than credit cards (0.8% vs 2.9%).
+      </p>
+      <p class="mb-4">
+        Capaxe Labs builds custom payment integrations that combine Stripe Elements for cards, Plaid Link for bank verification, and Stripe ACH for bank transfers. Our solutions handle subscriptions, installments, marketplace splits, and automated payment collection.
+      </p>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">Who Needs Stripe & Plaid Integration?</h2>
+      <ul class="list-disc pl-6 space-y-3 text-gray-700">
+        <li>Subscription businesses wanting lower payment processing fees with ACH</li>
+        <li>High-ticket retailers reducing transaction costs on expensive purchases</li>
+        <li>B2B merchants accepting business bank transfers for wholesale orders</li>
+        <li>Marketplace platforms splitting payments between sellers (Stripe Connect)</li>
+        <li>Membership sites processing recurring monthly/annual dues</li>
+        <li>Service providers offering payment plans with automated billing</li>
+        <li>SaaS companies managing usage-based billing and metered subscriptions</li>
+      </ul>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">How Our Integration Works</h2>
+      <div class="space-y-4">
+        <div class="border-l-4 border-blue-600 pl-6 py-2">
+          <h3 class="text-xl font-semibold mb-2">1. Checkout Integration</h3>
+          <p class="text-gray-700">We integrate Stripe Elements into Shopify checkout for card payments and Plaid Link for bank account selection. Customers choose between instant card payment or lower-fee ACH transfer.</p>
+        </div>
+
+        <div class="border-l-4 border-blue-600 pl-6 py-2">
+          <h3 class="text-xl font-semibold mb-2">2. Bank Verification</h3>
+          <p class="text-gray-700">Plaid Link opens secure bank connection interface. Customer logs into their bank, Plaid verifies account ownership, and account details are tokenized and sent to Stripe for ACH processing.</p>
+        </div>
+
+        <div class="border-l-4 border-blue-600 pl-6 py-2">
+          <h3 class="text-xl font-semibold mb-2">3. Payment Processing</h3>
+          <p class="text-gray-700">Stripe processes payment via card or ACH. ACH payments take 3-5 business days to settle. System handles pending states, webhooks for status updates, and order fulfillment triggers.</p>
+        </div>
+
+        <div class="border-l-4 border-blue-600 pl-6 py-2">
+          <h3 class="text-xl font-semibold mb-2">4. Subscription Management</h3>
+          <p class="text-gray-700">For recurring billing, Stripe automatically charges saved payment methods on schedule. System handles failed payment retries, subscription upgrades/downgrades, and prorated billing.</p>
+        </div>
+
+        <div class="border-l-4 border-blue-600 pl-6 py-2">
+          <h3 class="text-xl font-semibold mb-2">5. Webhook Handling</h3>
+          <p class="text-gray-700">Stripe sends webhooks for all payment events. Our integration listens for payment confirmations, failures, disputes, and refunds, then syncs status with Shopify orders in real-time.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">Payment Solutions We Build</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3">ACH Bank Transfers</h3>
+          <ul class="list-disc pl-5 space-y-2 text-gray-700">
+            <li>Plaid Link for instant bank verification</li>
+            <li>Stripe ACH payment processing</li>
+            <li>Lower fees (0.8% vs 2.9% for cards)</li>
+            <li>Automated payment collection</li>
+          </ul>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3">Subscription Billing</h3>
+          <ul class="list-disc pl-5 space-y-2 text-gray-700">
+            <li>Recurring payment automation</li>
+            <li>Flexible billing cycles and pricing</li>
+            <li>Failed payment retry and dunning</li>
+            <li>Usage-based and metered billing</li>
+          </ul>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3">Stripe Connect Marketplaces</h3>
+          <ul class="list-disc pl-5 space-y-2 text-gray-700">
+            <li>Multi-seller payment splits</li>
+            <li>Platform commission handling</li>
+            <li>Seller onboarding and verification</li>
+            <li>Automated payout management</li>
+          </ul>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3">Advanced Features</h3>
+          <ul class="list-disc pl-5 space-y-2 text-gray-700">
+            <li>Stripe Tax for multi-jurisdiction compliance</li>
+            <li>3D Secure authentication</li>
+            <li>Multi-currency support</li>
+            <li>Saved payment methods</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">Benefits of ACH Payments</h2>
+      <div class="bg-blue-50 p-6 rounded-lg mb-6">
+        <h3 class="text-2xl font-semibold mb-4">Cost Savings</h3>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <p class="text-lg font-semibold mb-2">Credit Card Processing</p>
+            <p class="text-3xl font-bold text-red-600">2.9% + $0.30</p>
+            <p class="text-sm text-gray-600 mt-1">Per transaction</p>
+          </div>
+          <div>
+            <p class="text-lg font-semibold mb-2">ACH Bank Transfer</p>
+            <p class="text-3xl font-bold text-green-600">0.8%</p>
+            <p class="text-sm text-gray-600 mt-1">Capped at $5 per transaction</p>
+          </div>
+        </div>
+        <p class="mt-4 text-gray-700">
+          <strong>Example:</strong> On a $1,000 purchase, card fees are $29.30 vs ACH fees of $5.00 - saving you $24.30 per transaction.
+        </p>
+      </div>
+
+      <ul class="list-disc pl-6 space-y-3 text-gray-700">
+        <li><strong>Lower Transaction Fees:</strong> 0.8% vs 2.9% saves thousands on high-value or high-volume transactions</li>
+        <li><strong>Reduced Chargebacks:</strong> ACH payments have significantly lower dispute rates than credit cards</li>
+        <li><strong>Better Cash Flow:</strong> ACH is ideal for subscriptions with predictable recurring revenue</li>
+        <li><strong>Higher Approval Rates:</strong> Bank account payments don't have credit limits</li>
+        <li><strong>Customer Convenience:</strong> Plaid Link makes bank verification seamless with instant OAuth connection</li>
+      </ul>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">Technology Stack</h2>
+      <p class="mb-4">Our Stripe and Plaid integrations are built with:</p>
+      <div class="flex flex-wrap gap-3">
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">Stripe API</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">Plaid Link</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">Stripe Elements</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">Stripe Connect</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">Webhooks</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">TypeScript</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">Node.js</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">React</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">Shopify Admin API</span>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">Geographic Coverage</h2>
+      <p class="mb-4">
+        Stripe and Plaid are available in multiple countries with varying ACH support:
+      </p>
+      <ul class="list-disc pl-6 space-y-2 text-gray-700">
+        <li><strong>United States</strong> - Full Stripe ACH and Plaid support for all US banks</li>
+        <li><strong>Canada</strong> - Plaid and Stripe ACH for Canadian bank accounts (CAD)</li>
+        <li><strong>United Kingdom</strong> - Plaid UK and Stripe BACS Direct Debit</li>
+        <li><strong>European Union</strong> - SEPA Direct Debit for EU bank transfers</li>
+        <li><strong>Australia</strong> - BECS Direct Debit for Australian accounts</li>
+        <li><strong>Worldwide</strong> - Stripe card payments available in 45+ countries</li>
+      </ul>
+      <p class="mt-4 text-gray-600">
+        Capaxe Labs serves clients globally. We're based in Mumbai, India and work across all time zones.
+      </p>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">Frequently Asked Questions</h2>
+      <div class="space-y-6">
+        {faqs.map((faq) => (
+          <div class="border-l-4 border-gray-300 pl-6">
+            <h3 class="text-xl font-semibold mb-2">{faq.question}</h3>
+            <p class="text-gray-700">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">Related Services</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <a href="/services/layaway-payment-systems" class="block bg-gray-50 p-6 rounded-lg hover:shadow-lg transition">
+          <h3 class="text-xl font-semibold mb-2">Layaway Payment Systems</h3>
+          <p class="text-gray-700">Build custom installment payment systems with Stripe ACH and automated collection.</p>
+        </a>
+        <a href="/services/shopify-subscription-systems" class="block bg-gray-50 p-6 rounded-lg hover:shadow-lg transition">
+          <h3 class="text-xl font-semibold mb-2">Subscription Systems</h3>
+          <p class="text-gray-700">Recurring billing and subscription management with Stripe and Shopify integration.</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="mb-12 bg-blue-50 p-8 rounded-lg">
+      <h2 class="text-3xl font-bold mb-4">Ready to Integrate Stripe & Plaid?</h2>
+      <p class="text-lg text-gray-700 mb-6">
+        Let's discuss your payment processing needs. We'll design a custom Stripe and Plaid integration that reduces fees, improves cash flow, and provides a seamless checkout experience.
+      </p>
+      <div class="flex gap-4">
+        <a href="/contact" class="inline-block bg-blue-600 text-white px-8 py-3 rounded-md hover:bg-blue-700 transition font-medium">
+          Contact Us
+        </a>
+        <a href="/case-studies" class="inline-block bg-white text-blue-600 border-2 border-blue-600 px-8 py-3 rounded-md hover:bg-blue-50 transition font-medium">
+          View Case Studies
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <CTABottom />
+</Layout>

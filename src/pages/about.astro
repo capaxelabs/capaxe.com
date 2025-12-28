@@ -3,49 +3,24 @@ import Layout from "@/layouts/Layout.astro";
 import { createSEO } from "@/utils/seo";
 import type { SEOProps } from "@/utils/seo";
 import CTABottom from "@/components/CTA.astro";
+import { getEnhancedOrganizationSchema } from "@/lib/schemas";
+
 interface Props {
   seo?: SEOProps;
   title?: string;
   description?: string;
 }
+
 const seo = createSEO({
   pageName: "About Us",
-  description: "About Capaxe Labs",
-  keywords: "Capaxe Labs, Shopify development, web development, e-commerce solutions, web design",
+  description: "Capaxe Labs is a Shopify-focused development agency based in Mumbai, India, specializing in custom Shopify apps, headless commerce, and payment integrations serving clients globally.",
+  keywords: "Capaxe Labs, Shopify development, web development, e-commerce solutions, Shopify apps, headless commerce, payment integration",
   image: "/images/about/about.jpg",
   contentType: "basic",
   pathname: "/about"
 });
 
-// Override structuredData if needed
-seo.structuredData = {
-  "@context": "https://schema.org", 
-  "@type": "Organization",
-  "name": "Capaxe Labs",
-  "url": "https://capaxelabs.com",
-  "logo": "/images/logo.svg",
-  "description": "Capaxe Labs is a Silicon Valley of India based team of passionate Shopify experts and web developers dedicated to empowering e-commerce businesses.",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "123 Main St",
-    "city": "San Francisco",
-    "state": "CA",
-    "postalCode": "94101",
-    "country": "United States"
-  },
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "telephone": "+1234567890",
-    "contactType": "customer service",
-    "email": "contact@capaxelabs.com"
-  },
-  "sameAs": [
-    "https://www.facebook.com/capaxelabs",
-    "https://www.twitter.com/capaxelabs",
-    "https://www.instagram.com/capaxelabs",
-    "https://www.linkedin.com/company/capaxelabs"
-  ]
-};
+seo.structuredData = getEnhancedOrganizationSchema();
 ---
 
 <Layout seo={seo} >

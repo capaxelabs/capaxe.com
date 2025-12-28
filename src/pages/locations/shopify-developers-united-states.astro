@@ -1,0 +1,224 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { createSEO } from '@/utils/seo';
+import { getLocalBusinessSchema } from '@/lib/schemas';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import CTABottom from '@/components/CTA.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://www.capaxe.com' },
+  { name: 'Locations', url: 'https://www.capaxe.com/locations' },
+  { name: 'United States', url: 'https://www.capaxe.com/locations/shopify-developers-united-states' }
+];
+
+const seo = createSEO({
+  pageName: 'Shopify Developers Serving United States',
+  description: 'Professional Shopify development services for US businesses. Custom apps, headless commerce, payment integrations, and subscription systems with USD pricing and US timezone support.',
+  keywords: 'Shopify developers USA, Shopify development United States, US Shopify agency, American Shopify developers',
+  contentType: 'location',
+  pathname: '/locations/shopify-developers-united-states'
+});
+
+const localBusinessSchema = getLocalBusinessSchema({
+  country: 'United States',
+  countryCode: 'US'
+});
+---
+
+<Layout seo={seo}>
+  <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+
+  <div class="container mx-auto px-4 py-12 max-w-5xl">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <h1 class="text-4xl md:text-5xl font-bold mb-6">Shopify Development Services for United States</h1>
+
+    <p class="text-xl text-gray-600 mb-12">
+      Professional Shopify development serving businesses across the United States. Custom apps, headless storefronts, and payment integrations with USD pricing and US timezone coverage.
+    </p>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">Serving US Businesses</h2>
+      <p class="mb-4">
+        Capaxe Labs provides comprehensive Shopify development services for businesses throughout the United States. We work across all US time zones (EST, CST, MST, PST, Alaska, Hawaii) with real-time communication and project management.
+      </p>
+      <p class="mb-4">
+        Our US clients benefit from extensive experience with American e-commerce requirements including sales tax compliance, USD payment processing, Stripe ACH integration for lower fees, and integration with US-based business systems.
+      </p>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">Services for US Market</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3">Custom Shopify Apps</h3>
+          <p class="text-gray-700 mb-3">Build public and private Shopify apps optimized for US merchants.</p>
+          <ul class="list-disc pl-5 space-y-1 text-sm text-gray-600">
+            <li>Shopify App Store submissions</li>
+            <li>US sales tax integration (TaxJar, Avalara)</li>
+            <li>USPS and FedEx shipping integrations</li>
+            <li>ERP/CRM connections for US businesses</li>
+          </ul>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3">Payment Integrations</h3>
+          <p class="text-gray-700 mb-3">Stripe, Plaid, and ACH payment solutions for US customers.</p>
+          <ul class="list-disc pl-5 space-y-1 text-sm text-gray-600">
+            <li>Stripe ACH Direct Debit (0.8% vs 2.9%)</li>
+            <li>Plaid bank verification for US banks</li>
+            <li>Layaway and installment payments</li>
+            <li>Subscription billing with US tax handling</li>
+          </ul>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3">Headless Commerce</h3>
+          <p class="text-gray-700 mb-3">High-performance Next.js and Hydrogen storefronts.</p>
+          <ul class="list-disc pl-5 space-y-1 text-sm text-gray-600">
+            <li>Deployed on Vercel US regions</li>
+            <li>Sub-second page loads for US visitors</li>
+            <li>Core Web Vitals optimization</li>
+            <li>Mobile-first responsive design</li>
+          </ul>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3">Migration & Integration</h3>
+          <p class="text-gray-700 mb-3">Platform migrations and third-party integrations.</p>
+          <ul class="list-disc pl-5 space-y-1 text-sm text-gray-600">
+            <li>Magento to Shopify migrations</li>
+            <li>Salesforce and HubSpot integration</li>
+            <li>QuickBooks and NetSuite sync</li>
+            <li>Amazon and eBay multi-channel</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">US-Specific Features</h2>
+      <div class="bg-blue-50 p-6 rounded-lg mb-6">
+        <h3 class="text-2xl font-semibold mb-4">Sales Tax Compliance</h3>
+        <p class="text-gray-700 mb-3">
+          We integrate with leading US tax calculation services to handle complex sales tax requirements across all 50 states:
+        </p>
+        <ul class="list-disc pl-6 space-y-2 text-gray-700">
+          <li><strong>TaxJar Integration</strong> - Automatic sales tax calculation for all US states</li>
+          <li><strong>Avalara AvaTax</strong> - Enterprise tax compliance and reporting</li>
+          <li><strong>Shopify Tax</strong> - Native Shopify tax calculation for US merchants</li>
+          <li><strong>Nexus Management</strong> - Handle multi-state tax nexus requirements</li>
+        </ul>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-4 mt-6">
+        <div class="bg-white border-2 border-gray-200 p-4 rounded-lg text-center">
+          <p class="text-3xl font-bold text-blue-600 mb-2">USD</p>
+          <p class="text-gray-700">Primary Currency</p>
+        </div>
+        <div class="bg-white border-2 border-gray-200 p-4 rounded-lg text-center">
+          <p class="text-3xl font-bold text-blue-600 mb-2">0.8%</p>
+          <p class="text-gray-700">ACH Fees (vs 2.9% cards)</p>
+        </div>
+        <div class="bg-white border-2 border-gray-200 p-4 rounded-lg text-center">
+          <p class="text-3xl font-bold text-blue-600 mb-2">50</p>
+          <p class="text-gray-700">States Supported</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">Why US Businesses Choose Capaxe Labs</h2>
+      <ul class="space-y-4">
+        <li class="flex items-start">
+          <svg class="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+          <div>
+            <p class="font-semibold mb-1">US Timezone Coverage</p>
+            <p class="text-gray-700">We work across EST, CST, MST, and PST with overlap hours for real-time collaboration.</p>
+          </div>
+        </li>
+        <li class="flex items-start">
+          <svg class="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+          <div>
+            <p class="font-semibold mb-1">US Payment Methods</p>
+            <p class="text-gray-700">Expert integration with Stripe ACH, Plaid, PayPal, and US-specific payment gateways.</p>
+          </div>
+        </li>
+        <li class="flex items-start">
+          <svg class="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+          <div>
+            <p class="font-semibold mb-1">Competitive Pricing</p>
+            <p class="text-gray-700">All pricing in USD. No currency conversion fees. Transparent fixed-price and retainer options.</p>
+          </div>
+        </li>
+        <li class="flex items-start">
+          <svg class="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+          <div>
+            <p class="font-semibold mb-1">US Business Understanding</p>
+            <p class="text-gray-700">Experience with American e-commerce requirements, regulations, and business practices.</p>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">US Client Success Stories</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3">Furniture E-commerce Platform</h3>
+          <p class="text-gray-700 mb-3">
+            Built layaway payment system with Stripe ACH for California-based furniture retailer. Handles $50K+ monthly in installment payments across US states.
+          </p>
+          <p class="text-sm text-gray-600">Industry: Home & Furniture | Location: California, USA</p>
+        </div>
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3">Subscription Box Service</h3>
+          <p class="text-gray-700 mb-3">
+            Developed custom subscription system with Shopify Plus for beauty brand. Integrated TaxJar for multi-state tax compliance. Processing 5,000+ recurring orders monthly.
+          </p>
+          <p class="text-sm text-gray-600">Industry: Beauty & Cosmetics | Location: New York, USA</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">Technology Stack for US Market</h2>
+      <p class="mb-4">We build with technologies optimized for US infrastructure:</p>
+      <div class="flex flex-wrap gap-3">
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">Shopify API</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">Stripe (US)</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">Plaid (US Banks)</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">Next.js</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">Vercel (US Edge)</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">TaxJar</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">Cloudflare (US)</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">AWS US-East</span>
+      </div>
+    </section>
+
+    <section class="mb-12 bg-blue-50 p-8 rounded-lg">
+      <h2 class="text-3xl font-bold mb-4">Work with US-Focused Shopify Developers</h2>
+      <p class="text-lg text-gray-700 mb-6">
+        Let's discuss your Shopify project. We provide custom development services for US businesses with transparent USD pricing, US timezone support, and deep understanding of American e-commerce requirements.
+      </p>
+      <div class="flex gap-4">
+        <a href="/contact" class="inline-block bg-blue-600 text-white px-8 py-3 rounded-md hover:bg-blue-700 transition font-medium">
+          Contact Us
+        </a>
+        <a href="/services" class="inline-block bg-white text-blue-600 border-2 border-blue-600 px-8 py-3 rounded-md hover:bg-blue-50 transition font-medium">
+          View All Services
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <CTABottom />
+</Layout>

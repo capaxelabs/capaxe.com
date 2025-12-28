@@ -5,7 +5,7 @@ export const siteConfig: SiteConfig = {
     legalName: 'Capaxe Labs LLP',
     name: 'Capaxe Labs',
     description: 'Professional Shopify development and web solutions for growing businesses.',
-    url: 'http://localhost:5173',
+    url: 'https://www.capaxe.com',
     ogImage: '/og-image.jpg',
     keywords: [
         'Shopify Development',

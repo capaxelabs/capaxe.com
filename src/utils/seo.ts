@@ -1,4 +1,5 @@
 import { siteConfig } from '@/config/site';
+import { getEnhancedOrganizationSchema, getEnhancedServiceSchema } from '@/lib/schemas';
 
 export interface SEOProps {
     title?: string;
@@ -19,7 +20,7 @@ export interface PageSEOProps extends SEOProps {
     pageName: string;
 }
 
-export type ContentType = 'basic' | 'service' | 'blog';
+export type ContentType = 'basic' | 'service' | 'blog' | 'faq' | 'case-study' | 'location';
 
 // Add this interface for structured data
 interface StructuredData {
@@ -61,19 +62,12 @@ export function createSEO(props: PageSEOProps & {
     switch (contentType) {
         case 'service':
             seoDescription = description || `Professional ${pageName} services by ${siteConfig.name}`;
-            structuredData = {
-                "@context": "https://schema.org",
-                "@type": "Service",
-                "name": pageName,
-                "description": seoDescription,
-                "provider": {
-                    "@type": "Organization",
-                    "name": siteConfig.name,
-                    "url": siteConfig.url
-                },
-                "serviceType": pageName,
-                "areaServed": "Worldwide"
-            };
+            structuredData = getEnhancedServiceSchema({
+                name: pageName,
+                description: seoDescription,
+                pathname: pathname || '',
+                serviceType: pageName
+            });
             break;
 
         case 'blog':
@@ -108,6 +102,19 @@ export function createSEO(props: PageSEOProps & {
                     }
                 }
             };
+            break;
+
+        case 'faq':
+            seoDescription = description || `Frequently asked questions about ${siteConfig.name}`;
+            break;
+
+        case 'case-study':
+            seoDescription = description || `${pageName} - Case study by ${siteConfig.name}`;
+            seoType = 'article';
+            break;
+
+        case 'location':
+            seoDescription = description || `Professional Shopify development services serving ${pageName}`;
             break;
 
         default:

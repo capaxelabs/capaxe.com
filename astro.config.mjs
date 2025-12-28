@@ -13,7 +13,7 @@ const alias = import.meta.env.PROD ? {
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https:/www.capaxe.com",
+  site: "https://www.capaxe.com",
   integrations: [
     mdx({
       shikiConfig: {

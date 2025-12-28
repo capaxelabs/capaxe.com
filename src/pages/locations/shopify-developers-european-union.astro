@@ -1,0 +1,287 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { createSEO } from '@/utils/seo';
+import { getLocalBusinessSchema } from '@/lib/schemas';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import CTABottom from '@/components/CTA.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://www.capaxe.com' },
+  { name: 'Locations', url: 'https://www.capaxe.com/locations' },
+  { name: 'European Union', url: 'https://www.capaxe.com/locations/shopify-developers-european-union' }
+];
+
+const seo = createSEO({
+  pageName: 'Shopify Developers Serving European Union',
+  description: 'Professional Shopify development services for EU businesses. Custom apps, headless commerce, payment integrations with EUR pricing and GDPR compliance.',
+  keywords: 'Shopify developers EU, Shopify development Europe, European Union Shopify agency, EU Shopify developers',
+  contentType: 'location',
+  pathname: '/locations/shopify-developers-european-union'
+});
+
+const localBusinessSchema = getLocalBusinessSchema({
+  country: 'European Union',
+  countryCode: 'EU'
+});
+---
+
+<Layout seo={seo}>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(localBusinessSchema)} />
+
+  <div class="container mx-auto px-4 py-12 max-w-5xl">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <h1 class="text-4xl md:text-5xl font-bold mb-6">Shopify Development Services for European Union</h1>
+
+    <p class="text-xl text-gray-600 mb-12">
+      Professional Shopify development serving EU businesses across all member states. Custom apps, headless storefronts, and payment integrations with EUR pricing, GDPR compliance, and multi-language support.
+    </p>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">Serving European Union Businesses</h2>
+      <p class="mb-4">
+        Capaxe Labs provides comprehensive Shopify development services for businesses across the European Union. We work across CET, EET, and WET timezones with availability during European business hours.
+      </p>
+      <p class="mb-4">
+        Our EU clients benefit from expertise in European e-commerce requirements including GDPR data protection, VAT/GST compliance, EUR payment processing, SEPA Direct Debit, multi-language support (German, French, Spanish, Italian), and EU-wide shipping integrations.
+      </p>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">Services for EU Market</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3">Custom Shopify Apps</h3>
+          <p class="text-gray-700 mb-3">Build Shopify apps optimized for EU merchants and regulations.</p>
+          <ul class="list-disc pl-5 space-y-1 text-sm text-gray-600">
+            <li>VAT/GST calculation across EU countries</li>
+            <li>Multi-language support (DE, FR, ES, IT, NL)</li>
+            <li>GDPR-compliant data handling</li>
+            <li>EU consumer rights integration</li>
+          </ul>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3">Payment Integrations</h3>
+          <p class="text-gray-700 mb-3">SEPA, Stripe, and EU payment solutions.</p>
+          <ul class="list-disc pl-5 space-y-1 text-sm text-gray-600">
+            <li>SEPA Direct Debit integration</li>
+            <li>Stripe for EU bank accounts</li>
+            <li>Klarna and Adyen support</li>
+            <li>Multi-currency EUR support</li>
+          </ul>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3">Headless Commerce</h3>
+          <p class="text-gray-700 mb-3">High-performance Next.js and Hydrogen storefronts.</p>
+          <ul class="list-disc pl-5 space-y-1 text-sm text-gray-600">
+            <li>Deployed on EU edge regions</li>
+            <li>Multi-language content management</li>
+            <li>Country-specific product catalogs</li>
+            <li>Progressive Web Apps (PWA)</li>
+          </ul>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3">Compliance & Regulations</h3>
+          <p class="text-gray-700 mb-3">EU regulatory compliance and data protection.</p>
+          <ul class="list-disc pl-5 space-y-1 text-sm text-gray-600">
+            <li>GDPR compliance and data privacy</li>
+            <li>VAT MOSS (Mini One Stop Shop)</li>
+            <li>EU consumer rights directive</li>
+            <li>Cookie consent (ePrivacy Directive)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">EU-Specific Features</h2>
+      <div class="bg-blue-50 p-6 rounded-lg mb-6">
+        <h3 class="text-2xl font-semibold mb-4">VAT & EU Tax Compliance</h3>
+        <p class="text-gray-700 mb-3">
+          We integrate with leading EU tax calculation services and handle multi-country VAT requirements:
+        </p>
+        <ul class="list-disc pl-6 space-y-2 text-gray-700">
+          <li><strong>Avalara EU VAT</strong> - Automatic VAT calculation across all EU member states</li>
+          <li><strong>Shopify Tax</strong> - Native Shopify tax calculation for EU merchants</li>
+          <li><strong>VAT MOSS</strong> - One Stop Shop for digital services VAT</li>
+          <li><strong>OSS (One Stop Shop)</strong> - Post-Brexit EU VAT simplification scheme</li>
+          <li><strong>Country-Specific Rates</strong> - Handle varying VAT rates (19-27%) by country</li>
+        </ul>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-4 mt-6">
+        <div class="bg-white border-2 border-gray-200 p-4 rounded-lg text-center">
+          <p class="text-3xl font-bold text-blue-600 mb-2">EUR</p>
+          <p class="text-gray-700">Primary Currency</p>
+        </div>
+        <div class="bg-white border-2 border-gray-200 p-4 rounded-lg text-center">
+          <p class="text-3xl font-bold text-blue-600 mb-2">27</p>
+          <p class="text-gray-700">Member States</p>
+        </div>
+        <div class="bg-white border-2 border-gray-200 p-4 rounded-lg text-center">
+          <p class="text-3xl font-bold text-blue-600 mb-2">GDPR</p>
+          <p class="text-gray-700">Compliant</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">Why EU Businesses Choose Capaxe Labs</h2>
+      <ul class="space-y-4">
+        <li class="flex items-start">
+          <svg class="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+          <div>
+            <p class="font-semibold mb-1">European Timezone Coverage</p>
+            <p class="text-gray-700">We work across CET, EET, and WET with overlap for real-time collaboration with Berlin, Paris, Amsterdam, and Madrid.</p>
+          </div>
+        </li>
+        <li class="flex items-start">
+          <svg class="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+          <div>
+            <p class="font-semibold mb-1">EUR Pricing & SEPA Payments</p>
+            <p class="text-gray-700">All pricing in Euros. Expert integration with SEPA Direct Debit, Stripe EU, Klarna, and Adyen.</p>
+          </div>
+        </li>
+        <li class="flex items-start">
+          <svg class="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+          <div>
+            <p class="font-semibold mb-1">GDPR & VAT Expertise</p>
+            <p class="text-gray-700">Deep understanding of GDPR requirements, EU VAT regulations, VAT MOSS, and OSS compliance.</p>
+          </div>
+        </li>
+        <li class="flex items-start">
+          <svg class="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+          <div>
+            <p class="font-semibold mb-1">Multi-Language Support</p>
+            <p class="text-gray-700">Build storefronts in German, French, Spanish, Italian, Dutch, and all major EU languages.</p>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">EU Payment Solutions We Integrate</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3">SEPA Direct Debit</h3>
+          <p class="text-gray-700 mb-3">Europe-wide bank transfer payment system.</p>
+          <ul class="list-disc pl-5 space-y-1 text-sm text-gray-600">
+            <li>Recurring billing via SEPA mandate</li>
+            <li>Lower fees than card payments</li>
+            <li>Works across all EU member states</li>
+            <li>Automated payment collection</li>
+          </ul>
+        </div>
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3">Klarna & Adyen</h3>
+          <p class="text-gray-700 mb-3">Popular EU payment providers.</p>
+          <ul class="list-disc pl-5 space-y-1 text-sm text-gray-600">
+            <li>Buy now, pay later options</li>
+            <li>Localized payment methods</li>
+            <li>Multi-currency support</li>
+            <li>Mobile-optimized checkout</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">EU Countries We Serve</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div class="bg-white border border-gray-200 p-3 rounded text-center">
+          <p class="font-semibold">Germany</p>
+          <p class="text-sm text-gray-600">Berlin, Munich</p>
+        </div>
+        <div class="bg-white border border-gray-200 p-3 rounded text-center">
+          <p class="font-semibold">France</p>
+          <p class="text-sm text-gray-600">Paris, Lyon</p>
+        </div>
+        <div class="bg-white border border-gray-200 p-3 rounded text-center">
+          <p class="font-semibold">Netherlands</p>
+          <p class="text-sm text-gray-600">Amsterdam</p>
+        </div>
+        <div class="bg-white border border-gray-200 p-3 rounded text-center">
+          <p class="font-semibold">Spain</p>
+          <p class="text-sm text-gray-600">Madrid, Barcelona</p>
+        </div>
+        <div class="bg-white border border-gray-200 p-3 rounded text-center">
+          <p class="font-semibold">Italy</p>
+          <p class="text-sm text-gray-600">Milan, Rome</p>
+        </div>
+        <div class="bg-white border border-gray-200 p-3 rounded text-center">
+          <p class="font-semibold">Belgium</p>
+          <p class="text-sm text-gray-600">Brussels</p>
+        </div>
+        <div class="bg-white border border-gray-200 p-3 rounded text-center">
+          <p class="font-semibold">Austria</p>
+          <p class="text-sm text-gray-600">Vienna</p>
+        </div>
+        <div class="bg-white border border-gray-200 p-3 rounded text-center">
+          <p class="font-semibold">Sweden</p>
+          <p class="text-sm text-gray-600">Stockholm</p>
+        </div>
+      </div>
+      <p class="mt-4 text-sm text-gray-600 text-center">
+        Plus all other EU member states including Poland, Ireland, Denmark, Finland, Portugal, Greece, and more.
+      </p>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">Multi-Language Capabilities</h2>
+      <p class="mb-4">We build Shopify storefronts supporting all major European languages:</p>
+      <div class="flex flex-wrap gap-3">
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">German (DE)</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">French (FR)</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">Spanish (ES)</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">Italian (IT)</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">Dutch (NL)</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">Polish (PL)</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">Swedish (SV)</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">Portuguese (PT)</span>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">Technology Stack for EU Market</h2>
+      <p class="mb-4">We build with technologies optimized for European infrastructure:</p>
+      <div class="flex flex-wrap gap-3">
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">Shopify API</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">SEPA Direct Debit</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">Stripe (EU)</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">Klarna</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">Adyen</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">Next.js</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">Vercel (EU Edge)</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">Avalara EU</span>
+      </div>
+    </section>
+
+    <section class="mb-12 bg-blue-50 p-8 rounded-lg">
+      <h2 class="text-3xl font-bold mb-4">Work with EU-Focused Shopify Developers</h2>
+      <p class="text-lg text-gray-700 mb-6">
+        Let's discuss your Shopify project. We provide custom development services for European businesses with transparent EUR pricing, European timezone support, and deep understanding of EU e-commerce requirements including GDPR and VAT compliance.
+      </p>
+      <div class="flex gap-4">
+        <a href="/contact" class="inline-block bg-blue-600 text-white px-8 py-3 rounded-md hover:bg-blue-700 transition font-medium">
+          Contact Us
+        </a>
+        <a href="/services" class="inline-block bg-white text-blue-600 border-2 border-blue-600 px-8 py-3 rounded-md hover:bg-blue-50 transition font-medium">
+          View All Services
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <CTABottom />
+</Layout>

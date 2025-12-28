@@ -1,0 +1,366 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { createSEO } from '@/utils/seo';
+import FAQSchema from '@/components/FAQSchema.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import CTABottom from '@/components/CTA.astro';
+
+const faqs = [
+  {
+    question: "Can you build custom subscription systems for Shopify?",
+    answer: "Yes. Capaxe Labs builds custom subscription and recurring billing systems for Shopify using Stripe Subscriptions API, Shopify Subscription API, and custom payment orchestration. We handle subscription creation, billing cycle management, payment collection, failed payment retry logic, and customer portal for subscription management."
+  },
+  {
+    question: "What types of subscription models do you support?",
+    answer: "We support all subscription models including monthly/annual recurring, prepaid subscriptions, usage-based billing, metered billing, tiered pricing, subscription boxes, subscribe-and-save discounts, membership subscriptions, and hybrid models combining one-time and recurring purchases."
+  },
+  {
+    question: "Do you integrate with Shopify's native subscription API?",
+    answer: "Yes. We integrate with Shopify's Subscription API for merchants on Shopify Plus. This provides native subscription management in Shopify admin, automatic inventory allocation, subscription contract management, and seamless integration with Shopify checkout. For non-Plus merchants, we build custom subscription systems using Stripe or third-party apps."
+  },
+  {
+    question: "How do you handle failed subscription payments?",
+    answer: "Our subscription systems include robust dunning management with automated retry logic for failed payments, customizable retry schedules (3 attempts over 7 days typical), automated email notifications to customers, payment method update requests, subscription pause instead of immediate cancellation, and manual recovery options for merchants."
+  },
+  {
+    question: "Can customers manage their subscriptions themselves?",
+    answer: "Yes. We build customer portals where subscribers can skip deliveries, pause subscriptions, change delivery frequency, swap products, update payment methods, view upcoming orders, and cancel subscriptions. The portal integrates with your Shopify theme or can be standalone headless application."
+  },
+  {
+    question: "What payment methods work with subscriptions?",
+    answer: "Subscriptions work with credit/debit cards via Stripe, ACH bank transfers via Plaid for lower fees, PayPal recurring billing, and saved payment methods. We recommend credit cards or ACH for automatic recurring billing. ACH is ideal for high-value subscriptions due to lower processing fees (0.8% vs 2.9%)."
+  },
+  {
+    question: "How long does it take to build a subscription system?",
+    answer: "A basic subscription system using Shopify native API takes 4-6 weeks for Plus merchants. Custom subscription systems with Stripe take 6-10 weeks. Complex implementations with usage-based billing, tiered pricing, or custom logic take 10-14 weeks. Timeline includes payment integration, customer portal, and admin dashboard."
+  },
+  {
+    question: "Can you migrate existing subscribers from another platform?",
+    answer: "Yes. We migrate subscribers from platforms like ReCharge, Bold Subscriptions, Cratejoy, or custom systems to Shopify. Migration includes customer data transfer, subscription contract recreation, payment method migration, historical order data, and zero-downtime cutover to ensure uninterrupted billing."
+  }
+];
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://www.capaxe.com' },
+  { name: 'Services', url: 'https://www.capaxe.com/services' },
+  { name: 'Subscription Systems', url: 'https://www.capaxe.com/services/shopify-subscription-systems' }
+];
+
+const seo = createSEO({
+  pageName: 'Shopify Subscription & Recurring Billing Systems',
+  description: 'Custom subscription and recurring billing systems for Shopify. Build subscription boxes, membership sites, and recurring revenue models with automated payment collection.',
+  keywords: 'Shopify subscriptions, recurring billing, subscription box, Stripe subscriptions, Shopify Subscription API, membership site, recurring payments',
+  contentType: 'service',
+  pathname: '/services/shopify-subscription-systems'
+});
+---
+
+<Layout seo={seo}>
+  <FAQSchema faqs={faqs} />
+
+  <div class="container mx-auto px-4 py-12 max-w-5xl">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <h1 class="text-4xl md:text-5xl font-bold mb-6">Shopify Subscription & Recurring Billing Systems</h1>
+
+    <p class="text-xl text-gray-600 mb-12">
+      Build predictable recurring revenue with custom subscription systems. Automate billing, reduce churn, and provide seamless subscription management for your customers.
+    </p>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">What is a Shopify Subscription System?</h2>
+      <p class="mb-4">
+        A subscription system enables businesses to sell products or services on a recurring basis. Customers subscribe once and are automatically billed at regular intervals (monthly, quarterly, annually) without re-entering payment information.
+      </p>
+      <p class="mb-4">
+        Capaxe Labs builds custom subscription systems for Shopify that handle recurring billing, subscription management, dunning (failed payment recovery), and customer self-service. We integrate with Shopify's Subscription API for Plus merchants or build custom solutions using Stripe for all Shopify plans.
+      </p>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">Who Needs Subscription Systems?</h2>
+      <ul class="list-disc pl-6 space-y-3 text-gray-700">
+        <li>Subscription box companies selling curated monthly products</li>
+        <li>Coffee roasters offering subscribe-and-save for regular customers</li>
+        <li>Beauty and cosmetics brands with recurring skincare deliveries</li>
+        <li>Pet supply stores automating food and treats replenishment</li>
+        <li>Membership sites charging monthly/annual dues</li>
+        <li>SaaS products built on Shopify requiring recurring billing</li>
+        <li>Digital product sellers offering monthly content subscriptions</li>
+        <li>Meal kit services with weekly or bi-weekly deliveries</li>
+      </ul>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">Subscription Models We Build</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3">Replenishment Subscriptions</h3>
+          <p class="text-gray-700 mb-3">Recurring delivery of consumable products at regular intervals.</p>
+          <ul class="list-disc pl-5 space-y-1 text-sm text-gray-600">
+            <li>Same product, predictable schedule</li>
+            <li>Ideal for coffee, vitamins, pet food</li>
+            <li>Inventory management integration</li>
+          </ul>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3">Curation Subscriptions</h3>
+          <p class="text-gray-700 mb-3">Curated selection of products delivered monthly (subscription boxes).</p>
+          <ul class="list-disc pl-5 space-y-1 text-sm text-gray-600">
+            <li>Different products each month</li>
+            <li>Ideal for beauty boxes, snack boxes</li>
+            <li>Product swapping and customization</li>
+          </ul>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3">Access Subscriptions</h3>
+          <p class="text-gray-700 mb-3">Membership or access to content, features, or benefits.</p>
+          <ul class="list-disc pl-5 space-y-1 text-sm text-gray-600">
+            <li>Digital content libraries</li>
+            <li>Member-only pricing and perks</li>
+            <li>Private community access</li>
+          </ul>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3">Usage-Based Billing</h3>
+          <p class="text-gray-700 mb-3">Charge based on consumption or usage metrics.</p>
+          <ul class="list-disc pl-5 space-y-1 text-sm text-gray-600">
+            <li>Metered billing (API calls, storage, etc.)</li>
+            <li>Tiered pricing based on usage</li>
+            <li>Overage charges for excess usage</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">How Our Subscription System Works</h2>
+      <div class="space-y-4">
+        <div class="border-l-4 border-blue-600 pl-6 py-2">
+          <h3 class="text-xl font-semibold mb-2">1. Customer Subscribes</h3>
+          <p class="text-gray-700">Customer selects subscription product and billing frequency on your Shopify store. They enter payment details once and agree to recurring charges. System creates subscription contract and processes first payment.</p>
+        </div>
+
+        <div class="border-l-4 border-blue-600 pl-6 py-2">
+          <h3 class="text-xl font-semibold mb-2">2. Automated Billing</h3>
+          <p class="text-gray-700">On each billing cycle (monthly, quarterly, annually), system automatically charges the saved payment method. Customer receives email receipt. No manual intervention required.</p>
+        </div>
+
+        <div class="border-l-4 border-blue-600 pl-6 py-2">
+          <h3 class="text-xl font-semibold mb-2">3. Order Creation</h3>
+          <p class="text-gray-700">Successful payment triggers automatic order creation in Shopify. Inventory is allocated. Order enters your fulfillment workflow just like regular purchases. Customer receives shipping notification.</p>
+        </div>
+
+        <div class="border-l-4 border-blue-600 pl-6 py-2">
+          <h3 class="text-xl font-semibold mb-2">4. Failed Payment Handling</h3>
+          <p class="text-gray-700">If payment fails, system retries automatically (typically 3 attempts over 7 days). Customer receives email to update payment method. Subscription pauses instead of immediate cancellation to maximize retention.</p>
+        </div>
+
+        <div class="border-l-4 border-blue-600 pl-6 py-2">
+          <h3 class="text-xl font-semibold mb-2">5. Customer Management</h3>
+          <p class="text-gray-700">Subscribers access customer portal to skip deliveries, change frequency, swap products, update payment methods, or cancel. All changes sync with Shopify and billing system in real-time.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">Key Features</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3">Billing Management</h3>
+          <ul class="list-disc pl-5 space-y-2 text-gray-700">
+            <li>Flexible billing cycles (weekly, monthly, annual)</li>
+            <li>Prepaid and postpaid subscriptions</li>
+            <li>Prorated upgrades and downgrades</li>
+            <li>Trial periods and discounted intro pricing</li>
+          </ul>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3">Dunning & Retention</h3>
+          <ul class="list-disc pl-5 space-y-2 text-gray-700">
+            <li>Automated failed payment retries</li>
+            <li>Smart retry scheduling</li>
+            <li>Payment method update requests</li>
+            <li>Pause instead of cancel option</li>
+          </ul>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3">Customer Portal</h3>
+          <ul class="list-disc pl-5 space-y-2 text-gray-700">
+            <li>Skip or reschedule deliveries</li>
+            <li>Change subscription frequency</li>
+            <li>Swap products or variants</li>
+            <li>Update billing and shipping info</li>
+          </ul>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3">Analytics & Reporting</h3>
+          <ul class="list-disc pl-5 space-y-2 text-gray-700">
+            <li>Monthly recurring revenue (MRR)</li>
+            <li>Churn rate and retention metrics</li>
+            <li>Lifetime value (LTV) calculations</li>
+            <li>Cohort analysis and growth trends</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">Shopify Plus vs Standard: Subscription Options</h2>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <h3 class="text-2xl font-semibold mb-4">Shopify Plus</h3>
+          <p class="text-green-600 font-semibold mb-3">✅ Native Subscription API</p>
+          <ul class="space-y-2 text-gray-700">
+            <li>• Built into Shopify admin</li>
+            <li>• No third-party app fees</li>
+            <li>• Full API control for customization</li>
+            <li>• Subscription contracts in native checkout</li>
+            <li>• Better performance and reliability</li>
+          </ul>
+          <p class="mt-4 text-sm text-gray-600"><strong>Cost:</strong> Included with Shopify Plus ($2,000+/month)</p>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <h3 class="text-2xl font-semibold mb-4">Shopify Standard</h3>
+          <p class="text-blue-600 font-semibold mb-3">⚙️ Custom Stripe Integration</p>
+          <ul class="space-y-2 text-gray-700">
+            <li>• Stripe Subscriptions API</li>
+            <li>• Custom subscription logic</li>
+            <li>• Webhook-based order creation</li>
+            <li>• Third-party app alternative available</li>
+            <li>• Full control over billing</li>
+          </ul>
+          <p class="mt-4 text-sm text-gray-600"><strong>Cost:</strong> Custom development + Stripe fees</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">Reducing Churn with Smart Dunning</h2>
+      <div class="bg-blue-50 p-6 rounded-lg">
+        <p class="text-lg mb-4">Failed payments are the #1 cause of involuntary churn. Our dunning system recovers 60-80% of failed payments:</p>
+        <div class="space-y-3">
+          <div class="flex items-start">
+            <span class="text-2xl mr-3">1️⃣</span>
+            <div>
+              <p class="font-semibold">Immediate Retry</p>
+              <p class="text-gray-700 text-sm">Retry payment 2 hours after initial failure (catches temporary card issues)</p>
+            </div>
+          </div>
+          <div class="flex items-start">
+            <span class="text-2xl mr-3">2️⃣</span>
+            <div>
+              <p class="font-semibold">Customer Notification</p>
+              <p class="text-gray-700 text-sm">Email customer with link to update payment method (24 hours after failure)</p>
+            </div>
+          </div>
+          <div class="flex items-start">
+            <span class="text-2xl mr-3">3️⃣</span>
+            <div>
+              <p class="font-semibold">Second Retry</p>
+              <p class="text-gray-700 text-sm">Retry payment 3 days after failure with updated card or same method</p>
+            </div>
+          </div>
+          <div class="flex items-start">
+            <span class="text-2xl mr-3">4️⃣</span>
+            <div>
+              <p class="font-semibold">Final Attempt</p>
+              <p class="text-gray-700 text-sm">Last retry 7 days after failure before pausing subscription</p>
+            </div>
+          </div>
+          <div class="flex items-start">
+            <span class="text-2xl mr-3">5️⃣</span>
+            <div>
+              <p class="font-semibold">Pause Instead of Cancel</p>
+              <p class="text-gray-700 text-sm">Subscription paused (not cancelled) allowing customer to reactivate easily</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">Technology Stack</h2>
+      <p class="mb-4">Our subscription systems are built with:</p>
+      <div class="flex flex-wrap gap-3">
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">Shopify Subscription API</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">Stripe Subscriptions</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">Shopify Admin API</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">Webhooks</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">TypeScript</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">React</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">PostgreSQL</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">Node.js</span>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">Geographic Coverage</h2>
+      <p class="mb-4">
+        Capaxe Labs builds subscription systems for clients globally:
+      </p>
+      <ul class="list-disc pl-6 space-y-2 text-gray-700">
+        <li><strong>United States</strong> - Full Stripe and Shopify Subscription API support</li>
+        <li><strong>Canada</strong> - CAD currency with Canadian payment methods</li>
+        <li><strong>United Kingdom</strong> - GBP currency with BACS Direct Debit</li>
+        <li><strong>European Union</strong> - Multi-currency and SEPA Direct Debit</li>
+        <li><strong>Australia</strong> - AUD currency with BECS Direct Debit</li>
+        <li><strong>Worldwide</strong> - Stripe available in 45+ countries for card subscriptions</li>
+      </ul>
+      <p class="mt-4 text-gray-600">
+        We work across all time zones with English and Hindi support. Based in Mumbai, India.
+      </p>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">Frequently Asked Questions</h2>
+      <div class="space-y-6">
+        {faqs.map((faq) => (
+          <div class="border-l-4 border-gray-300 pl-6">
+            <h3 class="text-xl font-semibold mb-2">{faq.question}</h3>
+            <p class="text-gray-700">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">Related Services</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <a href="/services/stripe-plaid-ach-integration" class="block bg-gray-50 p-6 rounded-lg hover:shadow-lg transition">
+          <h3 class="text-xl font-semibold mb-2">Stripe & Plaid Integration</h3>
+          <p class="text-gray-700">Payment gateway integration for subscription billing with ACH bank transfers.</p>
+        </a>
+        <a href="/services/layaway-payment-systems" class="block bg-gray-50 p-6 rounded-lg hover:shadow-lg transition">
+          <h3 class="text-xl font-semibold mb-2">Layaway Payment Systems</h3>
+          <p class="text-gray-700">Installment payment plans with scheduled collection similar to subscriptions.</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="mb-12 bg-blue-50 p-8 rounded-lg">
+      <h2 class="text-3xl font-bold mb-4">Ready to Build Your Subscription Business?</h2>
+      <p class="text-lg text-gray-700 mb-6">
+        Let's discuss your subscription requirements. We'll design a recurring billing system that drives predictable revenue, reduces churn, and delights your subscribers.
+      </p>
+      <div class="flex gap-4">
+        <a href="/contact" class="inline-block bg-blue-600 text-white px-8 py-3 rounded-md hover:bg-blue-700 transition font-medium">
+          Contact Us
+        </a>
+        <a href="/retainer" class="inline-block bg-white text-blue-600 border-2 border-blue-600 px-8 py-3 rounded-md hover:bg-blue-50 transition font-medium">
+          View Retainer Plans
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <CTABottom />
+</Layout>

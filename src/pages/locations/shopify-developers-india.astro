@@ -1,0 +1,276 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { createSEO } from '@/utils/seo';
+import { getLocalBusinessSchema } from '@/lib/schemas';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import CTABottom from '@/components/CTA.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://www.capaxe.com' },
+  { name: 'Locations', url: 'https://www.capaxe.com/locations' },
+  { name: 'India', url: 'https://www.capaxe.com/locations/shopify-developers-india' }
+];
+
+const seo = createSEO({
+  pageName: 'Shopify Developers in India',
+  description: 'Mumbai-based Shopify development agency serving businesses across India. Custom apps, headless commerce, payment integrations with INR pricing and Indian timezone support.',
+  keywords: 'Shopify developers India, Shopify development Mumbai, India Shopify agency, Indian Shopify developers',
+  contentType: 'location',
+  pathname: '/locations/shopify-developers-india'
+});
+
+const localBusinessSchema = getLocalBusinessSchema({
+  country: 'India',
+  countryCode: 'IN',
+  city: 'Mumbai',
+  region: 'Maharashtra',
+  latitude: '19.0760',
+  longitude: '72.8777'
+});
+---
+
+<Layout seo={seo}>
+  <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+
+  <div class="container mx-auto px-4 py-12 max-w-5xl">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <h1 class="text-4xl md:text-5xl font-bold mb-6">Shopify Development Services in India</h1>
+
+    <p class="text-xl text-gray-600 mb-12">
+      Mumbai-based Shopify development agency serving businesses across India and globally. Expert custom apps, headless commerce, and payment integrations with INR pricing and IST timezone support.
+    </p>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">India's Leading Shopify Development Team</h2>
+      <p class="mb-4">
+        Capaxe Labs is based in Mumbai, Maharashtra - India's commercial capital. We provide comprehensive Shopify development services for businesses across India including Delhi, Bangalore, Hyderabad, Chennai, Pune, and all major cities.
+      </p>
+      <p class="mb-4">
+        As an Indian development agency, we understand the local market requirements including GST compliance, Indian payment gateways (Razorpay, PayU, CCAvenue), multi-language support (Hindi, English), and competitive pricing in Indian Rupees.
+      </p>
+      <p class="mb-4">
+        Our team works in Indian Standard Time (IST) with availability during business hours across all Indian states. We also maintain overlap with global clients in US, Canada, UK, and EU time zones.
+      </p>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">Services for Indian Market</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3">Custom Shopify Apps</h3>
+          <p class="text-gray-700 mb-3">Build Shopify apps optimized for Indian merchants.</p>
+          <ul class="list-disc pl-5 space-y-1 text-sm text-gray-600">
+            <li>GST invoice generation and compliance</li>
+            <li>Multi-language support (Hindi, English, regional)</li>
+            <li>Indian payment gateway integration</li>
+            <li>COD (Cash on Delivery) workflows</li>
+          </ul>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3">Payment Integrations</h3>
+          <p class="text-gray-700 mb-3">Indian payment gateways and international solutions.</p>
+          <ul class="list-disc pl-5 space-y-1 text-sm text-gray-600">
+            <li>Razorpay payment gateway integration</li>
+            <li>PayU and CCAvenue support</li>
+            <li>UPI payment acceptance</li>
+            <li>Stripe for international payments</li>
+          </ul>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3">GST Compliance</h3>
+          <p class="text-gray-700 mb-3">Complete GST compliance for Indian Shopify stores.</p>
+          <ul class="list-disc pl-5 space-y-1 text-sm text-gray-600">
+            <li>GST invoice generation (18%, 12%, 5%, etc.)</li>
+            <li>HSN/SAC code management</li>
+            <li>IGST/CGST/SGST calculation</li>
+            <li>GSTIN validation and reporting</li>
+          </ul>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3">Logistics Integration</h3>
+          <p class="text-gray-700 mb-3">Indian shipping and logistics providers.</p>
+          <ul class="list-disc pl-5 space-y-1 text-sm text-gray-600">
+            <li>Delhivery shipping integration</li>
+            <li>Blue Dart and DTDC support</li>
+            <li>Shiprocket multi-carrier platform</li>
+            <li>India Post integration</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">India-Specific Features</h2>
+      <div class="bg-blue-50 p-6 rounded-lg mb-6">
+        <h3 class="text-2xl font-semibold mb-4">GST & Indian Tax Compliance</h3>
+        <p class="text-gray-700 mb-3">
+          We build Shopify stores compliant with Indian tax regulations and GST requirements:
+        </p>
+        <ul class="list-disc pl-6 space-y-2 text-gray-700">
+          <li><strong>GST Invoice Generation</strong> - Automatic GST invoice creation with GSTIN</li>
+          <li><strong>HSN/SAC Codes</strong> - Product-level HSN code management</li>
+          <li><strong>IGST/CGST/SGST</strong> - Automatic tax split based on customer location</li>
+          <li><strong>Composition Scheme</strong> - Support for composition scheme sellers</li>
+          <li><strong>GST Returns</strong> - Export data for GSTR filing</li>
+        </ul>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-4 mt-6">
+        <div class="bg-white border-2 border-gray-200 p-4 rounded-lg text-center">
+          <p class="text-3xl font-bold text-blue-600 mb-2">INR</p>
+          <p class="text-gray-700">Primary Currency</p>
+        </div>
+        <div class="bg-white border-2 border-gray-200 p-4 rounded-lg text-center">
+          <p class="text-3xl font-bold text-blue-600 mb-2">IST</p>
+          <p class="text-gray-700">Indian Standard Time</p>
+        </div>
+        <div class="bg-white border-2 border-gray-200 p-4 rounded-lg text-center">
+          <p class="text-3xl font-bold text-blue-600 mb-2">GST</p>
+          <p class="text-gray-700">Compliant Invoicing</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">Why Indian Businesses Choose Capaxe Labs</h2>
+      <ul class="space-y-4">
+        <li class="flex items-start">
+          <svg class="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+          <div>
+            <p class="font-semibold mb-1">Based in Mumbai, India</p>
+            <p class="text-gray-700">Local team in Maharashtra with deep understanding of Indian e-commerce market and customer behavior.</p>
+          </div>
+        </li>
+        <li class="flex items-start">
+          <svg class="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+          <div>
+            <p class="font-semibold mb-1">Competitive INR Pricing</p>
+            <p class="text-gray-700">All pricing in Indian Rupees with no currency conversion. Cost-effective development compared to international agencies.</p>
+          </div>
+        </li>
+        <li class="flex items-start">
+          <svg class="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+          <div>
+            <p class="font-semibold mb-1">Indian Payment Gateway Expertise</p>
+            <p class="text-gray-700">Expert integration with Razorpay, PayU, CCAvenue, Paytm, PhonePe, and UPI payment methods.</p>
+          </div>
+        </li>
+        <li class="flex items-start">
+          <svg class="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+          <div>
+            <p class="font-semibold mb-1">Bilingual Support</p>
+            <p class="text-gray-700">Communication in Hindi and English. Multi-language storefront support for regional Indian languages.</p>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">Indian Payment Gateways We Integrate</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3">Razorpay</h3>
+          <p class="text-gray-700 mb-3">India's leading payment gateway with complete feature set.</p>
+          <ul class="list-disc pl-5 space-y-1 text-sm text-gray-600">
+            <li>Credit/Debit cards, UPI, Netbanking</li>
+            <li>Wallets (Paytm, PhonePe, Google Pay)</li>
+            <li>Subscription and recurring billing</li>
+            <li>Smart routing and auto-retry</li>
+          </ul>
+        </div>
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3">PayU & CCAvenue</h3>
+          <p class="text-gray-700 mb-3">Established Indian payment solutions for all business sizes.</p>
+          <ul class="list-disc pl-5 space-y-1 text-sm text-gray-600">
+            <li>Multiple payment modes support</li>
+            <li>EMI and pay later options</li>
+            <li>International card acceptance</li>
+            <li>Custom checkout pages</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">Cities We Serve in India</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div class="bg-white border border-gray-200 p-3 rounded text-center">
+          <p class="font-semibold">Mumbai</p>
+          <p class="text-sm text-gray-600">Maharashtra</p>
+        </div>
+        <div class="bg-white border border-gray-200 p-3 rounded text-center">
+          <p class="font-semibold">Delhi NCR</p>
+          <p class="text-sm text-gray-600">National Capital</p>
+        </div>
+        <div class="bg-white border border-gray-200 p-3 rounded text-center">
+          <p class="font-semibold">Bangalore</p>
+          <p class="text-sm text-gray-600">Karnataka</p>
+        </div>
+        <div class="bg-white border border-gray-200 p-3 rounded text-center">
+          <p class="font-semibold">Hyderabad</p>
+          <p class="text-sm text-gray-600">Telangana</p>
+        </div>
+        <div class="bg-white border border-gray-200 p-3 rounded text-center">
+          <p class="font-semibold">Chennai</p>
+          <p class="text-sm text-gray-600">Tamil Nadu</p>
+        </div>
+        <div class="bg-white border border-gray-200 p-3 rounded text-center">
+          <p class="font-semibold">Pune</p>
+          <p class="text-sm text-gray-600">Maharashtra</p>
+        </div>
+        <div class="bg-white border border-gray-200 p-3 rounded text-center">
+          <p class="font-semibold">Ahmedabad</p>
+          <p class="text-sm text-gray-600">Gujarat</p>
+        </div>
+        <div class="bg-white border border-gray-200 p-3 rounded text-center">
+          <p class="font-semibold">Kolkata</p>
+          <p class="text-sm text-gray-600">West Bengal</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">Technology Stack for Indian Market</h2>
+      <p class="mb-4">We build with technologies optimized for Indian infrastructure:</p>
+      <div class="flex flex-wrap gap-3">
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">Shopify API</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">Razorpay</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">PayU</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">Next.js</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">React</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">TypeScript</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">Shiprocket</span>
+        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">Delhivery</span>
+      </div>
+    </section>
+
+    <section class="mb-12 bg-blue-50 p-8 rounded-lg">
+      <h2 class="text-3xl font-bold mb-4">Work with Mumbai's Top Shopify Developers</h2>
+      <p class="text-lg text-gray-700 mb-6">
+        Let's discuss your Shopify project. We provide custom development services for Indian businesses with transparent INR pricing, IST timezone support, GST compliance, and integration with all major Indian payment gateways.
+      </p>
+      <div class="flex gap-4">
+        <a href="/contact" class="inline-block bg-blue-600 text-white px-8 py-3 rounded-md hover:bg-blue-700 transition font-medium">
+          Contact Us
+        </a>
+        <a href="/services" class="inline-block bg-white text-blue-600 border-2 border-blue-600 px-8 py-3 rounded-md hover:bg-blue-50 transition font-medium">
+          View All Services
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <CTABottom />
+</Layout>
