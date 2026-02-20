@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { createSEO } from "@/utils/seo";
-import FAQSchema from "@/components/FAQSchema.astro";
+import { getFAQPageSchema } from "@/lib/schemas";
 
 const faqs = [
   {
@@ -87,15 +87,16 @@ const faqs = [
 ];
 
 const seo = createSEO({
-  pageName: "FAQ",
-  description: "Frequently asked questions about Capaxe Labs Shopify development services, payment integrations, headless commerce, and technical support.",
+  pageName: "Shopify Development FAQ",
+  description: "Answers to common questions about Capaxe Labs' Shopify services — custom apps, headless commerce, payment integrations, retainer plans, timelines, and pricing.",
+  keywords: "Shopify development FAQ, Shopify agency questions, Shopify app development FAQ, headless commerce FAQ",
   contentType: "faq",
   pathname: "/faq"
 });
+seo.structuredData = getFAQPageSchema(faqs);
 ---
 
-<FAQSchema faqs={faqs} />
-<Layout title={seo.title} description={seo.description} seo={seo}>
+<Layout seo={seo}>
   <main class="min-h-screen">
     <section class="pt-32 pb-8 px-6">
       <div class="max-w-3xl mx-auto text-center">

@@ -5,9 +5,20 @@ import { StickyCards, ServiceLanding } from "@/components/home/HomeComponents";
 import RetainerPlansSection from "@/components/RetainerPlan";
 import HeroSection from "@/components/home/HeroSection.astro";
 import ClientLogos from "@/components/home/ClientLogos";
+import { createSEO } from "@/utils/seo";
+import { getEnhancedOrganizationSchema } from "@/lib/schemas";
+
+const seo = createSEO({
+  pageName: "Shopify Development Agency | Custom Apps & Stores",
+  description: "Capaxe Labs builds custom Shopify apps, headless storefronts, and payment integrations for growing e-commerce businesses. Based in Mumbai, serving clients globally.",
+  keywords: "Shopify development agency, custom Shopify apps, headless Shopify, Shopify Plus development, Shopify store development",
+  contentType: "basic",
+  pathname: "/",
+});
+seo.structuredData = getEnhancedOrganizationSchema();
 ---
 
-<Layout title={siteConfig.name} description={siteConfig.description}>
+<Layout seo={seo}>
   <div class="min-h-screen">
     <HeroSection />
 

@@ -49,6 +49,18 @@ export const menuConfig: MenuConfig = {
                 href: "/retainer",
             },
             {
+                title: "Shopify Support",
+                href: "/shopify-support",
+            },
+            {
+                title: "Hire Shopify Developer",
+                href: "/hire-shopify-developer",
+            },
+            {
+                title: "Shopify Plus",
+                href: "/shopify-plus",
+            },
+            {
                 title: "Contact",
                 href: "/contact",
             },

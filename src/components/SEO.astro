@@ -29,9 +29,15 @@ const canonicalURL = canonical || new URL(Astro.url.pathname, Astro.site).toStri
 {keywords && <meta name="keywords" content={keywords} />}
 
 <!-- Robots directives -->
-{noindex && <meta name="robots" content="noindex" />}
-{nofollow && <meta name="robots" content="nofollow" />}
-{noindex && nofollow && <meta name="robots" content="noindex, nofollow" />}
+{noindex && nofollow ? (
+  <meta name="robots" content="noindex, nofollow" />
+) : noindex ? (
+  <meta name="robots" content="noindex" />
+) : nofollow ? (
+  <meta name="robots" content="nofollow" />
+) : (
+  <meta name="robots" content="index, follow" />
+)}
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
@@ -58,5 +64,9 @@ const canonicalURL = canonical || new URL(Astro.url.pathname, Astro.site).toStri
 
 <!-- Schema.org structured data -->
 {structuredData && (
-  <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
-)} 
+  Array.isArray(structuredData)
+    ? structuredData.map(schema => (
+        <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+      ))
+    : <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+)}

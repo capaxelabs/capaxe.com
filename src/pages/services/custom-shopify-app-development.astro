@@ -1,0 +1,197 @@
+---
+import { FiBox, FiGlobe, FiCpu, FiLayers, FiShield, FiTool } from "react-icons/fi";
+import CTABottom from "@/components/CTA.astro";
+import Layout from "@/layouts/Layout.astro";
+import { siteConfig } from "@/config/site";
+import ServiceCTA from "@/components/ServiceCTA";
+import BookingButton from "@/components/BookingButton";
+import ChatContactModal from "@/components/ChatContactModal";
+import { createSEO } from "@/utils/seo";
+import { getFAQPageSchema, getBreadcrumbSchema } from "@/lib/schemas";
+
+const appFaqs = [
+  { question: "What types of Shopify apps do you build?", answer: "We build private/custom apps, public apps listed on the Shopify App Store, Shopify Functions (discount, payment, fulfillment), and theme app extensions. We work with both embedded and standalone app architectures." },
+  { question: "What tech stack do you use for Shopify apps?", answer: "TypeScript, React, Node.js, Polaris (Shopify's UI library), Prisma, PostgreSQL, and GraphQL. We use Shopify CLI for development and deploy to Cloudflare Workers or Vercel." },
+  { question: "How long does it take to build a custom app?", answer: "Simple apps (single feature, basic UI) take 2-4 weeks. Mid-complexity apps (multiple features, third-party integrations) take 4-8 weeks. Complex apps (payment flows, multi-tenant, public app) take 8-12 weeks." },
+  { question: "Do you handle app submission to the Shopify App Store?", answer: "Yes. For public apps, we handle the full submission process including meeting Shopify's review requirements, writing app listings, and iterating on feedback from the review team." },
+];
+
+const seo = createSEO({
+  pageName: "Custom Shopify App Development",
+  description: "Build custom Shopify apps with Capaxe Labs — private apps, public apps, Shopify Functions, and theme extensions. TypeScript, React, Polaris, and GraphQL.",
+  keywords: "custom Shopify app development, Shopify app developer, Shopify app development company, build Shopify app, Shopify Functions development",
+  contentType: "service",
+  pathname: "/services/custom-shopify-app-development"
+});
+
+seo.structuredData = [
+  seo.structuredData as object,
+  getFAQPageSchema(appFaqs),
+  getBreadcrumbSchema([
+    { name: "Home", url: siteConfig.url },
+    { name: "Services", url: `${siteConfig.url}/services` },
+    { name: "Custom Shopify App Development", url: `${siteConfig.url}/services/custom-shopify-app-development` },
+  ])
+];
+---
+
+<Layout seo={seo}>
+  <div class="min-h-screen">
+    <!-- Hero -->
+    <section class="pt-32 pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-tile-accent text-center py-16 relative overflow-hidden">
+          <span class="inline-block px-3 py-1 rounded-full bg-white/10 text-white/80 text-xs font-medium mb-4 border border-white/20 hero-animate">
+            Shopify App Experts
+          </span>
+          <h1 class="text-5xl md:text-6xl font-bold mb-4 hero-animate hero-animate-delay-1">
+            Custom Shopify App Development
+          </h1>
+          <p class="text-lg text-white/60 max-w-2xl mx-auto mb-8 hero-animate hero-animate-delay-2">
+            Extend Shopify's capabilities with custom apps built for your exact business requirements. From private tools to public app store listings.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-3 justify-center hero-animate hero-animate-delay-3">
+            <BookingButton client:load className="btn-shimmer">Discuss Your App Idea</BookingButton>
+            <ChatContactModal
+              client:load
+              className="inline-flex items-center justify-center px-6 py-2 text-sm font-medium rounded-xl bg-white/10 text-white border border-white/20 hover:bg-white/20 transition-colors"
+            >
+              Chat with Us
+            </ChatContactModal>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- App Types -->
+    <section class="pb-8 px-6 reveal-on-scroll">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6 text-foreground text-center">Types of Apps We Build</h2>
+        <div class="bento-grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          <div class="bento-tile md:col-span-2">
+            <FiBox className="text-3xl text-primary-400 mb-4" />
+            <h3 class="text-xl font-semibold text-foreground mb-2">Private / Custom Apps</h3>
+            <p class="text-sm text-muted-foreground mb-3">
+              Built exclusively for your store. Custom workflows, integrations with ERPs, CRMs, and third-party services tailored to your operations.
+            </p>
+            <ul class="text-xs text-muted-foreground space-y-1">
+              <li>• Custom admin dashboards and tools</li>
+              <li>• Third-party API integrations (ERP, CRM, WMS)</li>
+              <li>• Automated workflows and background jobs</li>
+            </ul>
+          </div>
+          <div class="bento-tile-accent">
+            <FiGlobe className="text-3xl text-white/80 mb-4" />
+            <h3 class="text-xl font-semibold mb-2">Public Apps</h3>
+            <p class="text-sm text-white/70 mb-3">
+              Apps listed on the Shopify App Store, built to Shopify's review standards with multi-tenant architecture.
+            </p>
+            <ul class="text-xs text-white/60 space-y-1">
+              <li>• App Store compliant architecture</li>
+              <li>• Multi-tenant data isolation</li>
+              <li>• Billing via Shopify's API</li>
+            </ul>
+          </div>
+          <div class="bento-tile">
+            <FiCpu className="text-3xl text-emerald-400 mb-4" />
+            <h3 class="text-xl font-semibold text-foreground mb-2">Shopify Functions</h3>
+            <p class="text-sm text-muted-foreground mb-3">
+              Serverless extensions that run on Shopify's infrastructure — custom discounts, payment rules, and fulfillment logic.
+            </p>
+            <ul class="text-xs text-muted-foreground space-y-1">
+              <li>• Discount functions (BOGO, tiered, dynamic)</li>
+              <li>• Payment customization rules</li>
+              <li>• Delivery and fulfillment logic</li>
+            </ul>
+          </div>
+          <div class="bento-tile">
+            <FiLayers className="text-3xl text-violet-400 mb-4" />
+            <h3 class="text-xl font-semibold text-foreground mb-2">Theme App Extensions</h3>
+            <p class="text-sm text-muted-foreground mb-3">
+              App blocks that merchants can add to their themes through the theme editor — no code changes required.
+            </p>
+            <ul class="text-xs text-muted-foreground space-y-1">
+              <li>• Custom app blocks for Online Store 2.0</li>
+              <li>• Product page widgets and badges</li>
+              <li>• Dynamic storefront content</li>
+            </ul>
+          </div>
+          <div class="bento-tile">
+            <FiShield className="text-3xl text-cyan-400 mb-4" />
+            <h3 class="text-xl font-semibold text-foreground mb-2">Checkout Extensions</h3>
+            <p class="text-sm text-muted-foreground mb-3">
+              Custom checkout UI with Shopify Checkout Extensibility — upsells, custom fields, loyalty integrations.
+            </p>
+            <ul class="text-xs text-muted-foreground space-y-1">
+              <li>• Post-purchase upsell flows</li>
+              <li>• Custom checkout fields</li>
+              <li>• Order validation rules</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section class="pb-8 px-6 reveal-on-scroll">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-tile-muted text-center py-10 px-8">
+          <h2 class="text-2xl font-bold text-foreground mb-6">Our Tech Stack</h2>
+          <div class="flex flex-wrap justify-center gap-2 max-w-4xl mx-auto">
+            {["TypeScript", "React", "Node.js", "Polaris", "GraphQL", "Shopify Admin API", "Storefront API", "Shopify Functions", "Prisma", "PostgreSQL", "Redis", "Cloudflare Workers", "Shopify CLI", "Webhooks", "REST API"].map(tech => (
+              <span class="inline-block px-3 py-1 rounded-full bg-primary-500/10 text-primary-400 text-xs font-medium border border-primary-500/20">
+                {tech}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process -->
+    <section class="pb-8 px-6 reveal-on-scroll">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6 text-foreground text-center">Development Process</h2>
+        <div class="bento-grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          {[
+            { step: "1", title: "Discovery", desc: "Understand your requirements, map out features, and define the technical architecture." },
+            { step: "2", title: "Design & Prototype", desc: "Polaris-based UI design, API schema planning, and interactive prototyping." },
+            { step: "3", title: "Development", desc: "Iterative sprints with regular demos. Code reviews, testing, and documentation." },
+            { step: "4", title: "Testing & QA", desc: "Automated tests, manual QA, performance testing, and Shopify review compliance checks." },
+            { step: "5", title: "Deployment", desc: "Production deployment, monitoring setup, and app store submission if applicable." },
+            { step: "6", title: "Support", desc: "30-day warranty, ongoing maintenance, and feature additions via retainer plans." },
+          ].map(item => (
+            <div class="bento-tile text-center">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary-500/10 text-primary-400 font-bold text-lg mb-4">{item.step}</span>
+              <h3 class="text-lg font-semibold mb-2 text-foreground">{item.title}</h3>
+              <p class="text-sm text-muted-foreground">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="pb-8 px-6 reveal-on-scroll">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6 text-foreground text-center">Frequently Asked Questions</h2>
+        <div class="bento-grid grid-cols-1 md:grid-cols-2">
+          {appFaqs.map(faq => (
+            <div class="bento-tile">
+              <h3 class="text-base font-semibold mb-2 text-foreground">{faq.question}</h3>
+              <p class="text-sm text-muted-foreground">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <ServiceCTA />
+  </div>
+  <CTABottom
+    title="Have an app idea?"
+    description="Book a free call and we'll help you scope, plan, and build your custom Shopify app."
+    buttonText="Book a Call"
+    buttonUrl="/consultation"
+  />
+</Layout>

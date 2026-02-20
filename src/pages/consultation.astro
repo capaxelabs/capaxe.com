@@ -2,11 +2,15 @@
 import Layout from "@/layouts/Layout.astro";
 import { siteConfig } from "@/config/site";
 import CTABottom from "@/components/CTA.astro";
+import { createSEO } from "@/utils/seo";
 
-const seo = {
-  title: `Book a Consultation | ${siteConfig.name}`,
-  description: "Schedule a free consultation with our experts to discuss your project needs.",
-};
+const seo = createSEO({
+  pageName: "Book a Free Shopify Consultation",
+  description: "Schedule a free 30-minute consultation with Capaxe Labs to discuss your Shopify project — app development, store builds, migrations, or ongoing support.",
+  keywords: "Shopify consultation, free Shopify consultation, Shopify development consultation, book Shopify developer",
+  contentType: "basic",
+  pathname: "/consultation",
+});
 ---
 
 <Layout seo={seo}>

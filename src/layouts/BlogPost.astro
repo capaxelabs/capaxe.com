@@ -4,6 +4,8 @@ import Layout from "./Layout.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 import { createSEO } from "@/utils/seo";
 import type { SEOProps } from "@/utils/seo";
+import { getBreadcrumbSchema } from "@/lib/schemas";
+import { siteConfig } from "@/config/site";
 
 type Props = CollectionEntry<"blog">["data"];
 
@@ -16,8 +18,17 @@ const seo: SEOProps = createSEO({
   updateDate: updatedDate ? new Date(updatedDate) : undefined,
   image: heroImage,
   contentType: "blog",
-  pathname: "/blog"
+  pathname: Astro.url.pathname
 });
+
+seo.structuredData = [
+  seo.structuredData as object,
+  getBreadcrumbSchema([
+    { name: "Home", url: siteConfig.url },
+    { name: "Blog", url: `${siteConfig.url}/blog` },
+    { name: title, url: `${siteConfig.url}${Astro.url.pathname}` },
+  ])
+];
 ---
 
 <Layout seo={seo}>

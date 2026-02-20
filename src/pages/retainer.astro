@@ -7,6 +7,7 @@ import CTABottom from "@/components/CTA.astro";
 
 import { createSEO } from "@/utils/seo";
 import type { SEOProps } from "@/utils/seo";
+import { getFAQPageSchema } from "@/lib/schemas";
 
 interface Props {
   seo?: SEOProps;
@@ -14,12 +15,20 @@ interface Props {
   description?: string;
 }
 
+const retainerFaqs = [
+  { question: "What's included in the retainer hours?", answer: "Retainer hours can be used for development, maintenance, bug fixes, feature enhancements, and consultations related to your Shopify store." },
+  { question: "Can I roll over unused hours?", answer: "Unused hours typically expire at the end of each month, but we can discuss rollover options for specific circumstances." },
+  { question: "How do I request changes or support?", answer: "Retainer clients have access to a dedicated support channel where you can submit requests and track progress." },
+  { question: "Can I upgrade my plan later?", answer: "Yes, you can upgrade your retainer plan at any time as your business needs grow." },
+];
+
 const seo = createSEO({
-  pageName: `Retainer Plans | ${siteConfig.name}`,
-  description: "Choose from our flexible retainer plans designed to provide continuous improvements and support for your Shopify store.",
-  keywords: "Retainer Plans, Shopify, Capaxe Labs",
+  pageName: "Shopify Retainer Plans",
+  description: "Flexible Shopify retainer plans — dedicated developer access, priority support, and continuous improvements for your store. No long-term contracts.",
+  keywords: "Shopify retainer plan, dedicated Shopify developer, Shopify support plan, monthly Shopify maintenance",
   pathname: "/retainer",
 });
+seo.structuredData = getFAQPageSchema(retainerFaqs);
 ---
 
 <Layout seo={seo}>
@@ -28,12 +37,17 @@ const seo = createSEO({
     <section class="pt-32 pb-8 px-6">
       <div class="max-w-7xl mx-auto">
         <div class="bento-tile-accent text-center py-16">
-          <span class="inline-block px-3 py-1 rounded-full bg-white/10 text-white/80 text-xs font-medium mb-4 border border-white/20">
+          <span
+            class="inline-block px-3 py-1 rounded-full bg-white/10 text-white/80 text-xs font-medium mb-4 border border-white/20"
+          >
             Membership Plans
           </span>
-          <h1 class="text-5xl md:text-6xl font-bold mb-4">Join Our Shopify Success Community</h1>
+          <h1 class="text-5xl md:text-6xl font-bold mb-4">
+            Join Our Shopify Success Community
+          </h1>
           <p class="text-lg text-white/60 max-w-2xl mx-auto">
-            Get dedicated development support, strategic guidance, and priority service with our flexible membership plans.
+            Get dedicated development support, strategic guidance, and priority
+            service with our flexible membership plans.
           </p>
         </div>
       </div>
@@ -45,21 +59,34 @@ const seo = createSEO({
     <!-- Why Choose -->
     <section class="py-4 px-6">
       <div class="max-w-7xl mx-auto">
-        <h2 class="text-3xl font-bold mb-4 text-foreground text-center">Why Choose a Retainer Plan?</h2>
+        <h2 class="text-3xl font-bold mb-4 text-foreground text-center">
+          Why Choose a Retainer Plan?
+        </h2>
         <div class="bento-grid grid-cols-1 md:grid-cols-3 mt-6">
           <div class="bento-tile">
-            <h3 class="text-lg font-semibold mb-2 text-foreground">Ongoing Support</h3>
+            <h3 class="text-lg font-semibold mb-2 text-foreground">
+              Ongoing Support
+            </h3>
             <p class="text-sm text-muted-foreground">
-              Get reliable, consistent support for your Shopify store with dedicated experts who understand your business.
+              Get reliable, consistent support for your Shopify store with
+              dedicated experts who understand your business.
             </p>
           </div>
           <div class="bento-tile-accent">
             <h3 class="text-lg font-semibold mb-2">Predictable Costs</h3>
-            <p class="text-sm text-white/70">Budget effectively with fixed monthly or yearly rates, avoiding unexpected development expenses.</p>
+            <p class="text-sm text-white/70">
+              Budget effectively with fixed monthly or yearly rates, avoiding
+              unexpected development expenses.
+            </p>
           </div>
           <div class="bento-tile">
-            <h3 class="text-lg font-semibold mb-2 text-foreground">Priority Service</h3>
-            <p class="text-sm text-muted-foreground">Enjoy faster response times and priority scheduling for your Shopify store needs.</p>
+            <h3 class="text-lg font-semibold mb-2 text-foreground">
+              Priority Service
+            </h3>
+            <p class="text-sm text-muted-foreground">
+              Enjoy faster response times and priority scheduling for your
+              Shopify store needs.
+            </p>
           </div>
         </div>
       </div>
@@ -68,47 +95,46 @@ const seo = createSEO({
     <!-- FAQ -->
     <section class="py-4 px-6">
       <div class="max-w-7xl mx-auto">
-        <h2 class="text-3xl font-bold mb-4 text-foreground text-center">Frequently Asked Questions</h2>
+        <h2 class="text-3xl font-bold mb-4 text-foreground text-center">
+          Frequently Asked Questions
+        </h2>
         <div class="bento-grid grid-cols-1 md:grid-cols-2 mt-6">
           <div class="bento-tile">
-            <h3 class="text-base font-semibold mb-2 text-foreground">What's included in the retainer hours?</h3>
+            <h3 class="text-base font-semibold mb-2 text-foreground">
+              What's included in the retainer hours?
+            </h3>
             <p class="text-sm text-muted-foreground">
-              Retainer hours can be used for development, maintenance, bug fixes, feature enhancements, and consultations related to your Shopify store.
+              Retainer hours can be used for development, maintenance, bug
+              fixes, feature enhancements, and consultations related to your
+              Shopify store.
             </p>
           </div>
           <div class="bento-tile">
-            <h3 class="text-base font-semibold mb-2 text-foreground">Can I roll over unused hours?</h3>
+            <h3 class="text-base font-semibold mb-2 text-foreground">
+              Can I roll over unused hours?
+            </h3>
             <p class="text-sm text-muted-foreground">
-              Unused hours typically expire at the end of each month, but we can discuss rollover options for specific circumstances.
+              Unused hours typically expire at the end of each month, but we can
+              discuss rollover options for specific circumstances.
             </p>
           </div>
           <div class="bento-tile">
-            <h3 class="text-base font-semibold mb-2 text-foreground">How do I request changes or support?</h3>
-            <p class="text-sm text-muted-foreground">Retainer clients have access to a dedicated support channel where you can submit requests and track progress.</p>
+            <h3 class="text-base font-semibold mb-2 text-foreground">
+              How do I request changes or support?
+            </h3>
+            <p class="text-sm text-muted-foreground">
+              Retainer clients have access to a dedicated support channel where
+              you can submit requests and track progress.
+            </p>
           </div>
           <div class="bento-tile">
-            <h3 class="text-base font-semibold mb-2 text-foreground">Can I upgrade my plan later?</h3>
-            <p class="text-sm text-muted-foreground">Yes, you can upgrade your retainer plan at any time as your business needs grow.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="py-4 px-6 pb-8">
-      <div class="max-w-7xl mx-auto">
-        <div class="bento-tile-accent text-center py-12">
-          <h2 class="text-3xl font-bold mb-3">Ready to Get Started?</h2>
-          <p class="text-lg text-white/70 max-w-2xl mx-auto mb-6">
-            Take the next step towards growing your Shopify store with our expert team by your side.
-          </p>
-          <div class="flex flex-col sm:flex-row gap-3 justify-center">
-            <a href="/consultation" class="bg-white text-primary-600 px-6 py-3 rounded-xl font-medium hover:bg-gray-100 transition-colors text-sm">
-              Book a Consultation
-            </a>
-            <a href="/case-studies" class="bg-white/10 text-white px-6 py-3 rounded-xl font-medium hover:bg-white/20 transition-colors border border-white/20 text-sm">
-              View Our Case Studies
-            </a>
+            <h3 class="text-base font-semibold mb-2 text-foreground">
+              Can I upgrade my plan later?
+            </h3>
+            <p class="text-sm text-muted-foreground">
+              Yes, you can upgrade your retainer plan at any time as your
+              business needs grow.
+            </p>
           </div>
         </div>
       </div>

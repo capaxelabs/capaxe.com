@@ -1,0 +1,196 @@
+---
+import { FiCode, FiLayout, FiDatabase, FiShoppingCart, FiZap, FiGlobe } from "react-icons/fi";
+import CTABottom from "@/components/CTA.astro";
+import Layout from "@/layouts/Layout.astro";
+import { siteConfig } from "@/config/site";
+import ServiceCTA from "@/components/ServiceCTA";
+import BookingButton from "@/components/BookingButton";
+import ChatContactModal from "@/components/ChatContactModal";
+import { createSEO } from "@/utils/seo";
+import { getFAQPageSchema } from "@/lib/schemas";
+
+const hireFaqs = [
+  { question: "What Shopify skills does your team have?", answer: "Our developers are proficient in Liquid, Shopify Functions, Hydrogen, Remix, Polaris, Shopify Admin API, Storefront API, GraphQL, TypeScript, React, Node.js, and payment integrations with Stripe and Plaid." },
+  { question: "How do engagement models work?", answer: "We offer two models: fixed-price projects with milestone payments for defined scopes, and monthly retainers starting at $999/month for ongoing development and support. Both models include a dedicated developer." },
+  { question: "Can I start with a small project first?", answer: "Yes. Many clients start with a small project to evaluate our work before committing to a retainer. There's no minimum commitment required." },
+  { question: "What timezone do you work in?", answer: "We're based in Mumbai, India (IST) but work across all timezones. We overlap with US business hours and provide async communication for European clients." },
+];
+
+const seo = createSEO({
+  pageName: "Hire a Shopify Developer",
+  description: "Hire experienced Shopify developers from Capaxe Labs. Custom app development, headless storefronts, store builds, and payment integrations. Based in India, serving clients worldwide.",
+  keywords: "hire Shopify developer, Shopify developer for hire, dedicated Shopify developer, freelance Shopify developer, Shopify development agency",
+  contentType: "service",
+  pathname: "/hire-shopify-developer"
+});
+
+seo.structuredData = [
+  seo.structuredData as object,
+  getFAQPageSchema(hireFaqs)
+];
+---
+
+<Layout seo={seo}>
+  <div class="min-h-screen">
+    <!-- Hero -->
+    <section class="pt-32 pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-tile-accent text-center py-16 relative overflow-hidden">
+          <span class="inline-block px-3 py-1 rounded-full bg-white/10 text-white/80 text-xs font-medium mb-4 border border-white/20 hero-animate">
+            Dedicated Shopify Developers
+          </span>
+          <h1 class="text-5xl md:text-6xl font-bold mb-4 hero-animate hero-animate-delay-1">
+            Hire a Shopify Developer
+          </h1>
+          <p class="text-lg text-white/60 max-w-2xl mx-auto mb-8 hero-animate hero-animate-delay-2">
+            Get a skilled Shopify developer dedicated to your project — custom apps, headless storefronts, theme development, and payment integrations.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-3 justify-center hero-animate hero-animate-delay-3">
+            <BookingButton client:load className="btn-shimmer">Book a Free Call</BookingButton>
+            <ChatContactModal
+              client:load
+              className="inline-flex items-center justify-center px-6 py-2 text-sm font-medium rounded-xl bg-white/10 text-white border border-white/20 hover:bg-white/20 transition-colors"
+            >
+              Chat with Us
+            </ChatContactModal>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Grid -->
+    <section class="pb-8 px-6 reveal-on-scroll">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6 text-foreground text-center">What Our Developers Build</h2>
+        <div class="bento-grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          <div class="bento-tile md:col-span-2">
+            <FiCode className="text-3xl text-primary-400 mb-4" />
+            <h3 class="text-xl font-semibold text-foreground mb-2">Custom Shopify Apps</h3>
+            <p class="text-sm text-muted-foreground">
+              Private and public apps using Shopify Admin API, Storefront API, Shopify Functions, and Polaris. TypeScript, React, and Node.js.
+            </p>
+          </div>
+          <div class="bento-tile-accent">
+            <FiGlobe className="text-3xl text-white/80 mb-4" />
+            <h3 class="text-xl font-semibold mb-2">Headless Storefronts</h3>
+            <p class="text-sm text-white/70">
+              Hydrogen, Next.js, and Remix storefronts connected to Shopify's Storefront API for full design and performance control.
+            </p>
+          </div>
+          <div class="bento-tile">
+            <FiLayout className="text-3xl text-violet-400 mb-4" />
+            <h3 class="text-xl font-semibold text-foreground mb-2">Theme Development</h3>
+            <p class="text-sm text-muted-foreground">
+              Custom Liquid themes, section-based architecture, theme blocks, and OS 2.0 features with performance-first development.
+            </p>
+          </div>
+          <div class="bento-tile">
+            <FiDatabase className="text-3xl text-emerald-400 mb-4" />
+            <h3 class="text-xl font-semibold text-foreground mb-2">Payment Integrations</h3>
+            <p class="text-sm text-muted-foreground">
+              Stripe, Plaid ACH, layaway systems, subscription billing, and custom checkout flows with PCI-compliant architecture.
+            </p>
+          </div>
+          <div class="bento-tile">
+            <FiShoppingCart className="text-3xl text-amber-400 mb-4" />
+            <h3 class="text-xl font-semibold text-foreground mb-2">Store Builds</h3>
+            <p class="text-sm text-muted-foreground">
+              End-to-end Shopify store setup — products, collections, shipping, taxes, checkout configuration, and third-party app integrations.
+            </p>
+          </div>
+          <div class="bento-tile-accent">
+            <FiZap className="text-3xl text-white/80 mb-4" />
+            <h3 class="text-xl font-semibold mb-2">Migrations & Optimization</h3>
+            <p class="text-sm text-white/70">
+              Platform migrations from WooCommerce, Magento, and BigCommerce. Speed optimization and Core Web Vitals improvement.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Engagement Models -->
+    <section class="pb-8 px-6 reveal-on-scroll">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6 text-foreground text-center">Engagement Models</h2>
+        <div class="bento-grid grid-cols-1 md:grid-cols-2">
+          <div class="bento-tile">
+            <h3 class="text-xl font-semibold mb-3 text-foreground">Fixed-Price Project</h3>
+            <p class="text-sm text-muted-foreground mb-4">
+              Defined scope, clear deliverables, milestone-based payments. Ideal for one-time projects with a known scope.
+            </p>
+            <ul class="text-xs text-muted-foreground space-y-1">
+              <li>• Detailed proposal with timeline and cost</li>
+              <li>• Milestone payments (30/30/40 split)</li>
+              <li>• 30-day post-launch warranty</li>
+            </ul>
+          </div>
+          <div class="bento-tile-accent">
+            <h3 class="text-xl font-semibold mb-3">Monthly Retainer</h3>
+            <p class="text-sm text-white/70 mb-4">
+              Dedicated developer access, priority support, and continuous development. Cancel anytime, no long-term contracts.
+            </p>
+            <ul class="text-xs text-white/60 space-y-1">
+              <li>• Dedicated Shopify developer</li>
+              <li>• Priority response times</li>
+              <li>• Flexible scope — use hours as needed</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="pb-8 px-6 reveal-on-scroll">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6 text-foreground text-center">How It Works</h2>
+        <div class="bento-grid grid-cols-1 md:grid-cols-3">
+          <div class="bento-tile text-center">
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary-500/10 text-primary-400 font-bold text-lg mb-4">1</span>
+            <h3 class="text-lg font-semibold mb-2 text-foreground">Discovery Call</h3>
+            <p class="text-sm text-muted-foreground">
+              Free 30-minute call to understand your project, requirements, and timeline.
+            </p>
+          </div>
+          <div class="bento-tile text-center">
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary-500/10 text-primary-400 font-bold text-lg mb-4">2</span>
+            <h3 class="text-lg font-semibold mb-2 text-foreground">Proposal & Kickoff</h3>
+            <p class="text-sm text-muted-foreground">
+              Detailed proposal with scope, timeline, and pricing. Once approved, your developer starts within 48 hours.
+            </p>
+          </div>
+          <div class="bento-tile text-center">
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary-500/10 text-primary-400 font-bold text-lg mb-4">3</span>
+            <h3 class="text-lg font-semibold mb-2 text-foreground">Build & Deliver</h3>
+            <p class="text-sm text-muted-foreground">
+              Regular check-ins, progress updates, and iterative delivery until the project is complete.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="pb-8 px-6 reveal-on-scroll">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6 text-foreground text-center">Frequently Asked Questions</h2>
+        <div class="bento-grid grid-cols-1 md:grid-cols-2">
+          {hireFaqs.map(faq => (
+            <div class="bento-tile">
+              <h3 class="text-base font-semibold mb-2 text-foreground">{faq.question}</h3>
+              <p class="text-sm text-muted-foreground">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <ServiceCTA />
+  </div>
+  <CTABottom
+    title="Ready to hire a Shopify developer?"
+    description="Book a free call and we'll match you with the right developer for your project."
+    buttonText="Book a Call"
+    buttonUrl="/consultation"
+  />
+</Layout>

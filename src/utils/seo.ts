@@ -13,7 +13,7 @@ export interface SEOProps {
     author?: string;
     noindex?: boolean;
     nofollow?: boolean;
-    structuredData?: object;
+    structuredData?: object | object[];
 }
 
 export interface PageSEOProps extends SEOProps {

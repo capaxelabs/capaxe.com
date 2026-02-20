@@ -5,6 +5,8 @@ import { createSEO } from "@/utils/seo";
 import { getCollection, render } from "astro:content";
 import type { RenderResult } from "astro:content";
 import ProjectCarousel from "@/components/ProjectCarousel.tsx";
+import { getCaseStudySchema, getBreadcrumbSchema } from "@/lib/schemas";
+import { siteConfig } from "@/config/site";
 export const prerender = true;
 
 export async function getStaticPaths() {
@@ -27,8 +29,26 @@ if (caseStudy) {
 const seo = createSEO({
   pageName: caseStudy.data.title,
   description: caseStudy.data.description,
+  contentType: "case-study",
   pathname: `/case-studies/${caseStudy.id}`,
 });
+
+seo.structuredData = [
+  getCaseStudySchema({
+    title: caseStudy.data.title,
+    description: caseStudy.data.description,
+    problemStatement: caseStudy.data.problemStatement,
+    solution: caseStudy.data.solution,
+    techStack: caseStudy.data.techStack,
+    pubDate: new Date(caseStudy.data.pubDate),
+    url: `${siteConfig.url}/case-studies/${caseStudy.id}`,
+  }),
+  getBreadcrumbSchema([
+    { name: "Home", url: siteConfig.url },
+    { name: "Case Studies", url: `${siteConfig.url}/case-studies` },
+    { name: caseStudy.data.title, url: `${siteConfig.url}/case-studies/${caseStudy.id}` },
+  ])
+];
 
 // Define slide data for layaway solution
 const layawaySlides = [

@@ -1,0 +1,171 @@
+---
+import { FiRefreshCw, FiDatabase, FiLink, FiShield, FiCheckCircle, FiTrendingUp } from "react-icons/fi";
+import CTABottom from "@/components/CTA.astro";
+import Layout from "@/layouts/Layout.astro";
+import { siteConfig } from "@/config/site";
+import ServiceCTA from "@/components/ServiceCTA";
+import BookingButton from "@/components/BookingButton";
+import ChatContactModal from "@/components/ChatContactModal";
+import { createSEO } from "@/utils/seo";
+import { getFAQPageSchema, getBreadcrumbSchema } from "@/lib/schemas";
+
+const migrationFaqs = [
+  { question: "Which platforms do you migrate from?", answer: "We migrate from Magento, WooCommerce, BigCommerce, Squarespace, Wix, PrestaShop, and custom-built e-commerce platforms. We handle both standard and complex migrations with custom data mapping." },
+  { question: "Will I lose my SEO rankings?", answer: "No. We implement comprehensive 301 redirects for every URL, preserve meta tags, maintain URL structure where possible, and submit updated sitemaps. Most clients see improved rankings within 2-3 months post-migration." },
+  { question: "How long does a migration take?", answer: "Simple stores (under 1,000 products) take 2-4 weeks. Medium stores (1,000-10,000 products) take 4-6 weeks. Complex stores with custom integrations take 6-12 weeks. We run parallel testing before the final switch." },
+  { question: "What data gets migrated?", answer: "Products (images, variants, metafields), customers (accounts, addresses), orders (historical data), blog posts, pages, reviews, discount codes, and gift cards. We verify data integrity at every step." },
+];
+
+const seo = createSEO({
+  pageName: "Shopify Migration Service",
+  description: "Migrate to Shopify from Magento, WooCommerce, or BigCommerce. Capaxe Labs handles data transfer, URL redirects, SEO preservation, and testing for a seamless migration.",
+  keywords: "Shopify migration service, migrate to Shopify, WooCommerce to Shopify, Magento to Shopify, BigCommerce to Shopify, e-commerce migration",
+  contentType: "service",
+  pathname: "/services/shopify-migration"
+});
+
+seo.structuredData = [
+  seo.structuredData as object,
+  getFAQPageSchema(migrationFaqs),
+  getBreadcrumbSchema([
+    { name: "Home", url: siteConfig.url },
+    { name: "Services", url: `${siteConfig.url}/services` },
+    { name: "Shopify Migration", url: `${siteConfig.url}/services/shopify-migration` },
+  ])
+];
+---
+
+<Layout seo={seo}>
+  <div class="min-h-screen">
+    <!-- Hero -->
+    <section class="pt-32 pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-tile-accent text-center py-16 relative overflow-hidden">
+          <span class="inline-block px-3 py-1 rounded-full bg-white/10 text-white/80 text-xs font-medium mb-4 border border-white/20 hero-animate">
+            Zero-Downtime Migration
+          </span>
+          <h1 class="text-5xl md:text-6xl font-bold mb-4 hero-animate hero-animate-delay-1">
+            Migrate to Shopify<br />Without Losing a Thing
+          </h1>
+          <p class="text-lg text-white/60 max-w-2xl mx-auto mb-8 hero-animate hero-animate-delay-2">
+            Products, customers, orders, SEO rankings — we move everything to Shopify with zero data loss and comprehensive redirect handling.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-3 justify-center hero-animate hero-animate-delay-3">
+            <BookingButton client:load className="btn-shimmer">Get a Migration Quote</BookingButton>
+            <ChatContactModal
+              client:load
+              className="inline-flex items-center justify-center px-6 py-2 text-sm font-medium rounded-xl bg-white/10 text-white border border-white/20 hover:bg-white/20 transition-colors"
+            >
+              Chat with Us
+            </ChatContactModal>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Supported Platforms -->
+    <section class="pb-8 px-6 reveal-on-scroll">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6 text-foreground text-center">Platforms We Migrate From</h2>
+        <div class="bento-grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          {[
+            { name: "Magento / Adobe Commerce", desc: "Full catalog, customer, and order migration with complex data mapping for Magento's EAV architecture." },
+            { name: "WooCommerce", desc: "WordPress + WooCommerce stores with product variations, reviews, subscriptions, and custom post types." },
+            { name: "BigCommerce", desc: "Complete data transfer including multi-storefront setups, customer groups, and category hierarchies." },
+            { name: "Squarespace / Wix", desc: "E-commerce and content migration from website builders, including pages, blog posts, and product data." },
+            { name: "Custom Platforms", desc: "Bespoke e-commerce systems with custom database schemas — we build custom migration scripts." },
+            { name: "Shopify to Shopify Plus", desc: "Upgrade to Shopify Plus with B2B setup, Scripts, advanced checkout, and multi-location inventory." },
+          ].map((platform, i) => (
+            <div class={i === 0 ? "bento-tile md:col-span-2" : i === 5 ? "bento-tile-accent" : "bento-tile"}>
+              <h3 class={`text-xl font-semibold mb-2 ${i === 5 ? '' : 'text-foreground'}`}>{platform.name}</h3>
+              <p class={`text-sm ${i === 5 ? 'text-white/70' : 'text-muted-foreground'}`}>{platform.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- What Gets Migrated -->
+    <section class="pb-8 px-6 reveal-on-scroll">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6 text-foreground text-center">What We Migrate</h2>
+        <div class="bento-grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          <div class="bento-tile">
+            <FiDatabase className="text-3xl text-primary-400 mb-4" />
+            <h3 class="text-lg font-semibold text-foreground mb-2">Products & Catalog</h3>
+            <p class="text-sm text-muted-foreground">Images, variants, metafields, collections, tags, and SEO data for every product.</p>
+          </div>
+          <div class="bento-tile">
+            <FiRefreshCw className="text-3xl text-emerald-400 mb-4" />
+            <h3 class="text-lg font-semibold text-foreground mb-2">Customers & Orders</h3>
+            <p class="text-sm text-muted-foreground">Customer accounts, addresses, order history, and transaction records preserved.</p>
+          </div>
+          <div class="bento-tile">
+            <FiLink className="text-3xl text-violet-400 mb-4" />
+            <h3 class="text-lg font-semibold text-foreground mb-2">URL Redirects</h3>
+            <p class="text-sm text-muted-foreground">Every old URL mapped to new Shopify URLs with 301 redirects to preserve SEO authority.</p>
+          </div>
+          <div class="bento-tile">
+            <FiShield className="text-3xl text-amber-400 mb-4" />
+            <h3 class="text-lg font-semibold text-foreground mb-2">SEO Preservation</h3>
+            <p class="text-sm text-muted-foreground">Meta titles, descriptions, canonical tags, structured data, and sitemap submission.</p>
+          </div>
+          <div class="bento-tile">
+            <FiCheckCircle className="text-3xl text-cyan-400 mb-4" />
+            <h3 class="text-lg font-semibold text-foreground mb-2">Content & Pages</h3>
+            <p class="text-sm text-muted-foreground">Blog posts, static pages, navigation menus, and promotional content migrated.</p>
+          </div>
+          <div class="bento-tile">
+            <FiTrendingUp className="text-3xl text-pink-400 mb-4" />
+            <h3 class="text-lg font-semibold text-foreground mb-2">Reviews & Ratings</h3>
+            <p class="text-sm text-muted-foreground">Product reviews imported to your new Shopify store with original dates and ratings.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Migration Process -->
+    <section class="pb-8 px-6 reveal-on-scroll">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6 text-foreground text-center">Migration Process</h2>
+        <div class="bento-grid grid-cols-1 md:grid-cols-4">
+          {[
+            { step: "1", title: "Audit", desc: "Catalog your existing data, integrations, and custom functionality." },
+            { step: "2", title: "Test Migration", desc: "Run a test migration on a staging store — verify every data point." },
+            { step: "3", title: "Go Live", desc: "Execute the final migration, DNS switch, and redirect setup." },
+            { step: "4", title: "Verify", desc: "Post-launch monitoring, SEO checks, and issue resolution." },
+          ].map(item => (
+            <div class="bento-tile text-center">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary-500/10 text-primary-400 font-bold text-lg mb-4">{item.step}</span>
+              <h3 class="text-lg font-semibold mb-2 text-foreground">{item.title}</h3>
+              <p class="text-sm text-muted-foreground">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="pb-8 px-6 reveal-on-scroll">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6 text-foreground text-center">Frequently Asked Questions</h2>
+        <div class="bento-grid grid-cols-1 md:grid-cols-2">
+          {migrationFaqs.map(faq => (
+            <div class="bento-tile">
+              <h3 class="text-base font-semibold mb-2 text-foreground">{faq.question}</h3>
+              <p class="text-sm text-muted-foreground">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <ServiceCTA />
+  </div>
+  <CTABottom
+    title="Ready to migrate to Shopify?"
+    description="Book a free call and we'll audit your current store and map out the migration plan."
+    buttonText="Get a Migration Quote"
+    buttonUrl="/consultation"
+  />
+</Layout>

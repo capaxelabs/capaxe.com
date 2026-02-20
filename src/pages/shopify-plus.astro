@@ -1,0 +1,192 @@
+---
+import { FiZap, FiGlobe, FiUsers, FiLock, FiBarChart2, FiTool } from "react-icons/fi";
+import CTABottom from "@/components/CTA.astro";
+import Layout from "@/layouts/Layout.astro";
+import { siteConfig } from "@/config/site";
+import ServiceCTA from "@/components/ServiceCTA";
+import BookingButton from "@/components/BookingButton";
+import ChatContactModal from "@/components/ChatContactModal";
+import { createSEO } from "@/utils/seo";
+import { getFAQPageSchema } from "@/lib/schemas";
+
+const plusFaqs = [
+  { question: "What's the difference between Shopify and Shopify Plus?", answer: "Shopify Plus is the enterprise tier — it includes advanced checkout customization, Shopify Functions, Launchpad for scheduling, B2B wholesale, Shopify Markets for international selling, dedicated support, and higher API rate limits. It's designed for merchants doing $1M+ in annual revenue." },
+  { question: "Do you work with existing Shopify Plus stores?", answer: "Yes. We work with both new Shopify Plus builds and existing stores that need custom apps, checkout extensions, performance optimization, or migration from legacy Plus implementations." },
+  { question: "Can you help with B2B on Shopify Plus?", answer: "Yes. We build B2B catalogs with company-specific pricing, payment terms, draft orders, and custom checkout flows using Shopify Plus B2B features and custom apps." },
+  { question: "What about Shopify Markets?", answer: "We configure and customize Shopify Markets for international selling — multi-currency, language translations, localized pricing, duties and import taxes, and market-specific content." },
+];
+
+const seo = createSEO({
+  pageName: "Shopify Plus Development Agency",
+  description: "Enterprise Shopify Plus development by Capaxe Labs. Custom checkout, B2B catalogs, Shopify Functions, Launchpad, and international commerce with Shopify Markets.",
+  keywords: "Shopify Plus development, Shopify Plus agency, Shopify Plus developer, enterprise Shopify, Shopify Plus B2B, Shopify checkout customization",
+  contentType: "service",
+  pathname: "/shopify-plus"
+});
+
+seo.structuredData = [
+  seo.structuredData as object,
+  getFAQPageSchema(plusFaqs)
+];
+---
+
+<Layout seo={seo}>
+  <div class="min-h-screen">
+    <!-- Hero -->
+    <section class="pt-32 pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-tile-accent text-center py-16 relative overflow-hidden">
+          <span class="inline-block px-3 py-1 rounded-full bg-white/10 text-white/80 text-xs font-medium mb-4 border border-white/20 hero-animate">
+            Enterprise Shopify
+          </span>
+          <h1 class="text-5xl md:text-6xl font-bold mb-4 hero-animate hero-animate-delay-1">
+            Shopify Plus Development
+          </h1>
+          <p class="text-lg text-white/60 max-w-2xl mx-auto mb-8 hero-animate hero-animate-delay-2">
+            Unlock the full power of Shopify Plus — custom checkout, B2B commerce, Shopify Functions, and international selling with expert development.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-3 justify-center hero-animate hero-animate-delay-3">
+            <BookingButton client:load className="btn-shimmer">Book a Free Call</BookingButton>
+            <ChatContactModal
+              client:load
+              className="inline-flex items-center justify-center px-6 py-2 text-sm font-medium rounded-xl bg-white/10 text-white border border-white/20 hover:bg-white/20 transition-colors"
+            >
+              Chat with Us
+            </ChatContactModal>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Plus Features -->
+    <section class="pb-8 px-6 reveal-on-scroll">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6 text-foreground text-center">Shopify Plus Capabilities</h2>
+        <div class="bento-grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          <div class="bento-tile md:col-span-2">
+            <FiLock className="text-3xl text-primary-400 mb-4" />
+            <h3 class="text-xl font-semibold text-foreground mb-2">Custom Checkout</h3>
+            <p class="text-sm text-muted-foreground mb-3">
+              Build custom checkout experiences with Checkout Extensibility — upsells, custom fields, loyalty integrations, and branded checkout UI.
+            </p>
+            <ul class="text-xs text-muted-foreground space-y-1">
+              <li>• Post-purchase upsell flows</li>
+              <li>• Custom payment and shipping rules</li>
+              <li>• Branded checkout with Checkout Branding API</li>
+            </ul>
+          </div>
+          <div class="bento-tile-accent">
+            <FiZap className="text-3xl text-white/80 mb-4" />
+            <h3 class="text-xl font-semibold mb-2">Shopify Functions</h3>
+            <p class="text-sm text-white/70 mb-3">
+              Serverless backend logic for discounts, payments, and fulfillment running on Shopify's infrastructure.
+            </p>
+            <ul class="text-xs text-white/60 space-y-1">
+              <li>• Custom discount logic (BOGO, tiered, dynamic)</li>
+              <li>• Payment customization rules</li>
+              <li>• Delivery and fulfillment customization</li>
+            </ul>
+          </div>
+          <div class="bento-tile">
+            <FiUsers className="text-3xl text-emerald-400 mb-4" />
+            <h3 class="text-xl font-semibold text-foreground mb-2">B2B Commerce</h3>
+            <p class="text-sm text-muted-foreground mb-3">
+              Wholesale and B2B selling with company-specific pricing, payment terms, and custom catalogs.
+            </p>
+            <ul class="text-xs text-muted-foreground space-y-1">
+              <li>• Company profiles and price lists</li>
+              <li>• Net payment terms and draft orders</li>
+              <li>• Quantity rules and volume pricing</li>
+            </ul>
+          </div>
+          <div class="bento-tile">
+            <FiGlobe className="text-3xl text-violet-400 mb-4" />
+            <h3 class="text-xl font-semibold text-foreground mb-2">Shopify Markets</h3>
+            <p class="text-sm text-muted-foreground mb-3">
+              International commerce with multi-currency, translations, localized pricing, and duties.
+            </p>
+            <ul class="text-xs text-muted-foreground space-y-1">
+              <li>• Multi-currency with auto-conversion</li>
+              <li>• Market-specific pricing and catalogs</li>
+              <li>• Duties and import tax calculations</li>
+            </ul>
+          </div>
+          <div class="bento-tile">
+            <FiBarChart2 className="text-3xl text-amber-400 mb-4" />
+            <h3 class="text-xl font-semibold text-foreground mb-2">Launchpad & Automation</h3>
+            <p class="text-sm text-muted-foreground mb-3">
+              Schedule sales, product drops, and theme changes. Automate repetitive tasks with Flow.
+            </p>
+            <ul class="text-xs text-muted-foreground space-y-1">
+              <li>• Flash sales and product launch scheduling</li>
+              <li>• Shopify Flow automations</li>
+              <li>• Inventory and fulfillment automation</li>
+            </ul>
+          </div>
+          <div class="bento-tile-accent">
+            <FiTool className="text-3xl text-white/80 mb-4" />
+            <h3 class="text-xl font-semibold mb-2">Custom Apps & Integrations</h3>
+            <p class="text-sm text-white/70 mb-3">
+              Enterprise-grade custom apps with higher API limits, multi-store management, and ERP integrations.
+            </p>
+            <ul class="text-xs text-white/60 space-y-1">
+              <li>• Higher API rate limits</li>
+              <li>• Multi-store architecture</li>
+              <li>• ERP, CRM, and WMS integrations</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Use Cases -->
+    <section class="pb-8 px-6 reveal-on-scroll">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6 text-foreground text-center">Who Needs Shopify Plus?</h2>
+        <div class="bento-grid grid-cols-1 md:grid-cols-3">
+          <div class="bento-tile">
+            <h3 class="text-lg font-semibold mb-2 text-foreground">High-Growth Merchants</h3>
+            <p class="text-sm text-muted-foreground">
+              Stores doing $1M+ annually that need enterprise reliability, higher API limits, and advanced checkout customization.
+            </p>
+          </div>
+          <div class="bento-tile-accent">
+            <h3 class="text-lg font-semibold mb-2">B2B & Wholesale</h3>
+            <p class="text-sm text-white/70">
+              Businesses selling wholesale alongside DTC that need company-specific pricing, payment terms, and dedicated B2B storefronts.
+            </p>
+          </div>
+          <div class="bento-tile">
+            <h3 class="text-lg font-semibold mb-2 text-foreground">International Brands</h3>
+            <p class="text-sm text-muted-foreground">
+              Brands selling across multiple countries that need localized experiences, multi-currency, and compliance with regional regulations.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="pb-8 px-6 reveal-on-scroll">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6 text-foreground text-center">Frequently Asked Questions</h2>
+        <div class="bento-grid grid-cols-1 md:grid-cols-2">
+          {plusFaqs.map(faq => (
+            <div class="bento-tile">
+              <h3 class="text-base font-semibold mb-2 text-foreground">{faq.question}</h3>
+              <p class="text-sm text-muted-foreground">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <ServiceCTA />
+  </div>
+  <CTABottom
+    title="Ready for Shopify Plus?"
+    description="Book a free call and we'll assess whether Shopify Plus is right for your business and plan the build."
+    buttonText="Book a Call"
+    buttonUrl="/consultation"
+  />
+</Layout>

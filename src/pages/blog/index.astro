@@ -8,11 +8,11 @@ import { createSEO } from "@/utils/seo";
 const posts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const seo = createSEO({
-  pageName: "Blog",
-  description: "Insights, updates, and expert perspectives on the latest industry trends.",
-  keywords: "blog, articles, insights, industry trends, tech news",
+  pageName: "Shopify Development Blog",
+  description: "Guides, tutorials, and insights on Shopify development, custom app building, Liquid templating, headless commerce, and e-commerce best practices.",
+  keywords: "Shopify development blog, Shopify tutorials, Liquid templating, Shopify app development, headless commerce, e-commerce guides",
   image: "/images/blog-hero.jpg",
-  contentType: "blog",
+  contentType: "basic",
   pathname: "/blog"
 });
 

@@ -1,0 +1,347 @@
+---
+import { FiPackage, FiShoppingCart, FiBarChart2, FiArchive, FiUsers, FiFileText, FiGrid, FiTag, FiTruck, FiSettings } from "react-icons/fi";
+import CTABottom from "@/components/CTA.astro";
+import Layout from "@/layouts/Layout.astro";
+import { siteConfig } from "@/config/site";
+import ServiceCTA from "@/components/ServiceCTA";
+import BookingButton from "@/components/BookingButton";
+import ChatContactModal from "@/components/ChatContactModal";
+import { createSEO } from "@/utils/seo";
+import type { SEOProps } from "@/utils/seo";
+import { getFAQPageSchema } from "@/lib/schemas";
+
+interface Props {
+  seo?: SEOProps;
+}
+
+const supportFaqs = [
+  { question: "What tasks do you NOT handle?", answer: "We don't do marketing, CRO, sales strategy, or ad management. We handle the technical and operational side — development, store management, and backend tasks." },
+  { question: "How do you access my store?", answer: "We use Shopify's collaborator access with read/write permissions only for the areas we need. Your store stays secure, and you can revoke access anytime." },
+  { question: "How fast are turnarounds?", answer: "Simple tasks like price changes or media uploads are handled same-day. More involved tasks like analytics reports or bulk operations are completed within 48 hours." },
+  { question: "Do you support Shopify Plus?", answer: "Yes. We support all Shopify plans including Plus — covering B2B catalogs, Shopify Markets, Scripts, and advanced checkout features." },
+];
+
+const seo = createSEO({
+  pageName: "Shopify Backend Support",
+  description: "Dedicated Shopify backend support — product uploads, price changes, order management, analytics, inventory, and full store management. 100% Shopify focused.",
+  keywords: "shopify backend support, shopify store management, shopify virtual assistant, shopify product upload, shopify order management, shopify analytics support, shopify inventory management",
+  contentType: "service",
+  pathname: "/shopify-support"
+});
+
+seo.structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Shopify Backend Support",
+    "description": seo.description,
+    "provider": {
+      "@type": "Organization",
+      "name": siteConfig.name,
+      "url": siteConfig.url
+    },
+    "serviceType": "Shopify Store Management",
+    "areaServed": "Worldwide"
+  },
+  getFAQPageSchema(supportFaqs)
+];
+---
+
+<Layout seo={seo}>
+  <div class="min-h-screen">
+    <!-- Hero -->
+    <section class="pt-32 pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-tile-accent text-center py-16 relative overflow-hidden">
+          <span class="inline-block px-3 py-1 rounded-full bg-white/10 text-white/80 text-xs font-medium mb-4 border border-white/20 hero-animate">
+            Shopify-Only Support
+          </span>
+          <h1 class="text-5xl md:text-6xl font-bold mb-4 hero-animate hero-animate-delay-1">
+            Your Shopify Store,<br />Fully Managed
+          </h1>
+          <p class="text-lg text-white/60 max-w-2xl mx-auto mb-8 hero-animate hero-animate-delay-2">
+            We handle every backend task — product uploads, price changes, inventory, orders, analytics, and more. 100% focused on Shopify. Nothing else.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-3 justify-center hero-animate hero-animate-delay-3">
+            <BookingButton client:load className="btn-shimmer">Book a Free Call</BookingButton>
+            <ChatContactModal
+              client:load
+              className="inline-flex items-center justify-center px-6 py-2 text-sm font-medium rounded-xl bg-white/10 text-white border border-white/20 hover:bg-white/20 transition-colors"
+            >
+              Chat with Us
+            </ChatContactModal>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Grid -->
+    <section class="pb-8 px-6 reveal-on-scroll">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6 text-foreground text-center">What We Handle</h2>
+        <div class="bento-grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          <!-- Product Management -->
+          <div class="bento-tile md:col-span-2">
+            <FiPackage className="text-3xl text-primary-400 mb-4" />
+            <h3 class="text-xl font-semibold text-foreground mb-2">Product Management</h3>
+            <p class="text-sm text-muted-foreground mb-3">
+              Complete product lifecycle management — from bulk uploads to daily price adjustments.
+            </p>
+            <ul class="text-xs text-muted-foreground space-y-1">
+              <li>• Bulk product uploads & media management</li>
+              <li>• Variant & price updates</li>
+              <li>• Collection organization & metafield edits</li>
+            </ul>
+          </div>
+
+          <!-- Order Management -->
+          <div class="bento-tile">
+            <FiShoppingCart className="text-3xl text-emerald-400 mb-4" />
+            <h3 class="text-xl font-semibold text-foreground mb-2">Order Management</h3>
+            <p class="text-sm text-muted-foreground mb-3">
+              Streamlined order processing so nothing falls through the cracks.
+            </p>
+            <ul class="text-xs text-muted-foreground space-y-1">
+              <li>• Order processing & fulfillment</li>
+              <li>• Refund handling & draft orders</li>
+              <li>• Returns & exchanges management</li>
+            </ul>
+          </div>
+
+          <!-- Analytics & Reporting -->
+          <div class="bento-tile-accent md:col-span-2">
+            <FiBarChart2 className="text-3xl text-white/80 mb-4" />
+            <h3 class="text-xl font-semibold mb-2">Analytics & Reporting</h3>
+            <p class="text-sm text-white/70 mb-3">
+              Turn your Shopify data into actionable insights with regular reporting.
+            </p>
+            <ul class="text-xs text-white/60 space-y-1">
+              <li>• Sales & traffic reports</li>
+              <li>• Customer behavior insights</li>
+              <li>• Custom dashboards & inventory reports</li>
+            </ul>
+          </div>
+
+          <!-- Inventory Management -->
+          <div class="bento-tile">
+            <FiArchive className="text-3xl text-amber-400 mb-4" />
+            <h3 class="text-xl font-semibold text-foreground mb-2">Inventory Management</h3>
+            <p class="text-sm text-muted-foreground mb-3">
+              Keep stock levels accurate across all locations.
+            </p>
+            <ul class="text-xs text-muted-foreground space-y-1">
+              <li>• Stock level monitoring & alerts</li>
+              <li>• Multi-location inventory</li>
+              <li>• Inventory transfers & sync</li>
+            </ul>
+          </div>
+
+          <!-- Customer Data -->
+          <div class="bento-tile">
+            <FiUsers className="text-3xl text-violet-400 mb-4" />
+            <h3 class="text-xl font-semibold text-foreground mb-2">Customer Data</h3>
+            <p class="text-sm text-muted-foreground mb-3">
+              Organize and leverage your customer information.
+            </p>
+            <ul class="text-xs text-muted-foreground space-y-1">
+              <li>• Customer segmentation & tagging</li>
+              <li>• Data exports & cleanup</li>
+              <li>• Loyalty program setup</li>
+            </ul>
+          </div>
+
+          <!-- Content Updates -->
+          <div class="bento-tile">
+            <FiFileText className="text-3xl text-cyan-400 mb-4" />
+            <h3 class="text-xl font-semibold text-foreground mb-2">Content Updates</h3>
+            <p class="text-sm text-muted-foreground mb-3">
+              Keep your storefront content fresh and up to date.
+            </p>
+            <ul class="text-xs text-muted-foreground space-y-1">
+              <li>• Page & blog updates</li>
+              <li>• Navigation & menu edits</li>
+              <li>• Banners & promotional content</li>
+            </ul>
+          </div>
+
+          <!-- App Management -->
+          <div class="bento-tile">
+            <FiGrid className="text-3xl text-pink-400 mb-4" />
+            <h3 class="text-xl font-semibold text-foreground mb-2">App Management</h3>
+            <p class="text-sm text-muted-foreground mb-3">
+              Install, configure, and troubleshoot your Shopify apps.
+            </p>
+            <ul class="text-xs text-muted-foreground space-y-1">
+              <li>• App installation & configuration</li>
+              <li>• Third-party integrations</li>
+              <li>• Troubleshooting app conflicts</li>
+            </ul>
+          </div>
+
+          <!-- Discounts & Promotions -->
+          <div class="bento-tile-accent">
+            <FiTag className="text-3xl text-white/80 mb-4" />
+            <h3 class="text-xl font-semibold mb-2">Discounts & Promotions</h3>
+            <p class="text-sm text-white/70 mb-3">
+              Set up and manage all your promotional campaigns.
+            </p>
+            <ul class="text-xs text-white/60 space-y-1">
+              <li>• Discount codes & automatic discounts</li>
+              <li>• Gift cards & campaigns</li>
+              <li>• Seasonal promotion setup</li>
+            </ul>
+          </div>
+
+          <!-- Shipping & Tax -->
+          <div class="bento-tile">
+            <FiTruck className="text-3xl text-orange-400 mb-4" />
+            <h3 class="text-xl font-semibold text-foreground mb-2">Shipping & Tax Config</h3>
+            <p class="text-sm text-muted-foreground mb-3">
+              Shipping zones, rates, and tax rules — configured correctly.
+            </p>
+            <ul class="text-xs text-muted-foreground space-y-1">
+              <li>• Shipping zone & rate setup</li>
+              <li>• Tax settings & compliance</li>
+              <li>• Carrier integrations</li>
+            </ul>
+          </div>
+
+          <!-- Store Configuration -->
+          <div class="bento-tile">
+            <FiSettings className="text-3xl text-indigo-400 mb-4" />
+            <h3 class="text-xl font-semibold text-foreground mb-2">Store Configuration</h3>
+            <p class="text-sm text-muted-foreground mb-3">
+              Backend settings tuned for your business needs.
+            </p>
+            <ul class="text-xs text-muted-foreground space-y-1">
+              <li>• Payment gateway setup</li>
+              <li>• Checkout customization</li>
+              <li>• Notification emails & store policies</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Shopify-Only -->
+    <section class="pb-8 px-6 reveal-on-scroll">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6 text-foreground text-center">Why Shopify-Only?</h2>
+        <div class="bento-grid grid-cols-1 md:grid-cols-3">
+          <div class="bento-tile">
+            <h3 class="text-lg font-semibold mb-2 text-foreground">Deep Shopify Expertise</h3>
+            <p class="text-sm text-muted-foreground">
+              We only work in Shopify's ecosystem, so every decision is optimized for it. No half-measures, no platform guessing.
+            </p>
+          </div>
+          <div class="bento-tile-accent">
+            <h3 class="text-lg font-semibold mb-2">Faster Turnarounds</h3>
+            <p class="text-sm text-white/70">
+              No context-switching between platforms. Your requests are handled same-day for simple tasks, within 48 hours for complex ones.
+            </p>
+          </div>
+          <div class="bento-tile">
+            <h3 class="text-lg font-semibold mb-2 text-foreground">No Hidden Scope Creep</h3>
+            <p class="text-sm text-muted-foreground">
+              You know exactly what you're getting — Shopify tasks, executed cleanly. No surprise invoices or bloated scopes.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="pb-8 px-6 reveal-on-scroll">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6 text-foreground text-center">How It Works</h2>
+        <div class="bento-grid grid-cols-1 md:grid-cols-3">
+          <div class="bento-tile text-center">
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary-500/10 text-primary-400 font-bold text-lg mb-4">1</span>
+            <h3 class="text-lg font-semibold mb-2 text-foreground">Send a Request</h3>
+            <p class="text-sm text-muted-foreground">
+              Drop your task via WhatsApp, email, or our contact form. We acknowledge within 2 hours.
+            </p>
+          </div>
+          <div class="bento-tile text-center">
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary-500/10 text-primary-400 font-bold text-lg mb-4">2</span>
+            <h3 class="text-lg font-semibold mb-2 text-foreground">We Execute</h3>
+            <p class="text-sm text-muted-foreground">
+              Our Shopify team handles the task in your store. We only need collaborator access — nothing more.
+            </p>
+          </div>
+          <div class="bento-tile text-center">
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary-500/10 text-primary-400 font-bold text-lg mb-4">3</span>
+            <h3 class="text-lg font-semibold mb-2 text-foreground">You Review & Approve</h3>
+            <p class="text-sm text-muted-foreground">
+              We notify you when done. You review the changes, and we iterate until it's right.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Everything We Cover -->
+    <section class="pb-8 px-6 reveal-on-scroll">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-tile-muted text-center py-10 px-8">
+          <h2 class="text-2xl font-bold text-foreground mb-6">Everything We Cover</h2>
+          <div class="flex flex-wrap justify-center gap-2 max-w-4xl mx-auto">
+            {[
+              "Product Uploads", "Bulk Price Updates", "Media Management", "Inventory Sync",
+              "Order Processing", "Refund Handling", "Analytics Reports", "Custom Dashboards",
+              "Customer Segmentation", "Collection Management", "Metafield Edits", "App Configuration",
+              "Discount Codes", "Gift Cards", "Shipping Zones", "Tax Settings",
+              "Checkout Settings", "Blog Updates", "Menu Edits", "Navigation Updates",
+              "Payment Gateways", "Email Notifications", "Store Policies", "Draft Orders"
+            ].map(tag => (
+              <span class="inline-block px-3 py-1 rounded-full bg-primary-500/10 text-primary-400 text-xs font-medium border border-primary-500/20">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="pb-8 px-6 reveal-on-scroll">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6 text-foreground text-center">Frequently Asked Questions</h2>
+        <div class="bento-grid grid-cols-1 md:grid-cols-2">
+          <div class="bento-tile">
+            <h3 class="text-base font-semibold mb-2 text-foreground">What tasks do you NOT handle?</h3>
+            <p class="text-sm text-muted-foreground">
+              We don't do marketing, CRO, sales strategy, or ad management. We handle the technical and operational side — development, store management, and backend tasks. For custom development, check out our <a href="/services" class="text-primary-400 hover:underline">development services</a>.
+            </p>
+          </div>
+          <div class="bento-tile">
+            <h3 class="text-base font-semibold mb-2 text-foreground">How do you access my store?</h3>
+            <p class="text-sm text-muted-foreground">
+              We use Shopify's collaborator access with read/write permissions only for the areas we need. Your store stays secure, and you can revoke access anytime.
+            </p>
+          </div>
+          <div class="bento-tile">
+            <h3 class="text-base font-semibold mb-2 text-foreground">How fast are turnarounds?</h3>
+            <p class="text-sm text-muted-foreground">
+              Simple tasks like price changes or media uploads are handled same-day. More involved tasks like analytics reports or bulk operations are completed within 48 hours.
+            </p>
+          </div>
+          <div class="bento-tile">
+            <h3 class="text-base font-semibold mb-2 text-foreground">Do you support Shopify Plus?</h3>
+            <p class="text-sm text-muted-foreground">
+              Yes. We support all Shopify plans including Plus — covering B2B catalogs, Shopify Markets, Scripts, and advanced checkout features.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <ServiceCTA />
+  </div>
+  <CTABottom
+    title="Ready to hand off your Shopify backend?"
+    description="Book a free 30-minute call and we'll map out exactly how we can support your store."
+    buttonText="Book a Call"
+    buttonUrl="/consultation"
+  />
+</Layout>
