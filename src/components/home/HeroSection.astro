@@ -65,7 +65,213 @@ import ChatContactModal from "@/components/ChatContactModal";
             Start Your Project
           </ChatContactModal>
         </div>
-        <!-- Decorative gradient overlay -->
+        <!-- Decorative SVG illustration — bottom right -->
+        <div
+          class="hidden md:block absolute bottom-6 right-6 pointer-events-none opacity-25 hero-animate hero-animate-delay-4"
+        >
+          <svg
+            width="100%"
+            height="100%"
+            viewBox="0 0 500 500"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <style>
+              @keyframes float-slow {
+                0%,
+                100% {
+                  transform: translateY(0px);
+                }
+                50% {
+                  transform: translateY(-15px);
+                }
+              }
+              @keyframes float-fast {
+                0%,
+                100% {
+                  transform: translateY(0px);
+                }
+                50% {
+                  transform: translateY(-8px);
+                }
+              }
+              @keyframes spin-gentle {
+                0%,
+                100% {
+                  transform: rotate(-5deg);
+                }
+                50% {
+                  transform: rotate(5deg);
+                }
+              }
+              @keyframes pulse-glow {
+                0%,
+                100% {
+                  opacity: 0.05;
+                  transform: scale(1);
+                }
+                50% {
+                  opacity: 0.15;
+                  transform: scale(1.05);
+                }
+              }
+
+              .float-slow {
+                animation: float-slow 6s ease-in-out infinite;
+              }
+              .float-fast {
+                animation: float-fast 4s ease-in-out infinite;
+              }
+              .pulse-glow {
+                animation: pulse-glow 4s ease-in-out infinite;
+                transform-origin: 250px 250px;
+              }
+              .spin-gentle {
+                animation: spin-gentle 6s ease-in-out infinite;
+                transform-origin: 400px 140px;
+              }
+            </style>
+
+            <rect width="500" height="500" fill="transparent" rx="30"></rect>
+
+            <circle
+              cx="250"
+              cy="250"
+              r="180"
+              fill="#ffffff"
+              class="pulse-glow"
+              style="animation-delay: 0s;"></circle>
+            <circle
+              cx="250"
+              cy="250"
+              r="120"
+              fill="#ffffff"
+              class="pulse-glow"
+              style="animation-delay: 2s; opacity: 0.1;"></circle>
+
+            <g class="float-slow">
+              <path
+                d="M 200 200 V 160 C 200 130 300 130 300 160 V 200"
+                fill="none"
+                stroke="white"
+                stroke-width="12"
+                stroke-linecap="round"></path>
+
+              <rect
+                x="150"
+                y="200"
+                width="200"
+                height="170"
+                rx="20"
+                fill="white"
+                fill-opacity="0.1"
+                stroke="white"
+                stroke-width="12"></rect>
+
+              <path
+                d="M 140 190 L 360 190 L 370 230 L 130 230 Z"
+                fill="#2050C2"
+                stroke="white"
+                stroke-width="4"
+                stroke-linejoin="round"></path>
+              <path
+                d="M 130 230 A 24 24 0 0 0 178 230 A 24 24 0 0 0 226 230 A 24 24 0 0 0 274 230 A 24 24 0 0 0 322 230 A 24 24 0 0 0 370 230"
+                fill="#2050C2"
+                stroke="white"
+                stroke-width="4"></path>
+
+              <path
+                d="M 210 290 Q 250 330 290 290"
+                fill="none"
+                stroke="#95BF47"
+                stroke-width="10"
+                stroke-linecap="round"></path>
+            </g>
+
+            <g class="float-fast" style="animation-delay: 1s;">
+              <path
+                d="M 60 290 L 100 290 L 140 330 L 100 370 L 60 330 Z"
+                fill="#FFC220"
+                opacity="0.9"
+                stroke="white"
+                stroke-width="4"
+                stroke-linejoin="round"></path>
+              <circle cx="85" cy="330" r="6" fill="white"></circle>
+              <line
+                x1="105"
+                y1="330"
+                x2="120"
+                y2="330"
+                stroke="white"
+                stroke-width="4"
+                stroke-linecap="round"></line>
+            </g>
+
+            <g class="float-fast" style="animation-delay: 0.5s;">
+              <g class="spin-gentle">
+                <rect
+                  x="370"
+                  y="110"
+                  width="60"
+                  height="50"
+                  rx="5"
+                  fill="#E91E63"
+                  stroke="white"
+                  stroke-width="4"
+                  opacity="0.9"></rect>
+                <rect x="395" y="110" width="10" height="50" fill="white"
+                ></rect>
+                <rect x="370" y="130" width="60" height="10" fill="white"
+                ></rect>
+                <path
+                  d="M 400 110 C 380 85 390 110 400 110 C 420 85 410 110 400 110"
+                  stroke="white"
+                  stroke-width="4"
+                  fill="none"
+                  stroke-linecap="round"></path>
+              </g>
+            </g>
+
+            <g class="float-slow" style="animation-delay: 2s;">
+              <circle
+                cx="115"
+                cy="135"
+                r="30"
+                fill="#95BF47"
+                stroke="white"
+                stroke-width="4"></circle>
+              <text
+                x="115"
+                y="148"
+                font-family="sans-serif"
+                font-size="34"
+                font-weight="bold"
+                fill="white"
+                text-anchor="middle">%</text
+              >
+            </g>
+
+            <g class="float-fast" style="animation-delay: 1.5s;">
+              <path
+                d="M 370 330 L 430 330 L 440 380 L 360 380 Z"
+                fill="#2050C2"
+                stroke="white"
+                stroke-width="4"
+                stroke-linejoin="round"></path>
+              <path
+                d="M 370 330 L 350 310 M 430 330 L 450 310"
+                stroke="white"
+                stroke-width="4"
+                stroke-linecap="round"></path>
+              <path
+                d="M 385 355 L 415 355"
+                stroke="white"
+                stroke-width="4"
+                stroke-linecap="round"></path>
+            </g>
+          </svg>
+        </div>
+        <!-- Background glow -->
         <div
           class="absolute -bottom-20 -right-20 w-80 h-80 bg-white/10 rounded-full blur-3xl pointer-events-none"
         >
@@ -79,21 +285,43 @@ import ChatContactModal from "@/components/ChatContactModal";
         style="opacity: 0; animation: fade-up 0.6s ease-out 0.35s forwards, border-rotate 3s linear infinite;"
       >
         <span class="absolute top-3 right-3 flex h-3 w-3">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-3 w-3 bg-amber-500"></span>
+          <span
+            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"
+          ></span>
+          <span class="relative inline-flex rounded-full h-3 w-3 bg-amber-500"
+          ></span>
         </span>
 
-        <span class="text-5xl font-black text-primary-400 leading-none mb-1">30%</span>
-        <span class="text-xs font-bold uppercase tracking-widest text-primary-300 mb-3">OFF</span>
+        <span class="text-5xl font-black text-primary-400 leading-none mb-1"
+          >30%</span
+        >
+        <span
+          class="text-xs font-bold uppercase tracking-widest text-primary-300 mb-3"
+          >OFF</span
+        >
 
         <span class="text-sm text-foreground font-medium leading-snug">
-          Store setup or migration for <span class="text-amber-400 font-semibold">new Shopify merchants</span>
+          Store setup or migration for <span
+            class="text-amber-400 font-semibold">new Shopify merchants</span
+          >
         </span>
 
-        <span class="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-primary-400 group-hover:gap-2.5 transition-all duration-300">
+        <span
+          class="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-primary-400 group-hover:gap-2.5 transition-all duration-300"
+        >
           Claim Offer
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-3.5 w-3.5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2.5"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
           </svg>
         </span>
       </a>
