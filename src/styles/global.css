@@ -449,6 +449,29 @@
   border-radius: inherit;
 }
 
+/* Animated border rotation */
+@property --border-angle {
+  inherits: false;
+  initial-value: 0deg;
+  syntax: "<angle>";
+}
+
+@keyframes border-rotate {
+  to { --border-angle: 360deg; }
+}
+
+.animate-border {
+  --border-angle: 0deg;
+  border: 2px solid transparent;
+  border-radius: 1rem;
+  background-image:
+    linear-gradient(to bottom right, hsl(var(--bento-bg)), hsl(var(--surface-elevated))),
+    conic-gradient(from var(--border-angle), hsl(var(--border)) 80%, hsl(var(--primary-400)) 86%, hsl(var(--primary-300)) 90%, hsl(var(--primary-400)) 94%, hsl(var(--border)));
+  background-origin: padding-box, border-box;
+  background-clip: padding-box, border-box;
+  animation: border-rotate 3s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
