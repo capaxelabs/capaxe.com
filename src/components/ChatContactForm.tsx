@@ -187,14 +187,14 @@ const ChatContactForm = () => {
     <div className="bg-card p-6 rounded-2xl shadow-xl border border-border w-full max-w-lg mx-auto">
       {/* Chat Header */}
       <div className="flex items-center gap-3 mb-4 pb-4 border-b border-border">
-        <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center">
-          <span className="text-white text-lg">🤖</span>
+        <div className="w-10 h-10 bg-gradient-to-r from-primary-500 to-primary-700 rounded-full flex items-center justify-center">
+          <span className="text-lg">🤖</span>
         </div>
         <div>
           <h3 className="font-semibold text-foreground">Capaxe Assistant</h3>
           <div className="flex items-center gap-1">
-            {/* <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div> */}
-            {/* <span className="text-xs text-muted-foreground">Online</span> */}
+            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+            <span className="text-xs text-muted-foreground">Online</span>
           </div>
         </div>
       </div>
@@ -219,10 +219,10 @@ const ChatContactForm = () => {
               }`}
             >
               <div
-                className={`max-w-xs lg:max-w-md px-4 py-2 rounded-2xl ${
+                className={`max-w-xs lg:max-w-md px-4 py-2.5 rounded-2xl text-sm leading-relaxed ${
                   message.sender === "bot"
-                    ? "bg-gradient-to-r from-primary-100 to-primary-200 text-foreground"
-                    : "bg-gradient-to-r from-primary-600 to-primary-700 text-white"
+                    ? "bg-muted text-foreground"
+                    : "bg-gradient-to-r from-primary-500 to-primary-700 text-white"
                 }`}
               >
                 {message.text}
@@ -237,12 +237,12 @@ const ChatContactForm = () => {
             animate={{ opacity: 1 }}
             className="flex justify-start"
           >
-            <div className="bg-gradient-to-r from-primary-100 to-primary-200 text-foreground px-4 py-2 rounded-2xl">
+            <div className="bg-muted text-foreground px-4 py-2.5 rounded-2xl text-sm">
               <div className="flex items-center gap-2">
                 <div className="flex space-x-1">
-                  <div className="w-2 h-2 bg-purple-500 rounded-full animate-bounce"></div>
-                  <div className="w-2 h-2 bg-purple-500 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
-                  <div className="w-2 h-2 bg-purple-500 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                  <div className="w-2 h-2 bg-primary-500 rounded-full animate-bounce"></div>
+                  <div className="w-2 h-2 bg-primary-500 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
+                  <div className="w-2 h-2 bg-primary-500 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
                 </div>
                 <span>Processing your information...</span>
               </div>
@@ -266,7 +266,7 @@ const ChatContactForm = () => {
           <button
             onClick={handleSend}
             disabled={!input.trim() || isSubmitting}
-            className="bg-gradient-to-r from-primary-600 to-primary-700 text-white px-6 py-3 rounded-xl hover:from-primary-700 hover:to-primary-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 font-medium"
+            className="bg-gradient-to-r from-primary-500 to-primary-700 text-white px-6 py-3 rounded-xl hover:from-primary-600 hover:to-primary-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 font-medium"
           >
             Send
           </button>
@@ -275,7 +275,7 @@ const ChatContactForm = () => {
         <div className="text-center">
           <button
             onClick={resetForm}
-            className="bg-gradient-to-r from-accent to-primary text-white px-6 py-3 rounded-xl hover:from-accent/90 hover:to-primary/90 transition-all duration-200 font-medium"
+            className="bg-gradient-to-r from-primary-500 to-primary-700 text-white px-6 py-3 rounded-xl hover:from-primary-600 hover:to-primary-800 transition-all duration-200 font-medium"
           >
             Start New Conversation
           </button>

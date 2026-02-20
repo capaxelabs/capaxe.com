@@ -3,6 +3,7 @@ import BaseHead from "@/components/BaseHead.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import WhatsAppButton from "@/components/WhatsAppButton.astro";
+import SvgBackground from "@/components/SvgBackground.astro";
 import { siteConfig } from "@/config/site";
 import "@/styles/global.css";
 import "@calcom/atoms/globals.min.css";
@@ -32,11 +33,34 @@ const seoData: SEOProps = seo || {
   </head>
   <body>
     <Header />
-    <main>
+    <main class="relative">
+      <SvgBackground variant="dots" />
       <slot />
     </main>
     <Footer />
     <Toaster />
     <WhatsAppButton />
+    <script>
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        document.querySelectorAll(".reveal-on-scroll").forEach((el) => {
+          el.classList.add("revealed");
+        });
+      } else {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("revealed");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+        );
+        document.querySelectorAll(".reveal-on-scroll").forEach((el) => {
+          observer.observe(el);
+        });
+      }
+    </script>
   </body>
 </html>

@@ -10,11 +10,33 @@ import ClientLogos from "@/components/home/ClientLogos";
 <Layout title={siteConfig.name} description={siteConfig.description}>
   <div class="min-h-screen">
     <HeroSection />
-    <ClientLogos siteConfig={siteConfig} client:load />
-    <StickyCards siteConfig={siteConfig} client:load />
-    <ServiceLanding siteConfig={siteConfig} client:load />
-    <!-- <BookAppointment client:load /> -->
-    {/* Retainer Benefits Section */}
-    <RetainerPlansSection client:load />
+
+    <div class="reveal-on-scroll">
+      <ClientLogos siteConfig={siteConfig} client:load />
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="h-px bg-gradient-to-r from-transparent via-border to-transparent"></div>
+    </div>
+
+    <div class="reveal-on-scroll">
+      <StickyCards siteConfig={siteConfig} client:load />
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="h-px bg-gradient-to-r from-transparent via-border to-transparent"></div>
+    </div>
+
+    <div class="reveal-on-scroll">
+      <ServiceLanding siteConfig={siteConfig} client:load />
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="h-px bg-gradient-to-r from-transparent via-border to-transparent"></div>
+    </div>
+
+    <div class="reveal-on-scroll">
+      <RetainerPlansSection client:load />
+    </div>
   </div>
 </Layout>

@@ -48,7 +48,7 @@ export const Slider = ({
           loading="eager"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg"></div>
-        <div className="absolute bottom-6 left-6 text-white z-10">
+        <div className="absolute bottom-6 left-6 text-foreground z-10">
           <h3 className="text-2xl font-bold mb-2">{slide.title}</h3>
           <p className="text-gray-200">{slide.description}</p>
         </div>
@@ -124,7 +124,7 @@ export const Slider = ({
   };
 
   if (totalSlides === 0) {
-    return <div className="text-center text-gray-500">No slides to display</div>;
+    return <div className="text-center text-muted-foreground">No slides to display</div>;
   }
 
   return (
@@ -153,7 +153,7 @@ export const Slider = ({
               loading="eager"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg"></div>
-            <div className="absolute bottom-6 left-6 text-white z-20">
+            <div className="absolute bottom-6 left-6 text-foreground z-20">
               <h3 className="text-2xl font-bold mb-2">{slide.title}</h3>
               <p className="text-gray-200">{slide.description}</p>
             </div>
@@ -203,7 +203,7 @@ export const Slider = ({
       )}
 
       {/* Slide Counter */}
-      <div className="absolute top-4 right-4 bg-black/50 text-white px-3 py-1 rounded-full text-sm font-medium">
+      <div className="absolute top-4 right-4 bg-black/50 text-foreground px-3 py-1 rounded-full text-sm font-medium">
         {currentIndex + 1} / {totalSlides}
       </div>
     </div>

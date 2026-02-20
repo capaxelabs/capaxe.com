@@ -12,18 +12,18 @@ const schema = getBreadcrumbSchema(items);
 <script type="application/ld+json" set:html={JSON.stringify(schema)} />
 
 <nav aria-label="Breadcrumb" class="mb-8">
-    <ol class="flex items-center space-x-2 text-sm text-gray-600">
+    <ol class="flex items-center space-x-2 text-sm text-muted-foreground">
         {items.map((item, index) => (
             <li class="flex items-center">
                 {index > 0 && (
-                    <svg class="w-4 h-4 mx-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-4 h-4 mx-2 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                     </svg>
                 )}
                 {index === items.length - 1 ? (
-                    <span class="font-medium text-gray-900" aria-current="page">{item.name}</span>
+                    <span class="font-medium text-muted-foreground" aria-current="page">{item.name}</span>
                 ) : (
-                    <a href={item.url} class="hover:text-blue-600 transition-colors">
+                    <a href={item.url} class="hover:text-primary-400 transition-colors">
                         {item.name}
                     </a>
                 )}

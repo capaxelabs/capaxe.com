@@ -96,74 +96,71 @@ const seo = createSEO({
 
 <FAQSchema faqs={faqs} />
 <Layout title={seo.title} description={seo.description} seo={seo}>
-  <main class="container mx-auto px-4 py-12">
-    <h1 class="text-4xl font-bold mb-8">Frequently Asked Questions</h1>
-
-    <div class="max-w-3xl mx-auto">
-      <p class="text-lg mb-12">Find answers to common questions about our services, processes, and how we can help your business grow online.</p>
-
-      <!-- FAQ Categories -->
-      <div class="flex flex-wrap justify-center gap-4 mb-12">
-        <button class="px-6 py-2 bg-blue-600 text-white rounded-full">All</button>
-        <button class="px-6 py-2 bg-gray-200 hover:bg-gray-300 rounded-full">Services</button>
-        <button class="px-6 py-2 bg-gray-200 hover:bg-gray-300 rounded-full">Process</button>
-        <button class="px-6 py-2 bg-gray-200 hover:bg-gray-300 rounded-full">Pricing</button>
-        <button class="px-6 py-2 bg-gray-200 hover:bg-gray-300 rounded-full">Support</button>
+  <main class="min-h-screen">
+    <section class="pt-32 pb-8 px-6">
+      <div class="max-w-3xl mx-auto text-center">
+        <h1 class="text-5xl font-bold mb-4 text-foreground">Frequently Asked Questions</h1>
+        <p class="text-lg text-muted-foreground mb-8">Find answers to common questions about our services, processes, and how we can help your business grow online.</p>
       </div>
+    </section>
 
-      <!-- FAQ Items -->
-      <div class="space-y-6">
+    <!-- FAQ Categories -->
+    <section class="px-6 pb-4">
+      <div class="max-w-3xl mx-auto">
+        <div class="flex flex-wrap justify-center gap-2 mb-8">
+          <button class="px-5 py-2 bg-primary-500 text-white text-sm rounded-full font-medium">All</button>
+          <button class="px-5 py-2 bg-foreground/5 text-muted-foreground hover:text-foreground hover:bg-foreground/10 text-sm rounded-full transition-colors">Services</button>
+          <button class="px-5 py-2 bg-foreground/5 text-muted-foreground hover:text-foreground hover:bg-foreground/10 text-sm rounded-full transition-colors">Process</button>
+          <button class="px-5 py-2 bg-foreground/5 text-muted-foreground hover:text-foreground hover:bg-foreground/10 text-sm rounded-full transition-colors">Pricing</button>
+          <button class="px-5 py-2 bg-foreground/5 text-muted-foreground hover:text-foreground hover:bg-foreground/10 text-sm rounded-full transition-colors">Support</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Items -->
+    <section class="px-6 pb-16">
+      <div class="max-w-3xl mx-auto space-y-3">
         {faqs.map((faq, index) => (
-          <div class="border border-gray-200 rounded-lg overflow-hidden">
-            <button class="flex justify-between items-center w-full px-6 py-4 text-left bg-white hover:bg-gray-50">
-              <span class="text-lg font-medium">{faq.question}</span>
-              <svg class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div class="faq-item bento-tile p-0 overflow-hidden">
+            <button class="flex justify-between items-center w-full px-6 py-5 text-left hover:bg-foreground/5 transition-colors">
+              <span class="text-sm font-medium text-foreground pr-4">{faq.question}</span>
+              <svg class="h-5 w-5 text-muted-foreground flex-shrink-0 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </button>
-            <div class={index === 0 ? "px-6 py-4 bg-gray-50" : "hidden px-6 py-4 bg-gray-50"}>
-              <p>{faq.answer}</p>
+            <div class={index === 0 ? "px-6 pb-5" : "hidden px-6 pb-5"}>
+              <p class="text-sm text-muted-foreground leading-relaxed">{faq.answer}</p>
             </div>
           </div>
         ))}
-      </div>
 
-      <div class="mt-12 text-center">
-        <p class="text-lg mb-6">Don't see your question here?</p>
-        <a href="/contact" class="inline-block bg-blue-600 text-white py-3 px-8 rounded-md hover:bg-blue-700 transition">Contact Us</a>
+        <div class="bento-tile-accent text-center mt-8 py-10">
+          <p class="text-lg text-white/80 mb-4">Don't see your question here?</p>
+          <a href="/contact" class="inline-block bg-white text-primary-600 py-2.5 px-6 rounded-xl text-sm font-medium hover:bg-gray-100 transition-colors">
+            Contact Us
+          </a>
+        </div>
       </div>
-    </div>
+    </section>
   </main>
 </Layout>
 
 <script>
-  // Simple FAQ toggle functionality
   document.addEventListener("DOMContentLoaded", () => {
-    const faqButtons = document.querySelectorAll(".border.border-gray-200 button");
+    const faqItems = document.querySelectorAll(".faq-item");
 
-    faqButtons.forEach((button) => {
-      button.addEventListener("click", () => {
+    faqItems.forEach((item) => {
+      const button = item.querySelector("button");
+      button?.addEventListener("click", () => {
         const content = button.nextElementSibling as HTMLElement | null;
         if (content) {
           content.classList.toggle("hidden");
-
-          // Update the arrow icon
           const svg = button.querySelector("svg");
           if (svg) {
-            if (content.classList.contains("hidden")) {
-              svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>';
-            } else {
-              svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>';
-            }
+            svg.classList.toggle("rotate-180");
           }
         }
       });
     });
-
-    // Open the first FAQ by default
-    if (faqButtons.length > 0) {
-      const firstButton = faqButtons[0] as HTMLElement;
-      firstButton.click();
-    }
   });
 </script>

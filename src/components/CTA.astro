@@ -14,19 +14,17 @@ const {
 } = Astro.props;
 ---
 
-<div class="bg-primary-100 py-16">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center">
-      <h2 class="text-3xl font-extrabold text-primary-800 sm:text-4xl">{title}</h2>
-      <p class="mt-4 text-xl text-primary-800 max-w-2xl mx-auto">{description}</p>
-      <div class="mt-8 flex justify-center">
-        <a
-          href={buttonUrl}
-          class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-primary-800 bg-white hover:bg-primary-50"
-        >
-          {buttonText}
-        </a>
-      </div>
+<div class="px-6 py-4">
+  <div class="max-w-7xl mx-auto">
+    <div class="bento-tile-accent text-center py-12">
+      <h2 class="text-3xl font-bold mb-3">{title}</h2>
+      <p class="text-lg text-white/70 max-w-2xl mx-auto mb-6">{description}</p>
+      <a
+        href={buttonUrl}
+        class="inline-flex items-center justify-center px-6 py-3 text-sm font-medium rounded-xl bg-white text-primary-600 hover:bg-gray-100 transition-colors"
+      >
+        {buttonText}
+      </a>
     </div>
   </div>
 </div>

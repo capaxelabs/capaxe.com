@@ -111,7 +111,7 @@ export default function ContactFormReact({ siteConfig }: { siteConfig: SiteConfi
             <section className="pt-32 pb-16 px-4">
                 <div className="max-w-6xl mx-auto text-center">
                     <h1 className="text-5xl md:text-6xl font-bold mb-6">Contact Us</h1>
-                    <p className="text-xl text-gray-600 max-w-2xl mx-auto">Get in touch with us. We'd love to hear from you.</p>
+                    <p className="text-xl text-muted-foreground max-w-2xl mx-auto">Get in touch with us. We'd love to hear from you.</p>
                 </div>
             </section>
 
@@ -284,7 +284,7 @@ export default function ContactFormReact({ siteConfig }: { siteConfig: SiteConfi
                                         <MapPinIcon className="w-6 h-6 text-primary-600 mt-1" />
                                         <div>
                                             <h3 className="font-medium">Address</h3>
-                                            <p className="text-gray-600">
+                                            <p className="text-muted-foreground">
                                                 {siteConfig.contact.address}
                                             </p>
                                         </div>
@@ -293,21 +293,21 @@ export default function ContactFormReact({ siteConfig }: { siteConfig: SiteConfi
                                         <PhoneIcon className="w-6 h-6 text-primary-600 mt-1" />
                                         <div>
                                             <h3 className="font-medium">Phone</h3>
-                                            <a href={`tel:${siteConfig.contact.phone}`} className="text-gray-600">{siteConfig.contact.phone}</a>
+                                            <a href={`tel:${siteConfig.contact.phone}`} className="text-muted-foreground">{siteConfig.contact.phone}</a>
                                         </div>
                                     </div>
                                     <div className="flex items-start gap-4">
                                         <EnvelopeIcon className="w-6 h-6 text-primary-600 mt-1" />
                                         <div>
                                             <h3 className="font-medium">Email</h3>
-                                            <a href={`mailto:${siteConfig.contact.contactEmail}`} className="text-gray-600">{siteConfig.contact.contactEmail}</a>
+                                            <a href={`mailto:${siteConfig.contact.contactEmail}`} className="text-muted-foreground">{siteConfig.contact.contactEmail}</a>
                                         </div>
                                     </div>
                                     <div className="flex items-start gap-4">
                                         <img src="/whatsapp.svg" alt="Whatsapp" width={24} height={24} className="mt-1" />
                                         <div>
                                             <h3 className="font-medium">Whatsapp</h3>
-                                            <a href="https://wa.me/917019620967" className="text-gray-600">Chat with us</a>
+                                            <a href="https://wa.me/917019620967" className="text-muted-foreground">Chat with us</a>
                                         </div>
                                     </div>
                                 </div>
@@ -317,13 +317,13 @@ export default function ContactFormReact({ siteConfig }: { siteConfig: SiteConfi
                             <div>
                                 <h2 className="text-2xl font-bold mb-6">Working Hours</h2>
                                 <div className="space-y-2">
-                                    <p className="text-gray-600">
+                                    <p className="text-muted-foreground">
                                         <span className="font-medium">Monday - Friday:</span> 9:00 AM - 6:00 PM IST
                                     </p>
-                                    <p className="text-gray-600">
+                                    <p className="text-muted-foreground">
                                         <span className="font-medium">Saturday:</span> 10:00 AM - 2:00 PM IST
                                     </p>
-                                    <p className="text-gray-600">
+                                    <p className="text-muted-foreground">
                                         <span className="font-medium">Sunday:</span> Closed
                                     </p>
                                 </div>
@@ -335,15 +335,15 @@ export default function ContactFormReact({ siteConfig }: { siteConfig: SiteConfi
                                 <div className="space-y-4">
                                     <div>
                                         <h3 className="font-medium text-lg mb-2">What's your typical response time?</h3>
-                                        <p className="text-gray-600">We usually respond to all inquiries within 24 business hours.</p>
+                                        <p className="text-muted-foreground">We usually respond to all inquiries within 24 business hours.</p>
                                     </div>
                                     <div>
                                         <h3 className="font-medium text-lg mb-2">Do you work with international clients?</h3>
-                                        <p className="text-gray-600">Yes, we work with clients globally and can accommodate different time zones.</p>
+                                        <p className="text-muted-foreground">Yes, we work with clients globally and can accommodate different time zones.</p>
                                     </div>
                                     <div>
                                         <h3 className="font-medium text-lg mb-2">What happens after I submit the form?</h3>
-                                        <p className="text-gray-600">Our team will review your requirements and schedule a discovery call to discuss your project in detail.</p>
+                                        <p className="text-muted-foreground">Our team will review your requirements and schedule a discovery call to discuss your project in detail.</p>
                                     </div>
                                 </div>
                             </div>

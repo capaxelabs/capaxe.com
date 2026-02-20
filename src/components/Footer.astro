@@ -5,31 +5,28 @@ import ColorPaletteSwitcher from "@/components/ColorPaletteSwitcher";
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="bg-primary-800">
-  <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-1 gap-8 lg:grid-cols-4">
-      <!-- Company Info -->
-
-      <div>
-        <div class="flex items-center gap-2">
+<footer class="bg-card border-t border-border">
+  <div class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+    <div class="bento-grid grid-cols-1 lg:grid-cols-4">
+      <div class="bento-tile lg:col-span-1">
+        <div class="flex items-center gap-2 mb-4">
           <img src="/logo.svg" alt="Capaxe Labs" class="w-10 h-10" />
-          <a href="/" class="text-2xl font-bold text-white">
+          <a href="/" class="text-2xl font-bold text-foreground">
             {siteConfig.name}
           </a>
         </div>
-        <p class="mt-4 text-gray-200 max-w-xs">
+        <p class="text-muted-foreground max-w-xs text-sm leading-relaxed">
           {siteConfig.description}
         </p>
       </div>
 
-      <!-- Solutions -->
-      <div>
-        <h3 class="text-sm font-semibold text-white uppercase tracking-wider">Solutions</h3>
-        <ul class="mt-4 space-y-4">
+      <div class="bento-tile">
+        <h3 class="text-sm font-semibold text-primary-400 uppercase tracking-wider">Solutions</h3>
+        <ul class="mt-4 space-y-3">
           {
             siteConfig.services.shopify.items.map((item) => (
               <li>
-                <a href={item.href} class="text-base text-gray-200 hover:text-gray-300">
+                <a href={item.href} class="text-sm text-muted-foreground hover:text-foreground transition-colors">
                   {item.title}
                 </a>
               </li>
@@ -38,14 +35,13 @@ const currentYear = new Date().getFullYear();
         </ul>
       </div>
 
-      <!-- Case Studies   -->
-      <div>
-        <h3 class="text-sm font-semibold text-white uppercase tracking-wider">Case Studies</h3>
-        <ul class="mt-4 space-y-4">
+      <div class="bento-tile">
+        <h3 class="text-sm font-semibold text-primary-400 uppercase tracking-wider">Case Studies</h3>
+        <ul class="mt-4 space-y-3">
           {
             menuConfig.footerNav.caseStudies.map((item) => (
               <li>
-                <a href={item.href} class="text-base text-gray-200 hover:text-gray-300">
+                <a href={item.href} class="text-sm text-muted-foreground hover:text-foreground transition-colors">
                   {item.title}
                 </a>
               </li>
@@ -54,14 +50,13 @@ const currentYear = new Date().getFullYear();
         </ul>
       </div>
 
-      <!-- Company -->
-      <div>
-        <h3 class="text-sm font-semibold text-white uppercase tracking-wider">Company</h3>
-        <ul class="mt-4 space-y-4">
+      <div class="bento-tile">
+        <h3 class="text-sm font-semibold text-primary-400 uppercase tracking-wider">Company</h3>
+        <ul class="mt-4 space-y-3">
           {
             menuConfig.footerNav.company.map((item) => (
               <li>
-                <a href={item.href} class="text-base text-gray-200 hover:text-gray-300">
+                <a href={item.href} class="text-sm text-muted-foreground hover:text-foreground transition-colors">
                   {item.title}
                 </a>
               </li>
@@ -71,10 +66,9 @@ const currentYear = new Date().getFullYear();
       </div>
     </div>
 
-    <!-- Bottom Section -->
-    <div class="mt-12 border-t border-gray-200 pt-8">
+    <div class="mt-8 pt-8 border-t border-border">
       <div class="flex flex-col md:flex-row justify-between items-center">
-        <p class="text-base text-gray-400">
+        <p class="text-sm text-muted-foreground">
           &copy; {currentYear}
           {siteConfig.name}. All rights reserved.
         </p>
@@ -83,7 +77,7 @@ const currentYear = new Date().getFullYear();
             {
               menuConfig.footerNav.legal.map((item) => (
                 <li>
-                  <a href={item.href} class="text-sm text-gray-200 hover:text-gray-300">
+                  <a href={item.href} class="text-sm text-muted-foreground hover:text-foreground transition-colors">
                     {item.title}
                   </a>
                 </li>

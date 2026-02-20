@@ -1,0 +1,45 @@
+---
+interface Props {
+  variant?: 'dots' | 'grid' | 'blobs';
+}
+
+const { variant = 'dots' } = Astro.props;
+---
+
+{variant === 'dots' && (
+  <div class="absolute inset-0 overflow-hidden pointer-events-none -z-10" aria-hidden="true">
+    <svg class="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="dot-pattern" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
+          <circle cx="1" cy="1" r="1" class="fill-foreground/[0.07]" />
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#dot-pattern)" />
+    </svg>
+    <div class="absolute top-0 right-0 w-96 h-96 bg-primary-400/10 rounded-full blur-3xl animate-float"></div>
+    <div class="absolute bottom-0 left-0 w-80 h-80 bg-primary-600/10 rounded-full blur-3xl animate-float" style="animation-delay: -10s;"></div>
+  </div>
+)}
+
+{variant === 'grid' && (
+  <div class="absolute inset-0 overflow-hidden pointer-events-none -z-10" aria-hidden="true">
+    <svg class="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="grid-pattern" x="0" y="0" width="64" height="64" patternUnits="userSpaceOnUse">
+          <path d="M 64 0 L 0 0 0 64" fill="none" class="stroke-foreground/[0.05]" stroke-width="1" />
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#grid-pattern)" />
+    </svg>
+    <div class="absolute top-20 left-1/4 w-72 h-72 bg-primary-500/8 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-20 right-1/4 w-60 h-60 bg-primary-300/8 rounded-full blur-3xl"></div>
+  </div>
+)}
+
+{variant === 'blobs' && (
+  <div class="absolute inset-0 overflow-hidden pointer-events-none -z-10" aria-hidden="true">
+    <div class="absolute -top-40 -right-40 w-[500px] h-[500px] bg-primary-400/10 rounded-full blur-3xl animate-float"></div>
+    <div class="absolute -bottom-40 -left-40 w-[400px] h-[400px] bg-primary-600/8 rounded-full blur-3xl animate-float" style="animation-delay: -3s;"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-primary-500/5 rounded-full blur-3xl"></div>
+  </div>
+)}

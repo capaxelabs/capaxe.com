@@ -1,7 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import { siteConfig } from "@/config/site";
-import { Button } from "@/components/ui/button";
 import CTABottom from "@/components/CTA.astro";
 
 const seo = {
@@ -11,58 +10,58 @@ const seo = {
 ---
 
 <Layout seo={seo}>
-  <div class="min-h-screen bg-background">
-    <!-- Hero Section -->
-    <section class="pt-32 pb-16 px-4">
+  <div class="min-h-screen">
+    <!-- Hero -->
+    <section class="pt-32 pb-8 px-6">
       <div class="max-w-6xl mx-auto text-center">
-        <h1 class="text-5xl md:text-6xl font-bold mb-6">Book a Consultation</h1>
-        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+        <h1 class="text-5xl md:text-6xl font-bold mb-4 text-foreground">Book a Consultation</h1>
+        <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
           Schedule a free consultation with our experts to discuss your project needs and how we can help you achieve your goals.
         </p>
       </div>
     </section>
 
-    <!-- Consultation Form Section -->
-    <section class="py-16 px-4">
-      <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
-        <div class="p-8">
-          <h2 class="text-2xl font-bold mb-6">Request a Consultation</h2>
-          <form class="space-y-6" action="/api/submit-consultation" method="POST">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Form -->
+    <section class="pb-8 px-6">
+      <div class="max-w-3xl mx-auto">
+        <div class="bento-tile">
+          <h2 class="text-2xl font-bold mb-6 text-foreground">Request a Consultation</h2>
+          <form class="space-y-5" action="/api/submit-consultation" method="POST">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div>
-                <label for="firstName" class="block text-sm font-medium text-gray-700 mb-1">First Name *</label>
-                <input type="text" id="firstName" name="firstName" required 
-                  class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
+                <label for="firstName" class="block text-sm font-medium text-muted-foreground mb-1.5">First Name *</label>
+                <input type="text" id="firstName" name="firstName" required
+                  class="w-full px-4 py-2.5 bg-foreground/5 border border-border rounded-xl text-foreground placeholder-muted-foreground focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm" />
               </div>
               <div>
-                <label for="lastName" class="block text-sm font-medium text-gray-700 mb-1">Last Name *</label>
-                <input type="text" id="lastName" name="lastName" required 
-                  class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
+                <label for="lastName" class="block text-sm font-medium text-muted-foreground mb-1.5">Last Name *</label>
+                <input type="text" id="lastName" name="lastName" required
+                  class="w-full px-4 py-2.5 bg-foreground/5 border border-border rounded-xl text-foreground placeholder-muted-foreground focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm" />
               </div>
             </div>
-            
+
             <div>
-              <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address *</label>
-              <input type="email" id="email" name="email" required 
-                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
+              <label for="email" class="block text-sm font-medium text-muted-foreground mb-1.5">Email Address *</label>
+              <input type="email" id="email" name="email" required
+                class="w-full px-4 py-2.5 bg-foreground/5 border border-border rounded-xl text-foreground placeholder-muted-foreground focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm" />
             </div>
-            
+
             <div>
-              <label for="company" class="block text-sm font-medium text-gray-700 mb-1">Company Name</label>
-              <input type="text" id="company" name="company" 
-                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
+              <label for="company" class="block text-sm font-medium text-muted-foreground mb-1.5">Company Name</label>
+              <input type="text" id="company" name="company"
+                class="w-full px-4 py-2.5 bg-foreground/5 border border-border rounded-xl text-foreground placeholder-muted-foreground focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm" />
             </div>
-            
+
             <div>
-              <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-              <input type="tel" id="phone" name="phone" 
-                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
+              <label for="phone" class="block text-sm font-medium text-muted-foreground mb-1.5">Phone Number</label>
+              <input type="tel" id="phone" name="phone"
+                class="w-full px-4 py-2.5 bg-foreground/5 border border-border rounded-xl text-foreground placeholder-muted-foreground focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm" />
             </div>
-            
+
             <div>
-              <label for="projectType" class="block text-sm font-medium text-gray-700 mb-1">Project Type *</label>
-              <select id="projectType" name="projectType" required 
-                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+              <label for="projectType" class="block text-sm font-medium text-muted-foreground mb-1.5">Project Type *</label>
+              <select id="projectType" name="projectType" required
+                class="w-full px-4 py-2.5 bg-foreground/5 border border-border rounded-xl text-foreground focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm">
                 <option value="" disabled selected>Select a project type</option>
                 <option value="shopify-development">Shopify Development</option>
                 <option value="e-commerce">E-commerce Solutions</option>
@@ -72,18 +71,18 @@ const seo = {
                 <option value="other">Other</option>
               </select>
             </div>
-            
+
             <div>
-              <label for="projectDetails" class="block text-sm font-medium text-gray-700 mb-1">Project Details *</label>
-              <textarea id="projectDetails" name="projectDetails" rows="4" required 
-                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              <label for="projectDetails" class="block text-sm font-medium text-muted-foreground mb-1.5">Project Details *</label>
+              <textarea id="projectDetails" name="projectDetails" rows="4" required
+                class="w-full px-4 py-2.5 bg-foreground/5 border border-border rounded-xl text-foreground placeholder-muted-foreground focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm"
                 placeholder="Please provide details about your project requirements and goals..."></textarea>
             </div>
-            
+
             <div>
-              <label for="budget" class="block text-sm font-medium text-gray-700 mb-1">Estimated Budget</label>
-              <select id="budget" name="budget" 
-                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+              <label for="budget" class="block text-sm font-medium text-muted-foreground mb-1.5">Estimated Budget</label>
+              <select id="budget" name="budget"
+                class="w-full px-4 py-2.5 bg-foreground/5 border border-border rounded-xl text-foreground focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm">
                 <option value="" disabled selected>Select a budget range</option>
                 <option value="less-5k">Less than $5,000</option>
                 <option value="5k-10k">$5,000 - $10,000</option>
@@ -93,11 +92,11 @@ const seo = {
                 <option value="not-sure">Not sure / Need guidance</option>
               </select>
             </div>
-            
+
             <div>
-              <label for="timeline" class="block text-sm font-medium text-gray-700 mb-1">Expected Timeline</label>
-              <select id="timeline" name="timeline" 
-                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+              <label for="timeline" class="block text-sm font-medium text-muted-foreground mb-1.5">Expected Timeline</label>
+              <select id="timeline" name="timeline"
+                class="w-full px-4 py-2.5 bg-foreground/5 border border-border rounded-xl text-foreground focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm">
                 <option value="" disabled selected>Select a timeline</option>
                 <option value="asap">As soon as possible</option>
                 <option value="1-month">Within 1 month</option>
@@ -107,16 +106,16 @@ const seo = {
                 <option value="not-sure">Not sure / Flexible</option>
               </select>
             </div>
-            
+
             <div class="flex items-start">
-              <input type="checkbox" id="consent" name="consent" required class="mt-1 h-4 w-4 text-purple-600" />
-              <label for="consent" class="ml-2 block text-sm text-gray-700">
-                I agree to the <a href="/legal/privacy-policy" class="text-purple-600 hover:underline">Privacy Policy</a> and consent to being contacted about my inquiry. *
+              <input type="checkbox" id="consent" name="consent" required class="mt-1 h-4 w-4 accent-primary-500 rounded" />
+              <label for="consent" class="ml-2 block text-sm text-muted-foreground">
+                I agree to the <a href="/legal/privacy-policy" class="text-primary-400 hover:underline">Privacy Policy</a> and consent to being contacted about my inquiry. *
               </label>
             </div>
-            
-            <div class="text-center">
-              <button type="submit" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+
+            <div class="text-center pt-2">
+              <button type="submit" class="bg-primary-500 hover:bg-primary-600 text-white font-medium rounded-xl text-sm px-8 py-3 transition-colors">
                 Submit Request
               </button>
             </div>
@@ -125,28 +124,29 @@ const seo = {
       </div>
     </section>
 
-    <section class="py-16 px-4 bg-gray-50">
-      <div class="max-w-6xl mx-auto text-center">
-        <h2 class="text-3xl font-bold mb-6">What to Expect</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div class="bg-white p-6 rounded-xl shadow-sm">
-            <div class="text-purple-600 text-4xl font-bold mb-4">1</div>
-            <h3 class="text-xl font-semibold mb-3">Initial Consultation</h3>
-            <p class="text-gray-600">
+    <!-- What to Expect -->
+    <section class="pb-8 px-6">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold mb-4 text-foreground text-center">What to Expect</h2>
+        <div class="bento-grid grid-cols-1 md:grid-cols-3 mt-6">
+          <div class="bento-tile text-center">
+            <div class="text-4xl font-bold text-primary-400 mb-3">1</div>
+            <h3 class="text-lg font-semibold mb-2 text-foreground">Initial Consultation</h3>
+            <p class="text-sm text-muted-foreground">
               We'll discuss your business needs, project requirements, and goals during a 30-minute initial consultation.
             </p>
           </div>
-          <div class="bg-white p-6 rounded-xl shadow-sm">
-            <div class="text-purple-600 text-4xl font-bold mb-4">2</div>
-            <h3 class="text-xl font-semibold mb-3">Proposal & Planning</h3>
-            <p class="text-gray-600">
+          <div class="bento-tile text-center">
+            <div class="text-4xl font-bold text-primary-400 mb-3">2</div>
+            <h3 class="text-lg font-semibold mb-2 text-foreground">Proposal & Planning</h3>
+            <p class="text-sm text-muted-foreground">
               Our team will prepare a detailed proposal with timeline, scope, and budget based on your requirements.
             </p>
           </div>
-          <div class="bg-white p-6 rounded-xl shadow-sm">
-            <div class="text-purple-600 text-4xl font-bold mb-4">3</div>
-            <h3 class="text-xl font-semibold mb-3">Project Kickoff</h3>
-            <p class="text-gray-600">
+          <div class="bento-tile text-center">
+            <div class="text-4xl font-bold text-primary-400 mb-3">3</div>
+            <h3 class="text-lg font-semibold mb-2 text-foreground">Project Kickoff</h3>
+            <p class="text-sm text-muted-foreground">
               Once you approve the proposal, we'll schedule a kickoff meeting to start working on your project.
             </p>
           </div>
@@ -156,4 +156,4 @@ const seo = {
 
     <CTABottom />
   </div>
-</Layout> 
+</Layout>

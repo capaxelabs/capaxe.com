@@ -9,16 +9,14 @@ import BookingButton from "@/components/BookingButton";
 <ThemeInitializer />
 
 <div class="fixed top-0 left-0 w-full z-50 flex justify-center">
-  <header id="main-header" class="w-full max-w-5xl mt-4 rounded-lg">
+  <header id="main-header" class="w-full max-w-5xl mt-4 rounded-2xl">
     <nav class="px-6 py-4">
       <div class="flex items-center justify-between">
-        <!-- Logo -->
         <a href="/" class="text-2xl font-bold text-foreground flex items-center gap-2">
           <img src="/logo.svg" alt="Capaxe Labs" class="w-10 h-10" />
-          <span class="text-2xl font-bold text-foreground">Capaxe <span class="text-primary-500">Labs</span></span>
+          <span class="text-2xl font-bold text-foreground">Capaxe <span class="text-primary-400">Labs</span></span>
         </a>
 
-        <!-- Desktop Menu -->
         <div class="hidden md:flex items-center gap-8">
           {
             menuConfig.mainNav.map((item) =>
@@ -33,7 +31,7 @@ import BookingButton from "@/components/BookingButton";
                   </a>
                 )
               ) : (
-                <a href={item.href} class="text-gray-600 hover:text-gray-900 transition-colors">
+                <a href={item.href} class="text-muted-foreground hover:text-foreground transition-colors">
                   {item.title}
                 </a>
               )
@@ -41,8 +39,7 @@ import BookingButton from "@/components/BookingButton";
           }
         </div>
 
-        <!-- Mobile Menu Button -->
-        <button id="menu-toggle" class="md:hidden text-gray-600 hover:text-gray-900">
+        <button id="menu-toggle" class="md:hidden text-muted-foreground hover:text-foreground">
           <svg
             id="menu-icon"
             xmlns="http://www.w3.org/2000/svg"
@@ -73,18 +70,17 @@ import BookingButton from "@/components/BookingButton";
         </button>
       </div>
 
-      <!-- Mobile Menu -->
       <div
         id="mobile-menu"
-        class="md:hidden fixed top-0 left-0 h-screen w-3/4 bg-white shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out z-50"
+        class="md:hidden fixed top-0 left-0 h-screen w-3/4 bg-bento-muted-bg border-r border-border shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out z-50"
       >
         <div class="flex flex-col h-full">
-          <div class="p-6 border-b flex justify-between items-center">
+          <div class="p-6 border-b border-border flex justify-between items-center">
             <div class="flex items-center gap-2">
               <img src="/logo.svg" alt="Capaxe Labs" class="w-10 h-10" />
-              <span class="text-2xl font-bold text-foreground">Capaxe <span class="text-primary-500">Labs</span></span>
+              <span class="text-2xl font-bold text-foreground">Capaxe <span class="text-primary-400">Labs</span></span>
             </div>
-            <button id="close-menu" class="text-gray-600 hover:text-gray-900">
+            <button id="close-menu" class="text-muted-foreground hover:text-foreground">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -118,7 +114,7 @@ import BookingButton from "@/components/BookingButton";
                       </a>
                     )
                   ) : (
-                    <a href={item.href} class="text-xl text-gray-600 hover:text-gray-900 transition-colors py-2">
+                    <a href={item.href} class="text-xl text-muted-foreground hover:text-foreground transition-colors py-2">
                       {item.title}
                     </a>
                   )
@@ -175,9 +171,9 @@ import BookingButton from "@/components/BookingButton";
 
   window.addEventListener("scroll", () => {
     if (window.scrollY > 20) {
-      header?.classList.add("bg-white/80", "backdrop-blur-md", "shadow-lg");
+      header?.classList.add("bg-background/80", "backdrop-blur-xl", "shadow-lg", "border", "border-border");
     } else {
-      header?.classList.remove("bg-white/80", "backdrop-blur-md", "shadow-lg");
+      header?.classList.remove("bg-background/80", "backdrop-blur-xl", "shadow-lg", "border", "border-border");
     }
   });
 

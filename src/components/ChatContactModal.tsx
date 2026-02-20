@@ -26,7 +26,7 @@ const ChatContactModal = ({ children, className }: ChatContactModalProps) => {
 
       {/* Chat Modal */}
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="sm:max-w-2xl max-h-[90vh] overflow-hidden p-0 w-auto">
+        <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-hidden p-0 bg-transparent border-none shadow-none">
           <ChatContactForm />
         </DialogContent>
       </Dialog>

@@ -1,46 +1,102 @@
-import { motion, useScroll, useTransform } from "motion/react"
 import type { SiteConfig } from "@/types"
-import { ShoppingBagIcon, CodeBracketIcon, PhoneIcon } from '@heroicons/react/24/outline';
-import React, { useRef, useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useInView } from "motion/react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import ChatContactForm from "@/components/ChatContactForm";
 
-export const ServiceLanding = ({ siteConfig }: { siteConfig: SiteConfig }) => {
+function useCountUp(target: number, duration: number = 1500) {
+    const [count, setCount] = useState(0);
+    const ref = useRef<HTMLSpanElement>(null);
+    const hasAnimated = useRef(false);
+
+    useEffect(() => {
+        const el = ref.current;
+        if (!el) return;
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            setCount(target);
+            return;
+        }
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting && !hasAnimated.current) {
+                    hasAnimated.current = true;
+                    const start = performance.now();
+                    const step = (now: number) => {
+                        const progress = Math.min((now - start) / duration, 1);
+                        const eased = 1 - Math.pow(1 - progress, 3);
+                        setCount(Math.floor(eased * target));
+                        if (progress < 1) requestAnimationFrame(step);
+                    };
+                    requestAnimationFrame(step);
+                    observer.disconnect();
+                }
+            },
+            { threshold: 0.5 }
+        );
+        observer.observe(el);
+        return () => observer.disconnect();
+    }, [target, duration]);
+
+    return { count, ref };
+}
+
+const AnimatedStat = ({ value, label }: { value: string; label: string }) => {
+    const numericValue = parseInt(value);
+    const suffix = value.replace(/\d/g, "");
+    const { count, ref } = useCountUp(numericValue, 1500);
+
     return (
-        <section className="relative min-h-screen bg-gradient-to-br from-purple-200 via-indigo-100 to-blue-200 flex items-center justify-center overflow-hidden py-20">
-            {/* Animated background elements */}
-            <div className="absolute inset-0 bg-grid-white/10 bg-grid-8" />
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-blue-500/10 animate-float" />
+        <div className="mb-4">
+            <span ref={ref} className="text-5xl font-bold text-primary-400">
+                {count}{suffix}
+            </span>
+            <span className="text-sm text-muted-foreground ml-2">{label}</span>
+        </div>
+    );
+};
 
-            <div className="container mx-auto px-4 relative z-10">
-                <div className="text-center mb-16 animate-fade-in">
-                    <h2 className="text-6xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-purple-700 via-violet-600 to-indigo-700 animate-gradient-shift bg-[length:200%_auto]">
-                        Explore Our Innovative Services
-                    </h2>
-                    <p className="text-xl max-w-2xl mx-auto text-gray-700 leading-relaxed font-light animate-slide-up">
-                        Discover how our cutting-edge solutions can transform your business and drive success.
-                    </p>
-                </div>
+export const ServiceLanding = ({ siteConfig }: { siteConfig: SiteConfig }) => {
+    const gridRef = useRef(null);
+    const isInView = useInView(gridRef, { once: true, margin: "-50px" });
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    {siteConfig.services.shopify.items.map((service, index) => (
-                        <div
-                            key={index}
-                            className="group relative bg-white/20 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-white/20 hover:shadow-xl transition-all duration-300 animate-scale-in"
-                            style={{ animationDelay: `${index * 200}ms` }}
-                        >
-                            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                            <div className="relative z-10">
-                                <h3 className="text-2xl font-bold mb-4 text-purple-800 group-hover:text-purple-900 transition-colors group-hover:scale-105 transform duration-300">
+    return (
+        <section className="section max-w-7xl mx-auto">
+            <div className="text-center mb-12">
+                <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
+                    Explore Our Services
+                </h2>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                    Cutting-edge solutions that transform your business and drive success.
+                </p>
+            </div>
+
+            <div ref={gridRef} className="bento-grid grid-cols-1 md:grid-cols-3">
+                {siteConfig.services.shopify.items.map((service, index) => (
+                    <a
+                        key={index}
+                        href={service.href}
+                        className={`bento-tile group cursor-pointer transition-all duration-500 ${index === 0 ? 'md:col-span-2 md:row-span-1' : ''}`}
+                        style={{
+                            opacity: isInView ? 1 : 0,
+                            transform: isInView ? "translateY(0)" : "translateY(20px)",
+                            transitionDelay: `${index * 0.08}s`,
+                        }}
+                    >
+                        <div className="flex items-start gap-4">
+                            <div className="w-10 h-10 rounded-xl bg-primary-500/20 flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:bg-primary-500/30 group-hover:scale-110">
+                                <div className="w-2.5 h-2.5 rounded-full bg-primary-400 transition-all duration-300 group-hover:scale-125" />
+                            </div>
+                            <div>
+                                <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary-300 transition-colors">
                                     {service.title}
                                 </h3>
-                                <p className="text-gray-700 group-hover:text-gray-800 transition-colors group-hover:scale-102 transform duration-300">
+                                <p className="text-sm text-muted-foreground leading-relaxed">
                                     {service.description}
                                 </p>
                             </div>
                         </div>
-                    ))}
-                </div>
+                    </a>
+                ))}
             </div>
         </section>
     );
@@ -49,218 +105,146 @@ export const ServiceLanding = ({ siteConfig }: { siteConfig: SiteConfig }) => {
 
 export const RetainerBenefits = ({ siteConfig }: { siteConfig: SiteConfig }) => {
     return (
-        <section className="py-16 bg-gradient-to-br from-purple-50 to-indigo-50">
-            <div className="container mx-auto px-6">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    className="text-center mb-12"
-                >
-                    <h2 className="text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-800 to-indigo-700">Shopify Retainer Plans</h2>
-                    <p className="text-xl max-w-3xl mx-auto text-gray-700 leading-relaxed">
-                        Get dedicated Shopify support to scale your business. Choose the plan that fits your needs and let us handle your technical requirements.
-                    </p>
-                </motion.div>
+        <section className="section max-w-7xl mx-auto">
+            <div className="text-center mb-12">
+                <h2 className="text-4xl font-bold mb-4 text-foreground">Shopify Retainer Plans</h2>
+                <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                    Get dedicated Shopify support to scale your business.
+                </p>
+            </div>
 
-                <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    {siteConfig.retainer.items.map((item, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            whileHover={{ y: -5, scale: 1.02 }}
-                            transition={{ delay: index * 0.1 }}
-                            className="bg-white/20 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-white/20 hover:shadow-xl transition-all duration-300"
-                        >
-                            <h3 className="text-2xl font-bold mb-2 text-purple-800">{item.title}</h3>
-                            <div className="mb-6 pb-6 border-b border-purple-100">
-                                <p className="text-3xl font-bold text-purple-700">{item.monthly}<span className="text-sm font-normal">/month</span></p>
-                                <p className="text-sm text-purple-600 mt-1">Annual: ${item.yearly}/month</p>
-                            </div>
-                            <ul className="space-y-3">
-                                {item.features.map((feature, idx) => (
-                                    <li key={idx} className="flex items-start">
-                                        <span className="text-green-500 mr-2 mt-1 flex-shrink-0">✓</span>
-                                        <span className="text-gray-700">{feature}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </motion.div>
-                    ))}
-                </div>
-
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4 }}
-                    className="text-center mt-12"
-                >
-                    <a
-                        href="/retainer"
-                        className="inline-block bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-8 py-3 rounded-lg hover:from-purple-700 hover:to-indigo-700 transition-all duration-300 shadow-md hover:shadow-lg"
+            <div className="bento-grid grid-cols-1 md:grid-cols-3">
+                {siteConfig.retainer.items.map((item, index) => (
+                    <div
+                        key={index}
+                        className="bento-tile"
                     >
-                        View All Plans
-                    </a>
-                </motion.div>
+                        <h3 className="text-xl font-bold mb-2 text-foreground">{item.title}</h3>
+                        <div className="mb-6 pb-6 border-b border-border">
+                            <p className="text-2xl font-bold text-primary-400">{item.monthly}<span className="text-sm font-normal text-muted-foreground">/month</span></p>
+                        </div>
+                        <ul className="space-y-3">
+                            {item.features.map((feature, idx) => (
+                                <li key={idx} className="flex items-start">
+                                    <span className="text-primary-400 mr-2 mt-0.5 flex-shrink-0 text-sm">&#10003;</span>
+                                    <span className="text-sm text-muted-foreground">{feature}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                ))}
             </div>
         </section>
     )
 }
 
 
-export const StickyCards = ({ siteConfig }: { siteConfig: SiteConfig }) => {
-    const containerRef = useRef(null);
+export const StickyCards = ({ siteConfig: _siteConfig }: { siteConfig: SiteConfig }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start end", "end start"]
-    });
+    const gridRef = useRef(null);
+    const isInView = useInView(gridRef, { once: true, margin: "-50px" });
 
     const features = [
         {
-            icon: "🚀",
             title: "Expert Team",
             description: "Our team of skilled professionals brings years of experience and deep expertise to every project.",
-            gradient: "from-blue-500 to-cyan-500",
-            bgGradient: "from-blue-50 to-cyan-50"
+            stat: "8+",
+            statLabel: "Years Experience",
+            variant: "span2" as const,
         },
         {
-            icon: "💡",
             title: "Innovative Solutions",
             description: "We leverage cutting-edge technologies to deliver innovative solutions that drive real results.",
-            gradient: "from-purple-500 to-pink-500",
-            bgGradient: "from-purple-50 to-pink-50"
+            variant: "accent" as const,
         },
         {
-            icon: "🎯",
             title: "Client-Focused",
             description: "We prioritize your business goals and work closely with you to achieve measurable success.",
-            gradient: "from-green-500 to-emerald-500",
-            bgGradient: "from-green-50 to-emerald-50"
+            variant: "default" as const,
         },
         {
-            icon: "⚡",
             title: "Fast Delivery",
             description: "Quick turnaround times without compromising on quality. Get your projects delivered on schedule.",
-            gradient: "from-orange-500 to-red-500",
-            bgGradient: "from-orange-50 to-red-50"
+            variant: "default" as const,
         },
         {
-            icon: "🔧",
             title: "Custom Solutions",
             description: "Tailored approaches that fit your unique business needs and technical requirements.",
-            gradient: "from-indigo-500 to-blue-500",
-            bgGradient: "from-indigo-50 to-blue-50"
+            stat: "50+",
+            statLabel: "Projects Delivered",
+            variant: "span2" as const,
         },
         {
-            icon: "📈",
             title: "Proven Results",
             description: "Track record of successful projects that have delivered measurable business growth and ROI.",
-            gradient: "from-teal-500 to-green-500",
-            bgGradient: "from-teal-50 to-green-50"
+            variant: "muted" as const,
         }
     ];
 
     return (
-        <section ref={containerRef} className="relative py-20 bg-gradient-to-br from-gray-50 to-white">
-            <div className="max-w-7xl mx-auto px-6">
-                {/* Header Section */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    className="text-center mb-16"
-                >
-                    <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-700 via-blue-600 to-teal-500">
-                        Why Choose Us
-                    </h2>
-                    <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                        Experience the difference with our comprehensive approach to delivering exceptional results that exceed expectations.
-                    </p>
-                </motion.div>
-
-                {/* Features Grid - Vertical Layout */}
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-                    {features.map((feature, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 50 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            whileHover={{ y: -8, scale: 1.02 }}
-                            transition={{ 
-                                delay: index * 0.1,
-                                duration: 0.6,
-                                type: "spring",
-                                stiffness: 100
-                            }}
-                            className={`relative group bg-gradient-to-br ${feature.bgGradient} p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-white/50 backdrop-blur-sm`}
-                        >
-                            {/* Gradient overlay on hover */}
-                            <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-300`} />
-                            
-                            {/* Icon */}
-                            <div className="relative z-10 mb-6">
-                                <div className={`w-16 h-16 bg-gradient-to-r ${feature.gradient} rounded-2xl flex items-center justify-center text-2xl shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                                    <span className="filter drop-shadow-sm">{feature.icon}</span>
-                                </div>
-                            </div>
-
-                            {/* Content */}
-                            <div className="relative z-10">
-                                <h3 className={`text-2xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r ${feature.gradient} group-hover:scale-105 transform transition-all duration-300`}>
-                                    {feature.title}
-                                </h3>
-                                <p className="text-gray-700 leading-relaxed group-hover:text-gray-800 transition-colors duration-300">
-                                    {feature.description}
-                                </p>
-                            </div>
-
-                            {/* Decorative elements */}
-                            <div className="absolute top-4 right-4 w-20 h-20 bg-gradient-to-br from-white/20 to-white/5 rounded-full blur-xl opacity-50 group-hover:opacity-70 transition-opacity duration-300" />
-                            <div className="absolute bottom-4 left-4 w-12 h-12 bg-gradient-to-br from-white/10 to-transparent rounded-full blur-lg opacity-30 group-hover:opacity-50 transition-opacity duration-300" />
-                        </motion.div>
-                    ))}
-                </div>
-
-                {/* Bottom CTA Section */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2, duration: 0.8 }}
-                    className="text-center mt-16"
-                >
-                    <div className="bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl p-8 shadow-xl">
-                        <h3 className="text-3xl font-bold text-white mb-4">
-                            Ready to Get Started?
-                        </h3>
-                        <p className="text-xl text-purple-100 mb-6 max-w-2xl mx-auto">
-                            Let's discuss how we can help transform your business with our expertise and innovative solutions.
-                        </p>
-                        <button
-                            onClick={() => setIsModalOpen(true)}
-                            className="inline-block bg-white text-purple-600 px-8 py-4 rounded-xl font-semibold hover:bg-gray-50 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
-                        >
-                            💬 Start Your Project Today
-                        </button>
-                    </div>
-                </motion.div>
+        <section className="section max-w-7xl mx-auto">
+            <div className="text-center mb-12">
+                <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
+                    Why Choose Us
+                </h2>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                    Experience the difference with our comprehensive approach to delivering exceptional results.
+                </p>
             </div>
 
-            {/* Chat Contact Modal */}
+            <div ref={gridRef} className="bento-grid grid-cols-1 md:grid-cols-3">
+                {features.map((feature, index) => {
+                    const isSpan2 = feature.variant === "span2";
+                    const isAccent = feature.variant === "accent";
+
+                    return (
+                        <div
+                            key={index}
+                            className={`${isAccent ? 'bento-tile-accent' : isSpan2 ? 'bento-tile' : feature.variant === 'muted' ? 'bento-tile-muted' : 'bento-tile'} ${isSpan2 ? 'md:col-span-2' : ''} transition-all duration-500`}
+                            style={{
+                                opacity: isInView ? 1 : 0,
+                                transform: isInView ? "translateY(0)" : "translateY(20px)",
+                                transitionDelay: `${index * 0.08}s`,
+                            }}
+                        >
+                            {feature.stat && feature.statLabel && (
+                                <AnimatedStat value={feature.stat} label={feature.statLabel} />
+                            )}
+                            <h3 className={`text-xl font-semibold mb-2 ${isAccent ? 'text-white' : 'text-foreground'}`}>
+                                {feature.title}
+                            </h3>
+                            <p className={`text-sm leading-relaxed ${isAccent ? 'text-white/70' : 'text-muted-foreground'}`}>
+                                {feature.description}
+                            </p>
+                        </div>
+                    );
+                })}
+            </div>
+
+            {/* CTA Tile */}
+            <div className="mt-4">
+                <div className="bento-tile-accent text-center py-12">
+                    <h3 className="text-3xl font-bold mb-3">
+                        Ready to Get Started?
+                    </h3>
+                    <p className="text-lg text-white/70 mb-6 max-w-2xl mx-auto">
+                        Let's discuss how we can help transform your business.
+                    </p>
+                    <button
+                        onClick={() => setIsModalOpen(true)}
+                        className="bg-white text-primary-600 px-8 py-3 rounded-xl font-semibold hover:bg-gray-100 transition-all duration-300 btn-shimmer"
+                    >
+                        Start Your Project Today
+                    </button>
+                </div>
+            </div>
+
             <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-                <DialogContent className="sm:max-w-2xl max-h-[90vh] overflow-hidden p-0">
-                    <DialogHeader className="px-6 pt-6 pb-0">
-                        <DialogTitle className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600">
-                            Start Your Project Conversation
-                        </DialogTitle>
+                <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-hidden p-0 bg-transparent border-none shadow-none">
+                    <DialogHeader className="sr-only">
+                        <DialogTitle>Start Your Project Conversation</DialogTitle>
                     </DialogHeader>
-                    <div className="px-6 pb-6">
-                        <p className="text-muted-foreground mb-6">
-                            Let's discuss your project through our interactive chat. We'll gather all the details we need to give you an accurate quote.
-                        </p>
-                        <ChatContactForm />
-                    </div>
+                    <ChatContactForm />
                 </DialogContent>
             </Dialog>
         </section>

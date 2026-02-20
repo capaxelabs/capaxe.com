@@ -23,90 +23,110 @@ const seo = createSEO({
 seo.structuredData = getEnhancedOrganizationSchema();
 ---
 
-<Layout seo={seo} >
-
+<Layout seo={seo}>
   <div class="about-content">
-    <section class="pt-32 pb-16 px-4">
-      <div class="max-w-6xl mx-auto text-center">
-        <h1 class="text-5xl md:text-6xl font-bold mb-6">About Us</h1>
-        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-          Capaxe Labs is a Silicon Valley of India based team of passionate Shopify experts and web developers dedicated to empowering e-commerce
-          businesses. Founded on the principles of technical excellence and client-focused solutions, we've established ourselves as trusted partners for
-          businesses looking to thrive in the digital marketplace.
-        </p>
+    <!-- Hero -->
+    <section class="pt-32 pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-tile-accent text-center py-16 px-8">
+          <h1 class="text-5xl md:text-6xl font-bold mb-6">About Us</h1>
+          <p class="text-lg text-white/70 max-w-2xl mx-auto">
+            Capaxe Labs is a Silicon Valley of India based team of passionate Shopify experts and web developers dedicated to empowering e-commerce
+            businesses. Founded on the principles of technical excellence and client-focused solutions.
+          </p>
+        </div>
       </div>
     </section>
 
-    <section class="py-16 px-4">
-      <div class="max-w-6xl mx-auto">
-        <h2 class="text-3xl font-bold mb-6">Our Mission</h2>
-        <p class="mb-6">
+    <!-- Mission -->
+    <section class="py-4 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-tile">
+          <h2 class="text-3xl font-bold mb-4 text-foreground">Our Mission</h2>
+          <p class="text-muted-foreground leading-relaxed">
             Our mission is to deliver cutting-edge Shopify solutions that drive e-commerce success. We believe in creating digital experiences that not only
-          look beautiful but also perform exceptionally well, helping our clients achieve their business goals and exceed customer expectations.
-        </p>
-      </div>
-    
-      <div class="max-w-6xl mx-auto">
-        <h2 class="text-3xl font-bold mb-6">Our Mission</h2>
-        <p class="mb-6">
-      Our mission is to deliver cutting-edge Shopify solutions that drive e-commerce success. We believe in creating digital experiences that not only
-          look beautiful but also perform exceptionally well, helping our clients achieve their business goals and exceed customer expectations.
-        </p>
+            look beautiful but also perform exceptionally well, helping our clients achieve their business goals and exceed customer expectations.
+          </p>
+        </div>
       </div>
     </section>
-    <section class="py-16 px-4">
-      <div class="max-w-6xl mx-auto">
-        <h2 class="text-3xl font-bold mb-6">Our Expertise</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <div class="bg-white p-6 rounded-lg shadow-sm">
-            <h3 class="text-xl font-bold mb-3">Shopify Development</h3>
-            <p>
-              From custom theme development to complex store setups, we specialize in creating tailored Shopify experiences that convert visitors into
-              customers.
+
+    <!-- Expertise -->
+    <section class="py-4 px-6">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold mb-4 text-foreground">Our Expertise</h2>
+        <div class="bento-grid grid-cols-1 md:grid-cols-3">
+          <div class="bento-tile md:col-span-2">
+            <h3 class="text-xl font-bold mb-3 text-foreground">Shopify Development</h3>
+            <p class="text-muted-foreground">
+              From custom theme development to complex store setups, we specialize in creating tailored Shopify experiences that convert visitors into customers.
             </p>
           </div>
-          <div class="bg-white p-6 rounded-lg shadow-sm">
+          <div class="bento-tile-accent">
             <h3 class="text-xl font-bold mb-3">E-commerce Solutions</h3>
-            <p>
-              Our comprehensive e-commerce solutions include everything from store setup and migration to performance optimization and ongoing
-              maintenance.
+            <p class="text-white/70">
+              Our comprehensive e-commerce solutions include everything from store setup and migration to performance optimization and ongoing maintenance.
             </p>
           </div>
-          <div class="bg-white p-6 rounded-lg shadow-sm">
-            <h3 class="text-xl font-bold mb-3">Web Development</h3>
-            <p>We create modern, responsive websites using cutting-edge technologies that provide exceptional user experiences across all devices.</p>
+          <div class="bento-tile">
+            <h3 class="text-xl font-bold mb-3 text-foreground">Web Development</h3>
+            <p class="text-muted-foreground">
+              We create modern, responsive websites using cutting-edge technologies that provide exceptional user experiences across all devices.
+            </p>
           </div>
-        </div>  
+        </div>
       </div>
     </section>
-    <section class="py-16 px-4">
-      <div class="max-w-6xl mx-auto">
-        <h2 class="text-3xl font-bold mb-6">Why Choose Us</h2>
-        <ul class="list-disc pl-6 mb-8">
-          <li class="mb-3">
-        <strong>Technical Excellence:</strong> Our team stays at the forefront of e-commerce technology to deliver innovative solutions.
-        </li>
-      <li class="mb-3">
-        <strong>Client-Focused Approach:</strong> We listen carefully to your needs and tailor our services to meet your specific business goals.
-      </li>
-      <li class="mb-3">
-        <strong>Proven Track Record:</strong> Our portfolio showcases successful projects across various industries, demonstrating our versatility and
-        expertise.
-      </li>
-      <li class="mb-3">
-        <strong>Ongoing Support:</strong> We offer flexible retainer plans to provide continuous improvements and support for long-term success.
-      </li>
-    </ul>
-    </div>
 
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-3xl font-bold mb-6">Our Team</h2>
-      <p class="mb-6">
-      Behind Capaxe Labs is a diverse team of developers, designers, and e-commerce strategists who bring a wealth of experience and creativity to
-        every project. We're united by our passion for building exceptional digital experiences and our commitment to helping businesses succeed online.
-      </p>
-    </div>
+    <!-- Why Choose Us -->
+    <section class="py-4 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-grid grid-cols-1 md:grid-cols-2">
+          <div class="bento-tile">
+            <div class="w-10 h-10 rounded-xl bg-primary-500/20 flex items-center justify-center mb-4">
+              <div class="w-2.5 h-2.5 rounded-full bg-primary-400"></div>
+            </div>
+            <h3 class="text-lg font-semibold text-foreground mb-2">Technical Excellence</h3>
+            <p class="text-sm text-muted-foreground">Our team stays at the forefront of e-commerce technology to deliver innovative solutions.</p>
+          </div>
+          <div class="bento-tile">
+            <div class="w-10 h-10 rounded-xl bg-green-500/20 flex items-center justify-center mb-4">
+              <div class="w-2.5 h-2.5 rounded-full bg-green-400"></div>
+            </div>
+            <h3 class="text-lg font-semibold text-foreground mb-2">Client-Focused Approach</h3>
+            <p class="text-sm text-muted-foreground">We listen carefully to your needs and tailor our services to meet your specific business goals.</p>
+          </div>
+          <div class="bento-tile">
+            <div class="w-10 h-10 rounded-xl bg-amber-500/20 flex items-center justify-center mb-4">
+              <div class="w-2.5 h-2.5 rounded-full bg-amber-400"></div>
+            </div>
+            <h3 class="text-lg font-semibold text-foreground mb-2">Proven Track Record</h3>
+            <p class="text-sm text-muted-foreground">Our portfolio showcases successful projects across various industries, demonstrating our versatility.</p>
+          </div>
+          <div class="bento-tile">
+            <div class="w-10 h-10 rounded-xl bg-purple-500/20 flex items-center justify-center mb-4">
+              <div class="w-2.5 h-2.5 rounded-full bg-purple-400"></div>
+            </div>
+            <h3 class="text-lg font-semibold text-foreground mb-2">Ongoing Support</h3>
+            <p class="text-sm text-muted-foreground">We offer flexible retainer plans to provide continuous improvements and support for long-term success.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
+    <!-- Team -->
+    <section class="py-4 px-6 pb-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-tile-muted">
+          <h2 class="text-3xl font-bold mb-4 text-foreground">Our Team</h2>
+          <p class="text-muted-foreground leading-relaxed">
+            Behind Capaxe Labs is a diverse team of developers, designers, and e-commerce strategists who bring a wealth of experience and creativity to
+            every project. We're united by our passion for building exceptional digital experiences and our commitment to helping businesses succeed online.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <CTABottom />
   </div>
-  <CTABottom />
 </Layout>

@@ -34,7 +34,7 @@ const LogoHero = ({ siteConfig }: { siteConfig: SiteConfig }) => {
                 <p className="text-center max-w-xl my-6 text-foreground">
                     {siteConfig.hero.description}
                 </p>
-                <button type="button" className="flex items-center gap-2 rounded px-3 py-2 text-base font-medium uppercase text-white transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 md:text-lg bg-purple-900 shadow-[4px_4px_0px_black] hover:shadow-[8px_8px_0px_black]">
+                <button type="button" className="flex items-center gap-2 rounded px-3 py-2 text-base font-medium uppercase text-foreground transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 md:text-lg bg-purple-900 shadow-[4px_4px_0px_black] hover:shadow-[8px_8px_0px_black]">
                     Get in touch
                 </button>
             </div>
