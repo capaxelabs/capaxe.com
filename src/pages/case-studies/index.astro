@@ -46,7 +46,7 @@ const seo = createSEO({
         <div class="bento-grid grid-cols-1 md:grid-cols-2">
           {
             caseStudies.map((study, index) => (
-              <div class={`bento-tile group ${index === 0 ? 'md:col-span-2' : ''}`}>
+              <a href={`/case-studies/${study.id}`} class={`bento-tile group block cursor-pointer ${index === 0 ? 'md:col-span-2' : ''}`}>
                 <div class="flex items-start mb-4">
                   <div class="flex-shrink-0 mr-4">
                     <img
@@ -56,7 +56,7 @@ const seo = createSEO({
                     />
                   </div>
                   <div class="flex-1">
-                    <h2 class="text-xl font-bold mb-1 text-foreground group-hover:text-primary-300 transition-colors">{study.data.title}</h2>
+                    <h2 class="text-xl font-bold mb-1 text-foreground group-hover:text-primary-400 transition-colors">{study.data.title}</h2>
                     <p class="text-primary-400 text-sm font-medium">{study.data.client}</p>
                   </div>
                 </div>
@@ -73,11 +73,11 @@ const seo = createSEO({
                     )}
                   </div>
 
-                  <a href={`/case-studies/${study.id}`} class="text-primary-400 hover:text-primary-300 text-sm font-medium transition-colors">
+                  <span class="text-primary-400 group-hover:text-primary-300 text-sm font-medium transition-colors">
                     View Study &rarr;
-                  </a>
+                  </span>
                 </div>
-              </div>
+              </a>
             ))
           }
         </div>
