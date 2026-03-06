@@ -14,6 +14,7 @@ const alias = import.meta.env.PROD ? {
 // https://astro.build/config
 export default defineConfig({
   site: "https://www.capaxe.com",
+  trailingSlash: "never",
   redirects: {
     "/blog/20251013-ai-figma-mcp-revolution": "/blog/ai-figma-mcp-revolution",
     "/blog/20251014-conversational-commerce-openai": "/blog/conversational-commerce-openai",

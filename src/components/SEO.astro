@@ -19,7 +19,8 @@ const {
   structuredData
 } = Astro.props;
 
-const canonicalURL = canonical || new URL(Astro.url.pathname, Astro.site).toString();
+const pathname = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const canonicalURL = canonical || new URL(pathname, Astro.site).toString();
 ---
 
 <!-- Primary Meta Tags -->
@@ -44,7 +45,7 @@ const canonicalURL = canonical || new URL(Astro.url.pathname, Astro.site).toStri
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content={type} />
-<meta property="og:url" content={Astro.url} />
+<meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:logo" content="/logo.svg" />
@@ -57,7 +58,7 @@ const canonicalURL = canonical || new URL(Astro.url.pathname, Astro.site).toStri
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:domain" content="capaxe.com" />
-<meta property="twitter:url" content={Astro.url} />
+<meta property="twitter:url" content={canonicalURL} />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={new URL(image, Astro.site)} />
