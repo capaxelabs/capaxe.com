@@ -1,0 +1,112 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { createSEO } from "@/utils/seo";
+
+const seo = createSEO({
+  pageName: "GetBee App Privacy Policy",
+  description: "Privacy policy for GetBee Shopify applications. Learn how we collect, use, and protect your data.",
+  contentType: "basic",
+  pathname: "/apps/privacy",
+  noindex: true,
+});
+---
+
+<Layout seo={seo}>
+  <main class="min-h-screen">
+    <section class="pt-32 pb-8 px-6">
+      <div class="max-w-3xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-foreground mb-4">Privacy Policy</h1>
+        <p class="text-muted-foreground">Last updated: December 2024</p>
+      </div>
+    </section>
+
+    <section class="pb-16 px-6">
+      <div class="max-w-3xl mx-auto blog-content text-foreground">
+
+        <h2>Introduction</h2>
+        <p>
+          At GetBee ("we," "our," or "us"), we respect your privacy and are committed to protecting your personal data. This privacy policy explains how we collect, use, and share information about you when you use our Shopify applications and services.
+        </p>
+
+        <h2>Information We Collect</h2>
+
+        <h3>Store Information</h3>
+        <p>
+          When you install our apps, we collect basic information about your Shopify store, including store name, domain, plan type, and contact information.
+        </p>
+
+        <h3>Usage Data</h3>
+        <p>
+          We collect data about how you use our apps, including features accessed, settings configured, and performance metrics to improve our services.
+        </p>
+
+        <h3>Customer Data</h3>
+        <p>
+          Our apps may process customer data from your store (such as orders, reviews, and contact information) solely to provide the app functionality you've requested.
+        </p>
+
+        <h2>How We Use Your Information</h2>
+        <ul>
+          <li>To provide and maintain our app services</li>
+          <li>To process transactions and send service-related communications</li>
+          <li>To provide customer support and respond to your requests</li>
+          <li>To improve our apps and develop new features</li>
+          <li>To comply with legal obligations and enforce our terms</li>
+        </ul>
+
+        <h2>Data Sharing and Disclosure</h2>
+        <p>
+          We do not sell, trade, or otherwise transfer your personal information to third parties except in the following circumstances:
+        </p>
+        <ul>
+          <li>With your explicit consent</li>
+          <li>To trusted service providers who assist in our operations</li>
+          <li>When required by law or to protect our rights</li>
+          <li>In connection with a business transfer or acquisition</li>
+        </ul>
+
+        <h2>Data Security</h2>
+        <p>
+          We implement appropriate technical and organizational measures to protect your data against unauthorized access, alteration, disclosure, or destruction. This includes encryption, secure hosting, and regular security assessments.
+        </p>
+
+        <h2>Data Retention</h2>
+        <p>
+          We retain your information only as long as necessary to provide our services and fulfill the purposes outlined in this policy. When you uninstall our apps, we will delete your data within 90 days unless required to retain it by law.
+        </p>
+
+        <h2>Your Rights</h2>
+        <p>You have the right to:</p>
+        <ul>
+          <li>Access and receive a copy of your personal data</li>
+          <li>Correct inaccurate or incomplete information</li>
+          <li>Delete your personal data (subject to legal requirements)</li>
+          <li>Object to or restrict certain processing activities</li>
+          <li>Data portability where technically feasible</li>
+        </ul>
+
+        <h2>Cookies and Tracking</h2>
+        <p>
+          Our apps may use cookies and similar tracking technologies to enhance functionality and analyze usage patterns. You can control cookie preferences through your browser settings.
+        </p>
+
+        <h2>International Transfers</h2>
+        <p>
+          Your data may be transferred to and processed in countries other than your own. We ensure appropriate safeguards are in place to protect your data during such transfers.
+        </p>
+
+        <h2>Changes to This Policy</h2>
+        <p>
+          We may update this privacy policy from time to time. We will notify you of any material changes by posting the new policy on this page and updating the "Last updated" date.
+        </p>
+
+        <h2>Contact Us</h2>
+        <p>If you have any questions about this privacy policy or our data practices:</p>
+        <ul>
+          <li><strong>Email:</strong> contact@getbee.app</li>
+          <li><strong>Address:</strong> Capaxe Labs LLP, Room no 3, OLD CST Road, Kalina Santacruz East, Mumbai 400029</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+</Layout>
