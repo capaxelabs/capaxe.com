@@ -1,0 +1,149 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import CTABottom from "@/components/CTA.astro";
+import { createSEO } from "@/utils/seo";
+import { siteConfig } from "@/config/site";
+import {
+  appCategories,
+  appComparisons,
+  getAppsByCategory,
+  type AppCategory,
+  type AppComparison,
+  type ShopifyApp
+} from "@/config/app-seo";
+
+interface Props {
+  category: AppCategory;
+  apps: ShopifyApp[];
+  comparisons: AppComparison[];
+}
+
+export function getStaticPaths() {
+  return appCategories.map((category) => {
+    const comparisons = appComparisons.filter(
+      (c) => c.category === category.slug
+    );
+    return {
+      params: { category: category.slug },
+      props: {
+        category,
+        apps: getAppsByCategory(category.slug),
+        comparisons
+      }
+    };
+  });
+}
+
+const { category, apps, comparisons } = Astro.props as Props;
+
+const seo = createSEO({
+  pageName: `Best ${category.name} Apps for Shopify in 2026`,
+  description: category.metaDescription,
+  pathname: `/shopify/best/${category.slug}`,
+  contentType: "service"
+});
+---
+
+<Layout seo={seo}>
+  <section class="pt-32 pb-8 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="bento-tile-accent text-center py-16 px-8">
+        <span class="inline-block text-sm font-medium tracking-wider uppercase text-white/60 mb-4">Best Apps</span>
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">
+          Best {category.name} Apps for Shopify
+        </h1>
+        <p class="text-lg text-white/70 max-w-2xl mx-auto">
+          {category.description}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-8 px-6">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-3xl font-bold mb-4 text-foreground">Top {category.name} Apps</h2>
+      <div class="bento-grid grid-cols-1 md:grid-cols-2">
+        {apps.map((app) => (
+          <div class="bento-tile">
+            <h3 class="text-xl font-bold mb-2 text-foreground">
+              <a href={`/shopify/apps/${app.slug}`} class="hover:text-primary-500 transition-colors">
+                {app.name}
+              </a>
+            </h3>
+            <p class="text-muted-foreground mb-4">{app.shortDescription}</p>
+            <ul class="space-y-2 mb-4">
+              {app.features.slice(0, 4).map((feature) => (
+                <li class="text-sm text-muted-foreground flex items-start gap-2">
+                  <span class="text-primary-500 mt-0.5 shrink-0">--</span>
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+            <a
+              href={`/shopify/apps/${app.slug}`}
+              class="text-sm font-medium text-primary-500 hover:text-primary-400 transition-colors"
+            >
+              Learn more &rarr;
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {comparisons.length > 0 && (
+    <section class="py-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold mb-4 text-foreground">App Comparisons</h2>
+        <p class="text-muted-foreground mb-6">
+          Not sure which {category.name.toLowerCase()} app is right for your store? These head-to-head comparisons break down the key differences.
+        </p>
+        <div class="bento-grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          {comparisons.map((comparison) => {
+            const parts = comparison.slug.split("-vs-");
+            const app1Name = parts[0]?.replace(/-/g, " ") ?? "";
+            const app2Name = parts[1]?.replace(/-/g, " ") ?? "";
+            return (
+              <a href={`/shopify/compare/${comparison.slug}`} class="bento-tile-muted block hover:ring-2 hover:ring-primary-500/30 transition-all">
+                <h3 class="text-lg font-bold mb-2 text-foreground capitalize">
+                  {app1Name} vs {app2Name}
+                </h3>
+                <p class="text-sm text-muted-foreground">{comparison.metaDescription}</p>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="py-8 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="bento-tile-muted">
+        <h2 class="text-3xl font-bold mb-4 text-foreground">How to Choose the Right {category.name} App</h2>
+        <p class="text-muted-foreground leading-relaxed">
+          Selecting the best {category.name.toLowerCase()} app for your Shopify store depends on several factors. Consider your current store size and order volume, as some apps are built for high-traffic merchants while others are better suited for growing businesses. Evaluate your budget carefully since pricing tiers vary significantly across platforms. Look closely at the specific features your store needs today and plan for what you will need as you scale. Integration compatibility with your existing tech stack is equally important -- the best app is one that works seamlessly with the tools you already use. Finally, review customer support quality and onboarding resources, because a smooth setup can make all the difference in getting value quickly.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-8 px-6 pb-16">
+    <div class="max-w-7xl mx-auto">
+      <div class="bento-tile text-center py-12 px-8">
+        <h2 class="text-3xl font-bold mb-4 text-foreground">Need Expert Help?</h2>
+        <p class="text-muted-foreground max-w-2xl mx-auto mb-6">
+          Choosing and integrating the right {category.name.toLowerCase()} app can be complex. Our team at Capaxe specializes in Shopify app selection, setup, and custom integration to make sure your store gets the most out of every tool. Let us handle the technical details so you can focus on growing your business.
+        </p>
+        <a
+          href="/contact"
+          class="inline-flex items-center justify-center rounded-md bg-primary-500 px-6 py-3 text-white text-lg font-medium transition hover:bg-primary-600"
+        >
+          Get a Free Consultation
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <CTABottom />
+</Layout>

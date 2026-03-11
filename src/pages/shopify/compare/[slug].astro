@@ -1,0 +1,212 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import CTABottom from "@/components/CTA.astro";
+import { createSEO } from "@/utils/seo";
+import { siteConfig } from "@/config/site";
+import { appComparisons, getAppBySlug, type AppComparison, type ShopifyApp } from "@/config/app-seo";
+
+interface Props {
+  comparison: AppComparison;
+  app1: ShopifyApp;
+  app2: ShopifyApp;
+}
+
+export function getStaticPaths() {
+  return appComparisons.map((comparison) => ({
+    params: { slug: comparison.slug },
+    props: {
+      comparison,
+      app1: getAppBySlug(comparison.app1Slug)!,
+      app2: getAppBySlug(comparison.app2Slug)!
+    }
+  }));
+}
+
+const { comparison, app1, app2 } = Astro.props as Props;
+
+const seo = createSEO({
+  pageName: `${app1.name} vs ${app2.name} for Shopify`,
+  description: comparison.metaDescription,
+  pathname: `/shopify/compare/${comparison.slug}`,
+  contentType: "service"
+});
+
+function getChooseReasons(app: ShopifyApp, otherApp: ShopifyApp): string[] {
+  const reasons: string[] = [];
+  const features = app.features;
+  const desc = app.shortDescription.toLowerCase();
+
+  if (features.length > otherApp.features.length) {
+    reasons.push(`You need a feature-rich ${comparison.category.replace(/-/g, " ")} solution with broad capabilities`);
+  } else {
+    reasons.push(`You want a focused ${comparison.category.replace(/-/g, " ")} tool that excels at its core strengths`);
+  }
+
+  if (desc.includes("enterprise") || desc.includes("advanced") || desc.includes("scale")) {
+    reasons.push("Your store is scaling rapidly and needs enterprise-grade tooling");
+  } else if (desc.includes("simple") || desc.includes("easy") || desc.includes("accessible")) {
+    reasons.push("You prefer a straightforward setup with a gentle learning curve");
+  } else {
+    reasons.push(`You value ${app.name}'s approach to ${comparison.category.replace(/-/g, " ")} for Shopify`);
+  }
+
+  if (app.integrationBenefits.length > 0) {
+    reasons.push(app.integrationBenefits[0]);
+  }
+
+  if (features.length >= 2) {
+    reasons.push(`You need ${features[0].toLowerCase()} and ${features[1].toLowerCase()}`);
+  } else if (features.length === 1) {
+    reasons.push(`You need ${features[0].toLowerCase()}`);
+  }
+
+  return reasons.slice(0, 4);
+}
+
+const app1Reasons = getChooseReasons(app1, app2);
+const app2Reasons = getChooseReasons(app2, app1);
+---
+
+<Layout seo={seo}>
+  <div class="min-h-screen">
+    <!-- Hero -->
+    <section class="pt-32 pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-tile-accent text-center py-16 relative overflow-hidden">
+          <span class="inline-block px-3 py-1 rounded-full bg-white/10 text-white/80 text-xs font-medium mb-4 border border-white/20">
+            Comparison
+          </span>
+          <h1 class="text-4xl md:text-5xl font-bold mb-4">
+            {app1.name} vs {app2.name}: Which Is Better for Your Shopify Store?
+          </h1>
+          <p class="text-lg text-white/70 max-w-2xl mx-auto">
+            A side-by-side breakdown to help Shopify merchants pick the right {comparison.category.replace(/-/g, " ")} solution for their store.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Verdict -->
+    <section class="pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-tile-muted">
+          <h2 class="text-xl font-semibold text-foreground mb-3">Quick Verdict</h2>
+          <p class="text-base text-muted-foreground leading-relaxed border-l-4 border-primary-400 pl-4">
+            {comparison.verdict}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Side-by-Side Overview -->
+    <section class="pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6 text-foreground text-center">Overview</h2>
+        <div class="bento-grid grid-cols-1 md:grid-cols-2">
+          <div class="bento-tile">
+            <h3 class="text-2xl font-semibold text-foreground mb-2">{app1.name}</h3>
+            <p class="text-sm text-muted-foreground mb-4">{app1.shortDescription}</p>
+            <a
+              href={`/shopify/apps/${app1.slug}`}
+              class="text-sm font-medium text-primary-400 hover:text-primary-300 transition-colors"
+            >
+              Learn more about {app1.name} services
+            </a>
+          </div>
+          <div class="bento-tile">
+            <h3 class="text-2xl font-semibold text-foreground mb-2">{app2.name}</h3>
+            <p class="text-sm text-muted-foreground mb-4">{app2.shortDescription}</p>
+            <a
+              href={`/shopify/apps/${app2.slug}`}
+              class="text-sm font-medium text-primary-400 hover:text-primary-300 transition-colors"
+            >
+              Learn more about {app2.name} services
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature Comparison -->
+    <section class="pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6 text-foreground text-center">Feature Comparison</h2>
+        <div class="bento-grid grid-cols-1 md:grid-cols-2">
+          <div class="bento-tile">
+            <h3 class="text-xl font-semibold text-foreground mb-4">{app1.name} Features</h3>
+            <ul class="space-y-2">
+              {app1.features.map((feature) => (
+                <li class="flex items-start gap-2 text-sm text-muted-foreground">
+                  <span class="text-primary-400 mt-0.5 shrink-0">&#8226;</span>
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="bento-tile">
+            <h3 class="text-xl font-semibold text-foreground mb-4">{app2.name} Features</h3>
+            <ul class="space-y-2">
+              {app2.features.map((feature) => (
+                <li class="flex items-start gap-2 text-sm text-muted-foreground">
+                  <span class="text-primary-400 mt-0.5 shrink-0">&#8226;</span>
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- When to Choose Each -->
+    <section class="pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6 text-foreground text-center">When to Choose Each</h2>
+        <div class="bento-grid grid-cols-1 md:grid-cols-2">
+          <div class="bento-tile-accent">
+            <h3 class="text-xl font-semibold mb-4">Choose {app1.name} If...</h3>
+            <ul class="space-y-3">
+              {app1Reasons.map((reason) => (
+                <li class="flex items-start gap-2 text-sm text-white/80">
+                  <span class="mt-0.5 shrink-0">&#8226;</span>
+                  <span>{reason}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="bento-tile-accent">
+            <h3 class="text-xl font-semibold mb-4">Choose {app2.name} If...</h3>
+            <ul class="space-y-3">
+              {app2Reasons.map((reason) => (
+                <li class="flex items-start gap-2 text-sm text-white/80">
+                  <span class="mt-0.5 shrink-0">&#8226;</span>
+                  <span>{reason}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Need Help Deciding CTA -->
+    <section class="pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-tile-muted text-center py-12">
+          <h2 class="text-3xl font-bold text-foreground mb-3">Need Help Deciding?</h2>
+          <p class="text-base text-muted-foreground max-w-xl mx-auto mb-6">
+            Choosing between {app1.name} and {app2.name} depends on your store's unique needs. Our team at Capaxe can help you evaluate, implement, and optimize the right solution.
+          </p>
+          <a
+            href="/contact"
+            class="inline-flex items-center justify-center rounded-xl bg-primary-500 px-6 py-3 text-sm font-medium text-white hover:bg-primary-600 transition-colors"
+          >
+            Get a Free Consultation
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <CTABottom />
+  </div>
+</Layout>

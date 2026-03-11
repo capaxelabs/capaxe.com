@@ -1,63 +1,49 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { siteConfig } from "@/config/site";
 import ServiceCTA from "@/components/ServiceCTA";
 import CTABottom from "@/components/CTA.astro";
 import { createSEO } from "@/utils/seo";
 
-// Page-specific SEO metadata using the utility
-// const seo = createServiceSEO({
 const seo = createSEO({
   pageName: "Shopify Maintenance",
-  description: "Shopify Maintenance Services",
+  description: "Keep your Shopify store running at peak performance with our ongoing maintenance and support services. We handle theme updates, security patches, performance optimization, and custom development so you can focus on growing your business.",
   keywords: "shopify maintenance, ecommerce maintenance, website maintenance, shopify support, e-commerce maintenance",
-  image: "/images/services/shopify-maintenance.jpg", // Make sure this image exists in your public folder
+  image: "/images/services/shopify-maintenance.jpg",
+  contentType: "service",
+  pathname: "/services/shopify/maintenance-support"
 });
-
-// Override structuredData if needed
-seo.structuredData = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  name: "Shopify Maintenance",
-  description: seo.description,
-  provider: {
-    "@type": "Organization",
-    name: siteConfig.name,
-    url: siteConfig.url,
-  },
-  serviceType: "Shopify Maintenance",
-  areaServed: "Worldwide",
-};
 ---
 
 <Layout seo={seo}>
-  <div class="p-6 pt-32 min-h-screen flex flex-col items-center">
-    <section class="pt-32 pb-16 px-4">
-      <div class="max-w-6xl mx-auto text-center">
-        <h1 class="text-4xl font-extrabold text-foreground sm:text-5xl sm:tracking-tight lg:text-6xl">Shopify Development Services</h1>
-        <p class="mt-5 max-w-xl mx-auto text-xl text-muted-foreground">Custom Shopify solutions to help your business grow online</p>
+  <div class="min-h-screen">
+    <section class="pt-32 pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-tile-accent text-center py-16">
+          <span class="inline-block px-3 py-1 rounded-full bg-white/10 text-white/80 text-xs font-medium mb-4 border border-white/20">
+            Ongoing Support
+          </span>
+          <h1 class="text-5xl md:text-6xl font-bold mb-4">Maintenance & Support</h1>
+          <p class="text-lg text-white/60 max-w-2xl mx-auto">
+            Custom Shopify solutions to help your business grow online with reliable maintenance and expert support.
+          </p>
+        </div>
       </div>
     </section>
-    <section class="py-16 px-4">
-      <div class="max-w-6xl mx-auto">
-        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {/* Custom Theme Development */}
-          <div class="bg-purple-50 rounded-lg p-6">
-            <h3 class="text-lg font-medium text-foreground">Custom Theme Development</h3>
-            <p class="mt-2 text-muted-foreground">Unique, responsive themes tailored to your brand and business needs.</p>
+
+    <section class="pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-grid grid-cols-1 md:grid-cols-3">
+          <div class="bento-tile text-center">
+            <h2 class="text-xl font-semibold text-foreground mb-2">Custom Theme Development</h2>
+            <p class="text-sm text-muted-foreground">Unique, responsive themes tailored to your brand and business needs.</p>
           </div>
-
-          {/* App Development */}
-          <div class="bg-purple-50 rounded-lg p-6">
-            <h3 class="text-lg font-medium text-foreground">App Development</h3>
-            <p class="mt-2 text-muted-foreground">Custom Shopify apps to extend your store's functionality.</p>
+          <div class="bento-tile-accent text-center">
+            <h2 class="text-xl font-semibold mb-2">App Development</h2>
+            <p class="text-sm text-white/70">Custom Shopify apps to extend your store's functionality.</p>
           </div>
-
-          {/* Store Optimization */}
-          <div class="bg-purple-50 rounded-lg p-6">
-            <h3 class="text-lg font-medium text-foreground">Store Optimization</h3>
-
-            <p class="mt-2 text-muted-foreground">Performance optimization and conversion rate improvements.</p>
+          <div class="bento-tile text-center">
+            <h2 class="text-xl font-semibold text-foreground mb-2">Store Optimization</h2>
+            <p class="text-sm text-muted-foreground">Performance optimization and conversion rate improvements.</p>
           </div>
         </div>
       </div>

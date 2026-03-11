@@ -1,70 +1,49 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { siteConfig } from "@/config/site";
 import CTABottom from "@/components/CTA.astro";
 import ServiceCTA from "@/components/ServiceCTA";
 import { createSEO } from "@/utils/seo";
-import type { SEOProps } from "@/utils/seo";
 
-interface Props {
-  seo?: SEOProps;
-  title?: string;
-  description?: string;
-}
-
-// Page-specific SEO metadata using the utility
 const seo = createSEO({
   pageName: "Shopify Technical Support",
-  description: "Expert technical support for your digital presence",
+  description: "Expert technical support for your Shopify store. We provide priority assistance, regular maintenance, security updates, and fast troubleshooting to keep your digital presence running smoothly.",
   keywords: "technical support, Priority Support, expert support, digital presence, website support, e-commerce support",
   image: "/images/services/technical-support.jpg",
   contentType: "service",
   pathname: "/services/support"
 });
-
-// Override structuredData if needed
-seo.structuredData = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "name": "Shopify Technical Support",
-  "description": seo.description,
-  "provider": {
-    "@type": "Organization",
-    "name": siteConfig.name,
-    "url": siteConfig.url
-  },
-  "serviceType": "Shopify Technical Support",
-  "areaServed": "Worldwide"
-};
 ---
 
-<Layout seo={seo} >
-  <div class="p-6 pt-32 bg-gray-50 min-h-screen flex flex-col items-center">
-    <section class="pt-32 pb-16 px-4">
-      <div class="max-w-6xl mx-auto text-center">
-        <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">Technical Support Services</h1>
-        <p class="mt-5 max-w-xl mx-auto text-xl text-muted-foreground">24/7 expert technical support for your digital presence</p>
+<Layout seo={seo}>
+  <div class="min-h-screen">
+    <section class="pt-32 pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-tile-accent text-center py-16">
+          <span class="inline-block px-3 py-1 rounded-full bg-white/10 text-white/80 text-xs font-medium mb-4 border border-white/20">
+            Priority Support
+          </span>
+          <h1 class="text-5xl md:text-6xl font-bold mb-4">Technical Support</h1>
+          <p class="text-lg text-white/60 max-w-2xl mx-auto">
+            Expert technical support for your digital presence, available when you need it most.
+          </p>
+        </div>
       </div>
     </section>
-    <section class="py-16 px-4">
-      <div class="max-w-6xl mx-auto">
-        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {/* 24/7 Support */}
-          <div class="bg-purple-50 rounded-lg p-6">
-            <h3 class="text-lg font-medium text-gray-900">Priority Support</h3>
-            <p class="mt-2 text-muted-foreground">Round-the-clock technical support for your critical business needs.</p>
-          </div>
 
-          {/* Maintenance */}
-          <div class="bg-purple-50 rounded-lg p-6">
-            <h3 class="text-lg font-medium text-gray-900">Maintenance Services</h3>
-            <p class="mt-2 text-muted-foreground">Regular updates, security patches, and performance optimization.</p>
+    <section class="pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-grid grid-cols-1 md:grid-cols-3">
+          <div class="bento-tile text-center">
+            <h2 class="text-xl font-semibold text-foreground mb-2">Priority Support</h2>
+            <p class="text-sm text-muted-foreground">Round-the-clock technical support for your critical business needs.</p>
           </div>
-
-          {/* Troubleshooting */}
-          <div class="bg-purple-50 rounded-lg p-6">
-            <h3 class="text-lg font-medium text-gray-900">Expert Troubleshooting</h3>
-            <p class="mt-2 text-muted-foreground">Quick resolution of technical issues and expert problem-solving.</p>
+          <div class="bento-tile-accent text-center">
+            <h2 class="text-xl font-semibold mb-2">Maintenance Services</h2>
+            <p class="text-sm text-white/70">Regular updates, security patches, and performance optimization.</p>
+          </div>
+          <div class="bento-tile text-center">
+            <h2 class="text-xl font-semibold text-foreground mb-2">Expert Troubleshooting</h2>
+            <p class="text-sm text-muted-foreground">Quick resolution of technical issues and expert problem-solving.</p>
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import Cal from "@calcom/embed-react";
@@ -11,6 +11,12 @@ interface BookingButtonProps {
 
 const BookingButton = ({ children, className, variant = "outline" }: BookingButtonProps) => {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+  const [calTheme, setCalTheme] = useState<"light" | "dark">("light");
+
+  useEffect(() => {
+    const isDark = document.documentElement.classList.contains("dark");
+    setCalTheme(isDark ? "dark" : "light");
+  }, [isBookingModalOpen]);
 
   const handleBookCall = () => {
     setIsBookingModalOpen(true);
@@ -40,7 +46,7 @@ const BookingButton = ({ children, className, variant = "outline" }: BookingButt
                 name: "Mukesh Yadav",
                 email: "",
                 notes: "Book a consultation call with Capaxe Labs",
-                theme: "light"
+                theme: calTheme
                 
               }}
               style={{

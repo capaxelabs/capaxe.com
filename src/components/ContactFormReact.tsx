@@ -120,28 +120,28 @@ export default function ContactFormReact({ siteConfig }: { siteConfig: SiteConfi
                 <div className="max-w-6xl mx-auto">
                     <div className="grid md:grid-cols-2 gap-12">
                         {/* Contact Form */}
-                        <div className="bg-white p-8 rounded-2xl shadow-lg">
+                        <div className="bento-tile p-8">
                             <h2 className="text-2xl font-bold mb-6">Send us a message</h2>
                             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div>
-                                        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                                        <label htmlFor="name" className="block text-sm font-medium text-muted-foreground mb-2">Name</label>
                                         <input
                                             {...register("name")}
                                             id="name"
                                             type="text"
-                                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                            className="w-full px-4 py-2.5 bg-foreground/5 border border-border rounded-xl text-foreground focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm"
                                             placeholder="Your name"
                                         />
                                         {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>}
                                     </div>
                                     <div>
-                                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                                        <label htmlFor="email" className="block text-sm font-medium text-muted-foreground mb-2">Email</label>
                                         <input
                                             {...register("email")}
                                             id="email"
                                             type="email"
-                                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                            className="w-full px-4 py-2.5 bg-foreground/5 border border-border rounded-xl text-foreground focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm"
                                             placeholder="your@email.com"
                                         />
                                         {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>}
@@ -149,12 +149,12 @@ export default function ContactFormReact({ siteConfig }: { siteConfig: SiteConfi
                                 </div>
 
                                 <div>
-                                    <label htmlFor="companyName" className="block text-sm font-medium text-gray-700 mb-2">Company Name</label>
+                                    <label htmlFor="companyName" className="block text-sm font-medium text-muted-foreground mb-2">Company Name</label>
                                     <input
                                         {...register("companyName")}
                                         id="companyName"
                                         type="text"
-                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                        className="w-full px-4 py-2.5 bg-foreground/5 border border-border rounded-xl text-foreground focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm"
                                         placeholder="Your company name"
                                     />
                                     {errors.companyName && <p className="mt-1 text-sm text-red-600">{errors.companyName.message}</p>}
@@ -162,11 +162,11 @@ export default function ContactFormReact({ siteConfig }: { siteConfig: SiteConfi
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div>
-                                        <label htmlFor="serviceType" className="block text-sm font-medium text-gray-700 mb-2">Service Type</label>
+                                        <label htmlFor="serviceType" className="block text-sm font-medium text-muted-foreground mb-2">Service Type</label>
                                         <select
                                             {...register("serviceType")}
                                             id="serviceType"
-                                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                            className="w-full px-4 py-2.5 bg-foreground/5 border border-border rounded-xl text-foreground focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm"
                                         >
                                             <option value="">Select a service</option>
                                             <option value="store_development">Shopify Store Development</option>
@@ -180,11 +180,11 @@ export default function ContactFormReact({ siteConfig }: { siteConfig: SiteConfi
                                     </div>
 
                                     <div>
-                                        <label htmlFor="projectType" className="block text-sm font-medium text-gray-700 mb-2">Project Type</label>
+                                        <label htmlFor="projectType" className="block text-sm font-medium text-muted-foreground mb-2">Project Type</label>
                                         <select
                                             {...register("projectType")}
                                             id="projectType"
-                                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                            className="w-full px-4 py-2.5 bg-foreground/5 border border-border rounded-xl text-foreground focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm"
                                         >
                                             <option value="">Select project type</option>
                                             <option value="new_project">New Project</option>
@@ -196,14 +196,14 @@ export default function ContactFormReact({ siteConfig }: { siteConfig: SiteConfi
 
                                 {watch("projectType") === "existing_project" && (
                                     <div>
-                                        <label htmlFor="storeUrl" className="block text-sm font-medium text-gray-700 mb-2">
+                                        <label htmlFor="storeUrl" className="block text-sm font-medium text-muted-foreground mb-2">
                                             Existing Store URL (optional)
                                         </label>
                                         <input
                                             {...register("storeUrl")}
                                             id="storeUrl"
                                             type="text"
-                                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                            className="w-full px-4 py-2.5 bg-foreground/5 border border-border rounded-xl text-foreground focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm"
                                             placeholder="https://your-store.myshopify.com"
                                         />
                                     </div>
@@ -211,11 +211,11 @@ export default function ContactFormReact({ siteConfig }: { siteConfig: SiteConfi
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div>
-                                        <label htmlFor="budget" className="block text-sm font-medium text-gray-700 mb-2">Budget Range (USD)</label>
+                                        <label htmlFor="budget" className="block text-sm font-medium text-muted-foreground mb-2">Budget Range (USD)</label>
                                         <select
                                             {...register("budget")}
                                             id="budget"
-                                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                            className="w-full px-4 py-2.5 bg-foreground/5 border border-border rounded-xl text-foreground focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm"
                                         >
                                             <option value="">Select budget range</option>
                                             <option value="less_than_5k">Less than $5,000</option>
@@ -227,11 +227,11 @@ export default function ContactFormReact({ siteConfig }: { siteConfig: SiteConfi
                                     </div>
 
                                     <div>
-                                        <label htmlFor="timeline" className="block text-sm font-medium text-gray-700 mb-2">Timeline</label>
+                                        <label htmlFor="timeline" className="block text-sm font-medium text-muted-foreground mb-2">Timeline</label>
                                         <select
                                             {...register("timeline")}
                                             id="timeline"
-                                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                            className="w-full px-4 py-2.5 bg-foreground/5 border border-border rounded-xl text-foreground focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm"
                                         >
                                             <option value="">Select timeline</option>
                                             <option value="immediate">Immediate Start</option>
@@ -243,12 +243,12 @@ export default function ContactFormReact({ siteConfig }: { siteConfig: SiteConfi
                                     </div>
                                 </div>
                                 <div>
-                                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">Project Requirements & Details</label>
+                                    <label htmlFor="message" className="block text-sm font-medium text-muted-foreground mb-2">Project Requirements & Details</label>
                                     <textarea
                                         {...register("message")}
                                         id="message"
                                         rows={4}
-                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                        className="w-full px-4 py-2.5 bg-foreground/5 border border-border rounded-xl text-foreground focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm"
                                         placeholder="Please describe your project requirements, features needed, and any specific challenges you'd like us to address."
                                     ></textarea>
                                     {errors.message && <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>}
@@ -268,7 +268,7 @@ export default function ContactFormReact({ siteConfig }: { siteConfig: SiteConfi
                                 <button
                                     type="submit"
                                     disabled={isLoading}
-                                    className="w-full bg-primary-600 text-white py-3 rounded-lg font-medium hover:bg-primary-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="w-full bg-primary-500 hover:bg-primary-600 text-white py-3 rounded-xl font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                     {isLoading ? "Sending..." : "Send Message"}
                                 </button>

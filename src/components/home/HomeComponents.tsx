@@ -224,7 +224,7 @@ export const StickyCards = ({ siteConfig: _siteConfig }: { siteConfig: SiteConfi
             {/* CTA Tile */}
             <div className="mt-4">
                 <div className="bento-tile-accent text-center py-12">
-                    <h3 className="text-3xl font-bold mb-3">
+                    <h3 className="text-3xl font-bold mb-3 text-white">
                         Ready to Get Started?
                     </h3>
                     <p className="text-lg text-white/70 mb-6 max-w-2xl mx-auto">

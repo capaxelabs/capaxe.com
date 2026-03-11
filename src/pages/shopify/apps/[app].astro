@@ -1,0 +1,165 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import CTABottom from "@/components/CTA.astro";
+import { createSEO } from "@/utils/seo";
+import { siteConfig } from "@/config/site";
+import { shopifyApps, getComparisonsForApp, getAppBySlug, type ShopifyApp } from "@/config/app-seo";
+
+export function getStaticPaths() {
+  return shopifyApps.map((app) => ({
+    params: { app: app.slug },
+    props: { app }
+  }));
+}
+
+const { app } = Astro.props as { app: ShopifyApp };
+const comparisons = getComparisonsForApp(app.slug);
+
+const seo = createSEO({
+  pageName: `${app.name} Shopify Integration Services`,
+  description: app.metaDescription,
+  keywords: `${app.name}, Shopify integration, ${app.name} setup, ${app.name} Shopify, ${app.category}`,
+  pathname: `/shopify/apps/${app.slug}`,
+  contentType: "service"
+});
+
+seo.structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: `${app.name} Integration Services`,
+  description: seo.description,
+  provider: {
+    "@type": "Organization",
+    name: siteConfig.name,
+    url: siteConfig.url
+  },
+  serviceType: `${app.name} Shopify Integration`
+};
+---
+
+<Layout seo={seo}>
+  <div class="min-h-screen">
+    <section class="pt-32 pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-tile-accent text-center py-16">
+          <span class="inline-block px-3 py-1 rounded-full bg-white/10 text-white/80 text-xs font-medium mb-4 border border-white/20">
+            {app.category.replace(/-/g, " ").replace(/\b\w/g, (c: string) => c.toUpperCase())}
+          </span>
+          <h1 class="text-4xl md:text-5xl font-bold mb-4">
+            {app.name} Integration & Setup for Shopify
+          </h1>
+          <p class="text-lg text-white/60 max-w-2xl mx-auto">
+            {app.shortDescription}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-tile-muted">
+          <h2 class="text-2xl font-semibold text-foreground mb-4">About {app.name}</h2>
+          <p class="text-muted-foreground leading-relaxed">
+            {app.description}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-semibold text-foreground mb-6">Key Features</h2>
+        <div class="bento-grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          {app.features.map((feature) => (
+            <div class="bento-tile">
+              <div class="flex items-start gap-3">
+                <span class="text-primary-400 mt-0.5 shrink-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                </span>
+                <p class="text-sm text-muted-foreground">{feature}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-semibold text-foreground mb-6">Our {app.name} Services</h2>
+        <div class="bento-grid grid-cols-1 md:grid-cols-2">
+          {app.services.map((service) => (
+            <div class="bento-tile">
+              <h3 class="text-xl font-semibold text-foreground mb-2">{service.name}</h3>
+              <p class="text-sm text-muted-foreground">{service.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-tile">
+          <h2 class="text-2xl font-semibold text-foreground mb-4">Why Professional Integration Matters</h2>
+          <ul class="space-y-3">
+            {app.integrationBenefits.map((benefit) => (
+              <li class="flex items-start gap-3">
+                <span class="text-primary-400 mt-0.5 shrink-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                </span>
+                <p class="text-muted-foreground">{benefit}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    {comparisons.length > 0 && (
+      <section class="pb-8 px-6">
+        <div class="max-w-7xl mx-auto">
+          <h2 class="text-3xl font-semibold text-foreground mb-6">Related Comparisons</h2>
+          <div class="bento-grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            {comparisons.map((comparison) => {
+              const app1 = getAppBySlug(comparison.app1Slug);
+              const app2 = getAppBySlug(comparison.app2Slug);
+              return (
+                <a href={`/shopify/compare/${comparison.slug}`} class="bento-tile-muted block hover:ring-2 hover:ring-primary-400 transition-all">
+                  <h3 class="text-lg font-semibold text-foreground mb-2">
+                    {app1?.name} vs {app2?.name}
+                  </h3>
+                  <p class="text-sm text-muted-foreground">{comparison.verdict}</p>
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <section class="pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-tile-accent text-center py-12">
+          <h2 class="text-3xl font-semibold mb-4">
+            Ready to Get Started with {app.name}?
+          </h2>
+          <p class="text-white/60 max-w-2xl mx-auto mb-6">
+            Let our team handle the technical complexity of your {app.name} integration so you can focus on growing your business.
+          </p>
+          <a
+            href="/contact"
+            class="inline-flex items-center justify-center rounded-md bg-white text-black px-6 py-3 text-lg font-medium transition hover:bg-white/90"
+          >
+            Get a Free Consultation
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+  <CTABottom />
+</Layout>

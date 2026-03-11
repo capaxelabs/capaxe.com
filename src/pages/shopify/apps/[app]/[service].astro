@@ -1,0 +1,276 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import CTABottom from "@/components/CTA.astro";
+import { createSEO } from "@/utils/seo";
+import { siteConfig } from "@/config/site";
+import {
+  shopifyApps,
+  type ShopifyApp,
+  type AppService,
+} from "@/config/app-seo";
+
+interface Props {
+  app: ShopifyApp;
+  service: AppService;
+}
+
+export function getStaticPaths() {
+  return shopifyApps.flatMap((app) =>
+    app.services.map((service) => ({
+      params: { app: app.slug, service: service.slug },
+      props: { app, service },
+    })),
+  );
+}
+
+const { app, service } = Astro.props as Props;
+
+const seo = createSEO({
+  pageName: `${app.name} ${service.name} for Shopify`,
+  description: `${app.name} ${service.name.toLowerCase()} services for Shopify stores. ${service.description}`,
+  keywords: `${app.name.toLowerCase()}, ${service.slug}, shopify ${app.name.toLowerCase()} ${service.slug}, ${app.category}`,
+  contentType: "service",
+  pathname: `/shopify/apps/${app.slug}/${service.slug}`,
+});
+
+seo.structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: `${app.name} ${service.name}`,
+  description: seo.description,
+  provider: {
+    "@type": "Organization",
+    name: siteConfig.name,
+    url: siteConfig.url,
+  },
+  serviceType: `${app.name} ${service.name}`,
+  category: app.category,
+};
+
+const serviceContent: Record<
+  string,
+  {
+    paragraphs: string[];
+    processSteps: { title: string; description: string }[];
+  }
+> = {
+  setup: {
+    paragraphs: [
+      `Getting ${app.name} running on your Shopify store requires more than a one-click install. Proper ${service.name.toLowerCase()} involves configuring data syncs, mapping your product catalog, setting up tracking pixels, and aligning the app with your existing tech stack. A misconfigured integration leads to data gaps, broken workflows, and lost revenue.`,
+      `Our team handles every aspect of ${app.name} installation and configuration. We ensure your Shopify store data flows correctly into ${app.name}, configure all necessary settings for your specific use case, and verify that every feature is working as intended before launch.`,
+      `From initial planning through go-live, we follow a structured process that eliminates guesswork and reduces time-to-value. You get a production-ready ${app.name} setup that is built to scale with your business.`,
+    ],
+    processSteps: [
+      {
+        title: "Audit",
+        description: `We review your current Shopify setup, identify integration requirements, and create a detailed ${app.name} configuration plan tailored to your business goals.`,
+      },
+      {
+        title: "Execute",
+        description: `We install ${app.name}, configure all settings, map data fields, set up automations, and connect any third-party tools required for your workflow.`,
+      },
+      {
+        title: "Verify",
+        description: `We run end-to-end testing across all configured features, validate data accuracy, and confirm everything is performing correctly in a live environment.`,
+      },
+    ],
+  },
+  migration: {
+    paragraphs: [
+      `Switching to ${app.name} from another platform can be daunting. Data migration involves transferring historical records, recreating automation workflows, rebuilding templates, and ensuring continuity across every customer touchpoint. A poorly executed migration results in data loss, broken automations, and disrupted campaigns.`,
+      `We handle the full ${app.name} migration lifecycle. Our team maps your existing data structures, migrates historical records with full fidelity, rebuilds your automation workflows in ${app.name}, and verifies that everything functions identically or better than your previous setup.`,
+      `Zero downtime is non-negotiable. We execute migrations in parallel with your existing platform, validate every data point, and only cut over once we have confirmed complete accuracy and functionality.`,
+    ],
+    processSteps: [
+      {
+        title: "Audit",
+        description: `We map your current platform data, workflows, and templates to identify every element that needs to be migrated to ${app.name}.`,
+      },
+      {
+        title: "Execute",
+        description: `We transfer all historical data, rebuild automation flows, migrate templates, and configure ${app.name} to match or exceed your previous setup.`,
+      },
+      {
+        title: "Verify",
+        description: `We validate data integrity, test all migrated workflows end-to-end, and run a parallel operation period to ensure zero disruption.`,
+      },
+    ],
+  },
+  optimization: {
+    paragraphs: [
+      `Having ${app.name} installed is only the starting point. Without ongoing optimization, you leave significant revenue on the table. Performance tuning involves analyzing campaign metrics, refining audience segments, A/B testing content and timing, and eliminating workflow bottlenecks.`,
+      `Our optimization service goes beyond surface-level adjustments. We dig into your ${app.name} analytics, identify underperforming areas, and implement targeted improvements backed by data. Every change is measured against clear KPIs to ensure it delivers real business impact.`,
+      `Whether it is improving deliverability rates, increasing conversion through better segmentation, or reducing manual workload through smarter automations, we focus on the changes that move the needle for your Shopify store.`,
+    ],
+    processSteps: [
+      {
+        title: "Audit",
+        description: `We analyze your current ${app.name} performance metrics, identify bottlenecks, and benchmark against industry standards to pinpoint optimization opportunities.`,
+      },
+      {
+        title: "Execute",
+        description: `We implement targeted improvements including refined segments, updated automation triggers, A/B tests, and workflow streamlining within ${app.name}.`,
+      },
+      {
+        title: "Verify",
+        description: `We track results against baseline metrics, measure ROI on each change, and provide a detailed report with recommendations for continued improvement.`,
+      },
+    ],
+  },
+  customization: {
+    paragraphs: [
+      `Out-of-the-box ${app.name} features cover common use cases, but your brand is not common. Custom development lets you build bespoke templates, advanced automation flows, unique integrations, and specialized features that align precisely with your business model.`,
+      `Our team builds custom solutions within ${app.name} that extend its native capabilities. Whether you need custom email templates that match your brand identity, complex conditional logic in automation flows, or integrations with proprietary systems, we deliver production-grade custom work.`,
+      `Every customization is built with maintainability in mind. We document our work, follow ${app.name} best practices, and ensure that your custom features are robust enough to scale alongside your Shopify store.`,
+    ],
+    processSteps: [
+      {
+        title: "Audit",
+        description: `We gather your requirements, assess ${app.name} capabilities, and define a technical specification for the custom features you need.`,
+      },
+      {
+        title: "Execute",
+        description: `We build custom templates, develop advanced automation flows, create bespoke integrations, and implement all requested features within ${app.name}.`,
+      },
+      {
+        title: "Verify",
+        description: `We test all custom work across edge cases, validate performance under load, and walk your team through the new features before handoff.`,
+      },
+    ],
+  },
+};
+
+const content = serviceContent[service.slug] || serviceContent["setup"];
+const otherServices = app.services.filter((s) => s.slug !== service.slug);
+const benefits = app.integrationBenefits.slice(0, 4);
+---
+
+<Layout seo={seo}>
+  <div class="min-h-screen">
+    <section class="pt-32 pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-tile-accent text-center py-16">
+          <span
+            class="inline-block px-3 py-1 rounded-full bg-white/10 text-white/80 text-xs font-medium mb-4 border border-white/20"
+          >
+            {service.name}
+          </span>
+          <h1 class="text-5xl md:text-6xl font-bold mb-4">
+            {app.name}
+            {service.name} for Shopify
+          </h1>
+          <p class="text-lg text-white/60 max-w-2xl mx-auto">
+            {service.description}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-tile-muted p-8 md:p-12">
+          <h2 class="text-3xl font-semibold text-foreground mb-6">
+            What We Do
+          </h2>
+          {
+            content.paragraphs.map((paragraph) => (
+              <p class="text-muted-foreground mb-4 last:mb-0">{paragraph}</p>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-semibold text-foreground mb-6">
+          Key Benefits
+        </h2>
+        <div class="bento-grid grid-cols-1 md:grid-cols-2">
+          {
+            benefits.map((benefit, index) => (
+              <div class="bento-tile">
+                <span class="text-sm font-medium text-primary-400 mb-2 block">
+                  0{index + 1}
+                </span>
+                <p class="text-foreground font-medium">{benefit}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-semibold text-foreground mb-6">Our Process</h2>
+        <div class="bento-grid grid-cols-1 md:grid-cols-3">
+          {
+            content.processSteps.map((step, index) => (
+              <div class="bento-tile">
+                <span class="text-4xl font-bold text-primary-400 mb-3 block">
+                  {index + 1}
+                </span>
+                <h3 class="text-xl font-semibold text-foreground mb-2">
+                  {step.title}
+                </h3>
+                <p class="text-sm text-muted-foreground">{step.description}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-tile-muted p-8 md:p-12">
+          <h2 class="text-3xl font-semibold text-foreground mb-6">
+            Related Services
+          </h2>
+          <div class="flex flex-wrap gap-3">
+            {
+              otherServices.map((s) => (
+                <a
+                  href={`/shopify/apps/${app.slug}/${s.slug}`}
+                  class="inline-block px-4 py-2 rounded-md bg-foreground/10 text-foreground text-sm font-medium hover:bg-foreground/20 transition"
+                >
+                  {app.name} {s.name}
+                </a>
+              ))
+            }
+            <a
+              href={`/shopify/apps/${app.slug}`}
+              class="inline-block px-4 py-2 rounded-md bg-primary-400/10 text-primary-400 text-sm font-medium hover:bg-primary-400/20 transition"
+            >
+              All {app.name} Services
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-tile-accent text-center py-12">
+          <h2 class="text-3xl font-semibold mb-4 text-white">
+            Ready to Get Started?
+          </h2>
+          <p class="text-white/60 max-w-xl mx-auto mb-6">
+            Let our experts handle your {app.name}
+            {service.name.toLowerCase()} so you can focus on growing your Shopify
+            business.
+          </p>
+          <a
+            href="/contact"
+            class="inline-flex items-center justify-center rounded-md bg-white text-black px-6 py-3 text-lg font-medium transition hover:bg-white/90"
+          >
+            Get a Free Consultation
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <CTABottom />
+</Layout>

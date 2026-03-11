@@ -8,8 +8,8 @@ import { createSEO } from "@/utils/seo";
 const posts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const seo = createSEO({
-  pageName: "Shopify Development Blog",
-  description: "Guides, tutorials, and insights on Shopify development, custom app building, Liquid templating, headless commerce, and e-commerce best practices.",
+  pageName: "Shopify Development Blog — Liquid, Headless & App Guides",
+  description: "Expert guides on Shopify Liquid development, headless commerce, custom apps, and theme optimization. Tutorials, case studies, and best practices from Capaxe Labs.",
   keywords: "Shopify development blog, Shopify tutorials, Liquid templating, Shopify app development, headless commerce, e-commerce guides",
   image: "/images/blog-hero.jpg",
   contentType: "basic",
@@ -29,7 +29,7 @@ const regularPosts = posts.slice(1);
           <span class="inline-block px-3 py-1 rounded-full bg-white/10 text-white/80 text-xs font-medium mb-4 border border-white/20">
             Insights & Articles
           </span>
-          <h1 class="text-5xl md:text-6xl font-bold mb-4">Our Blog</h1>
+          <h1 class="text-5xl md:text-6xl font-bold mb-4">Shopify Development Blog</h1>
           <p class="text-lg text-white/60 max-w-2xl mx-auto">
             Insights, updates, and expert perspectives on Shopify development, e-commerce, and the latest industry trends.
           </p>
@@ -42,7 +42,7 @@ const regularPosts = posts.slice(1);
         <section class="pb-6 px-6">
           <div class="max-w-7xl mx-auto">
             <h2 class="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4 pl-1">Featured Post</h2>
-            <a href={`/blog/${featuredPost.id}/`} class="block group">
+            <a href={`/blog/${featuredPost.id}`} class="block group">
               <div class="bento-tile p-0 overflow-hidden">
                 <div class="md:flex">
                   <div class="md:w-1/2 overflow-hidden">
@@ -87,7 +87,7 @@ const regularPosts = posts.slice(1);
         <div class="bento-grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {
             regularPosts.map((post) => (
-              <a href={`/blog/${post.id}/`} class="bento-tile group p-0 overflow-hidden flex flex-col">
+              <a href={`/blog/${post.id}`} class="bento-tile group p-0 overflow-hidden flex flex-col">
                 <div class="overflow-hidden h-48">
                   <img
                     width={720}

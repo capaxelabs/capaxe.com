@@ -1,89 +1,58 @@
 ---
 import { FiCode, FiTool, FiCloud } from "react-icons/fi";
-import { Button } from "@/components/ui/button";
 import CTABottom from "@/components/CTA.astro";
 import Layout from "@/layouts/Layout.astro";
-import { siteConfig } from "@/config/site";
+import ServiceCTA from "@/components/ServiceCTA";
 import { createSEO } from "@/utils/seo";
-import type { SEOProps } from "@/utils/seo";
 
-interface Props {
-  seo?: SEOProps;
-  title?: string;
-  description?: string;
-}
-// Page-specific SEO metadata using the utility
 const seo = createSEO({
   pageName: "Mobile App Development",
-  description:
-    "Professional mobile app development services for iOS and Android platforms, helping businesses create seamless mobile experiences for their customers.",
+  description: "Professional mobile app development services for iOS and Android platforms, helping businesses create seamless mobile experiences for their customers.",
   keywords: "mobile app development, iOS app development, Android app development, cross-platform apps",
   image: "/images/services/mobile-app-development.jpg",
   contentType: "service",
   pathname: "/services/mobile-app-development",
 });
-
-// Override structuredData if needed
-seo.structuredData = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  name: "Mobile App Development",
-  description: seo.description,
-  provider: {
-    "@type": "Organization",
-    name: siteConfig.name,
-    url: siteConfig.url,
-  },
-  serviceType: "Mobile App Development",
-  areaServed: "Worldwide",
-};
 ---
 
 <Layout seo={seo}>
-  <div class="p-6 pt-32 min-h-screen flex flex-col items-center">
-    <section class="pt-32 pb-16 px-4">
-      <div class="max-w-6xl mx-auto text-center">
-        <h1 class="text-5xl md:text-6xl font-bold mb-6">Mobile App Development</h1>
-        <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
-          Take your Shopify store to the next level with our expert app development services. Whether it&apos;s a custom app tailored to your business
-          needs or a public app designed to serve thousands of merchants, we&apos;ve got you covered.
-        </p>
-      </div>
-    </section>
-
-    <section class="py-16 px-4">
-      <div class="max-w-6xl mx-auto">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-          <div class="bento-tile text-center hover:shadow-2xl transition">
-            <FiCode className="text-4xl text-blue-500 mb-4 mx-auto" />
-            <h2 class="text-xl font-semibold text-foreground mb-2">Mobile App Development</h2>
-            <p class="text-muted-foreground">
-              Build apps tailored to your specific requirements, integrating unique features that make your store stand out.
-            </p>
-          </div>
-          <div class="bento-tile text-center hover:shadow-2xl transition">
-            <FiTool className="text-4xl text-green-500 mb-4 mx-auto" />
-            <h2 class="text-xl font-semibold text-foreground mb-2">Mobile App Development</h2>
-            <p class="text-muted-foreground">Create scalable public apps that can be listed on the Shopify App Store to reach a global audience.</p>
-          </div>
-          <div class="bento-tile text-center hover:shadow-2xl transition">
-            <FiCloud className="text-4xl text-purple-500 mb-4 mx-auto" />
-            <h2 class="text-xl font-semibold text-foreground mb-2">Seamless Integrations</h2>
-            <p class="text-muted-foreground">Integrate third-party tools and services seamlessly into your Shopify store for enhanced functionality.</p>
-          </div>
+  <div class="min-h-screen">
+    <section class="pt-32 pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-tile-accent text-center py-16">
+          <span class="inline-block px-3 py-1 rounded-full bg-white/10 text-white/80 text-xs font-medium mb-4 border border-white/20">
+            App Development
+          </span>
+          <h1 class="text-5xl md:text-6xl font-bold mb-4">Mobile App Development</h1>
+          <p class="text-lg text-white/60 max-w-2xl mx-auto">
+            Take your Shopify store to the next level with our expert app development services. Whether it's a custom app tailored to your business needs or a public app designed to serve thousands of merchants, we've got you covered.
+          </p>
         </div>
       </div>
     </section>
 
-    <div class="flex flex-col sm:flex-row gap-4">
-      <a href="/consultation">
-        <Button className="px-6 py-3 bg-primary-500/100 text-white rounded-lg hover:bg-primary-500"> Get a Free Consultation </Button>
-      </a>
-      <a href="/case-studies">
-        <Button className="px-6 py-3 bg-gray-100 text-foreground rounded-lg hover:bg-gray-200"> View Our Case Studies </Button>
-      </a>
-    </div>
+    <section class="pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-grid grid-cols-1 md:grid-cols-3">
+          <div class="bento-tile md:col-span-2 text-center">
+            <FiCode className="text-3xl text-primary-400 mb-4 mx-auto" />
+            <h2 class="text-xl font-semibold text-foreground mb-2">Custom App Development</h2>
+            <p class="text-sm text-muted-foreground">Build apps tailored to your specific requirements, integrating unique features that make your store stand out.</p>
+          </div>
+          <div class="bento-tile-accent text-center">
+            <FiTool className="text-3xl text-white/80 mb-4 mx-auto" />
+            <h2 class="text-xl font-semibold mb-2">Public App Development</h2>
+            <p class="text-sm text-white/70">Create scalable public apps that can be listed on the Shopify App Store to reach a global audience.</p>
+          </div>
+          <div class="bento-tile text-center">
+            <FiCloud className="text-3xl text-violet-400 mb-4 mx-auto" />
+            <h2 class="text-xl font-semibold text-foreground mb-2">Seamless Integrations</h2>
+            <p class="text-sm text-muted-foreground">Integrate third-party tools and services seamlessly into your Shopify store for enhanced functionality.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <ServiceCTA />
   </div>
-
   <CTABottom />
 </Layout>

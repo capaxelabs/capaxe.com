@@ -15,9 +15,9 @@ interface Props {
 const caseStudies = await getCollection("caseStudies");
 
 const seo = createSEO({
-  pageName: "Shopify Case Studies",
-  description: "Real-world Shopify success stories — headless storefronts, custom layaway systems, 3D product viewers, and complex app integrations by Capaxe Labs.",
-  keywords: "Shopify case studies, Shopify development portfolio, headless Shopify projects, custom Shopify apps",
+  pageName: "Shopify Development Case Studies — Real Results",
+  description: "See how Capaxe Labs builds headless storefronts, custom apps, and payment integrations for growing e-commerce brands. Real projects, real results.",
+  keywords: "Shopify case studies, Shopify development portfolio, headless Shopify projects, custom Shopify apps, e-commerce results",
   contentType: "basic",
   pathname: "/case-studies",
 });
@@ -51,7 +51,7 @@ const seo = createSEO({
                   <div class="flex-shrink-0 mr-4">
                     <img
                       src={study.data.logos?.client?.src || `/logos/clients/${study.data.client.toLowerCase().replace(/[^a-z0-9]/g, '-')}.png`}
-                      alt={study.data.logos?.client?.alt || study.data.client}
+                      alt={study.data.logos?.client?.alt || `${study.data.client} logo`}
                       class="h-10 w-auto client-logo-card dark:brightness-0 dark:invert opacity-60"
                     />
                   </div>

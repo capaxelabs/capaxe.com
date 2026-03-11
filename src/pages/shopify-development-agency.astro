@@ -1,0 +1,222 @@
+---
+import { FiCode, FiLayers, FiServer, FiShield, FiTool, FiTrendingUp, FiGlobe, FiRefreshCw, FiCheckCircle, FiTarget, FiUsers, FiClock } from "react-icons/fi";
+import CTABottom from "@/components/CTA.astro";
+import Layout from "@/layouts/Layout.astro";
+import { siteConfig } from "@/config/site";
+import ServiceCTA from "@/components/ServiceCTA";
+import BookingButton from "@/components/BookingButton";
+import ChatContactModal from "@/components/ChatContactModal";
+import { createSEO } from "@/utils/seo";
+import { getFAQPageSchema } from "@/lib/schemas";
+import FAQSchema from "@/components/FAQSchema.astro";
+
+const faqs = [
+  { question: "What does a Shopify development agency do?", answer: "A Shopify development agency builds, customizes, and maintains Shopify stores and apps. This includes custom theme development, private and public app development, headless commerce builds, Shopify Plus customization, platform migrations, and ongoing technical support." },
+  { question: "How much does it cost to hire a Shopify development agency?", answer: "Project costs vary by scope. Simple theme customizations start around $2,000-$5,000. Custom app development ranges from $5,000-$25,000+. Full store builds with custom functionality range from $10,000-$50,000+. We also offer monthly retainers starting at $999/month for ongoing development." },
+  { question: "How long does a typical Shopify project take?", answer: "Timelines depend on complexity. Theme customizations take 1-2 weeks. Custom apps take 2-8 weeks. Full store builds take 4-12 weeks. Headless commerce projects take 6-16 weeks. We provide detailed timelines during the discovery phase." },
+  { question: "Do you work with Shopify Plus merchants?", answer: "Yes. We build on Shopify Plus features including checkout extensibility, Shopify Functions, B2B capabilities, multi-currency storefronts, and custom scripts. Our team is experienced with enterprise-level Shopify requirements." },
+  { question: "Can you migrate my store from another platform to Shopify?", answer: "Yes. We handle migrations from WooCommerce, Magento, BigCommerce, and other platforms. This includes product data, customer records, order history, SEO redirects, and custom functionality rebuilds." },
+  { question: "What is headless Shopify development?", answer: "Headless development decouples the storefront from Shopify's backend. We build custom frontends using Hydrogen, Next.js, or Remix connected to Shopify's Storefront API. This gives you full control over design, performance, and user experience." },
+  { question: "Do you offer ongoing Shopify support?", answer: "Yes. Our retainer plans provide dedicated development hours each month for bug fixes, feature additions, performance optimization, and technical support. Plans start at $999/month with no long-term contracts." },
+  { question: "Where is your Shopify development team based?", answer: "Our team is based in Mumbai, India. We work with clients across the US, UK, Europe, and Australia. We overlap with US business hours and maintain async communication for all timezones." },
+];
+
+const seo = createSEO({
+  pageName: 'Shopify Development Agency — Custom Apps, Stores & Headless Commerce',
+  description: 'Capaxe Labs is a Shopify development agency specializing in custom apps, headless storefronts, and Liquid theme development. Based in Mumbai, serving clients worldwide.',
+  keywords: 'shopify development agency, shopify developer, custom shopify development, shopify experts, shopify partner agency',
+  contentType: 'service',
+  pathname: '/shopify-development-agency'
+});
+
+seo.structuredData = [
+  seo.structuredData as object,
+  getFAQPageSchema(faqs)
+];
+---
+
+<Layout seo={seo}>
+  <div class="min-h-screen">
+    <!-- Hero -->
+    <section class="pt-32 pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-tile-accent text-center py-16 relative overflow-hidden">
+          <span class="inline-block px-3 py-1 rounded-full bg-white/10 text-white/80 text-xs font-medium mb-4 border border-white/20 hero-animate">
+            Shopify Partner Agency
+          </span>
+          <h1 class="text-5xl md:text-6xl font-bold mb-4 hero-animate hero-animate-delay-1">
+            Shopify Development Agency
+          </h1>
+          <p class="text-lg text-white/60 max-w-2xl mx-auto mb-8 hero-animate hero-animate-delay-2">
+            We build custom Shopify apps, headless storefronts, and high-performance themes. A full-stack development team focused entirely on the Shopify ecosystem.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-3 justify-center hero-animate hero-animate-delay-3">
+            <BookingButton client:load className="btn-shimmer">Book a Free Consultation</BookingButton>
+            <ChatContactModal
+              client:load
+              className="inline-flex items-center justify-center px-6 py-2 text-sm font-medium rounded-xl bg-white/10 text-white border border-white/20 hover:bg-white/20 transition-colors"
+            >
+              Chat with Us
+            </ChatContactModal>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Grid -->
+    <section class="pb-8 px-6 reveal-on-scroll">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6 text-foreground text-center">Our Shopify Development Services</h2>
+        <div class="bento-grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          <div class="bento-tile md:col-span-2">
+            <FiCode className="text-3xl text-primary-400 mb-4" />
+            <h3 class="text-xl font-semibold text-foreground mb-2">Custom App Development</h3>
+            <p class="text-sm text-muted-foreground mb-3">
+              Private apps, public App Store listings, Shopify Functions, and checkout extensions. Built with TypeScript, React, and Polaris.
+            </p>
+            <a href="/services/custom-shopify-app-development" class="text-sm text-primary-400 hover:underline">Learn more</a>
+          </div>
+          <div class="bento-tile-accent">
+            <FiGlobe className="text-3xl text-white/80 mb-4" />
+            <h3 class="text-xl font-semibold mb-2">Headless Commerce</h3>
+            <p class="text-sm text-white/70 mb-3">
+              Hydrogen, Next.js, and Remix storefronts with full design control and sub-second page loads via Shopify's Storefront API.
+            </p>
+            <a href="/services/headless-shopify-commerce" class="text-sm text-white/90 hover:underline">Learn more</a>
+          </div>
+          <div class="bento-tile">
+            <FiLayers className="text-3xl text-violet-400 mb-4" />
+            <h3 class="text-xl font-semibold text-foreground mb-2">Store Development</h3>
+            <p class="text-sm text-muted-foreground mb-3">
+              End-to-end Shopify store builds with custom Liquid themes, OS 2.0 sections, and conversion-optimized product pages.
+            </p>
+            <a href="/services/shopify/store-development" class="text-sm text-primary-400 hover:underline">Learn more</a>
+          </div>
+          <div class="bento-tile">
+            <FiShield className="text-3xl text-emerald-400 mb-4" />
+            <h3 class="text-xl font-semibold text-foreground mb-2">Shopify Plus</h3>
+            <p class="text-sm text-muted-foreground mb-3">
+              Enterprise-grade development with checkout extensibility, B2B catalogs, multi-currency, and Shopify Scripts.
+            </p>
+            <a href="/services/shopify/ecommerce-solutions" class="text-sm text-primary-400 hover:underline">Learn more</a>
+          </div>
+          <div class="bento-tile-accent">
+            <FiRefreshCw className="text-3xl text-white/80 mb-4" />
+            <h3 class="text-xl font-semibold mb-2">Platform Migration</h3>
+            <p class="text-sm text-white/70 mb-3">
+              Migrate from WooCommerce, Magento, or BigCommerce with zero data loss, SEO preservation, and custom functionality rebuild.
+            </p>
+            <a href="/services/shopify-migration" class="text-sm text-white/90 hover:underline">Learn more</a>
+          </div>
+          <div class="bento-tile">
+            <FiTool className="text-3xl text-amber-400 mb-4" />
+            <h3 class="text-xl font-semibold text-foreground mb-2">Ongoing Support</h3>
+            <p class="text-sm text-muted-foreground mb-3">
+              Monthly retainer plans for continuous development, bug fixes, performance tuning, and feature additions.
+            </p>
+            <a href="/services/shopify/maintenance-support" class="text-sm text-primary-400 hover:underline">Learn more</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="pb-8 px-6 reveal-on-scroll">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6 text-foreground text-center">Why Choose Capaxe Labs</h2>
+        <div class="bento-grid grid-cols-1 md:grid-cols-2">
+          <div class="bento-tile">
+            <FiTarget className="text-3xl text-primary-400 mb-4" />
+            <h3 class="text-xl font-semibold mb-2 text-foreground">Shopify-Focused Expertise</h3>
+            <p class="text-sm text-muted-foreground">
+              We work exclusively within the Shopify ecosystem. Every developer on our team knows Liquid, the Admin API, Storefront API, and Shopify's extension points inside out.
+            </p>
+          </div>
+          <div class="bento-tile-accent">
+            <FiServer className="text-3xl text-white/80 mb-4" />
+            <h3 class="text-xl font-semibold mb-2">Modern Tech Stack</h3>
+            <p class="text-sm text-white/70">
+              We build with Hydrogen, Next.js, React, TypeScript, and Node.js. Our architecture decisions are driven by performance, scalability, and maintainability.
+            </p>
+          </div>
+          <div class="bento-tile-accent">
+            <FiUsers className="text-3xl text-white/80 mb-4" />
+            <h3 class="text-xl font-semibold mb-2">Full-Stack Capability</h3>
+            <p class="text-sm text-white/70">
+              From Liquid templates to Node.js backends, from Polaris admin UIs to headless storefronts. One team handles your entire Shopify stack.
+            </p>
+          </div>
+          <div class="bento-tile">
+            <FiClock className="text-3xl text-emerald-400 mb-4" />
+            <h3 class="text-xl font-semibold mb-2 text-foreground">Flexible Retainer Plans</h3>
+            <p class="text-sm text-muted-foreground">
+              No long-term contracts. Monthly retainers starting at $999/month give you dedicated development hours, priority support, and consistent velocity on your roadmap.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Our Process -->
+    <section class="pb-8 px-6 reveal-on-scroll">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6 text-foreground text-center">Our Development Process</h2>
+        <div class="bento-grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          {[
+            { step: "1", title: "Discovery", desc: "We learn your business, audit your current setup, and define project requirements and success metrics." },
+            { step: "2", title: "Architecture", desc: "Technical planning, data modeling, API design, and infrastructure decisions before writing any code." },
+            { step: "3", title: "Development", desc: "Iterative sprints with regular demos. Clean, tested code with full documentation at every milestone." },
+            { step: "4", title: "Testing", desc: "Automated tests, cross-browser QA, performance benchmarks, and Shopify compliance validation." },
+            { step: "5", title: "Launch", desc: "Production deployment, DNS configuration, monitoring setup, and go-live support with zero downtime." },
+            { step: "6", title: "Support", desc: "30-day post-launch warranty included. Ongoing retainer plans available for continuous development." },
+          ].map(item => (
+            <div class="bento-tile text-center">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary-500/10 text-primary-400 font-bold text-lg mb-4">{item.step}</span>
+              <h3 class="text-lg font-semibold mb-2 text-foreground">{item.title}</h3>
+              <p class="text-sm text-muted-foreground">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section class="pb-8 px-6 reveal-on-scroll">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-tile-muted text-center py-10 px-8">
+          <h2 class="text-2xl font-bold text-foreground mb-6">Tech Stack We Work With</h2>
+          <div class="flex flex-wrap justify-center gap-2 max-w-4xl mx-auto">
+            {["Liquid", "Hydrogen", "Next.js", "React", "Node.js", "GraphQL", "TypeScript", "Tailwind CSS", "Polaris", "Shopify Admin API", "Storefront API", "Shopify Functions", "Remix", "Prisma", "PostgreSQL", "Cloudflare Workers"].map(tech => (
+              <span class="inline-block px-3 py-1 rounded-full bg-primary-500/10 text-primary-400 text-xs font-medium border border-primary-500/20">
+                {tech}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="pb-8 px-6 reveal-on-scroll">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6 text-foreground text-center">Frequently Asked Questions</h2>
+        <div class="bento-grid grid-cols-1 md:grid-cols-2">
+          {faqs.map(faq => (
+            <div class="bento-tile">
+              <h3 class="text-base font-semibold mb-2 text-foreground">{faq.question}</h3>
+              <p class="text-sm text-muted-foreground">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <ServiceCTA />
+  </div>
+  <CTABottom
+    title="Ready to build with a Shopify development agency?"
+    description="Book a free consultation and let's discuss how we can help grow your Shopify business."
+    buttonText="Book a Call"
+    buttonUrl="/consultation"
+  />
+</Layout>

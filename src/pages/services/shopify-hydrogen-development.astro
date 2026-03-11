@@ -1,0 +1,300 @@
+---
+import { FiZap, FiServer, FiPackage, FiCloud, FiGlobe, FiNavigation, FiShoppingCart, FiRepeat, FiUsers, FiLayers, FiCode, FiArrowRight } from "react-icons/fi";
+import Layout from "@/layouts/Layout.astro";
+import { createSEO } from "@/utils/seo";
+import CTABottom from "@/components/CTA.astro";
+import FAQSchema from "@/components/FAQSchema.astro";
+import BookingButton from "@/components/BookingButton";
+import ChatContactModal from "@/components/ChatContactModal";
+import { siteConfig } from "@/config/site";
+import { getFAQPageSchema, getBreadcrumbSchema } from "@/lib/schemas";
+
+const faqs = [
+  {
+    question: "What is Shopify Hydrogen and how is it different from Liquid themes?",
+    answer: "Hydrogen is Shopify's official React framework built on Remix for building custom storefronts. Unlike Liquid themes that render on Shopify's servers with limited flexibility, Hydrogen gives you full control over the frontend using React components, server-side rendering, and streaming SSR. It connects to Shopify via the Storefront API and deploys on Oxygen or any Node.js host."
+  },
+  {
+    question: "What is Oxygen hosting and do I need it?",
+    answer: "Oxygen is Shopify's global hosting platform built specifically for Hydrogen storefronts. It provides edge deployment, automatic scaling, and tight integration with Shopify's infrastructure. While Hydrogen can be deployed anywhere (Vercel, Cloudflare, etc.), Oxygen offers the simplest deployment path with built-in analytics and zero-config caching."
+  },
+  {
+    question: "How long does a Hydrogen storefront take to build?",
+    answer: "A standard Hydrogen storefront takes 6-10 weeks depending on complexity. Simple catalog stores with standard checkout take 6-8 weeks. Stores with custom features like subscription management, B2B portals, or multi-market support take 10-14 weeks. We scope every project individually during the discovery phase."
+  },
+  {
+    question: "Should I choose Hydrogen or Next.js for my headless Shopify store?",
+    answer: "Choose Hydrogen if your store is Shopify-only and you want built-in commerce components, Oxygen hosting, and opinionated patterns optimized for Shopify. Choose Next.js if you need to integrate multiple backends, have existing Next.js expertise, or need maximum ecosystem flexibility. We build with both and can recommend the right fit."
+  },
+  {
+    question: "Can I migrate my existing Shopify theme to Hydrogen?",
+    answer: "Yes. We handle full migrations from Liquid themes to Hydrogen. The process involves rebuilding the frontend in React while keeping your Shopify admin, products, and orders untouched. We replicate your existing design, improve performance, and add features that were not possible with Liquid. Typical migration takes 8-12 weeks."
+  },
+  {
+    question: "What kind of performance can I expect from a Hydrogen storefront?",
+    answer: "Hydrogen storefronts typically achieve sub-second page loads, 90+ Lighthouse scores, and significantly better Core Web Vitals compared to Liquid themes. Streaming SSR means users see content instantly while data loads in the background. Edge caching on Oxygen delivers consistent performance globally."
+  }
+];
+
+const seo = createSEO({
+  pageName: 'Shopify Hydrogen Development — Custom Storefronts & Oxygen Hosting',
+  description: 'Build high-performance Shopify storefronts with Hydrogen and Remix. Custom Oxygen hosting, server components, and streaming SSR for sub-second page loads.',
+  keywords: 'shopify hydrogen, hydrogen development, oxygen hosting, shopify hydrogen developer, remix shopify, headless shopify hydrogen',
+  contentType: 'service',
+  pathname: '/services/shopify-hydrogen-development'
+});
+
+seo.structuredData = [
+  seo.structuredData as object,
+  getFAQPageSchema(faqs),
+  getBreadcrumbSchema([
+    { name: "Home", url: siteConfig.url },
+    { name: "Services", url: `${siteConfig.url}/services` },
+    { name: "Shopify Hydrogen Development", url: `${siteConfig.url}/services/shopify-hydrogen-development` },
+  ])
+];
+---
+
+<Layout seo={seo}>
+  <FAQSchema faqs={faqs} />
+
+  <div class="min-h-screen">
+    <!-- Hero -->
+    <section class="pt-32 pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-tile-accent text-center py-16 relative overflow-hidden">
+          <span class="inline-block px-3 py-1 rounded-full bg-white/10 text-white/80 text-xs font-medium mb-4 border border-white/20 hero-animate">
+            Hydrogen Development
+          </span>
+          <h1 class="text-5xl md:text-6xl font-bold mb-4 hero-animate hero-animate-delay-1">
+            Shopify Hydrogen Development
+          </h1>
+          <p class="text-lg text-white/60 max-w-2xl mx-auto mb-8 hero-animate hero-animate-delay-2">
+            Build next-generation storefronts with Shopify's official React framework. Streaming SSR, server components, and Oxygen hosting for sub-second page loads.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-3 justify-center hero-animate hero-animate-delay-3">
+            <BookingButton client:load className="btn-shimmer">Start Your Hydrogen Project</BookingButton>
+            <ChatContactModal
+              client:load
+              className="inline-flex items-center justify-center px-6 py-2 text-sm font-medium rounded-xl bg-white/10 text-white border border-white/20 hover:bg-white/20 transition-colors"
+            >
+              Chat with Us
+            </ChatContactModal>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What is Hydrogen -->
+    <section class="pb-8 px-6 reveal-on-scroll">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-tile-muted py-10 px-8">
+          <h2 class="text-3xl font-bold mb-4 text-foreground">What is Shopify Hydrogen?</h2>
+          <p class="text-muted-foreground mb-4 max-w-4xl">
+            Hydrogen is Shopify's open-source React framework built on Remix. It provides commerce-optimized components, hooks, and utilities purpose-built for Shopify's Storefront API. Unlike generic frameworks adapted for commerce, Hydrogen was designed from the ground up to build fast, dynamic Shopify storefronts.
+          </p>
+          <p class="text-muted-foreground max-w-4xl">
+            Paired with Oxygen (Shopify's global hosting platform), Hydrogen delivers edge-rendered storefronts with built-in caching, streaming server-side rendering, and seamless integration with Shopify's checkout, cart, and product systems. It is the recommended path for merchants who need full frontend control without leaving the Shopify ecosystem.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Features Grid -->
+    <section class="pb-8 px-6 reveal-on-scroll">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6 text-foreground text-center">Key Hydrogen Features</h2>
+        <div class="bento-grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          <div class="bento-tile">
+            <FiServer className="text-3xl text-primary-400 mb-4" />
+            <h3 class="text-xl font-semibold text-foreground mb-2">Server Components</h3>
+            <p class="text-sm text-muted-foreground">
+              React Server Components reduce client-side JavaScript. Product data, collection pages, and layouts render on the server with zero bundle cost.
+            </p>
+          </div>
+          <div class="bento-tile">
+            <FiZap className="text-3xl text-amber-400 mb-4" />
+            <h3 class="text-xl font-semibold text-foreground mb-2">Streaming SSR</h3>
+            <p class="text-sm text-muted-foreground">
+              Pages stream HTML to the browser as data loads. Users see content instantly while slower data (reviews, recommendations) fills in progressively.
+            </p>
+          </div>
+          <div class="bento-tile">
+            <FiPackage className="text-3xl text-emerald-400 mb-4" />
+            <h3 class="text-xl font-semibold text-foreground mb-2">Built-in Shopify Components</h3>
+            <p class="text-sm text-muted-foreground">
+              Pre-built components for product images, variant selectors, cart management, and money formatting. Optimized for Shopify's data structures.
+            </p>
+          </div>
+          <div class="bento-tile">
+            <FiCloud className="text-3xl text-cyan-400 mb-4" />
+            <h3 class="text-xl font-semibold text-foreground mb-2">Oxygen Hosting</h3>
+            <p class="text-sm text-muted-foreground">
+              Shopify's global edge hosting with automatic scaling, built-in analytics, and zero-config deployment directly from your Git repository.
+            </p>
+          </div>
+          <div class="bento-tile">
+            <FiGlobe className="text-3xl text-violet-400 mb-4" />
+            <h3 class="text-xl font-semibold text-foreground mb-2">Edge Caching</h3>
+            <p class="text-sm text-muted-foreground">
+              Hydrogen's caching strategies (stale-while-revalidate, cache-control headers) serve pages from the nearest edge location for global performance.
+            </p>
+          </div>
+          <div class="bento-tile">
+            <FiNavigation className="text-3xl text-rose-400 mb-4" />
+            <h3 class="text-xl font-semibold text-foreground mb-2">Commerce-Optimized Routing</h3>
+            <p class="text-sm text-muted-foreground">
+              Built-in route conventions for products, collections, pages, and blogs. SEO-friendly URLs with automatic sitemap generation and meta tag handling.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hydrogen vs Next.js -->
+    <section class="pb-8 px-6 reveal-on-scroll">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6 text-foreground text-center">Hydrogen vs Next.js</h2>
+        <div class="bento-grid grid-cols-1 md:grid-cols-2">
+          <div class="bento-tile-accent">
+            <h3 class="text-2xl font-semibold mb-4">Choose Hydrogen When</h3>
+            <ul class="space-y-3 text-sm text-white/70">
+              <li class="flex items-start gap-2">
+                <FiArrowRight className="text-white/80 mt-0.5 shrink-0" />
+                <span>Your store is 100% Shopify and you want native integration</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <FiArrowRight className="text-white/80 mt-0.5 shrink-0" />
+                <span>You want Oxygen hosting with zero-config deployment</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <FiArrowRight className="text-white/80 mt-0.5 shrink-0" />
+                <span>You need built-in commerce components and cart hooks</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <FiArrowRight className="text-white/80 mt-0.5 shrink-0" />
+                <span>You prefer opinionated patterns over flexibility</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <FiArrowRight className="text-white/80 mt-0.5 shrink-0" />
+                <span>You want Remix's nested routing and data loading</span>
+              </li>
+            </ul>
+          </div>
+          <div class="bento-tile">
+            <h3 class="text-2xl font-semibold text-foreground mb-4">Choose Next.js When</h3>
+            <ul class="space-y-3 text-sm text-muted-foreground">
+              <li class="flex items-start gap-2">
+                <FiArrowRight className="text-primary-400 mt-0.5 shrink-0" />
+                <span>You integrate multiple backends beyond Shopify</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <FiArrowRight className="text-primary-400 mt-0.5 shrink-0" />
+                <span>Your team already has strong Next.js expertise</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <FiArrowRight className="text-primary-400 mt-0.5 shrink-0" />
+                <span>You need maximum ecosystem flexibility and npm packages</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <FiArrowRight className="text-primary-400 mt-0.5 shrink-0" />
+                <span>You want ISR, SSG, and SSR rendering options</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <FiArrowRight className="text-primary-400 mt-0.5 shrink-0" />
+                <span>You plan to deploy on Vercel with edge middleware</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What We Build -->
+    <section class="pb-8 px-6 reveal-on-scroll">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6 text-foreground text-center">What We Build with Hydrogen</h2>
+        <div class="bento-grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          <div class="bento-tile md:col-span-2">
+            <FiShoppingCart className="text-3xl text-primary-400 mb-4" />
+            <h3 class="text-xl font-semibold text-foreground mb-2">Custom Storefronts</h3>
+            <p class="text-sm text-muted-foreground mb-3">
+              Fully custom shopping experiences built from scratch. Unique product pages, dynamic collection filtering, animated carts, and brand-specific UX patterns that Liquid themes cannot achieve.
+            </p>
+            <ul class="text-xs text-muted-foreground space-y-1">
+              <li>- Custom product page layouts and configurators</li>
+              <li>- Advanced collection filtering and sorting</li>
+              <li>- Animated cart drawers and quick-buy flows</li>
+            </ul>
+          </div>
+          <div class="bento-tile-accent">
+            <FiRepeat className="text-3xl text-white/80 mb-4" />
+            <h3 class="text-xl font-semibold mb-2">Subscription Commerce</h3>
+            <p class="text-sm text-white/70 mb-3">
+              Custom subscription management UIs, flexible billing cycles, and customer portals for managing deliveries and payment methods.
+            </p>
+          </div>
+          <div class="bento-tile">
+            <FiGlobe className="text-3xl text-emerald-400 mb-4" />
+            <h3 class="text-xl font-semibold text-foreground mb-2">Multi-Market Stores</h3>
+            <p class="text-sm text-muted-foreground">
+              International storefronts with market-specific pricing, language localization, currency conversion, and region-aware content using Shopify Markets.
+            </p>
+          </div>
+          <div class="bento-tile">
+            <FiUsers className="text-3xl text-violet-400 mb-4" />
+            <h3 class="text-xl font-semibold text-foreground mb-2">B2B Portals</h3>
+            <p class="text-sm text-muted-foreground">
+              Wholesale buyer portals with custom pricing tiers, bulk ordering, quote requests, and company account management on Shopify Plus.
+            </p>
+          </div>
+          <div class="bento-tile">
+            <FiLayers className="text-3xl text-cyan-400 mb-4" />
+            <h3 class="text-xl font-semibold text-foreground mb-2">Headless CMS Integration</h3>
+            <p class="text-sm text-muted-foreground">
+              Connect Hydrogen storefronts with Contentful, Sanity, or Storyblok for editorial content, landing pages, and marketing campaigns managed outside Shopify.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section class="pb-8 px-6 reveal-on-scroll">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-tile-muted text-center py-10 px-8">
+          <h2 class="text-2xl font-bold text-foreground mb-6">Tech Stack</h2>
+          <div class="flex flex-wrap justify-center gap-2 max-w-4xl mx-auto">
+            {["Hydrogen", "Remix", "React 19", "TypeScript", "Storefront API", "GraphQL", "Oxygen", "Tailwind CSS", "Shopify CLI", "Vite", "Node.js", "Edge Functions"].map(tech => (
+              <span class="inline-block px-3 py-1 rounded-full bg-primary-500/10 text-primary-400 text-xs font-medium border border-primary-500/20">
+                {tech}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="pb-8 px-6 reveal-on-scroll">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6 text-foreground text-center">Frequently Asked Questions</h2>
+        <div class="bento-grid grid-cols-1 md:grid-cols-2">
+          {faqs.map(faq => (
+            <div class="bento-tile">
+              <h3 class="text-base font-semibold mb-2 text-foreground">{faq.question}</h3>
+              <p class="text-sm text-muted-foreground">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <CTABottom
+    title="Ready to build with Hydrogen?"
+    description="Book a free call to discuss your Hydrogen storefront. We will scope the project, recommend the right architecture, and get you to launch."
+    buttonText="Book a Call"
+    buttonUrl="/consultation"
+  />
+</Layout>

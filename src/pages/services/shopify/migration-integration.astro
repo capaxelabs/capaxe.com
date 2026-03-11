@@ -2,77 +2,57 @@
 import { FiArrowRight, FiRefreshCcw, FiDatabase, FiSettings } from "react-icons/fi";
 import CTABottom from "@/components/CTA.astro";
 import Layout from "@/layouts/Layout.astro";
-import { siteConfig } from "@/config/site";
 import ServiceCTA from "@/components/ServiceCTA";
 import { createSEO } from "@/utils/seo";
-import type { SEOProps } from "@/utils/seo";
 
-interface Props {
-  seo?: SEOProps;
-  title?: string;
-  description?: string;
-}
-// Page-specific SEO metadata using the utility
 const seo = createSEO({
   pageName: "Migration & Integration",
-  description: "Migration & Integration Services",
-  keywords: "shopify migration, ecommerce migration, integration services, e-commerce migration, shopify integration",
+  description: "Seamlessly migrate your online store to Shopify from WooCommerce, BigCommerce, or Magento with zero data loss and minimal downtime. We also integrate third-party tools like CRMs, ERPs, and marketing platforms.",
+  keywords: "shopify migration, ecommerce migration, integration services, e-commerce migration, shopify integration, woocommerce to shopify, bigcommerce to shopify, magento to shopify",
   image: "/images/services/migration-integration.jpg",
   contentType: "service",
   pathname: "/services/migration-integration"
 });
-
-// Override structuredData if needed
-seo.structuredData = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "name": "Migration & Integration",  
-  "description": seo.description,
-  "provider": {
-    "@type": "Organization",
-    "name": siteConfig.name,
-    "url": siteConfig.url
-  },
-  "serviceType": "Migration & Integration",
-  "areaServed": "Worldwide"
-};
 ---
 
-<Layout seo={seo} >
-  <div class="p-6 pt-32 min-h-screen flex flex-col items-center">
-    <section class="pt-32 pb-16 px-4">
-      <div class="max-w-6xl mx-auto text-center">
-        <h1 class="text-5xl md:text-6xl font-bold mb-6">Migration & Integration Services</h1>
-        <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
-          Transition your online store to Shopify seamlessly. We specialize in migrating from WooCommerce, BigCommerce, and Magento while ensuring
-          data integrity and minimal downtime. Enhance your store’s functionality with third-party tool integrations for a smooth business workflow.
-        </p>
+<Layout seo={seo}>
+  <div class="min-h-screen">
+    <section class="pt-32 pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-tile-accent text-center py-16">
+          <span class="inline-block px-3 py-1 rounded-full bg-white/10 text-white/80 text-xs font-medium mb-4 border border-white/20">
+            Platform Migration
+          </span>
+          <h1 class="text-5xl md:text-6xl font-bold mb-4">Migration & Integration</h1>
+          <p class="text-lg text-white/60 max-w-2xl mx-auto">
+            Transition your online store to Shopify seamlessly. We specialize in migrating from WooCommerce, BigCommerce, and Magento while ensuring data integrity and minimal downtime.
+          </p>
+        </div>
       </div>
     </section>
-    <section class="py-16 px-4">
-      <div class="max-w-6xl mx-auto">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-          <div class="bento-tile text-center hover:shadow-2xl transition">
-            <FiArrowRight className="text-4xl text-blue-500 mb-4 mx-auto" />
+
+    <section class="pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-grid grid-cols-1 lg:grid-cols-3">
+          <div class="bento-tile md:col-span-2 text-center">
+            <FiArrowRight className="text-3xl text-primary-400 mb-4 mx-auto" />
             <h2 class="text-xl font-semibold text-foreground mb-2">WooCommerce to Shopify</h2>
-            <p class="text-muted-foreground">Migrate from WooCommerce to Shopify with ease, preserving all your products, orders, and customer data.</p>
+            <p class="text-sm text-muted-foreground">Migrate from WooCommerce to Shopify with ease, preserving all your products, orders, and customer data.</p>
           </div>
-          <div class="bento-tile text-center hover:shadow-2xl transition">
-            <FiRefreshCcw className="text-4xl text-green-500 mb-4 mx-auto" />
-            <h2 class="text-xl font-semibold text-foreground mb-2">BigCommerce to Shopify</h2>
-            <p class="text-muted-foreground">Transition from BigCommerce to Shopify while enhancing performance and simplifying management.</p>
+          <div class="bento-tile-accent text-center">
+            <FiRefreshCcw className="text-3xl text-white/80 mb-4 mx-auto" />
+            <h2 class="text-xl font-semibold mb-2">BigCommerce to Shopify</h2>
+            <p class="text-sm text-white/70">Transition from BigCommerce to Shopify while enhancing performance and simplifying management.</p>
           </div>
-          <div class="bento-tile text-center hover:shadow-2xl transition">
-            <FiDatabase className="text-4xl text-purple-500 mb-4 mx-auto" />
+          <div class="bento-tile text-center">
+            <FiDatabase className="text-3xl text-violet-400 mb-4 mx-auto" />
             <h2 class="text-xl font-semibold text-foreground mb-2">Magento to Shopify</h2>
-            <p class="text-muted-foreground">Move from Magento to Shopify for a more user-friendly platform, faster performance, and better scalability.</p>
+            <p class="text-sm text-muted-foreground">Move from Magento to Shopify for a more user-friendly platform, faster performance, and better scalability.</p>
           </div>
-          <div class="bento-tile text-center hover:shadow-2xl transition">
-            <FiSettings className="text-4xl text-yellow-500 mb-4 mx-auto" />
+          <div class="bento-tile text-center">
+            <FiSettings className="text-3xl text-amber-400 mb-4 mx-auto" />
             <h2 class="text-xl font-semibold text-foreground mb-2">Third-Party Integrations</h2>
-            <p class="text-muted-foreground">
-              Connect your Shopify store with essential tools like CRMs, ERPs, and marketing platforms to streamline operations.
-            </p>
+            <p class="text-sm text-muted-foreground">Connect your Shopify store with essential tools like CRMs, ERPs, and marketing platforms to streamline operations.</p>
           </div>
         </div>
       </div>

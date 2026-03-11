@@ -98,7 +98,7 @@ const layawaySlides = [
                 {caseStudy.data.logos?.client?.src ? (
                   <img
                     src={caseStudy.data.logos.client.src}
-                    alt={caseStudy.data.logos.client.alt || caseStudy.data.client}
+                    alt={caseStudy.data.logos.client.alt || `${caseStudy.data.client} logo`}
                     class="h-6 w-auto"
                   />
                 ) : null}
@@ -167,7 +167,7 @@ const layawaySlides = [
             {(caseStudy.data.logos?.technologies && caseStudy.data.logos.technologies.length > 0) ? (
               caseStudy.data.logos.technologies.map((tech: any) => (
                 <div class="bento-tile-muted flex items-center gap-2 px-3 py-2 rounded-lg">
-                  <img src={tech.src} alt={tech.alt || tech.name} class="h-5 w-auto tech-logo" />
+                  <img src={tech.src} alt={tech.alt || `${tech.name} logo`} class="h-5 w-auto tech-logo" />
                   <span class="text-sm font-medium text-foreground">{tech.name}</span>
                 </div>
               ))
@@ -183,7 +183,7 @@ const layawaySlides = [
               {caseStudy.data.logos?.client?.src && (
                 <img
                   src={caseStudy.data.logos.client.src}
-                  alt={caseStudy.data.logos?.client?.alt || caseStudy.data.client}
+                  alt={caseStudy.data.logos?.client?.alt || `${caseStudy.data.client} logo`}
                   class="h-5 w-auto client-logo"
                 />
               )}

@@ -1,64 +1,53 @@
 ---
+import { FiCode, FiServer, FiLayers } from "react-icons/fi";
 import CTABottom from "@/components/CTA.astro";
 import Layout from "@/layouts/Layout.astro";
-import { siteConfig } from "@/config/site";
 import ServiceCTA from "@/components/ServiceCTA";
-import { FiCode } from "react-icons/fi";
 import { createSEO } from "@/utils/seo";
-import type { SEOProps } from "@/utils/seo";
 
-// Page-specific SEO metadata using the utility
 const seo = createSEO({
   pageName: "Web Development",
-  description: "Modern web solutions built with cutting-edge technologies",
+  description: "Modern web development services built with cutting-edge technologies. From responsive frontends with React and Next.js to scalable backend solutions, we deliver full-stack web applications.",
   keywords: "web development, frontend development, backend development, full stack development, web design, web development services",
   image: "/images/services/web-development.jpg",
   contentType: "service",
   pathname: "/services/web-development"
 });
-
-// Override structuredData if needed
-seo.structuredData = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "name": "Web Development",
-  "description": seo.description,
-  "provider": {
-    "@type": "Organization",
-    "name": siteConfig.name,
-    "url": siteConfig.url
-  },
-  "serviceType": "Web Development",
-  "areaServed": "Worldwide"
-};
 ---
 
-<Layout seo={seo} >
-  <div class="p-6 pt-32 bg-gray-50 min-h-screen flex flex-col items-center">
-    <section class="pt-32 pb-16 px-4">
-      <div class="max-w-6xl mx-auto text-center">
-        <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">Web Development Services</h1>
-        <p class="mt-5 max-w-xl mx-auto text-xl text-muted-foreground">Modern web solutions built with cutting-edge technologies</p>
+<Layout seo={seo}>
+  <div class="min-h-screen">
+    <section class="pt-32 pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-tile-accent text-center py-16">
+          <span class="inline-block px-3 py-1 rounded-full bg-white/10 text-white/80 text-xs font-medium mb-4 border border-white/20">
+            Web Development
+          </span>
+          <h1 class="text-5xl md:text-6xl font-bold mb-4">Web Development Services</h1>
+          <p class="text-lg text-white/60 max-w-2xl mx-auto">
+            Modern web solutions built with cutting-edge technologies for performance, scalability, and exceptional user experiences.
+          </p>
+        </div>
       </div>
     </section>
 
-    <section class="py-16 px-4">
-      <div class="max-w-6xl mx-auto">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-          <div class="bg-white shadow-lg rounded-lg p-6 text-center hover:shadow-2xl transition">
-            <FiCode className="text-4xl text-blue-500 mb-4 mx-auto" />
-            <h2 class="text-xl font-semibold text-gray-800 mb-2">Frontend Development</h2>
-            <p class="text-muted-foreground">Responsive, modern, and user-friendly interfaces using React, Next.js, and more.</p>
+    <section class="pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-grid grid-cols-1 md:grid-cols-3">
+          <div class="bento-tile md:col-span-2 text-center">
+            <FiCode className="text-3xl text-primary-400 mb-4 mx-auto" />
+            <h2 class="text-xl font-semibold text-foreground mb-2">Frontend Development</h2>
+            <p class="text-sm text-muted-foreground">Responsive, modern, and user-friendly interfaces using React, Next.js, and more.</p>
           </div>
-          <div class="bg-white shadow-lg rounded-lg p-6 text-center hover:shadow-2xl transition">
-            <FiCode className="text-4xl text-blue-500 mb-4 mx-auto" />
-            <h2 class="text-xl font-semibold text-gray-800 mb-2">Backend Development</h2>
-            <p class="text-muted-foreground">Scalable and secure backend solutions with Node.js, Python, and other technologies.</p>
+          <div class="bento-tile text-center">
+            <FiServer className="text-3xl text-emerald-400 mb-4 mx-auto" />
+            <h2 class="text-xl font-semibold text-foreground mb-2">Backend Development</h2>
+            <p class="text-sm text-muted-foreground">Scalable and secure backend solutions with Node.js, Python, and other technologies.</p>
           </div>
-          <div class="bg-white shadow-lg rounded-lg p-6 text-center hover:shadow-2xl transition">
-            <FiCode className="text-4xl text-blue-500 mb-4 mx-auto" />
-            <h2 class="text-xl font-semibold text-gray-800 mb-2">Full Stack Solutions</h2>
-            <p class="text-muted-foreground">End-to-end web applications with seamless integration and optimal performance.</p>
+          <div class="bento-tile-accent text-center">
+            <FiLayers className="text-3xl text-white/80 mb-4 mx-auto" />
+            <h2 class="text-xl font-semibold mb-2">Full Stack Solutions</h2>
+            <p class="text-sm text-white/70">End-to-end web applications with seamless integration and optimal performance.</p>
           </div>
         </div>
       </div>

@@ -21,6 +21,60 @@ const {
 
 const pathname = Astro.url.pathname.replace(/\/+$/, '') || '/';
 const canonicalURL = canonical || new URL(pathname, Astro.site).toString();
+
+const segmentLabels: Record<string, string> = {
+  services: 'Services',
+  blog: 'Blog',
+  'case-studies': 'Case Studies',
+  about: 'About',
+  contact: 'Contact',
+  consultation: 'Consultation',
+  retainer: 'Retainer Plans',
+  faq: 'FAQ',
+  'hire-shopify-developer': 'Hire a Shopify Developer',
+  'shopify-plus': 'Shopify Plus',
+  'shopify-support': 'Shopify Support',
+  legal: 'Legal',
+  locations: 'Locations',
+  shopify: 'Shopify',
+  press: 'Press',
+  plans: 'Plans',
+};
+
+function generateBreadcrumbs(path: string) {
+  if (path === '/' || path === '') return null;
+  const segments = path.split('/').filter(Boolean);
+  const items = [{ name: 'Home', url: siteConfig.url }];
+  let currentPath = '';
+  for (const segment of segments) {
+    currentPath += `/${segment}`;
+    const label = segmentLabels[segment] || segment.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+    items.push({ name: label, url: `${siteConfig.url}${currentPath}` });
+  }
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": items.map((item, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "name": item.name,
+      "item": item.url
+    }))
+  };
+}
+
+const hasExistingBreadcrumb = structuredData && (
+  Array.isArray(structuredData)
+    ? structuredData.some((s: any) => s?.['@type'] === 'BreadcrumbList')
+    : (structuredData as any)?.['@type'] === 'BreadcrumbList'
+);
+
+const autoBreadcrumb = !hasExistingBreadcrumb ? generateBreadcrumbs(pathname) : null;
+
+const allStructuredData = [
+  ...(structuredData ? (Array.isArray(structuredData) ? structuredData : [structuredData]) : []),
+  ...(autoBreadcrumb ? [autoBreadcrumb] : [])
+].filter(Boolean);
 ---
 
 <!-- Primary Meta Tags -->
@@ -64,10 +118,8 @@ const canonicalURL = canonical || new URL(pathname, Astro.site).toString();
 <meta name="twitter:image" content={new URL(image, Astro.site)} />
 
 <!-- Schema.org structured data -->
-{structuredData && (
-  Array.isArray(structuredData)
-    ? structuredData.map(schema => (
-        <script type="application/ld+json" set:html={JSON.stringify(schema)} />
-      ))
-    : <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+{allStructuredData.length > 0 && (
+  allStructuredData.map(schema => (
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  ))
 )}

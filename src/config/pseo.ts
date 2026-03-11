@@ -120,6 +120,159 @@ export const pseoCities: PSEOCity[] = [
     slug: "san-jose",
     name: "San Jose",
     localChallenge: "tech-forward consumers with zero tolerance for latency"
+  },
+  // UK Cities
+  {
+    slug: "london",
+    name: "London",
+    localChallenge: "fierce DTC competition across a digitally mature market"
+  },
+  {
+    slug: "manchester",
+    name: "Manchester",
+    localChallenge: "fast-growing northern e-commerce brands scaling beyond local markets"
+  },
+  {
+    slug: "birmingham",
+    name: "Birmingham",
+    localChallenge: "midlands retailers bridging high street and digital commerce"
+  },
+  {
+    slug: "leeds",
+    name: "Leeds",
+    localChallenge: "Yorkshire brands competing with London-level digital expectations"
+  },
+  {
+    slug: "glasgow",
+    name: "Glasgow",
+    localChallenge: "Scottish merchants navigating cross-border UK and EU selling"
+  },
+  {
+    slug: "bristol",
+    name: "Bristol",
+    localChallenge: "creative economy brands demanding standout shopping experiences"
+  },
+  {
+    slug: "edinburgh",
+    name: "Edinburgh",
+    localChallenge: "heritage and lifestyle brands requiring premium digital presence"
+  },
+  {
+    slug: "liverpool",
+    name: "Liverpool",
+    localChallenge: "retail-rich city with growing appetite for online commerce"
+  },
+  {
+    slug: "newcastle",
+    name: "Newcastle",
+    localChallenge: "northeast brands needing mobile-first experiences for younger audiences"
+  },
+  {
+    slug: "cardiff",
+    name: "Cardiff",
+    localChallenge: "Welsh businesses expanding reach through modern e-commerce"
+  },
+  // EU Cities
+  {
+    slug: "amsterdam",
+    name: "Amsterdam",
+    localChallenge: "Dutch merchants optimizing for multilingual European selling"
+  },
+  {
+    slug: "berlin",
+    name: "Berlin",
+    localChallenge: "German brands scaling across the EU's largest e-commerce market"
+  },
+  {
+    slug: "paris",
+    name: "Paris",
+    localChallenge: "French luxury and lifestyle brands requiring refined shopping experiences"
+  },
+  {
+    slug: "dublin",
+    name: "Dublin",
+    localChallenge: "Irish companies leveraging English-language EU market access"
+  },
+  {
+    slug: "stockholm",
+    name: "Stockholm",
+    localChallenge: "Scandinavian brands with high digital adoption and UX expectations"
+  },
+  {
+    slug: "barcelona",
+    name: "Barcelona",
+    localChallenge: "Spanish retailers expanding across Iberian and Latin markets"
+  },
+  {
+    slug: "milan",
+    name: "Milan",
+    localChallenge: "Italian fashion and design brands digitizing premium commerce"
+  },
+  {
+    slug: "copenhagen",
+    name: "Copenhagen",
+    localChallenge: "Danish DTC brands known for design-driven digital experiences"
+  },
+  {
+    slug: "lisbon",
+    name: "Lisbon",
+    localChallenge: "Portuguese businesses tapping into Southern European e-commerce growth"
+  },
+  {
+    slug: "vienna",
+    name: "Vienna",
+    localChallenge: "Austrian merchants serving DACH region with localized storefronts"
+  },
+  // Indian Cities
+  {
+    slug: "mumbai",
+    name: "Mumbai",
+    localChallenge: "India's commercial capital with high-volume cross-border commerce"
+  },
+  {
+    slug: "delhi",
+    name: "Delhi",
+    localChallenge: "NCR brands scaling rapidly across India's largest consumer market"
+  },
+  {
+    slug: "bangalore",
+    name: "Bangalore",
+    localChallenge: "tech-savvy DTC brands building modern e-commerce experiences"
+  },
+  {
+    slug: "hyderabad",
+    name: "Hyderabad",
+    localChallenge: "emerging e-commerce hub with growing international selling"
+  },
+  {
+    slug: "chennai",
+    name: "Chennai",
+    localChallenge: "South Indian brands expanding into pan-India and global markets"
+  },
+  {
+    slug: "pune",
+    name: "Pune",
+    localChallenge: "startup ecosystem driving innovative e-commerce solutions"
+  },
+  {
+    slug: "kolkata",
+    name: "Kolkata",
+    localChallenge: "eastern India's retail hub transitioning to digital commerce"
+  },
+  {
+    slug: "ahmedabad",
+    name: "Ahmedabad",
+    localChallenge: "Gujarat's manufacturing and textile brands going direct-to-consumer"
+  },
+  {
+    slug: "jaipur",
+    name: "Jaipur",
+    localChallenge: "artisan and heritage brands scaling through modern online storefronts"
+  },
+  {
+    slug: "kochi",
+    name: "Kochi",
+    localChallenge: "Kerala's export-oriented businesses building global Shopify presence"
   }
 ];
 
