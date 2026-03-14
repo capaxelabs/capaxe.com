@@ -7,7 +7,7 @@ const currentYear = new Date().getFullYear();
 
 <footer class="bg-card border-t border-border">
   <div class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
-    <div class="bento-grid grid-cols-1 lg:grid-cols-4">
+    <div class="bento-grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5">
       <div class="bento-tile lg:col-span-1">
         <div class="flex items-center gap-2 mb-4">
           <img src="/logo.svg" alt="Capaxe Labs" class="w-10 h-10" />
@@ -21,12 +21,19 @@ const currentYear = new Date().getFullYear();
       </div>
 
       <div class="bento-tile">
-        <h3 class="text-sm font-semibold text-primary-400 uppercase tracking-wider">Solutions</h3>
+        <h3
+          class="text-sm font-semibold text-primary-400 uppercase tracking-wider"
+        >
+          Solutions
+        </h3>
         <ul class="mt-4 space-y-3">
           {
             siteConfig.services.shopify.items.map((item) => (
               <li>
-                <a href={item.href} class="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <a
+                  href={item.href}
+                  class="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
                   {item.title}
                 </a>
               </li>
@@ -36,12 +43,19 @@ const currentYear = new Date().getFullYear();
       </div>
 
       <div class="bento-tile">
-        <h3 class="text-sm font-semibold text-primary-400 uppercase tracking-wider">Case Studies</h3>
+        <h3
+          class="text-sm font-semibold text-primary-400 uppercase tracking-wider"
+        >
+          Case Studies
+        </h3>
         <ul class="mt-4 space-y-3">
           {
             menuConfig.footerNav.caseStudies.map((item) => (
               <li>
-                <a href={item.href} class="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <a
+                  href={item.href}
+                  class="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
                   {item.title}
                 </a>
               </li>
@@ -51,17 +65,90 @@ const currentYear = new Date().getFullYear();
       </div>
 
       <div class="bento-tile">
-        <h3 class="text-sm font-semibold text-primary-400 uppercase tracking-wider">Company</h3>
+        <h3
+          class="text-sm font-semibold text-primary-400 uppercase tracking-wider"
+        >
+          Company
+        </h3>
         <ul class="mt-4 space-y-3">
           {
             menuConfig.footerNav.company.map((item) => (
               <li>
-                <a href={item.href} class="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <a
+                  href={item.href}
+                  class="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
                   {item.title}
                 </a>
               </li>
             ))
           }
+        </ul>
+      </div>
+
+      <div class="bento-tile lg:col-span-1">
+        <h3
+          class="text-sm font-semibold text-primary-400 uppercase tracking-wider"
+        >
+          Projects
+        </h3>
+        <ul class="mt-4 space-y-3">
+          <li>
+            <a
+              href="https://www.memoid.dev"
+              target="_blank"
+              rel="noopener"
+              class="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >Memoid</a>
+          </li>
+          <li>
+            <a
+              href="https://www.shootflo.com"
+              target="_blank"
+              rel="noopener"
+              class="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >Shootflo</a>
+          </li>
+          <li>
+            <a
+              href="https://www.photosshoot.com"
+              target="_blank"
+              rel="noopener"
+              class="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >PhotosShoot</a>
+          </li>
+          <li>
+            <a
+              href="https://www.memoid.dev"
+              target="_blank"
+              rel="noopener"
+              class="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >Memoid</a>
+          </li>
+          <li>
+            <a
+              href="https://www.beefi.ai"
+              target="_blank"
+              rel="noopener"
+              class="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >Beefi</a>
+          </li>
+          <li>
+            <a
+              href="https://www.getbee.app"
+              target="_blank"
+              rel="noopener"
+              class="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >Getbee</a>
+          </li>
+          <li>
+            <a
+              href="https://www.useklyro.com"
+              target="_blank"
+              rel="noopener"
+              class="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >Klyro</a>
+          </li>
         </ul>
       </div>
     </div>
@@ -77,7 +164,10 @@ const currentYear = new Date().getFullYear();
             {
               menuConfig.footerNav.legal.map((item) => (
                 <li>
-                  <a href={item.href} class="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  <a
+                    href={item.href}
+                    class="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  >
                     {item.title}
                   </a>
                 </li>
@@ -89,4 +179,3 @@ const currentYear = new Date().getFullYear();
     </div>
   </div>
 </footer>
-
