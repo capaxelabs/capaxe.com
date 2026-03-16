@@ -85,16 +85,28 @@ export const menuConfig: MenuConfig = {
         ],
         caseStudies: [
             {
-                title: "Shopify Store Redesign",
+                title: "CLD9 Headless Storefront",
                 href: "/case-studies/cld9-headless-storefront",
             },
             {
-                title: "Custom App Development",
+                title: "Layaway Payment Solution",
                 href: "/case-studies/layaway-solution",
             },
             {
-                title: "E-commerce Migration",
-                href: "/case-studies/furniture-headless-store",
+                title: "Shootflo Platform",
+                href: "/case-studies/shootflo-photo-workflow",
+            },
+            {
+                title: "PhotosShoot AI",
+                href: "/case-studies/photosshoot-ai-photography",
+            },
+            {
+                title: "Memoid Platform",
+                href: "/case-studies/memoid-developer-platform",
+            },
+            {
+                title: "GetBee App",
+                href: "/case-studies/getbee-mobile-app",
             },
         ],
     },

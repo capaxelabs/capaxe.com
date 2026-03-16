@@ -1,0 +1,70 @@
+---
+title: 'GetBee — Mobile App for On-Demand Local Services'
+client: 'GetBee'
+description: 'How Capaxe Labs built GetBee, a mobile app platform connecting users with vetted local service providers for on-demand home services, deliveries, and errands.'
+problemStatement: 'Finding reliable local service providers is a fragmented, trust-less experience. Users rely on word-of-mouth or outdated directories with no way to verify quality or availability.'
+solution: 'Built a full-stack mobile app platform with real-time booking, provider matching, in-app payments, and rating systems — creating a trusted marketplace for local services.'
+timeframe: '14 weeks'
+techStack: ['React Native', 'Node.js', 'PostgreSQL', 'Stripe', 'Firebase', 'AWS']
+pubDate: 'Feb 20 2025'
+---
+
+## Problem Statement
+
+Consumers struggle to find trustworthy local service providers. Whether it's home cleaning, delivery, or handyman work — the process involves calling multiple numbers, negotiating prices, and hoping the provider shows up.
+
+Service providers, on the other hand, lack a reliable channel to find customers beyond word-of-mouth. They needed a platform that handles discovery, booking, payments, and reputation — all in one place.
+
+## Solution
+
+We built GetBee as a two-sided marketplace connecting consumers with local service providers:
+
+### Consumer App
+
+- **Service Discovery**: Browse categorized services with filters for location, rating, and price
+- **Real-Time Booking**: Instant booking with provider availability and confirmation
+- **Live Tracking**: Track the service provider's arrival in real-time on a map
+- **In-App Payments**: Secure payments via Stripe with automatic receipts
+- **Ratings & Reviews**: Two-way rating system building trust in the marketplace
+
+### Provider App
+
+- **Job Dashboard**: View incoming requests, manage schedule, and track earnings
+- **Profile Management**: Showcase skills, certifications, and service history
+- **Earnings & Payouts**: Transparent earnings tracking with scheduled Stripe payouts
+- **Availability Calendar**: Set working hours and service areas
+
+### Admin Platform
+
+- **Provider Vetting**: Application review and background check workflow
+- **Dispute Resolution**: Tools for handling complaints and refund requests
+- **Analytics Dashboard**: Marketplace metrics, revenue tracking, and growth KPIs
+- **Promotions Engine**: Create and manage promotional offers and referral programs
+
+### Technical Architecture
+
+- **Mobile Apps**: React Native for cross-platform iOS and Android development
+- **Backend**: Node.js API with PostgreSQL for transactional data
+- **Real-Time**: Firebase for live tracking, push notifications, and chat
+- **Payments**: Stripe Connect for marketplace payments and provider payouts
+- **Infrastructure**: AWS for reliable, scalable hosting
+
+## Results
+
+GetBee launched as a trusted local services marketplace:
+
+✅ **Cross-Platform** — Single codebase serving both iOS and Android users
+✅ **Real-Time Matching** — Providers matched and confirmed within minutes
+✅ **Secure Payments** — Stripe Connect handles escrow and automatic payouts
+✅ **Trust & Safety** — Rating system and vetting process build marketplace trust
+✅ **Scalable** — Architecture supports expansion to new cities and service categories
+
+## Technical Highlights
+
+- Built real-time geolocation tracking with Firebase and Google Maps integration
+- Implemented Stripe Connect for marketplace-style payment splits and escrow
+- Created push notification system for booking updates and promotional campaigns
+- Designed efficient provider matching algorithm based on proximity, rating, and availability
+- Deployed React Native app with OTA updates for rapid feature rollouts
+
+Visit [GetBee](https://www.getbee.app) to explore the platform.
