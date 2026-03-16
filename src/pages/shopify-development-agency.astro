@@ -8,7 +8,7 @@ import BookingButton from "@/components/BookingButton";
 import ChatContactModal from "@/components/ChatContactModal";
 import { createSEO } from "@/utils/seo";
 import { getFAQPageSchema } from "@/lib/schemas";
-import FAQSchema from "@/components/FAQSchema.astro";
+import FAQSection from "@/components/FAQSection.astro";
 
 const faqs = [
   { question: "What does a Shopify development agency do?", answer: "A Shopify development agency builds, customizes, and maintains Shopify stores and apps. This includes custom theme development, private and public app development, headless commerce builds, Shopify Plus customization, platform migrations, and ongoing technical support." },
@@ -196,20 +196,7 @@ seo.structuredData = [
       </div>
     </section>
 
-    <!-- FAQ -->
-    <section class="pb-8 px-6 reveal-on-scroll">
-      <div class="max-w-7xl mx-auto">
-        <h2 class="text-3xl font-bold mb-6 text-foreground text-center">Frequently Asked Questions</h2>
-        <div class="bento-grid grid-cols-1 md:grid-cols-2">
-          {faqs.map(faq => (
-            <div class="bento-tile">
-              <h3 class="text-base font-semibold mb-2 text-foreground">{faq.question}</h3>
-              <p class="text-sm text-muted-foreground">{faq.answer}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
+    <FAQSection faqs={faqs} />
 
     <ServiceCTA />
   </div>

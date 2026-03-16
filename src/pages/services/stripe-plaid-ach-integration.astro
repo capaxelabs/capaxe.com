@@ -1,7 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import { createSEO } from '@/utils/seo';
-import FAQSchema from '@/components/FAQSchema.astro';
+import FAQSection from '@/components/FAQSection.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import CTABottom from '@/components/CTA.astro';
 
@@ -56,8 +56,6 @@ const seo = createSEO({
 ---
 
 <Layout seo={seo}>
-  <FAQSchema faqs={faqs} />
-
   <div class="container mx-auto px-4 py-12 max-w-5xl">
     <Breadcrumbs items={breadcrumbs} />
 
@@ -229,17 +227,7 @@ const seo = createSEO({
       </p>
     </section>
 
-    <section class="mb-12">
-      <h2 class="text-3xl font-bold mb-6">Frequently Asked Questions</h2>
-      <div class="space-y-6">
-        {faqs.map((faq) => (
-          <div class="border-l-4 border-gray-300 pl-6">
-            <h3 class="text-xl font-semibold mb-2">{faq.question}</h3>
-            <p class="text-muted-foreground">{faq.answer}</p>
-          </div>
-        ))}
-      </div>
-    </section>
+    <FAQSection faqs={faqs} />
 
     <section class="mb-12">
       <h2 class="text-3xl font-bold mb-6">Related Services</h2>

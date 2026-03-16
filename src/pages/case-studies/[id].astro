@@ -1,6 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import CTABottom from "@/components/CTA.astro";
+import FAQSection from "@/components/FAQSection.astro";
 import { createSEO } from "@/utils/seo";
 import { getCollection, render } from "astro:content";
 import type { RenderResult } from "astro:content";
@@ -51,6 +52,13 @@ seo.structuredData = [
 ];
 
 // Define slide data for layaway solution
+const faqs = [
+  { question: `What technologies were used in the ${caseStudy.data.client} project?`, answer: `We used ${caseStudy.data.techStack.join(', ')} to build this solution within ${caseStudy.data.timeframe}.` },
+  { question: `How long did the ${caseStudy.data.client} project take?`, answer: `The project was completed in ${caseStudy.data.timeframe}, from initial planning through deployment and testing.` },
+  { question: "Can Capaxe Labs build a similar solution for my store?", answer: "Yes, we specialize in custom Shopify development. Contact us for a free consultation to discuss your specific requirements." },
+  { question: "What was the main challenge in this project?", answer: caseStudy.data.problemStatement },
+];
+
 const layawaySlides = [
   {
     image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=600&q=80",
@@ -236,6 +244,8 @@ const layawaySlides = [
         </div>
       </div>
     </section>
+
+    <FAQSection faqs={faqs} />
 
     <CTABottom />
   </div>

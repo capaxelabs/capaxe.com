@@ -3,8 +3,17 @@ import Layout from "@/layouts/Layout.astro";
 import { siteConfig } from "@/config/site";
 import CTABottom from "@/components/CTA.astro";
 import { getCollection } from "astro:content";
+import FAQSection from "@/components/FAQSection.astro";
 import { createSEO } from "@/utils/seo";
 import type { SEOProps } from "@/utils/seo";
+
+const faqs = [
+  { question: "What types of projects are featured in your case studies?", answer: "Our case studies cover headless storefronts, custom Shopify apps, payment integrations, platform migrations, and Shopify Plus enterprise builds for brands across various industries." },
+  { question: "Can you build something similar for my business?", answer: "Yes, each project is tailored to the client's needs. We use the same proven processes and technologies showcased in our case studies to deliver results for your business." },
+  { question: "How long do these projects typically take?", answer: "Timelines vary by complexity. Simple store builds take 4-6 weeks, while custom apps and headless builds range from 6-12 weeks. We provide detailed timelines in our proposals." },
+  { question: "Do you provide post-launch support after project completion?", answer: "Yes, every project includes a 30-day post-launch warranty. For ongoing support, we offer flexible retainer plans with dedicated developer access." },
+  { question: "How do I start a project with Capaxe Labs?", answer: "Book a free discovery call where we discuss your goals, requirements, and budget. We then provide a detailed proposal with scope, timeline, and pricing." },
+];
 
 interface Props {
   seo?: SEOProps;
@@ -83,6 +92,7 @@ const seo = createSEO({
         </div>
       </div>
     </section>
+    <FAQSection faqs={faqs} />
     <CTABottom />
   </div>
 </Layout>

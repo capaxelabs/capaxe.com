@@ -4,6 +4,7 @@ import { createSEO } from '@/utils/seo';
 import { getLocalBusinessSchema } from '@/lib/schemas';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import CTABottom from '@/components/CTA.astro';
+import FAQSchema from '@/components/FAQSchema.astro';
 
 const breadcrumbs = [
   { name: 'Home', url: 'https://www.capaxe.com' },
@@ -23,6 +24,14 @@ const localBusinessSchema = getLocalBusinessSchema({
   country: 'Canada',
   countryCode: 'CA'
 });
+
+const faqs = [
+  { question: "Does Capaxe Labs work with Canadian businesses?", answer: "Yes, we serve businesses across all Canadian provinces and territories. We work in EST, CST, MST, and PST with real-time collaboration during Canadian business hours." },
+  { question: "Do you handle GST/HST tax compliance for Shopify stores?", answer: "Yes, we integrate GST/HST/PST/QST tax calculation across all provinces including Quebec-specific requirements and PIPEDA privacy compliance." },
+  { question: "Can you integrate Canadian payment gateways?", answer: "We integrate Stripe for Canadian bank accounts, Moneris, and other Canadian payment solutions with full CAD currency support." },
+  { question: "Do you support bilingual English/French Shopify stores?", answer: "Yes, we build bilingual storefronts supporting both English and French to meet federal and Quebec language requirements." },
+  { question: "What shipping integrations do you offer for Canada?", answer: "We integrate Canada Post, Purolator, Canpar, FedEx Canada, and UPS Canada with real-time rate calculation and tracking." },
+];
 ---
 
 <Layout seo={seo}>
@@ -207,6 +216,19 @@ const localBusinessSchema = getLocalBusinessSchema({
         <span class="px-4 py-2 bg-primary-500/20 text-primary-300 rounded-full font-medium">Avalara Canada</span>
       </div>
     </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">Frequently Asked Questions</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        {faqs.map(faq => (
+          <div class="bento-tile rounded-lg">
+            <h3 class="text-base font-semibold mb-2">{faq.question}</h3>
+            <p class="text-sm text-muted-foreground">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+    <FAQSchema faqs={faqs} />
 
     <section class="mb-12 bg-primary-500/10 p-8 rounded-lg">
       <h2 class="text-3xl font-bold mb-4">Work with Canadian-Focused Shopify Developers</h2>

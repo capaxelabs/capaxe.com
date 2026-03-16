@@ -5,8 +5,17 @@ import { StickyCards, ServiceLanding } from "@/components/home/HomeComponents";
 import RetainerPlansSection from "@/components/RetainerPlan";
 import HeroSection from "@/components/home/HeroSection.astro";
 import ClientLogos from "@/components/home/ClientLogos";
+import FAQSection from "@/components/FAQSection.astro";
 import { createSEO } from "@/utils/seo";
 import { getEnhancedOrganizationSchema } from "@/lib/schemas";
+
+const faqs = [
+  { question: "What Shopify development services does Capaxe Labs offer?", answer: "We offer custom Shopify app development, Liquid theme builds, headless storefronts with Hydrogen, Shopify Plus enterprise solutions, store migrations, and ongoing maintenance retainer plans." },
+  { question: "How much does a Shopify development project cost?", answer: "Project costs vary based on scope. Custom themes start around $3,000, while custom apps and headless builds range from $5,000 to $25,000+. We offer free consultations to provide accurate estimates." },
+  { question: "Do you offer ongoing Shopify support after launch?", answer: "Yes, we offer flexible retainer plans starting at $999/month that include dedicated developer access, bug fixes, feature enhancements, and priority support." },
+  { question: "How long does a typical Shopify project take?", answer: "Simple theme customizations take 1-2 weeks. Custom themes take 4-6 weeks. Custom apps and headless builds typically take 6-12 weeks depending on complexity." },
+  { question: "Can you migrate my store from another platform to Shopify?", answer: "Yes, we handle full migrations from WooCommerce, Magento, BigCommerce, and other platforms to Shopify, including product data, customer records, and order history." },
+];
 
 const seo = createSEO({
   pageName: "Shopify Development Agency — Liquid Themes, Custom Apps & Headless Storefronts",
@@ -45,5 +54,7 @@ seo.structuredData = getEnhancedOrganizationSchema();
     <div class="reveal-on-scroll">
       <RetainerPlansSection client:load />
     </div>
+
+    <FAQSection faqs={faqs} />
   </div>
 </Layout>

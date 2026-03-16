@@ -6,6 +6,7 @@ import { siteConfig } from "@/config/site";
 import ServiceCTA from "@/components/ServiceCTA";
 import BookingButton from "@/components/BookingButton";
 import ChatContactModal from "@/components/ChatContactModal";
+import FAQSection from "@/components/FAQSection.astro";
 import { createSEO } from "@/utils/seo";
 import { getFAQPageSchema, getBreadcrumbSchema } from "@/lib/schemas";
 
@@ -171,20 +172,7 @@ seo.structuredData = [
       </div>
     </section>
 
-    <!-- FAQ -->
-    <section class="pb-8 px-6 reveal-on-scroll">
-      <div class="max-w-7xl mx-auto">
-        <h2 class="text-3xl font-bold mb-6 text-foreground text-center">Frequently Asked Questions</h2>
-        <div class="bento-grid grid-cols-1 md:grid-cols-2">
-          {appFaqs.map(faq => (
-            <div class="bento-tile">
-              <h3 class="text-base font-semibold mb-2 text-foreground">{faq.question}</h3>
-              <p class="text-sm text-muted-foreground">{faq.answer}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
+    <FAQSection faqs={appFaqs} />
 
     <ServiceCTA />
   </div>

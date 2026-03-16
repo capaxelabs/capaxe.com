@@ -6,6 +6,7 @@ import { siteConfig } from "@/config/site";
 import ServiceCTA from "@/components/ServiceCTA";
 import BookingButton from "@/components/BookingButton";
 import ChatContactModal from "@/components/ChatContactModal";
+import FAQSection from "@/components/FAQSection.astro";
 import { createSEO } from "@/utils/seo";
 import type { SEOProps } from "@/utils/seo";
 import { getFAQPageSchema } from "@/lib/schemas";
@@ -303,38 +304,7 @@ seo.structuredData = [
       </div>
     </section>
 
-    <!-- FAQ -->
-    <section class="pb-8 px-6 reveal-on-scroll">
-      <div class="max-w-7xl mx-auto">
-        <h2 class="text-3xl font-bold mb-6 text-foreground text-center">Frequently Asked Questions</h2>
-        <div class="bento-grid grid-cols-1 md:grid-cols-2">
-          <div class="bento-tile">
-            <h3 class="text-base font-semibold mb-2 text-foreground">What tasks do you NOT handle?</h3>
-            <p class="text-sm text-muted-foreground">
-              We don't do marketing, CRO, sales strategy, or ad management. We handle the technical and operational side — development, store management, and backend tasks. For custom development, check out our <a href="/services" class="text-primary-400 hover:underline">development services</a>.
-            </p>
-          </div>
-          <div class="bento-tile">
-            <h3 class="text-base font-semibold mb-2 text-foreground">How do you access my store?</h3>
-            <p class="text-sm text-muted-foreground">
-              We use Shopify's collaborator access with read/write permissions only for the areas we need. Your store stays secure, and you can revoke access anytime.
-            </p>
-          </div>
-          <div class="bento-tile">
-            <h3 class="text-base font-semibold mb-2 text-foreground">How fast are turnarounds?</h3>
-            <p class="text-sm text-muted-foreground">
-              Simple tasks like price changes or media uploads are handled same-day. More involved tasks like analytics reports or bulk operations are completed within 48 hours.
-            </p>
-          </div>
-          <div class="bento-tile">
-            <h3 class="text-base font-semibold mb-2 text-foreground">Do you support Shopify Plus?</h3>
-            <p class="text-sm text-muted-foreground">
-              Yes. We support all Shopify plans including Plus — covering B2B catalogs, Shopify Markets, Scripts, and advanced checkout features.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
+    <FAQSection faqs={supportFaqs} />
 
     <ServiceCTA />
   </div>

@@ -1,6 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import CTABottom from "@/components/CTA.astro";
+import FAQSchema from "@/components/FAQSchema.astro";
 import { createSEO } from "@/utils/seo";
 import { siteConfig } from "@/config/site";
 import {
@@ -59,6 +60,14 @@ seo.structuredData = {
   serviceType: service.name,
   areaServed: city.name
 };
+
+const faqs = [
+  { question: `Why do I need ${service.name.toLowerCase()} services in ${city.name}?`, answer: `${city.name} brands face ${localChallenge}. Professional ${service.name.toLowerCase()} ensures your Shopify store is optimized for ${serviceBenefit}.` },
+  { question: `How long does ${service.name.toLowerCase()} take for a ${city.name} store?`, answer: `Timelines depend on project scope. Simple projects take 1-2 weeks, while complex builds or migrations can take 4-12 weeks. We provide a detailed timeline during discovery.` },
+  { question: `What makes Capaxe different from other Shopify agencies in ${city.name}?`, answer: `We combine deep technical expertise with local market understanding. Our focus is on ${uniqueValueProp}, delivering measurable results for ${city.name} businesses.` },
+  { question: `Do you offer ongoing support after the ${service.name.toLowerCase()} project?`, answer: "Yes, we provide guaranteed post-launch support to ensure your store performs flawlessly. We also offer monthly retainer plans for ongoing development and optimization." },
+  { question: "How do I get started with Capaxe?", answer: `Contact us for a free project consultation. We will assess your current platform, discuss your goals for the ${city.name} market, and provide a detailed plan with timeline and pricing.` },
+];
 ---
 
 <Layout seo={seo}>
@@ -130,6 +139,21 @@ seo.structuredData = {
       </ol>
     </div>
   </section>
+
+  <section class="py-16 px-4 bg-white">
+    <div class="max-w-5xl mx-auto space-y-6">
+      <h2 class="text-3xl font-semibold text-center">Frequently Asked Questions</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        {faqs.map(faq => (
+          <div class="bento-tile rounded-lg">
+            <h3 class="text-base font-semibold mb-2">{faq.question}</h3>
+            <p class="text-sm text-muted-foreground">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+  <FAQSchema faqs={faqs} />
 
   <section class="py-16 px-4 bg-foreground/5">
     <div class="max-w-5xl mx-auto space-y-6 text-center">

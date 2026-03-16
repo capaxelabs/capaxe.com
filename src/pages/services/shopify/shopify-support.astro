@@ -2,7 +2,16 @@
 import Layout from "@/layouts/Layout.astro";
 import CTABottom from "@/components/CTA.astro";
 import ServiceCTA from "@/components/ServiceCTA";
+import FAQSection from "@/components/FAQSection.astro";
 import { createSEO } from "@/utils/seo";
+
+const faqs = [
+  { question: "What kind of Shopify technical support do you provide?", answer: "We handle bug fixes, theme issues, app conflicts, checkout problems, performance optimization, and custom feature requests. Our team knows Shopify inside and out." },
+  { question: "What are your support response times?", answer: "Critical issues get a response within 2-4 hours. Standard requests are addressed within 1 business day. We offer priority plans with faster SLAs for mission-critical stores." },
+  { question: "Do you offer ongoing Shopify support plans?", answer: "Yes. We offer monthly retainer plans with dedicated hours for ongoing support, maintenance, and small development tasks. Plans are flexible and scale with your needs." },
+  { question: "Can you fix issues caused by third-party Shopify apps?", answer: "Yes. We diagnose and resolve app conflicts, broken integrations, and performance issues caused by third-party apps. We also recommend better alternatives when needed." },
+  { question: "Do you provide emergency support for store outages?", answer: "Yes. We offer emergency support for critical issues like checkout failures, payment gateway errors, and site downtime. We prioritize getting your store back online fast." },
+];
 
 const seo = createSEO({
   pageName: "Shopify Technical Support",
@@ -48,6 +57,7 @@ const seo = createSEO({
         </div>
       </div>
     </section>
+    <FAQSection faqs={faqs} />
     <ServiceCTA />
   </div>
   <CTABottom />

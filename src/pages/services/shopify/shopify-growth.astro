@@ -3,7 +3,16 @@ import { FiTrendingUp, FiTarget, FiBarChart2, FiUsers } from "react-icons/fi";
 import CTABottom from "@/components/CTA.astro";
 import Layout from "@/layouts/Layout.astro";
 import ServiceCTA from "@/components/ServiceCTA";
+import FAQSection from "@/components/FAQSection.astro";
 import { createSEO } from "@/utils/seo";
+
+const faqs = [
+  { question: "What does a Shopify growth strategy include?", answer: "We combine conversion rate optimization, SEO improvements, analytics setup, customer retention tactics, and marketing automation to create a comprehensive growth plan for your store." },
+  { question: "How do you measure e-commerce growth?", answer: "We track revenue, conversion rate, average order value, customer lifetime value, and traffic sources. You receive regular reports with actionable insights and recommendations." },
+  { question: "How quickly can I expect to see growth results?", answer: "Quick wins like checkout optimization show results in 2-4 weeks. Strategic initiatives like SEO and retention programs build momentum over 2-3 months with compounding returns." },
+  { question: "Do you help with customer retention strategies?", answer: "Yes. We implement loyalty programs, email automation, personalized product recommendations, and post-purchase flows to increase repeat purchases and lifetime value." },
+  { question: "Can you help scale my store for high traffic events?", answer: "Absolutely. We prepare stores for flash sales and peak seasons with performance optimization, load testing, and infrastructure planning to handle traffic spikes." },
+];
 
 const seo = createSEO({
   pageName: "Shopify Growth & Strategy",
@@ -80,6 +89,7 @@ const seo = createSEO({
         </div>
       </div>
     </section>
+    <FAQSection faqs={faqs} />
     <ServiceCTA />
   </div>
   <CTABottom />

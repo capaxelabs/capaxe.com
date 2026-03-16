@@ -3,7 +3,16 @@ import Layout from "../layouts/Layout.astro";
 import { siteConfig } from "@/config/site";
 import ContactFormReact from "@/components/ContactFormReact";
 import ChatContactForm from "@/components/ChatContactForm";
+import FAQSection from "@/components/FAQSection.astro";
 import { createSEO } from "@/utils/seo";
+
+const faqs = [
+  { question: "How quickly do you respond to inquiries?", answer: "We respond to all inquiries within 24 hours via email. For WhatsApp messages during business hours (9 AM - 6 PM IST), you can expect a reply within a few hours." },
+  { question: "Is the initial consultation free?", answer: "Yes, we offer a free 30-minute discovery call to understand your project requirements, discuss timelines, and provide a preliminary estimate." },
+  { question: "What information should I prepare before contacting you?", answer: "It helps to have a brief description of your project, your timeline, budget range, and any reference sites or designs you like. This helps us give you a more accurate proposal." },
+  { question: "Do you sign NDAs before discussing project details?", answer: "Yes, we are happy to sign NDAs before any detailed discussions. Your business information and project details are always kept confidential." },
+  { question: "What happens after I submit the contact form?", answer: "You will receive an auto-confirmation email immediately. Our team reviews your inquiry and follows up within 24 hours with next steps or to schedule a discovery call." },
+];
 
 const seo = createSEO({
   pageName: "Contact Us",
@@ -116,5 +125,7 @@ const seo = createSEO({
         </div>
       </div>
     </section>
+
+    <FAQSection faqs={faqs} />
   </div>
 </Layout>

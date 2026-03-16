@@ -3,7 +3,16 @@ import { FiSearch, FiZap, FiTrendingUp, FiSmile } from "react-icons/fi";
 import CTABottom from "@/components/CTA.astro";
 import Layout from "@/layouts/Layout.astro";
 import ServiceCTA from "@/components/ServiceCTA";
+import FAQSection from "@/components/FAQSection.astro";
 import { createSEO } from "@/utils/seo";
+
+const faqs = [
+  { question: "What is conversion rate optimization (CRO) for Shopify?", answer: "CRO is the process of improving your store to increase the percentage of visitors who complete a purchase. We use data analysis, A/B testing, and UX improvements to boost conversions." },
+  { question: "How quickly will I see results from CRO?", answer: "Most stores see measurable improvements within 4-8 weeks. We start with quick wins like checkout optimization, then move to longer-term strategic changes." },
+  { question: "What CRO tools do you use?", answer: "We use heatmaps, session recordings, Google Analytics, and A/B testing platforms to identify friction points and validate improvements with real data." },
+  { question: "Can you optimize my Shopify checkout flow?", answer: "Yes, we optimize every step from product page to order confirmation. This includes cart page improvements, checkout field optimization, and trust signal placement." },
+  { question: "How do you measure CRO success?", answer: "We track conversion rate, average order value, cart abandonment rate, and revenue per visitor. You receive regular reports showing before-and-after comparisons." },
+];
 
 const seo = createSEO({
   pageName: "Conversion Rate Optimization",
@@ -70,6 +79,7 @@ const seo = createSEO({
         </div>
       </div>
     </section>
+    <FAQSection faqs={faqs} />
     <ServiceCTA />
   </div>
   <CTABottom />

@@ -3,7 +3,16 @@ import { FiCode, FiServer, FiLayers } from "react-icons/fi";
 import CTABottom from "@/components/CTA.astro";
 import Layout from "@/layouts/Layout.astro";
 import ServiceCTA from "@/components/ServiceCTA";
+import FAQSection from "@/components/FAQSection.astro";
 import { createSEO } from "@/utils/seo";
+
+const faqs = [
+  { question: "What web development technologies do you use?", answer: "We work with React, Next.js, Astro, Node.js, TypeScript, and Tailwind CSS. We choose the right stack based on your project requirements and performance goals." },
+  { question: "Do you build both frontend and backend?", answer: "Yes. We provide full-stack development including responsive frontends, RESTful and GraphQL APIs, database design, and cloud deployment on platforms like Cloudflare and Vercel." },
+  { question: "Can you build custom web applications?", answer: "Absolutely. We build SaaS platforms, admin dashboards, customer portals, and internal tools. Every application is built with scalability, security, and maintainability in mind." },
+  { question: "How do you ensure website performance?", answer: "We implement server-side rendering, code splitting, image optimization, caching strategies, and CDN deployment. We target sub-2-second load times and strong Core Web Vitals." },
+  { question: "Do you provide hosting and deployment?", answer: "Yes. We deploy to Cloudflare Workers, Vercel, AWS, or your preferred infrastructure. We set up CI/CD pipelines, monitoring, and automated deployments." },
+];
 
 const seo = createSEO({
   pageName: "Web Development",
@@ -52,6 +61,7 @@ const seo = createSEO({
         </div>
       </div>
     </section>
+    <FAQSection faqs={faqs} />
     <ServiceCTA />
   </div>
   <CTABottom />

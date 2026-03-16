@@ -1,6 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import CTABottom from "@/components/CTA.astro";
+import FAQSchema from "@/components/FAQSchema.astro";
 import { createSEO } from "@/utils/seo";
 import { siteConfig } from "@/config/site";
 import {
@@ -35,6 +36,15 @@ export function getStaticPaths() {
 }
 
 const { category, apps, comparisons } = Astro.props as Props;
+
+const appNames = apps.map(a => a.name).slice(0, 3).join(', ');
+const faqs = [
+  { question: `What are the best ${category.name.toLowerCase()} apps for Shopify?`, answer: `The top ${category.name.toLowerCase()} apps for Shopify include ${appNames}. Each offers different strengths depending on your store's size and needs.` },
+  { question: `How do I choose the right ${category.name.toLowerCase()} app?`, answer: `Consider your store size, order volume, budget, and the specific features you need. Integration compatibility with your existing tech stack is also important.` },
+  { question: `Can I switch between ${category.name.toLowerCase()} apps later?`, answer: `Yes, but migration requires careful planning to avoid data loss. We handle full migrations including data transfer, workflow rebuilding, and zero-downtime cutover.` },
+  { question: `Does Capaxe Labs help with ${category.name.toLowerCase()} app setup?`, answer: `Yes, we offer professional setup, migration, optimization, and customization services for all major ${category.name.toLowerCase()} apps on Shopify.` },
+  { question: `How much does ${category.name.toLowerCase()} app integration cost?`, answer: `Integration costs vary by app complexity and your store's requirements. Contact us for a free consultation and detailed quote tailored to your needs.` },
+];
 
 const seo = createSEO({
   pageName: `Best ${category.name} Apps for Shopify in 2026`,
@@ -127,6 +137,21 @@ const seo = createSEO({
       </div>
     </div>
   </section>
+
+  <section class="py-8 px-6">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-3xl font-bold mb-6 text-foreground text-center">Frequently Asked Questions</h2>
+      <div class="bento-grid grid-cols-1 md:grid-cols-2">
+        {faqs.map(faq => (
+          <div class="bento-tile">
+            <h3 class="text-base font-semibold mb-2 text-foreground">{faq.question}</h3>
+            <p class="text-sm text-muted-foreground">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+  <FAQSchema faqs={faqs} />
 
   <section class="py-8 px-6 pb-16">
     <div class="max-w-7xl mx-auto">

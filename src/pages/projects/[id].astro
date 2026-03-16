@@ -1,6 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import CTABottom from "@/components/CTA.astro";
+import FAQSection from "@/components/FAQSection.astro";
 import { createSEO } from "@/utils/seo";
 import { getCollection, render } from "astro:content";
 import type { RenderResult } from "astro:content";
@@ -36,6 +37,13 @@ seo.structuredData = [
     { name: "Projects", url: `${siteConfig.url}/projects` },
     { name: project.data.name, url: `${siteConfig.url}/projects/${project.id}` },
   ])
+];
+
+const faqs = [
+  { question: `What technologies were used to build ${project.data.name}?`, answer: `${project.data.name} was built using ${project.data.techStack.join(', ')}. The project was completed in ${project.data.timeframe}.` },
+  { question: `How long did the ${project.data.name} project take?`, answer: `The project was delivered in ${project.data.timeframe}, covering design, development, testing, and deployment.` },
+  { question: `What category does ${project.data.name} fall under?`, answer: `${project.data.name} is a ${project.data.category} project. ${project.data.description}` },
+  { question: "Can Capaxe Labs build a similar project for my business?", answer: "Yes, we build custom solutions tailored to your business needs. Contact us for a free consultation to discuss your project requirements and timeline." },
 ];
 ---
 
@@ -150,6 +158,8 @@ seo.structuredData = [
         </div>
       </div>
     </section>
+
+    <FAQSection faqs={faqs} />
 
     <CTABottom />
   </div>

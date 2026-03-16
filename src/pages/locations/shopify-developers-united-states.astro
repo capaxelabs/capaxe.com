@@ -4,6 +4,7 @@ import { createSEO } from '@/utils/seo';
 import { getLocalBusinessSchema } from '@/lib/schemas';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import CTABottom from '@/components/CTA.astro';
+import FAQSchema from '@/components/FAQSchema.astro';
 
 const breadcrumbs = [
   { name: 'Home', url: 'https://www.capaxe.com' },
@@ -23,6 +24,14 @@ const localBusinessSchema = getLocalBusinessSchema({
   country: 'United States',
   countryCode: 'US'
 });
+
+const faqs = [
+  { question: "Does Capaxe Labs work with US-based businesses?", answer: "Yes, we serve businesses across all 50 states. We work across EST, CST, MST, and PST with overlap hours for real-time collaboration." },
+  { question: "Do you handle US sales tax compliance for Shopify?", answer: "Yes, we integrate TaxJar, Avalara AvaTax, and Shopify Tax for automatic sales tax calculation across all US states including nexus management." },
+  { question: "What US payment integrations do you support?", answer: "We integrate Stripe ACH Direct Debit (0.8% fees vs 2.9% for cards), Plaid bank verification, PayPal, and other US payment gateways." },
+  { question: "Can you migrate my existing store to Shopify?", answer: "Yes, we handle full platform migrations from Magento, WooCommerce, and other platforms to Shopify with zero data loss and preserved SEO value." },
+  { question: "What is your pricing for US clients?", answer: "All pricing is in USD with transparent fixed-price and retainer options. Contact us for a free consultation and detailed quote for your project." },
+];
 ---
 
 <Layout seo={seo}>
@@ -203,6 +212,19 @@ const localBusinessSchema = getLocalBusinessSchema({
         <span class="px-4 py-2 bg-primary-500/20 text-primary-300 rounded-full font-medium">AWS US-East</span>
       </div>
     </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">Frequently Asked Questions</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        {faqs.map(faq => (
+          <div class="bento-tile rounded-lg">
+            <h3 class="text-base font-semibold mb-2">{faq.question}</h3>
+            <p class="text-sm text-muted-foreground">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+    <FAQSchema faqs={faqs} />
 
     <section class="mb-12 bg-primary-500/10 p-8 rounded-lg">
       <h2 class="text-3xl font-bold mb-4">Work with US-Focused Shopify Developers</h2>

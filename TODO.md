@@ -45,6 +45,16 @@
 - [x] Create best-of category pages /shopify/best/[category] — 16 pages
 - [x] Build verification — 548 total HTML pages, zero errors
 
+## FAQ Schema Expansion (Completed)
+- [x] Add contextual FAQ sections + FAQSchema to case-studies/[id].astro
+- [x] Add contextual FAQ sections + FAQSchema to projects/[id].astro
+- [x] Add contextual FAQ sections + FAQSchema to shopify/apps/[app].astro
+- [x] Add contextual FAQ sections + FAQSchema to shopify/compare/[slug].astro
+- [x] Add contextual FAQ sections + FAQSchema to shopify/best/[category].astro
+- [x] Add contextual FAQ sections + FAQSchema to shopify/apps/[app]/[service].astro
+- [x] Add contextual FAQ sections + FAQSchema to 5 location pages (US, Canada, UK, EU, India)
+- [x] Add contextual FAQ sections + FAQSchema to shopify/[service]/[city].astro
+
 ## SEO Overhaul (Completed)
 - [x] Fix robots meta triple-output bug in SEO.astro
 - [x] Add schema array support in SEO.astro

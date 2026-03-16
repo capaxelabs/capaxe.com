@@ -3,7 +3,16 @@ import { FiLayout, FiMonitor, FiSmartphone, FiPenTool } from "react-icons/fi";
 import CTABottom from "@/components/CTA.astro";
 import Layout from "@/layouts/Layout.astro";
 import ServiceCTA from "@/components/ServiceCTA";
+import FAQSection from "@/components/FAQSection.astro";
 import { createSEO } from "@/utils/seo";
+
+const faqs = [
+  { question: "Do you design custom Shopify themes or customize existing ones?", answer: "We do both. We build fully custom themes from scratch and also customize existing Shopify themes to match your brand identity and conversion goals." },
+  { question: "How long does a Shopify design project take?", answer: "A custom theme design takes 4-8 weeks depending on complexity. Theme customizations typically take 1-3 weeks. We provide a detailed timeline during the discovery phase." },
+  { question: "Will my Shopify store be mobile-friendly?", answer: "Absolutely. Every design we create is fully responsive and optimized for mobile, tablet, and desktop. Over 70% of e-commerce traffic comes from mobile devices." },
+  { question: "Can you redesign my existing Shopify store?", answer: "Yes. We audit your current store's design and UX, identify areas for improvement, and implement a redesign that improves both aesthetics and conversion rates." },
+  { question: "Do you follow Shopify's Online Store 2.0 standards?", answer: "Yes. All our themes are built with Online Store 2.0 features including app blocks, sections everywhere, and JSON templates for maximum flexibility." },
+];
 
 const seo = createSEO({
   pageName: "Shopify Design Services",
@@ -80,6 +89,7 @@ const seo = createSEO({
         </div>
       </div>
     </section>
+    <FAQSection faqs={faqs} />
     <ServiceCTA />
   </div>
   <CTABottom />

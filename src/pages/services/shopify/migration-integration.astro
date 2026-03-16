@@ -3,7 +3,16 @@ import { FiArrowRight, FiRefreshCcw, FiDatabase, FiSettings } from "react-icons/
 import CTABottom from "@/components/CTA.astro";
 import Layout from "@/layouts/Layout.astro";
 import ServiceCTA from "@/components/ServiceCTA";
+import FAQSection from "@/components/FAQSection.astro";
 import { createSEO } from "@/utils/seo";
+
+const faqs = [
+  { question: "How long does a Shopify migration take?", answer: "Simple stores migrate in 2-4 weeks. Stores with thousands of products and complex integrations take 6-12 weeks. We run test migrations first to ensure accuracy." },
+  { question: "Will I lose my SEO rankings during migration?", answer: "No. We set up comprehensive 301 redirects for every URL, preserve meta tags, and submit updated sitemaps. Most clients maintain or improve their rankings." },
+  { question: "What data gets migrated to Shopify?", answer: "We migrate products, customers, orders, reviews, blog posts, pages, and discount codes. Every data point is verified for accuracy after transfer." },
+  { question: "Can you integrate third-party tools with my Shopify store?", answer: "Yes, we integrate CRMs, ERPs, shipping providers, marketing platforms, and accounting software. We build custom API connections when needed." },
+  { question: "Do you support migration from any e-commerce platform?", answer: "We regularly migrate from WooCommerce, Magento, BigCommerce, Squarespace, and custom platforms. We build custom migration scripts for non-standard setups." },
+];
 
 const seo = createSEO({
   pageName: "Migration & Integration",
@@ -57,6 +66,7 @@ const seo = createSEO({
         </div>
       </div>
     </section>
+    <FAQSection faqs={faqs} />
     <ServiceCTA />
   </div>
   <CTABottom />

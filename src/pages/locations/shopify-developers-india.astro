@@ -4,6 +4,7 @@ import { createSEO } from '@/utils/seo';
 import { getLocalBusinessSchema } from '@/lib/schemas';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import CTABottom from '@/components/CTA.astro';
+import FAQSchema from '@/components/FAQSchema.astro';
 
 const breadcrumbs = [
   { name: 'Home', url: 'https://www.capaxe.com' },
@@ -27,6 +28,14 @@ const localBusinessSchema = getLocalBusinessSchema({
   latitude: '19.0760',
   longitude: '72.8777'
 });
+
+const faqs = [
+  { question: "Where is Capaxe Labs based in India?", answer: "We are based in Mumbai, Maharashtra -- India's commercial capital. We serve businesses across all major Indian cities including Delhi, Bangalore, Hyderabad, Chennai, and Pune." },
+  { question: "Do you handle GST compliance for Indian Shopify stores?", answer: "Yes, we build GST-compliant invoicing with GSTIN validation, HSN/SAC code management, and automatic IGST/CGST/SGST calculation based on customer location." },
+  { question: "Which Indian payment gateways do you integrate?", answer: "We integrate Razorpay, PayU, CCAvenue, Paytm, PhonePe, UPI, and Google Pay. We also support COD workflows and EMI payment options." },
+  { question: "Do you offer competitive pricing in INR?", answer: "Yes, all our pricing is in Indian Rupees with no currency conversion fees. Our rates are cost-effective compared to international agencies." },
+  { question: "Can you integrate Indian shipping providers?", answer: "We integrate Delhivery, Blue Dart, DTDC, Shiprocket, and India Post with real-time tracking and COD support." },
+];
 ---
 
 <Layout seo={seo}>
@@ -255,6 +264,19 @@ const localBusinessSchema = getLocalBusinessSchema({
         <span class="px-4 py-2 bg-primary-500/20 text-primary-300 rounded-full font-medium">Delhivery</span>
       </div>
     </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">Frequently Asked Questions</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        {faqs.map(faq => (
+          <div class="bento-tile rounded-lg">
+            <h3 class="text-base font-semibold mb-2">{faq.question}</h3>
+            <p class="text-sm text-muted-foreground">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+    <FAQSchema faqs={faqs} />
 
     <section class="mb-12 bg-primary-500/10 p-8 rounded-lg">
       <h2 class="text-3xl font-bold mb-4">Work with Mumbai's Top Shopify Developers</h2>

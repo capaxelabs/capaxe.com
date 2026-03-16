@@ -3,7 +3,16 @@ import { FiSearch, FiZap, FiTrendingUp, FiSmile } from "react-icons/fi";
 import CTABottom from "@/components/CTA.astro";
 import Layout from "@/layouts/Layout.astro";
 import ServiceCTA from "@/components/ServiceCTA";
+import FAQSection from "@/components/FAQSection.astro";
 import { createSEO } from "@/utils/seo";
+
+const faqs = [
+  { question: "How do you improve Shopify SEO?", answer: "We optimize meta tags, headings, URL structure, image alt text, schema markup, and internal linking. We also fix technical issues like crawl errors and duplicate content." },
+  { question: "How long does it take to see SEO results?", answer: "Technical fixes show impact within 2-4 weeks. Organic ranking improvements typically take 2-3 months as search engines re-crawl and re-index your pages." },
+  { question: "Can you improve my Shopify store's page speed?", answer: "Yes. We optimize images, reduce unused JavaScript, implement lazy loading, minify CSS, and leverage browser caching to achieve faster Core Web Vitals scores." },
+  { question: "Do you offer ongoing SEO services?", answer: "We offer monthly SEO retainers that include keyword monitoring, content optimization, technical audits, and regular performance reporting." },
+  { question: "What SEO tools do you use for Shopify stores?", answer: "We use Google Search Console, Ahrefs, Screaming Frog, PageSpeed Insights, and custom monitoring tools to track rankings, traffic, and technical health." },
+];
 
 const seo = createSEO({
   pageName: "SEO & Performance Optimization",
@@ -70,6 +79,7 @@ const seo = createSEO({
         </div>
       </div>
     </section>
+    <FAQSection faqs={faqs} />
     <ServiceCTA />
   </div>
   <CTABottom />

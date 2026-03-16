@@ -1,6 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import CTABottom from "@/components/CTA.astro";
+import FAQSection from "@/components/FAQSection.astro";
 import { createSEO } from "@/utils/seo";
 import { siteConfig } from "@/config/site";
 import { shopifyApps, getComparisonsForApp, getAppBySlug, type ShopifyApp } from "@/config/app-seo";
@@ -22,6 +23,15 @@ const seo = createSEO({
   pathname: `/shopify/apps/${app.slug}`,
   contentType: "service"
 });
+
+const categoryLabel = app.category.replace(/-/g, " ").replace(/\b\w/g, (c: string) => c.toUpperCase());
+const faqs = [
+  { question: `What is ${app.name} and how does it work with Shopify?`, answer: `${app.name} is a ${categoryLabel.toLowerCase()} solution for Shopify stores. ${app.shortDescription}` },
+  { question: `What are the key features of ${app.name}?`, answer: `Key features include ${app.features.slice(0, 3).join(', ')}. Our team can help you leverage all of these for maximum impact.` },
+  { question: `Why should I hire a professional to set up ${app.name}?`, answer: `Professional integration ensures ${app.name} is configured correctly from the start, avoiding data gaps and broken workflows. ${app.integrationBenefits[0] || ''}` },
+  { question: `What ${app.name} services does Capaxe Labs offer?`, answer: `We offer ${app.services.map(s => s.name.toLowerCase()).join(', ')} for ${app.name}. Each service is tailored to your store's specific needs.` },
+  { question: `How long does ${app.name} integration take?`, answer: `Typical ${app.name} setup takes 1-2 weeks depending on complexity. Migrations and customizations may take longer based on your existing setup and requirements.` },
+];
 
 seo.structuredData = {
   "@context": "https://schema.org",
@@ -141,6 +151,8 @@ seo.structuredData = {
         </div>
       </section>
     )}
+
+    <FAQSection faqs={faqs} />
 
     <section class="pb-8 px-6">
       <div class="max-w-7xl mx-auto">

@@ -4,6 +4,7 @@ import { createSEO } from '@/utils/seo';
 import { getLocalBusinessSchema } from '@/lib/schemas';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import CTABottom from '@/components/CTA.astro';
+import FAQSchema from '@/components/FAQSchema.astro';
 
 const breadcrumbs = [
   { name: 'Home', url: 'https://www.capaxe.com' },
@@ -23,6 +24,14 @@ const localBusinessSchema = getLocalBusinessSchema({
   country: 'European Union',
   countryCode: 'EU'
 });
+
+const faqs = [
+  { question: "Does Capaxe Labs serve businesses in the European Union?", answer: "Yes, we serve businesses across all 27 EU member states. We work across CET, EET, and WET timezones with availability during European business hours." },
+  { question: "Do you ensure GDPR compliance for Shopify stores?", answer: "Yes, we build GDPR-compliant Shopify stores with proper data handling, cookie consent management, and compliance with the ePrivacy Directive." },
+  { question: "Can you handle VAT across multiple EU countries?", answer: "We integrate Avalara EU VAT, Shopify Tax, and OSS (One Stop Shop) for automatic VAT calculation across all member states with rates ranging from 19-27%." },
+  { question: "What EU payment methods do you integrate?", answer: "We integrate SEPA Direct Debit, Stripe EU, Klarna, Adyen, and localized payment methods with full multi-currency EUR support." },
+  { question: "Do you build multi-language Shopify stores for EU markets?", answer: "Yes, we build storefronts in German, French, Spanish, Italian, Dutch, Polish, Swedish, Portuguese, and all other major EU languages." },
+];
 ---
 
 <Layout seo={seo}>
@@ -266,6 +275,19 @@ const localBusinessSchema = getLocalBusinessSchema({
         <span class="px-4 py-2 bg-primary-500/20 text-primary-300 rounded-full font-medium">Avalara EU</span>
       </div>
     </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">Frequently Asked Questions</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        {faqs.map(faq => (
+          <div class="bento-tile rounded-lg">
+            <h3 class="text-base font-semibold mb-2">{faq.question}</h3>
+            <p class="text-sm text-muted-foreground">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+    <FAQSchema faqs={faqs} />
 
     <section class="mb-12 bg-primary-500/10 p-8 rounded-lg">
       <h2 class="text-3xl font-bold mb-4">Work with EU-Focused Shopify Developers</h2>

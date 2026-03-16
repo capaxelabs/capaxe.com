@@ -3,7 +3,16 @@ import Layout from "@/layouts/Layout.astro";
 import { createSEO } from "@/utils/seo";
 import type { SEOProps } from "@/utils/seo";
 import CTABottom from "@/components/CTA.astro";
+import FAQSection from "@/components/FAQSection.astro";
 import { getEnhancedOrganizationSchema } from "@/lib/schemas";
+
+const faqs = [
+  { question: "What does Capaxe Labs specialize in?", answer: "We specialize in Shopify development including custom apps, headless storefronts with Hydrogen, Liquid theme development, and enterprise Shopify Plus solutions for global brands." },
+  { question: "Where is Capaxe Labs based?", answer: "We are based in Mumbai, India and serve clients worldwide across all timezones, with overlap during US and European business hours." },
+  { question: "How experienced is the Capaxe Labs team?", answer: "Our team has 5+ years of dedicated Shopify development experience with 50+ successful projects delivered across various industries and business sizes." },
+  { question: "Do you work with businesses outside India?", answer: "Yes, we work with clients globally. Most of our projects are for businesses in the US, UK, Europe, and Australia. We communicate asynchronously and schedule calls across timezones." },
+  { question: "What industries do you serve?", answer: "We serve e-commerce brands across fashion, beauty, food and beverage, electronics, B2B wholesale, and more. Our solutions are tailored to each industry's specific needs." },
+];
 
 interface Props {
   seo?: SEOProps;
@@ -127,6 +136,7 @@ seo.structuredData = getEnhancedOrganizationSchema();
       </div>
     </section>
 
+    <FAQSection faqs={faqs} />
     <CTABottom />
   </div>
 </Layout>

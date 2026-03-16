@@ -2,7 +2,16 @@
 import Layout from "@/layouts/Layout.astro";
 import CTABottom from "@/components/CTA.astro";
 import ServiceCTA from "@/components/ServiceCTA";
+import FAQSection from "@/components/FAQSection.astro";
 import { createSEO } from "@/utils/seo";
+
+const faqs = [
+  { question: "What does your Shopify support service cover?", answer: "We cover theme fixes, app troubleshooting, performance issues, security updates, custom development requests, and general technical guidance for your Shopify store." },
+  { question: "How do I submit a support request?", answer: "You can reach us through our contact form, email, or chat. We acknowledge all requests within a few hours and provide an estimated resolution timeline." },
+  { question: "Do you offer support for Shopify Plus stores?", answer: "Yes. We support Shopify Plus stores including custom checkout, Scripts, Flow automations, and B2B features. Our team is experienced with Plus-specific capabilities." },
+  { question: "Can you help with one-time fixes or only ongoing plans?", answer: "We offer both. You can engage us for a single fix or project, or choose a monthly retainer plan for continuous support and proactive maintenance." },
+  { question: "What happens if my store goes down?", answer: "We treat outages as critical priority. Our team works to identify and resolve the root cause as quickly as possible, keeping you updated throughout the process." },
+];
 
 const seo = createSEO({
   pageName: "Shopify Technical Support",
@@ -48,6 +57,7 @@ const seo = createSEO({
         </div>
       </div>
     </section>
+    <FAQSection faqs={faqs} />
     <ServiceCTA />
   </div>
   <CTABottom />

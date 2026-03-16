@@ -1,6 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import CTABottom from "@/components/CTA.astro";
+import FAQSection from "@/components/FAQSection.astro";
 import { createSEO } from "@/utils/seo";
 import { siteConfig } from "@/config/site";
 import { appComparisons, getAppBySlug, type AppComparison, type ShopifyApp } from "@/config/app-seo";
@@ -65,6 +66,15 @@ function getChooseReasons(app: ShopifyApp, otherApp: ShopifyApp): string[] {
 
 const app1Reasons = getChooseReasons(app1, app2);
 const app2Reasons = getChooseReasons(app2, app1);
+
+const categoryLabel = comparison.category.replace(/-/g, " ");
+const faqs = [
+  { question: `What is the main difference between ${app1.name} and ${app2.name}?`, answer: comparison.verdict },
+  { question: `When should I choose ${app1.name} over ${app2.name}?`, answer: `Choose ${app1.name} if ${app1Reasons[0]?.toLowerCase() || `you need a strong ${categoryLabel} solution`}. It offers ${app1.features.slice(0, 2).join(' and ').toLowerCase()}.` },
+  { question: `When should I choose ${app2.name} over ${app1.name}?`, answer: `Choose ${app2.name} if ${app2Reasons[0]?.toLowerCase() || `you need a strong ${categoryLabel} solution`}. It offers ${app2.features.slice(0, 2).join(' and ').toLowerCase()}.` },
+  { question: `Can Capaxe Labs help me migrate between ${app1.name} and ${app2.name}?`, answer: `Yes, we handle full migrations between ${categoryLabel} platforms including data transfer, workflow rebuilding, and zero-downtime cutover.` },
+  { question: `How do I decide which ${categoryLabel} app is right for my Shopify store?`, answer: `The best choice depends on your store size, budget, and specific feature needs. Contact us for a free consultation and we will recommend the right fit.` },
+];
 ---
 
 <Layout seo={seo}>
@@ -188,6 +198,8 @@ const app2Reasons = getChooseReasons(app2, app1);
         </div>
       </div>
     </section>
+
+    <FAQSection faqs={faqs} />
 
     <!-- Need Help Deciding CTA -->
     <section class="pb-8 px-6">

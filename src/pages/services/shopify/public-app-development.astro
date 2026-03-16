@@ -3,7 +3,16 @@ import { FiCode, FiTool, FiCloud } from "react-icons/fi";
 import CTABottom from "@/components/CTA.astro";
 import Layout from "@/layouts/Layout.astro";
 import ServiceCTA from "@/components/ServiceCTA";
+import FAQSection from "@/components/FAQSection.astro";
 import { createSEO } from "@/utils/seo";
+
+const faqs = [
+  { question: "What is a Shopify public app?", answer: "A public app is listed on the Shopify App Store and available to all Shopify merchants. It uses OAuth authentication and multi-tenant architecture to serve thousands of stores." },
+  { question: "How do you handle Shopify App Store approval?", answer: "We build apps to meet all of Shopify's review requirements from the start, including Polaris UI compliance, proper OAuth flows, and webhook handling. We manage the full submission process." },
+  { question: "What monetization options are available for public apps?", answer: "We implement Shopify's billing API for recurring subscriptions, one-time charges, and usage-based pricing. You can offer free plans with paid upgrades." },
+  { question: "How do you ensure the app scales for many merchants?", answer: "We use multi-tenant database architecture, background job processing, rate limit handling, and deploy to scalable infrastructure like Cloudflare Workers." },
+  { question: "Can you build both the app and the App Store listing?", answer: "Yes. We handle development, testing, App Store listing copy, screenshots, and the submission process. We also iterate on feedback from Shopify's review team." },
+];
 
 const seo = createSEO({
   pageName: "Public App Development",
@@ -52,6 +61,7 @@ const seo = createSEO({
         </div>
       </div>
     </section>
+    <FAQSection faqs={faqs} />
     <ServiceCTA />
   </div>
   <CTABottom />

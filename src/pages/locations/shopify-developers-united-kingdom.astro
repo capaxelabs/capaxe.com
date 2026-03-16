@@ -4,6 +4,7 @@ import { createSEO } from '@/utils/seo';
 import { getLocalBusinessSchema } from '@/lib/schemas';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import CTABottom from '@/components/CTA.astro';
+import FAQSchema from '@/components/FAQSchema.astro';
 
 const breadcrumbs = [
   { name: 'Home', url: 'https://www.capaxe.com' },
@@ -23,6 +24,14 @@ const localBusinessSchema = getLocalBusinessSchema({
   country: 'United Kingdom',
   countryCode: 'GB'
 });
+
+const faqs = [
+  { question: "Does Capaxe Labs work with UK-based businesses?", answer: "Yes, we serve businesses across the UK from London to Edinburgh. We work in GMT/BST with availability during UK business hours for real-time collaboration." },
+  { question: "Do you handle UK VAT compliance for Shopify stores?", answer: "Yes, we integrate Avalara UK VAT, Shopify Tax, and Making Tax Digital support for HMRC digital tax submission." },
+  { question: "What UK payment methods do you integrate?", answer: "We integrate Stripe for UK bank accounts, BACS Direct Debit, PayPal UK, and other British payment gateways with full GBP support." },
+  { question: "Can you integrate UK shipping carriers?", answer: "We integrate Royal Mail, DPD, Evri (Hermes), Parcelforce, and DHL UK with real-time rate calculation and tracking number generation." },
+  { question: "How does your pricing work for UK clients?", answer: "All pricing is in GBP with no currency conversion fees. We offer competitive rates compared to London-based agencies while maintaining high-quality deliverables." },
+];
 ---
 
 <Layout seo={seo}>
@@ -244,6 +253,19 @@ const localBusinessSchema = getLocalBusinessSchema({
         <span class="px-4 py-2 bg-primary-500/20 text-primary-300 rounded-full font-medium">Avalara UK</span>
       </div>
     </section>
+
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6">Frequently Asked Questions</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        {faqs.map(faq => (
+          <div class="bento-tile rounded-lg">
+            <h3 class="text-base font-semibold mb-2">{faq.question}</h3>
+            <p class="text-sm text-muted-foreground">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+    <FAQSchema faqs={faqs} />
 
     <section class="mb-12 bg-primary-500/10 p-8 rounded-lg">
       <h2 class="text-3xl font-bold mb-4">Work with UK-Focused Shopify Developers</h2>

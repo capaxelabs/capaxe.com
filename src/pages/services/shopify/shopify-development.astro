@@ -3,7 +3,16 @@ import { FiCode, FiLayers, FiServer, FiBox } from "react-icons/fi";
 import CTABottom from "@/components/CTA.astro";
 import Layout from "@/layouts/Layout.astro";
 import ServiceCTA from "@/components/ServiceCTA";
+import FAQSection from "@/components/FAQSection.astro";
 import { createSEO } from "@/utils/seo";
+
+const faqs = [
+  { question: "What is the difference between Liquid and headless Shopify development?", answer: "Liquid is Shopify's native templating language that runs on their servers. Headless development uses frameworks like Next.js or Hydrogen with the Storefront API, giving you full control over the frontend." },
+  { question: "Should I choose Hydrogen or Next.js for my headless store?", answer: "Hydrogen is ideal if you want Shopify-native hosting on Oxygen with built-in commerce primitives. Next.js offers more flexibility and a larger ecosystem if you need custom infrastructure." },
+  { question: "How long does it take to build a custom Shopify store?", answer: "A standard Liquid theme store takes 4-8 weeks. Headless builds with Hydrogen or Next.js typically take 6-12 weeks depending on feature complexity and integrations." },
+  { question: "Can you customize an existing Shopify theme?", answer: "Yes. We customize existing themes by adding custom sections, modifying layouts, integrating third-party apps, and optimizing performance without starting from scratch." },
+  { question: "Do you build Shopify Plus stores?", answer: "Yes. We build Shopify Plus stores with advanced features like custom checkout, B2B functionality, multi-location inventory, and Shopify Scripts for dynamic pricing." },
+];
 
 const seo = createSEO({
   pageName: "Store Development",
@@ -68,6 +77,7 @@ const seo = createSEO({
         </div>
       </div>
     </section>
+    <FAQSection faqs={faqs} />
     <ServiceCTA />
   </div>
   <CTABottom />

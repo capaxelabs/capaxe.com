@@ -3,8 +3,17 @@ import Layout from "../../layouts/Layout.astro";
 import { siteConfig } from "@/config/site";
 import CTABottom from "@/components/CTA.astro";
 import ServiceCTA from "@/components/ServiceCTA";
+import FAQSection from "@/components/FAQSection.astro";
 import { createSEO } from "@/utils/seo";
 import type { SEOProps } from "@/utils/seo";
+
+const faqs = [
+  { question: "What Shopify development services do you provide?", answer: "We provide custom Shopify app development, Liquid theme builds, headless storefronts with Hydrogen, Shopify Plus enterprise solutions, platform migrations, and ongoing store maintenance." },
+  { question: "Do you build custom Shopify apps?", answer: "Yes, we build both private and public Shopify apps using the Admin API, Storefront API, Shopify Functions, and Polaris with TypeScript and React." },
+  { question: "Can you build a headless Shopify storefront?", answer: "Yes, we build headless storefronts using Shopify Hydrogen, Next.js, and Remix connected to the Storefront API for full control over design and performance." },
+  { question: "Do you work with Shopify Plus stores?", answer: "Yes, we specialize in Shopify Plus development including custom checkout, B2B commerce, Shopify Functions, and international selling with Shopify Markets." },
+  { question: "How do I get started with a Shopify project?", answer: "Book a free 30-minute discovery call where we discuss your requirements, timeline, and budget. We then provide a detailed proposal with scope and pricing." },
+];
 
 interface Props {
   seo?: SEOProps;
@@ -56,6 +65,7 @@ const seo = createSEO({
         </div>
       </div>
     </section>
+    <FAQSection faqs={faqs} />
     <ServiceCTA />
   </div>
   <CTABottom />

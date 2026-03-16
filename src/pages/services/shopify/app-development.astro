@@ -3,7 +3,16 @@ import { FiCode, FiTool, FiCloud } from "react-icons/fi";
 import CTABottom from "@/components/CTA.astro";
 import Layout from "@/layouts/Layout.astro";
 import ServiceCTA from "@/components/ServiceCTA";
+import FAQSection from "@/components/FAQSection.astro";
 import { createSEO } from "@/utils/seo";
+
+const faqs = [
+  { question: "What types of custom Shopify apps can you build?", answer: "We build private apps, custom admin tools, third-party integrations, checkout extensions, and Shopify Functions. Each app is tailored to your specific business workflows." },
+  { question: "How long does it take to develop a custom Shopify app?", answer: "Simple apps take 2-4 weeks, while complex apps with multiple integrations take 6-12 weeks. We provide a detailed timeline after the discovery phase." },
+  { question: "Can you integrate my existing systems with Shopify?", answer: "Yes, we build custom integrations with ERPs, CRMs, warehouse systems, and any third-party API. We ensure real-time data sync and error handling." },
+  { question: "Do you provide ongoing support after the app is built?", answer: "Absolutely. We offer maintenance plans that include bug fixes, updates for new Shopify API versions, and feature enhancements as your business grows." },
+  { question: "What tech stack do you use for Shopify app development?", answer: "We use TypeScript, React, Node.js, Shopify Polaris, GraphQL, and Prisma. Apps are deployed on Cloudflare Workers or Vercel for optimal performance." },
+];
 
 const seo = createSEO({
   pageName: "Custom App Development",
@@ -52,6 +61,7 @@ const seo = createSEO({
         </div>
       </div>
     </section>
+    <FAQSection faqs={faqs} />
     <ServiceCTA />
   </div>
   <CTABottom />
