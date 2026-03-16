@@ -97,20 +97,16 @@ export const menuConfig: MenuConfig = {
                 href: "/case-studies/layaway-solution",
             },
             {
-                title: "Shootflo Platform",
-                href: "/case-studies/shootflo-photo-workflow",
+                title: "Furniture Headless Store",
+                href: "/case-studies/furniture-headless-store",
             },
             {
-                title: "PhotosShoot AI",
-                href: "/case-studies/photosshoot-ai-photography",
+                title: "RenderEase 3D Viewer",
+                href: "/case-studies/renderease-3d-viewer",
             },
             {
-                title: "Memoid Platform",
-                href: "/case-studies/memoid-developer-platform",
-            },
-            {
-                title: "GetBee App",
-                href: "/case-studies/getbee-mobile-app",
+                title: "Picking List PDF",
+                href: "/case-studies/picking-list-pdf",
             },
         ],
     },
