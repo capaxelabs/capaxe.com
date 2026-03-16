@@ -61,6 +61,10 @@ export const menuConfig: MenuConfig = {
                 href: "/shopify-plus",
             },
             {
+                title: "Projects",
+                href: "/projects",
+            },
+            {
                 title: "Contact",
                 href: "/contact",
             },

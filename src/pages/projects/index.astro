@@ -1,0 +1,76 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import CTABottom from "@/components/CTA.astro";
+import { getCollection } from "astro:content";
+import { createSEO } from "@/utils/seo";
+
+const projects = await getCollection("projects");
+const sortedProjects = projects.sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime());
+
+const categories = [...new Set(sortedProjects.map(p => p.data.category))];
+
+const seo = createSEO({
+  pageName: "Projects We've Built — Apps, Platforms & Portfolios",
+  description: "Explore the products and platforms built by Capaxe Labs — from AI-powered tools and job platforms to travel planners and developer portfolios.",
+  keywords: "Capaxe Labs projects, web development portfolio, apps built by Capaxe, full-stack projects",
+  contentType: "basic",
+  pathname: "/projects",
+});
+---
+
+<Layout seo={seo}>
+  <div class="min-h-screen">
+    <section class="pt-32 pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-tile-accent text-center py-16">
+          <span class="inline-block px-3 py-1 rounded-full bg-white/10 text-white/80 text-xs font-medium mb-4 border border-white/20">
+            Our Work
+          </span>
+          <h1 class="text-5xl md:text-6xl font-bold mb-4">Projects</h1>
+          <p class="text-lg text-white/60 max-w-2xl mx-auto">
+            Products, platforms, and portfolios we've designed and built from the ground up
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-16 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          {
+            sortedProjects.map((project) => (
+              <a href={`/projects/${project.id}`} class="bento-tile group block cursor-pointer">
+                <div class="mb-4">
+                  <span class="inline-block px-2 py-1 text-xs font-medium rounded-md bg-primary-500/10 text-primary-400">
+                    {project.data.category}
+                  </span>
+                </div>
+
+                <h2 class="text-xl font-bold mb-2 text-foreground group-hover:text-primary-400 transition-colors">
+                  {project.data.name}
+                </h2>
+
+                <p class="text-muted-foreground text-sm mb-6 line-clamp-3">{project.data.description}</p>
+
+                <div class="flex items-center justify-between mt-auto">
+                  <div class="flex flex-wrap gap-2">
+                    {project.data.techStack.slice(0, 3).map((tech) => (
+                      <span class="bg-foreground/5 text-muted-foreground text-xs font-medium px-2.5 py-1 rounded-lg border border-border">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  <span class="text-primary-400 group-hover:text-primary-300 text-sm font-medium transition-colors">
+                    View &rarr;
+                  </span>
+                </div>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+    <CTABottom />
+  </div>
+</Layout>

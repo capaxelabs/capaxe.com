@@ -1,0 +1,156 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import CTABottom from "@/components/CTA.astro";
+import { createSEO } from "@/utils/seo";
+import { getCollection, render } from "astro:content";
+import type { RenderResult } from "astro:content";
+import { getBreadcrumbSchema } from "@/lib/schemas";
+import { siteConfig } from "@/config/site";
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((project) => ({
+    params: { id: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+let rendered: RenderResult | null = null;
+
+if (project) {
+  rendered = await render(project);
+}
+
+const seo = createSEO({
+  pageName: project.data.title,
+  description: project.data.description,
+  contentType: "basic",
+  pathname: `/projects/${project.id}`,
+});
+
+seo.structuredData = [
+  getBreadcrumbSchema([
+    { name: "Home", url: siteConfig.url },
+    { name: "Projects", url: `${siteConfig.url}/projects` },
+    { name: project.data.name, url: `${siteConfig.url}/projects/${project.id}` },
+  ])
+];
+---
+
+<Layout seo={seo}>
+  <div class="min-h-screen bg-background">
+    <section class="relative pt-32 pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          <div class="space-y-8">
+            <div class="space-y-4">
+              <div class="inline-flex items-center gap-3 bg-muted/60 backdrop-blur-sm px-4 py-2 rounded-full">
+                <span class="text-sm font-medium text-foreground">{project.data.name}</span>
+                <span class="text-xs text-muted-foreground">{project.data.category}</span>
+              </div>
+              <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
+                {project.data.title.split('—')[0].trim()}
+                {project.data.title.includes('—') && (
+                  <span class="block text-2xl md:text-3xl lg:text-4xl text-primary-400 mt-2">
+                    {project.data.title.split('—')[1].trim()}
+                  </span>
+                )}
+              </h1>
+              <p class="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl">
+                {project.data.description}
+              </p>
+            </div>
+
+            <div class="flex flex-wrap gap-4">
+              <div class="bento-tile-muted px-4 py-3 rounded-xl">
+                <div class="text-xs text-muted-foreground mb-1">Timeline</div>
+                <div class="text-sm font-semibold text-foreground">{project.data.timeframe}</div>
+              </div>
+              <div class="bento-tile-muted px-4 py-3 rounded-xl">
+                <div class="text-xs text-muted-foreground mb-1">Technologies</div>
+                <div class="text-sm font-semibold text-foreground">{project.data.techStack.length} Stack</div>
+              </div>
+              <a href={project.data.url} target="_blank" rel="noopener" class="bento-tile-accent px-4 py-3 rounded-xl text-white hover:opacity-90 transition-opacity">
+                <div class="text-xs text-white/70 mb-1">Live Site</div>
+                <div class="text-sm font-semibold">Visit &rarr;</div>
+              </a>
+            </div>
+          </div>
+
+          <div class="relative mt-8 lg:mt-0">
+            <div class="bg-gradient-to-br from-primary-500 to-primary-700 rounded-2xl p-6 md:p-8 shadow-2xl">
+              <div class="bg-background rounded-xl p-4 md:p-6 space-y-4">
+                <div class="flex items-center justify-between">
+                  <div class="text-sm font-medium text-muted-foreground">Project Overview</div>
+                  <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+                </div>
+                <div class="space-y-3">
+                  <div class="h-4 bg-muted rounded animate-pulse"></div>
+                  <div class="h-4 bg-muted rounded w-3/4 animate-pulse"></div>
+                  <div class="h-4 bg-muted rounded w-1/2 animate-pulse"></div>
+                </div>
+                <div class="flex flex-wrap gap-2 pt-2">
+                  {project.data.techStack.slice(0, 4).map((tech: string) => (
+                    <div class="px-2 py-1 bg-primary-500/10 text-primary-400 text-xs rounded font-medium">
+                      {tech}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-tile p-6 md:p-8">
+          <h2 class="text-lg font-semibold text-foreground mb-6">Tech Stack</h2>
+          <div class="flex flex-wrap items-center gap-3">
+            {project.data.techStack.map((tech: string) => (
+              <div class="bento-tile-muted px-3 py-2 rounded-lg">
+                <span class="text-sm font-medium text-foreground">{tech}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-8 px-6">
+      <div class="max-w-4xl mx-auto">
+        <div class="blog-content text-foreground">
+          {rendered && <rendered.Content />}
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div class="bento-tile-accent p-6 text-center">
+            <div class="text-2xl md:text-3xl font-bold text-white mb-1">{project.data.timeframe}</div>
+            <div class="text-sm text-white/70">Timeline</div>
+          </div>
+          <div class="bento-tile-accent p-6 text-center">
+            <div class="text-2xl md:text-3xl font-bold text-white mb-1">{project.data.techStack.length}</div>
+            <div class="text-sm text-white/70">Technologies</div>
+          </div>
+          <div class="bento-tile-accent p-6 text-center">
+            <div class="text-2xl md:text-3xl font-bold text-white mb-1">100%</div>
+            <div class="text-sm text-white/70">Custom Built</div>
+          </div>
+          <a href={project.data.url} target="_blank" rel="noopener" class="bento-tile-accent p-6 text-center hover:opacity-90 transition-opacity">
+            <div class="text-2xl md:text-3xl font-bold text-white mb-1">Live</div>
+            <div class="text-sm text-white/70">Visit Site &rarr;</div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <CTABottom />
+  </div>
+</Layout>

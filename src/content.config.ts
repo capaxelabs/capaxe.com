@@ -46,4 +46,20 @@ const caseStudies = defineCollection({
 	}),
 });
 
-export const collections = { blog, caseStudies };
+const projects = defineCollection({
+	loader: glob({ base: './src/content/projects', pattern: '**/*.{md,mdx}' }),
+	schema: z.object({
+		title: z.string(),
+		name: z.string(),
+		description: z.string(),
+		url: z.string(),
+		problemStatement: z.string(),
+		solution: z.string(),
+		timeframe: z.string(),
+		techStack: z.array(z.string()),
+		category: z.string(),
+		pubDate: z.coerce.date(),
+	}),
+});
+
+export const collections = { blog, caseStudies, projects };
