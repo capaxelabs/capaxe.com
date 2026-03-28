@@ -64,13 +64,13 @@ seo.structuredData = [
     <!-- Hero Image -->
     {heroImage && (
       <div class="max-w-4xl mx-auto px-6 pb-8">
-        <div class="overflow-hidden rounded-2xl border border-border shadow-lg">
+        <div class="overflow-hidden rounded-2xl border border-border shadow-lg aspect-[16/9]">
           <img
-            width={1020}
-            height={510}
+            width={1200}
+            height={630}
             src={heroImage}
             alt={title}
-            class="w-full h-auto object-cover"
+            class="w-full h-full object-cover"
           />
         </div>
       </div>

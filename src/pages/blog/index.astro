@@ -53,7 +53,7 @@ const regularPosts = posts.slice(1);
             <a href={`/blog/${featuredPost.id}`} class="block group">
               <div class="bento-tile p-0 overflow-hidden">
                 <div class="md:flex">
-                  <div class="md:w-1/2 overflow-hidden">
+                  <div class="md:w-1/2 overflow-hidden aspect-[16/9] md:aspect-auto">
                     <img
                       width={720}
                       height={360}
@@ -96,7 +96,7 @@ const regularPosts = posts.slice(1);
           {
             regularPosts.map((post) => (
               <a href={`/blog/${post.id}`} class="bento-tile group p-0 overflow-hidden flex flex-col">
-                <div class="overflow-hidden h-48">
+                <div class="overflow-hidden aspect-[16/9]">
                   <img
                     width={720}
                     height={360}

@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import Cal from "@calcom/embed-react";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { getCalApi } from "@calcom/embed-react";
 import ChatContactForm from "@/components/ChatContactForm";
 
 interface RetainerPlanItem {
@@ -16,13 +16,25 @@ interface RetainerPlanItem {
 }
 
 const RetainerPlansSection = () => {
-    const [selectedPlan, setSelectedPlan] = useState<RetainerPlanItem | null>(null);
-    const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
     const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
-    const handleBookCall = (item: RetainerPlanItem) => {
-        setSelectedPlan(item);
-        setIsBookingModalOpen(true);
+    useEffect(() => {
+        (async () => {
+            const cal = await getCalApi();
+            const isDark = document.documentElement.classList.contains("dark");
+            cal("ui", { theme: isDark ? "dark" : "light", hideEventTypeDetails: false });
+        })();
+    }, []);
+
+    const handleBookCall = async (item: RetainerPlanItem) => {
+        const cal = await getCalApi();
+        cal("modal", {
+            calLink: "capaxe/30min",
+            config: {
+                notes: `Interested in ${item.title} - ${item.description}`,
+                theme: document.documentElement.classList.contains("dark") ? "dark" : "light",
+            },
+        });
     };
 
     return (
@@ -106,34 +118,6 @@ const RetainerPlansSection = () => {
                     </div>
                 </div>
             </section>
-
-            <Dialog open={isBookingModalOpen} onOpenChange={setIsBookingModalOpen}>
-                <DialogContent className="sm:max-w-4xl max-h-[80vh] overflow-hidden bg-surface-elevated border-border">
-                    <DialogHeader>
-                        <DialogTitle className="text-2xl text-foreground">
-                            Book a Call - {selectedPlan?.title}
-                        </DialogTitle>
-                    </DialogHeader>
-                    <div className="h-[600px] overflow-auto">
-                        {selectedPlan && (
-                            <Cal
-                                calLink="capaxe/30min"
-                                config={{
-                                    name: "",
-                                    email: "",
-                                    notes: `Interested in ${selectedPlan.title} - ${selectedPlan.description}`,
-                                    theme: "dark"
-                                }}
-                                style={{
-                                    width: "100%",
-                                    height: "100%",
-                                    overflow: "scroll"
-                                }}
-                            />
-                        )}
-                    </div>
-                </DialogContent>
-            </Dialog>
 
             <Dialog open={isContactModalOpen} onOpenChange={setIsContactModalOpen}>
                 <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-hidden p-0 bg-transparent border-none shadow-none">
