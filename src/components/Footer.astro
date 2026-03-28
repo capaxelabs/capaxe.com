@@ -85,7 +85,24 @@ const currentYear = new Date().getFullYear();
           }
         </ul>
       </div>
+    </div>
 
+    <!-- Giant Brand Text -->
+    <div class="mt-16 overflow-hidden" id="footer-brand">
+      <div
+        class="flex items-baseline justify-center gap-[2vw] leading-none select-none"
+      >
+        <span
+          class="text-[14vw] md:text-[12vw] font-black tracking-tighter text-foreground footer-brand-capaxe"
+        >
+          Capaxe
+        </span>
+        <span
+          class="text-[14vw] md:text-[12vw] font-black tracking-tighter text-primary-400/0 footer-brand-labs"
+        >
+          Labs
+        </span>
+      </div>
     </div>
 
     <div class="mt-8 pt-8 border-t border-border">
@@ -114,3 +131,68 @@ const currentYear = new Date().getFullYear();
     </div>
   </div>
 </footer>
+
+<style>
+  @keyframes labs-reveal {
+    0% {
+      clip-path: inset(0 100% 0 0);
+      color: transparent;
+    }
+    50% {
+      clip-path: inset(0 0 0 0);
+      color: var(--color-primary-400);
+    }
+    100% {
+      clip-path: inset(0 0 0 0);
+      color: var(--color-primary-400);
+    }
+  }
+
+  @keyframes capaxe-brighten {
+    0% {
+      opacity: 0.1;
+    }
+    100% {
+      opacity: 0.15;
+    }
+  }
+
+  .footer-brand-labs.animate-in {
+    animation: labs-reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .footer-brand-capaxe.animate-in {
+    animation: capaxe-brighten 1s ease forwards;
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    function initFooterBrand() {
+      var brand = document.getElementById("footer-brand");
+      if (!brand) return;
+
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              var labs = brand.querySelector(".footer-brand-labs");
+              var capaxe = brand.querySelector(".footer-brand-capaxe");
+              if (labs) labs.classList.add("animate-in");
+              if (capaxe) capaxe.classList.add("animate-in");
+            }
+          });
+        },
+        { threshold: 0.1 },
+      );
+
+      observer.observe(brand);
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initFooterBrand);
+    } else {
+      initFooterBrand();
+    }
+  })();
+</script>

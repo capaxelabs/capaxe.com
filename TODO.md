@@ -96,25 +96,25 @@ Simple geometric shapes. Elegant, modern, SaaS-style.
 - [x] `shopify-theme-architecture.mdx` — Three stacked horizontal rectangles of decreasing width (header, body, footer), forming a simple page wireframe. Accent: white.
 - [x] `shopify-functions-rust-vs-javascript.mdx` — Two simple code bracket icons ({ }) side by side, left in soft orange, right in soft yellow. Center: a small gear icon in green.
 - [x] `rebuild-vs-refactor-shopify-theme.mdx` — Left side: a simple house outline being erased. Right side: the same house with a small wrench adjusting one part. Thin vertical divider between them. Accent: soft red for left.
-- [ ] `shopify-plus-multi-account-management.mdx` — Three small storefront icons arranged in a triangle, connected by thin lines to a central circle. Accent: soft gold.
-- [ ] `shopify-schema-guide.mdx` — Clean nested curly braces { { } } with a small key icon inside the innermost pair. Accent: white.
-- [ ] `shopify-new-customer-accounts.mdx` — A person icon with a small toggle switch below it, switch positioned to the right (new). Accent: white.
-- [ ] `shopify-theme-blocks-guide.mdx` — Four simple rounded rectangles stacked in a 2x2 grid, each a slightly different shade of green. Accent: white.
-- [ ] `shopify-next-gen-dev-platform.mdx` — A simple rocket silhouette pointing up, with three small dots (tools) orbiting around it. Accent: white.
-- [ ] `shopify-polaris-design-system-updates.mdx` — A compass icon (Polaris) with four small UI component squares at N, E, S, W positions. Accent: soft blue.
-- [ ] `getting-started-shopify-functions.mdx` — A function symbol f(x) inside a rounded rectangle with a small play/start arrow. Accent: white.
-- [ ] `custom-shopify-apps-scaling-ecommerce.mdx` — A small app icon (rounded square) with an upward arrow emerging from it. Accent: white.
-- [ ] `mastering-shopify-api-integrations.mdx` — Two circles connected by a double-headed arrow, small plug/socket icon at the connection point. Accent: white.
-- [ ] `migrating-shopify-customer-accounts.mdx` — A person icon with a curved arrow moving from left circle to right circle. Accent: soft blue.
-- [ ] `unlocking-shopify-full-potential.mdx` — A simple padlock in the open position with a small sparkle/star above it. Accent: white.
+- [x] `shopify-plus-multi-account-management.mdx` — Three small storefront icons arranged in a triangle, connected by thin lines to a central circle. Accent: soft gold.
+- [x] `shopify-schema-guide.mdx` — Clean nested curly braces { { } } with a small key icon inside the innermost pair. Accent: white.
+- [x] `shopify-new-customer-accounts.mdx` — A person icon with a small toggle switch below it, switch positioned to the right (new). Accent: white.
+- [x] `shopify-theme-blocks-guide.mdx` — Four simple rounded rectangles stacked in a 2x2 grid, each a slightly different shade of green. Accent: white.
+- [x] `shopify-next-gen-dev-platform.mdx` — A simple rocket silhouette pointing up, with three small dots (tools) orbiting around it. Accent: white.
+- [x] `shopify-polaris-design-system-updates.mdx` — A compass icon (Polaris) with four small UI component squares at N, E, S, W positions. Accent: soft blue.
+- [x] `getting-started-shopify-functions.mdx` — A function symbol f(x) inside a rounded rectangle with a small play/start arrow. Accent: white.
+- [x] `custom-shopify-apps-scaling-ecommerce.mdx` — A small app icon (rounded square) with an upward arrow emerging from it. Accent: white.
+- [x] `mastering-shopify-api-integrations.mdx` — Two circles connected by a double-headed arrow, small plug/socket icon at the connection point. Accent: white.
+- [x] `migrating-shopify-customer-accounts.mdx` — A person icon with a curved arrow moving from left circle to right circle. Accent: soft blue.
+- [x] `unlocking-shopify-full-potential.mdx` — A simple padlock in the open position with a small sparkle/star above it. Accent: white.
 
 ### Liquid & Theme Development (12 posts)
-- [ ] `high-converting-shopify-product-pages.mdx` — A simple product card rectangle with a small upward arrow in the bottom-right corner (conversion). Accent: white.
-- [ ] `accessible-interactive-alpinejs-shopify.mdx` — A mountain peak (Alpine) with a small universal access circle icon beside it. Accent: soft blue.
-- [ ] `alpinejs-global-state-shopify.mdx` — A central circle with three thin lines radiating to three smaller circles (state flow). Accent: white.
-- [ ] `managing-cart-state-alpinejs.mdx` — A shopping cart icon with a small circular arrow (sync/state) above it. Accent: white.
-- [ ] `mastering-liquid-capture-tag.mdx` — A single droplet icon with code brackets { } inside it. Accent: soft blue.
-- [ ] `refactoring-nested-loops-liquid.mdx` — Left: a tangled scribble circle. Right: a clean straight line. Arrow between them. Accent: soft red for left scribble.
+- [x] `high-converting-shopify-product-pages.mdx` — A simple product card rectangle with a small upward arrow in the bottom-right corner (conversion). Accent: white.
+- [x] `accessible-interactive-alpinejs-shopify.mdx` — A mountain peak (Alpine) with a small universal access circle icon beside it. Accent: soft blue.
+- [x] `alpinejs-global-state-shopify.mdx` — A central circle with three thin lines radiating to three smaller circles (state flow). Accent: white.
+- [x] `managing-cart-state-alpinejs.mdx` — A shopping cart icon with a small circular arrow (sync/state) above it. Accent: white.
+- [x] `mastering-liquid-capture-tag.mdx` — A single droplet icon with code brackets { } inside it. Accent: soft blue.
+- [x] `refactoring-nested-loops-liquid.mdx` — Left: a tangled scribble circle. Right: a clean straight line. Arrow between them. Accent: soft red for left scribble.
 - [ ] `liquid-performance-optimization.mdx` — A simple speedometer/gauge icon with needle pointing to the right (fast/green zone). Accent: white.
 - [ ] `liquid-doc-documentation.mdx` — An open book icon with three horizontal lines on each page (text). Accent: white.
 - [ ] `dynamic-filtering-liquid-url-params.mdx` — A funnel icon with three small dots entering the top and one dot exiting the bottom. Accent: white.
