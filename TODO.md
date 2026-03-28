@@ -115,27 +115,27 @@ Simple geometric shapes. Elegant, modern, SaaS-style.
 - [x] `managing-cart-state-alpinejs.mdx` — A shopping cart icon with a small circular arrow (sync/state) above it. Accent: white.
 - [x] `mastering-liquid-capture-tag.mdx` — A single droplet icon with code brackets { } inside it. Accent: soft blue.
 - [x] `refactoring-nested-loops-liquid.mdx` — Left: a tangled scribble circle. Right: a clean straight line. Arrow between them. Accent: soft red for left scribble.
-- [ ] `liquid-performance-optimization.mdx` — A simple speedometer/gauge icon with needle pointing to the right (fast/green zone). Accent: white.
-- [ ] `liquid-doc-documentation.mdx` — An open book icon with three horizontal lines on each page (text). Accent: white.
-- [ ] `dynamic-filtering-liquid-url-params.mdx` — A funnel icon with three small dots entering the top and one dot exiting the bottom. Accent: white.
-- [ ] `super-collections-page-performance.mdx` — A 2x2 grid of card rectangles with a small lightning bolt in the corner (speed). Accent: soft yellow.
-- [ ] `metaobjects-dynamic-data-source.mdx` — A small database cylinder with three branches extending right to content card rectangles. Accent: white.
-- [ ] `theme-block-nesting-architecture.mdx` — Three concentric rounded rectangles (nested blocks), each slightly offset. Accent: white (using different green opacities for each layer).
+- [x] `liquid-performance-optimization.mdx` — A simple speedometer/gauge icon with needle pointing to the right (fast/green zone). Accent: white.
+- [x] `liquid-doc-documentation.mdx` — An open book icon with three horizontal lines on each page (text). Accent: white.
+- [x] `dynamic-filtering-liquid-url-params.mdx` — A funnel icon with three small dots entering the top and one dot exiting the bottom. Accent: white.
+- [x] `super-collections-page-performance.mdx` — A 2x2 grid of card rectangles with a small lightning bolt in the corner (speed). Accent: soft yellow.
+- [x] `metaobjects-dynamic-data-source.mdx` — A small database cylinder with three branches extending right to content card rectangles. Accent: white.
+- [x] `theme-block-nesting-architecture.mdx` — Three concentric rounded rectangles (nested blocks), each slightly offset. Accent: white (using different green opacities for each layer).
 
 ### Shopify Apps & Tools (5 posts)
-- [ ] `swiperjs-vs-embla-carousel.mdx` — Two horizontal card strips side by side, left with soft blue tint, right with soft purple tint. Small "vs" between them. Accent: soft blue and purple.
-- [ ] `leveraging-search-and-discovery-app.mdx` — A magnifying glass icon with three small product card rectangles fanning out to the right. Accent: white.
-- [ ] `app-vs-theme-customization-framework.mdx` — A simple fork in a path: left branch has a code icon, right branch has a paintbrush icon. Accent: white.
-- [ ] `beyond-polaris-web-components.mdx` — A Polaris compass circle with a small arrow breaking out of it to the right. Accent: soft blue.
-- [ ] `optimizing-images-next-gen-formats.mdx` — A large image icon (landscape rectangle with mountain) with a small downward arrow and compressed version beside it. Accent: white.
+- [x] `swiperjs-vs-embla-carousel.mdx` — Two horizontal card strips side by side, left with soft blue tint, right with soft purple tint. Small "vs" between them. Accent: soft blue and purple.
+- [x] `leveraging-search-and-discovery-app.mdx` — A magnifying glass icon with three small product card rectangles fanning out to the right. Accent: white.
+- [x] `app-vs-theme-customization-framework.mdx` — A simple fork in a path: left branch has a code icon, right branch has a paintbrush icon. Accent: white.
+- [x] `beyond-polaris-web-components.mdx` — A Polaris compass circle with a small arrow breaking out of it to the right. Accent: soft blue.
+- [x] `optimizing-images-next-gen-formats.mdx` — A large image icon (landscape rectangle with mountain) with a small downward arrow and compressed version beside it. Accent: white.
 
 ### AI & Modern Development (7 posts)
-- [ ] `ai-figma-mcp-revolution.mdx` — A design frame (Figma) connected by a thin line to code brackets, with a small brain/AI circle at the midpoint. Accent: soft purple.
-- [ ] `getting-started-figma-mcp.mdx` — Three simple icons in a row connected by arrows: design frame, gear (MCP), code brackets. Accent: soft purple.
-- [ ] `advanced-prompting-claude.mdx` — A chat bubble icon with three horizontal lines inside, a small sparkle above it. Accent: soft purple.
-- [ ] `conversational-commerce-openai.mdx` — A chat bubble with a small shopping bag icon inside it. Accent: white.
-- [ ] `ai-assisted-developer-remix-v3.mdx` — A code editor rectangle with a small AI sparkle icon in the top-right corner. Accent: soft purple.
-- [ ] `graphql-schema-agentic-development.mdx` — A simple graph/tree: one parent node with three child nodes, thin connecting lines. Small AI sparkle on the parent node. Accent: soft pink.
+- [x] `ai-figma-mcp-revolution.mdx` — A design frame (Figma) connected by a thin line to code brackets, with a small brain/AI circle at the midpoint. Accent: soft purple.
+- [x] `getting-started-figma-mcp.mdx` — Three simple icons in a row connected by arrows: design frame, gear (MCP), code brackets. Accent: soft purple.
+- [x] `advanced-prompting-claude.mdx` — A chat bubble icon with three horizontal lines inside, a small sparkle above it. Accent: soft purple.
+- [x] `conversational-commerce-openai.mdx` — A chat bubble with a small shopping bag icon inside it. Accent: white.
+- [x] `ai-assisted-developer-remix-v3.mdx` — A code editor rectangle with a small AI sparkle icon in the top-right corner. Accent: soft purple.
+- [x] `graphql-schema-agentic-development.mdx` — A simple graph/tree: one parent node with three child nodes, thin connecting lines. Small AI sparkle on the parent node. Accent: soft pink.
 - [ ] `mcp-security-risks.mdx` — A shield icon with a small exclamation mark (!) inside it. Accent: soft red/amber.
 
 ### Freelancer & Business (7 posts)
