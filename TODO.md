@@ -136,23 +136,23 @@ Simple geometric shapes. Elegant, modern, SaaS-style.
 - [x] `conversational-commerce-openai.mdx` — A chat bubble with a small shopping bag icon inside it. Accent: white.
 - [x] `ai-assisted-developer-remix-v3.mdx` — A code editor rectangle with a small AI sparkle icon in the top-right corner. Accent: soft purple.
 - [x] `graphql-schema-agentic-development.mdx` — A simple graph/tree: one parent node with three child nodes, thin connecting lines. Small AI sparkle on the parent node. Accent: soft pink.
-- [ ] `mcp-security-risks.mdx` — A shield icon with a small exclamation mark (!) inside it. Accent: soft red/amber.
+- [x] `mcp-security-risks.mdx` — A shield icon with a small exclamation mark (!) inside it. Accent: soft red/amber.
 
 ### Freelancer & Business (7 posts)
-- [ ] `freelancer-tips.mdx` — A simple lightbulb icon with three small bullet-point dots beside it. Accent: soft yellow.
-- [ ] `avoiding-freelancer-burnout.mdx` — A battery icon at 50% charge with a small pause symbol beside it. Accent: soft amber.
-- [ ] `value-based-pricing-freelancers.mdx` — A price tag icon with an upward arrow emerging from it. Accent: white.
-- [ ] `project-scoping-guide.mdx` — A simple ruler/measuring tool with a dashed boundary rectangle. Accent: white.
-- [ ] `loom-notion-freelancer-workflow.mdx` — A play button (video) connected by an arrow to a page/document icon. Accent: soft blue.
-- [ ] `onboarding-new-shopify-client.mdx` — A handshake icon above a simple three-step progress bar. Accent: white.
-- [ ] `art-of-mvp-ab-testing.mdx` — Two simple rectangles labeled A and B side by side, B has a small crown/star above it. Accent: soft yellow.
+- [x] `freelancer-tips.mdx` — A simple lightbulb icon with three small bullet-point dots beside it. Accent: soft yellow.
+- [x] `avoiding-freelancer-burnout.mdx` — A battery icon at 50% charge with a small pause symbol beside it. Accent: soft amber.
+- [x] `value-based-pricing-freelancers.mdx` — A price tag icon with an upward arrow emerging from it. Accent: white.
+- [x] `project-scoping-guide.mdx` — A simple ruler/measuring tool with a dashed boundary rectangle. Accent: white.
+- [x] `loom-notion-freelancer-workflow.mdx` — A play button (video) connected by an arrow to a page/document icon. Accent: soft blue.
+- [x] `onboarding-new-shopify-client.mdx` — A handshake icon above a simple three-step progress bar. Accent: white.
+- [x] `art-of-mvp-ab-testing.mdx` — Two simple rectangles labeled A and B side by side, B has a small crown/star above it. Accent: soft yellow.
 
 ### Other (5 posts)
-- [ ] `ab-testing-guide.mdx` — Two overlapping rectangles (A behind B) with a small checkmark on the front one. Accent: white.
-- [ ] `automating-workflow-n8n.mdx` — Three circles connected by arrows in a left-to-right flow (input, process, output). Accent: soft orange.
-- [ ] `website-optimization-load-speed.mdx` — A browser window icon with a small lightning bolt in the center. Accent: soft yellow.
-- [ ] `cldnine.mdx` — Two rectangles (backend, frontend) connected by a thin API arrow line. Accent: soft blue.
-- [ ] `theme-rebuild-checklist.mdx` — A house outline with a circular arrow around it (rebuild cycle) and a small checklist beside it. Accent: white.
+- [x] `ab-testing-guide.mdx` — Two overlapping rectangles (A behind B) with a small checkmark on the front one. Accent: white.
+- [x] `automating-workflow-n8n.mdx` — Three circles connected by arrows in a left-to-right flow (input, process, output). Accent: soft orange.
+- [x] `website-optimization-load-speed.mdx` — A browser window icon with a small lightning bolt in the center. Accent: soft yellow.
+- [x] `cldnine.mdx` — Two rectangles (backend, frontend) connected by a thin API arrow line. Accent: soft blue.
+- [x] `theme-rebuild-checklist.mdx` — A house outline with a circular arrow around it (rebuild cycle) and a small checklist beside it. Accent: white.
 
 ## SEO Overhaul (Completed)
 - [x] Fix robots meta triple-output bug in SEO.astro
