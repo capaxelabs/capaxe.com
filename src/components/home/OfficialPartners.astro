@@ -1,0 +1,45 @@
+---
+const officialPartners = [
+  { name: "GoKwik",        logo: "/logos/partner/gokwik.svg" },
+  { name: "FoxSell Bundle",logo: "/logos/partner/foxsell.svg" },
+  { name: "Shiprocket",    logo: "/logos/partner/shiprocket.svg" },
+  { name: "Razorpay",      logo: "/logos/partner/razorpay.svg" },
+  { name: "Klaviyo",       logo: "/logos/partner/klaviyo.svg" },
+  { name: "Recharge",      logo: "/logos/partner/recharge.svg" },
+];
+---
+
+<section class="py-12 reveal-on-scroll">
+  <div class="container max-w-5xl mx-auto px-6 mb-8">
+    <h2 class="text-2xl md:text-3xl font-bold text-foreground text-center">
+      Trusted Partners. <span class="text-primary-400">Verified Expertise.</span>
+    </h2>
+  </div>
+
+  <div
+    class="overflow-hidden"
+    style="mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);"
+  >
+    <div class="partner-marquee flex items-center w-max">
+      {[...officialPartners, ...officialPartners].map((partner) => (
+        <div class="px-10">
+          <img
+            src={partner.logo}
+            alt={`${partner.name} logo`}
+            class="h-8 w-auto object-contain grayscale opacity-60 shrink-0"
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes partner-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .partner-marquee {
+    animation: partner-scroll 28s linear infinite;
+  }
+</style>

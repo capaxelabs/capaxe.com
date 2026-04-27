@@ -1,0 +1,119 @@
+---
+import { shopifyApps } from "@/config/app-seo";
+
+const brandColors: Record<string, string> = {
+  "klaviyo": "#FFE100",
+  "mailchimp": "#FFE01B",
+  "omnisend": "#012E4D",
+  "postscript": "#FF4F33",
+  "attentive": "#FFD400",
+  "recharge": "#5C29FF",
+  "bold-subscriptions": "#0070F3",
+  "loop-subscriptions": "#7B61FF",
+  "skio": "#7C3AED",
+  "appstle-subscriptions": "#1F2D5A",
+  "yotpo": "#1877F2",
+  "judge-me": "#E94B35",
+  "stamped-io": "#FF4757",
+  "loox": "#FF5A5F",
+  "okendo": "#1A1A1A",
+  "algolia": "#003DFF",
+  "searchspring": "#0BB3B7",
+  "boost-commerce": "#FF6F00",
+  "smile-io": "#FFB400",
+  "loyaltylion": "#FF4D4D",
+  "rise-ai": "#00B894",
+  "reconvert": "#FF7A45",
+  "carthook": "#0EA5E9",
+  "afterpay": "#B2FCE4",
+  "klarna": "#FFA8CD",
+  "lucky-orange": "#FF8800",
+  "hotjar": "#FD3A5C",
+  "google-analytics-4": "#F9AB00",
+  "shipstation": "#0088CC",
+  "shippo": "#5B6BFF",
+};
+
+const categoryLabels: Record<string, string> = {
+  "email-marketing": "Email",
+  "sms-marketing": "SMS",
+  "subscriptions": "Subscriptions",
+  "reviews": "Reviews",
+  "search": "Search",
+  "product-filtering": "Filtering",
+  "loyalty": "Loyalty",
+  "gift-cards": "Gift Cards",
+  "post-purchase": "Post-Purchase",
+  "buy-now-pay-later": "BNPL",
+  "analytics": "Analytics",
+  "shipping": "Shipping",
+};
+
+const partners = shopifyApps.map((app) => ({
+  slug: app.slug,
+  name: app.name,
+  category: categoryLabels[app.category] ?? app.category,
+  color: brandColors[app.slug] ?? "#6366F1",
+  initial: app.name.charAt(0).toUpperCase(),
+}));
+---
+
+<section class="px-6 py-20 reveal-on-scroll">
+  <div class="container max-w-7xl mx-auto">
+    <div class="text-center mb-12">
+      <span
+        class="inline-block text-xs font-semibold text-primary uppercase tracking-[0.2em] mb-3"
+      >
+        App Partners
+      </span>
+      <h2
+        class="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4"
+      >
+        Apps We Integrate, Configure & Optimize
+      </h2>
+      <p class="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
+        From email and subscriptions to reviews and analytics — we ship
+        end-to-end integrations for the leading Shopify apps brands rely on.
+      </p>
+    </div>
+
+    <div
+      class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4"
+    >
+      {
+        partners.map((partner) => (
+          <a
+            href={`/shopify/apps/${partner.slug}`}
+            class="group relative flex items-center gap-3 p-4 rounded-xl bg-bento-bg border border-bento-border hover:border-primary/30 hover:shadow-md hover:shadow-primary/5 hover:-translate-y-0.5 transition-all duration-300"
+            aria-label={`${partner.name} integration services`}
+          >
+            <span
+              class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center text-base font-bold text-white shadow-sm transition-transform duration-300 group-hover:scale-110"
+              style={`background-color: ${partner.color}; color: ${["#FFE100", "#FFE01B", "#FFD400", "#B2FCE4", "#FFA8CD", "#FFB400", "#F9AB00"].includes(partner.color) ? "#1A1A1A" : "#FFFFFF"};`}
+              aria-hidden="true"
+            >
+              {partner.initial}
+            </span>
+            <div class="flex-1 min-w-0">
+              <div class="text-sm font-semibold text-foreground truncate group-hover:text-primary transition-colors">
+                {partner.name}
+              </div>
+              <div class="text-xs text-muted-foreground truncate">
+                {partner.category}
+              </div>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+
+    <div class="mt-10 text-center">
+      <p class="text-sm text-muted-foreground">
+        Don't see your app? <a
+          href="/contact"
+          class="text-primary font-medium hover:underline">Talk to us</a
+        > — we work with the full Shopify ecosystem.
+      </p>
+    </div>
+  </div>
+</section>

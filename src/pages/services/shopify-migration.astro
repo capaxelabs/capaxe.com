@@ -8,7 +8,7 @@ import BookingButton from "@/components/BookingButton";
 import ChatContactModal from "@/components/ChatContactModal";
 import FAQSection from "@/components/FAQSection.astro";
 import { createSEO } from "@/utils/seo";
-import { getFAQPageSchema, getBreadcrumbSchema } from "@/lib/schemas";
+import { getBreadcrumbSchema } from "@/lib/schemas";
 
 const migrationFaqs = [
   { question: "Which platforms do you migrate from?", answer: "We migrate from Magento, WooCommerce, BigCommerce, Squarespace, Wix, PrestaShop, and custom-built e-commerce platforms. We handle both standard and complex migrations with custom data mapping." },
@@ -27,7 +27,6 @@ const seo = createSEO({
 
 seo.structuredData = [
   seo.structuredData as object,
-  getFAQPageSchema(migrationFaqs),
   getBreadcrumbSchema([
     { name: "Home", url: siteConfig.url },
     { name: "Services", url: `${siteConfig.url}/services` },

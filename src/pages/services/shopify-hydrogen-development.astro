@@ -7,7 +7,7 @@ import FAQSection from "@/components/FAQSection.astro";
 import BookingButton from "@/components/BookingButton";
 import ChatContactModal from "@/components/ChatContactModal";
 import { siteConfig } from "@/config/site";
-import { getFAQPageSchema, getBreadcrumbSchema } from "@/lib/schemas";
+import { getBreadcrumbSchema } from "@/lib/schemas";
 
 const faqs = [
   {
@@ -46,7 +46,6 @@ const seo = createSEO({
 
 seo.structuredData = [
   seo.structuredData as object,
-  getFAQPageSchema(faqs),
   getBreadcrumbSchema([
     { name: "Home", url: siteConfig.url },
     { name: "Services", url: `${siteConfig.url}/services` },

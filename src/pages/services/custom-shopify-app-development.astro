@@ -8,7 +8,7 @@ import BookingButton from "@/components/BookingButton";
 import ChatContactModal from "@/components/ChatContactModal";
 import FAQSection from "@/components/FAQSection.astro";
 import { createSEO } from "@/utils/seo";
-import { getFAQPageSchema, getBreadcrumbSchema } from "@/lib/schemas";
+import { getBreadcrumbSchema } from "@/lib/schemas";
 
 const appFaqs = [
   { question: "What types of Shopify apps do you build?", answer: "We build private/custom apps, public apps listed on the Shopify App Store, Shopify Functions (discount, payment, fulfillment), and theme app extensions. We work with both embedded and standalone app architectures." },
@@ -27,7 +27,6 @@ const seo = createSEO({
 
 seo.structuredData = [
   seo.structuredData as object,
-  getFAQPageSchema(appFaqs),
   getBreadcrumbSchema([
     { name: "Home", url: siteConfig.url },
     { name: "Services", url: `${siteConfig.url}/services` },

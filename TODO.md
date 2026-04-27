@@ -2,6 +2,8 @@
 - [x] Fine-tune bento grid layouts on individual service pages for visual variety
 - [x] Add subtle entrance animations to bento tiles (intersection observer)
 - [x] Review case study detail page ([id].astro) for bento consistency
+- [x] Add App Partners section on home page (logo + name grid linked to /shopify/apps/[slug])
+- [x] Add Official Partners section on home page (GoKwik, FoxSell Bundle, Shiprocket, Razorpay, etc.)
 
 ## Bug Fixes
 - [x] Verify dark-on-dark contrast for select/option elements in consultation form
@@ -153,6 +155,23 @@ Simple geometric shapes. Elegant, modern, SaaS-style.
 - [x] `website-optimization-load-speed.mdx` — A browser window icon with a small lightning bolt in the center. Accent: soft yellow.
 - [x] `cldnine.mdx` — Two rectangles (backend, frontend) connected by a thin API arrow line. Accent: soft blue.
 - [x] `theme-rebuild-checklist.mdx` — A house outline with a circular arrow around it (rebuild cycle) and a small checklist beside it. Accent: white.
+
+## SEO Audit Action Plan — April 2026 (Completed)
+- [x] C0.1 — Partytown integration for GTM + Microsoft Clarity (off main thread)
+- [x] C0.2 — Preconnect hints for GTM/Clarity domains + switch homepage below-fold islands to client:visible
+- [x] C1 — Fix hero stats SSR: AnimatedStat useState(0) → useState(target) so crawlers see real numbers
+- [x] H1.2 — Remove duplicate FAQPage schema on custom-shopify-app-development, shopify-migration, shopify-hydrogen-development
+- [x] M1 — Add lastmod to all sitemap entries (build date via sitemap serialize)
+- [x] C2 Path B — Expand PSEOCity with timezone, supportHours, currency, paymentGateways, commerceStat, marketContext, population for all 40 cities; update city page template with market-intel section + payment gateways block
+- [ ] C0.3 — Replace shopify-partner.png + shopify-expert.png with SVG (download from Shopify Partner asset kit)
+- [ ] C0.4 — Fix WCAG color-contrast failures (run axe-core, bump muted-foreground shade)
+- [ ] H1.4 — Switch /shopify/compare/* schema from Service → Article
+- [ ] M2 — Author bylines on blog posts (name + headshot + 1-line bio)
+- [ ] M3 — Add srcset descriptors to Unsplash hero images
+- [ ] M4 — Switch country-page schema from LocalBusiness → Service + areaServed
+- [ ] L1 — Generate llms-full.txt from blog frontmatter
+- [ ] L2 — Split sitemap by section (blog, services, shopify)
+- [ ] L4 — Fix 30% OFF CTA bar glyph aria-hidden
 
 ## SEO Overhaul (Completed)
 - [x] Fix robots meta triple-output bug in SEO.astro

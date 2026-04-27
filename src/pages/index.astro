@@ -4,7 +4,9 @@ import { siteConfig } from "@/config/site";
 import { StickyCards, ServiceLanding } from "@/components/home/HomeComponents";
 import RetainerPlansSection from "@/components/RetainerPlan";
 import HeroSection from "@/components/home/HeroSection.astro";
-import ClientLogos from "@/components/home/ClientLogos";
+import ClientLogos from "@/components/home/ClientLogos.astro";
+import AppPartners from "@/components/home/AppPartners.astro";
+import OfficialPartners from "@/components/home/OfficialPartners.astro";
 import FAQSection from "@/components/FAQSection.astro";
 import { createSEO } from "@/utils/seo";
 import { getEnhancedOrganizationSchema } from "@/lib/schemas";
@@ -31,28 +33,38 @@ seo.structuredData = getEnhancedOrganizationSchema();
   <div class="min-h-screen">
     <HeroSection />
 
+    <OfficialPartners />
+
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="h-px bg-linear-to-r from-transparent via-border to-transparent"></div>
+    </div>
+
+    <ClientLogos />
+
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="h-px bg-linear-to-r from-transparent via-border to-transparent"></div>
+    </div>
+
+    <StickyCards siteConfig={siteConfig} client:visible />
+
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="h-px bg-linear-to-r from-transparent via-border to-transparent"></div>
+    </div>
+
+    <ServiceLanding siteConfig={siteConfig} client:visible />
+
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="h-px bg-linear-to-r from-transparent via-border to-transparent"></div>
+    </div>
+
+    <AppPartners />
+
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="h-px bg-linear-to-r from-transparent via-border to-transparent"></div>
+    </div>
+
     <div class="reveal-on-scroll">
-      <ClientLogos siteConfig={siteConfig} client:load />
-    </div>
-
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="h-px bg-gradient-to-r from-transparent via-border to-transparent"></div>
-    </div>
-
-    <StickyCards siteConfig={siteConfig} client:load />
-
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="h-px bg-gradient-to-r from-transparent via-border to-transparent"></div>
-    </div>
-
-    <ServiceLanding siteConfig={siteConfig} client:load />
-
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="h-px bg-gradient-to-r from-transparent via-border to-transparent"></div>
-    </div>
-
-    <div class="reveal-on-scroll">
-      <RetainerPlansSection client:load />
+      <RetainerPlansSection client:visible />
     </div>
 
     <FAQSection faqs={faqs} />

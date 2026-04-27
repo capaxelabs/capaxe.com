@@ -4,6 +4,7 @@ import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import cloudflare from "@astrojs/cloudflare";
+import partytown from "@astrojs/partytown";
 
 import react from "@astrojs/react";
 
@@ -75,8 +76,13 @@ export default defineConfig({
     }),
     sitemap({
       filter: (page) => !['/color', '/health', '/plans', '/press'].some(p => page.includes(p)),
+      serialize(item) {
+        item.lastmod = new Date().toISOString().split('T')[0];
+        return item;
+      }
     }),
-    react()
+    react(),
+    partytown({ config: { forward: ['dataLayer.push', 'gtag', 'clarity'] } }),
   ],
   adapter: cloudflare({
     platformProxy: {

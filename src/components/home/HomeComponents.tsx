@@ -3,9 +3,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useInView } from "motion/react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import ChatContactForm from "@/components/ChatContactForm";
+import { ShoppingBag, Code2, Monitor, ArrowRightLeft, TrendingUp, Wrench } from "lucide-react";
+
+const serviceIcons = [ShoppingBag, Code2, Monitor, ArrowRightLeft, TrendingUp, Wrench];
 
 function useCountUp(target: number, duration: number = 1500) {
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState(target);
     const ref = useRef<HTMLSpanElement>(null);
     const hasAnimated = useRef(false);
 
@@ -83,8 +86,8 @@ export const ServiceLanding = ({ siteConfig }: { siteConfig: SiteConfig }) => {
                         }}
                     >
                         <div className="flex items-start gap-4">
-                            <div className="w-10 h-10 rounded-xl bg-primary-500/20 flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:bg-primary-500/30 group-hover:scale-110">
-                                <div className="w-2.5 h-2.5 rounded-full bg-primary-400 transition-all duration-300 group-hover:scale-125" />
+                            <div className="w-11 h-11 rounded-2xl bg-linear-to-br from-primary-500 to-primary-700 flex items-center justify-center shrink-0 shadow-md shadow-primary-500/30 transition-all duration-300 group-hover:scale-110 group-hover:shadow-primary-500/50">
+                                {React.createElement(serviceIcons[index] ?? ShoppingBag, { className: "w-5 h-5 text-white" })}
                             </div>
                             <div>
                                 <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary-300 transition-colors">
@@ -126,7 +129,7 @@ export const RetainerBenefits = ({ siteConfig }: { siteConfig: SiteConfig }) => 
                         <ul className="space-y-3">
                             {item.features.map((feature, idx) => (
                                 <li key={idx} className="flex items-start">
-                                    <span className="text-primary-400 mr-2 mt-0.5 flex-shrink-0 text-sm">&#10003;</span>
+                                    <span className="text-primary-400 mr-2 mt-0.5 shrink-0 text-sm">&#10003;</span>
                                     <span className="text-sm text-muted-foreground">{feature}</span>
                                 </li>
                             ))}

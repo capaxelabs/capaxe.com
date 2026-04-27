@@ -1,0 +1,995 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STELBORK — Updated Website Prototype</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+  <div class="hidden sticky top-0 z-[100] border-b border-[#e5e5e0] bg-white/95 backdrop-blur-[10px] mx-auto max-w-[1280px] px-6 max-[720px]:px-4 h-[76px] relative flex items-center justify-between gap-5 text-[22px] font-bold tracking-[0.18em] border-0 bg-transparent cursor-pointer flex items-center gap-7 text-[#666] hover:text-[#111] [&.active]:text-[#111] rounded-[18px] px-5 py-3.5 font-semibold text-white bg-[#121212] bg-white text-[#111] border border-[#e5e5e0] bg-[#f4f4f2] min-h-[80vh] text-white overflow-hidden relative z-[1] py-[110px] pb-[90px] text-[12px] uppercase tracking-[0.24em] text-[#8a8a8a] text-[72px] leading-[0.95] tracking-[-0.04em] max-w-[940px] mt-[14px] mb-[18px] text-[22px] leading-[1.7] max-w-[860px] text-white/80 flex flex-wrap gap-3 mt-7 grid grid-cols-4 gap-[14px] max-w-[1000px] bg-white/10 border border-white/20 rounded-[20px] px-[18px] pt-[18px] pb-4 text-[14px] text-white/70 py-[88px] justify-between items-end text-[52px] leading-[1.05] tracking-[-0.04em] grid-cols-3 grid-cols-2 grid-cols-5 bg-white border border-[#e5e5e0] rounded-[28px] overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.06)] p-5 aspect-[1.15/1] bg-[#efefef] aspect-square bg-[#f2f2f2] text-[20px] font-semibold mb-2 text-[#666] leading-[1.65] inline-flex items-center rounded-full px-3 py-2 text-[13px] text-[#333] bg-[#f5f5f2] grid-cols-[1.1fr_.9fr] items-center gap-7 min-h-[440px] rounded-[32px] grid-cols-[repeat(2,minmax(0,1fr))] text-[15px] text-[#444] bg-[#121212] text-white bg-white/5 border-white/10 [&.active]:block hidden grid-cols-[290px_1fr] sticky top-24 self-start p-5 mb-5 block text-[14px] mb-2 w-full rounded-[18px] px-3.5 py-3.5 justify-between gap-4 mb-5 max-w-[540px] w-[190px] uppercase tracking-[0.16em] text-[12px] mb-5 grid-cols-[1.04fr_.96fr] aspect-[1/0.9] mt-3 outline-2 outline-[#111] mt-7 rounded-[16px] bg-[#f4f4f2] p-1.5 [&.active]:bg-white [&.active]:border [&.active]:border-[#e5e5e0] mt-[18px] rounded-[28px] p-7 rounded-[20px] p-4 bg-[#f7f7f5] mt-[30px] grid-cols-[2fr_1fr_1fr_1fr] py-14 pt-[18px] pb-[18px] text-[#777] absolute left-0 right-0 top-full z-[99] max-w-[1280px] mx-auto border-t-0 shadow-[0_24px_60px_rgba(0,0,0,0.12)] rounded-b-[28px] grid-cols-[1fr_1fr_1.1fr] p-7 grid-cols-[1fr_1.15fr] tracking-[0.22em] text-[#888] text-left hover:bg-[#f7f7f5] text-[#777] text-[13px] leading-[1.45] block w-full text-left p-[18px] fixed top-[76px] left-0 right-0 bg-white/95 backdrop-blur-[10px] z-[90] [&.active]:block py-3 px-6 w-12 h-12 rounded-[14px] fixed inset-0 bg-black/50 items-center justify-center z-[120] p-6 [&.active]:flex w-[min(980px,100%)] max-h-[88vh] shadow-[0_30px_80px_rgba(0,0,0,0.24)] grid-cols-[.95fr_1.05fr] bg-[#111] p-[30px] max-h-[88vh] overflow-auto p-7 absolute right-[18px] top-[18px] w-10 h-10 rounded-full bg-white/10 text-white border border-white/20 rounded-[18px] text-[12px] text-[#444] border-collapse text-left px-5 py-4 bg-[#fafaf8] max-[1100px]:grid-cols-1 max-[1100px]:static max-[1100px]:grid-cols-2 max-[1100px]:grid-cols-4 max-[1100px]:text-[58px] max-[720px]:hidden max-[720px]:text-[42px] max-[720px]:text-[18px] max-[720px]:text-[36px] max-[720px]:py-[68px] max-[720px]:grid-cols-1 max-[720px]:rounded-[22px] max-[720px]:p-3 max-[720px]:p-[22px] max-[720px]:items-start max-[720px]:flex-col"></div>
+
+  <div class="nav">
+    <div class="container nav-inner">
+      <button class="brand" onclick="showPage('home')">STELBORK</button>
+
+      <div class="nav-links">
+        <button class="nav-link active" data-page="home" onclick="showPage('home')">Home</button>
+        <button class="nav-link" data-page="products" onmouseenter="showMega('products')" onclick="showPage('products')">Products</button>
+        <button class="nav-link" data-page="sectors" onmouseenter="showMega('sectors')" onclick="showPage('sectors')">Sectors</button>
+        <button class="nav-link" data-page="projects" onmouseenter="hideMega()" onclick="showPage('projects')">Projects</button>
+        <button class="nav-link" data-page="resources" onmouseenter="hideMega()" onclick="showPage('resources')">Resources</button>
+        <button class="nav-link" data-page="about" onmouseenter="hideMega()" onclick="showPage('about')">About</button>
+        <button class="nav-link" data-page="contact" onmouseenter="hideMega()" onclick="showPage('contact')">Contact</button>
+      </div>
+
+      <div class="nav-actions actions m-0">
+        <button class="btn-outline">Download Catalog</button>
+        <button class="btn">Contact / Quote</button>
+      </div>
+    </div>
+
+    <div class="mega-wrap hidden" id="megaProducts" onmouseleave="hideMega()">
+      <div class="mega">
+        <div class="mega-grid-products">
+          <div class="mega-col">
+            <h4>By Category</h4>
+            <div class="mega-links">
+              <button onclick="showPage('products')"><strong>Seating</strong></button>
+              <button onclick="showPage('products')"><strong>Tables</strong></button>
+              <button onclick="showPage('products')"><strong>Storage</strong></button>
+              <button onclick="showPage('products')"><strong>Sofas & Lounge</strong></button>
+              <button onclick="showPage('products')"><strong>Acoustic</strong></button>
+              <button onclick="showPage('products')"><strong>Workstations</strong></button>
+            </div>
+          </div>
+          <div class="mega-col">
+            <h4>By Collection</h4>
+            <div class="mega-links one-col">
+              <button onclick="showPage('products')"><strong>NOVA</strong></button>
+              <button onclick="showPage('products')"><strong>AER</strong></button>
+              <button onclick="showPage('products')"><strong>STACK</strong></button>
+              <button onclick="showPage('products')"><strong>LINE</strong></button>
+              <button onclick="showPage('products')"><strong>FORM</strong></button>
+              <button onclick="showPage('products')"><strong>ARC</strong></button>
+            </div>
+          </div>
+          <button class="mega-card" onclick="openProduct(0)">
+            <div class="media"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1400&q=80"></div>
+            <div class="body">
+              <div class="eyebrow text-[#888]">Featured</div>
+              <div class="title text-[28px] mt-2">NOVA Workplace Family</div>
+              <div class="muted">A coordinated collection for workplace and education projects with consistent technical documentation.</div>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="mega-wrap hidden" id="megaSectors" onmouseleave="hideMega()">
+      <div class="mega">
+        <div class="mega-grid-sectors">
+          <div class="mega-col">
+            <h4>Sectors</h4>
+            <div class="mega-links">
+              <button onclick="showPage('sectors')"><strong>Workplace</strong><span>Systems, seating, and collaborative furniture for modern offices.</span></button>
+              <button onclick="showPage('sectors')"><strong>Hospitality</strong><span>Elegant, durable furniture for hotels, lounges, and guest spaces.</span></button>
+              <button onclick="showPage('sectors')"><strong>Healthcare</strong><span>Cleanable, compliant, and high-durability furniture for care environments.</span></button>
+              <button onclick="showPage('sectors')"><strong>Education</strong><span>Flexible learning environments with durable, high-use pieces.</span></button>
+              <button onclick="showPage('sectors')"><strong>Food & Beverage</strong><span>Fast-turn commercial-grade indoor and outdoor seating and tables.</span></button>
+              <button onclick="showPage('sectors')"><strong>Public Spaces</strong><span>High-traffic solutions for waiting, circulation, and public-use zones.</span></button>
+            </div>
+          </div>
+          <button class="mega-card" onclick="showPage('projects')">
+            <div class="media"><img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?auto=format&fit=crop&w=1400&q=80"></div>
+            <div class="body">
+              <div class="eyebrow text-[#888]">Featured project</div>
+              <div class="title text-[28px] mt-2">Marriott Dubai Lobby Upgrade</div>
+              <div class="muted">Reference-driven project storytelling for consultants and developers evaluating sector fit.</div>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="stickyPDP" class="sticky-pdp">
+    <div class="sticky-inner">
+      <div class="sticky-left">
+        <div class="sticky-thumb"><img id="stickyThumb" src=""></div>
+        <div>
+          <div class="font-semibold" id="stickyName">NOVA Task Chair</div>
+          <div class="muted text-[13px]" id="stickyCollection">NOVA</div>
+        </div>
+      </div>
+      <div class="actions m-0">
+        <button class="btn" onclick="openQuote()">Request Quote</button>
+        <button class="btn-outline">Download Spec</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="home" class="page active">
+    <section class="hero">
+      <div class="container hero-content">
+        <div class="eyebrow">International contract furniture</div>
+        <h1>Built for projects. Structured for specification.</h1>
+        <p class="lead">Commercial furniture for hospitality, workplace, education, healthcare, and public environments across GCC, Europe, and the UK.</p>
+        <div class="actions">
+          <button class="btn" onclick="showPage('products')">Explore Products</button>
+          <button class="btn-outline">Download Catalog</button>
+        </div>
+        <div class="stats">
+          <div class="stat"><strong>Specification-first</strong><span>Technical data visible early</span></div>
+          <div class="stat"><strong>No login wall</strong><span>Files available directly</span></div>
+          <div class="stat"><strong>48-hour quote path</strong><span>Fast commercial workflow</span></div>
+          <div class="stat"><strong>Project-ready selection</strong><span>Compliance-led decision making</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Explore by sector</div>
+            <h2>Pathways built around real project types</h2>
+            <p>Direct consultants, designers, contractors, and procurement teams to relevant furniture and references without forcing them through a retail-style journey.</p>
+          </div>
+        </div>
+        <div class="grid-4">
+          <div class="card"><div class="media"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80"></div><div class="card-body"><div class="title">Workplace</div><div class="muted">Systems, seating, and collaborative furniture for modern offices.</div></div></div>
+          <div class="card"><div class="media"><img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80"></div><div class="card-body"><div class="title">Hospitality</div><div class="muted">Elegant, durable furniture for hotels, lounges, and guest spaces.</div></div></div>
+          <div class="card"><div class="media"><img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1200&q=80"></div><div class="card-body"><div class="title">Healthcare</div><div class="muted">Cleanable, compliant, and high-durability furniture for care environments.</div></div></div>
+          <div class="card"><div class="media"><img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80"></div><div class="card-body"><div class="title">Food & Beverage</div><div class="muted">Fast-turn commercial-grade indoor and outdoor seating and tables.</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-[#f7f7f5] border-y border-[#e5e5e0]">
+      <div class="container split">
+        <div class="large-media"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1400&q=80"></div>
+        <div>
+          <div class="eyebrow">Featured collection</div>
+          <h2 class="text-[52px] leading-[1.05] tracking-[-0.04em] mt-[10px] mb-4">NOVA workplace family</h2>
+          <p class="muted text-[18px]">A coordinated family of task, visitor, and meeting products designed for specification consistency, faster quoting, and a cleaner consultant workflow.</p>
+          <div class="info-list">
+            <div>Task seating</div><div>Visitor seating</div>
+            <div>Meeting support</div><div>Consistent documentation</div>
+          </div>
+          <div class="actions">
+            <button class="btn" onclick="openProduct(0)">View Collection</button>
+            <button class="btn-outline" onclick="showPage('products')">Browse Products</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Categories</div>
+            <h2>Structured categories for faster navigation</h2>
+          </div>
+        </div>
+        <div class="grid-4">
+          <div class="card"><div class="card-body"><div class="icon-box">Seat</div><div class="title text-[18px] mt-4">Seating</div></div></div>
+          <div class="card"><div class="card-body"><div class="icon-box">Table</div><div class="title text-[18px] mt-4">Tables</div></div></div>
+          <div class="card"><div class="card-body"><div class="icon-box">Store</div><div class="title text-[18px] mt-4">Storage</div></div></div>
+          <div class="card"><div class="card-body"><div class="icon-box">Acou</div><div class="title text-[18px] mt-4">Acoustic</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Recent projects</div>
+            <h2>References that support specification confidence</h2>
+          </div>
+          <button class="btn-outline" onclick="showPage('projects')">See all projects</button>
+        </div>
+        <div class="grid-3">
+          <div class="card"><div class="media"><img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?auto=format&fit=crop&w=1200&q=80"></div><div class="card-body"><div class="title">Marriott Dubai Lobby Upgrade</div><div class="muted">Dubai, UAE · Hospitality</div></div></div>
+          <div class="card"><div class="media"><img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80"></div><div class="card-body"><div class="title">Axis Business Hub</div><div class="muted">Doha, Qatar · Workplace</div></div></div>
+          <div class="card"><div class="media"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80"></div><div class="card-body"><div class="title">Northline Café</div><div class="muted">Riyadh, KSA · F&B</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dark-band">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Why specifiers choose STELBORK</div>
+            <h2>Technical clarity with project discipline</h2>
+            <p>A launch website should communicate sourcing maturity, compliance thinking, and response quality without sounding like a generic trading company.</p>
+          </div>
+        </div>
+        <div class="grid-4">
+          <div class="dark-card"><div class="title">Global sourcing</div><div class="muted text-white/70">Factories across India, UAE, and Turkey aligned to real project needs.</div></div>
+          <div class="dark-card"><div class="title">Compliance mindset</div><div class="muted text-white/70">BIFMA, EN, FSC, and GREENGUARD considered at selection level.</div></div>
+          <div class="dark-card"><div class="title">Project execution</div><div class="muted text-white/70">Commercial supply coordination for GCC, Europe, and UK workflows.</div></div>
+          <div class="dark-card"><div class="title">Dedicated response</div><div class="muted text-white/70">Clear quote and coordination path for professional buyers and specifiers.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container resources">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Resources</div>
+            <h2>Direct access to specification files</h2>
+            <p>The prototype includes a stronger resources and CAD direction so a developer understands that downloads are part of the core experience, not an afterthought.</p>
+          </div>
+        </div>
+        <div class="grid-4">
+          <div class="card"><div class="card-body"><div class="icon-box">Cat</div><div class="title text-[18px] mt-4">Product Catalog 2026</div><div class="muted">Overview of collections, sectors, and technical product pathways.</div></div></div>
+          <div class="card"><div class="card-body"><div class="icon-box">CAD</div><div class="title text-[18px] mt-4">CAD Library</div><div class="muted">Structured asset access for designers, consultants, and technical teams.</div></div></div>
+          <div class="card"><div class="card-body"><div class="icon-box">EPD</div><div class="title text-[18px] mt-4">Sustainability Report</div><div class="muted">Materials, certifications, sourcing, and product stewardship principles.</div></div></div>
+          <div class="card"><div class="card-body"><div class="icon-box">Zip</div><div class="title text-[18px] mt-4">Technical Downloads</div><div class="muted">Specification sheets, warranty files, and installation documentation.</div></div></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div id="products" class="page">
+    <section>
+      <div class="container">
+        <div class="eyebrow">Products</div>
+        <h2 class="text-[54px] leading-[1.05] tracking-[-0.04em] mt-[10px] mb-[14px]">Filter products by requirement</h2>
+        <p class="muted text-[18px] max-w-[900px]">This version expands the filters and structure to feel closer to the brief’s category page behavior.</p>
+        <div class="listing-layout mt-7">
+          <div class="sidebar">
+            <h3>Filters</h3>
+            <div class="field">
+              <label>Category</label>
+              <select class="select"><option>All categories</option><option>Seating</option><option>Tables</option><option>Acoustic</option></select>
+            </div>
+            <div class="field">
+              <label>Application</label>
+              <select class="select"><option>All sectors</option><option>Workplace</option><option>Hospitality</option><option>Healthcare</option></select>
+            </div>
+            <div class="field">
+              <label>Quick options</label>
+              <div class="badge-row">
+                <span class="badge">Stackable</span>
+                <span class="badge">Outdoor</span>
+                <span class="badge">FSC</span>
+                <span class="badge">BIFMA</span>
+                <span class="badge">GREENGUARD</span>
+              </div>
+            </div>
+            <div class="field">
+              <label>Lead time</label>
+              <select class="select"><option>All lead times</option><option>Under 4 weeks</option><option>4–8 weeks</option><option>8+ weeks</option></select>
+            </div>
+          </div>
+          <div>
+            <div class="toolbar">
+              <input class="input" placeholder="Search by product, collection, certification, or keyword" class="max-w-[540px]">
+              <div class="toolbar-right">
+                <span class="muted">4 results</span>
+                <select class="select w-[190px]"><option>Alphabetical</option><option>Newest first</option><option>Shortest lead time</option></select>
+              </div>
+            </div>
+            <div class="grid-3">
+              <div class="card product-card" onclick="openProduct(0)"><div class="media-square"><img src="https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=900&q=80"></div><div class="card-body"><div class="meta">NOVA</div><div class="title">NOVA Task Chair</div><div class="muted">680 × 640 × 980 mm</div><div class="badge-row"><span class="badge">Ergonomic</span><span class="badge">Project Ready</span><span class="badge">BIFMA</span></div></div></div>
+              <div class="card product-card" onclick="openProduct(1)"><div class="media-square"><img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80"></div><div class="card-body"><div class="meta">AER</div><div class="title">AER Lounge Chair</div><div class="muted">760 × 790 × 720 mm</div><div class="badge-row"><span class="badge">Hospitality</span><span class="badge">Lounge</span><span class="badge">FSC</span></div></div></div>
+              <div class="card product-card" onclick="openProduct(2)"><div class="media-square"><img src="https://images.unsplash.com/photo-1519947486511-46149fa0a254?auto=format&fit=crop&w=900&q=80"></div><div class="card-body"><div class="meta">STACK</div><div class="title">STACK Outdoor Chair</div><div class="muted">540 × 560 × 810 mm</div><div class="badge-row"><span class="badge">Stackable</span><span class="badge">Outdoor</span><span class="badge">Fast Lead</span></div></div></div>
+              <div class="card product-card" onclick="openProduct(3)"><div class="media-square"><img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80"></div><div class="card-body"><div class="meta">LINE</div><div class="title">LINE Meeting Table</div><div class="muted">2400 × 1000 × 740 mm</div><div class="badge-row"><span class="badge">Meeting</span><span class="badge">System</span><span class="badge">FSC</span></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div id="pdp" class="page">
+    <section>
+      <div class="container">
+        <div class="breadcrumbs"><button class="ghost-btn muted" onclick="showPage('products')">Products</button><span>›</span><span id="crumbCat">Seating</span><span>›</span><span id="crumbName">NOVA Task Chair</span></div>
+        <div class="pdp-layout">
+          <div>
+            <div class="gallery-main"><img id="mainImage" src=""></div>
+            <div class="thumbs" id="thumbs"></div>
+          </div>
+          <div class="pdp-summary">
+            <div class="muted" id="pCollection">NOVA</div>
+            <h2 id="pName" class="text-[54px] leading-[1.05] tracking-[-0.04em] my-2">NOVA Task Chair</h2>
+            <div class="muted" id="pDesigner">Studio Form · 2026</div>
+            <p class="muted" id="pDesc" class="text-[17px] mt-4">A refined ergonomic task chair designed for specification-led workplace and education projects.</p>
+            <div class="summary-grid">
+              <div class="summary-box"><div class="muted">Dimensions</div><strong id="pDims">680 × 640 × 980 mm</strong></div>
+              <div class="summary-box"><div class="muted">Certifications</div><strong id="pCerts">BIFMA · GREENGUARD</strong></div>
+              <div class="summary-box"><div class="muted">Lead Time</div><strong id="pLead">4–8 weeks</strong></div>
+              <div class="summary-box"><div class="muted">Weight</div><strong id="pWeight">14 kg</strong></div>
+            </div>
+            <div class="actions">
+              <button class="btn" onclick="openQuote()">Request Quote</button>
+              <button class="btn-outline">Download Spec Sheet</button>
+            </div>
+            <div class="badge-row" id="pCertBadges"></div>
+          </div>
+        </div>
+
+        <div class="tabs">
+          <div class="tab-bar">
+            <button class="tab-btn active" onclick="showTab('overview', event)">Overview</button>
+            <button class="tab-btn" onclick="showTab('dimensions', event)">Dimensions</button>
+            <button class="tab-btn" onclick="showTab('materials', event)">Materials</button>
+            <button class="tab-btn" onclick="showTab('technical', event)">Technical</button>
+            <button class="tab-btn" onclick="showTab('certifications', event)">Certifications</button>
+            <button class="tab-btn" onclick="showTab('sustainability', event)">Sustainability</button>
+            <button class="tab-btn" onclick="showTab('downloads', event)">Downloads</button>
+            <button class="tab-btn" onclick="showTab('warranty', event)">Warranty</button>
+            <button class="tab-btn" onclick="showTab('related', event)">Related</button>
+          </div>
+
+          <div id="overview" class="tab-panel active">
+            <div class="panel-card">
+              <div class="split">
+                <div>
+                  <div class="title text-[30px]">Overview</div>
+                  <p class="muted" id="overviewText"></p>
+                  <div class="muted mt-[14px]">• Consistent product data structure<br>• Direct quote and download actions<br>• Space for finishes, technical files, and warranty detail</div>
+                </div>
+                <div class="large-media min-h-[300px]"><img id="contextImage" src=""></div>
+              </div>
+            </div>
+          </div>
+
+          <div id="dimensions" class="tab-panel">
+            <div class="panel-card">
+              <div class="split">
+                <div class="large-media min-h-[300px] flex items-center justify-center bg-[#f7f7f5]"><div class="muted">Dimension drawing placeholder</div></div>
+                <div>
+                  <div class="title text-[30px]">Dimensions</div>
+                  <p class="muted" id="dimText"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="materials" class="tab-panel">
+            <div class="panel-card">
+              <div class="title text-[30px]">Materials & Finishes</div>
+              <div class="badge-row" id="matTags"></div>
+              <div class="grid-5" id="finishGrid" class="mt-[18px]"></div>
+            </div>
+          </div>
+
+          <div id="technical" class="tab-panel">
+            <div class="panel-card">
+              <div class="title text-[30px]">Technical</div>
+              <div class="small-grid">
+                <div class="summary-box"><div class="muted">Application</div><strong id="techApp"></strong></div>
+                <div class="summary-box"><div class="muted">Subcategory</div><strong id="techSub"></strong></div>
+                <div class="summary-box"><div class="muted">Indoor / Outdoor</div><strong id="techInOut"></strong></div>
+                <div class="summary-box"><div class="muted">Stackable</div><strong id="techStackable"></strong></div>
+              </div>
+            </div>
+          </div>
+
+          <div id="certifications" class="tab-panel">
+            <div class="panel-card">
+              <div class="title text-[30px]">Certifications</div>
+              <div id="certList" class="grid gap-[14px]"></div>
+            </div>
+          </div>
+
+          <div id="sustainability" class="tab-panel">
+            <div class="panel-card">
+              <div class="split">
+                <div>
+                  <div class="title text-[30px]">Sustainability</div>
+                  <p class="muted">This section is reserved for FSC status, recycled content, EPD links, and circularity information. It is styled here so your developer understands it is a proper content block, not just a small paragraph.</p>
+                </div>
+                <div class="large-media min-h-[300px]"><img src="https://images.unsplash.com/photo-1497436072909-f5e4be8f1e86?auto=format&fit=crop&w=1200&q=80"></div>
+              </div>
+            </div>
+          </div>
+
+          <div id="downloads" class="tab-panel">
+            <div class="panel-card">
+              <div class="title text-[30px]">Downloads</div>
+              <div class="muted mt-2 mb-[18px]">Direct file access structure for specifiers and developers.</div>
+              <div id="downloadList" class="grid gap-[14px]"></div>
+            </div>
+          </div>
+
+          <div id="warranty" class="tab-panel">
+            <div class="panel-card">
+              <div class="title text-[30px]">Warranty & Care</div>
+              <p class="muted">Commercial warranty language, care instructions, and exclusions should follow a single consistent template across all products.</p>
+            </div>
+          </div>
+
+          <div id="related" class="tab-panel">
+            <div class="section-head mb-[18px]">
+              <div><div class="title text-[30px]">Related Products</div></div>
+            </div>
+            <div class="grid-3" id="relatedGrid"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div id="sectors" class="page">
+    <section>
+      <div class="container">
+        <div class="eyebrow">Sectors</div>
+        <h2 class="text-[54px] leading-[1.05] tracking-[-0.04em] mt-[10px] mb-[14px]">Sector-led navigation for project teams</h2>
+        <p class="muted text-[18px] max-w-[900px]">Each sector page in the real build should combine positioning, key considerations, recommended products, project references, and relevant downloads.</p>
+        <div class="grid-3 mt-6">
+          <div class="card"><div class="media"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80"></div><div class="card-body"><div class="title">Workplace</div><div class="muted">Systems, seating, and collaborative furniture for modern offices.</div><div class="badge-row"><span class="badge">Durability</span><span class="badge">Compliance</span><span class="badge">Lead time</span><span class="badge">Customization</span></div></div></div>
+          <div class="card"><div class="media"><img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80"></div><div class="card-body"><div class="title">Hospitality</div><div class="muted">Elegant, durable furniture for hotels, lounges, and guest spaces.</div><div class="badge-row"><span class="badge">Durability</span><span class="badge">Compliance</span><span class="badge">Lead time</span><span class="badge">Customization</span></div></div></div>
+          <div class="card"><div class="media"><img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1200&q=80"></div><div class="card-body"><div class="title">Healthcare</div><div class="muted">Cleanable, compliant, and high-durability furniture for care environments.</div><div class="badge-row"><span class="badge">Durability</span><span class="badge">Compliance</span><span class="badge">Lead time</span><span class="badge">Customization</span></div></div></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div id="projects" class="page">
+    <section>
+      <div class="container">
+        <div class="eyebrow">Projects</div>
+        <h2 class="text-[54px] leading-[1.05] tracking-[-0.04em] mt-[10px] mb-[14px]">Reference projects</h2>
+        <div class="grid-3">
+          <div class="card"><div class="media"><img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?auto=format&fit=crop&w=1200&q=80"></div><div class="card-body"><div class="title">Marriott Dubai Lobby Upgrade</div><div class="muted">Dubai, UAE · Hospitality</div><p class="muted">Hospitality seating and lounge solutions for a premium guest environment.</p></div></div>
+          <div class="card"><div class="media"><img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80"></div><div class="card-body"><div class="title">Axis Business Hub</div><div class="muted">Doha, Qatar · Workplace</div><p class="muted">Task seating, collaboration tables, and breakout furniture for a flexible office floor.</p></div></div>
+          <div class="card"><div class="media"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80"></div><div class="card-body"><div class="title">Northline Café</div><div class="muted">Riyadh, KSA · F&B</div><p class="muted">Commercial-grade café seating and tables balancing durability and visual warmth.</p></div></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div id="resources" class="page">
+    <section>
+      <div class="container resources">
+        <div class="eyebrow">Resources</div>
+        <h2 class="text-[54px] leading-[1.05] tracking-[-0.04em] mt-[10px] mb-[14px]">Downloads, CAD, and technical files</h2>
+        <div class="grid-2">
+          <div class="card"><div class="card-body"><div class="title">Product Catalog 2026</div><div class="muted">Overview of collections, sectors, and technical product pathways.</div></div></div>
+          <div class="card"><div class="card-body"><div class="title">CAD Library</div><div class="muted">Structured asset access for designers, consultants, and technical teams.</div></div></div>
+          <div class="card"><div class="card-body"><div class="title">Sustainability Report</div><div class="muted">Materials, certifications, sourcing, and product stewardship principles.</div></div></div>
+          <div class="card"><div class="card-body"><div class="title">Technical Downloads</div><div class="muted">Specification sheets, warranty files, and installation documentation.</div></div></div>
+        </div>
+
+        <div class="card mt-6">
+          <div class="cad-head">
+            <div class="section-head mb-0">
+              <div>
+                <div class="title text-[32px]">CAD Library</div>
+                <div class="muted">Structured table preview for DWG, RFA, SKP, and related technical assets.</div>
+              </div>
+              <button class="btn"><span>Download all CAD as ZIP</span></button>
+            </div>
+          </div>
+          <div class="overflow-auto px-6 pt-6">
+            <table>
+              <thead>
+                <tr><th>Product</th><th>Category</th><th>Formats</th><th>Action</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>NOVA Task Chair</td><td class="text-[#777]">Seating</td><td class="text-[#777]">DWG, SKP, PDF</td><td><button class="btn-outline">Download</button></td></tr>
+                <tr><td>AER Lounge Chair</td><td class="text-[#777]">Seating</td><td class="text-[#777]">DWG, PDF</td><td><button class="btn-outline">Download</button></td></tr>
+                <tr><td>STACK Outdoor Chair</td><td class="text-[#777]">Seating</td><td class="text-[#777]">DWG, PDF</td><td><button class="btn-outline">Download</button></td></tr>
+                <tr><td>LINE Meeting Table</td><td class="text-[#777]">Tables</td><td class="text-[#777]">DWG, PDF, INSTALL</td><td><button class="btn-outline">Download</button></td></tr>
+                <tr><td>FORM Acoustic Panel</td><td class="text-[#777]">Acoustic</td><td class="text-[#777]">DWG, RFA, PDF</td><td><button class="btn-outline">Download</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div id="about" class="page">
+    <section>
+      <div class="container split">
+        <div>
+          <div class="eyebrow">About STELBORK</div>
+          <h2 class="text-[54px] leading-[1.05] tracking-[-0.04em] mt-[10px] mb-[14px]">A specification-led contract furniture platform</h2>
+          <p class="muted text-[18px]">This page presents the business with a more premium layout so your developer can understand the intended visual level: restrained, structured, and credible for consultants and project teams.</p>
+          <div class="small-grid mt-[18px]">
+            <div class="summary-box"><strong>Global sourcing strategy</strong></div>
+            <div class="summary-box"><strong>Commercial project focus</strong></div>
+            <div class="summary-box"><strong>Specification-first presentation</strong></div>
+            <div class="summary-box"><strong>Structured technical workflow</strong></div>
+          </div>
+        </div>
+        <div class="large-media"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80"></div>
+      </div>
+    </section>
+  </div>
+
+  <div id="contact" class="page">
+    <section>
+      <div class="container">
+        <div class="eyebrow">Contact</div>
+        <h2 class="text-[54px] leading-[1.05] tracking-[-0.04em] mt-[10px] mb-[14px]">Talk to the specification team</h2>
+        <div class="contact-grid">
+          <div class="card"><div class="card-body"><div class="title">Contact details</div><div class="muted">Dubai, UAE</div><div class="muted mt-2">sales@stelbork.com</div><div class="muted mt-2">Reply within 24 business hours</div></div></div>
+          <div class="card"><div class="card-body">
+            <div class="small-grid">
+              <input class="input" placeholder="Your name">
+              <input class="input" placeholder="Company">
+              <input class="input" placeholder="Email">
+              <input class="input" placeholder="Phone">
+            </div>
+            <div class="field mt-[14px]"><select class="select"><option>Quote request</option><option>General</option><option>Press</option><option>Careers</option></select></div>
+            <textarea rows="6" placeholder="Tell us about your project"></textarea>
+            <div class="actions"><button class="btn">Send enquiry</button></div>
+          </div></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="footer">
+    <div class="container footer-top">
+      <div>
+        <div class="brand p-0">STELBORK</div>
+        <p class="muted max-w-[420px]">An international contract furniture platform structured for specification, technical clarity, and project execution.</p>
+        <div class="badge-row">
+          <span class="badge">FSC</span><span class="badge">GREENGUARD</span><span class="badge">EPD</span><span class="badge">ISO 14001</span>
+        </div>
+      </div>
+      <div><div class="title text-[18px]">Products</div><div class="muted">Seating</div><div class="muted">Tables</div><div class="muted">Storage</div><div class="muted">Acoustic</div></div>
+      <div><div class="title text-[18px]">Sectors</div><div class="muted">Workplace</div><div class="muted">Hospitality</div><div class="muted">Healthcare</div><div class="muted">Education</div></div>
+      <div><div class="title text-[18px]">Resources</div><div class="muted">Catalogs</div><div class="muted">CAD Library</div><div class="muted">Sustainability</div><div class="muted">Technical Files</div></div>
+    </div>
+    <div class="container footer-bottom">
+      <div>© 2026 STELBORK. All rights reserved.</div>
+      <div>Privacy · Terms · EN / AR</div>
+    </div>
+  </div>
+
+  <div id="quoteModal" class="modal" onclick="closeQuote(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <div class="modal-grid">
+        <div class="modal-left relative">
+          <button class="close-btn" onclick="forceCloseQuote()">✕</button>
+          <div class="eyebrow text-white/60">Request Quote</div>
+          <div class="title text-[34px] text-white mt-[10px]" id="qName">NOVA Task Chair enquiry</div>
+          <p>This prototype includes the quote modal UI from the brief so a developer understands the intended interaction and data capture level.</p>
+          <div class="media"><img id="qImage" src=""></div>
+        </div>
+        <div class="modal-right">
+          <div class="title text-[28px]">Quote details</div>
+          <div class="small-grid mt-[14px]">
+            <input class="input" id="qProductField" placeholder="Product name">
+            <input class="input" placeholder="Quantity">
+            <select class="select" id="qFinish"></select>
+            <select class="select"><option>UAE</option><option>Saudi Arabia</option><option>Qatar</option><option>UK</option><option>Europe</option></select>
+            <select class="select"><option>Workplace</option><option>Hospitality</option><option>Healthcare</option><option>Education</option><option>Food & Beverage</option></select>
+            <input class="input" type="date">
+            <input class="input" placeholder="Your name">
+            <input class="input" placeholder="Company">
+            <input class="input" placeholder="Email">
+            <input class="input" placeholder="Phone">
+          </div>
+          <textarea rows="5" placeholder="Additional notes" class="mt-[14px]"></textarea>
+          <div class="actions">
+            <button class="btn">Submit request</button>
+            <button class="btn-outline" onclick="forceCloseQuote()">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    (function(){
+      const map = {
+        'nav':'sticky top-0 bg-white/95 backdrop-blur-[10px] border-b border-[#e5e5e0] z-[100]',
+        'container':'max-w-[1280px] mx-auto px-6 max-[720px]:px-4',
+        'nav-inner':'h-[76px] flex items-center justify-between gap-5 relative',
+        'brand':'font-bold tracking-[0.18em] text-[22px] border-0 bg-transparent cursor-pointer',
+        'nav-links':'flex items-center gap-7 max-[720px]:hidden',
+        'nav-actions':'max-[720px]:hidden',
+        'nav-link':'text-[#666] hover:text-[#111] [&.active]:text-[#111] border-0 bg-transparent cursor-pointer',
+        'btn':'bg-[#121212] text-white rounded-[18px] px-5 py-3.5 font-semibold border-0 cursor-pointer',
+        'btn-outline':'bg-white text-[#111] border border-[#e5e5e0] rounded-[18px] px-5 py-[13px] font-semibold cursor-pointer',
+        'btn-soft':'bg-[#f4f4f2] text-[#111] border border-[#e5e5e0] rounded-[18px] px-5 py-[13px] font-semibold cursor-pointer',
+        'hero':'relative min-h-[80vh] bg-[#111] text-white overflow-hidden',
+        'hero-content':'relative z-[1] pt-[110px] pb-[90px]',
+        'eyebrow':'text-[12px] uppercase tracking-[0.24em] text-[#8a8a8a]',
+        'actions':'flex flex-wrap gap-3 mt-7',
+        'stats':'grid grid-cols-4 gap-[14px] mt-9 max-w-[1000px] max-[1100px]:grid-cols-2 max-[720px]:grid-cols-1',
+        'stat':'bg-white/10 border border-white/20 rounded-[20px] px-[18px] pt-[18px] pb-4 backdrop-blur-[8px]',
+        'section-head':'flex justify-between items-end gap-5 mb-[34px]',
+        'grid-4':'grid grid-cols-4 gap-5 max-[1100px]:grid-cols-2 max-[720px]:grid-cols-1',
+        'grid-3':'grid grid-cols-3 gap-5 max-[1100px]:grid-cols-2 max-[720px]:grid-cols-1',
+        'grid-2':'grid grid-cols-2 gap-5 max-[720px]:grid-cols-1',
+        'grid-5':'grid grid-cols-5 gap-3 max-[720px]:grid-cols-1',
+        'card':'bg-white border border-[#e5e5e0] rounded-[28px] overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.06)] max-[720px]:rounded-[22px]',
+        'card-body':'p-5',
+        'media':'aspect-[1.15/1] bg-[#efefef]',
+        'media-square':'aspect-square bg-[#f2f2f2]',
+        'title':'text-[20px] font-semibold mb-2',
+        'muted':'text-[#666] leading-[1.65]',
+        'badge-row':'flex flex-wrap gap-2 mt-[14px]',
+        'badge':'inline-flex items-center border border-[#e5e5e0] bg-[#f5f5f2] rounded-full px-3 py-2 text-[13px] text-[#333]',
+        'dark-badge':'inline-flex items-center rounded-full px-3 py-2 text-[13px] text-white bg-[#111]',
+        'split':'grid grid-cols-[1.1fr_.9fr] gap-7 items-center max-[1100px]:grid-cols-1',
+        'large-media':'min-h-[440px] rounded-[32px] overflow-hidden border border-[#e5e5e0]',
+        'info-list':'grid grid-cols-2 gap-[14px] mt-4 max-[720px]:grid-cols-1',
+        'dark-band':'bg-[#121212] text-white',
+        'dark-card':'bg-white/5 border border-white/10 rounded-[28px] p-6',
+        'resources':'',
+        'page':'hidden [&.active]:block',
+        'listing-layout':'grid grid-cols-[290px_1fr] gap-6 max-[1100px]:grid-cols-1',
+        'sidebar':'sticky top-24 self-start bg-white border border-[#e5e5e0] rounded-[28px] p-5 shadow-[0_10px_30px_rgba(0,0,0,0.06)] max-[1100px]:static',
+        'field':'mb-5',
+        'input':'w-full border border-[#e5e5e0] rounded-[18px] px-3.5 py-[13px] bg-white',
+        'select':'w-full border border-[#e5e5e0] rounded-[18px] px-3.5 py-[13px] bg-white',
+        'toolbar':'flex justify-between items-center gap-4 mb-5',
+        'toolbar-right':'flex items-center gap-3',
+        'product-card':'cursor-pointer',
+        'meta':'text-[12px] uppercase tracking-[0.16em] text-[#8a8a8a]',
+        'breadcrumbs':'flex items-center gap-2 text-[14px] text-[#666] mb-5',
+        'pdp-layout':'grid grid-cols-[1.04fr_.96fr] gap-[30px] max-[1100px]:grid-cols-1',
+        'gallery-main':'aspect-[1/0.9] border border-[#e5e5e0] rounded-[32px] overflow-hidden bg-[#f5f5f5]',
+        'thumbs':'grid grid-cols-5 gap-3 mt-3 max-[1100px]:grid-cols-4 max-[720px]:grid-cols-2',
+        'thumb':'aspect-square rounded-[20px] overflow-hidden border border-[#e5e5e0] bg-[#f6f6f6] border-0 cursor-pointer [&.active]:outline-2 [&.active]:outline-[#111]',
+        'pdp-summary':'sticky top-24 self-start max-[1100px]:static',
+        'summary-grid':'grid grid-cols-2 gap-3 my-[18px] max-[720px]:grid-cols-1',
+        'summary-box':'border border-[#e5e5e0] rounded-[20px] p-[15px] bg-white',
+        'tabs':'mt-7',
+        'tab-bar':'flex flex-wrap gap-2 bg-[#f4f4f2] p-1.5 rounded-[20px]',
+        'tab-btn':'px-[14px] py-3 rounded-[16px] border-0 bg-transparent cursor-pointer [&.active]:bg-white [&.active]:border [&.active]:border-[#e5e5e0]',
+        'tab-panel':'hidden mt-[18px] [&.active]:block',
+        'panel-card':'border border-[#e5e5e0] rounded-[28px] p-7 bg-white shadow-[0_10px_30px_rgba(0,0,0,0.06)] max-[720px]:rounded-[22px]',
+        'download-item':'flex justify-between items-center gap-4 border border-[#e5e5e0] rounded-[20px] p-4',
+        'footer':'bg-[#f7f7f5] border-t border-[#e5e5e0] mt-[30px]',
+        'footer-top':'grid grid-cols-[2fr_1fr_1fr_1fr] gap-7 py-14 max-[1100px]:grid-cols-2 max-[720px]:grid-cols-1',
+        'footer-bottom':'border-t border-[#e5e5e0] py-[18px] text-[#777] flex justify-between gap-3 flex-wrap',
+        'small-grid':'grid grid-cols-2 gap-[18px] max-[720px]:grid-cols-1',
+        'contact-grid':'grid grid-cols-[.88fr_1.12fr] gap-6 max-[1100px]:grid-cols-1',
+        'mega-wrap':'absolute left-0 right-0 top-full z-[99] max-[1100px]:hidden',
+        'mega':'mx-auto max-w-[1280px] bg-white border border-[#e5e5e0] border-t-0 shadow-[0_24px_60px_rgba(0,0,0,0.12)] rounded-b-[28px] overflow-hidden',
+        'mega-grid-products':'grid grid-cols-[1fr_1fr_1.1fr] gap-7 p-7',
+        'mega-grid-sectors':'grid grid-cols-[1fr_1.15fr] gap-7 p-7',
+        'mega-col':'',
+        'mega-links':'grid grid-cols-2 gap-3',
+        'one-col':'grid-cols-1',
+        'mega-card':'block w-full text-left border border-[#e5e5e0] rounded-[28px] overflow-hidden bg-white border-0 cursor-pointer',
+        'body':'p-[18px]',
+        'sticky-pdp':'fixed top-[76px] left-0 right-0 bg-white/95 backdrop-blur-[10px] border-b border-[#e5e5e0] z-[90] hidden [&.active]:block',
+        'sticky-inner':'max-w-[1280px] mx-auto px-6 py-3 flex items-center justify-between gap-4 max-[720px]:px-4 max-[720px]:py-2.5 max-[720px]:items-start max-[720px]:flex-col',
+        'sticky-left':'flex items-center gap-3',
+        'sticky-thumb':'w-12 h-12 rounded-[14px] overflow-hidden border border-[#e5e5e0]',
+        'modal':'fixed inset-0 bg-black/50 hidden items-center justify-center z-[120] p-6 max-[720px]:p-3 [&.active]:flex',
+        'modal-card':'w-[min(980px,100%)] max-h-[88vh] bg-white rounded-[32px] overflow-hidden shadow-[0_30px_80px_rgba(0,0,0,0.24)]',
+        'modal-grid':'grid grid-cols-[.95fr_1.05fr] max-[1100px]:grid-cols-1',
+        'modal-left':'bg-[#111] text-white p-[30px]',
+        'modal-right':'p-7 overflow-auto max-h-[88vh] max-[720px]:p-[22px]',
+        'close-btn':'absolute right-[18px] top-[18px] border border-white/20 w-10 h-10 rounded-full bg-white/10 text-white cursor-pointer',
+        'icon-box':'w-12 h-12 rounded-[18px] bg-[#f4f4f2] border border-[#e5e5e0] flex items-center justify-center text-[12px] text-[#444]'
+      };
+      Object.entries(map).forEach(([k,v])=>{
+        if(!v) return;
+        const classes = v.split(/\s+/).filter(Boolean);
+        document.querySelectorAll('.'+k).forEach(el => el.classList.add(...classes));
+      });
+
+      document.querySelectorAll('section').forEach(el=>el.classList.add('py-[88px]','max-[720px]:py-[68px]'));
+      document.querySelectorAll('h1').forEach(el=>el.classList.add('text-[72px]','leading-[0.95]','tracking-[-0.04em]','max-w-[940px]','mt-[14px]','mb-[18px]','max-[1100px]:text-[58px]','max-[720px]:text-[42px]'));
+      document.querySelectorAll('.hero .eyebrow').forEach(el=>el.classList.add('text-white/70'));
+      document.querySelectorAll('.hero p.lead').forEach(el=>el.classList.add('text-[22px]','leading-[1.7]','max-w-[860px]','text-white/80','max-[720px]:text-[18px]'));
+      document.querySelectorAll('.section-head h2').forEach(el=>el.classList.add('text-[52px]','leading-[1.05]','tracking-[-0.04em]','mt-[10px]','max-[720px]:text-[36px]'));
+      document.querySelectorAll('.section-head p').forEach(el=>el.classList.add('max-w-[820px]','text-[#666]','text-[18px]','leading-[1.8]','m-0'));
+      document.querySelectorAll('.stat strong').forEach(el=>el.classList.add('block','text-[16px]','mb-1'));
+      document.querySelectorAll('.stat span').forEach(el=>el.classList.add('text-[14px]','text-white/70','leading-[1.5]'));
+      document.querySelectorAll('.dark-band .section-head p,.dark-band .muted').forEach(el=>el.classList.add('text-white/70'));
+
+      document.querySelectorAll('.hero').forEach(hero=>{
+        const bg = document.createElement('div');
+        bg.className = 'absolute inset-0 bg-[url(https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=80)] bg-cover bg-center opacity-40';
+        const ov = document.createElement('div');
+        ov.className = 'absolute inset-0 bg-gradient-to-r from-black/75 via-black/45 to-black/20';
+        hero.prepend(ov);
+        hero.prepend(bg);
+      });
+    })();
+  </script>
+
+  <script>
+    const products = [
+      {
+        name:'NOVA Task Chair',
+        category:'Seating',
+        collection:'NOVA',
+        designer:'Studio Form · 2026',
+        desc:'A refined ergonomic task chair designed for specification-led workplace and education projects, balancing comfort, adjustability, and a clean architectural profile.',
+        longDesc:'NOVA Task Chair is built for professional specification workflows where ergonomics, clean lines, and clear documentation matter equally. The chair is positioned for workplace and education environments and is shown here with a product structure that prioritizes dimensions, certifications, finishes, and direct download actions. In the real build, this content would be fully CMS-driven and remain consistent across every product page.',
+        dimensions:'680 × 640 × 980 mm',
+        seatHeight:'450 mm',
+        weight:'14 kg',
+        leadTime:'4–8 weeks',
+        application:'Workplace, Education',
+        subcategory:'Task Chair',
+        indoorOutdoor:'Indoor',
+        stackable:'No',
+        certifications:['BIFMA','GREENGUARD'],
+        materials:['Upholstered','Metal'],
+        finishOptions:['Black','Grey','Custom Upholstery','Polished Aluminium','Oak Accent'],
+        tags:['Ergonomic','Project Ready','BIFMA'],
+        image:'https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=900&q=80',
+        context:'https://images.unsplash.com/photo-1497366412874-3415097a27e7?auto=format&fit=crop&w=1200&q=80',
+        gallery:[
+          'https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=900&q=80',
+          'https://images.unsplash.com/photo-1497366412874-3415097a27e7?auto=format&fit=crop&w=1200&q=80',
+          'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80',
+          'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80',
+          'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=80'
+        ],
+        downloads:[
+          ['Spec Sheet PDF','NOVA-TC_SPEC.pdf'],
+          ['2D CAD DWG','NOVA-TC_2D.dwg'],
+          ['3D Model SKP','NOVA-TC_3D.skp'],
+          ['Warranty PDF','NOVA-TC_WARRANTY.pdf'],
+          ['Test Report PDF','NOVA-TC_TEST.pdf']
+        ]
+      },
+      {
+        name:'AER Lounge Chair',
+        category:'Seating',
+        collection:'AER',
+        designer:'Atelier North · 2026',
+        desc:'A hospitality-focused lounge chair with soft proportions, timber accents, and a specification-ready set of finish and upholstery options.',
+        longDesc:'AER Lounge Chair is positioned for hotel lobbies, guest lounges, and refined commercial waiting areas. This prototype shows how narrative, technical, and download content can live together without weakening the visual presentation. It is structured to help a developer understand the intended hierarchy: premium look, but always with specification logic.',
+        dimensions:'760 × 790 × 720 mm',
+        seatHeight:'410 mm',
+        weight:'18 kg',
+        leadTime:'8+ weeks',
+        application:'Hospitality, Retail',
+        subcategory:'Lounge Chair',
+        indoorOutdoor:'Indoor',
+        stackable:'No',
+        certifications:['EN 16139','FSC'],
+        materials:['Wood','Upholstered'],
+        finishOptions:['Oak','Walnut','Camel Leather','Grey Textile'],
+        tags:['Hospitality','Lounge','FSC'],
+        image:'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80',
+        context:'https://images.unsplash.com/photo-1554995207-c18c203602cb?auto=format&fit=crop&w=1200&q=80',
+        gallery:[
+          'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80',
+          'https://images.unsplash.com/photo-1554995207-c18c203602cb?auto=format&fit=crop&w=1200&q=80',
+          'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80',
+          'https://images.unsplash.com/photo-1519567241046-7f570eee3ce6?auto=format&fit=crop&w=1200&q=80',
+          'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80'
+        ],
+        downloads:[
+          ['Spec Sheet PDF','AER-LC_SPEC.pdf'],
+          ['2D CAD DWG','AER-LC_2D.dwg'],
+          ['Material Finishes PDF','AER-LC_FINISHES.pdf'],
+          ['Warranty PDF','AER-LC_WARRANTY.pdf']
+        ]
+      },
+      {
+        name:'STACK Outdoor Chair',
+        category:'Seating',
+        collection:'STACK',
+        designer:'Studio Form · 2026',
+        desc:'A weather-ready commercial chair suitable for terraces, cafés, and public-use outdoor environments with stackable functionality.',
+        longDesc:'STACK Outdoor Chair is intended for cafés, terraces, and public-use settings where commercial durability, quick replacement cycles, and stackability matter. The page layout demonstrates how a developer should present technical information without turning the site into a spreadsheet-led experience.',
+        dimensions:'540 × 560 × 810 mm',
+        seatHeight:'460 mm',
+        weight:'6 kg',
+        leadTime:'Under 4 weeks',
+        application:'Food & Beverage, Public Spaces',
+        subcategory:'Visitor Chair',
+        indoorOutdoor:'Outdoor',
+        stackable:'Yes',
+        certifications:['EN 16139'],
+        materials:['Plastic','Metal'],
+        finishOptions:['Black','White','Olive','Terracotta'],
+        tags:['Stackable','Outdoor','Fast Lead'],
+        image:'https://images.unsplash.com/photo-1519947486511-46149fa0a254?auto=format&fit=crop&w=900&q=80',
+        context:'https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80',
+        gallery:[
+          'https://images.unsplash.com/photo-1519947486511-46149fa0a254?auto=format&fit=crop&w=900&q=80',
+          'https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80',
+          'https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1200&q=80',
+          'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80',
+          'https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80'
+        ],
+        downloads:[
+          ['Spec Sheet PDF','STACK-OC_SPEC.pdf'],
+          ['2D CAD DWG','STACK-OC_2D.dwg'],
+          ['Care Guide PDF','STACK-OC_CARE.pdf']
+        ]
+      },
+      {
+        name:'LINE Meeting Table',
+        category:'Tables',
+        collection:'LINE',
+        designer:'Atelier North · 2026',
+        desc:'A meeting table system with specification-ready dimensions, coordinated finishes, and a clean visual language for commercial settings.',
+        longDesc:'LINE Meeting Table demonstrates a more systems-led furniture page. It helps illustrate variant-ready product structure, specification depth, and downloadable technical support. The live build would use the same shell for every table or system product while being powered by real CMS fields and downloadable assets.',
+        dimensions:'2400 × 1000 × 740 mm',
+        seatHeight:'-',
+        weight:'58 kg',
+        leadTime:'4–8 weeks',
+        application:'Workplace, Healthcare',
+        subcategory:'Meeting Table',
+        indoorOutdoor:'Indoor',
+        stackable:'No',
+        certifications:['FSC'],
+        materials:['Wood','Metal'],
+        finishOptions:['Oak','Walnut','Black Frame','White Frame'],
+        tags:['Meeting','System','FSC'],
+        image:'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80',
+        context:'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80',
+        gallery:[
+          'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80',
+          'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80',
+          'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80',
+          'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1200&q=80',
+          'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80'
+        ],
+        downloads:[
+          ['Spec Sheet PDF','LINE-MT_SPEC.pdf'],
+          ['2D CAD DWG','LINE-MT_2D.dwg'],
+          ['Installation Guide PDF','LINE-MT_INSTALL.pdf'],
+          ['Warranty PDF','LINE-MT_WARRANTY.pdf']
+        ]
+      }
+    ];
+
+    let currentProductIndex = 0;
+
+    function updateNav(page){
+      document.querySelectorAll('.nav-link').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.page === page);
+      });
+    }
+
+    function showPage(id){
+      hideMega();
+      document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      updateNav(id);
+      const sticky = document.getElementById('stickyPDP');
+      if(id !== 'pdp') sticky.classList.remove('active');
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+
+    function showMega(type){
+      document.getElementById('megaProducts').classList.add('hidden');
+      document.getElementById('megaSectors').classList.add('hidden');
+      if(type === 'products') document.getElementById('megaProducts').classList.remove('hidden');
+      if(type === 'sectors') document.getElementById('megaSectors').classList.remove('hidden');
+    }
+
+    function hideMega(){
+      document.getElementById('megaProducts').classList.add('hidden');
+      document.getElementById('megaSectors').classList.add('hidden');
+    }
+
+    function openProduct(index){
+      currentProductIndex = index;
+      const p = products[index];
+      document.getElementById('crumbCat').textContent = p.category;
+      document.getElementById('crumbName').textContent = p.name;
+      document.getElementById('pCollection').textContent = p.collection;
+      document.getElementById('pName').textContent = p.name;
+      document.getElementById('pDesigner').textContent = p.designer;
+      document.getElementById('pDesc').textContent = p.desc;
+      document.getElementById('pDims').textContent = p.dimensions;
+      document.getElementById('pCerts').textContent = p.certifications.join(' · ');
+      document.getElementById('pLead').textContent = p.leadTime;
+      document.getElementById('pWeight').textContent = p.weight;
+      document.getElementById('overviewText').textContent = p.longDesc;
+      document.getElementById('dimText').innerHTML = '<strong>Overall:</strong> ' + p.dimensions + '<br><strong>Seat Height:</strong> ' + p.seatHeight + '<br><strong>Weight:</strong> ' + p.weight + '<br><strong>Lead Time:</strong> ' + p.leadTime;
+      document.getElementById('techApp').textContent = p.application;
+      document.getElementById('techSub').textContent = p.subcategory;
+      document.getElementById('techInOut').textContent = p.indoorOutdoor;
+      document.getElementById('techStackable').textContent = p.stackable;
+      document.getElementById('mainImage').src = p.gallery[0];
+      document.getElementById('contextImage').src = p.context;
+      document.getElementById('stickyThumb').src = p.image;
+      document.getElementById('stickyName').textContent = p.name;
+      document.getElementById('stickyCollection').textContent = p.collection;
+      document.getElementById('qName').textContent = p.name + ' enquiry';
+      document.getElementById('qImage').src = p.context;
+      document.getElementById('qProductField').value = p.name;
+
+      const finishSelect = document.getElementById('qFinish');
+      finishSelect.innerHTML = '';
+      p.finishOptions.forEach(f => {
+        const o = document.createElement('option');
+        o.textContent = f;
+        finishSelect.appendChild(o);
+      });
+
+      const thumbs = document.getElementById('thumbs');
+      thumbs.innerHTML = '';
+      p.gallery.forEach((src, i)=>{
+        const el = document.createElement('button');
+        el.className = 'thumb' + (i===0 ? ' active' : '');
+        el.innerHTML = '<img src="'+src+'">';
+        el.onclick = () => {
+          document.getElementById('mainImage').src = src;
+          [...thumbs.children].forEach(x=>x.classList.remove('active'));
+          el.classList.add('active');
+        };
+        thumbs.appendChild(el);
+      });
+
+      document.getElementById('pCertBadges').innerHTML = p.certifications.map(t => '<span class="dark-badge">'+t+'</span>').join('');
+      document.getElementById('matTags').innerHTML = p.materials.map(t => '<span class="badge">'+t+'</span>').join('');
+      document.getElementById('finishGrid').innerHTML = p.finishOptions.map(t => '<div class="summary-box p-[14px] text-[14px] text-[#555]">'+t+'</div>').join('');
+      document.getElementById('certList').innerHTML = p.certifications.map(c => '<div class="download-item"><div><strong>'+c+'</strong><div class="muted">Certificate document and standard details</div></div><button class="btn-outline">View PDF</button></div>').join('');
+      document.getElementById('downloadList').innerHTML = p.downloads.map(d => '<div class="download-item"><div><strong>'+d[0]+'</strong><div class="muted">'+d[1]+'</div></div><button class="btn-outline">Download</button></div>').join('');
+
+      document.getElementById('relatedGrid').innerHTML = products
+        .filter((_, idx) => idx !== index)
+        .map((r) => `
+          <div class="card product-card" onclick="openProduct(${products.findIndex(x => x.name === r.name)})">
+            <div class="media-square"><img src="${r.image}"></div>
+            <div class="card-body">
+              <div class="meta">${r.collection}</div>
+              <div class="title">${r.name}</div>
+              <div class="muted">${r.dimensions}</div>
+              <div class="badge-row">${r.tags.map(t => `<span class="badge">${t}</span>`).join('')}</div>
+            </div>
+          </div>`).join('');
+
+      document.querySelectorAll('.tab-panel').forEach(pn => pn.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('overview').classList.add('active');
+      document.querySelector('.tab-btn').classList.add('active');
+
+      showPage('pdp');
+    }
+
+    function showTab(id, ev){
+      document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      ev.currentTarget.classList.add('active');
+    }
+
+    function openQuote(){
+      const p = products[currentProductIndex];
+      document.getElementById('qName').textContent = p.name + ' enquiry';
+      document.getElementById('qImage').src = p.context;
+      document.getElementById('qProductField').value = p.name;
+      document.getElementById('quoteModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function forceCloseQuote(){
+      document.getElementById('quoteModal').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function closeQuote(ev){
+      if(ev.target.id === 'quoteModal') forceCloseQuote();
+    }
+
+    window.addEventListener('scroll', () => {
+      const pdp = document.getElementById('pdp');
+      const sticky = document.getElementById('stickyPDP');
+      if(pdp.classList.contains('active') && window.scrollY > 380){
+        sticky.classList.add('active');
+      } else {
+        sticky.classList.remove('active');
+      }
+    });
+
+    openProduct(0);
+    showPage('home');
+  </script>
+</body>
+</html>
