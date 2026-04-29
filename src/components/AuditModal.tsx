@@ -69,7 +69,7 @@ const AuditModal = ({ children, className }: AuditModalProps) => {
           <DialogHeader>
             <DialogTitle className="text-xl font-bold">Free Shopify Store Audit</DialogTitle>
             <p className="text-sm text-muted-foreground mt-1">
-              We'll review your speed, conversion gaps, and code quality and send you a personalised report within 48 hours.
+              We'll audit your store's speed performance and SEO and send you a personalised report within 48 hours.
             </p>
           </DialogHeader>
 
@@ -129,7 +129,7 @@ const AuditModal = ({ children, className }: AuditModalProps) => {
                   rows={3}
                   value={form.message}
                   onChange={handleChange}
-                  placeholder="e.g. checkout drop-off, slow mobile LCP, app conflicts..."
+                  placeholder="e.g. slow LCP, keyword rankings, technical SEO issues..."
                   className="w-full px-3 py-2.5 rounded-xl border border-input bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring transition resize-none"
                 />
               </div>

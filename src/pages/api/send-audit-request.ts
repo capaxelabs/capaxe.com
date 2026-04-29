@@ -53,8 +53,8 @@ export const POST: APIRoute = async ({ request }) => {
         <p>We've received your request to audit <strong>${domain}</strong> and will send you a personalised report covering:</p>
         <ul>
           <li>Speed &amp; Core Web Vitals</li>
-          <li>Conversion &amp; UX gaps</li>
-          <li>Code quality &amp; app bloat</li>
+          <li>On-page SEO health</li>
+          <li>Technical SEO issues</li>
         </ul>
         <p>Expect our findings within <strong>48 hours</strong>.</p>
         <p>— The Capaxe Team</p>
