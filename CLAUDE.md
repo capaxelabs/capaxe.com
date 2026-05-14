@@ -1,75 +1,158 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Guidance for Claude Code when working in this repository.
 
-## Development Commands
+## Repo overview
+
+Monorepo for Capaxe Labs:
+
+- **apps/web** — Astro marketing site + admin UI for the leads DB, deployed to Cloudflare Workers.
+- **apps/scrapers** — Cron-driven Worker that crawls Shopify storefronts, judge.me, and ingests storeleads.app dumps. Writes to the same D1 database that `apps/web` reads.
+- **packages/db** — Shared SQLite/D1 schema + TypeScript row types used by both apps.
+- **scripts/** — Repo-wide one-shot tooling (e.g. D1 bulk import).
+
+Both Worker apps bind to the same D1 database (`shopify-leads`). One canonical lead DB; two Workers.
+
+## Folder layout
+
+```
+capaxe.com/
+├── apps/
+│   ├── web/                      Astro + React on Cloudflare Workers
+│   │   ├── src/                  pages, components, content, api routes
+│   │   ├── astro.config.mjs
+│   │   ├── wrangler.json         binds LEADS_DB (D1) + ASSETS
+│   │   └── package.json
+│   └── scrapers/                 cron-driven scraper Worker
+│       ├── src/
+│       │   ├── index.ts          cron + HTTP entry, dispatches subcommands
+│       │   ├── enrich.ts         storefront enrichment (theme/apps/socials/SKU/...)
+│       │   ├── judgeme.ts        judge.me category-walk crawler
+│       │   ├── storeleads.ts     storeleads.app JSON dump importer
+│       │   └── lookup.ts         single-domain combined lookup
+│       ├── wrangler.toml         binds LEADS_DB (same DB) + cron triggers
+│       └── package.json
+├── packages/
+│   └── db/
+│       ├── schema.sql            canonical schema (live source of truth)
+│       ├── migrations/           ordered SQL files (0001_initial.sql etc.)
+│       ├── types.ts              TypeScript row types
+│       └── queries.ts            shared query strings (TBD)
+├── scripts/
+│   └── d1-import.mjs             bulk-load a local SQLite file into D1
+├── package.json                  workspace orchestration only
+├── pnpm-workspace.yaml
+├── tsconfig.base.json
+└── CLAUDE.md
+```
+
+## Workspace commands (from repo root)
 
 | Command | Action |
 |---------|--------|
-| `npm run dev` | Start local development server at `localhost:4321` |
-| `npm run build` | Build production site to `./dist/` |
-| `npm run preview` | Preview build locally (runs `astro build && wrangler dev`) |
-| `npm run check` | Full validation: build + TypeScript check + dry-run deploy |
-| `npm run deploy` | Deploy to Cloudflare Workers |
-| `npm run cf-typegen` | Generate Cloudflare Worker types |
+| `pnpm install` | Install all workspaces |
+| `pnpm dev:web` | Start Astro dev server (apps/web) |
+| `pnpm dev:scrapers` | Run scraper Worker locally with miniflare |
+| `pnpm build:web` | Build the marketing site |
+| `pnpm deploy:web` | Deploy apps/web to Cloudflare Workers |
+| `pnpm deploy:scrapers` | Deploy apps/scrapers to Cloudflare Workers |
+| `pnpm check` | Run `check` script in every workspace |
+| `pnpm d1:create` | Create the D1 database once (`shopify-leads`) |
+| `pnpm d1:console "<sql>"` | Run an ad-hoc SQL against the remote D1 |
+| `pnpm d1:import` | Bulk import from local sqlite (see scripts/d1-import.mjs) |
 
-## Architecture Overview
+Per-app commands are also runnable via `pnpm --filter <web|scrapers> <script>`.
 
-This is an **Astro-based website for Capaxe Labs** (Shopify development agency) deployed on **Cloudflare Workers**. The site combines:
+## Initial D1 setup (one time)
 
-- **Astro** as the main framework with **React** components for interactivity
-- **TypeScript** with strict configuration
-- **Tailwind CSS v4** for styling with custom theming support
-- **MDX** for blog content with content collections
-- **React Email** for transactional email templates
+```bash
+# 1. Create the database
+pnpm d1:create
+# Copy database_id from the output and paste it into both:
+#   apps/web/wrangler.json        ("d1_databases" section)
+#   apps/scrapers/wrangler.toml   ("[[d1_databases]]" section)
 
-### Key Architecture Patterns
+# 2. Push schema
+wrangler d1 execute shopify-leads --remote --file=packages/db/schema.sql
+wrangler d1 execute shopify-leads --remote --file=packages/db/migrations/0002_admin_workflow.sql
 
-**Hybrid Component Architecture**: The site uses both `.astro` components for static content and React (`.tsx`) components for interactive features like forms, theme switching, and contact functionality.
+# 3. Bulk import existing data from local sqlite (~30 min)
+node scripts/d1-import.mjs --src /Users/mukesh/Projects/marketing/shopify-leads/shopify_stores.db
 
-**Content Management**: Blog posts and case studies are managed through Astro's content collections in `src/content/` with strict TypeScript schemas for frontmatter validation.
-
-**Configuration-Driven UI**: The site configuration in `src/config/site.ts` drives most UI content including services, retainer plans, contact forms, and site metadata - making it easy to update content without touching components.
-
-**Email Integration**: Uses React Email templates in `src/emails/` for consistent branding across contact forms, auto-replies, and welcome emails.
-
-## Project Structure
-
-```
-src/
-├── components/          # Shared Astro & React components
-│   ├── ui/             # Reusable UI components (shadcn/ui style)
-│   └── home/           # Homepage-specific components
-├── config/             # Configuration files
-│   ├── site.ts         # Main site configuration (services, contact, etc.)
-│   ├── menu.ts         # Navigation structure
-│   └── caseStudy.ts    # Case study data
-├── content/            # Content collections
-│   └── blog/           # Blog posts (MDX files)
-├── emails/             # React Email templates
-├── lib/                # Utility functions
-├── pages/              # File-based routing
-│   ├── api/            # API endpoints (contact forms, etc.)
-│   └── services/       # Service pages with nested structure
-├── layouts/            # Page layouts
-└── types/              # TypeScript type definitions
+# 4. Verify
+wrangler d1 execute shopify-leads --remote --command "SELECT COUNT(*) FROM parsed_stores"
 ```
 
-## Key Technical Details
+## apps/web (marketing site + admin UI)
 
-**TypeScript Path Mapping**: Uses `@/*` alias pointing to `src/*` for cleaner imports.
+The Astro site already runs the public marketing pages. New surface area for
+the leads admin lives under:
 
-**Cloudflare Integration**: Configured for Cloudflare Workers deployment with platform proxy enabled for development. The `wrangler.json` file contains deployment configuration.
+- `src/pages/admin/*.astro` — UI pages, auth-gated by `src/middleware.ts`
+- `src/pages/api/admin/*.ts` — JSON endpoints reading/writing D1 via `locals.runtime.env.LEADS_DB`
 
-**React 19**: The project uses React 19 with strict TypeScript configuration.
+Auth model TBD — for the first cut, a shared `ADMIN_TOKEN` (Worker secret +
+cookie) is the simplest. Cloudflare Access (zero auth code) is the upgrade
+path once we want per-user attribution.
 
-**Content Collections**: Blog uses Astro's content collections with glob loader for automatic file discovery and frontmatter validation.
+## apps/scrapers (cron Worker)
 
-**API Routes**: Contact forms and email sending handled through Astro API routes in `src/pages/api/`.
+Cron triggers in `wrangler.toml`:
 
-## Development Notes
+| Schedule | Job | What it does |
+|---|---|---|
+| `* * * * *` | `enrich` | Pick 20 unprocessed `parsed_stores`, fetch storefront HTML + `/products.json` + `/collections.json`, write fields back. |
+| `*/5 * * * *` | `judgeme` | Walk one page of judge.me search; new domains get probed and upserted. |
 
-- Site configuration in `src/config/site.ts` should be updated to change business information, services, or pricing
-- The `astro.config.mjs` site URL needs to be updated for production deployment
-- Email templates use React Email and are sent through API routes
-- Theme switching is implemented via next-themes with system preference support
+Manual HTTP triggers exist for ad-hoc runs (`POST /enrich`, `POST /judgeme`,
+`POST /import-storeleads`, `GET /lookup?domain=`). All write endpoints require
+the `x-admin-token` header.
+
+Each cron invocation is short (well under 30 s CPU). The DB is the queue;
+`processed_at IS NULL` is the work-to-do list.
+
+## packages/db (shared schema + types)
+
+- `schema.sql` — exact dump of the live DB. Treat as source of truth.
+- `migrations/000N_*.sql` — versioned, additive changes. Run via `wrangler d1 execute --file=...`.
+- `types.ts` — TypeScript row interfaces for every table. Imported by both apps.
+
+If you change a column, update **all three**: the schema dump, a new migration
+file, and the matching TypeScript interface.
+
+## Reference Python pipeline
+
+The original Python implementation lives at
+`/Users/mukesh/Projects/marketing/shopify-leads/` and remains the canonical
+behaviour to port. When implementing `apps/scrapers/src/*.ts`, mirror the
+logic in:
+
+| TS file | Python source |
+|---|---|
+| `enrich.ts` | `shopify-leads/enrich.py` |
+| `judgeme.ts` | `shopify-leads/judgeme_crawler.py` |
+| `storeleads.ts` | `shopify-leads/storeleads_import.py` |
+| `lookup.ts` | `shopify-leads/judgeme_lookup.py` + `cli.py:cmd_lookup` |
+
+## Conventions
+
+- **One canonical DB.** Everything lives in D1 once we cut over from the local
+  Python pipeline. No more CSV files in the repo.
+- **No trailing slashes** on routes (matches `astro.config.mjs` setting).
+- **Bindings** in code are accessed via `locals.runtime.env.<BINDING>` in Astro
+  and `env.<BINDING>` in the scrapers Worker.
+- **Secrets** (admin token, API keys) go through `wrangler secret put`, never
+  into `wrangler.{json,toml}`. The `vars` block is for non-secret config.
+- **Migrations** are additive only. Never `DROP TABLE` or rename in place;
+  add a new column and backfill, or create a new table.
+
+## Pending / TODO
+
+- [ ] Run `pnpm d1:create` and paste the database_id into both wrangler files
+- [ ] Bulk-import current 237k rows
+- [ ] Implement the four scraper stubs in `apps/scrapers/src/` (logic exists
+      in the reference Python pipeline)
+- [ ] Build admin pages under `apps/web/src/pages/admin/`
+- [ ] Add the admin auth middleware in `apps/web/src/middleware.ts`
+- [ ] Replace the placeholder Astro project name
+      (`astro-blog-starter-template`) in `apps/web/package.json` with `web`

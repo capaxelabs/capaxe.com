@@ -1,0 +1,11 @@
+{
+  "name": "@capaxe/db",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./types.ts",
+    "./schema": "./schema.sql",
+    "./queries": "./queries.ts"
+  }
+}

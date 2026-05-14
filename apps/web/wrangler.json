@@ -1,15 +1,29 @@
 {
-  "name": "astro-blog-starter-template",
+  "name": "capaxe-web",
   "compatibility_date": "2025-04-01",
-  "compatibility_flags": ["nodejs_compat"],
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
   "main": "./dist/_worker.js/index.js",
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
     "html_handling": "drop-trailing-slash",
     "not_found_handling": "none",
-    "run_worker_first": ["/blog/2025*", "/blog/2024*"]
+    "run_worker_first": [
+      "/blog/2025*",
+      "/blog/2024*",
+      "/admin/*",
+      "/api/admin/*"
+    ]
   },
+  "d1_databases": [
+    {
+      "binding": "LEADS_DB",
+      "database_name": "shopify-leads",
+      "database_id": "39f53b08-1ea9-4621-8704-e36b6b02ef27"
+    }
+  ],
   "observability": {
     "enabled": true
   },

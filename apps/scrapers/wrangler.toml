@@ -1,0 +1,26 @@
+name = "shopify-leads-scrapers"
+main = "src/index.ts"
+compatibility_date = "2025-04-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Shared D1 — same database the web app reads from
+[[d1_databases]]
+binding = "LEADS_DB"
+database_name = "shopify-leads"
+database_id = "REPLACE_WITH_DATABASE_ID_FROM_d1_create"
+
+[observability]
+enabled = true
+
+# Cron triggers
+[triggers]
+crons = [
+  "* * * * *",        # enrich pass every minute (20 stores/run)
+  "*/5 * * * *",      # judgeme crawler every 5 min (when not paused)
+]
+
+# Manual trigger endpoints (also exposed for ad-hoc runs):
+#   POST /enrich?limit=20
+#   POST /judgeme?n=10
+#   POST /import-storeleads  (body = JSON dump)
+#   GET  /stats
