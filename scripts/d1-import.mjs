@@ -67,9 +67,10 @@ function sqlite(args) {
 function runD1Sql(sql) {
   const file = join(tmpDir, "chunk.sql");
   writeFileSync(file, sql);
+  // wrangler d1 execute prompts for confirmation interactively; auto-answer yes
   const r = spawnSync(
-    "wrangler",
-    ["d1", "execute", DB, "--remote", `--file=${file}`],
+    "sh",
+    ["-c", `yes | pnpm exec wrangler d1 execute ${DB} --remote --file=${file}`],
     { encoding: "utf8", stdio: ["ignore", "inherit", "inherit"] }
   );
   unlinkSync(file);

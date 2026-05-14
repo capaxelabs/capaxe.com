@@ -53,15 +53,61 @@ const blogRedirects: Record<string, string> = {
   "/blog/20250303": "/blog/high-converting-shopify-product-pages",
 };
 
-export const onRequest = defineMiddleware(({ request }, next) => {
+const ADMIN_COOKIE = "admin_token";
+
+function isAdminPath(path: string): boolean {
+  return path === "/admin" || path.startsWith("/admin/") || path.startsWith("/api/admin/");
+}
+
+export const onRequest = defineMiddleware((ctx, next) => {
+  const { request } = ctx;
   const url = new URL(request.url);
   const path = url.pathname.replace(/\/$/, "") || "/";
 
+  // Blog redirects (existing behaviour)
   const redirect = blogRedirects[path];
   if (redirect) {
     return new Response(null, {
       status: 301,
       headers: { Location: redirect + "/" },
+    });
+  }
+
+  // Admin auth gate
+  if (isAdminPath(path) && path !== "/admin/login" && path !== "/api/admin/login") {
+    const env = ctx.locals.runtime?.env;
+    const expected = env?.ADMIN_TOKEN;
+    const cookie = ctx.cookies.get(ADMIN_COOKIE)?.value;
+    const headerToken = request.headers.get("x-admin-token");
+    const ok = expected && (cookie === expected || headerToken === expected);
+    if (!ok) {
+      if (path.startsWith("/api/")) {
+        return new Response(JSON.stringify({ error: "unauthorized" }), {
+          status: 401,
+          headers: {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+          },
+        });
+      }
+      const next = encodeURIComponent(url.pathname + url.search);
+      return new Response(null, {
+        status: 302,
+        headers: {
+          Location: `/admin/login?next=${next}`,
+          "cache-control": "no-store",
+        },
+      });
+    }
+  }
+
+  // For admin responses, force no-store so CF/browsers never cache dynamic data.
+  if (isAdminPath(path)) {
+    return next().then((res) => {
+      const r = new Response(res.body, res);
+      r.headers.set("cache-control", "no-store");
+      r.headers.set("x-robots-tag", "noindex,nofollow");
+      return r;
     });
   }
 

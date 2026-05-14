@@ -17,7 +17,7 @@ CREATE TABLE raw_stores (
                     site_id INTEGER, page_number INTEGER DEFAULT 0,
                     UNIQUE(website, site_id) ON CONFLICT IGNORE
                 );
-CREATE TABLE sqlite_sequence(name,seq);
+-- sqlite_sequence is auto-managed by SQLite/D1 — never CREATE it manually.
 CREATE TABLE failed_stores (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     website TEXT NOT NULL,

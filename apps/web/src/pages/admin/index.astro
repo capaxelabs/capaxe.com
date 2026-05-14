@@ -1,0 +1,139 @@
+---
+import AdminLayout from "@/layouts/AdminLayout.astro";
+
+export const prerender = false;
+
+const db = Astro.locals.runtime.env.LEADS_DB;
+
+async function count(sql: string, ...binds: unknown[]): Promise<number> {
+  const r = await db.prepare(sql).bind(...binds).first<{ n: number }>();
+  return r?.n ?? 0;
+}
+
+const [
+  parsedTotal,
+  parsedUnprocessed,
+  parsedProcessed,
+  parsedWithEmail,
+  parsedShopifyPlus,
+  rawStores,
+  judgemeStores,
+  appsCount,
+  themesCount,
+] = await Promise.all([
+  count("SELECT COUNT(*) AS n FROM parsed_stores"),
+  count("SELECT COUNT(*) AS n FROM parsed_stores WHERE processed_at IS NULL"),
+  count("SELECT COUNT(*) AS n FROM parsed_stores WHERE processed_at IS NOT NULL"),
+  count("SELECT COUNT(*) AS n FROM parsed_stores WHERE email IS NOT NULL"),
+  count("SELECT COUNT(*) AS n FROM parsed_stores WHERE plan = 'Shopify Plus'"),
+  count("SELECT COUNT(*) AS n FROM raw_stores"),
+  count("SELECT COUNT(*) AS n FROM judgeme_stores"),
+  count("SELECT COUNT(*) AS n FROM apps"),
+  count("SELECT COUNT(*) AS n FROM themes"),
+]);
+
+const dataSources = await db
+  .prepare(
+    "SELECT data_source, COUNT(*) AS n FROM parsed_stores GROUP BY data_source ORDER BY n DESC"
+  )
+  .all<{ data_source: string | null; n: number }>();
+
+const recent = await db
+  .prepare(
+    `SELECT website, COALESCE(merchant_name, company_name) AS name, plan, processed_at
+       FROM parsed_stores
+       WHERE processed_at IS NOT NULL
+       ORDER BY processed_at DESC
+       LIMIT 10`
+  )
+  .all<{ website: string; name: string | null; plan: string | null; processed_at: string }>();
+
+function fmt(n: number) {
+  return n.toLocaleString("en-US");
+}
+---
+
+<AdminLayout title="Dashboard" active="dashboard">
+  <!-- KPI cards -->
+  <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
+    <a href="/admin/leads" class="rounded-lg border border-slate-200 bg-white p-4 hover:bg-slate-50">
+      <p class="text-xs uppercase tracking-wider text-slate-500">Total leads</p>
+      <p class="mt-1 text-2xl font-semibold">{fmt(parsedTotal)}</p>
+    </a>
+    <a href="/admin/leads?processed=unprocessed" class="rounded-lg border border-slate-200 bg-white p-4 hover:bg-slate-50">
+      <p class="text-xs uppercase tracking-wider text-slate-500">Unprocessed (queue)</p>
+      <p class="mt-1 text-2xl font-semibold">{fmt(parsedUnprocessed)}</p>
+      <p class="mt-0.5 text-xs text-slate-500">{fmt(parsedProcessed)} processed</p>
+    </a>
+    <a href="/admin/leads?email=1" class="rounded-lg border border-slate-200 bg-white p-4 hover:bg-slate-50">
+      <p class="text-xs uppercase tracking-wider text-slate-500">With email</p>
+      <p class="mt-1 text-2xl font-semibold">{fmt(parsedWithEmail)}</p>
+    </a>
+    <a href="/admin/leads?plan=Shopify+Plus" class="rounded-lg border border-slate-200 bg-white p-4 hover:bg-slate-50">
+      <p class="text-xs uppercase tracking-wider text-slate-500">Shopify Plus</p>
+      <p class="mt-1 text-2xl font-semibold">{fmt(parsedShopifyPlus)}</p>
+    </a>
+  </div>
+
+  <div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+    <!-- Catalogs -->
+    <div class="rounded-lg border border-slate-200 bg-white p-4">
+      <h2 class="text-sm font-medium">Master catalogs</h2>
+      <dl class="mt-3 space-y-2 text-sm">
+        <div class="flex justify-between"><dt class="text-slate-600"><a href="/admin/apps" class="hover:underline">Apps</a></dt><dd class="font-medium">{fmt(appsCount)}</dd></div>
+        <div class="flex justify-between"><dt class="text-slate-600"><a href="/admin/themes" class="hover:underline">Themes</a></dt><dd class="font-medium">{fmt(themesCount)}</dd></div>
+        <div class="flex justify-between"><dt class="text-slate-600"><a href="/admin/judgeme" class="hover:underline">Judge.me stores</a></dt><dd class="font-medium">{fmt(judgemeStores)}</dd></div>
+        <div class="flex justify-between"><dt class="text-slate-600">raw_stores (myip.ms)</dt><dd class="font-medium">{fmt(rawStores)}</dd></div>
+      </dl>
+    </div>
+
+    <!-- Data sources -->
+    <div class="rounded-lg border border-slate-200 bg-white p-4">
+      <h2 class="text-sm font-medium">Lead composition by source</h2>
+      <table class="mt-3 w-full text-sm">
+        <thead class="text-xs uppercase tracking-wider text-slate-500">
+          <tr><th class="text-left font-medium pb-1">Source</th><th class="text-right font-medium pb-1">Count</th></tr>
+        </thead>
+        <tbody>
+          {dataSources.results?.map((row) => (
+            <tr class="border-t border-slate-100">
+              <td class="py-1.5 text-slate-700">{row.data_source ?? "(none)"}</td>
+              <td class="py-1.5 text-right font-medium">{fmt(row.n)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Recently processed -->
+  <div class="mt-6 rounded-lg border border-slate-200 bg-white">
+    <div class="flex items-center justify-between border-b border-slate-200 px-4 py-3">
+      <h2 class="text-sm font-medium">Recently processed</h2>
+      <a href="/admin/leads" class="text-xs text-slate-600 hover:underline">View all →</a>
+    </div>
+    <table class="w-full text-sm">
+      <thead class="bg-slate-50 text-xs uppercase tracking-wider text-slate-500">
+        <tr>
+          <th class="px-4 py-2 text-left font-medium">Domain</th>
+          <th class="px-4 py-2 text-left font-medium">Name</th>
+          <th class="px-4 py-2 text-left font-medium">Plan</th>
+          <th class="px-4 py-2 text-left font-medium">Processed</th>
+        </tr>
+      </thead>
+      <tbody>
+        {recent.results?.map((row) => (
+          <tr class="border-t border-slate-100">
+            <td class="px-4 py-2"><a href={`/admin/leads/${encodeURIComponent(row.website)}`} class="font-medium text-slate-900 hover:underline">{row.website}</a></td>
+            <td class="px-4 py-2 text-slate-700">{row.name ?? "—"}</td>
+            <td class="px-4 py-2 text-slate-700">{row.plan ?? "—"}</td>
+            <td class="px-4 py-2 text-slate-500">{new Date(row.processed_at).toLocaleString()}</td>
+          </tr>
+        ))}
+        {!recent.results?.length && (
+          <tr><td colspan="4" class="px-4 py-8 text-center text-slate-500 text-sm">No processed leads yet — the cron will start filling this as it runs.</td></tr>
+        )}
+      </tbody>
+    </table>
+  </div>
+</AdminLayout>

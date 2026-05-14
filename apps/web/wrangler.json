@@ -1,5 +1,6 @@
 {
-  "name": "capaxe-web",
+  "name": "capaxe",
+  "account_id": "81cac75fe318d80f4344481afc4799ac",
   "compatibility_date": "2025-04-01",
   "compatibility_flags": [
     "nodejs_compat"
@@ -13,6 +14,7 @@
     "run_worker_first": [
       "/blog/2025*",
       "/blog/2024*",
+      "/admin",
       "/admin/*",
       "/api/admin/*"
     ]

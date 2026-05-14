@@ -1,0 +1,148 @@
+---
+import AdminLayout from "@/layouts/AdminLayout.astro";
+
+export const prerender = false;
+
+const db = Astro.locals.runtime.env.LEADS_DB;
+const url = new URL(Astro.request.url);
+const q = url.searchParams.get("q")?.trim() || "";
+const minRating = Number(url.searchParams.get("minRating") ?? "0");
+const minReviews = Number(url.searchParams.get("minReviews") ?? "0");
+const country = url.searchParams.get("country") || "";
+const categoryId = url.searchParams.get("category") || "";
+const page = Math.max(1, Number(url.searchParams.get("page") ?? "1"));
+const pageSize = 50;
+const offset = (page - 1) * pageSize;
+
+const where: string[] = ["1=1"];
+const binds: unknown[] = [];
+if (q) {
+  where.push("(storefront LIKE ? OR store_name LIKE ?)");
+  binds.push(`%${q}%`, `%${q}%`);
+}
+if (minRating > 0) { where.push("avg_rating >= ?"); binds.push(minRating); }
+if (minReviews > 0) { where.push("reviews_count >= ?"); binds.push(minReviews); }
+if (country) { where.push("store_country = ?"); binds.push(country); }
+if (categoryId) { where.push("category_id = ?"); binds.push(Number(categoryId)); }
+const whereSql = where.join(" AND ");
+
+const totalRow = await db
+  .prepare(`SELECT COUNT(*) AS n FROM judgeme_stores WHERE ${whereSql}`)
+  .bind(...binds)
+  .first<{ n: number }>();
+const total = totalRow?.n ?? 0;
+const pages = Math.max(1, Math.ceil(total / pageSize));
+
+const rows = await db
+  .prepare(
+    `SELECT js.storefront, js.store_name, js.store_country, js.reviews_count, js.verified_reviews,
+            js.avg_rating, js.transparency_score, js.product_count, js.collection_count,
+            c.name AS category_name
+       FROM judgeme_stores js
+       LEFT JOIN judgeme_categories c ON c.id = js.category_id
+       WHERE ${whereSql}
+       ORDER BY js.reviews_count DESC NULLS LAST
+       LIMIT ? OFFSET ?`
+  )
+  .bind(...binds, pageSize, offset)
+  .all<{
+    storefront: string;
+    store_name: string | null;
+    store_country: string | null;
+    reviews_count: number | null;
+    verified_reviews: number | null;
+    avg_rating: number | null;
+    transparency_score: number | null;
+    product_count: number | null;
+    collection_count: number | null;
+    category_name: string | null;
+  }>();
+
+const categories = await db
+  .prepare("SELECT id, name FROM judgeme_categories ORDER BY name LIMIT 300")
+  .all<{ id: number; name: string }>();
+const countries = await db
+  .prepare("SELECT DISTINCT store_country FROM judgeme_stores WHERE store_country IS NOT NULL ORDER BY store_country")
+  .all<{ store_country: string }>();
+
+function pageHref(p: number) {
+  const sp = new URLSearchParams(url.searchParams);
+  sp.set("page", String(p));
+  return `?${sp.toString()}`;
+}
+function fmt(n: number | null) { return n == null ? "—" : n.toLocaleString("en-US"); }
+---
+
+<AdminLayout title="Judge.me stores" active="judgeme">
+  <form method="GET" class="grid grid-cols-12 gap-3 rounded-lg border border-slate-200 bg-white p-3">
+    <input name="q" placeholder="Search domain / name…" value={q}
+      class="col-span-4 rounded-md border border-slate-300 px-3 py-1.5 text-sm" />
+    <select name="country" class="col-span-2 rounded-md border border-slate-300 px-2 py-1.5 text-sm">
+      <option value="">All countries</option>
+      {countries.results?.map((c) => (
+        <option value={c.store_country} selected={c.store_country === country}>{c.store_country}</option>
+      ))}
+    </select>
+    <select name="category" class="col-span-3 rounded-md border border-slate-300 px-2 py-1.5 text-sm">
+      <option value="">All categories</option>
+      {categories.results?.map((c) => (
+        <option value={c.id} selected={String(c.id) === categoryId}>{c.name}</option>
+      ))}
+    </select>
+    <input name="minRating" type="number" step="0.1" min="0" max="5" placeholder="Min rating"
+      value={url.searchParams.get("minRating") || ""}
+      class="col-span-1 rounded-md border border-slate-300 px-2 py-1.5 text-sm" />
+    <input name="minReviews" type="number" min="0" placeholder="Min reviews"
+      value={url.searchParams.get("minReviews") || ""}
+      class="col-span-1 rounded-md border border-slate-300 px-2 py-1.5 text-sm" />
+    <button type="submit" class="col-span-1 rounded-md bg-slate-900 px-3 py-1.5 text-sm font-medium text-white hover:bg-slate-800">Apply</button>
+  </form>
+
+  <p class="mt-3 text-xs text-slate-500">{fmt(total)} stores · page {page} of {pages}</p>
+
+  <div class="mt-3 overflow-x-auto rounded-lg border border-slate-200 bg-white">
+    <table class="w-full text-sm">
+      <thead class="bg-slate-50 text-xs uppercase tracking-wider text-slate-500">
+        <tr>
+          <th class="px-4 py-2 text-left font-medium">Domain</th>
+          <th class="px-4 py-2 text-left font-medium">Name</th>
+          <th class="px-4 py-2 text-left font-medium">Category</th>
+          <th class="px-4 py-2 text-left font-medium">Country</th>
+          <th class="px-4 py-2 text-right font-medium">Reviews</th>
+          <th class="px-4 py-2 text-right font-medium">Rating</th>
+          <th class="px-4 py-2 text-right font-medium">Transparency</th>
+          <th class="px-4 py-2 text-right font-medium">SKUs</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows.results?.map((s) => (
+          <tr class="border-t border-slate-100">
+            <td class="px-4 py-2">
+              <a href={`/admin/leads/${encodeURIComponent(s.storefront)}`} class="font-medium text-slate-900 hover:underline">{s.storefront}</a>
+            </td>
+            <td class="px-4 py-2 text-slate-700">{s.store_name ?? "—"}</td>
+            <td class="px-4 py-2 text-xs text-slate-500">{s.category_name ?? "—"}</td>
+            <td class="px-4 py-2 text-slate-600">{s.store_country ?? "—"}</td>
+            <td class="px-4 py-2 text-right text-slate-700">{fmt(s.reviews_count)}</td>
+            <td class="px-4 py-2 text-right text-slate-700">{s.avg_rating != null ? s.avg_rating.toFixed(1) : "—"}</td>
+            <td class="px-4 py-2 text-right text-slate-700">{s.transparency_score != null ? (s.transparency_score * 100).toFixed(0) + "%" : "—"}</td>
+            <td class="px-4 py-2 text-right text-slate-700">{fmt(s.product_count)}</td>
+          </tr>
+        ))}
+        {!rows.results?.length && (
+          <tr><td colspan="8" class="px-4 py-10 text-center text-slate-500 text-sm">No matching stores.</td></tr>
+        )}
+      </tbody>
+    </table>
+  </div>
+
+  {pages > 1 && (
+    <div class="mt-3 flex items-center justify-between text-sm">
+      <p class="text-slate-500">page {page} of {pages}</p>
+      <div class="flex gap-1">
+        <a href={pageHref(Math.max(1, page - 1))} class:list={["rounded-md border border-slate-200 bg-white px-3 py-1.5 hover:bg-slate-50", page === 1 && "pointer-events-none opacity-50"]}>← Prev</a>
+        <a href={pageHref(Math.min(pages, page + 1))} class:list={["rounded-md border border-slate-200 bg-white px-3 py-1.5 hover:bg-slate-50", page === pages && "pointer-events-none opacity-50"]}>Next →</a>
+      </div>
+    </div>
+  )}
+</AdminLayout>

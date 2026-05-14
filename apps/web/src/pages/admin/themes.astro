@@ -1,0 +1,73 @@
+---
+import AdminLayout from "@/layouts/AdminLayout.astro";
+
+export const prerender = false;
+
+const db = Astro.locals.runtime.env.LEADS_DB;
+const url = new URL(Astro.request.url);
+const q = url.searchParams.get("q")?.trim() || "";
+
+const where: string[] = ["1=1"];
+const binds: unknown[] = [];
+if (q) {
+  where.push("(name LIKE ? OR vendor LIKE ? OR handle LIKE ?)");
+  binds.push(`%${q}%`, `%${q}%`, `%${q}%`);
+}
+const whereSql = where.join(" AND ");
+
+// Group themes by name with style aggregation, also count adoption
+const rows = await db
+  .prepare(
+    `SELECT t.id, t.name, t.vendor, t.handle, t.style_handle, t.theme_store_url,
+            (SELECT COUNT(*) FROM parsed_stores ps WHERE ps.theme_id = t.id) AS adoption
+       FROM themes t
+       WHERE ${whereSql}
+       ORDER BY adoption DESC, t.name ASC, t.style_handle ASC
+       LIMIT 500`
+  )
+  .bind(...binds)
+  .all<{ id: number; name: string; vendor: string | null; handle: string | null; style_handle: string | null; theme_store_url: string | null; adoption: number }>();
+
+function fmt(n: number) { return n.toLocaleString("en-US"); }
+---
+
+<AdminLayout title="Themes" active="themes">
+  <form method="GET" class="grid grid-cols-12 gap-3 rounded-lg border border-slate-200 bg-white p-3">
+    <input name="q" placeholder="Search theme, vendor…" value={q}
+      class="col-span-10 rounded-md border border-slate-300 px-3 py-1.5 text-sm" />
+    <button type="submit" class="col-span-2 rounded-md bg-slate-900 px-3 py-1.5 text-sm font-medium text-white hover:bg-slate-800">Search</button>
+  </form>
+
+  <p class="mt-3 text-xs text-slate-500">Showing top {Math.min(500, rows.results?.length ?? 0)} themes by adoption.</p>
+
+  <div class="mt-3 overflow-x-auto rounded-lg border border-slate-200 bg-white">
+    <table class="w-full text-sm">
+      <thead class="bg-slate-50 text-xs uppercase tracking-wider text-slate-500">
+        <tr>
+          <th class="px-4 py-2 text-left font-medium">Theme</th>
+          <th class="px-4 py-2 text-left font-medium">Style</th>
+          <th class="px-4 py-2 text-left font-medium">Vendor</th>
+          <th class="px-4 py-2 text-right font-medium">Adoption</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows.results?.map((t) => (
+          <tr class="border-t border-slate-100">
+            <td class="px-4 py-2 font-medium">
+              {t.theme_store_url
+                ? <a href={t.theme_store_url} target="_blank" rel="noopener" class="text-slate-900 hover:underline">{t.name}</a>
+                : t.name}
+              {t.handle && <span class="ml-2 text-xs text-slate-400">{t.handle}</span>}
+            </td>
+            <td class="px-4 py-2 text-slate-600">{t.style_handle ?? "—"}</td>
+            <td class="px-4 py-2 text-slate-600">{t.vendor ?? "—"}</td>
+            <td class="px-4 py-2 text-right text-slate-700">{fmt(t.adoption)}</td>
+          </tr>
+        ))}
+        {!rows.results?.length && (
+          <tr><td colspan="4" class="px-4 py-10 text-center text-slate-500 text-sm">No matching themes.</td></tr>
+        )}
+      </tbody>
+    </table>
+  </div>
+</AdminLayout>

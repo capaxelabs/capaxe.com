@@ -1,0 +1,126 @@
+---
+import AdminLayout from "@/layouts/AdminLayout.astro";
+
+export const prerender = false;
+
+const db = Astro.locals.runtime.env.LEADS_DB;
+const url = new URL(Astro.request.url);
+const q = url.searchParams.get("q")?.trim() || "";
+const sort = url.searchParams.get("sort") || "installs";
+const page = Math.max(1, Number(url.searchParams.get("page") ?? "1"));
+const pageSize = 50;
+const offset = (page - 1) * pageSize;
+
+const where: string[] = ["1=1"];
+const binds: unknown[] = [];
+if (q) {
+  where.push("(name LIKE ? OR vendor_name LIKE ? OR token LIKE ?)");
+  binds.push(`%${q}%`, `%${q}%`, `%${q}%`);
+}
+const whereSql = where.join(" AND ");
+
+const orderSql =
+  sort === "rating"
+    ? "avg_rating DESC NULLS LAST, install_count DESC NULLS LAST"
+    : sort === "name"
+    ? "name ASC"
+    : "install_count DESC NULLS LAST, name ASC";
+
+const totalRow = await db
+  .prepare(`SELECT COUNT(*) AS n FROM apps WHERE ${whereSql}`)
+  .bind(...binds)
+  .first<{ n: number }>();
+const total = totalRow?.n ?? 0;
+const pages = Math.max(1, Math.ceil(total / pageSize));
+
+const rows = await db
+  .prepare(
+    `SELECT id, token, name, vendor_name, install_count, avg_rating, review_count, categories_json, app_store_url
+       FROM apps WHERE ${whereSql}
+       ORDER BY ${orderSql}
+       LIMIT ? OFFSET ?`
+  )
+  .bind(...binds, pageSize, offset)
+  .all<{
+    id: number;
+    token: string | null;
+    name: string;
+    vendor_name: string | null;
+    install_count: number | null;
+    avg_rating: number | null;
+    review_count: number | null;
+    categories_json: string | null;
+    app_store_url: string | null;
+  }>();
+
+function pageHref(p: number) {
+  const sp = new URLSearchParams(url.searchParams);
+  sp.set("page", String(p));
+  return `?${sp.toString()}`;
+}
+function fmt(n: number | null) { return n == null ? "—" : n.toLocaleString("en-US"); }
+function parseCategories(j: string | null): string[] {
+  if (!j) return [];
+  try { return JSON.parse(j) || []; } catch { return []; }
+}
+---
+
+<AdminLayout title="Apps" active="apps">
+  <form method="GET" class="grid grid-cols-12 gap-3 rounded-lg border border-slate-200 bg-white p-3">
+    <input name="q" placeholder="Search app, vendor, token…" value={q}
+      class="col-span-6 rounded-md border border-slate-300 px-3 py-1.5 text-sm" />
+    <select name="sort" class="col-span-3 rounded-md border border-slate-300 px-2 py-1.5 text-sm">
+      <option value="installs" selected={sort === "installs"}>Sort: Installs</option>
+      <option value="rating"   selected={sort === "rating"}>Sort: Rating</option>
+      <option value="name"     selected={sort === "name"}>Sort: Name</option>
+    </select>
+    <button type="submit" class="col-span-1 rounded-md bg-slate-900 px-3 py-1.5 text-sm font-medium text-white hover:bg-slate-800">Apply</button>
+  </form>
+
+  <p class="mt-3 text-xs text-slate-500">{fmt(total)} apps · page {page} of {pages}</p>
+
+  <div class="mt-3 overflow-x-auto rounded-lg border border-slate-200 bg-white">
+    <table class="w-full text-sm">
+      <thead class="bg-slate-50 text-xs uppercase tracking-wider text-slate-500">
+        <tr>
+          <th class="px-4 py-2 text-left font-medium">App</th>
+          <th class="px-4 py-2 text-left font-medium">Vendor</th>
+          <th class="px-4 py-2 text-left font-medium">Categories</th>
+          <th class="px-4 py-2 text-right font-medium">Installs</th>
+          <th class="px-4 py-2 text-right font-medium">Rating</th>
+          <th class="px-4 py-2 text-right font-medium">Reviews</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows.results?.map((a) => (
+          <tr class="border-t border-slate-100">
+            <td class="px-4 py-2">
+              {a.app_store_url
+                ? <a href={a.app_store_url} target="_blank" rel="noopener" class="font-medium text-slate-900 hover:underline">{a.name}</a>
+                : <span class="font-medium">{a.name}</span>}
+              {a.token && <div class="text-xs text-slate-400">{a.token}</div>}
+            </td>
+            <td class="px-4 py-2 text-slate-700">{a.vendor_name ?? "—"}</td>
+            <td class="px-4 py-2 text-xs text-slate-500">{parseCategories(a.categories_json).join(", ") || "—"}</td>
+            <td class="px-4 py-2 text-right text-slate-700">{fmt(a.install_count)}</td>
+            <td class="px-4 py-2 text-right text-slate-700">{a.avg_rating != null ? a.avg_rating.toFixed(1) : "—"}</td>
+            <td class="px-4 py-2 text-right text-slate-700">{fmt(a.review_count)}</td>
+          </tr>
+        ))}
+        {!rows.results?.length && (
+          <tr><td colspan="6" class="px-4 py-10 text-center text-slate-500 text-sm">No matching apps.</td></tr>
+        )}
+      </tbody>
+    </table>
+  </div>
+
+  {pages > 1 && (
+    <div class="mt-3 flex items-center justify-between text-sm">
+      <p class="text-slate-500">page {page} of {pages}</p>
+      <div class="flex gap-1">
+        <a href={pageHref(Math.max(1, page - 1))} class:list={["rounded-md border border-slate-200 bg-white px-3 py-1.5 hover:bg-slate-50", page === 1 && "pointer-events-none opacity-50"]}>← Prev</a>
+        <a href={pageHref(Math.min(pages, page + 1))} class:list={["rounded-md border border-slate-200 bg-white px-3 py-1.5 hover:bg-slate-50", page === pages && "pointer-events-none opacity-50"]}>Next →</a>
+      </div>
+    </div>
+  )}
+</AdminLayout>

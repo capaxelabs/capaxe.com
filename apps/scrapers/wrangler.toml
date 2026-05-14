@@ -1,5 +1,6 @@
 name = "shopify-leads-scrapers"
 main = "src/index.ts"
+account_id = "81cac75fe318d80f4344481afc4799ac"
 compatibility_date = "2025-04-01"
 compatibility_flags = ["nodejs_compat"]
 
@@ -7,7 +8,7 @@ compatibility_flags = ["nodejs_compat"]
 [[d1_databases]]
 binding = "LEADS_DB"
 database_name = "shopify-leads"
-database_id = "REPLACE_WITH_DATABASE_ID_FROM_d1_create"
+database_id = "39f53b08-1ea9-4621-8704-e36b6b02ef27"
 
 [observability]
 enabled = true

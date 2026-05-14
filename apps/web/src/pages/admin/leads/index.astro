@@ -1,0 +1,179 @@
+---
+import AdminLayout from "@/layouts/AdminLayout.astro";
+
+export const prerender = false;
+
+const db = Astro.locals.runtime.env.LEADS_DB;
+const url = new URL(Astro.request.url);
+
+const q = url.searchParams.get("q")?.trim() || "";
+const plan = url.searchParams.get("plan")?.trim() || "";
+const country = url.searchParams.get("country")?.trim() || "";
+const processed = url.searchParams.get("processed") || ""; // "processed" | "unprocessed" | ""
+const hasEmail = url.searchParams.get("email") === "1";
+const minProducts = Number(url.searchParams.get("minProducts") ?? "");
+const page = Math.max(1, Number(url.searchParams.get("page") ?? "1"));
+const pageSize = 50;
+const offset = (page - 1) * pageSize;
+
+const where: string[] = ["1 = 1"];
+const binds: unknown[] = [];
+
+if (q) {
+  where.push("(website LIKE ? OR merchant_name LIKE ? OR company_name LIKE ?)");
+  binds.push(`%${q}%`, `%${q}%`, `%${q}%`);
+}
+if (plan) { where.push("plan = ?"); binds.push(plan); }
+if (country) { where.push("country_code = ?"); binds.push(country); }
+if (processed === "processed") where.push("processed_at IS NOT NULL");
+if (processed === "unprocessed") where.push("processed_at IS NULL");
+if (hasEmail) where.push("email IS NOT NULL AND email != ''");
+if (!Number.isNaN(minProducts) && minProducts > 0) {
+  where.push("product_count >= ?");
+  binds.push(minProducts);
+}
+
+const whereSql = where.join(" AND ");
+
+const totalRow = await db
+  .prepare(`SELECT COUNT(*) AS n FROM parsed_stores WHERE ${whereSql}`)
+  .bind(...binds)
+  .first<{ n: number }>();
+const total = totalRow?.n ?? 0;
+const pages = Math.max(1, Math.ceil(total / pageSize));
+
+const rows = await db
+  .prepare(
+    `SELECT website, COALESCE(merchant_name, company_name) AS name, plan, country_code,
+            product_count, email, judgeme_avg_rating, admin_status, data_source, processed_at
+       FROM parsed_stores
+      WHERE ${whereSql}
+      ORDER BY storeleads_rank IS NULL, storeleads_rank ASC, website ASC
+      LIMIT ? OFFSET ?`
+  )
+  .bind(...binds, pageSize, offset)
+  .all<{
+    website: string;
+    name: string | null;
+    plan: string | null;
+    country_code: string | null;
+    product_count: number | null;
+    email: string | null;
+    judgeme_avg_rating: number | null;
+    admin_status: string | null;
+    data_source: string | null;
+    processed_at: string | null;
+  }>();
+
+// distinct plan + country values for the filter dropdowns
+const plans = await db
+  .prepare("SELECT DISTINCT plan FROM parsed_stores WHERE plan IS NOT NULL ORDER BY plan")
+  .all<{ plan: string }>();
+const countries = await db
+  .prepare("SELECT DISTINCT country_code FROM parsed_stores WHERE country_code IS NOT NULL ORDER BY country_code")
+  .all<{ country_code: string }>();
+
+function pageHref(p: number) {
+  const sp = new URLSearchParams(url.searchParams);
+  sp.set("page", String(p));
+  return `?${sp.toString()}`;
+}
+
+function fmt(n: number) { return n.toLocaleString("en-US"); }
+---
+
+<AdminLayout title="Leads" active="leads">
+  <!-- Filter bar -->
+  <form method="GET" class="grid grid-cols-12 gap-3 rounded-lg border border-slate-200 bg-white p-3">
+    <input
+      name="q"
+      placeholder="Search domain, merchant…"
+      value={q}
+      class="col-span-4 rounded-md border border-slate-300 px-3 py-1.5 text-sm focus:border-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900"
+    />
+    <select name="plan" class="col-span-2 rounded-md border border-slate-300 px-2 py-1.5 text-sm">
+      <option value="">All plans</option>
+      {plans.results?.map((p) => (
+        <option value={p.plan} selected={p.plan === plan}>{p.plan}</option>
+      ))}
+    </select>
+    <select name="country" class="col-span-1 rounded-md border border-slate-300 px-2 py-1.5 text-sm">
+      <option value="">Country</option>
+      {countries.results?.map((c) => (
+        <option value={c.country_code} selected={c.country_code === country}>{c.country_code}</option>
+      ))}
+    </select>
+    <select name="processed" class="col-span-2 rounded-md border border-slate-300 px-2 py-1.5 text-sm">
+      <option value="">All</option>
+      <option value="processed" selected={processed === "processed"}>Processed</option>
+      <option value="unprocessed" selected={processed === "unprocessed"}>Unprocessed</option>
+    </select>
+    <label class="col-span-1 flex items-center gap-1.5 text-sm text-slate-700">
+      <input type="checkbox" name="email" value="1" checked={hasEmail} class="rounded" />
+      Email
+    </label>
+    <input
+      name="minProducts"
+      type="number"
+      min="0"
+      placeholder="Min SKUs"
+      value={url.searchParams.get("minProducts") || ""}
+      class="col-span-1 rounded-md border border-slate-300 px-2 py-1.5 text-sm"
+    />
+    <button type="submit" class="col-span-1 rounded-md bg-slate-900 px-3 py-1.5 text-sm font-medium text-white hover:bg-slate-800">
+      Apply
+    </button>
+  </form>
+
+  <p class="mt-3 text-xs text-slate-500">
+    {fmt(total)} leads · page {page} of {fmt(pages)}
+  </p>
+
+  <!-- Table -->
+  <div class="mt-3 overflow-x-auto rounded-lg border border-slate-200 bg-white">
+    <table class="w-full text-sm">
+      <thead class="bg-slate-50 text-xs uppercase tracking-wider text-slate-500">
+        <tr>
+          <th class="px-4 py-2 text-left font-medium">Domain</th>
+          <th class="px-4 py-2 text-left font-medium">Name</th>
+          <th class="px-4 py-2 text-left font-medium">Plan</th>
+          <th class="px-4 py-2 text-left font-medium">Country</th>
+          <th class="px-4 py-2 text-right font-medium">SKUs</th>
+          <th class="px-4 py-2 text-right font-medium">Rating</th>
+          <th class="px-4 py-2 text-left font-medium">Email</th>
+          <th class="px-4 py-2 text-left font-medium">Status</th>
+          <th class="px-4 py-2 text-left font-medium">Source</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows.results?.map((r) => (
+          <tr class="border-t border-slate-100 hover:bg-slate-50">
+            <td class="px-4 py-2"><a class="font-medium text-slate-900 hover:underline" href={`/admin/leads/${encodeURIComponent(r.website)}`}>{r.website}</a></td>
+            <td class="px-4 py-2 text-slate-700">{r.name ?? "—"}</td>
+            <td class="px-4 py-2 text-slate-700">{r.plan ?? "—"}</td>
+            <td class="px-4 py-2 text-slate-500">{r.country_code ?? "—"}</td>
+            <td class="px-4 py-2 text-right text-slate-700">{r.product_count != null ? fmt(r.product_count) : "—"}</td>
+            <td class="px-4 py-2 text-right text-slate-700">{r.judgeme_avg_rating != null ? r.judgeme_avg_rating.toFixed(1) : "—"}</td>
+            <td class="px-4 py-2 text-slate-500 truncate max-w-[180px]">{r.email ?? "—"}</td>
+            <td class="px-4 py-2 text-slate-700">{r.admin_status ?? "—"}</td>
+            <td class="px-4 py-2 text-xs text-slate-500">{r.data_source ?? "—"}</td>
+          </tr>
+        ))}
+        {!rows.results?.length && (
+          <tr><td colspan="9" class="px-4 py-10 text-center text-slate-500 text-sm">No matching leads.</td></tr>
+        )}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  {pages > 1 && (
+    <div class="mt-3 flex items-center justify-between text-sm">
+      <p class="text-slate-500">Showing {fmt(offset + 1)}–{fmt(Math.min(offset + pageSize, total))} of {fmt(total)}</p>
+      <div class="flex gap-1">
+        <a href={pageHref(Math.max(1, page - 1))} class:list={["rounded-md border border-slate-200 bg-white px-3 py-1.5 hover:bg-slate-50", page === 1 && "pointer-events-none opacity-50"]}>← Prev</a>
+        <a href={pageHref(Math.min(pages, page + 1))} class:list={["rounded-md border border-slate-200 bg-white px-3 py-1.5 hover:bg-slate-50", page === pages && "pointer-events-none opacity-50"]}>Next →</a>
+      </div>
+    </div>
+  )}
+</AdminLayout>
