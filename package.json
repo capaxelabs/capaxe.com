@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "pnpm --filter web dev",
     "dev:scrapers": "pnpm --filter scrapers dev",
+    "build": "pnpm --filter web build",
     "build:web": "pnpm --filter web build",
     "build:scrapers": "pnpm --filter scrapers build",
     "deploy:web": "pnpm --filter web deploy",
