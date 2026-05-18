@@ -9,6 +9,7 @@
     "build": "pnpm --filter web build",
     "build:web": "pnpm --filter web build",
     "build:scrapers": "pnpm --filter scrapers build",
+    "deploy": "pnpm --filter web deploy",
     "deploy:web": "pnpm --filter web deploy",
     "deploy:scrapers": "pnpm --filter scrapers deploy",
     "check": "pnpm -r check",
