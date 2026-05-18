@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 interface AuditModalProps {
   children: React.ReactNode;
@@ -59,13 +59,13 @@ const AuditModal = ({ children, className }: AuditModalProps) => {
   };
 
   return (
-    <>
-      <button onClick={() => setOpen(true)} className={className}>
-        {children}
-      </button>
-
-      <Dialog open={open} onOpenChange={handleOpenChange}>
-        <DialogContent className="sm:max-w-md">
+    <Dialog open={open} onOpenChange={handleOpenChange}>
+      <DialogTrigger asChild>
+        <button type="button" className={className}>
+          {children}
+        </button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle className="text-xl font-bold">Request a store teardown</DialogTitle>
             <p className="text-sm text-muted-foreground mt-1">
@@ -153,7 +153,6 @@ const AuditModal = ({ children, className }: AuditModalProps) => {
           )}
         </DialogContent>
       </Dialog>
-    </>
   );
 };
 

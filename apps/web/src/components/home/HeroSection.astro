@@ -1,6 +1,6 @@
 ---
-import { ArrowRight, Zap, ShoppingBag, Activity, Wrench } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Zap, ShoppingBag, Activity, Wrench } from "lucide-react";
+import BookingButton from "@/components/BookingButton";
 import AuditModal from "@/components/AuditModal";
 
 const systems = [
@@ -178,15 +178,12 @@ const systems = [
         <div
           class="flex flex-col sm:flex-row gap-3 mt-10 relative z-10 hero-animate hero-animate-delay-4"
         >
-          <a href="/consultation">
-            <Button
-              size="lg"
-              className="bg-primary-500 text-white hover:bg-primary-600 font-semibold rounded-xl btn-shimmer"
-            >
-              Book a strategy call
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </a>
+          <BookingButton
+            client:load
+            className="bg-primary-500 text-white border-primary-500 hover:bg-primary-600 hover:border-primary-600 font-semibold rounded-xl btn-shimmer"
+          >
+            Book a strategy call
+          </BookingButton>
           <AuditModal
             client:load
             className="bg-white/15 backdrop-blur-sm text-white px-6 py-3 rounded-xl font-medium hover:bg-white/25 transition-all duration-200 border border-white/20"

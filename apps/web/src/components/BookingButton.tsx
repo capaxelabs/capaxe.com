@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import Cal from "@calcom/embed-react";
 
 interface BookingButtonProps {
@@ -37,24 +37,22 @@ const BookingButton = ({ children, className, variant = "outline" }: BookingButt
 
       {/* Cal.com Booking Modal */}
       <Dialog open={isBookingModalOpen} onOpenChange={setIsBookingModalOpen}>
-        <DialogContent className="sm:max-w-4xl max-h-[80vh] overflow-hidden">
-          
-            <Cal
-              calLink="capaxe/30min" // Direct link to 30min event type
-              
-              config={{
-                name: "Mukesh Yadav",
-                email: "",
-                notes: "Book a consultation call with Capaxe Labs",
-                theme: calTheme
-                
-              }}
-              style={{
-                width: "100%",
-                height: "100%",
-                overflow: "scroll"
-              }}
-            />
+        <DialogContent className="sm:max-w-4xl w-full h-[85vh] p-0 gap-0 border-0 overflow-hidden bg-transparent shadow-none">
+          <DialogTitle className="sr-only">Book a consultation</DialogTitle>
+          <Cal
+            calLink="capaxe/30min"
+            config={{
+              name: "Mukesh Yadav",
+              email: "",
+              notes: "Book a consultation call with Capaxe Labs",
+              theme: calTheme,
+            }}
+            style={{
+              width: "100%",
+              height: "100%",
+              overflow: "auto",
+            }}
+          />
         </DialogContent>
       </Dialog>
     </>
