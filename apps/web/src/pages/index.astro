@@ -1,28 +1,32 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { siteConfig } from "@/config/site";
-import { StickyCards, ServiceLanding } from "@/components/home/HomeComponents";
-import RetainerPlansSection from "@/components/RetainerPlan";
 import HeroSection from "@/components/home/HeroSection.astro";
 import ClientLogos from "@/components/home/ClientLogos.astro";
-import AppPartners from "@/components/home/AppPartners.astro";
 import OfficialPartners from "@/components/home/OfficialPartners.astro";
+import CeilingSection from "@/components/home/CeilingSection.astro";
+import FourSystems from "@/components/home/FourSystems.astro";
+import HowWeWork from "@/components/home/HowWeWork.astro";
+import WhoBuiltFor from "@/components/home/WhoBuiltFor.astro";
+import FounderSection from "@/components/home/FounderSection.astro";
+import FinalCTASection from "@/components/home/FinalCTASection.astro";
 import FAQSection from "@/components/FAQSection.astro";
 import { createSEO } from "@/utils/seo";
 import { getEnhancedOrganizationSchema } from "@/lib/schemas";
 
 const faqs = [
-  { question: "What Shopify development services does Capaxe Labs offer?", answer: "We offer custom Shopify app development, Liquid theme builds, headless storefronts with Hydrogen, Shopify Plus enterprise solutions, store migrations, and ongoing maintenance retainer plans." },
-  { question: "How much does a Shopify development project cost?", answer: "Project costs vary based on scope. Custom themes start around $3,000, while custom apps and headless builds range from $5,000 to $25,000+. We offer free consultations to provide accurate estimates." },
-  { question: "Do you offer ongoing Shopify support after launch?", answer: "Yes, we offer flexible retainer plans starting at $999/month that include dedicated developer access, bug fixes, feature enhancements, and priority support." },
-  { question: "How long does a typical Shopify project take?", answer: "Simple theme customizations take 1-2 weeks. Custom themes take 4-6 weeks. Custom apps and headless builds typically take 6-12 weeks depending on complexity." },
-  { question: "Can you migrate my store from another platform to Shopify?", answer: "Yes, we handle full migrations from WooCommerce, Magento, BigCommerce, and other platforms to Shopify, including product data, customer records, and order history." },
+  { question: "Who do you typically work with?", answer: "Considered Shopify brands that have moved past the template-and-plugin stage — usually direct-to-consumer brands where the store is the operating system of the business, not a brochure. We work best with operators who care about the line between engineering and revenue." },
+  { question: "How is this different from a typical Shopify agency?", answer: "Most Shopify agencies are studios that picked up code; we're engineers who picked up Shopify. We engineer systems — conversion, merchandising, performance, custom — not deliverables. The discipline comes from years of shipping production systems at scale, including in fintech." },
+  { question: "Do you take on early-stage stores or one-off projects?", answer: "Generally, no. The brands we work with already have traction and have outgrown the systems they started with. Early-stage stores are usually better served by a theme partner or a dedicated solo developer." },
+  { question: "How long does an engagement take?", answer: "Diagnostics typically run a few weeks. Build sprints are scoped to the system being engineered. Embedded partnerships are ongoing. We share a clear timeline before any work begins." },
+  { question: "Do you publish pricing?", answer: "No — and we think that's a feature. No two engagements look the same, and fixed published pricing tends to push agencies toward template work rather than engineered work. We give you a clear investment range in the first conversation." },
+  { question: "Where are you based and how do you work with international brands?", answer: "We're based in India and work with brands across multiple time zones. Our engagements are async-first, with structured sync touchpoints — designed to feel like an embedded internal team rather than an external vendor." },
+  { question: "Do you work on Shopify Plus?", answer: "Yes. The systems we engineer — conversion, merchandising, performance, custom — apply across Shopify and Shopify Plus, with deeper engineering on Plus where Functions, B2B, and headless make more sense." },
 ];
 
 const seo = createSEO({
-  pageName: "Shopify Development Agency — Liquid Themes, Custom Apps & Headless Storefronts",
-  description: "Mumbai-based Shopify development agency specializing in Liquid themes, custom apps, and headless storefronts. From theme builds to Hydrogen commerce — we ship it all.",
-  keywords: "Shopify development agency, custom Shopify apps, headless Shopify, Shopify Plus development, Shopify store development, headless commerce",
+  pageName: "Shopify Systems Engineering for Brands Past Templates, Apps, and Quick Fixes",
+  description: "Capaxe Labs engineers the systems behind considered Shopify brands — conversion, merchandising, performance, and custom engineering. Built by engineers, not a theme shop.",
+  keywords: "Shopify systems engineering, Shopify Plus development, headless Shopify, Shopify conversion engineering, Shopify performance engineering, custom Shopify apps, Shopify Functions",
   contentType: "basic",
   pathname: "/",
 });
@@ -35,37 +39,19 @@ seo.structuredData = getEnhancedOrganizationSchema();
 
     <OfficialPartners />
 
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="h-px bg-linear-to-r from-transparent via-border to-transparent"></div>
-    </div>
-
     <ClientLogos />
 
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="h-px bg-linear-to-r from-transparent via-border to-transparent"></div>
-    </div>
+    <CeilingSection />
 
-    <StickyCards siteConfig={siteConfig} client:visible />
+    <FourSystems />
 
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="h-px bg-linear-to-r from-transparent via-border to-transparent"></div>
-    </div>
+    <HowWeWork />
 
-    <ServiceLanding siteConfig={siteConfig} client:visible />
+    <WhoBuiltFor />
 
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="h-px bg-linear-to-r from-transparent via-border to-transparent"></div>
-    </div>
+    <FounderSection />
 
-    <AppPartners />
-
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="h-px bg-linear-to-r from-transparent via-border to-transparent"></div>
-    </div>
-
-    <div class="reveal-on-scroll">
-      <RetainerPlansSection client:visible />
-    </div>
+    <FinalCTASection />
 
     <FAQSection faqs={faqs} />
   </div>

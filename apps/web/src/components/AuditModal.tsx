@@ -67,9 +67,9 @@ const AuditModal = ({ children, className }: AuditModalProps) => {
       <Dialog open={open} onOpenChange={handleOpenChange}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle className="text-xl font-bold">Free Shopify Store Audit</DialogTitle>
+            <DialogTitle className="text-xl font-bold">Request a store teardown</DialogTitle>
             <p className="text-sm text-muted-foreground mt-1">
-              We'll audit your store's speed performance and SEO and send you a personalised report within 48 hours.
+              A structured review of your store — conversion, performance, and merchandising traced back to root cause. Not a generic audit.
             </p>
           </DialogHeader>
 
@@ -80,9 +80,9 @@ const AuditModal = ({ children, className }: AuditModalProps) => {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <p className="font-semibold text-foreground">Request received!</p>
+              <p className="font-semibold text-foreground">Request received.</p>
               <p className="text-sm text-muted-foreground">
-                We'll audit <span className="font-medium text-foreground">{form.domain}</span> and send findings to <span className="font-medium text-foreground">{form.email}</span> within 48 hours.
+                We'll review <span className="font-medium text-foreground">{form.domain}</span> and send a teardown to <span className="font-medium text-foreground">{form.email}</span> shortly.
               </p>
             </div>
           ) : (
@@ -129,7 +129,7 @@ const AuditModal = ({ children, className }: AuditModalProps) => {
                   rows={3}
                   value={form.message}
                   onChange={handleChange}
-                  placeholder="e.g. slow LCP, keyword rankings, technical SEO issues..."
+                  placeholder="e.g. conversion drop on PDP, slow collections, sale-day stability..."
                   className="w-full px-3 py-2.5 rounded-xl border border-input bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring transition resize-none"
                 />
               </div>
@@ -143,11 +143,11 @@ const AuditModal = ({ children, className }: AuditModalProps) => {
                 disabled={status === "loading"}
                 className="w-full bg-primary-600 hover:bg-primary-700 disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold py-2.5 px-4 rounded-xl transition text-sm"
               >
-                {status === "loading" ? "Sending request…" : "Get My Free Audit"}
+                {status === "loading" ? "Sending request…" : "Request teardown"}
               </button>
 
               <p className="text-xs text-center text-muted-foreground">
-                No sales pitch. Just a straightforward report on what to fix.
+                A focused review that ends with a prioritized roadmap.
               </p>
             </form>
           )}

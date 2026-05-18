@@ -85,8 +85,10 @@ def import_table(conn, db_name: str, table: str, start_batch: int) -> None:
     chunk_size = len(insert_prefix)
     target = start_batch  # rows per chunk; auto-shrinks on 413
 
+    consecutive_failures = 0
+
     def flush() -> bool:
-        nonlocal chunk_rows, chunk_size, written, target
+        nonlocal chunk_rows, chunk_size, written, target, consecutive_failures
         if not chunk_rows:
             return True
         body = insert_prefix + ",\n".join(chunk_rows) + ";\n"
@@ -101,16 +103,27 @@ def import_table(conn, db_name: str, table: str, start_batch: int) -> None:
                 cmd, shell=True, capture_output=True, text=True
             )
             if r.returncode != 0:
-                stderr_tail = (r.stderr or "")[-400:]
-                if "413" in stderr_tail or "Payload Too Large" in stderr_tail:
+                stderr = (r.stderr or "") + (r.stdout or "")
+                # Fail fast on auth/account errors — retrying won't help.
+                if "More than one account" in stderr or "Unauthorized" in stderr:
+                    print(f"\nERROR: wrangler can't pick a Cloudflare account in non-interactive mode.")
+                    print(f"  Set CLOUDFLARE_ACCOUNT_ID=<id> in your shell env and rerun.")
+                    print(f"  Available accounts:\n{stderr[stderr.find('Available accounts'):stderr.find('Available accounts')+400]}")
+                    raise SystemExit(2)
+                if "413" in stderr or "Payload Too Large" in stderr:
                     if target > 25:
                         target = max(25, target // 2)
                         print(f"    payload too large; halving target to {target}")
                         return False
-                print(f"    chunk failed: {stderr_tail}")
+                consecutive_failures += 1
+                print(f"    chunk failed (#{consecutive_failures}): {stderr[-200:]}")
+                if consecutive_failures >= 5:
+                    print(f"\nERROR: 5 consecutive chunk failures — aborting to avoid runaway.")
+                    raise SystemExit(3)
                 return False
+            consecutive_failures = 0
             written += len(chunk_rows)
-            print(f"    {written}/{total}")
+            print(f"    {written}/{total}", flush=True)
             chunk_rows.clear()
             chunk_size = len(insert_prefix)
             return True

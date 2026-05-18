@@ -50,6 +50,11 @@ export interface EnrichResult {
 
 // Time budget for one cron invocation. Leave headroom below the 30s CPU limit.
 const RUN_BUDGET_MS = 25_000;
+// Process N stores concurrently within one invocation. Each store hits a
+// different domain (so no per-host rate-limit risk), but they share the
+// Worker's subrequest budget — keep this <= 8 on the paid plan (1000 subreq
+// limit / ~5 subreq per store = ~200 stores max).
+const CONCURRENCY = 5;
 
 export async function enrichBatch(
   env: Env,
@@ -66,14 +71,26 @@ export async function enrichBatch(
   let ok = 0;
   let transient = 0;
   let permanent = 0;
+  let cursor = 0;
 
-  for (const website of targets) {
-    if (Date.now() - started > RUN_BUDGET_MS) break;
-    const outcome = await enrichOne(env.LEADS_DB, website, apps);
-    if (outcome === "ok") ok++;
-    else if (outcome === "transient") transient++;
-    else permanent++;
+  // Run CONCURRENCY workers, each pulling from the targets array sequentially.
+  // This keeps memory bounded and respects the time budget.
+  async function worker() {
+    while (true) {
+      if (Date.now() - started > RUN_BUDGET_MS) return;
+      const i = cursor++;
+      if (i >= targets.length) return;
+      const website = targets[i]!;
+      const outcome = await enrichOne(env.LEADS_DB, website, apps);
+      if (outcome === "ok") ok++;
+      else if (outcome === "transient") transient++;
+      else permanent++;
+    }
   }
+
+  await Promise.all(
+    Array.from({ length: Math.min(CONCURRENCY, targets.length) }, () => worker())
+  );
 
   return {
     picked: targets.length,
@@ -94,6 +111,15 @@ async function enrichOne(
   const url = website.startsWith("http") ? website : `https://${website}`;
   const host = url.replace(/^https?:\/\//, "").replace(/\/.*$/, "");
 
+  // Kick off the storefront probes IN PARALLEL with the HTML fetch.
+  // All three target the same host (Shopify CDN handles fanout fine), so
+  // there's no extra rate-limit cost vs. sequential — but we save ~50% wall time.
+  const probePromise = probeStorefrontCounts(host).catch(() => ({
+    product_count: null,
+    collection_count: null,
+    product_probe_status: "error",
+  }));
+
   // 1. Fetch storefront HTML
   let html: string;
   try {
@@ -102,6 +128,8 @@ async function enrichOne(
       redirect: "follow",
     });
     if (!r.ok) {
+      // Drain the probe promise so we don't leak hanging fetches.
+      probePromise.catch(() => {});
       const code = r.status;
       const isTransient = TRANSIENT_HTTP_CODES.has(code);
       if (isTransient) return "transient";
@@ -116,6 +144,7 @@ async function enrichOne(
     }
     html = await r.text();
   } catch (err) {
+    probePromise.catch(() => {});
     // Connection-level: permanent (dead domains, SSL issues, DNS, timeouts)
     const msg = (err as Error)?.message ?? "request_failed";
     await db
@@ -128,9 +157,9 @@ async function enrichOne(
     return "permanent";
   }
 
-  // 2. Extract fields
+  // 2. Extract fields (synchronous parse while probe is still in flight)
   const themeName = extractThemeName(html);
-  const { theme_id, theme_raw } = await resolveTheme(db, themeName);
+  const themeResolution = resolveTheme(db, themeName);
 
   // App detection: regex each known pattern against the page text.
   const appsIds: number[] = [];
@@ -143,8 +172,11 @@ async function enrichOne(
     }
   }
 
-  // 3. Probe products.json + collections.json
-  const probe = await probeStorefrontCounts(host);
+  // 3. Now await both the probe (network) and the theme resolution (D1)
+  const [probe, { theme_id, theme_raw }] = await Promise.all([
+    probePromise,
+    themeResolution,
+  ]);
 
   await writeEnrichment(db, {
     website,
@@ -174,12 +206,16 @@ async function enrichOne(
 async function probeStorefrontCounts(
   host: string
 ): Promise<{ product_count: number | null; collection_count: number | null }> {
-  const productCount = await countEndpoint(host, "products.json", "products");
-  let collectionCount: number | null = null;
-  if (productCount !== null) {
-    collectionCount = await countEndpoint(host, "collections.json", "collections");
-  }
-  return { product_count: productCount, collection_count: collectionCount };
+  // Run both probes in parallel — same host, no extra rate-limit risk.
+  const [productCount, collectionCount] = await Promise.all([
+    countEndpoint(host, "products.json", "products"),
+    countEndpoint(host, "collections.json", "collections"),
+  ]);
+  // If products probe failed (404, host unreachable), trust collections null too
+  return {
+    product_count: productCount,
+    collection_count: productCount === null ? null : collectionCount,
+  };
 }
 
 async function countEndpoint(

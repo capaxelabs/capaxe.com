@@ -1,0 +1,228 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import FAQSection from "@/components/FAQSection.astro";
+import FinalCTASection from "@/components/home/FinalCTASection.astro";
+import { createSEO } from "@/utils/seo";
+import { getFAQPageSchema } from "@/lib/schemas";
+import { Search, Hammer, Infinity as InfinityIcon, ArrowRight, Check } from "lucide-react";
+
+const engagements = [
+  {
+    number: "01",
+    icon: Search,
+    eyebrow: "Diagnostic",
+    title: "A focused review that ends with a prioritized roadmap.",
+    body: "For brands who suspect their store is leaving revenue on the table but haven't isolated where. Ends with a written plan you can execute in-house or with us.",
+    bestFor: "Best for: identifying the highest-leverage moves before committing to a build.",
+    points: [
+      "Structured store review — not a generic audit",
+      "Conversion, performance, and merchandising traced to root cause",
+      "Prioritized roadmap ranked by revenue impact",
+      "Written deliverable you keep, with or without us",
+    ],
+    duration: "A few weeks",
+    accent: false,
+  },
+  {
+    number: "02",
+    icon: Hammer,
+    eyebrow: "Build Sprint",
+    title: "A defined engineering engagement against a specific system.",
+    body: "For brands with a known constraint — performance, merchandising, conversion — that needs to be solved properly, not patched over. Scoped, shipped, measured.",
+    bestFor: "Best for: turning a known bottleneck into compounding revenue.",
+    points: [
+      "Scoped to a single system: conversion, merchandising, performance, or custom",
+      "Native Shopify primitives — Functions, app extensions, Liquid done right",
+      "Measured against the metric that matters",
+      "Shipped, not theme-shopped",
+    ],
+    duration: "Scoped to the system",
+    accent: true,
+  },
+  {
+    number: "03",
+    icon: InfinityIcon,
+    eyebrow: "Embedded Partnership",
+    title: "An ongoing engineering relationship for serious operators.",
+    body: "For brands where the store is the business, and the engineering needs to compound month over month. We become the engineering layer — diagnostic, build, optimization, integration — under your brand and product strategy.",
+    bestFor: "Best for: brands who've stopped looking for vendors and want a partner.",
+    points: [
+      "Diagnostic, build, optimization, and integration — under your strategy",
+      "Engineering that compounds month over month",
+      "Direct access to the people doing the work",
+      "Quarterly reviews with the engineering lead",
+    ],
+    duration: "Ongoing",
+    accent: false,
+  },
+];
+
+const faqs = [
+  { question: "Do you publish pricing?", answer: "No — and we think that's a feature. No two engagements look the same, and fixed published pricing tends to push agencies toward template work rather than engineered work. We give you a clear investment range in the first conversation." },
+  { question: "How do I know which engagement is right for me?", answer: "If you don't know where the revenue is leaking, start with a Diagnostic. If you know the bottleneck but not the fix, a Build Sprint. If the store is the business and engineering needs to compound, an Embedded Partnership." },
+  { question: "Can a Diagnostic turn into a Build Sprint?", answer: "Often, yes. Most relationships start with a Diagnostic and graduate into a Build Sprint or Embedded Partnership once we've identified the highest-leverage moves." },
+  { question: "How long does each engagement take?", answer: "Diagnostics typically run a few weeks. Build Sprints are scoped to the system being engineered. Embedded Partnerships are ongoing. We share a clear timeline before any work begins." },
+  { question: "Do you take on early-stage stores?", answer: "Generally, no. The brands we work with already have traction and have outgrown the systems they started with. Early-stage stores are usually better served by a theme partner or a dedicated solo developer." },
+];
+
+const seo = createSEO({
+  pageName: "Engagement Models — Diagnostic, Build Sprint, Embedded Partnership",
+  description: "Three ways to work with Capaxe Labs. No fixed-scope shopping cart — each engagement is shaped around where your store is and what's blocking the next stage.",
+  keywords: "Shopify engagement models, Shopify diagnostic, Shopify build sprint, embedded Shopify engineering, Shopify systems engineering partnership",
+  contentType: "service",
+  pathname: "/engagements",
+});
+seo.structuredData = getFAQPageSchema(faqs);
+---
+
+<Layout seo={seo}>
+  <div class="min-h-screen">
+    <!-- Hero -->
+    <section class="relative pt-32 pb-12 px-6 overflow-hidden">
+      <!-- Background -->
+      <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <svg
+          class="absolute inset-0 w-full h-full"
+          preserveAspectRatio="xMidYMid slice"
+          viewBox="0 0 1600 500"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <pattern id="eng-dots" width="32" height="32" patternUnits="userSpaceOnUse">
+              <circle cx="1.5" cy="1.5" r="1.5" fill="currentColor" class="text-foreground/10"></circle>
+            </pattern>
+            <radialGradient id="eng-glow" cx="70%" cy="50%" r="40%">
+              <stop offset="0%" stop-color="currentColor" class="text-primary-400" stop-opacity="0.15"></stop>
+              <stop offset="100%" stop-color="currentColor" class="text-primary-400" stop-opacity="0"></stop>
+            </radialGradient>
+          </defs>
+          <rect width="1600" height="500" fill="url(#eng-dots)"></rect>
+          <rect width="1600" height="500" fill="url(#eng-glow)"></rect>
+        </svg>
+      </div>
+
+      <div class="relative z-10 max-w-7xl mx-auto">
+        <div class="max-w-3xl">
+          <span class="inline-block text-[11px] font-bold uppercase tracking-[0.22em] text-primary mb-4">
+            Engagements
+          </span>
+          <h1 class="text-balance text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-[1.05] tracking-tight mb-6">
+            Three ways to work together.
+          </h1>
+          <p class="text-base md:text-lg text-muted-foreground leading-relaxed">
+            No fixed-scope shopping cart. Each engagement is shaped around where your store is, what's blocking the next stage, and how deep we need to go.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Engagements -->
+    <section class="section max-w-7xl mx-auto px-6 reveal-on-scroll">
+      <div class="space-y-6 md:space-y-8">
+        {engagements.map(({ number, icon: Icon, eyebrow, title, body, bestFor, points, duration, accent }) => (
+          <div class={`${accent ? "bento-tile-accent" : "bento-tile"} relative overflow-hidden`}>
+            <!-- Decorative SVG -->
+            <div class="absolute -top-16 -right-16 w-72 h-72 pointer-events-none opacity-20" aria-hidden="true">
+              <svg viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="140" cy="140" r="120" fill="none" stroke={accent ? "white" : "currentColor"} class={accent ? "" : "text-primary-400"} stroke-width="1"></circle>
+                <circle cx="140" cy="140" r="80" fill="none" stroke={accent ? "white" : "currentColor"} class={accent ? "" : "text-primary-400"} stroke-width="1"></circle>
+                <circle cx="140" cy="140" r="40" fill={accent ? "white" : "currentColor"} class={accent ? "" : "text-primary-400"} fill-opacity="0.05"></circle>
+              </svg>
+            </div>
+
+            <div class="relative z-10 grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-10">
+              <!-- Left: number + title + body -->
+              <div class="lg:col-span-3">
+                <div class="flex items-start gap-4 mb-6">
+                  <span class={`inline-flex items-center justify-center w-12 h-12 rounded-xl shrink-0 ${accent ? "bg-white/15 text-white ring-1 ring-white/20" : "bg-primary-500/10 text-primary-400 ring-1 ring-primary-500/20"}`}>
+                    <Icon className="w-5 h-5" />
+                  </span>
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-center gap-3 mb-2">
+                      <span class={`text-[10px] font-mono tracking-widest ${accent ? "text-white/50" : "text-muted-foreground/50"}`}>{number}</span>
+                      <span class={`text-[11px] font-bold uppercase tracking-[0.22em] ${accent ? "text-white/70" : "text-primary"}`}>{eyebrow}</span>
+                    </div>
+                    <h2 class={`text-balance text-2xl md:text-3xl font-bold leading-tight ${accent ? "text-white" : "text-foreground"}`}>
+                      {title}
+                    </h2>
+                  </div>
+                </div>
+                <p class={`text-base md:text-lg leading-relaxed mb-6 ${accent ? "text-white/80" : "text-muted-foreground"}`}>
+                  {body}
+                </p>
+                <p class={`text-sm italic ${accent ? "text-white/70" : "text-muted-foreground/80"}`}>
+                  → {bestFor}
+                </p>
+              </div>
+
+              <!-- Right: points + duration -->
+              <div class="lg:col-span-2">
+                <div class={`${accent ? "bg-white/10 border border-white/15" : "bg-muted/40 border border-border"} rounded-2xl p-6`}>
+                  <span class={`text-[11px] font-bold uppercase tracking-[0.18em] ${accent ? "text-white/70" : "text-muted-foreground"}`}>
+                    What's included
+                  </span>
+                  <ul class="mt-4 space-y-3">
+                    {points.map((p) => (
+                      <li class="flex items-start gap-3">
+                        <Check className={`w-4 h-4 mt-0.5 shrink-0 ${accent ? "text-emerald-300" : "text-emerald-500"}`} />
+                        <span class={`text-sm leading-relaxed ${accent ? "text-white/90" : "text-foreground"}`}>{p}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div class={`mt-5 pt-4 border-t ${accent ? "border-white/15" : "border-border"} flex items-center justify-between`}>
+                    <span class={`text-[11px] font-bold uppercase tracking-[0.18em] ${accent ? "text-white/70" : "text-muted-foreground"}`}>
+                      Duration
+                    </span>
+                    <span class={`text-sm font-semibold ${accent ? "text-white" : "text-foreground"}`}>
+                      {duration}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Pricing note -->
+    <section class="section max-w-7xl mx-auto px-6 reveal-on-scroll">
+      <div class="bento-tile-muted relative overflow-hidden py-12 md:py-16 px-8 md:px-12">
+        <div class="absolute -top-20 -right-20 w-72 h-72 pointer-events-none opacity-15" aria-hidden="true">
+          <svg viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="pricing-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="currentColor" class="text-primary-400" stroke-width="1"></path>
+              </pattern>
+            </defs>
+            <rect width="280" height="280" fill="url(#pricing-grid)"></rect>
+          </svg>
+        </div>
+        <div class="relative z-10 max-w-3xl">
+          <span class="inline-block text-[11px] font-bold uppercase tracking-[0.22em] text-primary mb-4">
+            Pricing
+          </span>
+          <h2 class="text-balance text-2xl md:text-3xl lg:text-4xl font-bold text-foreground leading-tight mb-6">
+            We don't publish fixed pricing — and we think that's a feature.
+          </h2>
+          <p class="text-base md:text-lg text-muted-foreground leading-relaxed">
+            No two engagements look the same. Investment is shaped around scope, depth, and timeline — and we'll tell you in the first conversation whether it makes sense to work together.
+          </p>
+          <div class="mt-8">
+            <a
+              href="/consultation"
+              class="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:gap-3 transition-all"
+            >
+              Start a conversation
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <FAQSection faqs={faqs} />
+
+    <FinalCTASection />
+  </div>
+</Layout>

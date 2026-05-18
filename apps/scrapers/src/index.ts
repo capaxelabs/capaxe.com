@@ -15,12 +15,22 @@ export interface Env {
   ADMIN_TOKEN?: string;
 }
 
+// Run two enrich passes per minute (30s apart) — effective doubled cadence
+// without needing sub-minute cron, which CF doesn't support.
+// With CONCURRENCY=5 inside enrichBatch + 2-3s per store, ~50 stores fit
+// in the 25s RUN_BUDGET_MS budget per batch.
+async function enrichTwice(env: Env): Promise<void> {
+  await enrichBatch(env, { limit: 50 });
+  await new Promise((r) => setTimeout(r, 30_000));
+  await enrichBatch(env, { limit: 50 });
+}
+
 export default {
   // Cron entry point
   async scheduled(event: ScheduledController, env: Env, ctx: ExecutionContext): Promise<void> {
     switch (event.cron) {
       case "* * * * *":
-        ctx.waitUntil(enrichBatch(env, { limit: 20 }));
+        ctx.waitUntil(enrichTwice(env));
         break;
       case "*/5 * * * *":
         ctx.waitUntil(judgemeTick(env, { limit: 10 }));

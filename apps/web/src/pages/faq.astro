@@ -5,84 +5,32 @@ import { getFAQPageSchema } from "@/lib/schemas";
 
 const faqs = [
   {
-    question: "What services does Capaxe Labs provide?",
-    answer: "Capaxe Labs provides Shopify custom app development, headless commerce development using Next.js and Hydrogen, payment integrations (Stripe, Plaid, ACH), layaway and subscription systems, platform migrations to Shopify, and full-stack web development. We specialize in complex e-commerce solutions for Shopify and Shopify Plus."
+    question: "Who do you typically work with?",
+    answer: "Considered Shopify brands that have moved past the template-and-plugin stage — usually direct-to-consumer brands where the store is the operating system of the business, not a brochure. We work best with operators who care about the line between engineering and revenue."
   },
   {
-    question: "Do you work with Shopify Plus?",
-    answer: "Yes. Capaxe Labs works extensively with Shopify Plus, building custom apps, headless storefronts, and complex payment integrations for enterprise-level merchants. Our team has experience with Shopify Plus exclusive features including Launchpad, Scripts, and advanced checkout customization."
+    question: "How is this different from a typical Shopify agency?",
+    answer: "Most Shopify agencies are studios that picked up code; we're engineers who picked up Shopify. We engineer systems — conversion, merchandising, performance, custom — not deliverables. The discipline comes from years of shipping production systems at scale, including in fintech."
   },
   {
-    question: "Can you build custom Shopify apps?",
-    answer: "Yes. We build both private and public Shopify apps using the Shopify Admin API, Storefront API, and Shopify Functions. Our apps integrate with third-party services, add custom functionality, and extend Shopify's native capabilities. We use TypeScript, React, Node.js, and Polaris for app development."
+    question: "Do you take on early-stage stores or one-off projects?",
+    answer: "Generally, no. The brands we work with already have traction and have outgrown the systems they started with. Early-stage stores are usually better served by a theme partner or a dedicated solo developer."
   },
   {
-    question: "Do you offer headless commerce development?",
-    answer: "Yes. Capaxe Labs specializes in headless Shopify storefronts using Next.js, Hydrogen, and React. We build custom frontend experiences that connect to Shopify's Storefront API while maintaining complete design and performance control. Our headless solutions are deployed on Vercel and Cloudflare Workers."
+    question: "How long does an engagement take?",
+    answer: "Diagnostics typically run a few weeks. Build sprints are scoped to the system being engineered. Embedded partnerships are ongoing. We share a clear timeline before any work begins."
   },
   {
-    question: "What payment integrations do you support?",
-    answer: "We integrate Stripe (including Stripe Elements, Stripe Tax, and Stripe Connect), Plaid for ACH bank transfers, PayPal, and cryptocurrency payment gateways. We specialize in custom payment flows including layaway systems, installment payments, and subscription billing using Stripe and Shopify's Subscription API."
+    question: "Do you publish pricing?",
+    answer: "No — and we think that's a feature. No two engagements look the same, and fixed published pricing tends to push agencies toward template work rather than engineered work. We give you a clear investment range in the first conversation."
   },
   {
-    question: "What technologies does Capaxe Labs use?",
-    answer: "We build with TypeScript, JavaScript, React, Next.js, Node.js, Python, Shopify Liquid, GraphQL, Shopify API (Admin and Storefront), Hydrogen, Remix, Stripe, Plaid, PostgreSQL, MongoDB, Redis, Supabase, Prisma, and deploy on Vercel, Cloudflare Workers, and AWS."
+    question: "Where are you based and how do you work with international brands?",
+    answer: "We're based in India and work with brands across multiple time zones. Our engagements are async-first, with structured sync touchpoints — designed to feel like an embedded internal team rather than an external vendor."
   },
   {
-    question: "Can you build layaway payment systems?",
-    answer: "Yes. Capaxe Labs specializes in custom layaway and installment payment systems for Shopify using Stripe ACH, Plaid, and custom payment orchestration. We handle down payments, scheduled installments, inventory holds, and automated payment collection. Our layaway systems integrate directly with Shopify checkout and order management."
-  },
-  {
-    question: "Which countries do you serve?",
-    answer: "Capaxe Labs serves clients globally. Our primary markets are United States, Canada, India, United Kingdom, and European Union. We work across all time zones with English and Hindi language support. We're based in Mumbai, India, and have experience with multi-currency commerce and international tax compliance."
-  },
-  {
-    question: "Do you integrate with ERPs and CRMs?",
-    answer: "Yes. We build custom integrations between Shopify and ERP systems (SAP, NetSuite, Oracle), CRM platforms (Salesforce, HubSpot), inventory management systems, and warehouse management software using APIs, webhooks, and background jobs. We ensure real-time data sync and automated workflows."
-  },
-  {
-    question: "How does your pricing work?",
-    answer: "We offer two pricing models: fixed-price projects with milestone-based payments for defined scopes, and monthly retainer plans for ongoing development and support. Project costs vary based on complexity and requirements. Retainer plans start at $999/month with dedicated developer access. Contact us for a custom quote."
-  },
-  {
-    question: "What is your typical project timeline?",
-    answer: "Timelines vary by project complexity. Simple Shopify theme customizations take 1-2 weeks. Custom Shopify apps take 4-8 weeks. Headless storefronts take 6-12 weeks. Complex payment integrations and layaway systems take 4-10 weeks. We provide detailed timelines during project discovery."
-  },
-  {
-    question: "Do you offer retainer plans?",
-    answer: "Yes. Our monthly retainer plans include dedicated Shopify developer access, project manager support, real-time chat support, bug fixes, feature enhancements, performance optimization, regular audits, and progress reporting. Retainers are flexible with no long-term contracts required. You can cancel anytime."
-  },
-  {
-    question: "What is included in maintenance support?",
-    answer: "Maintenance support includes regular Shopify updates, security monitoring, bug fixes, performance optimization, backup management, uptime monitoring, minor feature additions, and priority technical support. Our retainer plans provide proactive monitoring and dedicated developer access."
-  },
-  {
-    question: "Do you work with clients globally?",
-    answer: "Yes. Capaxe Labs works with clients worldwide across all time zones. We have clients in United States, Canada, United Kingdom, European Union, Australia, and India. We communicate in English and Hindi and accommodate international payment methods and currencies."
-  },
-  {
-    question: "Can you migrate my store to Shopify?",
-    answer: "Yes. We specialize in platform migrations from Magento, WooCommerce, BigCommerce, and custom e-commerce platforms to Shopify. Migration services include data transfer (products, customers, orders, reviews), URL redirects for SEO preservation, theme development, app integration, and thorough testing."
-  },
-  {
-    question: "What is headless Shopify?",
-    answer: "Headless Shopify separates the frontend presentation layer from Shopify's backend. This allows custom storefronts built with Next.js, React, or Hydrogen while using Shopify for product management, checkout, and order processing. Benefits include faster performance, unlimited design flexibility, and better developer experience."
-  },
-  {
-    question: "How long does it take to build a custom Shopify store?",
-    answer: "Simple stores with pre-built themes take 2-3 weeks. Custom theme development takes 4-6 weeks. Headless storefronts with custom features take 8-12 weeks. Complex stores with custom apps, payment integrations, and third-party systems take 12-16 weeks. Timeline depends on requirements and complexity."
-  },
-  {
-    question: "Do you provide ongoing support after launch?",
-    answer: "Yes. We offer monthly retainer plans for ongoing support including updates, bug fixes, feature additions, performance monitoring, and technical support. We also provide ad-hoc support for specific needs. All projects include a 30-day warranty period for bug fixes after launch."
-  },
-  {
-    question: "What is your development process?",
-    answer: "Our process includes: 1) Discovery and requirements gathering, 2) Technical architecture design, 3) Development and implementation, 4) Quality assurance and testing, 5) Deployment and launch, 6) Post-launch support and monitoring. We follow agile methodologies with regular check-ins and progress updates."
-  },
-  {
-    question: "Can you help with Shopify SEO?",
-    answer: "Yes. Our SEO services include technical SEO audits, page speed optimization, Core Web Vitals improvement, schema markup implementation, meta tag optimization, image optimization, mobile responsiveness, and SEO-friendly URL structures. We also handle Shopify-specific SEO including collection pages and product optimization."
+    question: "Do you work on Shopify Plus?",
+    answer: "Yes. The systems we engineer — conversion, merchandising, performance, custom — apply across Shopify and Shopify Plus, with deeper engineering on Plus where Functions, B2B, and headless make more sense."
   }
 ];
 

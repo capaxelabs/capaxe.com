@@ -173,6 +173,96 @@ Simple geometric shapes. Elegant, modern, SaaS-style.
 - [ ] L2 — Split sitemap by section (blog, services, shopify)
 - [ ] L4 — Fix 30% OFF CTA bar glyph aria-hidden
 
+## Capaxe Labs Repositioning — Week 1 (Foundations)
+
+### Features
+- [x] Homepage hero: replace headline → "For Shopify brands that have outgrown themes, apps, and quick fixes."
+- [x] Homepage hero: replace subhead → "We engineer the systems that unlock your next stage of growth — conversion, merchandising, and performance that off-the-shelf Shopify can't deliver."
+- [x] Homepage CTAs: Primary "Book a strategy call" + Secondary "Request a teardown"
+- [x] Replace track-record stat strip (50+/8+/100%/3) with single-line engineering credibility statement (Paytm Money continuity)
+- [ ] Update Clutch tagline → "Shopify systems engineering for brands past templates, apps, and quick fixes."
+- [ ] Update Clutch description (systems-led, four-system framing, RankFlo/Opskitty, Paytm Money)
+- [ ] Update Clutch min project size: $1,000+ → $10,000+
+- [ ] Update Clutch hourly rate: $50–$99/hr → $100–$149/hr
+- [x] Update LinkedIn company name: "Capaxe Labs | Shopify Engineering & Performance Agency" → "Capaxe Labs"
+- [x] Update LinkedIn tagline → "Shopify systems engineering for brands past templates, plugins, and quick fixes."
+- [x] Replace LinkedIn About section (~2,000 chars, new positioning)
+- [x] Replace LinkedIn banner with editorial-light version (1584×396, cream #F5F2EC, terracotta accent)
+
+### Refactoring (Remove)
+- [x] Remove "Free Speed & SEO Audit" CTA across site (repositioned as "Request a teardown")
+- [x] Remove "$999/month" retainer pricing language from FAQs + landing pages
+- [x] Remove "Themes start around $3,000" from FAQs (verified — none remained)
+- [x] Remove "Cancel anytime — no long-term contracts" language site-wide
+- [x] Remove six "Why Choose Us" generic blocks (StickyCards section)
+- [x] Remove 30-app integration carousel (AppPartners)
+- [x] Remove "Trusted Partners" framing on Klaviyo/Razorpay logos
+- [x] Remove 4-card stat strip (50+ / 8+ / 100% / 3) — replaced with two engineering tiles
+- [x] Remove repeated client logo carousel (verified — only one instance existed)
+- [x] Remove "pixel-perfect" / pixel framing from copy (no "Crafting Commerce" tagline found in code)
+- [x] Replace site config description with new positioning
+
+## Capaxe Labs Repositioning — Week 2 (Systems)
+
+### Features
+- [x] Add homepage "The Ceiling" section (systems problem framing)
+- [x] Replace homepage Capabilities section with four-system layout (Conversion / Merchandising / Performance / Custom Engineering)
+- [x] Replace homepage "Why Choose Us" with "How We Work" (Diagnose / Prioritize / Engineer / Compound)
+- [x] Add homepage "Who We're Built For" section
+- [x] Add homepage Founder section (engineering depth — Paytm Money, RankFlo, Opskitty)
+- [x] Replace homepage Final CTA: "Past the plateau? Let's engineer what's next."
+- [x] Build new Capabilities page; hero "We don't sell services. We engineer systems."
+- [x] Capabilities page uses 4-block template (intro / today / engineered / where it shows up) per system
+- [x] Build Engagements page with three tiers (Diagnostic / Build Sprint / Embedded Partnership)
+- [x] Replace published pricing with "we don't publish fixed pricing" line on Engagements page
+- [x] Rewrite About page → "Built by engineers, for operators."
+- [x] Replace homepage FAQs (7 new Q&A items from handbook §3.5)
+- [x] Update top + footer nav to new pages (Capabilities / Engagements / About)
+- [x] 301 redirect /retainer → /engagements
+- [ ] Update Clutch service bullets to final 8-item list
+- [ ] Set Clutch service focus % allocation (Plus 25 / Apps 20 / Hydrogen 15 / Functions 10 / CRO 10 / Perf 10 / Migrations 5 / Embedded 5)
+- [ ] Paste 8 Clutch service-card descriptions (55–75 words each)
+- [ ] Add Clutch industries (Consumer Products, Fashion, Retail, eCommerce — pick 3–5)
+- [ ] Add existing client logos to Clutch profile (AOS, CLD9, Picking List, RenderEase)
+- [x] LinkedIn Specialties: pick 8–15 from handbook list
+- [x] LinkedIn Industry: "IT Services and IT Consulting" → "Software Development"
+- [x] LinkedIn Headquarters: fix casing → "Bengaluru, Karnataka, India"
+- [ ] Logo Path A quick fix: remove hard square frame, cream background, soften to navy/charcoal
+
+## Capaxe Labs Repositioning — Week 3 (Proof)
+
+### Features
+- [ ] Outreach to 3–5 past clients for Clutch reviews (use handbook §4 template)
+- [ ] Rewrite case study 1 under new framing (pick from CLD9/Layaway/Furniture Headless/RenderEase/Picking List)
+- [ ] Rewrite case study 2 under new framing
+- [ ] Publish first founder LinkedIn teardown post under new positioning
+- [ ] Brief designer on logo Path B redesign (wordmark, charcoal/cream/terracotta)
+- [ ] Verify and correct "Founded 2026" on Clutch + LinkedIn (consistency)
+
+## Capaxe Labs Repositioning — Week 4 (Cleanup)
+
+### Refactoring
+- [ ] Drop per-service URL structure (/services/shopify/store-development, /services/shopify/seo-performance, etc.)
+- [ ] Set up 301 redirects from old /services/shopify/* URLs
+- [ ] Site-wide FAQ audit — replace any remaining old language
+- [ ] Refresh footer links to match new Capabilities + Engagements structure
+- [ ] Audit email signatures for old tagline/positioning
+- [ ] Audit proposal templates for old language
+- [ ] Audit sales decks for old language
+
+### Documentation
+- [ ] Update voice & language guardrails reference (terms to use vs avoid) for internal contributors
+
+## Capaxe Labs Repositioning — Open Decisions (Founder lock before execution)
+- [ ] Lock Clutch min project size: $10K (start) vs $25K (aspirational)
+- [ ] Lock Clutch hourly rate: $100–149/hr vs $150–199/hr
+- [ ] Verify LLP founded year + decide how to convey team continuity
+- [ ] Lock exact tagline phrasing across all surfaces
+- [ ] Decide geography framing (India-as-advantage vs neutral)
+- [ ] Pick 2–3 case studies to rewrite first
+- [ ] Decide free vs paid teardown CTA destination
+- [ ] Decide logo path: A only / A + parallel B / straight to B
+
 ## SEO Overhaul (Completed)
 - [x] Fix robots meta triple-output bug in SEO.astro
 - [x] Add schema array support in SEO.astro

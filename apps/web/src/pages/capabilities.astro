@@ -1,0 +1,353 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import FAQSection from "@/components/FAQSection.astro";
+import FinalCTASection from "@/components/home/FinalCTASection.astro";
+import { createSEO } from "@/utils/seo";
+import { Activity, ShoppingBag, Zap, Wrench } from "lucide-react";
+
+const systems = [
+  {
+    id: "conversion",
+    number: "01",
+    icon: Activity,
+    title: "Conversion System",
+    intro: "We treat conversion as a product, not a project. We trace where revenue is leaking — landing, PDP, cart, checkout — and rebuild friction points with native Shopify primitives, not duct-taped apps.",
+    today: [
+      "A pile of CRO apps fighting each other",
+      "A/B tests on button colors and headlines",
+      "Theme tweaks rolled back because they 'felt off'",
+      "Checkout extensions stacked on legacy Liquid",
+    ],
+    engineer: [
+      "Funnel-level engineering across landing, PDP, cart, checkout",
+      "Native Shopify primitives — Functions, app extensions, theme blocks",
+      "Structured experiments tied to revenue metrics",
+      "Checkout extensibility built for Shopify's own roadmap",
+    ],
+    showsUp: ["Conversion rate", "AOV", "Add-to-cart rate", "Checkout completion"],
+    accent: true,
+  },
+  {
+    id: "merchandising",
+    number: "02",
+    icon: ShoppingBag,
+    title: "Merchandising System",
+    intro: "Out-of-the-box collection sorting is the silent killer of AOV. We engineer ranking, filtering, and discovery logic that surfaces the right product to the right buyer — across collections, search, and recommendations.",
+    today: [
+      "Default Shopify sort orders (manual / best-selling / alpha)",
+      "Search & filter apps that don't talk to each other",
+      "Recommendations from a black-box ML app",
+      "Merch decisions made in a spreadsheet, not the storefront",
+    ],
+    engineer: [
+      "Custom ranking signals fed from real buyer behavior",
+      "Filter and search logic engineered into the theme — not an app",
+      "Recommendation surfaces under your control, instrumented",
+      "Metaobjects + Liquid done properly for editorial merchandising",
+    ],
+    showsUp: ["AOV", "Items per order", "Collection CTR", "Search-to-purchase rate"],
+    accent: false,
+  },
+  {
+    id: "performance",
+    number: "03",
+    icon: Zap,
+    title: "Performance System",
+    intro: "Speed is a revenue lever, not a Lighthouse score. We rebuild Core Web Vitals from the theme up, eliminate the app-script tax, and engineer stability for sale-day traffic.",
+    today: [
+      "Lighthouse green that drops the moment a real user lands",
+      "Twenty third-party scripts loading in the head",
+      "Carts that buckle on Black Friday traffic",
+      "Performance audits with no follow-through",
+    ],
+    engineer: [
+      "Core Web Vitals rebuilt from the theme up — LCP, INP, CLS",
+      "App-script audit and removal — the third-party tax goes away",
+      "Sale-day stability tested under real load",
+      "Image, font, and asset strategy that holds up at scale",
+    ],
+    showsUp: ["LCP", "INP", "CLS", "Sale-day uptime", "Revenue during peak traffic"],
+    accent: false,
+  },
+  {
+    id: "custom",
+    number: "04",
+    icon: Wrench,
+    title: "Custom Engineering",
+    intro: "When apps fall short, we go deeper. Shopify Functions, theme app extensions, Hydrogen storefronts, custom backends, ERP and OMS integrations — built once, owned forever.",
+    today: [
+      "A stack of apps duct-taping a custom workflow",
+      "Brittle script-tag injections in the theme",
+      "ERP/OMS sync via CSV exports and prayer",
+      "Custom features that break with every Shopify update",
+    ],
+    engineer: [
+      "Shopify Functions for discount, payment, shipping, fulfillment logic",
+      "Theme app extensions — app blocks that integrate cleanly into any theme",
+      "Hydrogen storefronts on Oxygen + Storefront API",
+      "ERP/OMS integrations with NetSuite, SAP, ShipStation, custom backends",
+    ],
+    showsUp: ["Operational reliability", "Custom feature velocity", "Integration stability", "Long-term ownership"],
+    accent: true,
+  },
+];
+
+const seo = createSEO({
+  pageName: "Capabilities — We don't sell services. We engineer systems.",
+  description: "Four systems we engineer for considered Shopify brands — Conversion, Merchandising, Performance, and Custom Engineering. Built with native Shopify primitives, owned forever.",
+  keywords: "Shopify capabilities, Shopify conversion engineering, Shopify merchandising, Shopify performance engineering, custom Shopify apps, Shopify Functions, Hydrogen development",
+  contentType: "service",
+  pathname: "/capabilities",
+});
+---
+
+<Layout seo={seo}>
+  <div class="min-h-screen">
+    <!-- Hero -->
+    <section class="relative pt-32 pb-12 px-6 overflow-hidden">
+      <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <svg
+          class="absolute inset-0 w-full h-full"
+          preserveAspectRatio="xMidYMid slice"
+          viewBox="0 0 1600 500"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <pattern id="cap-dots" width="32" height="32" patternUnits="userSpaceOnUse">
+              <circle cx="1.5" cy="1.5" r="1.5" fill="currentColor" class="text-foreground/10"></circle>
+            </pattern>
+            <radialGradient id="cap-glow" cx="30%" cy="40%" r="50%">
+              <stop offset="0%" stop-color="currentColor" class="text-primary-400" stop-opacity="0.15"></stop>
+              <stop offset="100%" stop-color="currentColor" class="text-primary-400" stop-opacity="0"></stop>
+            </radialGradient>
+          </defs>
+          <rect width="1600" height="500" fill="url(#cap-dots)"></rect>
+          <rect width="1600" height="500" fill="url(#cap-glow)"></rect>
+        </svg>
+      </div>
+
+      <div class="relative z-10 max-w-7xl mx-auto">
+        <div class="max-w-3xl">
+          <span class="inline-block text-[11px] font-bold uppercase tracking-[0.22em] text-primary mb-4">
+            Capabilities
+          </span>
+          <h1 class="text-balance text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-[1.05] tracking-tight mb-6">
+            We don't sell services. <span class="text-muted-foreground">We engineer systems.</span>
+          </h1>
+          <p class="text-base md:text-lg text-muted-foreground leading-relaxed">
+            Brands that have outgrown their first Shopify build don't need another agency selling theme work. They need a partner who treats the store as the operating system of the business.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nav anchors -->
+    <section class="max-w-7xl mx-auto px-6 reveal-on-scroll">
+      <div class="flex flex-wrap gap-2 md:gap-3 py-4 border-y border-border">
+        {systems.map(({ id, number, title }) => (
+          <a
+            href={`#${id}`}
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted/40 hover:bg-primary-500/10 border border-border hover:border-primary/30 transition-all text-sm font-medium text-foreground group"
+          >
+            <span class="text-[10px] font-mono text-muted-foreground/60 group-hover:text-primary">{number}</span>
+            <span>{title}</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- Systems (sticky stack) -->
+    <section class="max-w-7xl mx-auto px-6 reveal-on-scroll">
+      <div class="capabilities-stack pt-12 pb-32">
+        {systems.map(({ id, number, icon: Icon, title, intro, today, engineer, showsUp, accent }, idx) => (
+          <div
+            id={id}
+            class="capabilities-card scroll-mt-24"
+            style={`--stack-index: ${idx}; --stack-offset: ${idx * 24}px;`}
+            data-index={idx}
+          >
+            <div class={`${accent ? "bento-tile-accent" : "bento-tile"} relative overflow-hidden capabilities-card-inner`}>
+              <div class="absolute -top-20 -right-20 w-80 h-80 pointer-events-none opacity-15" aria-hidden="true">
+                <svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="160" cy="160" r="140" fill="none" stroke={accent ? "white" : "currentColor"} class={accent ? "" : "text-primary-400"} stroke-width="1"></circle>
+                  <circle cx="160" cy="160" r="100" fill="none" stroke={accent ? "white" : "currentColor"} class={accent ? "" : "text-primary-400"} stroke-width="1"></circle>
+                </svg>
+              </div>
+
+              <div class="relative z-10">
+                <!-- Header -->
+                <div class="flex items-start gap-4 mb-6">
+                  <span class={`inline-flex items-center justify-center w-12 h-12 rounded-xl shrink-0 ${accent ? "bg-white/15 text-white ring-1 ring-white/20" : "bg-primary-500/10 text-primary-400 ring-1 ring-primary-500/20"}`}>
+                    <Icon className="w-5 h-5" />
+                  </span>
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-center gap-3 mb-1">
+                      <span class={`text-[10px] font-mono tracking-widest ${accent ? "text-white/50" : "text-muted-foreground/50"}`}>{number}</span>
+                      <span class={`text-[11px] font-bold uppercase tracking-[0.22em] ${accent ? "text-white/70" : "text-primary"}`}>System</span>
+                    </div>
+                    <h2 class={`text-balance text-2xl md:text-3xl lg:text-4xl font-bold leading-tight ${accent ? "text-white" : "text-foreground"}`}>
+                      {title}
+                    </h2>
+                  </div>
+                </div>
+
+                <p class={`text-base md:text-lg leading-relaxed mb-8 max-w-3xl ${accent ? "text-white/85" : "text-muted-foreground"}`}>
+                  {intro}
+                </p>
+
+                <!-- Today vs engineered -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6">
+                  <div class={`${accent ? "bg-white/10 border border-white/15" : "bg-muted/40 border border-border"} rounded-2xl p-6`}>
+                    <span class={`text-[11px] font-bold uppercase tracking-[0.18em] ${accent ? "text-white/60" : "text-muted-foreground"}`}>
+                      What you probably have today
+                    </span>
+                    <ul class="mt-4 space-y-2.5">
+                      {today.map((t) => (
+                        <li class={`flex items-start gap-3 ${accent ? "text-white/70" : "text-muted-foreground"}`}>
+                          <span class={`mt-2 w-1 h-1 rounded-full ${accent ? "bg-white/50" : "bg-muted-foreground/50"} shrink-0`}></span>
+                          <span class="text-sm leading-relaxed line-through decoration-1">{t}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div class={`${accent ? "bg-white/15 border border-white/25" : "bg-primary-500/5 border border-primary/20"} rounded-2xl p-6`}>
+                    <span class={`text-[11px] font-bold uppercase tracking-[0.18em] ${accent ? "text-white" : "text-primary"}`}>
+                      What we engineer instead
+                    </span>
+                    <ul class="mt-4 space-y-2.5">
+                      {engineer.map((e) => (
+                        <li class={`flex items-start gap-3 ${accent ? "text-white" : "text-foreground"}`}>
+                          <span class={`mt-2 w-1.5 h-1.5 rounded-full ${accent ? "bg-emerald-300" : "bg-emerald-500"} shrink-0`}></span>
+                          <span class="text-sm leading-relaxed font-medium">{e}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- Where it shows up -->
+                <div class={`flex flex-wrap items-center gap-3 pt-6 border-t ${accent ? "border-white/15" : "border-border"}`}>
+                  <span class={`text-[11px] font-bold uppercase tracking-[0.18em] ${accent ? "text-white/60" : "text-muted-foreground"}`}>
+                    Where it shows up
+                  </span>
+                  <div class="flex flex-wrap gap-2">
+                    {showsUp.map((m) => (
+                      <span class={`text-xs font-medium px-2.5 py-1 rounded-md ${accent ? "bg-white/10 text-white/90 border border-white/15" : "bg-muted text-foreground border border-border"}`}>
+                        {m}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <FinalCTASection />
+
+    <style>
+      @media (min-width: 768px) {
+        .capabilities-stack {
+          display: flex;
+          flex-direction: column;
+          gap: 2rem;
+        }
+        .capabilities-card {
+          position: sticky;
+          top: calc(6.5rem + var(--stack-offset));
+          min-height: 70vh;
+          will-change: transform, opacity;
+        }
+        .capabilities-card-inner {
+          transition:
+            transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+            opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+            filter 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+          transform-origin: center top;
+          box-shadow:
+            0 10px 40px -10px rgb(0 0 0 / 0.08),
+            0 0 0 1px rgb(0 0 0 / 0.02);
+        }
+        .capabilities-card.is-stacked .capabilities-card-inner {
+          transform: scale(calc(1 - (var(--cover, 0) * 0.04)))
+            translateY(calc(var(--cover, 0) * -8px));
+          opacity: calc(1 - (var(--cover, 0) * 0.3));
+          filter: blur(calc(var(--cover, 0) * 1px));
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .capabilities-card {
+          position: static;
+          min-height: auto;
+        }
+        .capabilities-card-inner {
+          transition: none;
+          transform: none !important;
+          opacity: 1 !important;
+          filter: none !important;
+        }
+      }
+    </style>
+
+    <script is:inline>
+      (() => {
+        const mql = window.matchMedia("(min-width: 768px) and (prefers-reduced-motion: no-preference)");
+        if (!mql.matches) return;
+
+        const cards = Array.from(document.querySelectorAll(".capabilities-card"));
+        if (cards.length === 0) return;
+
+        let ticking = false;
+
+        const update = () => {
+          ticking = false;
+          const viewportH = window.innerHeight;
+
+          cards.forEach((card, i) => {
+            const next = cards[i + 1];
+            if (!next) {
+              card.style.setProperty("--cover", "0");
+              card.classList.remove("is-stacked");
+              return;
+            }
+            const nextRect = next.getBoundingClientRect();
+            const cardRect = card.getBoundingClientRect();
+            // How much of "next" has scrolled up past the top of the viewport
+            // Start covering when next card's top crosses 60% of viewport
+            const triggerStart = viewportH * 0.6;
+            const triggerEnd = viewportH * 0.1;
+            const range = triggerStart - triggerEnd;
+            let cover = (triggerStart - nextRect.top) / range;
+            cover = Math.max(0, Math.min(1, cover));
+
+            // Only animate the card that is currently pinned/sticky (its top is near final position)
+            const isPinned = cardRect.top < 200;
+
+            if (isPinned && cover > 0) {
+              card.classList.add("is-stacked");
+              card.style.setProperty("--cover", cover.toFixed(3));
+            } else {
+              card.classList.remove("is-stacked");
+              card.style.setProperty("--cover", "0");
+            }
+          });
+        };
+
+        const onScroll = () => {
+          if (!ticking) {
+            window.requestAnimationFrame(update);
+            ticking = true;
+          }
+        };
+
+        window.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener("resize", onScroll);
+        update();
+      })();
+    </script>
+  </div>
+</Layout>

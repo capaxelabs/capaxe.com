@@ -1,0 +1,89 @@
+---
+import { Check, X } from "lucide-react";
+
+const builtFor = [
+  "Have moved past the template-and-plugin stage",
+  "Treat the store as a system, not a marketing asset",
+  "Care about the line between engineering and revenue",
+  "Want a partner, not a vendor",
+];
+
+const notFor = [
+  "Early-stage stores",
+  "One-off project work",
+  "Teams looking for a cheaper version of what they already have",
+];
+---
+
+<section class="section max-w-7xl mx-auto px-6 reveal-on-scroll">
+  <div class="max-w-3xl mb-12">
+    <span
+      class="inline-block text-[11px] font-bold uppercase tracking-[0.22em] text-primary mb-4"
+    >
+      Who We're Built For
+    </span>
+    <h2
+      class="text-balance text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-[1.1] tracking-tight"
+    >
+      Built for considered Shopify operators.
+    </h2>
+  </div>
+
+  <div class="bento-grid grid-cols-1 md:grid-cols-2">
+    <!-- Built for -->
+    <div class="bento-tile relative overflow-hidden">
+      <div class="flex items-center gap-3 mb-6">
+        <span
+          class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-500 ring-1 ring-emerald-500/20"
+        >
+          <Check className="w-5 h-5" />
+        </span>
+        <h3 class="text-lg md:text-xl font-bold text-foreground">
+          We work best with brands that —
+        </h3>
+      </div>
+      <ul class="space-y-4">
+        {
+          builtFor.map((item) => (
+            <li class="flex items-start gap-3">
+              <span class="mt-2 w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
+              <span class="text-sm md:text-base text-muted-foreground leading-relaxed">
+                {item}
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <!-- Not for -->
+    <div class="bento-tile relative overflow-hidden bg-muted/30">
+      <div class="flex items-center gap-3 mb-6">
+        <span
+          class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-muted text-muted-foreground ring-1 ring-border"
+        >
+          <X className="w-5 h-5" />
+        </span>
+        <h3 class="text-lg md:text-xl font-bold text-foreground">
+          We're not the right fit for —
+        </h3>
+      </div>
+      <ul class="space-y-4">
+        {
+          notFor.map((item) => (
+            <li class="flex items-start gap-3">
+              <span class="mt-2 w-1.5 h-1.5 rounded-full bg-muted-foreground/50 shrink-0" />
+              <span class="text-sm md:text-base text-muted-foreground leading-relaxed">
+                {item}
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="text-sm text-muted-foreground/80 mt-6 pt-6 border-t border-border italic">
+        For these, a theme partner or solo developer is usually a better fit —
+        and we'll tell you that in the first call.
+      </p>
+    </div>
+  </div>
+</section>

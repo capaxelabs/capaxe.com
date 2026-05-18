@@ -17,6 +17,7 @@ export default defineConfig({
   site: "https://www.capaxe.com",
   trailingSlash: "never",
   redirects: {
+    "/retainer": "/engagements",
     "/blog/20251013-ai-figma-mcp-revolution": "/blog/ai-figma-mcp-revolution",
     "/blog/20251014-conversational-commerce-openai": "/blog/conversational-commerce-openai",
     "/blog/20251015-ai-assisted-developer-remix-v3": "/blog/ai-assisted-developer-remix-v3",

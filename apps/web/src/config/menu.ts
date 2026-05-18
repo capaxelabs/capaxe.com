@@ -7,23 +7,23 @@ export const menuConfig: MenuConfig = {
             href: "/",
         },
         {
-            title: "Services",
-            href: "/services",
+            title: "Capabilities",
+            href: "/capabilities",
+        },
+        {
+            title: "Engagements",
+            href: "/engagements",
         },
         {
             title: "Case Studies",
             href: "/case-studies",
         },
         {
-            title: "Retainer Plans",
-            href: "/retainer",
+            title: "About",
+            href: "/about",
         },
         {
-            title: "Contact",
-            href: "/contact",
-        },
-        {
-            title: "Book a call",
+            title: "Book a strategy call",
             href: "#",
             isButton: true,
             isCalBooking: true,
@@ -33,36 +33,28 @@ export const menuConfig: MenuConfig = {
         
         company: [
             {
-                title: "About Us",
+                title: "About",
                 href: "/about",
             },
             {
-                title: "Blog",
-                href: "/blog",
+                title: "Capabilities",
+                href: "/capabilities",
+            },
+            {
+                title: "Engagements",
+                href: "/engagements",
             },
             {
                 title: "Case Studies",
                 href: "/case-studies",
             },
             {
-                title: "Retainer Plans",
-                href: "/retainer",
-            },
-            {
-                title: "Shopify Support",
-                href: "/shopify-support",
-            },
-            {
-                title: "Hire Shopify Developer",
-                href: "/hire-shopify-developer",
-            },
-            {
-                title: "Shopify Plus",
-                href: "/shopify-plus",
-            },
-            {
                 title: "Projects",
                 href: "/projects",
+            },
+            {
+                title: "Blog",
+                href: "/blog",
             },
             {
                 title: "Contact",

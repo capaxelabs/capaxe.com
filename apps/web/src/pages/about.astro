@@ -1,142 +1,251 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import { createSEO } from "@/utils/seo";
-import type { SEOProps } from "@/utils/seo";
-import CTABottom from "@/components/CTA.astro";
 import FAQSection from "@/components/FAQSection.astro";
+import FinalCTASection from "@/components/home/FinalCTASection.astro";
 import { getEnhancedOrganizationSchema } from "@/lib/schemas";
+import { Code2, Database, GitBranch, Activity } from "lucide-react";
 
 const faqs = [
-  { question: "What does Capaxe Labs specialize in?", answer: "We specialize in Shopify development including custom apps, headless storefronts with Hydrogen, Liquid theme development, and enterprise Shopify Plus solutions for global brands." },
-  { question: "Where is Capaxe Labs based?", answer: "We are based in Mumbai, India and serve clients worldwide across all timezones, with overlap during US and European business hours." },
-  { question: "How experienced is the Capaxe Labs team?", answer: "Our team has 5+ years of dedicated Shopify development experience with 50+ successful projects delivered across various industries and business sizes." },
-  { question: "Do you work with businesses outside India?", answer: "Yes, we work with clients globally. Most of our projects are for businesses in the US, UK, Europe, and Australia. We communicate asynchronously and schedule calls across timezones." },
-  { question: "What industries do you serve?", answer: "We serve e-commerce brands across fashion, beauty, food and beverage, electronics, B2B wholesale, and more. Our solutions are tailored to each industry's specific needs." },
+  { question: "Who do you typically work with?", answer: "Considered Shopify brands that have moved past the template-and-plugin stage — usually direct-to-consumer brands where the store is the operating system of the business, not a brochure." },
+  { question: "How is this different from a typical Shopify agency?", answer: "Most Shopify agencies are studios that picked up code; we're engineers who picked up Shopify. We engineer systems — conversion, merchandising, performance, custom — not deliverables." },
+  { question: "Do you take on early-stage stores or one-off projects?", answer: "Generally, no. The brands we work with already have traction and have outgrown the systems they started with." },
+  { question: "Where are you based?", answer: "We're based in India and work async-first with brands across multiple time zones — designed to feel like an embedded internal team, not an external vendor." },
 ];
 
-interface Props {
-  seo?: SEOProps;
-  title?: string;
-  description?: string;
-}
+const principles = [
+  {
+    icon: Activity,
+    title: "Instrumented",
+    body: "Every change we ship is traceable to a metric. If we can't measure it, we don't claim it.",
+  },
+  {
+    icon: GitBranch,
+    title: "Accountable",
+    body: "You see the trade-offs we made and why. No black boxes, no agency theatrics.",
+  },
+  {
+    icon: Database,
+    title: "Built to last",
+    body: "We engineer with native primitives — Shopify Functions, app extensions, Liquid done properly — so the work outlasts the team that shipped it.",
+  },
+  {
+    icon: Code2,
+    title: "Engineering-first",
+    body: "Same discipline we brought to fintech: code reviews, tests where they matter, post-mortems where they don't.",
+  },
+];
 
 const seo = createSEO({
-  pageName: "About Capaxe Labs — Shopify Experts Based in Mumbai",
-  description: "Capaxe Labs is a Shopify development agency based in Mumbai, India. Our team builds custom apps, headless storefronts, and enterprise e-commerce solutions for global brands.",
-  keywords: "Capaxe Labs, Shopify development agency, Mumbai Shopify experts, e-commerce solutions, Shopify apps, headless commerce",
+  pageName: "About Capaxe Labs — Built by engineers, for operators",
+  description: "Capaxe Labs is a Shopify systems engineering studio. We engineer the systems behind considered DTC brands — built by the same engineers who scaled fintech at Paytm Money.",
+  keywords: "Capaxe Labs, Shopify systems engineering, Shopify engineering studio, considered Shopify operators, Paytm Money engineers, RankFlo, Opskitty",
   image: "/images/about/about.jpg",
   contentType: "basic",
   pathname: "/about"
 });
-
 seo.structuredData = getEnhancedOrganizationSchema();
 ---
 
 <Layout seo={seo}>
   <div class="about-content">
     <!-- Hero -->
-    <section class="pt-32 pb-8 px-6">
-      <div class="max-w-7xl mx-auto">
-        <div class="bento-tile-accent text-center py-16 px-8">
-          <h1 class="text-5xl md:text-6xl font-bold mb-6">About Capaxe Labs</h1>
-          <p class="text-lg text-white/70 max-w-2xl mx-auto">
-            Capaxe Labs is a Silicon Valley of India based team of passionate Shopify experts and web developers dedicated to empowering e-commerce
-            businesses. Founded on the principles of technical excellence and client-focused solutions.
-          </p>
-        </div>
+    <section class="relative pt-32 pb-12 px-6 overflow-hidden">
+      <!-- Background SVG -->
+      <div
+        class="absolute inset-0 pointer-events-none"
+        aria-hidden="true"
+      >
+        <svg
+          class="absolute inset-0 w-full h-full"
+          preserveAspectRatio="xMidYMid slice"
+          viewBox="0 0 1600 600"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <pattern
+              id="about-dots"
+              width="32"
+              height="32"
+              patternUnits="userSpaceOnUse"
+            >
+              <circle
+                cx="1.5"
+                cy="1.5"
+                r="1.5"
+                fill="currentColor"
+                class="text-foreground/10"></circle>
+            </pattern>
+            <radialGradient id="about-glow" cx="50%" cy="40%" r="50%">
+              <stop offset="0%" stop-color="currentColor" class="text-primary-400" stop-opacity="0.15"></stop>
+              <stop offset="100%" stop-color="currentColor" class="text-primary-400" stop-opacity="0"></stop>
+            </radialGradient>
+          </defs>
+          <rect width="1600" height="600" fill="url(#about-dots)"></rect>
+          <rect width="1600" height="600" fill="url(#about-glow)"></rect>
+        </svg>
       </div>
-    </section>
 
-    <!-- Mission -->
-    <section class="py-4 px-6">
-      <div class="max-w-7xl mx-auto">
-        <div class="bento-tile">
-          <h2 class="text-3xl font-bold mb-4 text-foreground">Our Mission</h2>
-          <p class="text-muted-foreground leading-relaxed">
-            Our mission is to deliver cutting-edge Shopify solutions that drive e-commerce success. We believe in creating digital experiences that not only
-            look beautiful but also perform exceptionally well, helping our clients achieve their business goals and exceed customer expectations.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Expertise -->
-    <section class="py-4 px-6">
-      <div class="max-w-7xl mx-auto">
-        <h2 class="text-3xl font-bold mb-4 text-foreground">Our Expertise</h2>
-        <div class="bento-grid grid-cols-1 md:grid-cols-3">
-          <div class="bento-tile md:col-span-2">
-            <h3 class="text-xl font-bold mb-3 text-foreground">Shopify Development</h3>
-            <p class="text-muted-foreground">
-              From custom theme development to complex store setups, we specialize in creating tailored Shopify experiences that convert visitors into customers.
+      <div class="relative z-10 max-w-7xl mx-auto">
+        <div class="bento-tile-accent relative overflow-hidden text-left py-16 md:py-20 px-8 md:px-12">
+          <div
+            class="absolute -top-20 -right-20 w-80 h-80 pointer-events-none opacity-15"
+            aria-hidden="true"
+          >
+            <svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="160" cy="160" r="140" fill="none" stroke="white" stroke-width="1"></circle>
+              <circle cx="160" cy="160" r="100" fill="none" stroke="white" stroke-width="1"></circle>
+              <circle cx="160" cy="160" r="60" fill="none" stroke="white" stroke-width="1"></circle>
+            </svg>
+          </div>
+          <div class="relative z-10 max-w-3xl">
+            <span class="inline-block text-[11px] font-bold uppercase tracking-[0.22em] text-white/70 mb-4">
+              About
+            </span>
+            <h1 class="text-balance text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.05] tracking-tight mb-6">
+              Built by engineers, <span class="text-white/70">for operators.</span>
+            </h1>
+            <p class="text-base md:text-lg text-white/80 leading-relaxed">
+              Capaxe Labs was built on a simple observation: most Shopify agencies are studios that picked up code. <span class="font-semibold text-white">We're engineers who picked up Shopify.</span>
             </p>
           </div>
-          <div class="bento-tile-accent">
-            <h3 class="text-xl font-bold mb-3">E-commerce Solutions</h3>
-            <p class="text-white/70">
-              Our comprehensive e-commerce solutions include everything from store setup and migration to performance optimization and ongoing maintenance.
-            </p>
-          </div>
-          <div class="bento-tile">
-            <h3 class="text-xl font-bold mb-3 text-foreground">Web Development</h3>
-            <p class="text-muted-foreground">
-              We create modern, responsive websites using cutting-edge technologies that provide exceptional user experiences across all devices.
-            </p>
-          </div>
         </div>
       </div>
     </section>
 
-    <!-- Why Choose Us -->
-    <section class="py-4 px-6">
-      <div class="max-w-7xl mx-auto">
-        <div class="bento-grid grid-cols-1 md:grid-cols-2">
-          <div class="bento-tile">
-            <div class="w-10 h-10 rounded-xl bg-primary-500/20 flex items-center justify-center mb-4">
-              <div class="w-2.5 h-2.5 rounded-full bg-primary-400"></div>
-            </div>
-            <h3 class="text-lg font-semibold text-foreground mb-2">Technical Excellence</h3>
-            <p class="text-sm text-muted-foreground">Our team stays at the forefront of e-commerce technology to deliver innovative solutions.</p>
-          </div>
-          <div class="bento-tile">
-            <div class="w-10 h-10 rounded-xl bg-green-500/20 flex items-center justify-center mb-4">
-              <div class="w-2.5 h-2.5 rounded-full bg-green-400"></div>
-            </div>
-            <h3 class="text-lg font-semibold text-foreground mb-2">Client-Focused Approach</h3>
-            <p class="text-sm text-muted-foreground">We listen carefully to your needs and tailor our services to meet your specific business goals.</p>
-          </div>
-          <div class="bento-tile">
-            <div class="w-10 h-10 rounded-xl bg-amber-500/20 flex items-center justify-center mb-4">
-              <div class="w-2.5 h-2.5 rounded-full bg-amber-400"></div>
-            </div>
-            <h3 class="text-lg font-semibold text-foreground mb-2">Proven Track Record</h3>
-            <p class="text-sm text-muted-foreground">Our portfolio showcases successful projects across various industries, demonstrating our versatility.</p>
-          </div>
-          <div class="bento-tile">
-            <div class="w-10 h-10 rounded-xl bg-purple-500/20 flex items-center justify-center mb-4">
-              <div class="w-2.5 h-2.5 rounded-full bg-purple-400"></div>
-            </div>
-            <h3 class="text-lg font-semibold text-foreground mb-2">Ongoing Support</h3>
-            <p class="text-sm text-muted-foreground">We offer flexible retainer plans to provide continuous improvements and support for long-term success.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Team -->
-    <section class="py-4 px-6 pb-8">
-      <div class="max-w-7xl mx-auto">
-        <div class="bento-tile-muted">
-          <h2 class="text-3xl font-bold mb-4 text-foreground">Our Team</h2>
-          <p class="text-muted-foreground leading-relaxed">
-            Behind Capaxe Labs is a diverse team of developers, designers, and e-commerce strategists who bring a wealth of experience and creativity to
-            every project. We're united by our passion for building exceptional digital experiences and our commitment to helping businesses succeed online.
+    <!-- Origin story -->
+    <section class="section max-w-7xl mx-auto px-6 reveal-on-scroll">
+      <div class="bento-grid grid-cols-1 md:grid-cols-5">
+        <div class="bento-tile md:col-span-3">
+          <span class="inline-block text-[11px] font-bold uppercase tracking-[0.22em] text-primary mb-4">
+            Where we come from
+          </span>
+          <h2 class="text-balance text-3xl md:text-4xl font-bold text-foreground leading-tight mb-6">
+            Fintech discipline, applied to commerce.
+          </h2>
+          <p class="text-base md:text-lg text-muted-foreground leading-relaxed mb-4">
+            We've built and scaled production systems in fintech, including products at <span class="font-semibold text-foreground">Paytm Money</span> serving millions of users.
           </p>
+          <p class="text-base md:text-lg text-muted-foreground leading-relaxed mb-4">
+            We run <span class="font-semibold text-foreground">RankFlo</span> (SEO and SKU intelligence for Shopify) and <span class="font-semibold text-foreground">Opskitty</span> (web operations) — products that keep us close to where Shopify is actually breaking, and what it takes to fix it.
+          </p>
+          <p class="text-base md:text-lg text-muted-foreground leading-relaxed">
+            When we engineer a store, it's the same discipline we'd bring to a financial system:
+            <span class="font-semibold text-foreground">traced, measured, accountable, built to outlast the team that shipped it.</span>
+          </p>
+        </div>
+
+        <!-- Side facts -->
+        <div class="md:col-span-2 grid grid-cols-1 gap-4 md:gap-6">
+          <div class="bento-tile-accent relative overflow-hidden">
+            <div class="absolute -bottom-10 -right-10 w-40 h-40 pointer-events-none opacity-20" aria-hidden="true">
+              <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="80" cy="80" r="70" fill="none" stroke="white" stroke-width="1"></circle>
+                <circle cx="80" cy="80" r="40" fill="none" stroke="white" stroke-width="1"></circle>
+              </svg>
+            </div>
+            <div class="relative z-10">
+              <span class="text-[11px] font-bold uppercase tracking-[0.18em] text-white/70">
+                Origin
+              </span>
+              <p class="text-2xl md:text-3xl font-bold text-white mt-4 leading-tight">
+                Paytm Money
+              </p>
+              <p class="text-sm text-white/70 mt-2 leading-relaxed">
+                Built financial products at scale for millions of Indian users.
+              </p>
+            </div>
+          </div>
+
+          <div class="bento-tile bg-muted/30">
+            <span class="text-[11px] font-bold uppercase tracking-[0.18em] text-muted-foreground">
+              Sister products
+            </span>
+            <div class="mt-4 space-y-4">
+              <div class="flex items-start gap-3">
+                <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-primary-500/10 text-primary-400 font-bold text-sm ring-1 ring-primary-500/20 shrink-0">
+                  R
+                </span>
+                <div class="flex-1">
+                  <div class="text-sm font-bold text-foreground">RankFlo</div>
+                  <div class="text-xs text-muted-foreground mt-0.5">SKU & SEO intelligence for Shopify</div>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-primary-500/10 text-primary-400 font-bold text-sm ring-1 ring-primary-500/20 shrink-0">
+                  O
+                </span>
+                <div class="flex-1">
+                  <div class="text-sm font-bold text-foreground">Opskitty</div>
+                  <div class="text-xs text-muted-foreground mt-0.5">Web operations platform</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Operating principles -->
+    <section class="section max-w-7xl mx-auto px-6 reveal-on-scroll">
+      <div class="max-w-3xl mb-12">
+        <span class="inline-block text-[11px] font-bold uppercase tracking-[0.22em] text-primary mb-4">
+          Operating Principles
+        </span>
+        <h2 class="text-balance text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-[1.1] tracking-tight">
+          The discipline we bring to commerce.
+        </h2>
+        <p class="text-base md:text-lg text-muted-foreground leading-relaxed mt-6">
+          Same standards as fintech engineering — applied to Shopify.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+        {principles.map(({ icon: Icon, title, body }, i) => (
+          <div class="bento-tile relative overflow-hidden">
+            <div class="flex items-center justify-between mb-5">
+              <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-primary-500/10 text-primary-400 ring-1 ring-primary-500/20">
+                <Icon className="w-5 h-5" />
+              </span>
+              <span class="text-[10px] font-mono text-muted-foreground/40 tracking-widest">
+                0{i + 1}
+              </span>
+            </div>
+            <h3 class="text-lg md:text-xl font-bold text-foreground mb-2">{title}</h3>
+            <p class="text-sm text-muted-foreground leading-relaxed">{body}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- How we engage -->
+    <section class="section max-w-7xl mx-auto px-6 reveal-on-scroll">
+      <div class="bento-tile-muted relative overflow-hidden py-12 md:py-16 px-8 md:px-12">
+        <div class="max-w-3xl">
+          <span class="inline-block text-[11px] font-bold uppercase tracking-[0.22em] text-primary mb-4">
+            How we engage
+          </span>
+          <h2 class="text-balance text-2xl md:text-3xl lg:text-4xl font-bold text-foreground leading-tight mb-6">
+            You won't get an account manager.
+            <span class="text-muted-foreground">You'll get the people doing the work.</span>
+          </h2>
+          <p class="text-base md:text-lg text-muted-foreground leading-relaxed">
+            Engagements are async-first with structured sync touchpoints — designed to feel like an embedded internal team rather than an external vendor. We take on a small number of brands at a time.
+          </p>
+          <div class="mt-8">
+            <a
+              href="/engagements"
+              class="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:gap-3 transition-all"
+            >
+              See engagement models →
+            </a>
+          </div>
         </div>
       </div>
     </section>
 
     <FAQSection faqs={faqs} />
-    <CTABottom />
+
+    <FinalCTASection />
   </div>
 </Layout>

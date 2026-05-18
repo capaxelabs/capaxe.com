@@ -4,16 +4,16 @@ export const siteConfig: SiteConfig = {
 
     legalName: 'Capaxe Labs LLP',
     name: 'Capaxe Labs',
-    description: 'Professional Shopify development and web solutions for growing businesses.',
+    description: 'Shopify systems engineering for brands past templates, apps, and quick fixes.',
     url: 'https://www.capaxe.com',
     ogImage: '/og.jpg',
     keywords: [
-        'Shopify Development',
-        'E-commerce Solutions',
-        'Web Development',
-        'Custom Shopify Stores',
-        'E-commerce Development',
-        'Technical Support'
+        'Shopify systems engineering',
+        'Shopify Plus development',
+        'Headless Shopify',
+        'Shopify conversion engineering',
+        'Shopify performance engineering',
+        'Custom Shopify apps'
     ],
     logo: {
         src: '/logo.svg', // Make sure to add your logo file
@@ -35,8 +35,8 @@ export const siteConfig: SiteConfig = {
     },
     hero: {
         title: 'Capaxe Labs',
-        subtitle: '(India Silicon Valley Based)',
-        description: 'Professional Shopify development and web solutions for growing businesses.',
+        subtitle: 'Shopify systems engineering studio',
+        description: 'For Shopify brands that have outgrown themes, apps, and quick fixes. We engineer the systems that unlock the next stage of growth.',
         slides: [
             '/hero-slide1.jpg',
             '/hero-slide2.jpg',
@@ -181,7 +181,7 @@ export const siteConfig: SiteConfig = {
                     'Bug fixes & feature enhancements',
                     'Performance optimization & monitoring',
                     'Regular progress updates & reporting',
-                    'Cancel anytime - no long-term contracts',
+                    'Quarterly engagement reviews with the engineering lead',
                     'Project collaboration in your preferred tools'
                 ]
             }
