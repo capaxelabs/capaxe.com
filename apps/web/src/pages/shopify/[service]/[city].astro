@@ -66,24 +66,24 @@ seo.structuredData = {
 
 const faqs = [
   {
-    question: `Why do I need ${service.name.toLowerCase()} services in ${city.name}?`,
-    answer: `${city.name} brands face ${localChallenge}. ${city.commerceStat} Professional ${service.name.toLowerCase()} ensures your Shopify store is optimised for ${serviceBenefit}.`
+    question: `Why does ${service.name.toLowerCase()} matter for a ${city.name} store?`,
+    answer: `Stores in ${city.name} run into ${localChallenge}. ${city.commerceStat} Getting the ${service.name.toLowerCase()} right is what gives you ${serviceBenefit}.`
   },
   {
     question: `What payment methods do ${city.name} shoppers expect?`,
-    answer: `${city.name} shoppers primarily pay with ${city.paymentGateways.slice(0, 3).join(", ")}. We integrate all major gateways for your market, ensuring checkout abandonment stays low across every payment preference.`
+    answer: `Most ${city.name} shoppers reach for ${city.paymentGateways.slice(0, 3).join(", ")}. We set up the gateways your customers actually use, so fewer people drop off at checkout.`
   },
   {
     question: `How long does ${service.name.toLowerCase()} take for a ${city.name} store?`,
-    answer: `Timelines depend on project scope. Simple projects take 1–2 weeks, while complex builds or migrations can take 4–12 weeks. We provide a detailed timeline during discovery.`
+    answer: `It depends on the scope. Smaller jobs take 1–2 weeks; bigger builds and migrations run 4–12 weeks. We'll give you a realistic timeline upfront, not a guess.`
   },
   {
     question: `What makes Capaxe different from other Shopify agencies serving ${city.name}?`,
-    answer: `We combine deep technical expertise with an understanding of ${city.name}'s market dynamics. Our focus is on ${uniqueValueProp}, delivering measurable results for ${city.name} businesses.`
+    answer: `We're hands-on Shopify developers, not a sales team — and we pay attention to what works in ${city.name}. The focus is simple: ${uniqueValueProp}.`
   },
   {
     question: "How do I get started with Capaxe?",
-    answer: `Contact us for a free project consultation. We will assess your current platform, discuss your goals for the ${city.name} market, and provide a detailed plan with timeline and pricing.`
+    answer: `Just reach out for a free chat. We'll take a look at your current setup, talk through what you want to do in ${city.name}, and come back with a clear plan, timeline, and price.`
   },
 ];
 ---
@@ -93,13 +93,12 @@ const faqs = [
   <section class="pt-32 pb-16 px-4 bg-white">
     <div class="max-w-5xl mx-auto space-y-6">
       <h1 class="text-4xl md:text-5xl font-bold">
-        Premier {service.name} Experts in {city.name}
+        {service.name} for {city.name} Shopify Stores
       </h1>
       <p class="text-lg text-muted-foreground">
-        Are you an e-commerce brand based in {city.name} looking to maximise your Shopify investment?
-        Capaxe is your specialised partner for high-performance {service.name.toLowerCase()} services.
-        We understand the specific demands of {localChallenge} and deliver tailored solutions that
-        translate directly into {serviceBenefit}.
+        If you run a Shopify store in {city.name}, you already know {localChallenge} can quietly cost
+        you sales. We help {city.name} brands fix that with {service.name.toLowerCase()} that's built
+        around how your customers actually shop — work that shows up as {serviceBenefit}.
       </p>
       <div class="flex flex-wrap gap-3">
         <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-500/10 text-primary-600 text-sm font-medium border border-primary-500/20">
@@ -134,7 +133,7 @@ const faqs = [
       <div class="bento-tile space-y-4">
         <h3 class="text-lg font-semibold">Preferred Payment Methods in {city.name}</h3>
         <p class="text-sm text-muted-foreground">
-          We integrate every gateway your {city.name} customers rely on — so checkout conversion stays high regardless of how they pay.
+          We set up whichever gateways your {city.name} customers prefer, so nobody bails at checkout just because their payment option is missing.
         </p>
         <div class="flex flex-wrap gap-2">
           {city.paymentGateways.map(gateway => (
@@ -150,17 +149,16 @@ const faqs = [
   <!-- Why localised service matters -->
   <section class="py-16 px-4 bg-white">
     <div class="max-w-5xl mx-auto space-y-4">
-      <h2 class="text-3xl font-semibold">Why Localised {service.name} Matters in {city.name}</h2>
+      <h2 class="text-3xl font-semibold">Why a {city.name}-Specific Approach Helps</h2>
       <p class="text-lg text-muted-foreground">
-        In a rapidly moving market like {city.name}, generic solutions won&apos;t cut it. Your e-commerce
-        store needs to be more than just functional — it needs to be an optimised revenue engine built
-        for how {city.name} shoppers actually behave.
+        A store that converts well in one market can fall flat in another. Shoppers in {city.name} have
+        their own habits — how they pay, what they trust, when they buy — and a store that ignores that
+        leaves money on the table.
       </p>
       <p class="text-lg text-muted-foreground">
-        Our team combines deep technical expertise with a clear understanding of {city.name}&apos;s
-        local commerce dynamics. Whether you require a complete platform rebuild, a complex third-party
-        app integration, or specialised performance tuning, we focus on delivering a {uniqueValueProp}.
-        We don&apos;t just build or fix; we architect for scale and conversion.
+        We know Shopify well and we take the time to understand what works in {city.name}. Whether you
+        need a full rebuild, a tricky app integration, or some focused performance work, the goal is the
+        same: {uniqueValueProp}. No filler, just the changes that move the numbers.
       </p>
     </div>
   </section>
@@ -168,33 +166,32 @@ const faqs = [
   <!-- Process -->
   <section class="py-16 px-4 bg-foreground/5">
     <div class="max-w-5xl mx-auto space-y-6">
-      <h2 class="text-3xl font-semibold">Our {service.name} Process</h2>
+      <h2 class="text-3xl font-semibold">How We Work</h2>
       <p class="text-lg text-muted-foreground">
-        Our approach is transparent, data-driven, and focused on tangible outcomes for {city.name} brands.
+        No surprises and no jargon. Here's what working with us on a {city.name} project looks like.
       </p>
       <ol class="space-y-6 list-decimal list-inside text-muted-foreground">
         <li class="space-y-2">
-          <h3 class="text-2xl font-semibold text-foreground">Discovery &amp; Strategy</h3>
+          <h3 class="text-2xl font-semibold text-foreground">We figure out what you actually need</h3>
           <p>
-            We begin with an in-depth assessment of your platform, goals, and target audience in {city.name}.
-            This ensures our {service.name.toLowerCase()} plan aligns with your business KPIs and the
-            expectations of {city.name} shoppers.
+            First we look at your store, your goals, and who you're selling to in {city.name}. That way
+            the {service.name.toLowerCase()} plan lines up with the results you care about — not a generic
+            checklist.
           </p>
         </li>
         <li class="space-y-2">
-          <h3 class="text-2xl font-semibold text-foreground">Execution &amp; Quality Assurance</h3>
+          <h3 class="text-2xl font-semibold text-foreground">We build it and test it properly</h3>
           <p>
-            We execute the {service.name.toLowerCase()} work using best-in-class standards — clean
-            Liquid architecture, 100% data fidelity for migrations, and Core Web Vitals optimisation for
-            speed projects. Every build is tested against {city.name} shopper behaviour patterns.
+            Then we do the work: clean Liquid, no data left behind on migrations, and real speed gains on
+            Core Web Vitals where that's the focus. Everything gets tested before it goes anywhere near
+            your customers.
           </p>
         </li>
         <li class="space-y-2">
-          <h3 class="text-2xl font-semibold text-foreground">Launch &amp; Post-Launch Support</h3>
+          <h3 class="text-2xl font-semibold text-foreground">We launch and stick around</h3>
           <p>
-            Following rigorous testing, we handle a smooth deployment and provide guaranteed
-            post-implementation support. Your {city.name} store will be monitored and backed by our team
-            across {city.supportHours}.
+            Once it's tested, we handle the launch and keep an eye on things afterwards. You're not on
+            your own — our team is here across {city.supportHours} if anything comes up.
           </p>
         </li>
       </ol>
@@ -220,10 +217,10 @@ const faqs = [
   <!-- CTA -->
   <section class="py-16 px-4 bg-foreground/5">
     <div class="max-w-5xl mx-auto space-y-6 text-center">
-      <h2 class="text-3xl font-semibold">Ready to Elevate Your Shopify Store in {city.name}?</h2>
+      <h2 class="text-3xl font-semibold">Let's talk about your {city.name} store</h2>
       <p class="text-lg text-muted-foreground">
-        Stop losing customers to slow load times or cumbersome checkout flows. Partner with Capaxe for
-        expert {service.name.toLowerCase()} that gives you a competitive edge in {city.name}.
+        Slow pages and clunky checkouts cost you sales every day. If that sounds familiar, we can help —
+        tell us what's going on and we'll point you in the right direction, no pressure.
       </p>
       <a
         class="inline-flex items-center justify-center rounded-md bg-black px-6 py-3 text-white text-lg font-medium transition hover:bg-gray-800"

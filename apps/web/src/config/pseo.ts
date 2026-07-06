@@ -24,57 +24,57 @@ export const pseoServices: PSEOService[] = [
   {
     slug: "development",
     name: "Shopify Development",
-    serviceBenefit: "High-converting storefronts engineered for velocity",
+    serviceBenefit: "a fast store that turns more visits into orders",
     uniqueValueProps: [
-      "modular Liquid architecture that keeps technical debt low",
-      "Hydrogen-ready component patterns for seamless headless expansion",
-      "collaborative sprints that align development roadmaps with revenue goals"
+      "clean Liquid your next developer won't dread touching",
+      "components built so you can move to headless Hydrogen later without a rebuild",
+      "sprints planned with you, so the build follows your revenue goals — not just a spec"
     ],
-    metaDescription: "Full-fidelity Shopify development services including custom themes, feature buildouts, and performance-first storefront engineering."
+    metaDescription: "Custom Shopify development — themes, new features, and fast, reliable storefronts. Clean code your team can actually maintain."
   },
   {
     slug: "migration",
     name: "Shopify Migration",
-    serviceBenefit: "Zero-downtime replatforming with preserved SEO equity",
+    serviceBenefit: "a clean move to Shopify with your traffic and rankings intact",
     uniqueValueProps: [
-      "systematic data migration playbooks for orders, customers, and catalogs",
-      "redirect matrices engineered to protect organic rankings",
-      "QA flows that validate omnichannel integrations before launch"
+      "a tested process for moving orders, customers, and catalogs without losing data",
+      "redirect maps that protect your Google rankings through the switch",
+      "every integration checked twice before you flip the switch"
     ],
-    metaDescription: "Expert Shopify migration for brands moving from Magento, WooCommerce, BigCommerce, and custom stacks with full data fidelity."
+    metaDescription: "Shopify migration from Magento, WooCommerce, BigCommerce, or a custom build — all your data moved intact, with redirects that keep your SEO."
   },
   {
     slug: "theme-customization",
     name: "Shopify Theme Customization",
-    serviceBenefit: "Experience-led storefronts tuned for conversion",
+    serviceBenefit: "a store that fits your brand and is easy to shop",
     uniqueValueProps: [
-      "mobile-first experience design anchored in CRO heuristics",
-      "modular sections crafted for flexible merchandising",
-      "theme governance that keeps brand consistency across releases"
+      "mobile-first design based on what actually gets people to checkout",
+      "flexible sections your team can rearrange without calling a developer",
+      "a tidy theme that stays on-brand as you keep shipping changes"
     ],
-    metaDescription: "Tailored Shopify theme customization covering UX audits, section builds, and brand-aligned design systems for scaling teams."
+    metaDescription: "Shopify theme customization — UX reviews, custom sections, and a design system that keeps your brand consistent as you grow."
   },
   {
     slug: "speed-optimization",
     name: "Shopify Speed Optimization",
-    serviceBenefit: "Lightning-fast Core Web Vitals that lift revenue",
+    serviceBenefit: "faster pages that lift sales",
     uniqueValueProps: [
-      "render pipeline cleanup eliminating unused scripts and blocking assets",
-      "media optimization workflows leveraging next-gen compression",
-      "continuous monitoring dashboards for shipping measurable velocity"
+      "cutting the unused scripts and blocking assets that drag your pages down",
+      "images compressed and served in modern formats without losing quality",
+      "monitoring so you can see the speed gains, not just take our word for it"
     ],
-    metaDescription: "Comprehensive Shopify performance optimization tackling Core Web Vitals, liquid efficiency, and asset delivery for faster storefronts."
+    metaDescription: "Shopify speed optimization — better Core Web Vitals, leaner Liquid, and faster asset delivery so your store loads quickly and converts."
   },
   {
     slug: "app-integration",
     name: "Shopify App Integration",
-    serviceBenefit: "Unified tech stacks without operational friction",
+    serviceBenefit: "your tools talking to each other without the manual busywork",
     uniqueValueProps: [
-      "robust middleware architecture for ERP, CRM, and OMS sync",
-      "secure API orchestration respecting Shopify rate limits",
-      "automation frameworks that streamline back-office workflows"
+      "solid middleware to keep your ERP, CRM, and order systems in sync",
+      "API setups that respect Shopify's rate limits and hold up under load",
+      "automations that take the repetitive back-office tasks off your plate"
     ],
-    metaDescription: "Specialized Shopify app integration services connecting ERP, CRM, OMS, and marketing stacks with resilient automations."
+    metaDescription: "Shopify app integration — connect your ERP, CRM, OMS, and marketing tools with reliable syncs and automations that cut manual work."
   }
 ];
 

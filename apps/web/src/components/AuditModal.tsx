@@ -61,7 +61,10 @@ const AuditModal = ({ children, className }: AuditModalProps) => {
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
-        <button type="button" className={className}>
+        <button
+          type="button"
+          className={`inline-flex items-center justify-center whitespace-nowrap text-sm cursor-pointer ${className || ""}`}
+        >
           {children}
         </button>
       </DialogTrigger>
@@ -114,7 +117,7 @@ const AuditModal = ({ children, className }: AuditModalProps) => {
                   required
                   value={form.domain}
                   onChange={handleChange}
-                  placeholder="yourstore.myshopify.com"
+                  placeholder="yourstore.com"
                   className="w-full px-3 py-2.5 rounded-xl border border-input bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring transition"
                 />
               </div>
