@@ -33,7 +33,7 @@ const AuditModal = ({ children, className }: AuditModalProps) => {
         <DialogHeader>
           <DialogTitle className="text-xl font-bold">Request your free audit</DialogTitle>
           <p className="text-sm text-muted-foreground mt-1">
-            A scored performance and conversion audit of your Shopify store —
+            A scored performance and conversion audit of your Shopify store
             Core Web Vitals from real-user data, the conversion leaks in your
             product page and cart, and every issue ranked Critical to Low with a
             phased action plan.

@@ -33,9 +33,9 @@ const suppressFor = (days: number) => {
 };
 
 const benefits = [
-  "Core Web Vitals from real-user field data — LCP, INP and CLS, not just a lab score",
-  "Conversion leaks traced through your product page, cart and checkout",
-  "Every issue ranked Critical → Low, with quick wins and projected lift",
+  "How slow your store actually feels to real shoppers — not just a test score",
+  "Where people give up: product page, cart, checkout",
+  "What to fix first, what can wait, and what each one is worth",
 ];
 
 const TeardownPopup = () => {
@@ -94,17 +94,17 @@ const TeardownPopup = () => {
         {/* Accent header */}
         <div className="bg-primary-600 px-6 pt-6 pb-5 text-white">
           <span className="inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-white/80 mb-3">
-            Free performance &amp; CRO audit
+            Free store audit
           </span>
           <DialogHeader className="space-y-0">
             <DialogTitle className="text-xl font-bold text-white text-left leading-snug">
-              See your store scored out of 100.
+              Want to know what's costing you sales?
             </DialogTitle>
           </DialogHeader>
           <p className="text-sm text-white/85 mt-2 leading-relaxed">
-            We measure what's actually slowing your store down and where it's
-            losing orders — then send back a prioritised action plan, not a list
-            of complaints.
+            Give us your domain and we'll go through your store properly then
+            write back and tell you what we'd fix first. No jargon, no 40-slide
+            deck.
           </p>
         </div>
 
@@ -130,7 +130,7 @@ const TeardownPopup = () => {
           <TeardownForm onSuccess={() => suppressFor(CONVERTED_DAYS)} />
 
           <p className="text-[11px] text-center text-muted-foreground/70 mt-3">
-            Free, no strings. Delivered as a written report within 3 working days.
+            Free, and no sales pitch. You'll hear back within 3 working days.
           </p>
         </div>
       </DialogContent>

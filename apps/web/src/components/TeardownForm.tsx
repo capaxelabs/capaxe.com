@@ -53,9 +53,9 @@ const TeardownForm = ({ onSuccess }: TeardownFormProps) => {
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <p className="font-semibold text-foreground">Request received.</p>
+        <p className="font-semibold text-foreground">Got it — thanks.</p>
         <p className="text-sm text-muted-foreground">
-          We'll audit <span className="font-medium text-foreground">{form.domain}</span> and send your scored report to <span className="font-medium text-foreground">{form.email}</span> within 3 working days.
+          We'll take a proper look at <span className="font-medium text-foreground">{form.domain}</span> and email you at <span className="font-medium text-foreground">{form.email}</span> within 3 working days.
         </p>
       </div>
     );
@@ -97,7 +97,7 @@ const TeardownForm = ({ onSuccess }: TeardownFormProps) => {
 
       <div className="space-y-1.5">
         <label htmlFor="teardown-message" className="text-sm font-medium text-foreground">
-          Anything specific to look at? <span className="text-muted-foreground text-xs">(optional)</span>
+          Anything you'd like us to look at? <span className="text-muted-foreground text-xs">(optional)</span>
         </label>
         <textarea
           id="teardown-message"
@@ -105,7 +105,7 @@ const TeardownForm = ({ onSuccess }: TeardownFormProps) => {
           rows={3}
           value={form.message}
           onChange={handleChange}
-          placeholder="e.g. slow product pages, checkout drop-off, sale-day stability..."
+          placeholder="e.g. product pages feel slow, people abandon the cart, site wobbles on sale days..."
           className="w-full px-3 py-2.5 rounded-xl border border-input bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring transition resize-none"
         />
       </div>
