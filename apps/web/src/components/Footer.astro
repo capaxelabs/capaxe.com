@@ -6,7 +6,7 @@ const currentYear = new Date().getFullYear();
 ---
 
 <footer class="bg-card border-t border-border">
-  <div class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+  <div class="mx-auto max-w-7xl px-6 pt-16 lg:px-8">
     <div class="bento-grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
       <div class="bento-tile lg:col-span-1">
         <div class="flex items-center gap-2 mb-4">
@@ -87,24 +87,6 @@ const currentYear = new Date().getFullYear();
       </div>
     </div>
 
-    <!-- Giant Brand Text -->
-    <div class="mt-16 overflow-hidden" id="footer-brand">
-      <div
-        class="flex items-baseline justify-center gap-[2vw] leading-none select-none"
-      >
-        <span
-          class="text-[14vw] md:text-[12vw] font-black tracking-tighter text-foreground footer-brand-capaxe"
-        >
-          Capaxe
-        </span>
-        <span
-          class="text-[14vw] md:text-[12vw] font-black tracking-tighter text-primary-400/0 footer-brand-labs"
-        >
-          Labs
-        </span>
-      </div>
-    </div>
-
     <div class="mt-8 pt-8 border-t border-border">
       <div class="flex flex-col md:flex-row justify-between items-center">
         <p class="text-sm text-muted-foreground">
@@ -130,9 +112,28 @@ const currentYear = new Date().getFullYear();
       </div>
     </div>
   </div>
+  <!-- Giant Brand Text — fills the content container, aligned with the grid -->
+  <div class="mt-16 overflow-x-clip p-5" id="footer-brand">
+    <div
+      class="footer-brand-line font-black tracking-tighter leading-[0.8] pb-[0.14em] text-center whitespace-nowrap select-none"
+    >
+      <span class="text-foreground footer-brand-capaxe">Capaxe</span>
+      <span class="text-primary-400/0 footer-brand-labs">Labs</span>
+    </div>
+  </div>
 </footer>
 
 <style>
+  /* Sized against the container, not the viewport, so the wordmark fills the
+     same width as the footer grid at every breakpoint. */
+  #footer-brand {
+    container-type: inline-size;
+  }
+
+  .footer-brand-line {
+    font-size: 17.4cqw;
+  }
+
   @keyframes labs-reveal {
     0% {
       clip-path: inset(0 100% 0 0);

@@ -33,8 +33,8 @@ const suppressFor = (days: number) => {
 };
 
 const benefits = [
-  "How slow your store actually feels to real shoppers — not just a test score",
-  "Where people give up: product page, cart, checkout",
+  "How slow your store actually feels to real shoppers not just a test score",
+  "What's dragging it down: heavy images, leftover apps, blocking scripts",
   "What to fix first, what can wait, and what each one is worth",
 ];
 
