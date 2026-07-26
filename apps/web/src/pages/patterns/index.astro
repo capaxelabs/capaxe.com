@@ -1,0 +1,106 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import CTABottom from "@/components/CTA.astro";
+import { createSEO } from "@/utils/seo";
+
+const patterns = (await getCollection("patterns", ({ data }) => !data.draft)).sort((a, b) =>
+  a.data.title.localeCompare(b.data.title),
+);
+
+const order = ["pdp", "collection", "cart", "checkout", "b2b", "ops"] as const;
+const groupLabels: Record<string, string> = {
+  pdp: "Product page",
+  collection: "Collection & search",
+  cart: "Cart",
+  checkout: "Checkout",
+  b2b: "B2B & wholesale",
+  ops: "Operations",
+};
+
+const groups = order
+  .map((key) => ({
+    key,
+    label: groupLabels[key],
+    items: patterns.filter((p) => p.data.category === key),
+  }))
+  .filter((g) => g.items.length > 0);
+
+const seo = createSEO({
+  pageName: "Shopify Storefront Patterns — What Breaks and How to Build It",
+  description:
+    "Commerce problems that are hard to solve well on Shopify. For each one: the platform's real limits, the failure mode that bites in production, and the honest trade-off between buying an app, hacking the theme, and building it properly.",
+  keywords:
+    "Shopify patterns, Shopify B2B pricing, product configurator, multi-location inventory, Shopify bundles, storefront filtering",
+  contentType: "basic",
+  pathname: "/patterns",
+});
+---
+
+<Layout seo={seo}>
+  <div class="min-h-screen">
+    <section class="px-6 pt-32 pb-12">
+      <div class="mx-auto max-w-7xl">
+        <div class="bento-tile-accent py-16 text-center">
+          <span
+            class="mb-4 inline-block rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-medium text-white/80"
+          >
+            The pattern library
+          </span>
+          <h1 class="mb-4 text-5xl font-bold md:text-6xl">Storefront patterns</h1>
+          <p class="mx-auto max-w-2xl text-lg text-white/60">
+            Commerce problems that are hard to solve well: what the platform actually gives you,
+            what breaks in production, and the honest trade-off between buying an app, hacking the
+            theme, and building it properly.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    {
+      groups.length === 0 && (
+        <p class="px-6 pb-20 text-center text-muted-foreground">No patterns published yet.</p>
+      )
+    }
+
+    <section class="px-6 pb-20">
+      <div class="mx-auto max-w-7xl">
+        {
+          groups.map((group) => (
+            <div class="mb-14">
+              <h2 class="mb-6 border-b border-border pb-2 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+                {group.label}
+              </h2>
+              <div class="bento-grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                {group.items.map((p) => (
+                  <a href={`/patterns/${p.data.slug}`} class="bento-tile group flex flex-col p-6">
+                    <h3 class="mb-3 text-lg font-bold leading-snug text-foreground transition-colors group-hover:text-primary-400">
+                      {p.data.title}
+                    </h3>
+                    <p class="mb-4 flex-1 text-sm leading-relaxed text-muted-foreground">
+                      {p.data.problem}
+                    </p>
+                    <span class="mt-auto inline-flex items-center gap-1 text-sm font-medium text-primary-400 transition-all group-hover:gap-2">
+                      Read the pattern
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-4 w-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+  </div>
+  <CTABottom />
+</Layout>

@@ -1,0 +1,73 @@
+---
+title: 'Showing prices with and without VAT'
+slug: 'b2b-vat-display'
+category: 'b2b'
+problem: 'B2B buyers need to see ex-VAT prices while consumers need inc-VAT, and Shopify will only commit to one of them at a time.'
+description: 'How Shopify handles tax-inclusive pricing, why showing both figures at once is harder than it looks, and what breaks in each approach.'
+pubDate: 2026-07-25
+routes:
+  - method: 'app'
+    summary: 'A dual-pricing app rewrites displayed prices in the browser after the theme has rendered.'
+    cost: 'US$15–40/mo, minutes to install'
+    breaks: 'AJAX cart updates and section rendering repaint the original price; the app has to re-run on every DOM change, and the flash of the wrong number is visible on slow connections.'
+  - method: 'theme'
+    summary: 'Compute the second figure in Liquid from a hardcoded rate and render both.'
+    cost: 'A day, no recurring fee'
+    breaks: 'The moment you sell into a second tax jurisdiction, or a product has a reduced rate, or the rate changes. You now maintain tax law in a theme file.'
+  - method: 'custom'
+    summary: 'Drive display off the market and customer context Shopify already resolves, and reconcile the figures against the same totals the checkout will produce.'
+    cost: 'One engagement'
+    breaks: 'Nothing routinely — but it requires deciding up front which figure is authoritative, and accepting that checkout will show only one of them.'
+related:
+  - 'wholesale-price-tiers'
+---
+
+import Callout from '../../components/Callout.astro';
+
+{/*
+  DRAFT — needs Mukesh's review before publish.
+
+  I have written the general Shopify mechanics, which are accurate, but I do
+  NOT have the Bulls Hardware implementation in front of me. Before this goes
+  live you need to:
+    1. Replace the generic examples with what you actually shipped for them.
+    2. Confirm the rounding behaviour claim against the real store.
+    3. Add screenshots — upload to R2 first, then reference the key. Never
+       commit image files to this repo.
+    4. Get the client's OK before naming them, or keep it anonymised.
+  Delete this comment when done.
+*/}
+
+A consumer storefront quotes one number: the price the customer pays. A B2B storefront quotes a different one: the price before tax, because the buyer reclaims it and budgets in ex-VAT terms. A store selling to both is being asked to be two storefronts at once, and Shopify's pricing model is built on the assumption that you will pick one.
+
+That assumption is not a bug. It runs deep enough that working around it badly produces a store where the product page, the cart, and the invoice disagree — which for a B2B buyer is not a cosmetic problem. It is a reason to phone a competitor.
+
+## What Shopify actually gives you
+
+Tax-inclusive pricing is resolved per market, not per customer. A market is configured to either include tax in displayed prices or not, and everything downstream — collection pages, product pages, cart, checkout — inherits that single decision. Liquid hands your theme a price that has already had that decision applied to it.
+
+This means the theme does not have both numbers. It has one number and no reliable way to derive the other, because deriving it requires knowing the tax rate that applied, which depends on the product's tax category, the destination, and any overrides. The theme knows none of these things at render time.
+
+<Callout kind="gotcha">
+This is the root of nearly every broken dual-pricing implementation: the second figure is being *reconstructed* client-side from an assumed rate, rather than *resolved* from the same source of truth the checkout will use. The two agree right up until they don't.
+</Callout>
+
+## The rounding trap
+
+Even where the rate is genuinely uniform, computing the second figure per line item and summing is not the same operation as summing and then computing. With a 5% rate and a basket of oddly-priced SKUs, the two methods differ by a few paise or fils — which is small enough to survive testing and large enough that a purchasing manager reconciling your quote against your invoice notices.
+
+Decide which figure is authoritative before writing any code. Everything else is derived from it, displayed to the same rounding rule, and reconciled against the totals the checkout will produce — not against a spreadsheet.
+
+## Where the seam is
+
+Checkout is the constraint that shapes the whole design. Whatever a theme does, checkout displays the market's configured basis and nothing else. A storefront that shows a B2B buyer ex-VAT prices throughout and then hands them an inc-VAT checkout has not solved the problem; it has moved the surprise to the least recoverable moment in the funnel.
+
+The workable shapes are narrow. Either the buyer's context resolves to a market whose configuration matches what you showed them, so display and checkout agree by construction — or you show both figures everywhere, clearly labelled, with the authoritative one visually dominant, so that nothing at checkout is new information.
+
+<Callout kind="limit">
+An ex-VAT display for a customer who checks out against an inc-VAT market is not a styling problem you can solve in the theme. The two have to be reconciled at the market and catalog layer, or they will diverge.
+</Callout>
+
+## What this looks like when it is right
+
+The buyer sees the basis appropriate to who they are, labelled explicitly rather than implied — `AED 1,240 ex. VAT` beats a bare number and a footnote. The secondary figure sits alongside in a muted weight rather than behind a toggle, because a toggle is a state that can be wrong when the page is shared, printed, or screenshotted into a purchase order. Line totals, cart total, and the eventual invoice all agree to the last unit. And nothing about the number changes after the page has painted.

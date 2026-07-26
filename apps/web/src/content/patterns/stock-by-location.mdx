@@ -1,0 +1,68 @@
+---
+title: 'Showing stock by location'
+slug: 'stock-by-location'
+category: 'ops'
+problem: 'A customer wants to know whether the item is in the shop they can reach today, and the storefront only knows one aggregate number.'
+description: 'What the Storefront API will and will not tell you about per-location inventory, why moving a fulfillment order is not the same as moving stock, and how to build a location selector that does not lie.'
+pubDate: 2026-07-26
+routes:
+  - method: 'app'
+    summary: 'A store-locator or multi-location app reads inventory levels through the Admin API and renders per-branch availability in a theme block.'
+    cost: 'US$15–60/mo, an hour to install'
+    breaks: 'It polls. Between polls the number is wrong, and the busier the branch the more wrong it is — which is precisely the branch the customer is asking about.'
+  - method: 'theme'
+    summary: 'Use the native pickup availability section, which reports the locations where the selected variant can be collected.'
+    cost: 'Half a day if the theme already ships it'
+    breaks: 'It only covers locations with local pickup enabled, it reports availability rather than quantity, and it says nothing about a warehouse the customer cannot walk into.'
+  - method: 'custom'
+    summary: 'Project inventory levels into your own read model from webhooks, serve them per location, and reconcile against Shopify rather than reading it live on every page view.'
+    cost: 'One engagement'
+    breaks: 'Nothing routinely — but it is a cache, and a cache needs a stated staleness budget and a way to prove it is being met.'
+related:
+  - 'back-in-stock'
+---
+
+import Callout from '../../components/Callout.astro';
+
+{/*
+  Mechanics verified against shopify.dev. Layer in the multi-location build:
+  which branches were exposed, the transfer policy, and what the POS connector
+  actually reconciled.
+*/}
+
+The question a customer asks in a shop with five branches is never "how many do you have". It is "can I get it today, near me". Those are different questions, and Shopify's storefront is built to answer neither of them precisely — it is built to answer "can this be bought", which is a third question, and the one the merchant cares least about.
+
+## What Shopify actually gives you
+
+Inventory is tracked per location on the Admin side, and that data is complete: an inventory item has a level at each location it is stocked at, and it moves through documented mutations. The storefront is where it narrows.
+
+`quantityAvailable` on a variant is a single number. It is not per location, and since it became market-contextual it is not even a simple sum — cart quantity limits are now determined by inventory available in the buyer's market region rather than by total stock, so a customer can be told they may buy fewer than the catalogue-wide number suggests. That is correct behaviour and it surprises everyone the first time.
+
+The one genuinely per-location read the storefront gets is pickup availability. `store_availabilities` in Liquid, or `StoreAvailability.quantityAvailable` in the Storefront API, reports the locations where the selected variant can be picked up. It is real, it is native, and it is narrower than it looks:
+
+- It only covers locations with local pickup turned on. A distribution centre that fills online orders is invisible to it.
+- The section that renders it cannot access the Liquid `product` object at all — it is fetched per variant through the section rendering API, which is why every theme's implementation is a fetch call and a DOM insert rather than a straightforward render.
+- `store_availability.available` accounts for store transfers, so a variant can report as collectable at a branch that does not stock it, with `pick_up_time` adjusted to cover the transfer. Usually what you want. Occasionally the reason your "in stock at Andheri" badge is describing a box currently in Pune.
+
+## The failure mode: moving the order does not move the stock
+
+This is where multi-location builds actually break, and it happens after checkout, where nobody is looking.
+
+`fulfillmentOrderMove` reassigns which location is responsible for fulfilling line items. It is the correct mutation for "Bandra is out, let Lower Parel ship it". What it does not do is move inventory, and it will refuse outright in a set of conditions that read as edge cases and are not:
+
+- **The destination location does not stock the requested inventory item.** Not "has zero" — is not connected to that inventory item at all. A new branch that has never been stocked with a SKU cannot be assigned it, and the mutation fails rather than warning you.
+- **Line items already fulfilled cannot be reassigned.** They stay with the original location permanently, so a partially-shipped order can never be fully consolidated.
+- **A fulfillment order awaiting a fulfillment service cannot be moved** while its request status is `SUBMITTED`, `ACCEPTED`, `CANCELLATION_REQUESTED` or `CANCELLATION_REJECTED`. You must get a cancellation accepted first. This is deliberate — it stops two locations shipping the same item — and it means your "reroute to nearest branch" automation stalls exactly when a 3PL is involved.
+- Moving a subset produces a *new* fulfillment order for the remainder, so the order now has more fulfillment orders than it did. Any code holding a fulfillment order ID from before the move is holding a stale one.
+
+<Callout kind="gotcha">
+A rerouting rule written as "move the fulfillment order to the branch with stock" works in testing, where every location stocks every SKU, and fails in production, where new branches are connected to inventory items lazily. Check that the destination stocks the item before you attempt the move, and handle the failure as a normal outcome rather than an exception.
+</Callout>
+
+## What this looks like when it is right
+
+The customer picks a location once and the storefront remembers it — the selector is not a modal they re-open on every product page. Availability is expressed in the language of the decision they are making: *collect today*, *at Bandra tomorrow*, *ships in 3 days*, not a raw integer that invites them to argue with your staff about it.
+
+Where a number is shown, it is shown with a staleness they can live with, and it is banded rather than exact — "low stock" costs nothing when it is wrong, "2 left" costs a phone call. The read path does not depend on an Admin API call per page view: inventory changes arrive by webhook, land in a store you control, and are served from there.
+
+And every automated reroute treats a refused move as a routine result. Because it is.

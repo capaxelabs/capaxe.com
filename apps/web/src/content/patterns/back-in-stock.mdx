@@ -1,0 +1,83 @@
+---
+title: 'Back-in-stock alerts that do not stampede'
+slug: 'back-in-stock'
+category: 'pdp'
+problem: 'Four hundred people asked to be told when it returns, twelve units arrived, and everyone found out at the same second.'
+description: 'Why the inventory webhook fires more often than stock actually arrives, what a restock notification is really competing with, and how to release demand you have already captured without burning it.'
+pubDate: 2026-07-26
+routes:
+  - method: 'app'
+    summary: 'A back-in-stock app adds the capture form and sends the alert on restock, usually over email and SMS.'
+    cost: 'US$10–60/mo, minutes to install'
+    breaks: 'It sends to everyone at once. On a small restock that produces one sale, several hundred disappointed customers, and a measurable unsubscribe spike.'
+  - method: 'theme'
+    summary: 'A form that writes the request to a customer metafield or a tag, checked by a scheduled job.'
+    cost: 'A day or two, no recurring fee'
+    breaks: 'Latency. A poll that runs hourly on a product that sells out in ten minutes notifies people about stock that is already gone.'
+  - method: 'custom'
+    summary: 'Subscribe to inventory events, verify the item is genuinely purchasable in the requester’s market, and release the queue in waves.'
+    cost: 'A short engagement'
+    breaks: 'Nothing routinely — but it needs a queue with an ordering rule, and that rule is a commercial decision the merchant has to make rather than a default you can pick for them.'
+related:
+  - 'stock-by-location'
+  - 'whatsapp-first-flows'
+---
+
+import Callout from '../../components/Callout.astro';
+
+{/*
+  Verified against shopify.dev. Layer in a real restock: queue depth, wave
+  size, and the conversion difference between wave one and wave three.
+*/}
+
+A customer who asks to be told when something returns has done something no advertising can buy: they have told you exactly what they want, and given you permission to interrupt them about it. Most stores answer that gift with a mailshot to everyone the instant a number goes above zero, which converts a small percentage and irritates the rest — including the people who click through in good faith and land on a sold-out page for the second time.
+
+The mechanics are easy. The queue discipline is the pattern.
+
+## What Shopify actually gives you
+
+No native back-in-stock notification, but the event you need is solid. `inventory_levels/update` fires whenever an inventory level changes, under the `inventory` access scope, with a payload that is smaller and more literal than people expect:
+
+```json
+{
+  "inventory_item_id": 271878346596884015,
+  "location_id": 24826418,
+  "available": 10,
+  "updated_at": "2021-12-31T19:00:00-05:00"
+}
+```
+
+Note what is in it: an inventory item, **a location**, and a quantity. Not a product. Not a variant. Not a market. Resolving it to something a customer would recognise is your job, and so is deciding whether this particular change means what you think it means.
+
+On the storefront side, `availableForSale` and `currentlyNotInStock` tell you whether the variant can be bought, and `quantityAvailable` how many. Since cart quantity limits became market-contextual, that last number reflects what is available for fulfilment in the buyer's market region rather than total stock everywhere.
+
+## The failure mode: the webhook fires when stock moves, not when stock arrives
+
+`inventory_levels/update` is per location. Every event that changes any location's level fires it, including several that are not restocks at all:
+
+- **A transfer between locations** fires an event at the destination with `available` rising from 0 to 12. Total stock across the business has not changed by a single unit. A naive listener sends four hundred emails about a box that was already yours.
+- **A cycle count correction** fires the same shape.
+- **A cancelled order** returns units to a location and fires it again.
+- On a busy SKU, an oversell correction can bounce a level above and below zero repeatedly — and a rule that triggers on "crossed zero upwards" fires on every bounce.
+
+<Callout kind="gotcha">
+Do not treat "a location's available went above zero" as "the product is back". Evaluate purchasability the way a customer would — resolve to the variant, check that it is available for sale in the requester's market, and require the state to hold for a short settling window before you notify anyone. Restocks are rarely so urgent that ninety seconds of confirmation costs a sale.
+</Callout>
+
+And then there is the arithmetic nobody does: 400 requests against 12 units is not a campaign with a 3% conversion rate, it is 388 people receiving a message whose only content, by the time they act on it, is *you were too slow*. Sending it to everyone simultaneously guarantees that outcome. It is also how a merchant trains their best-intentioned customers to ignore them.
+
+## Consent, briefly, because it is where these get built wrong
+
+The capture form is asking for contact permission, and the permission has to live somewhere real. SMS consent is a first-class field on the customer — set through `customerSmsMarketingConsentUpdate`, with a marketing state, an opt-in level and a collection timestamp — but it requires the customer to already have a unique phone number on their record.
+
+Keep the scope honest, too: consent to be told about *this product* is not consent to be added to the newsletter. Merchants who conflate the two get a short-term list and a long-term deliverability problem.
+
+## What this looks like when it is right
+
+Requests are a queue with a stated order — first in, or highest value, or customers before strangers — and the merchant chose that order deliberately.
+
+Notification goes out in waves sized against actual stock: twelve units means the first wave is perhaps thirty people, with a short window before the next wave. Everyone who receives a message has a real chance of completing the purchase, and the message says how many were available rather than implying abundance.
+
+Where the platform allows it, the link the customer follows carries a hold — a pre-built cart, a short reservation window — so that clicking promptly is rewarded. The rest of the queue is told the truth: *this wave sold out, you are still on the list, next batch is expected in ten days.*
+
+And the request itself is visible in the admin as demand data, because four hundred people asking for a sold-out size is the clearest purchasing signal the merchant will get all quarter, and it should not live only inside a notification app.

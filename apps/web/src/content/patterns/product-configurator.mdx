@@ -1,0 +1,81 @@
+---
+title: 'Building a product configurator without an app'
+slug: 'product-configurator'
+category: 'pdp'
+problem: 'A made-to-order product has more valid combinations than Shopify will let you model as variants, and the ones that carry a price cannot be captured as text.'
+description: 'Why line item properties are not a pricing mechanism, where the variant model actually runs out, and how to build a configurator on metaobjects that survives contact with the cart.'
+pubDate: 2026-07-26
+routes:
+  - method: 'app'
+    summary: 'A configurator app renders the option UI and writes the selection back as line item properties, usually with a hidden "upcharge" product for the price difference.'
+    cost: 'US$20–90/mo, an afternoon to configure'
+    breaks: 'The upcharge line is a separate cart line. It can be removed on its own, it discounts on its own, and it arrives in the warehouse as a mystery SKU with no link to the item it belongs to.'
+  - method: 'theme'
+    summary: 'Hardcode the option tree in a section schema and pass the selection through as line item properties.'
+    cost: 'Two to three days, no recurring fee'
+    breaks: 'The first time pricing depends on a combination rather than a single option — and every time the merchant wants to add a finish without a developer.'
+  - method: 'custom'
+    summary: 'Model the option domain as metaobjects the merchant edits, resolve each priced configuration to a real variant, and keep only genuinely free-form input as properties.'
+    cost: 'One engagement'
+    breaks: 'Nothing routinely — but it forces an early decision about which dimensions are priced and which are merely recorded, and that decision is expensive to reverse.'
+related:
+  - 'bundle-builder'
+  - 'quote-request'
+---
+
+import Callout from '../../components/Callout.astro';
+
+{/*
+  Platform mechanics here are checked against shopify.dev. Before this is used
+  as a reference for a specific build, layer in the furniture configurator:
+  which dimensions were priced vs recorded, and how the workshop received them.
+*/}
+
+A merchant selling a made-to-order sofa is not selling one product. They are selling a frame, in one of nine fabrics, in one of four leg finishes, with or without a contrast piping the customer picks from a different swatch card — and the price moves with the fabric, not with the piping. Asked to put that online, the reasonable-sounding answer is "just add options". The reason that answer fails is arithmetic, and then it is worse than arithmetic.
+
+## What Shopify actually gives you
+
+Two mechanisms, and they do not overlap the way people assume.
+
+**Variants** are the priced, stocked, purchasable unit. A variant has a price, an inventory item, a SKU, and a barcode. Products now support up to 2,048 variants, which is a much higher ceiling than the old 100 — high enough that the combinatorial argument alone rarely kills a configurator any more. What kills it is that every one of those variants is a real catalogue row: it syncs to every channel, it appears in exports, it gets inventory-tracked, and someone has to keep it alive.
+
+**Line item properties** are the other mechanism, and they are text. You attach them at add-to-cart, they survive to the order, and the workshop can read them. Prefix a key with an underscore and Liquid still exposes the property while conventional theme code filters it out of display; prefix a *cart attribute* with two underscores and it is genuinely hidden — not present in the Liquid `cart.attributes` object or the Ajax API at all, which is also what keeps it from breaking page caching.
+
+What line item properties are not is a price. There is no field on them that money goes in.
+
+<Callout kind="limit">
+A line item property cannot change what the customer is charged. Any configurator that appears to price by property is doing it somewhere else — a second cart line, a Cart Transform function, or a draft order — and which of those it chose determines everything about how it fails.
+</Callout>
+
+## The failure mode: the upcharge line
+
+This is the one that bites, and it bites in the warehouse rather than in QA.
+
+The common app pattern prices a configuration by adding a second, near-invisible cart line — "Custom options: ₹4,500" — alongside the base product. In the cart it looks like one purchase. In the data it is two independent line items with no structural relationship. So:
+
+- A customer editing their cart can delete the upcharge and keep the sofa. Nothing stops them, because nothing knows the two are connected.
+- An automatic discount targeting "all products" allocates across both lines, quietly discounting the configuration as well as the item.
+- The order exports as two rows. Whatever picks it up next — the workshop's job sheet, the ERP, the shipping app — sees a physical product and an unrelated ₹4,500 item with no dimensions and no weight.
+- Refunding partially, which happens constantly on made-to-order goods, requires a human to know that these two lines are one thing.
+
+None of that shows up on a test order. All of it shows up in month two, in an email from the person doing fulfilment.
+
+Cart Transform functions solve the structural half properly — they can expand one purchase into priced components, or override a line's price, title and image so the cart shows what the customer actually bought. But `lineUpdate`-style price overrides are limited to development stores and Shopify Plus, which puts the clean version of this out of reach for exactly the merchants most likely to want a configurator.
+
+## Where the metaobject layer helps, and where it stops
+
+Metaobjects are the right home for the option domain: a `fabric` definition with a swatch image, a name, a price band and a lead time is data the merchant can edit without touching the theme. The limits are generous — 128 definitions on Basic through Advanced, 256 on Plus, 40 fields each, and up to a million entries per definition.
+
+The constraint is not storage, it is Liquid.
+
+<Callout kind="gotcha">
+Looping a metaobject definition's `values` in Liquid returns 50 entries unless you paginate, and a paginated page caps at 250. Accessing entries by individual handle is worse: 20 unique handles per page, with no pagination available at all. A 400-swatch fabric library is fine in the database and quietly truncated on the page.
+</Callout>
+
+Design around it rather than into it: render the swatch grid from a paginated `values` loop or fetch it as JSON, and reserve handle access for the small number of entries a single render genuinely needs.
+
+## What this looks like when it is right
+
+The priced dimensions are variants — real, stocked, exportable rows, generated and maintained by a script rather than by hand. The unpriced dimensions are properties: the monogram text, the delivery-access note, the customer's own reference number. Nothing carrying money travels as text.
+
+The merchant adds a fabric by creating a metaobject entry, and the storefront picks it up without a deploy. The configurator's state lives in the URL, so a customer can send their configuration to their partner and get back the same sofa. The cart shows one line, priced correctly, with the configuration legible underneath it. And the order that reaches the workshop says what to build, in the workshop's vocabulary, on one row.

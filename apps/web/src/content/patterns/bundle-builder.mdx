@@ -1,0 +1,77 @@
+---
+title: 'Build-your-own bundles that survive the warehouse'
+slug: 'bundle-builder'
+category: 'cart'
+problem: 'The customer buys one thing at one price, and the pick list has to show six — without either side of that ever disagreeing.'
+description: 'Fixed bundles versus cart transform functions, the component ownership rule that locks a merchant to one app forever, and why bundle inventory is not a number you control.'
+pubDate: 2026-07-26
+routes:
+  - method: 'app'
+    summary: 'A bundle app provides the picker UI and a cart transform function that assembles the selection into a priced bundle line.'
+    cost: 'US$20–130/mo, an afternoon to configure'
+    breaks: 'Once that app assigns components to a bundle, only that app can manage them. Uninstalling does not hand the bundles back — it strands them.'
+  - method: 'theme'
+    summary: 'A section that adds several variants to the cart at once, with a discount code or automatic discount supplying the bundle price.'
+    cost: 'Two to three days, no recurring fee'
+    breaks: 'The cart shows six lines, so a customer can delete one and keep the discount unless the discount logic is airtight. It also stacks with other promotions in ways nobody modelled.'
+  - method: 'custom'
+    summary: 'Use Shopify’s own bundle model where the bundle is fixed, and a cart transform function where the customer composes it — with components as real inventory-tracked variants either way.'
+    cost: 'One engagement'
+    breaks: 'Nothing routinely — but line price overrides require a Plus-tier plan, which changes what is buildable on Basic and Advanced.'
+related:
+  - 'product-configurator'
+  - 'back-in-stock'
+---
+
+import Callout from '../../components/Callout.astro';
+
+{/*
+  Verified against shopify.dev. Layer in a real build: which route was taken,
+  and what the fulfilment side actually needed on the pick list.
+*/}
+
+A bundle is two products wearing a trench coat, and the whole difficulty is that different systems need to see through the disguise at different moments. The customer should see one item at one price. The discount engine needs to know what it is discounting. The warehouse needs six pickable SKUs. Inventory needs to decrement the components, not the costume. Get one of those wrong and the failure is not cosmetic — it is a stock count that drifts until someone does a manual audit.
+
+## What Shopify actually gives you
+
+Two genuinely different mechanisms, and choosing between them is the whole design decision.
+
+**Fixed bundles** are the native model, and they are structural rather than cosmetic. A bundle product's components are declared through a `bundleComponents` relationship; the parent variant sets the price and the components determine the inventory. Shopify understands the relationship everywhere, including checkout, where the bundle's parts are visible as line components rather than as unrelated lines.
+
+The constraints are explicit and worth knowing before you promise anything:
+
+- Up to **30 components** per bundle.
+- Up to **three options**, where combined options across components count as one.
+- **Quantity options cannot be combined.**
+- **No nesting.** A product cannot both have components and be a component.
+- Creation is asynchronous — `productBundleCreate` returns an operation to poll rather than a finished product.
+
+**Cart transform functions** are the other mechanism, and they work at the cart rather than the catalogue. A function can *expand* one line into priced components, *merge* several component lines into a single bundle line, or *update* a line's price, title and image. This is what a build-your-own box needs, because the combination does not exist until the customer makes it.
+
+<Callout kind="limit">
+Cart transform `update` operations — overriding a line's price, title or image — are limited to development stores and Shopify Plus. On Basic or Advanced, the presentation half of a custom bundle is simply not available, and any design that depends on it has to be re-scoped rather than worked around.
+</Callout>
+
+Note also that a store can run one cart transform function per app, but if two apps each install one, **both run**. Two bundle apps on the same store is not a redundancy, it is a race.
+
+## The failure mode: whoever assigns the components owns them
+
+This is the sentence in the documentation that decides whether a merchant is free in two years:
+
+> After an app has assigned components to a bundle, only that app can manage the components of the bundle.
+
+Read that as a commercial term, because that is what it is. Install a bundle app, let it build the store's bundles, and those bundles are now managed by that vendor exclusively. The merchant cannot edit the components in the admin. A second app cannot take them over. Uninstalling does not release them — it leaves products whose composition nobody can change.
+
+<Callout kind="gotcha">
+Bundle component ownership is the strongest lock-in on the platform, and it is acquired by clicking install. Before a bundle app touches production, know which entity owns the components — the vendor's app, or one you control — because migrating later means recreating every bundle and losing its history.
+</Callout>
+
+The related trap is inventory. A bundle's stock is *derived* from its components; it is not a number you set. That is correct — it makes overselling structurally difficult — and it means the merchant's instinct to "hold back 20 gift boxes for the campaign" has nowhere to go. Reserving stock for a bundle means reserving component inventory, usually with a dedicated location, not typing a number against the bundle.
+
+## What this looks like when it is right
+
+The customer builds the box and sees one line at one price, with the contents legible underneath it — not six lines and a discount they have to believe in. Removing a component changes the price in the picker, before the cart, so the cart never has to explain arithmetic.
+
+The order arrives in the warehouse as components with quantities, because the pick list is generated from what is actually being shipped rather than from the marketing name. Inventory decrements at component level, so the count is still right at the end of the campaign.
+
+The merchant can change what is in the box without a developer and without the vendor. And when the campaign ends, the bundle can be retired without leaving behind products that nothing on the store is able to edit.

@@ -1,0 +1,71 @@
+---
+title: 'A size guide that reduces returns'
+slug: 'size-guide'
+category: 'pdp'
+problem: 'The size chart is a JPEG in a modal, and the customer who cannot read it orders two sizes and sends one back at your expense.'
+description: 'Why size guides are modelled at the wrong level, what a metaobject-backed chart gets you that an image does not, and the unit mistake that only shows up in a second market.'
+pubDate: 2026-07-26
+routes:
+  - method: 'app'
+    summary: 'A sizing app injects a modal, and the better ones recommend a size from the customer’s past orders or from body measurements.'
+    cost: 'US$20–150/mo, an hour to install'
+    breaks: 'The recommendation is only as good as the measurement data behind it, and most catalogues do not have any. An app confidently recommending M from a garment type average is guessing with your return rate.'
+  - method: 'theme'
+    summary: 'Upload a chart image per collection and render it in a modal from a product metafield.'
+    cost: 'A day, no recurring fee'
+    breaks: 'It is an image. It cannot be searched, translated, converted between units, read by a screen reader, or usefully zoomed on the device 70% of your customers are using.'
+  - method: 'custom'
+    summary: 'Model measurements as structured data attached at the level the fit actually varies, and render the chart natively with the customer’s units.'
+    cost: 'A few days'
+    breaks: 'Nothing routinely — but someone has to measure the garments, and no amount of engineering substitutes for that.'
+related:
+  - 'faceted-filtering'
+---
+
+import Callout from '../../components/Callout.astro';
+
+{/*
+  Verified against shopify.dev. Layer in the returns delta from the apparel
+  build — before/after return rate is the only number that makes this page
+  worth reading.
+*/}
+
+Every apparel merchant knows the return rate is the business. Rather fewer treat the size guide as a serious surface: it is typically a chart the supplier sent, exported as an image, dropped into a modal behind a small grey link, and never looked at again. The customer opens it on a phone, gets a 1400px table scaled to 380px, gives up, and orders both sizes — which is the single most expensive customer behaviour in fashion ecommerce, and you have just designed for it.
+
+## What Shopify actually gives you
+
+Nothing native. There is no size guide object, which is the correct decision — sizing is not a commerce primitive — and it means the modelling is yours.
+
+The materials are good, though:
+
+- **Metaobjects** give you a real `size_chart` type: rows of measurements, a unit, a note on how to measure, a fit descriptor. Definition limits are generous — 128 on Basic through Advanced, 256 on Plus, 40 fields each — and a definition holds up to a million entries.
+- **Metafields** connect them. A `metaobject_reference` points a product at its chart; `list.metaobject_reference` points it at several, and that list type is the one with the highest ceiling at 256 items.
+- Structured measurement data as JSON is also viable: most metafield types cap at 64KB, and `json` at 128KB, both far larger than any table of garment measurements.
+
+Whatever you build, it renders as real markup — which is the entire argument against the image.
+
+## The failure mode: fit varies by variant, the chart is attached to the product
+
+This is the one that quietly limits how much a size guide can help.
+
+The metafield holding the chart lives on the product. The decision the customer is making lives on the variant. For a single-supplier, single-block product line those are the same thing and nobody notices. They stop being the same thing in the ordinary course of running an apparel business:
+
+- The range is manufactured by two suppliers, and the fit differs by half a size between them.
+- A colourway is produced in a different fabric — a knit and a woven in the same style number do not size the same.
+- A product spans two size systems because it sells in two markets under the same handle.
+
+In each case the honest chart is per variant, or at least per group of variants, and the model says one chart per product. Merchants resolve it the only way the model allows: by publishing the average, which is wrong for both halves of the range and is exactly the sort of small inaccuracy that produces a return.
+
+<Callout kind="gotcha">
+If a product's variants do not share a fit, a product-level size chart is not a simplification — it is a false statement about half the catalogue. Either attach measurements to variants, or split the product. Do not average two blocks into one table and ship it.
+</Callout>
+
+The second, cheaper failure is units. A chart authored in centimetres is served unchanged to a customer in a market that thinks in inches, because Shopify contextualises price and availability by market but has no concept of a measurement preference. That has to be derived — from the market, with a toggle the customer can override — and stored, or every international visitor does arithmetic before buying trousers.
+
+## What this looks like when it is right
+
+The measurements are on the page, not behind a link. On mobile the relevant row for the selected size renders inline under the variant picker: *chest 104cm, length 71cm, sleeve 63cm* — the three numbers that decide the purchase, in the customer's units, without a modal.
+
+The table is real markup: selectable, translatable, readable by a screen reader, and indexed. Merchants edit it as a metaobject entry, so adding a size does not require a developer, and the same entry can be shared by every product cut from the same block.
+
+The guide says which garment it describes — *measured flat, garment not body* — because the ambiguity between the two is responsible for a meaningful share of returns on its own. Where you have the data, the page says what other customers did: *most buyers of this style in your usual size kept it*. And the returns portal feeds back — every "too small" is a measurement you now have, on a garment you can re-measure.

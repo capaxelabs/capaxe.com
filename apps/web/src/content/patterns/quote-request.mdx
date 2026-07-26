@@ -1,0 +1,70 @@
+---
+title: 'Request a quote instead of add to cart'
+slug: 'quote-request'
+category: 'b2b'
+problem: 'The buyer cannot check out, because the price depends on a conversation — but every hour that conversation takes place over email is an hour the order is not in the system.'
+description: 'Draft orders as a quoting engine: what an invoice link actually is, why a quote does not hold stock, and how to keep the quote and the eventual order the same object.'
+pubDate: 2026-07-26
+routes:
+  - method: 'app'
+    summary: 'A quote-request app replaces the buy button with a form and collects submissions in its own dashboard.'
+    cost: 'US$20–70/mo, an hour to install'
+    breaks: 'The quote lives in the app, not in Shopify. Accepting it means re-keying the order, so your order history, your customer lifetime value and your reporting all miss the half of the business that arrived this way.'
+  - method: 'theme'
+    summary: 'Swap the buy button for a contact form and email the enquiry to sales.'
+    cost: 'Half a day, no recurring fee'
+    breaks: 'The moment there is more than one salesperson. There is no state, no owner, no expiry, and no way to answer "what did we quote them in March".'
+  - method: 'custom'
+    summary: 'Create a draft order from the buyer’s configuration, price it in the admin, and send the invoice — so the quote and the order are the same record at two points in its life.'
+    cost: 'One engagement'
+    breaks: 'Nothing routinely — but a draft order holds no inventory and freezes no price, so quote expiry has to be a business rule you enforce rather than a platform behaviour you inherit.'
+related:
+  - 'wholesale-price-tiers'
+  - 'product-configurator'
+---
+
+import Callout from '../../components/Callout.astro';
+
+{/*
+  Verified against shopify.dev. Layer in the B2B hardware build: the actual
+  quote-to-order conversion rate, and how expiry was handled operationally.
+*/}
+
+There is a category of purchase where the add-to-cart button is not merely unhelpful, it is disqualifying. Freight is unknown until someone weighs the pallet. The price depends on volume the buyer has not committed to yet. Someone has to check whether the item can be delivered to a site with no loading bay. A storefront that answers all of this with a checkout button is telling a professional buyer it does not do business their way.
+
+The instinctive fix — replace the button with a contact form — solves the customer's problem and creates the merchant's. The enquiry leaves the commerce system, and everything downstream of it does too.
+
+## What Shopify actually gives you
+
+A draft order is the quoting primitive, and it is a genuinely good one. It is an order before it is an order: it has line items, a customer, an address, taxes, a total, and a lifecycle.
+
+The parts that matter for quoting:
+
+- **Custom line items.** A draft order line does not need to reference a variant. It can carry a title, a price and a quantity you set — which is how "2.4m bespoke worktop, cut to drawing" becomes a chargeable line without polluting your catalogue.
+- **Applied discounts** at line and order level, expressed as a fixed amount or a percentage, with a description the buyer sees. This is where the negotiated concession lives, visibly, rather than being buried in an adjusted unit price.
+- **`draftOrderInvoiceSend`**, which emails the buyer a link to pay.
+- **`draftOrderComplete`**, which turns the draft into a real order — either marked as paid, or awaiting payment.
+
+The same flow works for B2B: creating and invoicing a draft order for a company contact is identical to the consumer path.
+
+## The failure mode: a quote is not a reservation
+
+Everyone building this assumes some version of "the quote holds the stock and the price for a fortnight". None of that is true, and the assumption fails quietly enough to reach a customer.
+
+A draft order does not decrement inventory. Nothing is reserved. Between quoting and payment the stock is sold to whoever buys it first, which on a fast-moving line is very often someone else. The buyer pays an invoice for goods that are gone, and now you are refunding a B2B customer in their first transaction with you.
+
+Nor does the draft track price. The figures are captured when the line is created and they sit there. If your costs move — and on imported hardware they move with the exchange rate — a two-month-old invoice link is still payable at the old number.
+
+<Callout kind="gotcha">
+The invoice link is a bearer URL. Anyone holding it can complete that checkout — and buyers forward quotes to their finance team, their procurement portal, and occasionally to a competitor for comparison. Treat quote expiry as a control you enforce, not as a nicety: close stale drafts, and re-issue rather than leaving a payable link alive indefinitely.
+</Callout>
+
+One more, smaller but reliably annoying: draft orders do not allow discount codes at checkout by default. A buyer who has been given a code by your sales team cannot apply it on the invoice, and will tell you the site is broken. The concession belongs on the draft as an applied discount, where sales can see it, not in a code the buyer types.
+
+## What this looks like when it is right
+
+The buyer builds the thing they want on the storefront — quantities, options, delivery constraints — and the enquiry arrives in the admin as a draft order that already contains all of it. Sales open a record, not an email. They adjust freight, apply the agreed concession as a visible line, and send.
+
+The buyer gets a document that reads like a quote and pays like a checkout: a reference number, an expiry date stated on the face of it, itemised delivery, and one button. Accepting it produces an order with the same identity as the quote, so the reporting question "how much of our revenue starts as a quote" has an answer.
+
+And nothing in that flow says *awaiting stock confirmation* after payment, because the expiry was short enough, and the confirmation happened before the invoice went out.

@@ -1,0 +1,83 @@
+---
+title: 'Where Shopify’s native filtering stops being enough'
+slug: 'faceted-filtering'
+category: 'collection'
+problem: 'The catalogue is big enough that browsing is useless without filters, and big enough that Shopify stops showing them.'
+description: 'The hard limits on storefront filtering — 25 filters, a 5,000-product cliff, and a fixed list of filterable metafield types — and how to tell whether you have outgrown it before your customers do.'
+pubDate: 2026-07-26
+routes:
+  - method: 'app'
+    summary: 'A search-and-filter app builds its own index and replaces the collection grid with its own rendering.'
+    cost: 'US$30–500/mo depending on catalogue size'
+    breaks: 'You now have two catalogues. Anything the index has not picked up yet — a price change, a restock, a new product — is wrong on the page that matters most, and reindex lag is the vendor’s decision, not yours.'
+  - method: 'theme'
+    summary: 'Use native storefront filtering: create filters in the admin, render `collection.filters` in the theme.'
+    cost: 'A day or two, no recurring fee'
+    breaks: 'At 25 filters, at 5,000 products in a collection, and at any facet whose underlying data is not one of the supported metafield types.'
+  - method: 'custom'
+    summary: 'Keep native filtering where it fits, and put a real search index behind the specific collections that exceed it — with one source of truth for the product data feeding both.'
+    cost: 'One engagement'
+    breaks: 'Nothing routinely — but it is an index, so it inherits every problem an index has: freshness, cost, and being wrong in ways the primary store is not.'
+related:
+  - 'size-guide'
+  - 'stock-by-location'
+---
+
+import Callout from '../../components/Callout.astro';
+
+{/*
+  Verified against shopify.dev. Layer in the catalogue that forced the move —
+  the product count, which facet broke first, and what the index cost.
+*/}
+
+Filtering is one of the few storefront features whose value is measurable within a week: on a large catalogue, the proportion of sessions that touch a filter and the proportion that convert are close to the same set of people. It is also the feature most likely to be described as "solved, Shopify does it natively" by someone who has not yet hit the ceilings — which are real, documented, and arrive without warning.
+
+The useful question is not "can Shopify filter". It is "at what size does this stop working", and that question has numeric answers.
+
+## What Shopify actually gives you
+
+Storefront filtering is the native mechanism and it is capable. Filters are created by the merchant in the admin and rendered by the theme from the `collection` or `search` object. They can be based on:
+
+- Availability, price, category, product tags, product type, vendor
+- Variant options — colour, size, and whatever else the catalogue uses
+- Metafields, product-scoped or variant-scoped
+
+Applied filters live in the URL under a documented structure: `filter.p.*` for product-scoped facets, `filter.v.*` for variant-scoped ones, so `/collections/all?filter.p.product_type=shoes&filter.v.option.color=red` is a shareable, bookmarkable state. Filter values combine with **OR**, and separate filters combine with **AND**.
+
+That is a genuinely good default, and for most stores it is where the story ends.
+
+## The three ceilings
+
+**Twenty-five filters.** That is the documented maximum a merchant can create. It sounds generous until you count how a real catalogue spends them: colour, size, price, availability, brand, material, fit, sleeve, neckline, occasion, care, certification, country of origin — a well-merchandised apparel store is at twenty before it has considered anything seasonal. Filters are shop-wide, so every specialist facet a category needs is taken from the same budget.
+
+**Supported metafield types only.** A metafield-based filter can reference `single_line_text_field`, `list.single_line_text_field`, `metaobject_reference`, `list.metaobject_reference`, `number_integer`, `number_decimal` and `boolean`. That excludes a lot of the data merchants actually store — anything modelled as JSON, anything rich text, anything computed. The facet is not hard to build; it is not buildable, and the fix is a data migration rather than theme work.
+
+**Five thousand products.** This is the one that takes people by surprise.
+
+<Callout kind="limit">
+Collections that contain over 5,000 products don't display filters. Not degraded, not paginated differently — the filter UI is not rendered. The collection most likely to cross that line is `all`, which is also the collection your search results and your "shop everything" link lean on.
+</Callout>
+
+## The failure mode: it disappears rather than failing
+
+Every other limit on this site announces itself. This one does not. Nothing errors, no warning appears in the admin, and the theme has no obvious signal. A merchant who has been steadily adding products crosses five thousand in some ordinary week, and the filters on their largest collection simply stop being there.
+
+The people who notice are customers, by not converting.
+
+<Callout kind="gotcha">
+Track collection sizes as an operational metric, not as trivia. A catalogue growing at a few hundred products a quarter has a date on which its main collection stops being filterable, and that date is knowable months in advance. Finding out from a Search Console traffic dip is finding out late.
+</Callout>
+
+The related, slower failure is that filtered URLs multiply. Every combination is a distinct URL, and a large facet set generates far more of them than there are useful pages. That is a crawl budget problem before it is a ranking problem, and it wants a deliberate answer — which combinations are indexable, which are canonicalised away, which are blocked — rather than whatever the theme happens to emit.
+
+One small implementation note that costs people an afternoon: `filter_value.url_to_add` and `url_to_remove` strip pagination parameters. That is correct behaviour — changing a filter should return you to page one — and it means you cannot use them to build "keep my place" links.
+
+## What this looks like when it is right
+
+The facet set is small and merchandised. Ten filters that match how customers describe the product beat twenty-five that mirror the internal taxonomy, and the difference is visible in the click-through on each facet.
+
+Every filter shows result counts, and options that would return nothing are disabled rather than hidden — an empty result set that the customer walked into deliberately is a dead end they blame themselves for.
+
+Filter state is in the URL, so it survives sharing, the back button, and a page refresh on a train. On mobile the filter UI is a full-height sheet with an explicit apply, not a dropdown that reloads the grid on every tap.
+
+And when the catalogue outgrows the native mechanism, the move to an index is planned, scoped to the collections that need it, and fed from the same product data as everything else — rather than being an emergency in the week the filters vanished.

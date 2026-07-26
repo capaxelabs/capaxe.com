@@ -1,0 +1,76 @@
+---
+title: 'Quantity breaks and per-company pricing'
+slug: 'wholesale-price-tiers'
+category: 'b2b'
+problem: 'Every wholesale account has been quoted a different number, and the storefront has to show each buyer theirs without ever showing them anyone else’s.'
+description: 'How catalogs, price lists and quantity rules actually resolve, why there is no webhook when a price changes, and the caching mistake that shows one customer another customer’s pricing.'
+pubDate: 2026-07-26
+routes:
+  - method: 'app'
+    summary: 'A wholesale app gates the storefront behind a login and rewrites prices for tagged customers, usually with its own parallel catalog.'
+    cost: 'US$40–300/mo, a week to configure'
+    breaks: 'The app’s prices and Shopify’s prices are two sources of truth. They agree until a discount, a subscription, or a draft order asks Shopify directly — and then the buyer sees a number the app never showed them.'
+  - method: 'theme'
+    summary: 'Customer tags plus Liquid conditionals: read the tag, apply a percentage, render the result.'
+    cost: 'Two days, no recurring fee'
+    breaks: 'Immediately, at checkout. Liquid can display any number it likes; the customer is charged the catalog price. The two diverge silently and the buyer notices before you do.'
+  - method: 'custom'
+    summary: 'Model tiers as B2B catalogs and price lists, contextualise every storefront query with the buyer’s company location, and let Shopify resolve the price.'
+    cost: 'One engagement, Plus-tier plan required'
+    breaks: 'Nothing routinely — but there are no webhooks on catalog or price list changes, so anything you cache has to be invalidated on a schedule you decide rather than on an event Shopify sends.'
+related:
+  - 'b2b-vat-display'
+  - 'quote-request'
+---
+
+import Callout from '../../components/Callout.astro';
+
+{/*
+  Verified against shopify.dev. Layer in the wholesale build: how many tiers
+  were real vs. historical accident, and what the migration off tag-based
+  pricing cost.
+*/}
+
+A distributor's price list is not a marketing device. It is the outcome of a negotiation, it is often contractual, and the buyer on the other end has it open in a spreadsheet while they browse. Two things have to be true at once: this buyer sees their number, and no buyer ever sees another's. Most Shopify wholesale implementations get the first right and treat the second as a detail.
+
+## What Shopify actually gives you
+
+B2B on Shopify resolves pricing through **catalogs**. A catalog is a price list plus a publication, scoped by context — most usefully to a company location. The buyer is a company contact, they order on behalf of a location, and that location's catalogs determine both what they can see and what it costs.
+
+The model is more flexible than it first appears, because a company location can hold more than one catalog. That lets you separate the two concerns: pricing-only catalogs for each negotiated tier, publication-only catalogs for each product assortment. Fifty tiers across ten assortments is sixty catalogs, not five hundred.
+
+The resolution rules are worth memorising, because they are where surprises come from:
+
+- If several **pricing** catalogs apply, the buyer gets the **lowest** listed price. Not the most specific, not the most recently assigned. The lowest.
+- A product must be published in **at least one** applicable publication catalog to be visible at all. Priced but unpublished is invisible.
+- A price list's currency must match the market's currency. You cannot bolt a USD price list onto a market operating in INR.
+
+On top of price, B2B gives you **quantity rules** — `minimum`, `maximum` and `increment` per variant — and **quantity price breaks**, a set of `minimumQuantity` / `price` pairs. Both are exposed to the storefront on the contextualised variant, and both are enforced, not merely advisory: a cart line that violates the increment does not survive to a completed order.
+
+All of this only appears if the query asks in the buyer's context. A storefront query carrying the company location and the customer token gets B2B prices; the same query without them gets retail prices and no errors. That silence is the root of the next section.
+
+## The failure mode: a cache that does not know whose price it holds
+
+Contextual pricing and edge caching are on a collision course, and the collision is not a performance problem. It is a disclosure.
+
+A product page rendered for one company location contains that company's negotiated pricing. Cache it at the CDN keyed on URL — which is the default in every stack, including your own reverse proxy — and the next buyer to request that URL is served it. They now have a competitor's cost base. In a market where the same distributor supplies competing retailers, that is the kind of incident that ends a supply relationship rather than generating a bug report.
+
+<Callout kind="gotcha">
+Any response containing contextual pricing must be keyed on the buyer context or not cached at all. Vary on the company location, mark it private, and treat a B2B price the way you would treat an account balance — because commercially, that is what it is.
+</Callout>
+
+The second half of the problem is that Shopify will not tell you when it changes.
+
+<Callout kind="limit">
+There are no webhooks associated with changes to catalogs or price lists. A merchant can renegotiate a tier in the admin and nothing in your system is notified. Every cache, search index, feed and PDF quote built on top of B2B pricing is stale from that moment until something re-reads it.
+</Callout>
+
+This is why "we'll cache the catalog nightly" is a decision that needs stating out loud rather than assuming. Pair it with a rebuild the merchant can trigger themselves after a price change, and read the price lists back with pagination — the catalog price lists query returns at most 250 entries per request.
+
+## What this looks like when it is right
+
+The buyer signs in and the storefront is theirs: their assortment, their prices, their minimums, with the tier they are on stated plainly rather than inferred from the number. Price breaks are shown as a ladder on the product page — *10+ ₹840, 50+ ₹790* — because a purchasing manager who can see the next break buys to it, and one who cannot buys ten.
+
+Quantity rules are enforced in the UI the way they will be enforced at checkout: the stepper moves in increments of six because the case pack is six, and the buyer never meets an error message explaining what they should have known.
+
+Nothing on the page was computed by the theme. The number the buyer reads is the number the checkout will charge, because both came from the same catalog. And when the merchant changes a tier, there is a documented, bounded window before the storefront agrees — a window you chose, and can state.

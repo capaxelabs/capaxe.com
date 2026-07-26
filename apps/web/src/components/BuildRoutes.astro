@@ -1,0 +1,69 @@
+---
+/**
+ * The three-routes block on every pattern page: buy an app, hack the theme,
+ * or build it properly. This is the section app-vendor content marketing
+ * cannot credibly reproduce, so it gets a fixed, recognisable shape.
+ */
+export type Route = {
+  method: "app" | "theme" | "custom";
+  summary: string;
+  cost?: string;
+  breaks?: string;
+};
+
+interface Props {
+  routes: Route[];
+}
+
+const { routes } = Astro.props;
+
+const labels = {
+  app: "Buy an app",
+  theme: "Hack the theme",
+  custom: "Build it properly",
+} as const;
+---
+
+{
+  routes.length > 0 && (
+    <div class="my-10 grid gap-4 sm:grid-cols-[repeat(auto-fit,minmax(240px,1fr))]">
+      {routes.map((r) => (
+        <section
+          class:list={[
+            "rounded-xl border bg-card p-5",
+            r.method === "custom" ? "border-primary-500" : "border-border",
+          ]}
+        >
+          <p
+            class:list={[
+              "m-0 mb-2 text-[1.05rem] font-bold",
+              r.method === "custom" ? "text-primary-400" : "text-foreground",
+            ]}
+          >
+            {labels[r.method]}
+          </p>
+          <p class="m-0 mb-4 text-[0.92rem] leading-relaxed text-muted-foreground">
+            {r.summary}
+          </p>
+
+          {r.cost && (
+            <p class="m-0 mb-1.5 grid grid-cols-[6.5rem_1fr] gap-2 text-[0.82rem] text-muted-foreground">
+              <span class="pt-0.5 text-xs font-semibold uppercase tracking-wider">
+                Cost
+              </span>
+              <span>{r.cost}</span>
+            </p>
+          )}
+          {r.breaks && (
+            <p class="m-0 grid grid-cols-[6.5rem_1fr] gap-2 text-[0.82rem] text-muted-foreground">
+              <span class="pt-0.5 text-xs font-semibold uppercase tracking-wider">
+                Breaks when
+              </span>
+              <span>{r.breaks}</span>
+            </p>
+          )}
+        </section>
+      ))}
+    </div>
+  )
+}

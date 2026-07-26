@@ -1,0 +1,45 @@
+---
+interface Props {
+  /**
+   * gotcha — the thing that bites you in production
+   * limit  — a hard platform constraint
+   * note   — neutral aside
+   */
+  kind?: "gotcha" | "limit" | "note";
+  title?: string;
+}
+
+const { kind = "note", title } = Astro.props;
+
+const defaults = {
+  gotcha: "Where this bites",
+  limit: "Platform limit",
+  note: "Note",
+} as const;
+
+const tone = {
+  gotcha: "border-l-primary-500 bg-primary-500/5",
+  limit: "border-l-foreground bg-muted",
+  note: "border-l-border bg-muted",
+} as const;
+
+const label = {
+  gotcha: "text-primary-400",
+  limit: "text-foreground",
+  note: "text-muted-foreground",
+} as const;
+---
+
+<aside class:list={["my-7 rounded-r-lg border-l-2 px-5 py-4", tone[kind]]}>
+  <p
+    class:list={[
+      "m-0 mb-2 text-xs font-semibold uppercase tracking-wider",
+      label[kind],
+    ]}
+  >
+    {title ?? defaults[kind]}
+  </p>
+  <div class="text-[0.95rem] leading-relaxed [&>*+*]:mt-3 [&>:last-child]:mb-0">
+    <slot />
+  </div>
+</aside>

@@ -1,0 +1,86 @@
+---
+title: 'Replacing the email flow stack with WhatsApp'
+slug: 'whatsapp-first-flows'
+category: 'ops'
+problem: 'In markets where nobody opens email, the abandoned-cart flow that works everywhere else is talking to an empty room.'
+description: 'What it takes to run recovery and post-purchase messaging over WhatsApp: consent that lives in two systems, the 24-hour window, and the redacted phone number your integration reads as absent.'
+pubDate: 2026-07-26
+routes:
+  - method: 'app'
+    summary: 'A WhatsApp marketing app connects a Business Platform number and ships templated abandoned-cart, COD-confirmation and delivery flows.'
+    cost: 'US$25–200/mo plus per-conversation charges'
+    breaks: 'Consent is now recorded in the app and in Shopify, and they do not agree. A customer who opts out inside WhatsApp stays subscribed in Shopify — and gets messaged again by the next tool you install.'
+  - method: 'theme'
+    summary: 'A floating chat button that opens WhatsApp with a prefilled message.'
+    cost: 'An hour, no recurring fee'
+    breaks: 'It is a contact link, not a flow. There is no trigger, no state, and no way to reach a customer who has already left the site — which is the entire job.'
+  - method: 'custom'
+    summary: 'One consent record on the customer, one integration to the Business Platform, and templates triggered from your own event stream.'
+    cost: 'One engagement plus per-conversation charges'
+    breaks: 'Nothing routinely — but every template is approved by Meta before it can send, so message copy is a release with a lead time, not a Tuesday afternoon edit.'
+related:
+  - 'back-in-stock'
+---
+
+import Callout from '../../components/Callout.astro';
+
+{/*
+  Shopify-side mechanics verified against shopify.dev; Business Platform
+  behaviour is Meta's and moves — re-check the window and template rules before
+  quoting them to a client. Layer in the real recovery-rate delta.
+*/}
+
+The abandoned-cart email is one of the most reliably profitable objects in ecommerce, and in large parts of India, Brazil, Indonesia and the Gulf it is close to worthless. Not because the tactic is wrong, but because the channel is dead: the address was given to get an order confirmation, the inbox is a filing cabinet nobody opens, and the message that would have recovered the sale is sitting in it. Meanwhile the same customer answers a WhatsApp message in ninety seconds.
+
+Moving the flow stack to WhatsApp is therefore not a nice-to-have in those markets. It is the difference between having recovery and not having it. It is also considerably more constrained than the email version, and the constraints are the interesting part.
+
+## What Shopify actually gives you
+
+Shopify's own marketing automations speak email and SMS. There is no native WhatsApp channel, so the sending side is always Meta's WhatsApp Business Platform, reached through a provider. What Shopify contributes is the customer record, the events, and the consent model — and the consent model is the half people skip.
+
+SMS consent is a first-class field: `customerSmsMarketingConsentUpdate` sets a marketing state and an opt-in level, records when consent was collected, and can record where. It has one hard prerequisite — the customer must have a phone number on their record, and it must be unique. No phone, no consent to store.
+
+That is the mechanism you should be reusing, even though the channel is not SMS, because the alternative is a consent flag inside a vendor's database that no other system can see.
+
+## The failure mode: redaction looks exactly like absence
+
+This one is specific to WhatsApp work because WhatsApp work is phone-number work, and phone numbers are protected customer data.
+
+Shopify classifies customer data in levels. Level 1 is customer data excluding name, address, phone and email. Level 2 is the one that includes them, and it must be requested field by field and approved. A public app that has not been approved for the phone field does not get an error you can trip over. It gets this:
+
+```
+{
+  "data": { "customer": { "email": "buyer@example.com", "phone": null } },
+  "errors": [{ "message": "This app is not approved to access the Customer object.", "path": ["customer","phone"] }]
+}
+```
+
+HTTP 200. A `data` object that parses cleanly. `phone: null`.
+
+<Callout kind="gotcha">
+Every integration written the obvious way — `if (!customer.phone) skip()` — treats an unapproved field as a customer without a phone number. The flow does not crash, it does not alert, it silently reaches nobody, and the dashboard shows a channel with plausible-looking low volume. Read the `errors` array even on a 200, and fail loudly when a field you depend on has been redacted.
+</Callout>
+
+Custom apps are the usual way out: level 1 and level 2 access are available to them without going through public app review. If the integration only ever serves one merchant, build it as a custom app and skip the queue.
+
+## The window, and what it does to your flow design
+
+Meta's platform is not an SMS gateway with nicer bubbles. Two rules shape everything:
+
+**The customer service window.** Once a customer messages you, there is a bounded window — 24 hours at the time of writing — in which you can reply with free-form content. Outside it, you may only send pre-approved templates. Support conversations therefore have a natural rhythm and marketing conversations do not.
+
+**Template approval.** Anything you send to open a conversation is a template reviewed by Meta before use. Variables are slots, not free text. This is the constraint that surprises marketing teams: the copy change they would have shipped in an hour on email is a submission with a review turnaround, so the message catalogue has to be designed as a stable set of shapes rather than rewritten per campaign.
+
+Both rules push you toward utility messaging — order confirmed, payment pending, out for delivery, COD confirmation — which is also where WhatsApp earns its place. In a COD market, a confirmation message that converts an order from *placed* to *confirmed* before dispatch pays for the entire channel in avoided returns, and it is a category no email flow was ever going to win.
+
+<Callout kind="limit">
+Consent gathered on WhatsApp and consent stored in Shopify are two records, and only one of them is checked by the next tool the merchant installs. If an opt-out inside WhatsApp does not write back to the customer record, the merchant will eventually message someone who told them to stop — and in most jurisdictions that is a regulatory problem, not an inbox problem.
+</Callout>
+
+## What this looks like when it is right
+
+There is exactly one place a customer's messaging consent is recorded, it is on the Shopify customer, and every channel reads it before sending. Opt-out anywhere writes back there within minutes.
+
+The number the customer sees is verified, branded, and answered by a human during business hours — because a template that opens a conversation the merchant then ignores is worse than no message. Flows are utility-first: the transactional sequence earns the right to the channel, and promotional sends are rare enough that the thread does not become something to mute.
+
+And every message is bilingual in the way the market actually is — the language the customer typed in, not the language of the merchant's head office.

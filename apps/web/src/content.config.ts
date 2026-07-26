@@ -48,6 +48,38 @@ const caseStudies = defineCollection({
 	}),
 });
 
+const buildMethod = z.enum(['app', 'theme', 'custom']);
+
+const patterns = defineCollection({
+	// Long-form pattern essays: a commerce problem, the platform's real limits,
+	// the failure mode that bites in production, and the three ways to build it.
+	loader: glob({ base: './src/content/patterns', pattern: '**/*.{md,mdx}' }),
+	schema: z.object({
+		title: z.string(),
+		slug: z.string(),
+		category: z.enum(['pdp', 'collection', 'cart', 'checkout', 'b2b', 'ops']),
+		/** One sentence; used as the meta description and in listings. */
+		problem: z.string(),
+		description: z.string(),
+		pubDate: z.coerce.date(),
+		updatedDate: z.coerce.date().optional(),
+		/** Rendered as the three-routes block. */
+		routes: z
+			.array(
+				z.object({
+					method: buildMethod,
+					summary: z.string(),
+					cost: z.string().optional(),
+					breaks: z.string().optional(),
+				}),
+			)
+			.default([]),
+		/** Related pattern slugs, for internal linking. */
+		related: z.array(z.string()).default([]),
+		draft: z.boolean().default(false),
+	}),
+});
+
 const projects = defineCollection({
 	loader: glob({ base: './src/content/projects', pattern: '**/*.{md,mdx}' }),
 	schema: z.object({
@@ -64,4 +96,4 @@ const projects = defineCollection({
 	}),
 });
 
-export const collections = { blog, caseStudies, projects };
+export const collections = { blog, caseStudies, projects, patterns };
