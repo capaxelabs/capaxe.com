@@ -19,6 +19,10 @@ export const menuConfig: MenuConfig = {
             href: "/case-studies",
         },
         {
+            title: "Patterns",
+            href: "/patterns",
+        },
+        {
             title: "About",
             href: "/about",
         },
@@ -51,6 +55,10 @@ export const menuConfig: MenuConfig = {
             {
                 title: "Projects",
                 href: "/projects",
+            },
+            {
+                title: "Patterns",
+                href: "/patterns",
             },
             {
                 title: "Blog",
