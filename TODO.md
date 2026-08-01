@@ -6,6 +6,9 @@
 - [x] Add Official Partners section on home page (GoKwik, FoxSell Bundle, Shiprocket, Razorpay, etc.)
 
 ## Bug Fixes
+- [x] Fix header nav wrapping ("Case Studies" broke to two lines after adding Patterns) — widened container to max-w-6xl, tightened gaps, moved desktop nav from md to lg breakpoint
+- [x] Fix footer wordmark clipping the final "s" in "Labs" — replaced hand-tuned 17.4cqw with a measured auto-fit that accounts for trailing negative tracking
+- [ ] Load a real webfont for `--font-sans` — "Inter" is declared in global.css but never loaded, so all type falls back to the OS sans-serif
 - [x] Verify dark-on-dark contrast for select/option elements in consultation form
 - [x] Fix ContactFormReact dark mode contrast (hardcoded light colors → theme-aware bento classes)
 - [x] Test all modals (Cal.com booking, chat contact) on dark background

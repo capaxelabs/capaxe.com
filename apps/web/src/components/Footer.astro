@@ -131,7 +131,9 @@ const currentYear = new Date().getFullYear();
   }
 
   .footer-brand-line {
-    font-size: 17.4cqw;
+    /* Conservative fallback until the fitter sizes it exactly, so the wordmark
+       can never clip on first paint. */
+    font-size: 16.4cqw;
   }
 
   @keyframes labs-reveal {
@@ -172,6 +174,47 @@ const currentYear = new Date().getFullYear();
     function initFooterBrand() {
       var brand = document.getElementById("footer-brand");
       if (!brand) return;
+
+      var line = brand.querySelector(".footer-brand-line");
+
+      // Size the wordmark from its measured width instead of a hand-tuned cqw
+      // value, so it fills the container exactly in whatever font resolves.
+      function fitBrand() {
+        if (!line) return;
+        var styles = getComputedStyle(brand);
+        var available =
+          brand.clientWidth - parseFloat(styles.paddingLeft) - parseFloat(styles.paddingRight);
+        if (!available) return;
+
+        // The line is block-level, so measure the text itself rather than the box.
+        var probe = 100;
+        line.style.fontSize = probe + "px";
+        var range = document.createRange();
+        range.selectNodeContents(line);
+        var textWidth = range.getBoundingClientRect().width;
+        if (!textWidth) return;
+
+        // Negative tracking is applied after the last glyph as well, so the ink
+        // runs that much wider than the box the range reports.
+        var overhang = Math.abs(parseFloat(getComputedStyle(line).letterSpacing) || 0);
+
+        // 0.995 keeps a sub-pixel margin so rounding never pushes ink into the clip.
+        line.style.fontSize = (probe * available * 0.995) / (textWidth + overhang) + "px";
+      }
+
+      // Resizing the line changes the container's height, which would re-trigger
+      // the observer — only refit when the width actually changed.
+      var lastWidth = 0;
+      function refitOnWidthChange() {
+        if (brand.clientWidth === lastWidth) return;
+        lastWidth = brand.clientWidth;
+        fitBrand();
+      }
+
+      refitOnWidthChange();
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitBrand);
+      if (window.ResizeObserver) new ResizeObserver(refitOnWidthChange).observe(brand);
+      else window.addEventListener("resize", refitOnWidthChange);
 
       var observer = new IntersectionObserver(
         function (entries) {
