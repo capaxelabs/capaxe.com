@@ -7,6 +7,8 @@ import { createSEO } from "@/utils/seo";
 
 const faqs = [
   { question: "What does Shopify maintenance include?", answer: "Our maintenance covers theme updates, security patches, performance monitoring, bug fixes, and regular backups. We keep your store running smoothly so you can focus on sales." },
+  { question: "How much do Shopify maintenance packages cost?", answer: "Packages are shaped around your store's size and how much changes each month. A content-stable store needs less than one shipping weekly campaigns. We share a clear monthly price after a short review of your store — no surprise invoices." },
+  { question: "What should a Shopify website maintenance checklist cover?", answer: "At minimum: theme and app update testing, broken link and 404 checks, page speed monitoring, checkout testing, backup verification, and security review. We run this checklist on every store we maintain — see our full Shopify store maintenance checklist on the blog." },
   { question: "How quickly do you respond to urgent issues?", answer: "Critical issues get a response within 2-4 hours during business days. We also offer priority support plans with faster SLAs for high-traffic stores." },
   { question: "Do you offer monthly maintenance plans?", answer: "Yes, we offer flexible retainer plans with a set number of hours per month for ongoing updates, fixes, and small feature additions." },
   { question: "Can you help with Shopify app updates and compatibility?", answer: "Absolutely. We test app updates before applying them, resolve conflicts between apps, and ensure everything works together after Shopify platform updates." },
@@ -14,9 +16,9 @@ const faqs = [
 ];
 
 const seo = createSEO({
-  pageName: "Shopify Maintenance",
-  description: "Keep your Shopify store running at peak performance with our ongoing maintenance and support services. We handle theme updates, security patches, performance optimization, and custom development so you can focus on growing your business.",
-  keywords: "shopify maintenance, ecommerce maintenance, website maintenance, shopify support, e-commerce maintenance",
+  pageName: "Shopify Maintenance & Support Packages",
+  description: "Shopify maintenance packages covering theme updates, security patches, performance monitoring, backups, and bug fixes. Monthly plans with fast response SLAs.",
+  keywords: "shopify maintenance, shopify maintenance packages, shopify website maintenance, shopify store maintenance, shopify support and maintenance services, shopify maintenance checklist",
   image: "/images/services/shopify-maintenance.jpg",
   contentType: "service",
   pathname: "/services/shopify/maintenance-support"
@@ -31,9 +33,9 @@ const seo = createSEO({
           <span class="inline-block px-3 py-1 rounded-full bg-white/10 text-white/80 text-xs font-medium mb-4 border border-white/20">
             Ongoing Support
           </span>
-          <h1 class="text-5xl md:text-6xl font-bold mb-4">Maintenance & Support</h1>
+          <h1 class="text-5xl md:text-6xl font-bold mb-4">Shopify Maintenance & Support</h1>
           <p class="text-lg text-white/60 max-w-2xl mx-auto">
-            Custom Shopify solutions to help your business grow online with reliable maintenance and expert support.
+            Monthly maintenance packages that keep your Shopify store fast, secure, and up to date — theme updates, security patches, monitoring, and expert support.
           </p>
         </div>
       </div>
@@ -41,19 +43,44 @@ const seo = createSEO({
 
     <section class="pb-8 px-6">
       <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6 text-foreground text-center">What Our Shopify Maintenance Packages Include</h2>
         <div class="bento-grid grid-cols-1 md:grid-cols-3">
           <div class="bento-tile text-center">
-            <h2 class="text-xl font-semibold text-foreground mb-2">Custom Theme Development</h2>
-            <p class="text-sm text-muted-foreground">Unique, responsive themes tailored to your brand and business needs.</p>
+            <h3 class="text-xl font-semibold text-foreground mb-2">Theme & App Updates</h3>
+            <p class="text-sm text-muted-foreground">Theme updates tested on staging before going live, plus app compatibility checks after every Shopify platform release.</p>
           </div>
           <div class="bento-tile-accent text-center">
-            <h2 class="text-xl font-semibold mb-2">App Development</h2>
-            <p class="text-sm text-white/70">Custom Shopify apps to extend your store's functionality.</p>
+            <h3 class="text-xl font-semibold mb-2">Security & Backups</h3>
+            <p class="text-sm text-white/70">Security patches, access reviews, and verified backups so a bad update or breach never takes your store down.</p>
           </div>
           <div class="bento-tile text-center">
-            <h2 class="text-xl font-semibold text-foreground mb-2">Store Optimization</h2>
-            <p class="text-sm text-muted-foreground">Performance optimization and conversion rate improvements.</p>
+            <h3 class="text-xl font-semibold text-foreground mb-2">Performance Monitoring</h3>
+            <p class="text-sm text-muted-foreground">Core Web Vitals tracking, page speed checks, and fixes before slowdowns cost you conversions.</p>
           </div>
+          <div class="bento-tile text-center">
+            <h3 class="text-xl font-semibold text-foreground mb-2">Bug Fixes</h3>
+            <p class="text-sm text-muted-foreground">Broken layouts, checkout issues, and Liquid errors fixed with a 2-4 hour response on critical problems.</p>
+          </div>
+          <div class="bento-tile text-center">
+            <h3 class="text-xl font-semibold text-foreground mb-2">Small Improvements</h3>
+            <p class="text-sm text-muted-foreground">A monthly hours budget for section tweaks, new banners, and small features — no separate quotes for every request.</p>
+          </div>
+          <div class="bento-tile-accent text-center">
+            <h3 class="text-xl font-semibold mb-2">Monthly Reporting</h3>
+            <p class="text-sm text-white/70">A plain-English report of what was updated, fixed, and monitored — you always know what you're paying for.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-8 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-tile">
+          <h2 class="text-2xl font-bold text-foreground mb-3">Prefer to handle maintenance yourself?</h2>
+          <p class="text-sm text-muted-foreground mb-4">
+            We published the exact checklist we run on client stores — weekly, monthly, and quarterly tasks for keeping a Shopify store healthy. If you'd rather have a team own it end to end, our <a href="/engagements" class="text-primary-500 hover:underline">engagement plans</a> cover maintenance as part of an ongoing partnership.
+          </p>
+          <a href="/blog/shopify-store-maintenance-checklist" class="text-primary-500 font-medium hover:underline">Read the Shopify store maintenance checklist →</a>
         </div>
       </div>
     </section>

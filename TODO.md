@@ -263,6 +263,68 @@ Simple geometric shapes. Elegant, modern, SaaS-style.
 - [ ] Decide free vs paid teardown CTA destination
 - [ ] Decide logo path: A only / A + parallel B / straight to B
 
+## GSC Query Optimization — August 2026
+
+### Features
+- [x] Retarget /services/shopify-hydrogen-development to "hire shopify hydrogen developers" (title, H1, hire-intent FAQs)
+- [x] Rebuild /services/shopify/maintenance-support for the maintenance cluster (packages tiles, checklist link, cost FAQ)
+- [x] Weave "Shopify retainer" into /engagements title, meta, and FAQ without breaking positioning
+- [x] Retarget custom app dev page to "custom shopify app development services" + private-app FAQ
+- [x] Tighten /hire-shopify-developer title; add "hire liquid developers" FAQ
+- [x] Comparison template: 2026 in title, reverse-order phrasing, "How does X compare to Y" FAQ
+- [x] Comparison template: optional pricing, best-for, and switching-notes sections
+- [x] Enrich top 5 comparisons (klaviyo-mailchimp, postscript-attentive, recharge-skio, recharge-loop, yotpo-stamped)
+- [x] LiquidDoc post: exact-match "@param Valid Types" section with table (targets ~1,190 imps)
+- [x] Embla vs Swiper post: "Swiper.js Alternatives" section
+
+### Bug Fixes
+- [x] Canonical reverse-order duplicate comparisons (mailchimp-vs-klaviyo, omnisend-vs-klaviyo, attentive-vs-postscript) to primaries
+- [x] Fix LiquidDoc post syntax: {% comment %}/@name → official {% doc %} tag
+- [x] Fix retainer post linking to redirecting /retainer URL → /engagements
+- [x] De-cannibalize "best subscription apps": category page defers to blog guide; guide links to comparisons
+
+### Pending (next GSC iteration)
+- [ ] Add "alternatives" page type (/shopify/alternatives/[app]) for carthook/recharge/algolia alternative queries
+- [ ] Editorial depth for klaviyo-vs-postscript, recharge-vs-bold, recharge-vs-appstle, yotpo-vs-judge-me clusters
+- [ ] Spanish variant of maintenance page (mantenimiento shopify, ~120 imps)
+- [ ] Re-export GSC with position data to find pages at positions 5–15
+
+## Bee Apps Content Plan — Blog + Comparisons (August 2026)
+Full plan with 36 blog posts (6 per category), keywords, and promo angles: docs/bee-apps-content-plan.md
+Publish on capaxe.com reusing app-seo.ts infra; add Bee apps as ShopifyApp entries with an "our app" disclosure flag. Each piece links to the App Store listing.
+
+### Phase 1 — RankFlo + Bee AI SEO (shipped Aug 2026)
+- [x] Add merchandising + ai-seo categories and 8 app entries to app-seo.ts (isOwnApp + appStoreUrl fields)
+- [x] Compare: RankFlo vs Kimonix, RankFlo vs Bestsellers reSort, RankFlo vs Boost AI Search
+- [x] Blog: "Shopify Collection Sorting: The Complete Merchandising Guide"
+- [x] Blog: "How to Push Sold-Out Products Down in Shopify Collections"
+- [x] Compare: Bee AI SEO vs LLM Rank, vs Avada AEO, vs FSEO
+- [x] Blog: "How to Get Your Shopify Products Recommended by ChatGPT"
+- [x] Blog: "llms.txt for Shopify: What It Is and How to Set It Up"
+- [x] Own-app disclosure block + App Store links in comparison template
+- [ ] Add hero images for the 4 new posts (currently using /shopify-capaxe-labs.png placeholder)
+- [ ] Add UTM params to App Store links once attribution tracking is agreed
+
+### Phase 2 — Bee Invoice + Bee Migration
+- [ ] Compare: Bee Invoice vs Sufio, vs Order Printer Pro, vs Vify
+- [ ] Blog: "Shopify Invoicing Guide: Order Printer vs Dedicated Invoice Apps"
+- [ ] Blog: "GST/VAT-Compliant Invoices on Shopify"
+- [ ] Compare: Bee Migration vs LitExtension, vs Cart2Cart, vs Matrixify
+- [ ] Blog: "Dukaan to Shopify Migration: Step-by-Step Guide" (low-competition niche)
+- [ ] Blog: "Magento to Shopify Migration Guide" (companion to existing WooCommerce guide)
+
+### Phase 3 — Bee Gifting + ShootFlo
+- [ ] Compare: Bee Gifting vs Giftship, vs Gipht, vs AnyGift
+- [ ] Blog: "How to Let Customers Send Gifts Without a Shipping Address on Shopify"
+- [ ] Blog: "Corporate & Bulk Gifting on Shopify"
+- [ ] Compare: ShootFlo vs AdCreative.ai, vs Creatify, vs Predis.ai
+- [ ] Blog: "AI Ad Creatives for Shopify: Product Photos to TikTok/Instagram Ads"
+
+### Infra
+- [ ] Add `isOwnApp` flag + disclosure line to comparison template
+- [ ] Hub page listing all Bee Apps with App Store links
+- [ ] Cross-link RankFlo content with existing /patterns/faceted-filtering + searchspring/algolia comparisons
+
 ## SEO Overhaul (Completed)
 - [x] Fix robots meta triple-output bug in SEO.astro
 - [x] Add schema array support in SEO.astro

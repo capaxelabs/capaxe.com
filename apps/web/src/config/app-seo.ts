@@ -14,6 +14,8 @@ export interface ShopifyApp {
   integrationBenefits: string[];
   metaDescription: string;
   services: AppService[];
+  isOwnApp?: boolean;
+  appStoreUrl?: string;
 }
 
 export interface AppComparison {
@@ -23,6 +25,10 @@ export interface AppComparison {
   category: string;
   verdict: string;
   metaDescription: string;
+  canonicalOf?: string;
+  pricing?: { app1: string; app2: string };
+  bestFor?: { app1: string; app2: string };
+  switchingNotes?: string;
 }
 
 export interface AppCategory {
@@ -57,7 +63,7 @@ const customizationService: AppService = {
   description: "Custom templates, advanced flows, and bespoke feature builds tailored to your brand requirements."
 };
 
-export const shopifyApps: ShopifyApp[] = [
+const baseApps: ShopifyApp[] = [
   {
     slug: "klaviyo",
     name: "Klaviyo",
@@ -750,6 +756,200 @@ export const shopifyApps: ShopifyApp[] = [
   }
 ];
 
+export const merchandisingAndAiSeoApps: ShopifyApp[] = [
+  {
+    slug: "rankflo",
+    name: "RankFlo",
+    category: "merchandising",
+    isOwnApp: true,
+    appStoreUrl: "https://apps.shopify.com/rankflo",
+    shortDescription: "Collection sorting and merchandising that ranks products by similarity, popularity, and stock automatically.",
+    description: "RankFlo turns static Shopify collections into ranked, revenue-aware product listings. It sorts by attributes like colour, type, and popularity, pushes bestsellers up, and drops out-of-stock products down — with no theme edits or code. Built by our team at Capaxe Labs for stores whose catalogues have outgrown Shopify's native sort options.",
+    features: [
+      "One-click ranking with pre-built merchandising templates",
+      "Automatic bestseller promotion and out-of-stock demotion",
+      "No-code setup that works with any Shopify theme",
+      "Real-time collection updates as inventory and sales change",
+      "Per-collection analytics tracking revenue and conversion impact",
+      "Custom ranking weights and elimination rules on higher tiers",
+      "A/B testing across collections with statistical significance reporting"
+    ],
+    integrationBenefits: [
+      "Get collection sort rules configured around your actual margin and stock priorities",
+      "Pair automated ranking with faceted filtering for a complete discovery experience",
+      "Set up A/B tests that prove which merchandising strategy earns more revenue",
+      "Connect collection performance data to your wider analytics stack"
+    ],
+    metaDescription: "RankFlo collection sorting for Shopify — automatic merchandising, bestseller promotion, and out-of-stock demotion. Setup and strategy services.",
+    services: [setupService, optimizationService, customizationService]
+  },
+  {
+    slug: "kimonix",
+    name: "Kimonix",
+    category: "merchandising",
+    shortDescription: "AI collection sorting, merchandising, and 1:1 personalization in one platform.",
+    description: "Kimonix is the established leader in Shopify AI merchandising. It combines algorithmic collection sorting with personalization, drawing on live sales, inventory, and demand data to build and reorder collections automatically. It also handles smart collection creation and A/B testing across merchandising strategies.",
+    features: [
+      "AI-driven collection sorting using sales, margin, and inventory signals",
+      "1:1 personalized collection ordering per shopper",
+      "Smart collection builder with rule-based conditions",
+      "A/B testing across sorting strategies",
+      "Inventory-aware merchandising that reacts to stock levels",
+      "Multi-strategy merchandising per collection"
+    ],
+    integrationBenefits: [
+      "Configure AI sorting strategies that match your margin priorities",
+      "Set up personalization rules without over-fragmenting your catalogue",
+      "Interpret A/B test results correctly before rolling changes site-wide",
+      "Integrate Kimonix ordering with your theme's collection templates"
+    ],
+    metaDescription: "Kimonix setup and optimization for Shopify — AI collection sorting, merchandising strategy, and personalization configuration.",
+    services: [setupService, migrationService, optimizationService]
+  },
+  {
+    slug: "bestsellers-resort",
+    name: "Bestsellers reSort",
+    category: "merchandising",
+    shortDescription: "Rule-based collection auto-sorting by sales, revenue, and inventory.",
+    description: "Bestsellers reSort by EGNITION is the budget specialist in Shopify collection sorting. It automatically organizes products within collections using rules based on sales performance, revenue, and inventory levels. It focuses on doing rule-based sorting well rather than adding personalization or AI layers.",
+    features: [
+      "Automatic sorting by sales volume, revenue, or inventory",
+      "Push out-of-stock products to the bottom of collections",
+      "Scheduled re-sorting on a recurring basis",
+      "Multiple sorting rules across different collections",
+      "Free plan for small catalogues",
+      "Straightforward setup with no theme changes"
+    ],
+    integrationBenefits: [
+      "Choose sorting rules that reflect how your catalogue actually sells",
+      "Schedule re-sorts around your restock and campaign calendar",
+      "Combine sorting rules with collection structure improvements",
+      "Migrate to a more advanced merchandising tool when you outgrow rules"
+    ],
+    metaDescription: "Bestsellers reSort setup for Shopify — rule-based collection sorting by sales, revenue, and stock levels.",
+    services: [setupService, optimizationService]
+  },
+  {
+    slug: "boost-ai-search",
+    name: "Boost AI Search & Filter",
+    category: "merchandising",
+    shortDescription: "Search and filtering platform with merchandising controls layered on top.",
+    description: "Boost AI Search & Filter is primarily a search-and-filter app for Shopify, with collection merchandising built in as a secondary capability. If your main problem is on-site search and faceted filtering — and you want merchandising controls in the same tool — Boost covers both from one dashboard.",
+    features: [
+      "AI-powered on-site search with typo tolerance and synonyms",
+      "Faceted filtering by tag, metafield, price, and variant options",
+      "Collection merchandising rules and manual pinning",
+      "Product boosting and burying by rule",
+      "Search analytics showing zero-result and top queries",
+      "Instant search suggestions"
+    ],
+    integrationBenefits: [
+      "Configure filters around metafields your catalogue actually uses",
+      "Tune search relevance and synonyms for your product vocabulary",
+      "Combine search merchandising with collection sorting strategy",
+      "Ensure filter URLs stay crawl-friendly and don't create index bloat"
+    ],
+    metaDescription: "Boost AI Search & Filter setup for Shopify — search relevance, faceted filtering, and collection merchandising configuration.",
+    services: [setupService, migrationService, optimizationService, customizationService]
+  },
+  {
+    slug: "bee-ai-seo",
+    name: "Bee AI SEO",
+    category: "ai-seo",
+    isOwnApp: true,
+    appStoreUrl: "https://apps.shopify.com/bee-llms-seo",
+    shortDescription: "llms.txt, JSON-LD, and AEO audits so AI search engines can find and cite your products.",
+    description: "Bee AI SEO helps Shopify stores get discovered inside ChatGPT, Perplexity, Claude, and Google AI Overviews. It generates and auto-refreshes llms.txt, adds JSON-LD structured data, and runs AEO audits that check whether AI crawlers can actually reach your store. Built by our team at Capaxe Labs — unlike single-purpose llms.txt generators, it verifies bot access and flags the missing metadata behind poor AI visibility.",
+    features: [
+      "Auto-generated and auto-refreshed llms.txt that stays in sync with your catalogue",
+      "AEO audit with health score and prioritized fixes",
+      "AI bot accessibility testing that flags what's blocking crawlers",
+      "Product and page scans for missing or weak meta tags",
+      "One-click theme injection for JSON-LD, Open Graph, and AI meta tags",
+      "Breadcrumb and indexing checks alongside traditional SEO signals"
+    ],
+    integrationBenefits: [
+      "Audit whether AI crawlers can currently reach and parse your catalogue",
+      "Fix the structured data gaps that keep products out of AI answers",
+      "Align llms.txt content with the products you actually want recommended",
+      "Combine AEO fixes with technical SEO work on the same store"
+    ],
+    metaDescription: "Bee AI SEO for Shopify — llms.txt, JSON-LD, and AEO audits that get your products cited by ChatGPT, Perplexity, and AI Overviews.",
+    services: [setupService, optimizationService, customizationService]
+  },
+  {
+    slug: "llm-rank",
+    name: "LLM Rank",
+    category: "ai-seo",
+    shortDescription: "AI visibility app generating llms.txt, llms-full.txt, and agents.md with crawler controls.",
+    description: "LLM Rank focuses on AI visibility for Shopify stores, auto-generating llms.txt, llms-full.txt, and agents.md so ChatGPT, Claude, Gemini, and AI agents can parse your catalogue. Its higher tier adds featured product controls and granular AI crawler management.",
+    features: [
+      "Auto-generated llms.txt, llms-full.txt, and agents.md",
+      "Featured product controls for AI recommendations",
+      "AI agent instruction files",
+      "100+ crawler controls on the Pro plan",
+      "Support for ChatGPT, Claude, Gemini, and agent traffic",
+      "Automatic refresh as the catalogue changes"
+    ],
+    integrationBenefits: [
+      "Decide which products to feature in AI-facing files",
+      "Configure crawler controls without blocking useful AI traffic",
+      "Keep agents.md instructions aligned with your merchandising strategy",
+      "Pair AI file generation with structured data fixes on the theme"
+    ],
+    metaDescription: "LLM Rank setup for Shopify — llms.txt, agents.md, and AI crawler controls for ChatGPT, Claude, and Gemini visibility.",
+    services: [setupService, optimizationService]
+  },
+  {
+    slug: "avada-aeo",
+    name: "Avada AEO Optimizer",
+    category: "ai-seo",
+    shortDescription: "Fast llms.txt setup for the major AI assistants, from an established Shopify app studio.",
+    description: "Avada AEO Optimizer generates llms.txt for ChatGPT, Claude, Gemini, and Perplexity with a setup process that takes under ten minutes. It comes from Avada, a long-established Shopify app developer, which appeals to merchants who prefer a vendor with a broad existing app portfolio.",
+    features: [
+      "llms.txt generation for the major AI assistants",
+      "Setup in under ten minutes",
+      "Automatic file refresh",
+      "Backed by an established Shopify app studio",
+      "Works alongside Avada's wider SEO tooling",
+      "Free tier available"
+    ],
+    integrationBenefits: [
+      "Get llms.txt live quickly without theme changes",
+      "Coordinate AEO setup with any existing Avada SEO apps",
+      "Validate that generated files reflect your real catalogue structure",
+      "Layer deeper structured data work on top of the generated files"
+    ],
+    metaDescription: "Avada AEO Optimizer setup for Shopify — quick llms.txt generation for ChatGPT, Claude, Gemini, and Perplexity.",
+    services: [setupService, optimizationService]
+  },
+  {
+    slug: "fseo",
+    name: "FSEO",
+    category: "ai-seo",
+    shortDescription: "llms.txt management plus AI visibility tracking that shows when models mention your store.",
+    description: "FSEO combines llms.txt generation with an AI Visibility Checker that tracks how often ChatGPT, Gemini, and Perplexity recommend your store. Its differentiator is measurement — reporting on AI mentions rather than only publishing the files that enable them.",
+    features: [
+      "llms.txt generation and management",
+      "AI Visibility Checker tracking model mentions",
+      "Coverage across ChatGPT, Gemini, and Perplexity",
+      "AI search visibility reporting over time",
+      "Catalogue-aware file updates",
+      "Recommendations based on visibility gaps"
+    ],
+    integrationBenefits: [
+      "Set a visibility baseline before making AEO changes",
+      "Interpret AI mention data and turn it into content priorities",
+      "Combine visibility tracking with structured data improvements",
+      "Report AI search performance alongside organic search metrics"
+    ],
+    metaDescription: "FSEO setup for Shopify — llms.txt management and AI visibility tracking across ChatGPT, Gemini, and Perplexity.",
+    services: [setupService, optimizationService]
+  }
+];
+
+export const shopifyApps: ShopifyApp[] = [...baseApps, ...merchandisingAndAiSeoApps];
+
 export const appComparisons: AppComparison[] = [
   {
     slug: "klaviyo-vs-mailchimp",
@@ -757,7 +957,16 @@ export const appComparisons: AppComparison[] = [
     app2Slug: "mailchimp",
     category: "email-marketing",
     verdict: "Klaviyo is the stronger choice for Shopify stores needing deep e-commerce data integration and advanced automation, while Mailchimp suits brands wanting simplicity and broader marketing tools.",
-    metaDescription: "Klaviyo vs Mailchimp for Shopify: detailed comparison of features, pricing, and e-commerce capabilities to help you choose the right email platform."
+    metaDescription: "Klaviyo vs Mailchimp for Shopify: detailed comparison of features, pricing, and e-commerce capabilities to help you choose the right email platform.",
+    pricing: {
+      app1: "Free up to 250 contacts, then paid email plans start around $20/month and scale with active profiles. Email + SMS bundles cost more — expect $100-400/month for a mid-size Shopify list.",
+      app2: "Free tier for very small lists with limited features. Standard starts around $20/month and scales with contacts. Usually cheaper than Klaviyo at the same list size, but the e-commerce feature set is thinner."
+    },
+    bestFor: {
+      app1: "email is a core revenue channel and you want Shopify data driving segmentation and flows — abandoned cart, winback, predictive LTV.",
+      app2: "you want simple newsletters at the lowest cost, or you run non-ecommerce marketing under the same roof."
+    },
+    switchingNotes: "Most stores migrate from Mailchimp to Klaviyo, not the other way. Export lists with unsubscribe and suppression data intact, rebuild automations from scratch (they don't transfer), and ramp sending volume gradually so deliverability doesn't dip. Historical campaign analytics stay behind — archive any reports you care about before cancelling."
   },
   {
     slug: "klaviyo-vs-omnisend",
@@ -797,7 +1006,16 @@ export const appComparisons: AppComparison[] = [
     app2Slug: "attentive",
     category: "sms-marketing",
     verdict: "Postscript is ideal for Shopify-native SMS with strong community support, while Attentive suits enterprise brands needing advanced AI and scale.",
-    metaDescription: "Postscript vs Attentive for Shopify SMS: compare features, Shopify integration, and pricing for your SMS marketing strategy."
+    metaDescription: "Postscript vs Attentive for Shopify SMS: compare features, Shopify integration, two-way messaging, and pricing for your SMS strategy.",
+    pricing: {
+      app1: "Free starter tier plus per-message fees; Growth and Professional plans add features and lower message rates. Usage-based, so cost tracks your list size and send volume.",
+      app2: "Custom enterprise pricing only — no public tiers. Expect a meaningful monthly minimum plus per-message fees, aimed at high-volume senders."
+    },
+    bestFor: {
+      app1: "you're a growing Shopify-native brand that wants transparent usage-based pricing, quick setup, and conversational two-way SMS.",
+      app2: "you're at enterprise scale, send high SMS volume, and want AI-driven list growth with white-glove account management."
+    },
+    switchingNotes: "SMS subscriber consent transfers between platforms only if you export and import it correctly — mishandling opt-in records risks TCPA violations. Move consent records with timestamps and source, rebuild keyword and two-way messaging flows, and confirm the porting timeline for your toll-free or short code (short codes can take weeks)."
   },
   {
     slug: "omnisend-vs-postscript",
@@ -829,7 +1047,16 @@ export const appComparisons: AppComparison[] = [
     app2Slug: "loop-subscriptions",
     category: "subscriptions",
     verdict: "Recharge offers the most mature subscription platform, while Loop excels with retention-focused features like gamified portals and advanced dunning.",
-    metaDescription: "Recharge vs Loop Subscriptions for Shopify: compare features, retention tools, and pricing for subscription management."
+    metaDescription: "Recharge vs Loop Subscriptions for Shopify: features, retention tools, migration effort, and pricing compared side by side.",
+    pricing: {
+      app1: "Standard is $99/month plus 1.25% + 19¢ per transaction; Pro is $499/month with lower rates and advanced features. Enterprise is custom-quoted.",
+      app2: "Free entry tier for small subscriber bases, with paid plans from around $99/month plus transaction fees that undercut Recharge at most volumes."
+    },
+    bestFor: {
+      app1: "you need enterprise-grade tooling and the widest third-party integration coverage in the subscription space.",
+      app2: "retention is your focus — gamified subscriber portals, smarter dunning, and a lower total cost as you scale."
+    },
+    switchingNotes: "Loop offers white-glove migrations from Recharge, including payment token transfer through your gateway. Going the other direction, Recharge's team assists on larger books. Either way: freeze plan changes during the cutover window, map anchor and renewal dates carefully, and verify dunning settings before the first billing cycle runs."
   },
   {
     slug: "recharge-vs-skio",
@@ -837,7 +1064,16 @@ export const appComparisons: AppComparison[] = [
     app2Slug: "skio",
     category: "subscriptions",
     verdict: "Recharge suits brands needing enterprise-grade subscription tools, while Skio is ideal for DTC brands prioritizing frictionless subscriber experiences.",
-    metaDescription: "Recharge vs Skio for Shopify: compare subscription platforms on features, customer experience, and pricing."
+    metaDescription: "Recharge vs Skio comparison for Shopify: subscription features, customer experience, migration effort, and pricing side by side.",
+    pricing: {
+      app1: "Standard is $99/month plus 1.25% + 19¢ per transaction; Pro is $499/month with lower rates and advanced features. Enterprise is custom-quoted.",
+      app2: "Starts around $599/month plus 1% + 20¢ per transaction — a higher floor, aimed at brands that already have meaningful subscription revenue."
+    },
+    bestFor: {
+      app1: "you want the largest integration ecosystem and an established platform your future hires and agencies already know.",
+      app2: "subscriber experience is the priority — passwordless login, one-click skips, and churn-reduction tooling built for DTC brands."
+    },
+    switchingNotes: "The hard part of any subscription migration is payment methods: card tokens live with your gateway, so plan the Shopify Payments or Stripe token transfer first. Map renewal and anchor dates so no subscriber gets double-billed, and run both platforms in parallel for one billing cycle before full cutover."
   },
   {
     slug: "recharge-vs-appstle-subscriptions",
@@ -909,7 +1145,16 @@ export const appComparisons: AppComparison[] = [
     app2Slug: "stamped-io",
     category: "reviews",
     verdict: "Yotpo offers the more mature enterprise platform, while Stamped.io provides a strong mid-market alternative with reviews, NPS, and loyalty at competitive pricing.",
-    metaDescription: "Yotpo vs Stamped.io for Shopify: compare review platforms, loyalty features, and pricing for your e-commerce store."
+    metaDescription: "Yotpo vs Stamped.io for Shopify: which review platform is better for your store? Features, loyalty, pricing, and migration compared.",
+    pricing: {
+      app1: "Free plan for basic reviews; paid review plans start under $100/month but climb steeply once you add loyalty, SMS, and UGC modules. Enterprise bundles are custom-quoted.",
+      app2: "Free tier, with paid plans from roughly $23/month and a full reviews + loyalty suite in the low hundreds — typically far cheaper than Yotpo for a comparable feature set."
+    },
+    bestFor: {
+      app1: "you're consolidating reviews, loyalty, referrals, and SMS with one enterprise vendor and have the budget for it.",
+      app2: "you want most of the review and loyalty functionality at a mid-market price."
+    },
+    switchingNotes: "Reviews move between platforms via CSV export/import, but check three things: photo and video reviews actually come across, review request flows get rebuilt, and your product schema keeps serving star ratings in Google. A broken rich-snippet handoff is the most common SEO casualty of review-app migrations."
   },
   {
     slug: "yotpo-vs-loox",
@@ -1101,7 +1346,8 @@ export const appComparisons: AppComparison[] = [
     app2Slug: "klaviyo",
     category: "email-marketing",
     verdict: "Klaviyo is the clear winner for Shopify-focused email marketing with deeper data integration, while Mailchimp remains a solid general-purpose option.",
-    metaDescription: "Mailchimp vs Klaviyo for Shopify: which email marketing platform is right for your e-commerce store?"
+    metaDescription: "Mailchimp vs Klaviyo for Shopify: which email marketing platform is right for your e-commerce store?",
+    canonicalOf: "klaviyo-vs-mailchimp"
   },
   {
     slug: "omnisend-vs-klaviyo",
@@ -1109,7 +1355,8 @@ export const appComparisons: AppComparison[] = [
     app2Slug: "klaviyo",
     category: "email-marketing",
     verdict: "Klaviyo offers superior segmentation and analytics, while Omnisend provides easier omnichannel orchestration with competitive pricing.",
-    metaDescription: "Omnisend vs Klaviyo for Shopify: compare omnichannel automation with advanced email marketing for your store."
+    metaDescription: "Omnisend vs Klaviyo for Shopify: compare omnichannel automation with advanced email marketing for your store.",
+    canonicalOf: "klaviyo-vs-omnisend"
   },
   {
     slug: "attentive-vs-postscript",
@@ -1117,7 +1364,8 @@ export const appComparisons: AppComparison[] = [
     app2Slug: "postscript",
     category: "sms-marketing",
     verdict: "Attentive is built for enterprise scale with AI-driven optimization, while Postscript offers a more Shopify-native experience for growing brands.",
-    metaDescription: "Attentive vs Postscript for Shopify: compare enterprise SMS marketing with Shopify-native SMS capabilities."
+    metaDescription: "Attentive vs Postscript for Shopify: compare enterprise SMS marketing with Shopify-native SMS capabilities.",
+    canonicalOf: "postscript-vs-attentive"
   },
   {
     slug: "recharge-vs-bold-subscriptions-vs-appstle-subscriptions",
@@ -1198,6 +1446,108 @@ export const appComparisons: AppComparison[] = [
     category: "shipping",
     verdict: "ShipStation suits high-volume stores needing advanced automation, while Shippo is ideal for growing brands wanting simplicity and pre-negotiated rates.",
     metaDescription: "ShipStation vs Shippo on Shopify: compare shipping automation, carrier rates, and fulfillment features for your store."
+  },
+  {
+    slug: "rankflo-vs-kimonix",
+    app1Slug: "rankflo",
+    app2Slug: "kimonix",
+    category: "merchandising",
+    verdict: "Kimonix is the deeper platform, adding per-shopper personalization and smart collection building on top of AI sorting. RankFlo covers the sorting job itself — bestseller promotion, out-of-stock demotion, A/B testing — at a much lower price, which is enough for most catalogues.",
+    metaDescription: "RankFlo vs Kimonix for Shopify: compare collection sorting, AI merchandising, personalization, and pricing side by side.",
+    pricing: {
+      app1: "Free for up to 100 products and 5 collections. Starter $9/month covers 1,000 products; Plus $19/month covers 20,000 products with unlimited collections; Elite $49/month is unlimited with advanced rules.",
+      app2: "Priced well above the entry tiers here, positioned as an enterprise merchandising platform. Expect a mid-hundreds monthly commitment once personalization is included."
+    },
+    bestFor: {
+      app1: "you want automated sorting and merchandising A/B tests without an enterprise budget, and personalization isn't a requirement yet.",
+      app2: "you need true 1:1 personalized collection ordering and rule-built smart collections, and have the budget to match."
+    },
+    switchingNotes: "Both apps reorder collections rather than rewrite them, so switching is low-risk — no product data is destroyed. Note your existing sort rules before you disconnect, re-create them in the new app, and watch collection revenue for two weeks: sorting changes take a little time to show a clear signal in analytics."
+  },
+  {
+    slug: "rankflo-vs-bestsellers-resort",
+    app1Slug: "rankflo",
+    app2Slug: "bestsellers-resort",
+    category: "merchandising",
+    verdict: "Both are affordable rule-based sorters. Bestsellers reSort is the more established option with a long review history; RankFlo adds similarity-based ranking, per-collection revenue analytics, and A/B testing on higher tiers.",
+    metaDescription: "RankFlo vs Bestsellers reSort for Shopify: compare automated collection sorting rules, analytics, A/B testing, and pricing.",
+    pricing: {
+      app1: "Free for up to 100 products and 5 collections; paid tiers at $9, $19, and $49/month scale by catalogue size.",
+      app2: "Free plan for small catalogues, with paid plans starting around $9.99/month."
+    },
+    bestFor: {
+      app1: "you want analytics proving which sort strategy earns more, plus A/B testing as you scale.",
+      app2: "you want a long-established app doing straightforward sales and inventory sorting, nothing more."
+    },
+    switchingNotes: "These two overlap heavily, so switching is mostly a matter of re-creating sort rules. Run only one sorting app at a time — two apps re-ordering the same collection will fight each other and produce unpredictable results."
+  },
+  {
+    slug: "rankflo-vs-boost-ai-search",
+    app1Slug: "rankflo",
+    app2Slug: "boost-ai-search",
+    category: "merchandising",
+    verdict: "These solve different problems. Boost is a search-and-filter platform with merchandising attached; RankFlo is a dedicated collection sorting tool. If on-site search is your bottleneck, Boost. If your collections are simply in the wrong order, RankFlo — at a fraction of the cost.",
+    metaDescription: "RankFlo vs Boost AI Search & Filter for Shopify: dedicated collection sorting compared with a full search and filtering platform.",
+    pricing: {
+      app1: "Free tier, then $9-$49/month by catalogue size.",
+      app2: "From around $29/month, scaling with catalogue size and traffic — priced as a full search platform."
+    },
+    bestFor: {
+      app1: "search works fine but your collection pages bury the products that actually sell.",
+      app2: "shoppers can't find products through search or filters, and you want merchandising in the same tool."
+    },
+    switchingNotes: "Many stores run both: Boost for search and filtering, a sorting app for collection order. If you do, make sure only one owns collection sort order — overlapping merchandising rules are the most common cause of 'my collection order keeps resetting'."
+  },
+  {
+    slug: "bee-ai-seo-vs-llm-rank",
+    app1Slug: "bee-ai-seo",
+    app2Slug: "llm-rank",
+    category: "ai-seo",
+    verdict: "LLM Rank goes deeper on AI file generation with agents.md and 100+ crawler controls. Bee AI SEO covers llms.txt too but adds an AEO audit and JSON-LD injection, so it fixes the structured data gaps behind poor AI visibility rather than only publishing files.",
+    metaDescription: "Bee AI SEO vs LLM Rank for Shopify: compare llms.txt generation, AEO audits, crawler controls, and structured data features.",
+    pricing: {
+      app1: "Free.",
+      app2: "Free tier available, with a Pro plan for featured products, agent instructions, and advanced crawler controls."
+    },
+    bestFor: {
+      app1: "you want an audit that tells you what's broken — bot access, missing meta, weak structured data — not just a generated file.",
+      app2: "you want granular control over individual AI crawlers and agent-facing instruction files."
+    },
+    switchingNotes: "Run only one llms.txt generator at a time. Two apps writing to the same path will overwrite each other, and AI crawlers will read whichever wrote last. Remove the old app's file and confirm /llms.txt returns the expected content before considering the switch done."
+  },
+  {
+    slug: "bee-ai-seo-vs-avada-aeo",
+    app1Slug: "bee-ai-seo",
+    app2Slug: "avada-aeo",
+    category: "ai-seo",
+    verdict: "Avada is the quickest path to a live llms.txt from a long-established app studio. Bee AI SEO takes a broader approach — auditing bot accessibility and structured data alongside file generation — for merchants who want to know why AI search isn't surfacing them.",
+    metaDescription: "Bee AI SEO vs Avada AEO Optimizer for Shopify: llms.txt generation, AEO audits, and structured data compared.",
+    pricing: {
+      app1: "Free.",
+      app2: "Free tier available; paid tiers align with Avada's wider SEO suite."
+    },
+    bestFor: {
+      app1: "you want the diagnosis as well as the file — audit scores, blocked-crawler warnings, and JSON-LD fixes.",
+      app2: "you already use Avada's SEO apps and want AEO handled by the same vendor."
+    },
+    switchingNotes: "As with any llms.txt app, keep only one active. If you've had Avada's file live for a while, check your server logs or analytics for AI crawler hits before and after switching so you can tell whether the change helped."
+  },
+  {
+    slug: "bee-ai-seo-vs-fseo",
+    app1Slug: "bee-ai-seo",
+    app2Slug: "fseo",
+    category: "ai-seo",
+    verdict: "FSEO's differentiator is measurement — its AI Visibility Checker tracks when models mention your store. Bee AI SEO focuses on the fixes: audit, bot access, structured data, and llms.txt. Measurement without fixes tells you that you're invisible; fixes without measurement leave you guessing.",
+    metaDescription: "Bee AI SEO vs FSEO for Shopify: compare AEO audits and structured data fixes with AI visibility tracking and reporting.",
+    pricing: {
+      app1: "Free.",
+      app2: "Paid plans, priced around the visibility tracking feature set."
+    },
+    bestFor: {
+      app1: "your AI visibility is poor and you need to find and fix the technical reasons why.",
+      app2: "you already rank in AI answers and want ongoing reporting on how often models mention you."
+    },
+    switchingNotes: "These two are more complementary than competing — tracking tells you where you stand, auditing tells you what to fix. If you run both, let only one generate llms.txt and use the other purely for reporting."
   }
 ];
 
@@ -1313,6 +1663,20 @@ export const appCategories: AppCategory[] = [
     description: "UGC platforms for Shopify that collect, curate, and display customer photos, videos, and social content to build authentic social proof.",
     metaDescription: "Compare the best Shopify UGC apps. Professional setup for Yotpo, Loox, Okendo, and visual content management.",
     appSlugs: ["yotpo", "loox", "okendo", "stamped-io"]
+  },
+  {
+    slug: "merchandising",
+    name: "Collection Sorting & Merchandising",
+    description: "Merchandising apps that control the order products appear in Shopify collections — promoting bestsellers, demoting out-of-stock items, and testing which arrangement earns the most revenue.",
+    metaDescription: "Compare the best Shopify collection sorting and merchandising apps. Setup for RankFlo, Kimonix, Bestsellers reSort, and Boost.",
+    appSlugs: ["rankflo", "kimonix", "bestsellers-resort", "boost-ai-search"]
+  },
+  {
+    slug: "ai-seo",
+    name: "AI SEO & AEO",
+    description: "Answer Engine Optimization apps that make Shopify catalogues readable to ChatGPT, Perplexity, Claude, and Google AI Overviews through llms.txt, structured data, and crawler access.",
+    metaDescription: "Compare the best Shopify AI SEO and AEO apps. Setup for Bee AI SEO, LLM Rank, Avada AEO, and FSEO with llms.txt and JSON-LD.",
+    appSlugs: ["bee-ai-seo", "llm-rank", "avada-aeo", "fseo"]
   }
 ];
 

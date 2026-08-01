@@ -1,0 +1,118 @@
+---
+title: "Shopify Collection Sorting: The Complete Merchandising Guide"
+description: "How Shopify collection sort order works, what the native options can and cannot do, and how to merchandise collections so your best products stop getting buried."
+category: 'Shopify Development'
+tags: ["merchandising", "collections", "CRO"]
+pubDate: 'Aug 03 2026'
+heroImage: '/shopify-capaxe-labs.png'
+---
+
+Most stores spend months on product photography and product page copy, then let Shopify decide what order those products appear in. That order is doing more work than the copy is. On a collection page with 60 products, the first row gets a large share of the clicks, and everything below the third scroll might as well not exist.
+
+This guide covers how Shopify's collection sorting actually works, where the native options run out, and how to think about merchandising once they do.
+
+---
+
+## How Shopify Collection Sort Order Works
+
+Every Shopify collection has a sort order set in the admin under **Products > Collections > [your collection] > Sort**. You get six built-in options:
+
+| Sort option | What it does | Where it breaks |
+|---|---|---|
+| Best selling | Orders by Shopify's internal sales velocity metric | Favours long-lived products; new arrivals never surface |
+| Product title A-Z / Z-A | Alphabetical | Merchandising by alphabet is merchandising by accident |
+| Highest / lowest price | Price order | Buries mid-price bestsellers, which is usually your margin |
+| Newest / oldest first | By creation date | Recency has no relationship to what sells |
+| Manual | Drag and drop | Accurate for a week, stale by the second week |
+
+Two things about this list matter more than the individual options.
+
+First, **the sort order is a single global rule per collection.** Shopify applies one sort to every shopper, on every device, at every hour. It cannot react to a product going out of stock, a campaign starting, or a category selling differently on mobile.
+
+Second, **"best selling" is not the metric you think it is.** Shopify's best-selling sort weighs sales over a rolling window and doesn't know about your margin. A high-volume, low-margin product will outrank a product that makes you three times as much per order.
+
+### Manual sorting is a trap
+
+Manual sorting is the most common choice for merchandising-conscious stores, and it's the one that ages worst. You arrange 40 products carefully. Two weeks later, six of them are out of stock, three have been discounted, and one has quietly become your bestseller. The order you set is now actively working against you, and nobody notices because the collection page still looks fine.
+
+The problem is not that manual sorting is inaccurate. It's that it's accurate once and never again.
+
+---
+
+## What "Good" Collection Order Actually Means
+
+Before choosing tools, decide what you're optimizing for. In practice most stores want some combination of these:
+
+**Sell what's actually available.** An out-of-stock product occupying a top-row position is a dead click. The shopper lands on a product page, sees "sold out," and a meaningful share of them leave rather than go back and try again.
+
+**Protect margin, not just volume.** If two products convert at similar rates but one earns twice as much, position should reflect that. Very few native sort options can express this.
+
+**Give new arrivals a fair test.** New products have no sales history, so any sales-based sort buries them permanently — they can't sell because they're at the bottom, and they're at the bottom because they haven't sold. Breaking that loop requires deliberately boosting new products for a trial window.
+
+**Respect the shopper's context.** Someone landing on "Winter Coats" in a heatwave and someone landing in a cold snap are different shoppers. Seasonality, campaign traffic, and referral source all change what should lead.
+
+You will not get all four from a native sort option. That's the honest ceiling.
+
+---
+
+## Where Native Sorting Runs Out
+
+Shopify's built-in options are fine when your catalogue is small and stable. They start failing at recognizable thresholds:
+
+- **More than ~50 products in a collection.** Beyond this, position matters much more than any individual product's page quality, because most products never get seen.
+- **Frequent stock changes.** If products regularly go in and out of stock, any static order is wrong most of the time.
+- **Multiple collections that need different logic.** "New In" and "Sale" and "Bestsellers" should not be sorted the same way, but managing that manually across dozens of collections is not sustainable.
+- **You want to know whether it worked.** Native sorting gives you no way to test one arrangement against another. You're guessing, permanently.
+
+At that point you have two options: build sorting logic yourself, or use a merchandising app.
+
+### Building it yourself
+
+Sorting can be done with Shopify Flow (to reorder collections on triggers), a scheduled script against the Admin API, or metafield-driven ranking in Liquid. This is a legitimate path, and we build it for clients whose logic is genuinely bespoke — pricing tiers, B2B catalogues, complex margin rules.
+
+It's worth being clear about the cost. A custom sorting system needs a scheduled job, error handling for API rate limits, a way to express and edit the rules, and ongoing maintenance as your catalogue changes. That's real engineering, and for straightforward "promote bestsellers, drop sold-out items" logic, it's more than the problem requires.
+
+### Using a merchandising app
+
+For most stores, an app that handles the rules is the right call. The category splits into three types:
+
+**Rule-based sorters** apply conditions you define — sort by revenue, push out-of-stock down, boost products tagged "new" — and re-run automatically. This covers the majority of real merchandising needs.
+
+**AI merchandising platforms** go further, using algorithmic ranking based on conversion and margin data, with personalization per shopper. More powerful, meaningfully more expensive.
+
+**Search and filter platforms with merchandising attached** solve discovery first and collection order second. Right choice if search is your actual bottleneck.
+
+We compare the main options in detail: [RankFlo vs Kimonix](/shopify/compare/rankflo-vs-kimonix), [RankFlo vs Bestsellers reSort](/shopify/compare/rankflo-vs-bestsellers-resort), and [RankFlo vs Boost AI Search](/shopify/compare/rankflo-vs-boost-ai-search).
+
+---
+
+## Automating It with RankFlo
+
+We built [RankFlo](https://apps.shopify.com/rankflo) because this problem kept showing up in client stores and the existing options were either too basic or priced for enterprise. *(Disclosure: RankFlo is built by our team at Capaxe Labs.)*
+
+It handles the sorting job directly:
+
+- **Bestseller promotion and out-of-stock demotion** run automatically, so collections reflect what's actually available and selling.
+- **Similarity-based ranking** groups related products by attributes like colour and type, so browsing feels coherent rather than randomized.
+- **Per-collection analytics** show revenue and conversion impact, so you can see whether a sorting change did anything.
+- **A/B testing** on higher tiers lets you test arrangements against each other with significance reporting, rather than guessing.
+
+Setup requires no theme changes or code, and the free tier covers up to 100 products and 5 collections — enough to test the approach on your highest-traffic collection before committing.
+
+If your logic is more complex than rules can express — margin tiers, B2B-specific ordering, inventory location awareness — that's where our [engineering engagements](/engagements) come in, and we'll tell you honestly if an app already covers what you need.
+
+---
+
+## A Practical Starting Point
+
+If you do nothing else from this guide, do these three things in order:
+
+1. **Find your highest-traffic collection.** In Shopify Analytics, look at landing pages. One or two collections almost certainly carry most of your collection traffic.
+2. **Count how many out-of-stock products sit in the first 20 positions.** This is the fastest revenue leak to plug and needs no tooling to diagnose.
+3. **Pick one sorting change and measure it for two weeks.** Not five changes at once. One, with a clean before-and-after, so you learn something you can apply to the other collections.
+
+Merchandising compounds. A collection page that puts the right products first earns more from the same traffic, the same photography, and the same ad spend — which is why it's usually the highest-leverage work available on a mature store.
+
+---
+
+**Related reading:** [Collection page CRO](/patterns/faceted-filtering), [Super collections and page performance](/blog/super-collections-page-performance), and [dynamic filtering with Liquid URL params](/blog/dynamic-filtering-liquid-url-params).

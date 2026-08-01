@@ -26,10 +26,13 @@ export function getStaticPaths() {
 const { comparison, app1, app2 } = Astro.props as Props;
 
 const seo = createSEO({
-  pageName: `${app1.name} vs ${app2.name} for Shopify`,
+  pageName: `${app1.name} vs ${app2.name} for Shopify (2026)`,
   description: comparison.metaDescription,
   pathname: `/shopify/compare/${comparison.slug}`,
-  contentType: "service"
+  contentType: "service",
+  ...(comparison.canonicalOf
+    ? { canonical: `${siteConfig.url}/shopify/compare/${comparison.canonicalOf}` }
+    : {})
 });
 
 function getChooseReasons(app: ShopifyApp, otherApp: ShopifyApp): string[] {
@@ -70,6 +73,7 @@ const app2Reasons = getChooseReasons(app2, app1);
 const categoryLabel = comparison.category.replace(/-/g, " ");
 const faqs = [
   { question: `What is the main difference between ${app1.name} and ${app2.name}?`, answer: comparison.verdict },
+  { question: `How does ${app1.name} compare to ${app2.name}?`, answer: `${app1.name}: ${app1.shortDescription} ${app2.name}: ${app2.shortDescription} The right choice depends on your store's size, budget, and which features you'll actually use — the full breakdown above covers features, pricing, and who each app fits best.` },
   { question: `When should I choose ${app1.name} over ${app2.name}?`, answer: `Choose ${app1.name} if ${app1Reasons[0]?.toLowerCase() || `you need a strong ${categoryLabel} solution`}. It offers ${app1.features.slice(0, 2).join(' and ').toLowerCase()}.` },
   { question: `When should I choose ${app2.name} over ${app1.name}?`, answer: `Choose ${app2.name} if ${app2Reasons[0]?.toLowerCase() || `you need a strong ${categoryLabel} solution`}. It offers ${app2.features.slice(0, 2).join(' and ').toLowerCase()}.` },
   { question: `Can Capaxe Labs help me migrate between ${app1.name} and ${app2.name}?`, answer: `Yes, we handle full migrations between ${categoryLabel} platforms including data transfer, workflow rebuilding, and zero-downtime cutover.` },
@@ -96,6 +100,18 @@ const faqs = [
       </div>
     </section>
 
+    {(app1.isOwnApp || app2.isOwnApp) && (
+      <section class="pb-4 px-6">
+        <div class="max-w-7xl mx-auto">
+          <div class="rounded-xl border border-border bg-muted/40 px-5 py-4">
+            <p class="text-sm text-muted-foreground">
+              <strong class="text-foreground">Disclosure:</strong> {app1.isOwnApp ? app1.name : app2.name} is built by our team at Capaxe Labs. We've kept this comparison honest about where the alternative is the better fit — but you should weigh it knowing we have a stake in one of these apps.
+            </p>
+          </div>
+        </div>
+      </section>
+    )}
+
     <!-- Quick Verdict -->
     <section class="pb-8 px-6">
       <div class="max-w-7xl mx-auto">
@@ -104,9 +120,43 @@ const faqs = [
           <p class="text-base text-muted-foreground leading-relaxed border-l-4 border-primary-400 pl-4">
             {comparison.verdict}
           </p>
+          <p class="text-sm text-muted-foreground mt-3">
+            Searching for {app2.name} vs {app1.name} instead? Same comparison — the trade-offs below apply either way.
+          </p>
+          {comparison.bestFor && (
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
+              <div class="rounded-xl border border-border p-4">
+                <p class="text-sm font-semibold text-foreground mb-1">Pick {app1.name} if</p>
+                <p class="text-sm text-muted-foreground">{comparison.bestFor.app1}</p>
+              </div>
+              <div class="rounded-xl border border-border p-4">
+                <p class="text-sm font-semibold text-foreground mb-1">Pick {app2.name} if</p>
+                <p class="text-sm text-muted-foreground">{comparison.bestFor.app2}</p>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </section>
+
+    {comparison.pricing && (
+      <section class="pb-8 px-6">
+        <div class="max-w-7xl mx-auto">
+          <h2 class="text-3xl font-bold mb-6 text-foreground text-center">{app1.name} vs {app2.name} Pricing</h2>
+          <div class="bento-grid grid-cols-1 md:grid-cols-2">
+            <div class="bento-tile">
+              <h3 class="text-xl font-semibold text-foreground mb-3">{app1.name} pricing</h3>
+              <p class="text-sm text-muted-foreground">{comparison.pricing.app1}</p>
+            </div>
+            <div class="bento-tile">
+              <h3 class="text-xl font-semibold text-foreground mb-3">{app2.name} pricing</h3>
+              <p class="text-sm text-muted-foreground">{comparison.pricing.app2}</p>
+            </div>
+          </div>
+          <p class="text-xs text-muted-foreground text-center mt-4">Pricing as of 2026 — both platforms adjust tiers regularly, so confirm on their pricing pages before committing.</p>
+        </div>
+      </section>
+    )}
 
     <!-- Side-by-Side Overview -->
     <section class="pb-8 px-6">
@@ -116,22 +166,36 @@ const faqs = [
           <div class="bento-tile">
             <h3 class="text-2xl font-semibold text-foreground mb-2">{app1.name}</h3>
             <p class="text-sm text-muted-foreground mb-4">{app1.shortDescription}</p>
-            <a
-              href={`/shopify/apps/${app1.slug}`}
-              class="text-sm font-medium text-primary-400 hover:text-primary-300 transition-colors"
-            >
-              Learn more about {app1.name} services
-            </a>
+            <div class="flex flex-wrap gap-4">
+              <a
+                href={`/shopify/apps/${app1.slug}`}
+                class="text-sm font-medium text-primary-400 hover:text-primary-300 transition-colors"
+              >
+                Learn more about {app1.name} services
+              </a>
+              {app1.appStoreUrl && (
+                <a href={app1.appStoreUrl} rel="noopener" class="text-sm font-medium text-primary-400 hover:text-primary-300 transition-colors">
+                  View on the Shopify App Store
+                </a>
+              )}
+            </div>
           </div>
           <div class="bento-tile">
             <h3 class="text-2xl font-semibold text-foreground mb-2">{app2.name}</h3>
             <p class="text-sm text-muted-foreground mb-4">{app2.shortDescription}</p>
-            <a
-              href={`/shopify/apps/${app2.slug}`}
-              class="text-sm font-medium text-primary-400 hover:text-primary-300 transition-colors"
-            >
-              Learn more about {app2.name} services
-            </a>
+            <div class="flex flex-wrap gap-4">
+              <a
+                href={`/shopify/apps/${app2.slug}`}
+                class="text-sm font-medium text-primary-400 hover:text-primary-300 transition-colors"
+              >
+                Learn more about {app2.name} services
+              </a>
+              {app2.appStoreUrl && (
+                <a href={app2.appStoreUrl} rel="noopener" class="text-sm font-medium text-primary-400 hover:text-primary-300 transition-colors">
+                  View on the Shopify App Store
+                </a>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -198,6 +262,17 @@ const faqs = [
         </div>
       </div>
     </section>
+
+    {comparison.switchingNotes && (
+      <section class="pb-8 px-6">
+        <div class="max-w-7xl mx-auto">
+          <div class="bento-tile">
+            <h2 class="text-2xl font-bold text-foreground mb-3">Switching between {app1.name} and {app2.name}</h2>
+            <p class="text-sm text-muted-foreground leading-relaxed">{comparison.switchingNotes}</p>
+          </div>
+        </div>
+      </section>
+    )}
 
     <FAQSection faqs={faqs} />
 
