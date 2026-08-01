@@ -15,12 +15,12 @@ const engagements = [
     body: "For brands who suspect their store is leaving revenue on the table but haven't isolated where. Ends with a written plan you can execute in-house or with us.",
     bestFor: "Best for: identifying the highest-leverage moves before committing to a build.",
     points: [
-      "Structured store review — not a generic audit",
-      "Conversion, performance, and merchandising traced to root cause",
+      "Structured store review, traced to root cause",
+      "Conversion, performance, and merchandising assessed together",
       "Prioritized roadmap ranked by revenue impact",
       "Written deliverable you keep, with or without us",
     ],
-    duration: "A few weeks",
+    duration: "2 to 3 weeks",
     accent: false,
   },
   {
@@ -28,15 +28,15 @@ const engagements = [
     icon: Hammer,
     eyebrow: "Build Sprint",
     title: "A defined engineering engagement against a specific system.",
-    body: "For brands with a known constraint — performance, merchandising, conversion — that needs to be solved properly, not patched over. Scoped, shipped, measured.",
+    body: "For brands with a known constraint in performance, merchandising, or conversion that needs solving properly rather than patching over. We scope it, ship it, and measure what moved.",
     bestFor: "Best for: turning a known bottleneck into compounding revenue.",
     points: [
       "Scoped to a single system: conversion, merchandising, performance, or custom",
-      "Native Shopify primitives — Functions, app extensions, Liquid done right",
-      "Measured against the metric that matters",
-      "Shipped, not theme-shopped",
+      "Native Shopify primitives: Functions, app extensions, Liquid done right",
+      "Measured against one agreed metric before we start",
+      "Shipped to production, with the code documented and handed over",
     ],
-    duration: "Scoped to the system",
+    duration: "4 to 8 weeks",
     accent: true,
   },
   {
@@ -44,31 +44,31 @@ const engagements = [
     icon: InfinityIcon,
     eyebrow: "Embedded Partnership",
     title: "An ongoing engineering relationship for serious operators.",
-    body: "For brands where the store is the business, and the engineering needs to compound month over month. We become the engineering layer — diagnostic, build, optimization, integration — under your brand and product strategy.",
-    bestFor: "Best for: brands who've stopped looking for vendors and want a partner.",
+    body: "For brands where the store is the business and the engineering needs to compound month over month. We become the engineering layer underneath your brand and product strategy.",
+    bestFor: "Best for: brands who want a long-term engineering partner.",
     points: [
-      "Diagnostic, build, optimization, and integration — under your strategy",
+      "Diagnostic, build, optimization, and integration under your strategy",
       "Engineering that compounds month over month",
       "Direct access to the people doing the work",
       "Quarterly reviews with the engineering lead",
     ],
-    duration: "Ongoing",
+    duration: "Ongoing, monthly",
     accent: false,
   },
 ];
 
 const faqs = [
-  { question: "Is the Embedded Partnership a Shopify retainer?", answer: "Functionally, yes — it's a monthly Shopify development retainer with senior engineers. The difference from a typical retainer agency is that it's shaped around systems and outcomes, not a bucket of hours: diagnostic, build, optimization, and integration work that compounds month over month." },
-  { question: "Do you publish pricing?", answer: "No — and we think that's a feature. No two engagements look the same, and fixed published pricing tends to push agencies toward template work rather than engineered work. We give you a clear investment range in the first conversation." },
+  { question: "Is the Embedded Partnership a Shopify retainer?", answer: "Functionally, yes. It's a monthly Shopify development retainer staffed by senior engineers. The difference from a typical retainer agency is that it's shaped around systems and outcomes rather than a bucket of hours: diagnostic, build, optimization, and integration work that compounds month over month." },
+  { question: "Do you publish pricing?", answer: "No, and we think that's a feature. No two engagements look the same, and fixed published pricing tends to push agencies toward template work rather than engineered work. We give you a clear investment range in the first conversation. If you want to compare billing models first, read our breakdown of retainer versus hourly versus project-based pricing." },
   { question: "How do I know which engagement is right for me?", answer: "If you don't know where the revenue is leaking, start with a Diagnostic. If you know the bottleneck but not the fix, a Build Sprint. If the store is the business and engineering needs to compound, an Embedded Partnership." },
   { question: "Can a Diagnostic turn into a Build Sprint?", answer: "Often, yes. Most relationships start with a Diagnostic and graduate into a Build Sprint or Embedded Partnership once we've identified the highest-leverage moves." },
-  { question: "How long does each engagement take?", answer: "Diagnostics typically run a few weeks. Build Sprints are scoped to the system being engineered. Embedded Partnerships are ongoing. We share a clear timeline before any work begins." },
+  { question: "How long does each engagement take?", answer: "A Diagnostic runs 2 to 3 weeks. A Build Sprint runs 4 to 8 weeks depending on the system being engineered. An Embedded Partnership is ongoing and billed monthly. We share a clear timeline before any work begins." },
   { question: "Do you take on early-stage stores?", answer: "Generally, no. The brands we work with already have traction and have outgrown the systems they started with. Early-stage stores are usually better served by a theme partner or a dedicated solo developer." },
 ];
 
 const seo = createSEO({
   pageName: "Shopify Retainer & Engagement Models",
-  description: "Three ways to work with Capaxe Labs — a Diagnostic, a Build Sprint, or an Embedded Partnership that works like a senior Shopify development retainer.",
+  description: "Three ways to work with Capaxe Labs: a Diagnostic, a Build Sprint, or an Embedded Partnership that runs as a senior Shopify development retainer.",
   keywords: "Shopify retainer, Shopify development retainer, Shopify monthly retainer, Shopify retainer agency, Shopify engagement models, embedded Shopify engineering",
   contentType: "service",
   pathname: "/engagements",
@@ -108,10 +108,10 @@ seo.structuredData = getFAQPageSchema(faqs);
             Engagements
           </span>
           <h1 class="text-balance text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-[1.05] tracking-tight mb-6">
-            Three ways to work together.
+            Three ways to work with a senior Shopify team.
           </h1>
           <p class="text-base md:text-lg text-muted-foreground leading-relaxed">
-            No fixed-scope shopping cart. Each engagement is shaped around where your store is, what's blocking the next stage, and how deep we need to go.
+            No fixed-scope shopping cart. Each engagement is shaped around where your store is, what's blocking the next stage, and how deep we need to go. The Embedded Partnership runs as a full Shopify development retainer. The other two are scoped pieces of work with a defined end.
           </p>
         </div>
       </div>
@@ -204,10 +204,19 @@ seo.structuredData = getFAQPageSchema(faqs);
             Pricing
           </span>
           <h2 class="text-balance text-2xl md:text-3xl lg:text-4xl font-bold text-foreground leading-tight mb-6">
-            We don't publish fixed pricing — and we think that's a feature.
+            Why we scope investment to the work.
           </h2>
           <p class="text-base md:text-lg text-muted-foreground leading-relaxed">
-            No two engagements look the same. Investment is shaped around scope, depth, and timeline — and we'll tell you in the first conversation whether it makes sense to work together.
+            No two engagements look the same, so we shape investment around scope, depth, and timeline. You'll get a clear range in the first conversation, along with an honest read on whether it makes sense to work together at all.
+          </p>
+          <p class="text-base md:text-lg text-muted-foreground leading-relaxed mt-4">
+            Weighing billing models? We wrote up
+            <a href="/shopify-retainer-vs-hourly-vs-project" class="text-primary font-semibold hover:underline">
+              retainer versus hourly versus project-based pricing</a
+            >. Want to see the systems each engagement covers? Start with our
+            <a href="/capabilities" class="text-primary font-semibold hover:underline">
+              four engineering capabilities</a
+            >.
           </p>
           <div class="mt-8">
             <a

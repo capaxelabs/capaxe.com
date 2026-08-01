@@ -11,7 +11,7 @@ const ClientLogos = ({ siteConfig }: { siteConfig: SiteConfig }) => {
             <div className="container max-w-7xl mx-auto">
                 <div className="bento-tile-muted py-10 px-8">
                     <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider text-center mb-8">
-                        Trusted by Amazing Clients
+                        Brands we work with
                     </h2>
                     <div className="flex overflow-hidden">
                         <TranslateWrapper>

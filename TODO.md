@@ -17,6 +17,22 @@
 - [x] Bento Box theme redesign - global CSS, all pages, all components
 - [x] Landing page visual enhancements - hero animations, scroll reveal, staggered cards, button polish
 
+## Content Humanization
+- [x] Add humanize rules to global CLAUDE.md (em dash cap, banned constructions, banned words)
+- [x] Replace "Trusted by Amazing Clients" placeholder on homepage (ClientLogos.astro + .tsx)
+- [x] Homepage humanize pass — 20 em dashes to 0, 18 "X, not Y" constructions down to 2 kept intentionally
+- [x] Remove banned word "unlock" from hero and fix the broken hero sentence (missing punctuation after "growth")
+- [x] Shorten homepage title tag from 90 to 56 chars
+- [x] Add homepage internal links to /engagements, /case-studies, /about
+- [x] Engagements humanize pass — 12 em dashes to 0
+- [x] Add "Shopify" + "retainer" to engagements H1 and hero (page absorbs the /retainer 301)
+- [x] Replace vague engagement durations with "2 to 3 weeks" / "4 to 8 weeks" / "Ongoing, monthly"
+- [x] Add engagements internal links to /shopify-retainer-vs-hourly-vs-project and /capabilities
+- [ ] Add real proof to /engagements — client results, numbers, or case study links (needs real data, blocked)
+- [ ] Site-wide humanize sweep — 108 files still contain em dashes; blog and /patterns are worst
+- [ ] Add Service schema for the three engagement tiers
+- [ ] Dedupe RenderEase in siteConfig.clientLogos (listed twice as .avif and .png, renders as two logos)
+
 ## SEO Action Plan — Phase 1 (This Week)
 - [x] Update title tags per SEO audit recommendations (all key pages)
 - [x] Update meta descriptions per SEO audit recommendations (all key pages)
