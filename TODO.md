@@ -17,21 +17,91 @@
 - [x] Bento Box theme redesign - global CSS, all pages, all components
 - [x] Landing page visual enhancements - hero animations, scroll reveal, staggered cards, button polish
 
-## Content Humanization
+## Content Rewrite (site-wide)
+
+**Why:** Audit of the homepage and /engagements found the copy carries heavy LLM tells. Site-wide baseline before work started: **160 files, 509 em dashes, 218 "X, not Y" contrast constructions**, plus agency-speak banned words concentrated in the case studies.
+
+**Process for every batch:** load the `brand` and `seo-content` skills first, then apply the Humanize rules in `~/.claude/CLAUDE.md`. Never rewrite from memory.
+
+**Acceptance criteria (every file):**
+- Zero em dashes. If one truly earns its place, never in the "X — not Y" form.
+- Zero banned words (delve, leverage as a verb, robust, seamless, elevate, unlock, comprehensive, crucial, cutting-edge, foster, and the rest of the list).
+- At most 2 contrast constructions per page, and only where the line is load-bearing.
+- No rule-of-three triads. No claim restated in a nicer way one paragraph later.
+- Target keyword present in H1 and first 100 words on any page that targets one.
+- 3 to 5 internal links per 1000 words, descriptive anchor text, no trailing slashes.
+- Page still sounds like Capaxe. Confident and declarative. Do not sand the voice off.
+
+### Done
 - [x] Add humanize rules to global CLAUDE.md (em dash cap, banned constructions, banned words)
 - [x] Replace "Trusted by Amazing Clients" placeholder on homepage (ClientLogos.astro + .tsx)
-- [x] Homepage humanize pass — 20 em dashes to 0, 18 "X, not Y" constructions down to 2 kept intentionally
+- [x] Homepage humanize pass. 20 em dashes to 0, 18 contrast constructions down to 2 kept on purpose
 - [x] Remove banned word "unlock" from hero and fix the broken hero sentence (missing punctuation after "growth")
 - [x] Shorten homepage title tag from 90 to 56 chars
 - [x] Add homepage internal links to /engagements, /case-studies, /about
-- [x] Engagements humanize pass — 12 em dashes to 0
-- [x] Add "Shopify" + "retainer" to engagements H1 and hero (page absorbs the /retainer 301)
+- [x] Engagements humanize pass. 12 em dashes to 0
+- [x] Add "Shopify" and "retainer" to engagements H1 and hero (page absorbs the /retainer 301)
 - [x] Replace vague engagement durations with "2 to 3 weeks" / "4 to 8 weeks" / "Ongoing, monthly"
 - [x] Add engagements internal links to /shopify-retainer-vs-hourly-vs-project and /capabilities
-- [ ] Add real proof to /engagements — client results, numbers, or case study links (needs real data, blocked)
-- [ ] Site-wide humanize sweep — 108 files still contain em dashes; blog and /patterns are worst
+
+### Phase 1: Core marketing pages (8 files, 60 em dashes)
+Highest traffic and highest conversion intent. Do these before anything else.
+- [ ] /capabilities (11 em dashes, 4 contrast). Also the destination for 4 homepage links, so voice must match
+- [ ] /about (11 em dashes, 3 contrast). Carries the E-E-A-T story, keep every Paytm/RankFlo/Opskitty specific
+- [ ] /shopify-retainer-vs-hourly-vs-project (9 em dashes, 4 contrast, banned: seamless). Now linked from /engagements
+- [ ] /faq (8 em dashes, 3 contrast). Check for answers duplicated from homepage and /engagements FAQs
+- [ ] /shopify-support (8 em dashes, banned: leverage)
+- [ ] /hire-shopify-developer (8 em dashes)
+- [ ] /shopify-plus (5 em dashes)
+- [ ] /shopify-development-agency (4 em dashes, 1 contrast)
+
+### Phase 2: Service pages (7 files)
+- [ ] /services/shopify/maintenance-support (6 em dashes). One of only two pages linking to /engagements
+- [ ] /services/custom-shopify-app-development (4 em dashes)
+- [ ] /services/shopify-migration (3 em dashes)
+- [ ] /services/shopify-hydrogen-development (3 em dashes)
+- [ ] /services/shopify/store-development, /services/shopify/shopify-design, /services (1 em dash each)
+
+### Phase 3: Programmatic templates (3 files, high leverage)
+One rewrite fixes every generated page.
+- [ ] pages/shopify/[service]/[city].astro (7 em dashes, 2 contrast)
+- [ ] pages/shopify/compare/[slug].astro (4 em dashes)
+- [ ] pages/projects/[id].astro (3 em dashes)
+
+### Phase 4: Proof pages (17 files)
+Worst banned-word density on the site. These read like a template agency wrote them, which undercuts the whole positioning.
+- [ ] 5 case studies. Every one uses "comprehensive" and "robust"; renderease also uses "cutting-edge", picking-list uses "crucial"
+- [ ] 12 project pages (72 em dashes total). Worst: klyro-business-tools (10), beefi-ai-platform (9), getbee-mobile-app (9), memoid-developer-platform (8, banned: comprehensive), photosshoot-ai-photography (8), shootflo-photo-workflow (7, banned: elevate)
+- [ ] While in here: add the missing client results and numbers, which also closes the /engagements proof gap
+
+### Phase 5: Pattern library (10 files, 131 em dashes, 59 contrast)
+Worst density per file on the whole site.
+- [ ] faceted-filtering (18 em, 9 contrast)
+- [ ] size-guide (16 em)
+- [ ] whatsapp-first-flows (15 em, 6 contrast)
+- [ ] bundle-builder (14 em, 8 contrast)
+- [ ] product-configurator (14 em, 5 contrast, banned: underscore)
+- [ ] wholesale-price-tiers (12 em, 7 contrast)
+- [ ] quote-request (12 em) and the remaining 3 patterns
+
+### Phase 6: Blog (65 files, 156 em dashes, 117 contrast)
+Biggest volume, lowest urgency per file, but long-form is where the tells compound hardest. Work in batches of 10 and re-run the counter after each batch.
+- [ ] Batch A (worst 6): get-shopify-products-recommended-by-chatgpt (16 em, 10 contrast, banned: leverage), shopify-retainer-vs-hiring-inhouse-developer (14 em), llms-txt-shopify (13 em, 6 contrast), shopify-plus-retainer-enterprise-support (13 em), push-sold-out-products-down-shopify (11 em), shopify-collection-sorting-guide (8 em, banned: leverage)
+- [ ] Batches B through G: remaining 59 posts, 10 at a time
+
+### Phase 7: Components and shared copy (10 files)
+- [ ] components/Callout.astro (3 em dashes)
+- [ ] components/Footer.astro (2 em dashes, 2 contrast)
+- [ ] components/home/AppPartners.astro (2 em dashes)
+- [ ] components/TeardownPopup.tsx, components/TeardownForm.tsx. Load `better-writing` for these, they are UI text not marketing copy
+- [ ] Remaining 4 components
+
+### Cross-cutting
+- [ ] Add real proof to /engagements: client results, numbers, or case study links (**blocked, needs real data from founder**)
 - [ ] Add Service schema for the three engagement tiers
-- [ ] Dedupe RenderEase in siteConfig.clientLogos (listed twice as .avif and .png, renders as two logos)
+- [ ] Dedupe RenderEase in siteConfig.clientLogos (listed twice as .avif and .png, renders as two separate logos)
+- [ ] Re-run the tell counter after every phase and record the new baseline here
+- [ ] Final pass: check no two pages now open with the same rewritten sentence
 
 ## SEO Action Plan — Phase 1 (This Week)
 - [x] Update title tags per SEO audit recommendations (all key pages)
