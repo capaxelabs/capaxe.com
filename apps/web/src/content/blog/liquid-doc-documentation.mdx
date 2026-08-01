@@ -1,9 +1,10 @@
 ---
-title: "How to Use LiquidDoc to Document Your Shopify Snippets and Blocks"
-description: "Learn how to implement Shopify's native LiquidDoc feature to create structured, self-documenting code that improves maintainability and supercharges AI development tools."
+title: "Shopify LiquidDoc: @param Valid Types, Syntax, and Examples"
+description: "The valid @param types in Shopify LiquidDoc — string, number, boolean, object, Liquid objects, and typed arrays — plus full doc tag syntax for snippets and blocks."
 category: 'Liquid & Theme'
 tags: ["Liquid", "documentation", "LiquidDoc"]
 pubDate: 'Oct 31 2025'
+updatedDate: 'Aug 01 2026'
 heroImage: "/blog/liquid-doc-documentation.png"
 ---
 
@@ -17,29 +18,65 @@ This is where **LiquidDoc**, a native Shopify feature, becomes an essential tool
 
 ## **What is LiquidDoc?**
 
-LiquidDoc is a standardized format for adding documentation directly within your Liquid snippet and block files. It uses a combination of YAML-like front matter and special tags to define what a component does, what parameters it accepts, and how to use it.
+LiquidDoc is Shopify's standardized format for documenting Liquid snippet and block files. It uses a JSDoc-inspired syntax inside a `{% doc %}` tag to define what a component does, what parameters it accepts, and how to use it. These details power theme checks, code completions, and hover information in your editor.
 
 **Crucially, LiquidDoc is for `snippets` and `blocks` only.** It is not supported in `sections`, where documentation and settings are handled by the `{% schema %}` tag.
 
 A well-documented snippet using LiquidDoc looks like this:
 
 ```liquid
-{% comment %}
-  @name Product Card
-  @description Renders a single product card for use in grids or carousels.
+{% doc %}
+  Renders a single product card for use in grids or carousels.
 
-  @param {Object} product - The product object to render.
-  @param {String} [image_size] - The desired size for the product image. Defaults to 'medium'.
+  @param {product} product - The product object to render
+  @param {string} [image_size] - Optional image size, defaults to 'medium'
 
   @example
   {% render 'product-card', product: my_product, image_size: 'large' %}
-{% endcomment %}
+{% enddoc %}
 
 <div class="product-card">
-  <img src="{{ product.featured_image | img_url: image_size | default: 'medium' }}" alt="{{ product.featured_image.alt }}">
+  <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.featured_image.alt }}">
   <h3>{{ product.title }}</h3>
 </div>
 ```
+
+---
+
+## **LiquidDoc @param Valid Types**
+
+The most common question about LiquidDoc: what are the valid types for `@param`? Shopify's `ValidDocParamTypes` theme check accepts exactly these:
+
+| Type | Description |
+|------|-------------|
+| `string` | Text values |
+| `number` | Numeric values |
+| `boolean` | True/false values (everything in Liquid is truthy or falsy) |
+| `object` | Complex Liquid types, or anything that isn't a primitive |
+| Any Liquid object | e.g. `product`, `collection`, `image`, `color`, `currency` — as long as it isn't exclusively a global object |
+| Typed arrays | Append `[]` to any valid type: `string[]`, `product[]` |
+
+Rules worth knowing:
+
+- **Types are optional.** `@param some_untyped` is valid — the type in curly braces can be omitted.
+- **Optional parameters** are marked by wrapping the *name* in square brackets: `@param {string} [subtitle]`.
+- **Multidimensional arrays are invalid.** `{string[][]}` fails the theme check.
+- **Made-up types fail.** `{custom}` or `{fake}` will be flagged by `ValidDocParamTypes`.
+
+```liquid
+{% doc %}
+  @param {string} some_str
+  @param {number} some_num
+  @param {boolean} some_bool
+  @param {object} some_obj
+  @param {product} special_product
+  @param {product[]} special_products
+  @param {string} [optional_str]
+  @param some_untyped
+{% enddoc %}
+```
+
+All of the above pass validation. `@param {custom} param1` and `@param {string[][]} matrix` do not.
 
 ---
 
@@ -70,15 +107,16 @@ The act of writing LiquidDoc forces you to think more clearly about the componen
 
 ## **How to Implement LiquidDoc: The Core Tags**
 
-Implementing LiquidDoc is simple. You just need to know a few key tags within a `{% comment %}` block at the top of your file.
+Implementing LiquidDoc is simple. Place a `{% doc %}` block at the top of your snippet or block file. Three tags are supported:
 
--   `@name`: A human-readable name for your component.
--   `@description`: A brief explanation of what the component does.
--   `@param {Type} [name] - Description`: Defines a parameter.
-    -   `{Type}`: The expected data type (e.g., `{Object}`, `{String}`, `{Number}`).
-    -   `[name]`: The parameter name. Use square brackets for optional parameters (e.g., `[image_size]`).
-    -   `- Description`: A clear explanation of the parameter.
--   `@example`: A code block showing a clear example of how to render the component.
+-   `@description`: A brief explanation of what the component does. You can also just write the description as plain text before any `@` annotation and omit the tag.
+-   `@param {type} name - description`: Defines a parameter.
+    -   `{type}`: Optional data type in curly braces — one of the valid types listed above (e.g., `{string}`, `{number}`, `{product}`).
+    -   `name`: The parameter name. Wrap it in square brackets for optional parameters (e.g., `[image_size]`).
+    -   `- description`: A clear explanation of the parameter.
+-   `@example`: A code block showing how to render the component. Multiple `@example` tags are allowed.
+
+LiquidDoc also integrates with Theme Check: `ValidDocParamTypes` validates your types, `UniqueDocParamNames` catches duplicate names, `UnusedDocParam` flags documented-but-unused parameters, and render/content_for usage checks make sure callers pass what you declared.
 
 ---
 

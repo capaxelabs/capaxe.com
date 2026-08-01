@@ -69,6 +69,18 @@ const seo = createSEO({
     </div>
   </section>
 
+  {category.slug === "subscriptions" && (
+    <section class="pb-4 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="bento-tile-muted">
+          <p class="text-sm text-muted-foreground">
+            This page is a quick directory of the top subscription apps and our setup services for each. For the full editorial breakdown with pricing tables and recommendations, read our <a href="/blog/best-shopify-subscription-apps" class="text-primary-500 hover:underline">complete guide to the best Shopify subscription apps in 2026</a>.
+          </p>
+        </div>
+      </div>
+    </section>
+  )}
+
   <section class="py-8 px-6">
     <div class="max-w-7xl mx-auto">
       <h2 class="text-3xl font-bold mb-4 text-foreground">Top {category.name} Apps</h2>

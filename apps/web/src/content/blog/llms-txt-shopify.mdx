@@ -1,0 +1,128 @@
+---
+title: "llms.txt for Shopify: What It Is and How to Set It Up"
+description: "A practical guide to llms.txt on Shopify — the format, three ways to publish one, and an honest look at the evidence on whether AI crawlers actually read it."
+category: 'AI & Modern Dev'
+tags: ["AEO", "AI search", "llms.txt"]
+pubDate: 'Aug 10 2026'
+heroImage: '/shopify-capaxe-labs.png'
+---
+
+If you've looked into AI search visibility recently, you've been told to add an `llms.txt` file. This guide explains what it is, how to publish one on Shopify, and — the part most guides skip — what the measured evidence says about whether it currently does anything.
+
+---
+
+## What llms.txt Is
+
+`llms.txt` is a proposed standard, published at the root of your domain (`yourstore.com/llms.txt`), that gives language models a curated, markdown-formatted summary of your site. The idea is reasonable: HTML pages are full of navigation, scripts, and markup that waste a model's context window, so hand them a clean summary instead.
+
+It's often compared to `robots.txt`, but they do opposite jobs. `robots.txt` tells crawlers what they may *not* access. `llms.txt` tells models what's *worth* reading. There's also `llms-full.txt`, a longer variant containing full content rather than links.
+
+The format is plain markdown:
+
+```markdown
+# Your Store Name
+
+> One-line description of what you sell and who you serve.
+
+Optional context paragraph — brand positioning, specialities,
+shipping regions, anything a model should know when describing you.
+
+## Products
+
+- [Merino Base Layer](https://yourstore.com/products/merino-base-layer): 200gsm merino wool, sizes XS-XXL, £89
+- [Insulated Jacket](https://yourstore.com/products/insulated-jacket): 800-fill down, tested to -20C, £249
+
+## Collections
+
+- [Winter Hiking](https://yourstore.com/collections/winter-hiking): Cold-weather layering for multi-day treks
+
+## Policies
+
+- [Shipping](https://yourstore.com/policies/shipping-policy): Free UK delivery over £50, 2-3 working days
+- [Returns](https://yourstore.com/policies/refund-policy): 60-day returns, free UK return labels
+```
+
+An H1 with your store name, a blockquote summary, then H2 sections of annotated links. The annotations matter more than the links — that's where you state facts a model can quote.
+
+---
+
+## The Honest Part: Does It Actually Work?
+
+Most articles about llms.txt skip this. It's the question you're actually asking.
+
+**The measured evidence in 2026 is weak.** Large-scale crawler analysis found llms.txt requested a few hundred times across hundreds of millions of AI bot visits over a 90-day window. Adoption sits around 10% of surveyed domains, but *crawler interest is close to zero*. Neither OpenAI, Google, nor Anthropic mention llms.txt in their published crawler documentation for search and answer surfaces. Google has publicly indicated it doesn't use it.
+
+So: having an `llms.txt` file today does not measurably improve your chances of being cited by ChatGPT, Claude, Gemini, or Perplexity in their main answer surfaces.
+
+**Where it does show up** is agent-oriented contexts — OpenAI's Agents SDK and agentic commerce tooling reference this style of file, and some agent frameworks fetch it. That's a genuinely growing area, just a much smaller one than "AI search" implies.
+
+**So should you publish one?** Yes, with correct expectations. It costs very little, it's trivially reversible, and standards sometimes get adopted after a slow start. Treat it as a cheap option on a possible future, not as the thing that fixes your AI visibility. If you only have time for one piece of AEO work, [fix your structured data and crawler access instead](/blog/get-shopify-products-recommended-by-chatgpt) — that's where the measured impact is.
+
+---
+
+## Three Ways to Publish llms.txt on Shopify
+
+Shopify doesn't let you drop arbitrary files at the domain root, which makes this slightly awkward. Here are the working approaches.
+
+### Option 1: A Shopify page with a redirect (free, manual)
+
+The simplest no-code route:
+
+1. Create a page in **Online Store > Pages** containing your markdown content.
+2. Give it the handle `llms-txt`.
+3. Under **Online Store > Navigation > URL Redirects**, add a redirect from `/llms.txt` to `/pages/llms-txt`.
+
+**Caveat:** this serves HTML, not plain text, and it's a redirect rather than a direct file. Some fetchers follow it fine; stricter ones expect `text/plain` at the exact path. It's the least reliable option technically, but it takes five minutes and costs nothing.
+
+### Option 2: Serve it from a theme template (free, requires development)
+
+A cleaner approach uses an alternate template rendered as plain text, or a proxy route through an app. If you have theme access and want the file served properly rather than redirected, this is the better free path — but it needs a developer, and Shopify's routing constraints mean the implementation varies by setup.
+
+The real problem with both free options is the same: **maintenance**. A useful llms.txt reflects your current catalogue. Hand-maintaining a product list across a store that changes weekly is work nobody keeps doing after month two, and a stale llms.txt is worse than none — it tells models about products you no longer sell.
+
+### Option 3: An app that generates and refreshes it (recommended)
+
+This is the pragmatic answer for most stores, because it solves the staleness problem. The file regenerates as your catalogue changes.
+
+We built [Bee AI SEO](https://apps.shopify.com/bee-llms-seo) to handle this alongside the work that matters more. *(Disclosure: it's built by our team at Capaxe Labs.)* It generates and auto-refreshes llms.txt, but it also runs an AEO audit with a health score, tests whether AI bots can actually reach your store, flags products with missing metadata, and injects JSON-LD and Open Graph tags into your theme. Given the evidence above, that audit and structured-data work is the part we'd point you at first — the llms.txt generation is the easy bit. It's free.
+
+Other options in this space: [LLM Rank](/shopify/compare/bee-ai-seo-vs-llm-rank) goes deeper on crawler controls and `agents.md`, [Avada AEO](/shopify/compare/bee-ai-seo-vs-avada-aeo) is the quickest setup from an established studio, and [FSEO](/shopify/compare/bee-ai-seo-vs-fseo) adds AI mention tracking.
+
+**Whichever you choose, run only one.** Two apps writing to the same path overwrite each other, and whichever wrote last is what gets served.
+
+---
+
+## Writing a Good One
+
+If you're going to publish it, the annotations are where the value is. A bare list of URLs tells a model nothing it couldn't get by crawling.
+
+**Do:**
+- Write a summary line that states plainly what you sell and to whom.
+- Annotate each product with the facts a shopper would ask about — material, size range, price, key spec.
+- Include policy pages. Shipping and returns terms are among the most common things assistants get asked about a store.
+- Keep it to your genuinely important pages. A 4,000-line dump of every variant defeats the purpose.
+
+**Don't:**
+- Stuff keywords. There's no evidence of any ranking mechanism to game, and it makes the file less useful to a model that does read it.
+- Include prices you won't keep current. A wrong price quoted by an assistant is worse than no price.
+- Let it go stale. If you can't automate it, keep it short enough to update by hand.
+
+---
+
+## How to Verify It's Live
+
+Once published, check:
+
+1. `curl -I https://yourstore.com/llms.txt` — confirm it returns 200, and note whether it's a redirect.
+2. Open it in a browser and confirm the content is current against your actual catalogue.
+3. Check server or app logs periodically for requests to the path. Based on current adoption, expect very few. That's the honest baseline, and it's useful to know rather than assume.
+
+---
+
+## The Short Version
+
+`llms.txt` is cheap, easy, and currently under-used by the crawlers it's aimed at. Publish one if it costs you nothing to maintain — automated is the only version that stays true. Then spend your actual effort on crawler access, structured data, and content worth quoting, which is what determines whether AI assistants recommend you today.
+
+---
+
+**Related reading:** [How to get your Shopify products recommended by ChatGPT](/blog/get-shopify-products-recommended-by-chatgpt) and [schema markup for Shopify](/blog/shopify-schema-guide).

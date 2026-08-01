@@ -1,0 +1,112 @@
+---
+title: "How to Get Your Shopify Products Recommended by ChatGPT"
+description: "What actually makes AI assistants cite and recommend your Shopify store — crawler access, structured data, and citable content — separated from the AEO tactics that don't move the needle."
+category: 'AI & Modern Dev'
+tags: ["AEO", "AI search", "SEO"]
+pubDate: 'Aug 07 2026'
+heroImage: '/shopify-capaxe-labs.png'
+---
+
+A growing share of product research now starts in ChatGPT, Perplexity, or Google's AI Overviews rather than a search box. When someone asks "best merino base layers for winter hiking," an AI assistant answers with specific brands and products. If your store isn't among them, that's a channel you're invisible in.
+
+We can see this happening in our own data. Our Search Console shows queries like *"evaluate the e-commerce platforms company shopify on best subscription app"* and multi-sentence prompts beginning *"I am a digital marketing manager at a fast-growing DTC brand…"* — those aren't humans typing into Google. They're AI systems researching on someone's behalf, and they're already sending impressions.
+
+This guide covers what actually influences whether you get cited, and — just as usefully — what doesn't.
+
+---
+
+## First, How AI Assistants Actually Find Products
+
+There are three distinct paths, and they need different things from you.
+
+**1. Live web retrieval.** ChatGPT Search, Perplexity, and AI Overviews fetch pages at query time, usually via a search index. This is the dominant path today, and it means classic SEO still matters enormously: if you don't rank, you generally don't get retrieved.
+
+**2. Training data.** Models absorb content during training. You can't influence this on any useful timescale — it's a slow, one-way process, and chasing it isn't a strategy.
+
+**3. Agentic browsing and commerce protocols.** Agents that browse or transact on a user's behalf read your pages directly, and increasingly through structured commerce protocols. This is the smallest path today and the fastest growing.
+
+Almost everything you can control sits in paths 1 and 3.
+
+---
+
+## What Actually Works
+
+### Let the crawlers in
+
+This is the unglamorous one that blocks everything else. AI crawlers use their own user agents — `GPTBot` and `OAI-SearchBot` (OpenAI), `ClaudeBot` (Anthropic), `PerplexityBot`, `Google-Extended`. If your `robots.txt` blocks them, nothing else in this guide matters.
+
+Shopify generates a default `robots.txt` you can override via `robots.txt.liquid` in your theme. Check what yours currently allows. Plenty of stores blocked AI crawlers in 2023 when the advice was to protect content from training, then never revisited the decision. Blocking `GPTBot` also removes you from ChatGPT's shopping surfaces.
+
+Worth understanding: blocking training (`GPTBot`, `Google-Extended`) and blocking retrieval (`OAI-SearchBot`) are separate decisions. You can decline training while staying visible in AI search.
+
+### Get your structured data right
+
+This is the highest-leverage technical work. AI systems parse structured data to extract facts about products with confidence — price, availability, ratings, specifications.
+
+For a Shopify store, the essentials are:
+
+- **Product schema** with `name`, `description`, `image`, `sku`, `brand`
+- **Offer** nested inside it with `price`, `priceCurrency`, and `availability`
+- **AggregateRating** where you have genuine reviews
+- **BreadcrumbList** so the catalogue hierarchy is legible
+- **Organization** with your real business details
+
+Most themes emit some of this. Very few emit all of it correctly, and a common failure is having *two* conflicting Product schemas — one from the theme, one from a reviews app — which makes your data less trustworthy, not more. Validate with Google's Rich Results Test and check for duplicates.
+
+### Write content that can be quoted
+
+AI systems cite passages, not pages. Content that gets quoted tends to share a shape: a direct question as a heading, a complete answer in the first two sentences, then supporting detail.
+
+Practically, for a store:
+
+- Answer real buying questions in full sentences — "how do I choose a size," "what's the difference between X and Y," "is this suitable for Z."
+- Put specifications in tables. Structured comparisons get extracted cleanly.
+- Include concrete numbers, materials, dimensions, and constraints. Vague marketing copy is unciteable.
+- Say who's wrong for the product. Assistants asked "is this right for me?" reward content that draws boundaries honestly.
+
+### Keep being findable the normal way
+
+Because retrieval mostly runs through search infrastructure, the fundamentals still apply: indexable pages, fast loads, sane internal linking, unique product descriptions rather than manufacturer boilerplate. AEO is largely SEO with the citation layer taken seriously — not a separate discipline.
+
+---
+
+## What Doesn't Work (Yet)
+
+Being straight about this matters, because the AEO space is full of confident claims.
+
+**llms.txt has almost no measured pickup.** The file is a proposed standard for exposing a site summary to language models. It sounds compelling. But across large-scale crawler studies in 2026, AI bots request it in negligible volumes — a few hundred requests against hundreds of millions of AI bot visits — and neither OpenAI, Google, nor Anthropic list it in their crawler documentation for search or answer surfaces.
+
+It's cheap to publish and does show up in agent and SDK contexts, so it isn't pointless. But it is not the reason a store gets recommended today, and anyone selling it as the key to AI visibility is overstating the evidence. Treat it as a low-cost bet on a standard that may matter later, not as the work itself. We go into the detail in our [llms.txt for Shopify guide](/blog/llms-txt-shopify).
+
+**Keyword stuffing for AI.** Models don't reward density. They reward clarity and extractable facts.
+
+**"AI-optimized" content spun at volume.** Thin generated pages don't get cited; they get ignored, and they carry real risk under search quality systems.
+
+---
+
+## Where an App Helps
+
+Most of the work above is diagnostic before it's creative. You need to know whether crawlers can reach you, whether your structured data is valid and unduplicated, and which products have missing metadata.
+
+We built [Bee AI SEO](https://apps.shopify.com/bee-llms-seo) for that. *(Disclosure: it's built by our team at Capaxe Labs.)* It runs an AEO audit with a health score, tests whether AI bots can actually access your store, scans products and pages for missing or weak meta tags, and injects JSON-LD, Open Graph, and AI-related meta tags into the theme in one click. It generates and refreshes llms.txt too — with the honest caveat above about what that file is currently worth.
+
+The audit and structured-data half is where the real value sits, and it's free to run against your store.
+
+If you'd rather compare options, we've written up [Bee AI SEO vs LLM Rank](/shopify/compare/bee-ai-seo-vs-llm-rank), [vs Avada AEO](/shopify/compare/bee-ai-seo-vs-avada-aeo), and [vs FSEO](/shopify/compare/bee-ai-seo-vs-fseo).
+
+---
+
+## A Sensible Order of Operations
+
+1. **Check `robots.txt` for AI crawler access.** Decide deliberately whether to allow training, retrieval, or both.
+2. **Validate Product and Offer schema on your top 20 products.** Fix errors and remove duplicate schema blocks.
+3. **Rewrite descriptions for your top sellers** so they contain real specifications and answer real questions, not manufacturer copy.
+4. **Add buying-guide content** for the questions people actually ask before purchasing in your category.
+5. **Publish llms.txt** if it's free to do so, with realistic expectations.
+6. **Measure.** Ask the assistants your own category questions monthly and note whether you appear. Watch Search Console for prompt-shaped queries — they're a real signal that AI systems are surfacing you.
+
+The stores winning in AI search right now are mostly the ones that did the technical fundamentals properly and wrote genuinely useful content. That's a less exciting answer than a new file format, but it's the one the evidence supports.
+
+---
+
+**Related reading:** [llms.txt for Shopify](/blog/llms-txt-shopify), [GraphQL schema and agentic development](/blog/graphql-schema-agentic-development), and our [SEO and performance services](/services/shopify/seo-performance).
