@@ -11,16 +11,16 @@ import { createSEO } from "@/utils/seo";
 import { getFAQPageSchema } from "@/lib/schemas";
 
 const hireFaqs = [
-  { question: "What Shopify skills does your team have?", answer: "Our developers are proficient in Liquid, Shopify Functions, Hydrogen, Remix, Polaris, Shopify Admin API, Storefront API, GraphQL, TypeScript, React, Node.js, and payment integrations with Stripe and Plaid." },
-  { question: "Can I hire a dedicated Liquid developer?", answer: "Yes. If your work is theme-focused — custom sections, theme blocks, metafields, performance fixes — we assign a developer who works in Liquid daily. For storefronts that need React, the same team covers Hydrogen and Remix." },
-  { question: "How do engagement models work?", answer: "We offer three engagement models: a Diagnostic for a focused review that ends with a prioritized roadmap, a Build Sprint for a defined engineering engagement against a specific system, and an Embedded Partnership for ongoing engineering work. No two engagements look the same — investment is shaped around scope, depth, and timeline." },
-  { question: "Can I start with a small engagement first?", answer: "Yes. Most relationships start with a Diagnostic — a structured review of the store, traced back to root cause, with a written plan you can execute in-house or with us. It's the lowest-friction way to evaluate fit before a larger build." },
-  { question: "What timezone do you work in?", answer: "We're based in Mumbai, India (IST) but work across all timezones. We overlap with US business hours and provide async communication for European clients." },
+  { question: "What Shopify skills does your team have?", answer: "Liquid, Shopify Functions, Hydrogen, Remix, Polaris, the Admin and Storefront APIs, GraphQL, TypeScript, React, and Node.js. On payments we work with Stripe and Plaid." },
+  { question: "Can I hire a dedicated Liquid developer?", answer: "Yes. For theme work (custom sections, theme blocks, metafields, performance fixes) we assign a developer who writes Liquid daily. If the storefront needs React, the same team covers Hydrogen and Remix." },
+  { question: "How do engagement models work?", answer: "There are three. A Diagnostic is a focused review that ends with a prioritized roadmap. A Build Sprint is a defined engineering engagement against one system. An Embedded Partnership is ongoing engineering work under your product and brand strategy. We don't publish rates, since no two engagements look the same. You get an investment range in the first conversation." },
+  { question: "Can I start with a small engagement first?", answer: "Yes. Most relationships start with a Diagnostic: a structured review of the store traced back to root cause, ending in a written plan you can execute in-house or with us. It's the least expensive way to test the fit before committing to a build." },
+  { question: "What timezone do you work in?", answer: "We're in Mumbai, India (IST) and work with clients across timezones. We overlap with US business hours and run async for European clients." },
 ];
 
 const seo = createSEO({
   pageName: "Hire Shopify & Liquid Developers",
-  description: "Hire dedicated Shopify and Liquid developers for custom apps, Hydrogen storefronts, and theme development. Senior engineers, flexible engagements, worldwide.",
+  description: "Hire dedicated Shopify and Liquid developers for custom apps, Hydrogen storefronts, and theme work. Senior engineers, assigned to your store, worldwide.",
   keywords: "hire Shopify developer, hire liquid developers, Shopify developer for hire, dedicated Shopify developer, Liquid developer, Hydrogen developer",
   contentType: "service",
   pathname: "/hire-shopify-developer"
@@ -45,7 +45,7 @@ seo.structuredData = [
             Hire a Shopify Developer
           </h1>
           <p class="text-lg text-white/60 max-w-2xl mx-auto mb-8 hero-animate hero-animate-delay-2">
-            Get a skilled Shopify developer dedicated to your project — custom apps, headless storefronts, theme development, and payment integrations.
+            One senior Shopify developer assigned to your store, and they stay on it. Custom apps, headless storefronts, Liquid themes, and payment integrations.
           </p>
           <div class="flex flex-col sm:flex-row gap-3 justify-center hero-animate hero-animate-delay-3">
             <BookingButton client:load className="btn-shimmer">Book a Free Call</BookingButton>
@@ -83,7 +83,7 @@ seo.structuredData = [
             <FiLayout className="text-3xl text-violet-400 mb-4" />
             <h3 class="text-xl font-semibold text-foreground mb-2">Theme Development</h3>
             <p class="text-sm text-muted-foreground">
-              Custom Liquid themes, section-based architecture, theme blocks, and OS 2.0 features with performance-first development.
+              Custom Liquid themes, section-based architecture, theme blocks, and OS 2.0 features. Performance budgets are set before the first commit.
             </p>
           </div>
           <div class="bento-tile">
@@ -97,7 +97,7 @@ seo.structuredData = [
             <FiShoppingCart className="text-3xl text-amber-400 mb-4" />
             <h3 class="text-xl font-semibold text-foreground mb-2">Store Builds</h3>
             <p class="text-sm text-muted-foreground">
-              End-to-end Shopify store setup — products, collections, shipping, taxes, checkout configuration, and third-party app integrations.
+              Full store setup: products, collections, shipping, taxes, checkout configuration, and third-party app integrations.
             </p>
           </div>
           <div class="bento-tile-accent">
@@ -114,15 +114,15 @@ seo.structuredData = [
     <!-- Engagement Models -->
     <section class="pb-8 px-6 reveal-on-scroll">
       <div class="max-w-7xl mx-auto">
-        <h2 class="text-3xl font-bold mb-6 text-foreground text-center">Engagement Models</h2>
+        <h2 class="text-3xl font-bold mb-6 text-foreground text-center">How We Bill</h2>
         <div class="bento-grid grid-cols-1 md:grid-cols-2">
           <div class="bento-tile">
             <h3 class="text-xl font-semibold mb-3 text-foreground">Fixed-Price Project</h3>
             <p class="text-sm text-muted-foreground mb-4">
-              Defined scope, clear deliverables, milestone-based payments. Ideal for one-time projects with a known scope.
+              Best when the scope is already clear. You approve a number and a written set of deliverables before anything starts, then pay against milestones.
             </p>
             <ul class="text-xs text-muted-foreground space-y-1">
-              <li>• Detailed proposal with timeline and cost</li>
+              <li>• Proposal with timeline and cost before kickoff</li>
               <li>• Milestone payments (30/30/40 split)</li>
               <li>• 30-day post-launch warranty</li>
             </ul>
@@ -130,12 +130,12 @@ seo.structuredData = [
           <div class="bento-tile-accent">
             <h3 class="text-xl font-semibold mb-3">Monthly Retainer</h3>
             <p class="text-sm text-white/70 mb-4">
-              An ongoing engineering relationship for brands where the store is the business — diagnostic, build, optimization, and integration under your product and brand strategy.
+              An ongoing engineering relationship for brands where the store is the business. Diagnostic, build, optimization, and integration work, run under your product and brand strategy.
             </p>
             <ul class="text-xs text-white/60 space-y-1">
               <li>• Dedicated Shopify developer</li>
               <li>• Priority response times</li>
-              <li>• Flexible scope — use hours as needed</li>
+              <li>• Flexible scope: spend the hours where they matter</li>
             </ul>
           </div>
         </div>
@@ -151,21 +151,21 @@ seo.structuredData = [
             <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary-500/10 text-primary-400 font-bold text-lg mb-4">1</span>
             <h3 class="text-lg font-semibold mb-2 text-foreground">Discovery Call</h3>
             <p class="text-sm text-muted-foreground">
-              Free 30-minute call to understand your project, requirements, and timeline.
+              A free 30-minute call. We go through what you're building and what's blocking it, then agree on a timeline.
             </p>
           </div>
           <div class="bento-tile text-center">
             <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary-500/10 text-primary-400 font-bold text-lg mb-4">2</span>
             <h3 class="text-lg font-semibold mb-2 text-foreground">Proposal & Kickoff</h3>
             <p class="text-sm text-muted-foreground">
-              Detailed proposal with scope, timeline, and pricing. Once approved, your developer starts within 48 hours.
+              A written proposal covering scope, timeline, and cost. Approve it and your developer starts within 48 hours.
             </p>
           </div>
           <div class="bento-tile text-center">
             <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary-500/10 text-primary-400 font-bold text-lg mb-4">3</span>
             <h3 class="text-lg font-semibold mb-2 text-foreground">Build & Deliver</h3>
             <p class="text-sm text-muted-foreground">
-              Regular check-ins, progress updates, and iterative delivery until the project is complete.
+              Work ships in increments. You see progress as it lands, with direct access to the engineer writing the code.
             </p>
           </div>
         </div>
@@ -177,8 +177,8 @@ seo.structuredData = [
     <ServiceCTA />
   </div>
   <CTABottom
-    title="Ready to hire a Shopify developer?"
-    description="Book a free call and we'll match you with the right developer for your project."
+    title="Hire a Shopify developer."
+    description="Book a free 30-minute call. We'll put the right engineer on your store."
     buttonText="Book a Call"
     buttonUrl="/consultation"
   />

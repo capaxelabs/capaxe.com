@@ -11,15 +11,15 @@ import { createSEO } from "@/utils/seo";
 import { getFAQPageSchema } from "@/lib/schemas";
 
 const plusFaqs = [
-  { question: "What's the difference between Shopify and Shopify Plus?", answer: "Shopify Plus is the enterprise tier — it includes advanced checkout customization, Shopify Functions, Launchpad for scheduling, B2B wholesale, Shopify Markets for international selling, dedicated support, and higher API rate limits. It's designed for merchants doing $1M+ in annual revenue." },
-  { question: "Do you work with existing Shopify Plus stores?", answer: "Yes. We work with both new Shopify Plus builds and existing stores that need custom apps, checkout extensions, performance optimization, or migration from legacy Plus implementations." },
-  { question: "Can you help with B2B on Shopify Plus?", answer: "Yes. We build B2B catalogs with company-specific pricing, payment terms, draft orders, and custom checkout flows using Shopify Plus B2B features and custom apps." },
-  { question: "What about Shopify Markets?", answer: "We configure and customize Shopify Markets for international selling — multi-currency, language translations, localized pricing, duties and import taxes, and market-specific content." },
+  { question: "What's the difference between Shopify and Shopify Plus?", answer: "Shopify Plus is the enterprise tier. It adds checkout customization, Shopify Functions, Launchpad for scheduling, B2B wholesale, Shopify Markets for international selling, dedicated support, and higher API rate limits. It's built for merchants doing $1M+ in annual revenue." },
+  { question: "Do you work with existing Shopify Plus stores?", answer: "Yes. We take on new Shopify Plus builds and existing stores that need custom apps, checkout extensions, performance work, or a move off a legacy Plus implementation." },
+  { question: "Can you help with B2B on Shopify Plus?", answer: "Yes. We build B2B catalogs with company-specific pricing, payment terms, draft orders, and custom checkout flows. Where the native B2B feature set runs out, we fill the gap with a custom app." },
+  { question: "What about Shopify Markets?", answer: "We configure and customize Shopify Markets for international selling: multi-currency, language translations, localized pricing, duties and import taxes, and market-specific content." },
 ];
 
 const seo = createSEO({
-  pageName: "Shopify Plus Development Agency — Enterprise E-commerce",
-  description: "Shopify Plus development for scaling brands. Custom checkout, B2B catalogs, Shopify Functions, and international commerce. Built by certified Shopify experts.",
+  pageName: "Shopify Plus Development Agency",
+  description: "Shopify Plus development for brands past the standard plan. Custom checkout, B2B catalogs, Shopify Functions, international selling, built by engineers.",
   keywords: "Shopify Plus development, Shopify Plus agency, Shopify Plus developer, enterprise Shopify, Shopify Plus B2B, Shopify checkout customization",
   contentType: "service",
   pathname: "/shopify-plus"
@@ -44,7 +44,7 @@ seo.structuredData = [
             Shopify Plus Development
           </h1>
           <p class="text-lg text-white/60 max-w-2xl mx-auto mb-8 hero-animate hero-animate-delay-2">
-            Unlock the full power of Shopify Plus — custom checkout, B2B commerce, Shopify Functions, and international selling with expert development.
+            Shopify Plus development for brands past the standard plan. We build custom checkout, B2B commerce, Shopify Functions, and international selling on top of the Plus feature set.
           </p>
           <div class="flex flex-col sm:flex-row gap-3 justify-center hero-animate hero-animate-delay-3">
             <BookingButton client:load className="btn-shimmer">Book a Free Call</BookingButton>
@@ -68,7 +68,7 @@ seo.structuredData = [
             <FiLock className="text-3xl text-primary-400 mb-4" />
             <h3 class="text-xl font-semibold text-foreground mb-2">Custom Checkout</h3>
             <p class="text-sm text-muted-foreground mb-3">
-              Build custom checkout experiences with Checkout Extensibility — upsells, custom fields, loyalty integrations, and branded checkout UI.
+              Checkout Extensibility replaced checkout.liquid. We build inside it with UI extensions, custom fields, and validation logic that survives Shopify's upgrades.
             </p>
             <ul class="text-xs text-muted-foreground space-y-1">
               <li>• Post-purchase upsell flows</li>
@@ -92,7 +92,7 @@ seo.structuredData = [
             <FiUsers className="text-3xl text-emerald-400 mb-4" />
             <h3 class="text-xl font-semibold text-foreground mb-2">B2B Commerce</h3>
             <p class="text-sm text-muted-foreground mb-3">
-              Wholesale and B2B selling with company-specific pricing, payment terms, and custom catalogs.
+              Wholesale running on the same store as your DTC catalog, with each buyer seeing their own prices and terms.
             </p>
             <ul class="text-xs text-muted-foreground space-y-1">
               <li>• Company profiles and price lists</li>
@@ -104,7 +104,7 @@ seo.structuredData = [
             <FiGlobe className="text-3xl text-violet-400 mb-4" />
             <h3 class="text-xl font-semibold text-foreground mb-2">Shopify Markets</h3>
             <p class="text-sm text-muted-foreground mb-3">
-              International commerce with multi-currency, translations, localized pricing, and duties.
+              Sell into new countries without standing up a separate store for each one.
             </p>
             <ul class="text-xs text-muted-foreground space-y-1">
               <li>• Multi-currency with auto-conversion</li>
@@ -116,7 +116,7 @@ seo.structuredData = [
             <FiBarChart2 className="text-3xl text-amber-400 mb-4" />
             <h3 class="text-xl font-semibold text-foreground mb-2">Launchpad & Automation</h3>
             <p class="text-sm text-muted-foreground mb-3">
-              Schedule sales, product drops, and theme changes. Automate repetitive tasks with Flow.
+              Put a sale live at 9am without anyone awake to press a button. Flow handles the repetitive work after that.
             </p>
             <ul class="text-xs text-muted-foreground space-y-1">
               <li>• Flash sales and product launch scheduling</li>
@@ -128,7 +128,7 @@ seo.structuredData = [
             <FiTool className="text-3xl text-white/80 mb-4" />
             <h3 class="text-xl font-semibold mb-2">Custom Apps & Integrations</h3>
             <p class="text-sm text-white/70 mb-3">
-              Enterprise-grade custom apps with higher API limits, multi-store management, and ERP integrations.
+              Private apps that talk to the internal systems nobody wants to replace, on infrastructure you control.
             </p>
             <ul class="text-xs text-white/60 space-y-1">
               <li>• Higher API rate limits</li>
@@ -148,19 +148,19 @@ seo.structuredData = [
           <div class="bento-tile">
             <h3 class="text-lg font-semibold mb-2 text-foreground">High-Growth Merchants</h3>
             <p class="text-sm text-muted-foreground">
-              Stores doing $1M+ annually that need enterprise reliability, higher API limits, and advanced checkout customization.
+              Stores past $1M a year that keep hitting API limits and checkout restrictions on the standard plan.
             </p>
           </div>
           <div class="bento-tile-accent">
             <h3 class="text-lg font-semibold mb-2">B2B & Wholesale</h3>
             <p class="text-sm text-white/70">
-              Businesses selling wholesale alongside DTC that need company-specific pricing, payment terms, and dedicated B2B storefronts.
+              Businesses running wholesale alongside DTC, where every buyer logs in to a different price list and a different set of terms.
             </p>
           </div>
           <div class="bento-tile">
             <h3 class="text-lg font-semibold mb-2 text-foreground">International Brands</h3>
             <p class="text-sm text-muted-foreground">
-              Brands selling across multiple countries that need localized experiences, multi-currency, and compliance with regional regulations.
+              Brands selling into several countries, where currency, language, and tax treatment change at every border.
             </p>
           </div>
         </div>
@@ -172,8 +172,8 @@ seo.structuredData = [
     <ServiceCTA />
   </div>
   <CTABottom
-    title="Ready for Shopify Plus?"
-    description="Book a free call and we'll assess whether Shopify Plus is right for your business and plan the build."
+    title="Scope your Shopify Plus build"
+    description="Book a free call. We'll tell you whether Plus is worth the upgrade for your store, and what the build would take."
     buttonText="Book a Call"
     buttonUrl="/consultation"
   />

@@ -12,18 +12,18 @@ import FAQSection from "@/components/FAQSection.astro";
 
 const faqs = [
   { question: "What does a Shopify development agency do?", answer: "A Shopify development agency builds, customizes, and maintains Shopify stores and apps. This includes custom theme development, private and public app development, headless commerce builds, Shopify Plus customization, platform migrations, and ongoing technical support." },
-  { question: "How much does it cost to hire a Shopify development agency?", answer: "No two engagements look the same, so we don't publish fixed pricing. Investment is shaped around scope, depth, and timeline. We give you a clear range in the first conversation, and we'll tell you upfront whether it makes sense to work together." },
-  { question: "How long does a typical Shopify project take?", answer: "Timelines depend on complexity. Theme customizations take 1-2 weeks. Custom apps take 2-8 weeks. Full store builds take 4-12 weeks. Headless commerce projects take 6-16 weeks. We provide detailed timelines during the discovery phase." },
-  { question: "Do you work with Shopify Plus merchants?", answer: "Yes. We build on Shopify Plus features including checkout extensibility, Shopify Functions, B2B capabilities, multi-currency storefronts, and custom scripts. Our team is experienced with enterprise-level Shopify requirements." },
+  { question: "How much does it cost to hire a Shopify development agency?", answer: "We don't publish fixed pricing because no two engagements are the same. Cost tracks scope and timeline. You get a range in the first call, and we'll say plainly if we're the wrong fit for the work." },
+  { question: "How long does a typical Shopify project take?", answer: "It depends on complexity. Theme customizations run 1-2 weeks, custom apps 2-8 weeks, full store builds 4-12 weeks, and headless commerce 6-16 weeks. You get a dated plan during discovery." },
+  { question: "Do you work with Shopify Plus merchants?", answer: "Yes. We build on Plus features including checkout extensibility, Shopify Functions, B2B capabilities, multi-currency storefronts, and custom scripts." },
   { question: "Can you migrate my store from another platform to Shopify?", answer: "Yes. We handle migrations from WooCommerce, Magento, BigCommerce, and other platforms. This includes product data, customer records, order history, SEO redirects, and custom functionality rebuilds." },
-  { question: "What is headless Shopify development?", answer: "Headless development decouples the storefront from Shopify's backend. We build custom frontends using Hydrogen, Next.js, or Remix connected to Shopify's Storefront API. This gives you full control over design, performance, and user experience." },
-  { question: "Do you offer ongoing Shopify support?", answer: "Yes. Through our Embedded Partnership, we become the engineering layer behind the brand — diagnostic, build, optimization, and integration — under your product and brand strategy. Best for considered operators who want a partner, not a vendor." },
-  { question: "Where is your Shopify development team based?", answer: "Our team is based in Mumbai, India. We work with clients across the US, UK, Europe, and Australia. We overlap with US business hours and maintain async communication for all timezones." },
+  { question: "What is headless Shopify development?", answer: "Headless development decouples the storefront from Shopify's backend. We build custom frontends in Hydrogen, Next.js, or Remix against the Storefront API, so the theme layer stops being the constraint on design and page speed." },
+  { question: "Do you offer ongoing Shopify support?", answer: "Yes. Through our Embedded Partnership we act as the engineering layer behind the brand, covering diagnostics, builds, optimization, and integrations under your product and brand strategy. It suits operators who want the same team month after month." },
+  { question: "Where is your Shopify development team based?", answer: "Our team is based in Mumbai, India. We work with clients across the US, UK, Europe, and Australia, overlap with US business hours, and run async the rest of the time." },
 ];
 
 const seo = createSEO({
-  pageName: 'Shopify Development Agency — Custom Apps, Stores & Headless Commerce',
-  description: 'Capaxe Labs is a Shopify development agency specializing in custom apps, headless storefronts, and Liquid theme development. Based in Mumbai, serving clients worldwide.',
+  pageName: 'Shopify Development Agency',
+  description: 'Capaxe Labs is a Shopify development agency building custom apps, headless storefronts, and Liquid themes. Based in Mumbai, working with brands worldwide.',
   keywords: 'shopify development agency, shopify developer, custom shopify development, shopify experts, shopify partner agency',
   contentType: 'service',
   pathname: '/shopify-development-agency'
@@ -48,7 +48,7 @@ seo.structuredData = [
             Shopify Development Agency
           </h1>
           <p class="text-lg text-white/60 max-w-2xl mx-auto mb-8 hero-animate hero-animate-delay-2">
-            We build custom Shopify apps, headless storefronts, and high-performance themes. A full-stack development team focused entirely on the Shopify ecosystem.
+            A Shopify development agency run by engineers. We build custom apps, headless storefronts, and Liquid themes for brands that have outgrown templates, apps, and quick fixes.
           </p>
           <div class="flex flex-col sm:flex-row gap-3 justify-center hero-animate hero-animate-delay-3">
             <BookingButton client:load className="btn-shimmer">Book a Free Consultation</BookingButton>
@@ -129,28 +129,28 @@ seo.structuredData = [
             <FiTarget className="text-3xl text-primary-400 mb-4" />
             <h3 class="text-xl font-semibold mb-2 text-foreground">Shopify-Focused Expertise</h3>
             <p class="text-sm text-muted-foreground">
-              We work exclusively within the Shopify ecosystem. Every developer on our team knows Liquid, the Admin API, Storefront API, and Shopify's extension points inside out.
+              We work inside the Shopify ecosystem and nowhere else. Every developer here has shipped against Liquid, the Admin API, the Storefront API, and Shopify's extension points.
             </p>
           </div>
           <div class="bento-tile-accent">
             <FiServer className="text-3xl text-white/80 mb-4" />
             <h3 class="text-xl font-semibold mb-2">Modern Tech Stack</h3>
             <p class="text-sm text-white/70">
-              We build with Hydrogen, Next.js, React, TypeScript, and Node.js. Our architecture decisions are driven by performance, scalability, and maintainability.
+              We build with Hydrogen, Next.js, React, TypeScript, and Node.js. Architecture gets settled before the first commit, and we write down why.
             </p>
           </div>
           <div class="bento-tile-accent">
             <FiUsers className="text-3xl text-white/80 mb-4" />
             <h3 class="text-xl font-semibold mb-2">Full-Stack Capability</h3>
             <p class="text-sm text-white/70">
-              From Liquid templates to Node.js backends, from Polaris admin UIs to headless storefronts. One team handles your entire Shopify stack.
+              Liquid templates, Node.js backends, Polaris admin UIs, headless storefronts. One team owns the whole stack, so nothing gets thrown over a wall between specialists.
             </p>
           </div>
           <div class="bento-tile">
             <FiClock className="text-3xl text-emerald-400 mb-4" />
             <h3 class="text-xl font-semibold mb-2 text-foreground">Embedded Engineering Partnership</h3>
             <p class="text-sm text-muted-foreground">
-              For brands where the storefront is the business and engineering needs to compound month over month. We become the engineering layer behind the brand — under your product and brand strategy.
+              For brands where the storefront is the business and engineering needs to compound month over month. We sit inside the team as the engineering layer, working under your product and brand strategy.
             </p>
           </div>
         </div>
@@ -163,9 +163,9 @@ seo.structuredData = [
         <h2 class="text-3xl font-bold mb-6 text-foreground text-center">Our Development Process</h2>
         <div class="bento-grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {[
-            { step: "1", title: "Discovery", desc: "We learn your business, audit your current setup, and define project requirements and success metrics." },
+            { step: "1", title: "Discovery", desc: "We audit what you have running today and agree on what success looks like before anything gets quoted." },
             { step: "2", title: "Architecture", desc: "Technical planning, data modeling, API design, and infrastructure decisions before writing any code." },
-            { step: "3", title: "Development", desc: "Iterative sprints with regular demos. Clean, tested code with full documentation at every milestone." },
+            { step: "3", title: "Development", desc: "Sprints that end with a working demo. Tested code, documented as it lands rather than afterwards." },
             { step: "4", title: "Testing", desc: "Automated tests, cross-browser QA, performance benchmarks, and Shopify compliance validation." },
             { step: "5", title: "Launch", desc: "Production deployment, DNS configuration, monitoring setup, and go-live support with zero downtime." },
             { step: "6", title: "Support", desc: "30-day post-launch warranty included. Ongoing retainer plans available for continuous development." },
@@ -201,8 +201,8 @@ seo.structuredData = [
     <ServiceCTA />
   </div>
   <CTABottom
-    title="Ready to build with a Shopify development agency?"
-    description="Book a free consultation and let's discuss how we can help grow your Shopify business."
+    title="Work with a Shopify development agency that ships"
+    description="Book a free consultation. Bring the problem you're stuck on and we'll tell you what it takes to fix it."
     buttonText="Book a Call"
     buttonUrl="/consultation"
   />
