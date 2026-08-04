@@ -16,15 +16,15 @@ interface Props {
 }
 
 const supportFaqs = [
-  { question: "What tasks do you NOT handle?", answer: "We don't do marketing, CRO, sales strategy, or ad management. We handle the technical and operational side — development, store management, and backend tasks." },
-  { question: "How do you access my store?", answer: "We use Shopify's collaborator access with read/write permissions only for the areas we need. Your store stays secure, and you can revoke access anytime." },
-  { question: "How fast are turnarounds?", answer: "Simple tasks like price changes or media uploads are handled same-day. More involved tasks like analytics reports or bulk operations are completed within 48 hours." },
-  { question: "Do you support Shopify Plus?", answer: "Yes. We support all Shopify plans including Plus — covering B2B catalogs, Shopify Markets, Scripts, and advanced checkout features." },
+  { question: "What tasks do you NOT handle?", answer: "We don't touch marketing, CRO, sales strategy, or ad management. We handle the technical and operational side: development, store management, and backend tasks." },
+  { question: "How do you access my store?", answer: "We use Shopify's collaborator access, with read/write permissions only for the areas we need. Your store stays secure, and you can revoke access anytime." },
+  { question: "How fast are turnarounds?", answer: "Simple tasks like price changes or media uploads are handled same-day. Bigger jobs such as analytics reports or bulk operations are completed within 48 hours." },
+  { question: "Do you support Shopify Plus?", answer: "Yes. Every Shopify plan including Plus. That covers B2B catalogs, Shopify Markets, Scripts, and advanced checkout features." },
 ];
 
 const seo = createSEO({
   pageName: "Shopify Backend Support",
-  description: "Dedicated Shopify backend support — product uploads, price changes, order management, analytics, inventory, and full store management. 100% Shopify focused.",
+  description: "Dedicated Shopify backend support: product uploads, price changes, orders, analytics, inventory, and full store management. 100% Shopify focused.",
   keywords: "shopify backend support, shopify store management, shopify virtual assistant, shopify product upload, shopify order management, shopify analytics support, shopify inventory management",
   contentType: "service",
   pathname: "/shopify-support"
@@ -58,10 +58,10 @@ seo.structuredData = [
             Shopify-Only Support
           </span>
           <h1 class="text-5xl md:text-6xl font-bold mb-4 hero-animate hero-animate-delay-1">
-            Your Shopify Store,<br />Fully Managed
+            Your Shopify Backend,<br />Fully Managed
           </h1>
           <p class="text-lg text-white/60 max-w-2xl mx-auto mb-8 hero-animate hero-animate-delay-2">
-            We handle every backend task — product uploads, price changes, inventory, orders, analytics, and more. 100% focused on Shopify. Nothing else.
+            Product uploads, price changes, inventory, orders, analytics: we run every backend task in your store. Shopify is the only platform we work on. Nothing else.
           </p>
           <div class="flex flex-col sm:flex-row gap-3 justify-center hero-animate hero-animate-delay-3">
             <BookingButton client:load className="btn-shimmer">Book a Free Call</BookingButton>
@@ -86,7 +86,7 @@ seo.structuredData = [
             <FiPackage className="text-3xl text-primary-400 mb-4" />
             <h3 class="text-xl font-semibold text-foreground mb-2">Product Management</h3>
             <p class="text-sm text-muted-foreground mb-3">
-              Complete product lifecycle management — from bulk uploads to daily price adjustments.
+              The full product lifecycle, from bulk uploads to daily price adjustments.
             </p>
             <ul class="text-xs text-muted-foreground space-y-1">
               <li>• Bulk product uploads & media management</li>
@@ -100,7 +100,7 @@ seo.structuredData = [
             <FiShoppingCart className="text-3xl text-emerald-400 mb-4" />
             <h3 class="text-xl font-semibold text-foreground mb-2">Order Management</h3>
             <p class="text-sm text-muted-foreground mb-3">
-              Streamlined order processing so nothing falls through the cracks.
+              We work the order queue so nothing sits unprocessed.
             </p>
             <ul class="text-xs text-muted-foreground space-y-1">
               <li>• Order processing & fulfillment</li>
@@ -114,7 +114,7 @@ seo.structuredData = [
             <FiBarChart2 className="text-3xl text-white/80 mb-4" />
             <h3 class="text-xl font-semibold mb-2">Analytics & Reporting</h3>
             <p class="text-sm text-white/70 mb-3">
-              Turn your Shopify data into actionable insights with regular reporting.
+              Regular reporting that tells you what your Shopify data actually says.
             </p>
             <ul class="text-xs text-white/60 space-y-1">
               <li>• Sales & traffic reports</li>
@@ -142,7 +142,7 @@ seo.structuredData = [
             <FiUsers className="text-3xl text-violet-400 mb-4" />
             <h3 class="text-xl font-semibold text-foreground mb-2">Customer Data</h3>
             <p class="text-sm text-muted-foreground mb-3">
-              Organize and leverage your customer information.
+              Clean, segmented customer records you can actually use.
             </p>
             <ul class="text-xs text-muted-foreground space-y-1">
               <li>• Customer segmentation & tagging</li>
@@ -156,7 +156,7 @@ seo.structuredData = [
             <FiFileText className="text-3xl text-cyan-400 mb-4" />
             <h3 class="text-xl font-semibold text-foreground mb-2">Content Updates</h3>
             <p class="text-sm text-muted-foreground mb-3">
-              Keep your storefront content fresh and up to date.
+              Storefront pages, copy, and banners kept current.
             </p>
             <ul class="text-xs text-muted-foreground space-y-1">
               <li>• Page & blog updates</li>
@@ -184,7 +184,7 @@ seo.structuredData = [
             <FiTag className="text-3xl text-white/80 mb-4" />
             <h3 class="text-xl font-semibold mb-2">Discounts & Promotions</h3>
             <p class="text-sm text-white/70 mb-3">
-              Set up and manage all your promotional campaigns.
+              Campaign setup and the day-to-day running of every promo you launch.
             </p>
             <ul class="text-xs text-white/60 space-y-1">
               <li>• Discount codes & automatic discounts</li>
@@ -198,7 +198,7 @@ seo.structuredData = [
             <FiTruck className="text-3xl text-orange-400 mb-4" />
             <h3 class="text-xl font-semibold text-foreground mb-2">Shipping & Tax Config</h3>
             <p class="text-sm text-muted-foreground mb-3">
-              Shipping zones, rates, and tax rules — configured correctly.
+              Shipping zones, rates, and tax rules, configured correctly.
             </p>
             <ul class="text-xs text-muted-foreground space-y-1">
               <li>• Shipping zone & rate setup</li>
@@ -212,7 +212,7 @@ seo.structuredData = [
             <FiSettings className="text-3xl text-indigo-400 mb-4" />
             <h3 class="text-xl font-semibold text-foreground mb-2">Store Configuration</h3>
             <p class="text-sm text-muted-foreground mb-3">
-              Backend settings tuned for your business needs.
+              Backend settings tuned to how your store actually operates.
             </p>
             <ul class="text-xs text-muted-foreground space-y-1">
               <li>• Payment gateway setup</li>
@@ -244,7 +244,7 @@ seo.structuredData = [
           <div class="bento-tile">
             <h3 class="text-lg font-semibold mb-2 text-foreground">No Hidden Scope Creep</h3>
             <p class="text-sm text-muted-foreground">
-              You know exactly what you're getting — Shopify tasks, executed cleanly. No surprise invoices or bloated scopes.
+              You know exactly what you're getting: Shopify tasks, executed cleanly. No surprise invoices, no scope that quietly doubles.
             </p>
           </div>
         </div>
@@ -267,7 +267,7 @@ seo.structuredData = [
             <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary-500/10 text-primary-400 font-bold text-lg mb-4">2</span>
             <h3 class="text-lg font-semibold mb-2 text-foreground">We Execute</h3>
             <p class="text-sm text-muted-foreground">
-              Our Shopify team handles the task in your store. We only need collaborator access — nothing more.
+              Our Shopify engineers do the work inside your store. Collaborator access is all we need.
             </p>
           </div>
           <div class="bento-tile text-center">

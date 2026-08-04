@@ -11,7 +11,7 @@ const systems = [
     number: "01",
     icon: Activity,
     title: "Conversion System",
-    intro: "We treat conversion as a product, not a project. We trace where revenue is leaking — landing, PDP, cart, checkout — and rebuild friction points with native Shopify primitives, not duct-taped apps.",
+    intro: "Conversion work usually stalls because nobody owns it end to end. We trace where revenue leaks across landing, PDP, cart, and checkout, then rebuild each friction point with native Shopify primitives and instrument what changed.",
     today: [
       "A pile of CRO apps fighting each other",
       "A/B tests on button colors and headlines",
@@ -20,7 +20,7 @@ const systems = [
     ],
     engineer: [
       "Funnel-level engineering across landing, PDP, cart, checkout",
-      "Native Shopify primitives — Functions, app extensions, theme blocks",
+      "Native Shopify primitives: Functions, app extensions, theme blocks",
       "Structured experiments tied to revenue metrics",
       "Checkout extensibility built for Shopify's own roadmap",
     ],
@@ -32,16 +32,16 @@ const systems = [
     number: "02",
     icon: ShoppingBag,
     title: "Merchandising System",
-    intro: "Out-of-the-box collection sorting is the silent killer of AOV. We engineer ranking, filtering, and discovery logic that surfaces the right product to the right buyer — across collections, search, and recommendations.",
+    intro: "Default collection sorting is where AOV quietly goes to die. We engineer the ranking, filtering, and discovery logic that puts the right product in front of the right buyer, across collections, search, and recommendations.",
     today: [
       "Default Shopify sort orders (manual / best-selling / alpha)",
       "Search & filter apps that don't talk to each other",
       "Recommendations from a black-box ML app",
-      "Merch decisions made in a spreadsheet, not the storefront",
+      "Merch decisions made in a spreadsheet and never reflected in the storefront",
     ],
     engineer: [
       "Custom ranking signals fed from real buyer behavior",
-      "Filter and search logic engineered into the theme — not an app",
+      "Filter and search logic engineered into the theme itself",
       "Recommendation surfaces under your control, instrumented",
       "Metaobjects + Liquid done properly for editorial merchandising",
     ],
@@ -53,7 +53,7 @@ const systems = [
     number: "03",
     icon: Zap,
     title: "Performance System",
-    intro: "Speed is a revenue lever, not a Lighthouse score. We rebuild Core Web Vitals from the theme up, eliminate the app-script tax, and engineer stability for sale-day traffic.",
+    intro: "A green Lighthouse score and a genuinely fast store are two different things. We rebuild Core Web Vitals from the theme up, cut the third-party script tax, and keep the store standing through sale-day traffic.",
     today: [
       "Lighthouse green that drops the moment a real user lands",
       "Twenty third-party scripts loading in the head",
@@ -61,8 +61,8 @@ const systems = [
       "Performance audits with no follow-through",
     ],
     engineer: [
-      "Core Web Vitals rebuilt from the theme up — LCP, INP, CLS",
-      "App-script audit and removal — the third-party tax goes away",
+      "Core Web Vitals rebuilt from the theme up: LCP, INP, CLS",
+      "App-script audit and removal, so the third-party tax goes away",
       "Sale-day stability tested under real load",
       "Image, font, and asset strategy that holds up at scale",
     ],
@@ -74,7 +74,7 @@ const systems = [
     number: "04",
     icon: Wrench,
     title: "Custom Engineering",
-    intro: "When apps fall short, we go deeper. Shopify Functions, theme app extensions, Hydrogen storefronts, custom backends, ERP and OMS integrations — built once, owned forever.",
+    intro: "Some workflows have no app that fits. We build those properly: Shopify Functions, theme app extensions, Hydrogen storefronts, custom backends, and ERP or OMS integrations that survive platform updates.",
     today: [
       "A stack of apps duct-taping a custom workflow",
       "Brittle script-tag injections in the theme",
@@ -83,7 +83,7 @@ const systems = [
     ],
     engineer: [
       "Shopify Functions for discount, payment, shipping, fulfillment logic",
-      "Theme app extensions — app blocks that integrate cleanly into any theme",
+      "Theme app extensions: app blocks that drop cleanly into any theme",
       "Hydrogen storefronts on Oxygen + Storefront API",
       "ERP/OMS integrations with NetSuite, SAP, ShipStation, custom backends",
     ],
@@ -93,8 +93,8 @@ const systems = [
 ];
 
 const seo = createSEO({
-  pageName: "Capabilities — We don't sell services. We engineer systems.",
-  description: "Four systems we engineer for considered Shopify brands — Conversion, Merchandising, Performance, and Custom Engineering. Built with native Shopify primitives, owned forever.",
+  pageName: "Shopify Engineering Capabilities",
+  description: "Four systems we engineer for Shopify brands: conversion, merchandising, performance, and custom engineering. Built with native Shopify primitives.",
   keywords: "Shopify capabilities, Shopify conversion engineering, Shopify merchandising, Shopify performance engineering, custom Shopify apps, Shopify Functions, Hydrogen development",
   contentType: "service",
   pathname: "/capabilities",
@@ -132,10 +132,10 @@ const seo = createSEO({
             Capabilities
           </span>
           <h1 class="text-balance text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-[1.05] tracking-tight mb-6">
-            We don't sell services. <span class="text-muted-foreground">We engineer systems.</span>
+            Four systems we engineer <span class="text-muted-foreground">for Shopify brands.</span>
           </h1>
           <p class="text-base md:text-lg text-muted-foreground leading-relaxed">
-            Brands that have outgrown their first Shopify build don't need another agency selling theme work. They need a partner who treats the store as the operating system of the business.
+            We don't sell services. We engineer systems. Brands that have outgrown their first Shopify build need a partner who treats the store as core operating infrastructure, and who can show the engineering behind that claim. How far we take each system depends on the <a href="/engagements" class="text-primary font-semibold hover:underline">engagement you pick</a>.
           </p>
         </div>
       </div>

@@ -7,10 +7,10 @@ import { getEnhancedOrganizationSchema } from "@/lib/schemas";
 import { Code2, Database, GitBranch, Activity } from "lucide-react";
 
 const faqs = [
-  { question: "Who do you typically work with?", answer: "Considered Shopify brands that have moved past the template-and-plugin stage — usually direct-to-consumer brands where the store is the operating system of the business, not a brochure." },
-  { question: "How is this different from a typical Shopify agency?", answer: "Most Shopify agencies are studios that picked up code; we're engineers who picked up Shopify. We engineer systems — conversion, merchandising, performance, custom — not deliverables." },
+  { question: "Who do you typically work with?", answer: "Brands whose store has become the constraint on growth rather than the vehicle for it. In practice that means an established catalogue, real order volume, and a team that has already exhausted what apps and theme edits can do." },
+  { question: "How is this different from a typical Shopify agency?", answer: "Agencies sell deliverables: a theme refresh, a redesign, a sprint of tickets. We engineer systems. Conversion, merchandising, performance, and custom Shopify work, built to keep running after we hand it over." },
   { question: "Do you take on early-stage stores or one-off projects?", answer: "Generally, no. The brands we work with already have traction and have outgrown the systems they started with." },
-  { question: "Where are you based?", answer: "We're based in India and work async-first with brands across multiple time zones — designed to feel like an embedded internal team, not an external vendor." },
+  { question: "Where are you based?", answer: "India. We work async-first with brands across several time zones, which is why handoffs get written down instead of explained in a call." },
 ];
 
 const principles = [
@@ -27,7 +27,7 @@ const principles = [
   {
     icon: Database,
     title: "Built to last",
-    body: "We engineer with native primitives — Shopify Functions, app extensions, Liquid done properly — so the work outlasts the team that shipped it.",
+    body: "We build on native primitives: Shopify Functions, app extensions, Liquid done properly. The result is a store your next engineer can read.",
   },
   {
     icon: Code2,
@@ -37,8 +37,8 @@ const principles = [
 ];
 
 const seo = createSEO({
-  pageName: "About Capaxe Labs — Built by engineers, for operators",
-  description: "Capaxe Labs is a Shopify systems engineering studio. We engineer the systems behind considered DTC brands — built by the same engineers who scaled fintech at Paytm Money.",
+  pageName: "About Capaxe Labs, Shopify Systems Engineers",
+  description: "Capaxe Labs is a Shopify systems engineering studio. The same engineers who built fintech products at Paytm Money now engineer stores for DTC brands.",
   keywords: "Capaxe Labs, Shopify systems engineering, Shopify engineering studio, considered Shopify operators, Paytm Money engineers, RankFlo, Opskitty",
   image: "/images/about/about.jpg",
   contentType: "basic",
@@ -106,7 +106,7 @@ seo.structuredData = getEnhancedOrganizationSchema();
               Built by engineers, <span class="text-white/70">for operators.</span>
             </h1>
             <p class="text-base md:text-lg text-white/80 leading-relaxed">
-              Capaxe Labs was built on a simple observation: most Shopify agencies are studios that picked up code. <span class="font-semibold text-white">We're engineers who picked up Shopify.</span>
+              Capaxe Labs engineers Shopify systems for direct-to-consumer brands. Most agencies in this space are studios that picked up code. <span class="font-semibold text-white">We're engineers who picked up Shopify.</span>
             </p>
           </div>
         </div>
@@ -127,11 +127,11 @@ seo.structuredData = getEnhancedOrganizationSchema();
             We've built and scaled production systems in fintech, including products at <span class="font-semibold text-foreground">Paytm Money</span> serving millions of users.
           </p>
           <p class="text-base md:text-lg text-muted-foreground leading-relaxed mb-4">
-            We run <span class="font-semibold text-foreground">RankFlo</span> (SEO and SKU intelligence for Shopify) and <span class="font-semibold text-foreground">Opskitty</span> (web operations) — products that keep us close to where Shopify is actually breaking, and what it takes to fix it.
+            We also run <span class="font-semibold text-foreground">RankFlo</span> (SEO and SKU intelligence for Shopify) and <span class="font-semibold text-foreground">Opskitty</span> (web operations). Running our own products keeps us close to where Shopify actually breaks, and what it costs to fix it.
           </p>
           <p class="text-base md:text-lg text-muted-foreground leading-relaxed">
-            When we engineer a store, it's the same discipline we'd bring to a financial system:
-            <span class="font-semibold text-foreground">traced, measured, accountable, built to outlast the team that shipped it.</span>
+            Most stores run fine right up until they don't. A checkout change nobody can trace, an app stack nobody owns.
+            <span class="font-semibold text-foreground">Fintech teaches you to design for that day before it arrives.</span>
           </p>
         </div>
 
@@ -193,10 +193,10 @@ seo.structuredData = getEnhancedOrganizationSchema();
           Operating Principles
         </span>
         <h2 class="text-balance text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-[1.1] tracking-tight">
-          The discipline we bring to commerce.
+          Four rules we don't break.
         </h2>
         <p class="text-base md:text-lg text-muted-foreground leading-relaxed mt-6">
-          Same standards as fintech engineering — applied to Shopify.
+          Written down so you can hold us to them on every Shopify build.
         </p>
       </div>
 
@@ -230,7 +230,7 @@ seo.structuredData = getEnhancedOrganizationSchema();
             <span class="text-muted-foreground">You'll get the people doing the work.</span>
           </h2>
           <p class="text-base md:text-lg text-muted-foreground leading-relaxed">
-            Engagements are async-first with structured sync touchpoints — designed to feel like an embedded internal team rather than an external vendor. We take on a small number of brands at a time.
+            Engagements run async-first with fixed sync windows, close enough to your team to feel like an internal one.
           </p>
           <div class="mt-8">
             <a

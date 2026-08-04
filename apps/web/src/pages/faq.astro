@@ -6,38 +6,46 @@ import { getFAQPageSchema } from "@/lib/schemas";
 const faqs = [
   {
     question: "Who do you typically work with?",
-    answer: "Considered Shopify brands that have moved past the template-and-plugin stage — usually direct-to-consumer brands where the store is the operating system of the business, not a brochure. We work best with operators who care about the line between engineering and revenue."
+    answer: "Considered Shopify and Shopify Plus brands that have outgrown the template-and-plugin stage. Most are direct-to-consumer, doing real volume, with a storefront that carries the whole customer relationship. The other thing they share is an operator who can say what the store needs to do and then let engineers decide how. We also work underneath in-house teams as the engineering layer when that fits better."
   },
   {
     question: "How is this different from a typical Shopify agency?",
-    answer: "Most Shopify agencies are studios that picked up code; we're engineers who picked up Shopify. We engineer systems — conversion, merchandising, performance, custom — not deliverables. The discipline comes from years of shipping production systems at scale, including in fintech."
+    answer: "We're engineers first. Most Shopify agencies grew out of design studios and picked up code along the way; our background is production systems at scale, including fintech, where a bad deploy costs money within minutes. That changes how the work runs. We trace a problem to root cause before touching anything, and we build on native Shopify primitives like Functions and app extensions instead of adding another app subscription. Every build sprint is measured against one metric agreed before we start."
   },
   {
     question: "Do you take on early-stage stores or one-off projects?",
-    answer: "Generally, no. The brands we work with already have traction and have outgrown the systems they started with. Early-stage stores are usually better served by a theme partner or a dedicated solo developer."
+    answer: "Generally, no. Our work assumes existing traction and enough order volume that a conversion or performance change shows up in the data within weeks. Below that, a theme partner or a good solo developer will serve you better and cost you far less. One-off projects usually get the same answer: if there's no system behind the request and no follow-through after it ships, we'll point you elsewhere."
   },
   {
     question: "How long does an engagement take?",
-    answer: "Diagnostics typically run a few weeks. Build sprints are scoped to the system being engineered. Embedded partnerships are ongoing. We share a clear timeline before any work begins."
+    answer: "A Diagnostic runs two to three weeks. A Build Sprint runs four to eight weeks depending on which system we're engineering and how much of it already exists. An Embedded Partnership has no end date and bills monthly. In practice, timelines move on two things: how clean the existing codebase is, and how quickly decisions get made on your side. You get a dated plan before any work starts."
   },
   {
     question: "Do you publish pricing?",
-    answer: "No — and we think that's a feature. No two engagements look the same, and fixed published pricing tends to push agencies toward template work rather than engineered work. We give you a clear investment range in the first conversation."
+    answer: "No, and we think that's the right call. Two brands can ask for the same thing and need completely different amounts of engineering behind it, so a published price list would either overcharge one of them or quietly shrink the scope to fit the number. You get a clear investment range in the first conversation, before there's any proposal to sign. There's also a written breakdown on the site comparing retainer, hourly, and project-based billing if you want to weigh the models first."
+  },
+  {
+    question: "What happens in the first conversation?",
+    answer: "A free 30-minute call. We ask what the store is supposed to do and where it stops doing it, then tell you which engagement fits and roughly what it costs. If the problem doesn't need engineering, we'll say so on the call. Written next steps follow within 24 hours either way."
   },
   {
     question: "Where are you based and how do you work with international brands?",
-    answer: "We're based in India and work with brands across multiple time zones. Our engagements are async-first, with structured sync touchpoints — designed to feel like an embedded internal team rather than an external vendor."
+    answer: "We're based in India and run engagements across time zones. Most of the work moves in writing, so decisions and tradeoffs stay on the record instead of getting stuck in a call half the team missed. Sync calls are scheduled rather than ad hoc: a weekly review, plus live time whenever a decision needs it. Overlap hours get agreed at kickoff and we hold to them."
+  },
+  {
+    question: "Do we own everything you build?",
+    answer: "Yes. Code ships into your Shopify store and your repositories, documented well enough that another engineer can take it over without calling us. Diagnostic roadmaps are yours to keep and execute in-house if you'd rather. Nothing we build sits behind a proprietary app or an account you can't access."
   },
   {
     question: "Do you work on Shopify Plus?",
-    answer: "Yes. The systems we engineer — conversion, merchandising, performance, custom — apply across Shopify and Shopify Plus, with deeper engineering on Plus where Functions, B2B, and headless make more sense."
+    answer: "Yes, and a good share of our work is on Plus. The four systems we engineer (conversion, merchandising, performance, and custom) apply to both, but Plus opens up primitives that change what's worth building: Shopify Functions for discount and checkout logic, checkout extensibility, B2B, and headless storefronts where the catalogue justifies the cost. On standard Shopify we stay inside Liquid, app extensions, and the Admin API, which covers more than most brands assume."
   }
 ];
 
 const seo = createSEO({
   pageName: "Shopify Development FAQ",
-  description: "Answers to common questions about Capaxe Labs' Shopify services — custom apps, headless commerce, payment integrations, retainer plans, timelines, and pricing.",
-  keywords: "Shopify development FAQ, Shopify agency questions, Shopify app development FAQ, headless commerce FAQ",
+  description: "Straight answers on working with Capaxe Labs: who we take on, how long engagements run, pricing, time zones, code ownership, and Shopify Plus.",
+  keywords: "Shopify development FAQ, Shopify agency questions, Shopify retainer pricing, Shopify Plus development, hiring a Shopify engineering team",
   contentType: "faq",
   pathname: "/faq"
 });
@@ -49,7 +57,7 @@ seo.structuredData = getFAQPageSchema(faqs);
     <section class="pt-32 pb-8 px-6">
       <div class="max-w-3xl mx-auto text-center">
         <h1 class="text-5xl font-bold mb-4 text-foreground">Frequently Asked Questions</h1>
-        <p class="text-lg text-muted-foreground mb-8">Find answers to common questions about our services, processes, and how we can help your business grow online.</p>
+        <p class="text-lg text-muted-foreground mb-8">How we work, who we take on, what engagements cost, and how long they run. If your question is missing, ask it directly.</p>
       </div>
     </section>
 

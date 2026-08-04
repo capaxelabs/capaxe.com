@@ -6,16 +6,16 @@ import { createSEO } from "@/utils/seo";
 import { getFAQPageSchema } from "@/lib/schemas";
 
 const faqs = [
-  { question: "What if I don't use all my retainer hours in a month?", answer: "Most retainer plans include a reasonable rollover window. But even unused hours aren't wasted — your team stays familiar with your codebase and ready to jump in instantly when needed." },
-  { question: "Is a retainer worth it if I only need occasional updates?", answer: "Even stores with light development needs benefit from proactive monitoring, security patches, and performance optimization. A basic retainer covers all of this and prevents small issues from becoming expensive emergencies." },
-  { question: "Can I switch from hourly billing to a retainer mid-project?", answer: "Yes. Many of our clients start with a project engagement and transition to a retainer once they see the value of ongoing support. We make the switch seamless." },
-  { question: "How does retainer pricing compare to hiring a full-time Shopify developer?", answer: "A full-time Shopify developer costs $80K-$150K/year in salary alone, plus benefits, tools, and management overhead. A retainer gives you access to an entire agency team for a fraction of that cost." },
-  { question: "What's the minimum commitment for a retainer plan?", answer: "We offer month-to-month retainers with no long-term lock-in. Most clients stay because the value is clear, not because they're contractually obligated." },
+  { question: "What if I don't use all my retainer hours in a month?", answer: "Most retainer plans include a reasonable rollover window. Unused hours still buy you something: the team stays current on your codebase and can start work the same day you ask." },
+  { question: "Is a retainer worth it if I only need occasional updates?", answer: "Sometimes no. If your store changes a few times a year and an hour of downtime costs you little, hourly is cheaper. A retainer earns its keep when monitoring, security patches, and speed work would otherwise sit undone until something breaks." },
+  { question: "Can I switch from hourly billing to a retainer mid-project?", answer: "Yes. Plenty of clients start with a project build and move to a retainer once the launch settles and a backlog of small changes starts forming. The same engineers stay on the codebase, so there is no re-onboarding." },
+  { question: "How does retainer pricing compare to hiring a full-time Shopify developer?", answer: "A full-time Shopify developer costs $80K-$150K/year in salary alone, before benefits, tooling, and management time. A retainer costs less than one senior hire and covers a team instead of one person." },
+  { question: "What's the minimum commitment for a retainer plan?", answer: "Month-to-month, with no long-term lock-in. Clients stay while the work keeps paying for itself, and they can leave the month it stops." },
 ];
 
 const seo = createSEO({
-  pageName: "Shopify Retainer vs Hourly vs Project-Based — Pricing Comparison",
-  description: "Compare Shopify retainer plans against hourly and project-based billing. See why retainers save money, reduce risk, and deliver better results for growing Shopify stores.",
+  pageName: "Shopify Retainer vs Hourly vs Project Pricing",
+  description: "Shopify retainer vs hourly vs project-based billing: annual cost, response times, and which model actually fits your store.",
   keywords: "shopify retainer vs hourly, shopify development pricing comparison, shopify retainer plan cost, shopify agency billing models, shopify project vs retainer",
   contentType: "basic",
   pathname: "/shopify-retainer-vs-hourly-vs-project",
@@ -26,38 +26,38 @@ const comparisonRows = [
   { feature: "Monthly Cost", retainer: "$2,000 - $5,000/mo", hourly: "$3,000 - $8,000+/mo", project: "$5,000 - $50,000 per project", retainerWin: true },
   { feature: "Cost Predictability", retainer: "Fixed monthly fee", hourly: "Varies every month", project: "Fixed per project, but scope creep adds cost", retainerWin: true },
   { feature: "Response Time", retainer: "Same-day (SLA-backed)", hourly: "1-3 days (when available)", project: "Only during active project", retainerWin: true },
-  { feature: "Team Familiarity with Your Store", retainer: "Deep — ongoing relationship", hourly: "Shallow — re-learns each time", project: "Temporary — ends with project", retainerWin: true },
+  { feature: "Team Familiarity with Your Store", retainer: "Deep, built over time", hourly: "Shallow. Re-learns each time", project: "Temporary. Ends at handoff", retainerWin: true },
   { feature: "Bug Fixes & Emergencies", retainer: "Included in plan", hourly: "$150-250/hr rush rate", project: "Not covered unless scoped", retainerWin: true },
   { feature: "Proactive Optimization", retainer: "Monthly speed, SEO & CRO checks", hourly: "Only if you request (and pay)", project: "Not included", retainerWin: true },
   { feature: "Security Monitoring", retainer: "Continuous monitoring included", hourly: "Pay per audit", project: "One-time audit at best", retainerWin: true },
   { feature: "Strategic Guidance", retainer: "Ongoing roadmap planning", hourly: "Ad-hoc advice when billing", project: "Scoped recommendations only", retainerWin: true },
   { feature: "Scaling for Peak Seasons", retainer: "Pre-planned, stress-free", hourly: "Scramble to book hours", project: "Requires new project scope", retainerWin: true },
-  { feature: "App & Theme Updates", retainer: "Managed proactively", hourly: "Reactive — after things break", project: "Not covered", retainerWin: true },
+  { feature: "App & Theme Updates", retainer: "Tested in staging first", hourly: "Reactive, after things break", project: "Not covered", retainerWin: true },
   { feature: "Communication", retainer: "Dedicated Slack/channel + weekly syncs", hourly: "Email threads, variable response", project: "Project manager during engagement", retainerWin: true },
-  { feature: "Long-Term ROI", retainer: "Highest — compounds over time", hourly: "Moderate — pay more as needs grow", project: "One-time value, no continuity", retainerWin: true },
+  { feature: "Long-Term ROI", retainer: "Highest, compounds over time", hourly: "Moderate. Costs rise as needs grow", project: "One-time value, no continuity", retainerWin: true },
 ];
 
 const scenarios = [
   {
-    title: "The 2 AM Checkout Disaster",
-    description: "Your checkout breaks on a Friday night during a flash sale. Hourly developers aren't available until Monday. Project-scoped agencies say it's out of scope.",
-    retainer: "Your retainer team gets an alert, diagnoses the issue within the hour, and pushes a fix before most customers even notice.",
+    title: "Checkout Breaks at 2 AM",
+    description: "Your checkout stops accepting payments on a Friday night, halfway through a flash sale.",
+    retainer: "Monitoring fires an alert. The team finds the cause inside an hour and pushes a fix before most customers notice.",
     hourly: "You email your freelancer. They respond Monday morning. You've lost an entire weekend of sales.",
     project: "Your project ended 3 months ago. The agency quotes a new engagement with a 2-week lead time.",
     lost: "$15,000 - $50,000+ in lost weekend revenue",
   },
   {
     title: "BFCM Traffic Surge Preparation",
-    description: "Black Friday is 6 weeks away. Your store needs load testing, speed optimization, and checkout flow improvements.",
-    retainer: "Your team has been optimizing all quarter. Load tests are done. Checkout is already streamlined. You're ready.",
-    hourly: "You scramble to book enough hours. The developer needs to re-learn your codebase first. Timeline is tight.",
+    description: "Black Friday is 6 weeks out. The store needs load testing, speed work, and a tighter checkout flow.",
+    retainer: "The team has been at this all quarter. Load tests are done and checkout is already tightened up.",
+    hourly: "You scramble to book enough hours. The developer has to re-learn your codebase first, and the timeline is tight.",
     project: "You scope a rush project at 2x premium pricing. Delivery is uncertain with the compressed timeline.",
     lost: "$5,000 - $20,000 in rush fees and lost optimization time",
   },
   {
     title: "Shopify Theme Update Breaks Your Customizations",
     description: "Shopify releases a major theme update. Your custom sections, metafield integrations, and checkout tweaks stop working.",
-    retainer: "Your team tests the update in staging first, identifies conflicts, and deploys a clean migration — zero downtime.",
+    retainer: "The team runs the update in staging, catches the conflicts, and deploys a clean migration with zero downtime.",
     hourly: "You find out when customers report broken pages. You book emergency hours at rush rates.",
     project: "You submit a new project request. The agency can start in 3 weeks.",
     lost: "$3,000 - $10,000 in emergency fixes + conversion loss during downtime",
@@ -65,7 +65,7 @@ const scenarios = [
   {
     title: "Competitor Launches a New Feature",
     description: "Your biggest competitor adds a product configurator. Your CEO wants the same thing yesterday.",
-    retainer: "Your team scopes it in your weekly sync, starts building within days using their deep knowledge of your codebase.",
+    retainer: "The team scopes it in the weekly sync and starts building within days. They already know how your product data is structured.",
     hourly: "You get quotes from 3 freelancers. Fastest estimate: 4 weeks to start, after onboarding.",
     project: "You negotiate a new SOW. Kickoff is 2-3 weeks out after contracts and deposits.",
     lost: "Weeks of competitive advantage and market positioning",
@@ -89,11 +89,11 @@ const costBreakdown = {
             Pricing Comparison
           </span>
           <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-            Retainer vs Hourly vs Project-Based
+            Shopify Retainer vs Hourly vs Project-Based
           </h1>
           <p class="text-lg text-white/60 max-w-3xl mx-auto">
-            Not all billing models are equal. See why Shopify merchants who switch to retainers
-            spend less, ship faster, and sleep better at night.
+            Three ways to pay for Shopify engineering work, with very different annual totals.
+            Below is the full comparison, plus the kind of store each model actually suits.
           </p>
         </div>
       </div>
@@ -103,13 +103,13 @@ const costBreakdown = {
     <section class="pb-8 px-6">
       <div class="max-w-7xl mx-auto">
         <div class="bento-tile border-2 border-primary-500/30 p-8 text-center">
-          <p class="text-sm font-semibold text-primary-400 uppercase tracking-wider mb-2">The Bottom Line</p>
+          <p class="text-sm font-semibold text-primary-400 uppercase tracking-wider mb-2">The Short Version</p>
           <p class="text-2xl md:text-3xl font-bold text-foreground mb-3">
             Retainer clients save 20-40% annually
           </p>
           <p class="text-muted-foreground max-w-2xl mx-auto">
-            compared to hourly billing, while getting faster response times, proactive optimization,
-            and a team that actually knows their store inside out.
+            compared with hourly billing, on top of faster response times and a team that already
+            knows the codebase. That gap narrows if your store barely changes month to month.
           </p>
         </div>
       </div>
@@ -150,7 +150,7 @@ const costBreakdown = {
     <!-- Annual Cost Breakdown -->
     <section class="pb-8 px-6">
       <div class="max-w-7xl mx-auto">
-        <h2 class="text-3xl font-bold mb-8 text-foreground text-center">Real-World Annual Cost Comparison</h2>
+        <h2 class="text-3xl font-bold mb-8 text-foreground text-center">What Each Model Costs Over a Year</h2>
         <p class="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
           For a mid-size Shopify store doing $500K-$2M in annual revenue with regular development needs.
         </p>
@@ -158,11 +158,11 @@ const costBreakdown = {
           <!-- Retainer -->
           <div class="bento-tile border-2 border-primary-500/30 relative">
             <div class="absolute -top-3 left-1/2 -translate-x-1/2">
-              <span class="px-3 py-1 bg-primary-500 text-white text-xs font-bold rounded-full">BEST VALUE</span>
+              <span class="px-3 py-1 bg-primary-500 text-white text-xs font-bold rounded-full">LOWEST TOTAL</span>
             </div>
             <div class="text-center pt-4">
               <h3 class="text-xl font-bold text-primary-400 mb-1">Retainer</h3>
-              <p class="text-sm text-muted-foreground mb-6">Predictable, proactive, all-inclusive</p>
+              <p class="text-sm text-muted-foreground mb-6">Fixed monthly fee, emergencies included</p>
             </div>
             <div class="space-y-3">
               <div class="flex justify-between">
@@ -194,7 +194,7 @@ const costBreakdown = {
           <div class="bento-tile">
             <div class="text-center">
               <h3 class="text-xl font-bold text-foreground mb-1">Hourly</h3>
-              <p class="text-sm text-muted-foreground mb-6">Pay per task, unpredictable costs</p>
+              <p class="text-sm text-muted-foreground mb-6">Pay per task. Cost varies month to month</p>
             </div>
             <div class="space-y-3">
               <div class="flex justify-between">
@@ -267,9 +267,9 @@ const costBreakdown = {
     <!-- Real-World Scenarios -->
     <section class="pb-8 px-6">
       <div class="max-w-7xl mx-auto">
-        <h2 class="text-3xl font-bold mb-3 text-foreground text-center">Real-World Scenarios</h2>
+        <h2 class="text-3xl font-bold mb-3 text-foreground text-center">When Things Go Wrong</h2>
         <p class="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
-          See how each billing model handles the situations Shopify merchants actually face.
+          Four situations Shopify merchants actually hit, and how each billing model handles them.
         </p>
 
         {scenarios.map((scenario) => (
@@ -294,7 +294,7 @@ const costBreakdown = {
 
             <div class="bg-red-500/5 border border-red-500/20 rounded-lg px-4 py-2">
               <p class="text-sm text-red-400">
-                <span class="font-semibold">Cost of not having a retainer:</span> {scenario.lost}
+                <span class="font-semibold">What the delay costs:</span> {scenario.lost}
               </p>
             </div>
           </div>
@@ -313,7 +313,7 @@ const costBreakdown = {
               <li>You do $200K+ in annual revenue</li>
               <li>You need regular updates and features</li>
               <li>Downtime directly costs you money</li>
-              <li>You want proactive optimization, not reactive fixes</li>
+              <li>You'd rather catch problems before customers report them</li>
               <li>You're preparing for growth or seasonal peaks</li>
               <li>You want a team that knows your store deeply</li>
             </ul>
@@ -331,7 +331,7 @@ const costBreakdown = {
               <li>Your store has very low traffic and revenue</li>
             </ul>
             <p class="text-xs text-muted-foreground mt-6 italic">
-              Most stores outgrow hourly billing within 3-6 months.
+              Most stores outgrow hourly billing within 3-6 months of steady growth.
             </p>
           </div>
 
@@ -344,7 +344,7 @@ const costBreakdown = {
               <li>You already have in-house support for maintenance</li>
             </ul>
             <p class="text-xs text-muted-foreground mt-6 italic">
-              Even project clients benefit from adding a retainer after launch.
+              A retainer after launch is optional. Plenty of teams handle maintenance in-house.
             </p>
           </div>
         </div>
@@ -355,10 +355,10 @@ const costBreakdown = {
     <section class="pb-8 px-6">
       <div class="max-w-7xl mx-auto">
         <div class="bento-tile-accent text-center py-12">
-          <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Stop Overpaying for Shopify Support?</h2>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Work Out Which Model Fits Your Store</h2>
           <p class="text-white/70 max-w-2xl mx-auto mb-8">
-            Most merchants who switch from hourly or project-based billing to a retainer
-            save 20-40% in the first year while getting better service and faster turnaround.
+            Tell us what the next twelve months look like for your store and we'll say which
+            billing model makes sense. Sometimes that answer is hourly, and we'll say so.
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="/retainer" class="inline-block px-8 py-4 bg-white text-primary-600 font-semibold rounded-lg hover:bg-white/90 transition-colors">

@@ -21,6 +21,8 @@
 
 **Why:** Audit of the homepage and /engagements found the copy carries heavy LLM tells. Site-wide baseline before work started: **160 files, 509 em dashes, 218 "X, not Y" contrast constructions**, plus agency-speak banned words concentrated in the case studies.
 
+**Current baseline after Phase 1:** 105 files, 443 em dashes, 135 contrast constructions. Every marketing page a buyer actually lands on is now clean; what remains is blog, patterns, projects, and service pages.
+
 **Process for every batch:** load the `brand` and `seo-content` skills first, then apply the Humanize rules in `~/.claude/CLAUDE.md`. Never rewrite from memory.
 
 **Acceptance criteria (every file):**
@@ -44,16 +46,24 @@
 - [x] Replace vague engagement durations with "2 to 3 weeks" / "4 to 8 weeks" / "Ongoing, monthly"
 - [x] Add engagements internal links to /shopify-retainer-vs-hourly-vs-project and /capabilities
 
-### Phase 1: Core marketing pages (8 files, 60 em dashes)
-Highest traffic and highest conversion intent. Do these before anything else.
-- [ ] /capabilities (11 em dashes, 4 contrast). Also the destination for 4 homepage links, so voice must match
-- [ ] /about (11 em dashes, 3 contrast). Carries the E-E-A-T story, keep every Paytm/RankFlo/Opskitty specific
-- [ ] /shopify-retainer-vs-hourly-vs-project (9 em dashes, 4 contrast, banned: seamless). Now linked from /engagements
-- [ ] /faq (8 em dashes, 3 contrast). Check for answers duplicated from homepage and /engagements FAQs
-- [ ] /shopify-support (8 em dashes, banned: leverage)
-- [ ] /hire-shopify-developer (8 em dashes)
-- [ ] /shopify-plus (5 em dashes)
-- [ ] /shopify-development-agency (4 em dashes, 1 contrast)
+### Phase 1: Core marketing pages — DONE (8 files, 60 em dashes to 0)
+Completed with 6 parallel agents. Build passes, all titles under 60 chars, all meta descriptions under 155.
+- [x] /capabilities. H1 was "We don't sell services. We engineer systems." with no keyword; now "Four systems we engineer for Shopify brands" and the old line moved into the intro. Title 72 to 46 chars. Added /engagements link
+- [x] /about. All E-E-A-T specifics preserved (Paytm Money, RankFlo, Opskitty). Keyword added to first 100 words. Title 65 to 58 chars
+- [x] /shopify-retainer-vs-hourly-vs-project. Also rebalanced toward even-handedness since /engagements now links here as a neutral resource. "BEST VALUE" badge to "LOWEST TOTAL" to match the page's own numbers
+- [x] /faq. Found all 7 questions were duplicated from the homepage, 3 near-verbatim across all three pages. Rewrote as the canonical fuller version, now 9 questions. No sentence over 40 chars is shared between /faq, / and /engagements
+- [x] /shopify-support. "leverage" was the verb form, removed. H1 to "Your Shopify Backend, Fully Managed" to match target term
+- [x] /hire-shopify-developer. Broke 5 rhetorical triads. Fixed an H2 that contradicted its own FAQ ("Engagement Models" to "How We Bill")
+- [x] /shopify-plus. Removed banned word "unlock" from the hero. 4 capability tiles were restating their own bullet lists verbatim
+- [x] /shopify-development-agency. Title 82 to 40 chars
+
+### Phase 1 follow-up: cross-page duplicates found during verification
+Parallel rewriting surfaced repeated lines the original audit missed.
+- [x] "You won't get an account manager. You'll get the people doing the work." was on the homepage and /about. Kept on /about as an H2, rewrote the homepage version
+- [x] "We take on a small number of brands at a time" appeared 3 times, twice on the homepage alone (hero + final CTA). Now once
+- [x] "studios that picked up code / engineers who picked up Shopify" was on / and /about. Kept on /about, reframed the homepage FAQ
+- [x] "Who do you typically work with?" FAQ was near-identical on / and /about. Differentiated
+- [x] components/home/AppPartners.astro (2 em dashes), pulled forward from Phase 7
 
 ### Phase 2: Service pages (7 files)
 - [ ] /services/shopify/maintenance-support (6 em dashes). One of only two pages linking to /engagements
