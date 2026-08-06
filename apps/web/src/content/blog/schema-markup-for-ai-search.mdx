@@ -1,0 +1,111 @@
+---
+title: "Schema Markup for AI Search: Product Data LLMs Can Read"
+description: "Which schema types actually matter when ChatGPT and Perplexity compose an answer, the mistakes Shopify themes make, and how to check what your store is emitting."
+category: 'AI & Modern Dev'
+tags: ["AEO", "AI search", "schema", "structured data"]
+pubDate: 'Aug 14 2026'
+heroImage: '/shopify-capaxe-labs.png'
+---
+
+When a language model answers "what's a good waterproof jacket under 200 dollars", it has to compare products it has never seen from stores it knows nothing about. It does that by reading whatever machine-readable data it can find, and falling back to guessing from your HTML when it can't.
+
+Structured data is how you stop it guessing. This guide covers which schema types matter for AI answers, what Shopify themes typically get wrong, and how to check what your store actually emits today.
+
+---
+
+## Why Schema Matters More for AI Than for Search
+
+Google has been reading the open web for twenty-five years. It has link graphs, click data, and enough context to understand your product page even if the markup is a mess.
+
+A model composing an answer has none of that history for your specific store. It has a retrieved page, a limited attention budget, and a question to answer. Clean structured data gives it price, availability, brand, and rating as facts it can state confidently. Missing structured data means it either infers those from your page copy, which is where hallucinated prices come from, or skips your product for one it can describe accurately.
+
+That's the practical benefit. Not a ranking boost. **Accuracy, and a lower chance of being left out because the model wasn't confident enough to mention you.**
+
+## The Schema Types That Earn Their Place
+
+You don't need all of Schema.org. Five types cover almost everything a commerce store needs.
+
+### Product
+
+The one that matters most. A complete `Product` block should carry:
+
+- `name`, `description`, `image`, `sku`
+- `brand` as a nested `Organization` object rather than a bare string
+- `offers` with `price`, `priceCurrency`, `availability`, and `priceValidUntil`
+- `aggregateRating` and `review` where you have real reviews
+
+`availability` is the field most often stale or missing, and it's the one that makes a model reluctant to recommend you. "In stock" is a fact it can repeat. Silence isn't.
+
+### Organization
+
+Establishes who you are as an entity. Include `name`, `url`, `logo`, `sameAs` pointing at your real social profiles, and contact details. This is how a model connects a product page to a brand it may have seen mentioned elsewhere.
+
+### BreadcrumbList
+
+Tells the model where a page sits in your catalogue. Cheap to add, and it gives useful context about category relationships that your URL structure alone may not convey.
+
+### FAQPage
+
+Question and answer pairs are close to the format an answer engine wants. If you have genuine buyer questions on product or category pages, marking them up makes them straightforward to extract. Do not invent questions to farm this. Fabricated FAQs read as filler to humans and models alike.
+
+### WebSite
+
+Small but useful. Carries your site name and a `SearchAction`, which helps a model understand your store has a searchable catalogue.
+
+## What Shopify Themes Get Wrong
+
+Shopify outputs some structured data by default, and most themes add more. Quality varies a lot. These four problems show up constantly.
+
+**Two conflicting Product blocks.** Your theme emits one, and a review app injects another with a different rating. Now the page carries contradictory data. A validator flags it, and a model reading the page has no way to know which to trust. This is the most common structured data bug on Shopify and the least noticed.
+
+**`brand` as a plain string.** Many themes output `"brand": "Acme"` where the spec wants a nested `Organization` object. It often still validates, but it gives up the entity connection, which is exactly the thing that helps a model link your product to a brand it recognises.
+
+**Prices that drift.** Structured data generated at theme render time can go stale against a price a sales app changes at runtime. The page shows one price and the markup says another.
+
+**Variants collapsed into one product.** A jacket in four sizes and three colours is often marked up as a single `Product` with one price. If the price varies by variant, the model states a number that may not exist. `AggregateOffer` with `lowPrice` and `highPrice` handles this correctly.
+
+## How to Check What Your Store Emits
+
+Three checks, in order of how much they tell you.
+
+**1. Read the raw output.** Open a product page, view source, and search for `application/ld+json`. Count the blocks. If you find more than one `Product`, you've found a problem.
+
+**2. Run it through a validator.** Google's Rich Results Test and Schema.org's validator will catch missing required fields and type errors. Both are free and take a minute per page.
+
+**3. Check a spread of products.** Your bestseller probably looks fine. Test a product with no reviews, one that's out of stock, and one with many variants. That's where the gaps live.
+
+Do this for a product page, a collection page, and your homepage. Those three cover most of the templates a crawler will encounter.
+
+## The Part Most Guides Leave Out
+
+Structured data only helps if the crawler can fetch the page in the first place.
+
+If GPTBot or PerplexityBot is getting a 403 from a bot-protection app or a `robots.txt` rule, your schema quality is irrelevant. We've seen stores with immaculate JSON-LD and zero AI visibility for exactly this reason. Check access before you optimize markup, and see [AEO vs SEO](/blog/aeo-vs-seo-shopify) for how the two fit together, or [getting products recommended by ChatGPT](/blog/get-shopify-products-recommended-by-chatgpt) for the wider checklist.
+
+## Keeping It Correct
+
+Adding schema is a one-time job. Keeping it accurate is not.
+
+Catalogues change. Apps get installed and inject their own markup. Themes get updated and quietly change their JSON-LD output. A store that validated cleanly in January can be emitting duplicate blocks by June without anyone touching a template on purpose.
+
+The maintenance question is what usually decides between doing this by hand and using an app.
+
+## Where an App Helps
+
+[Bee AI SEO](/shopify/apps/bee-ai-seo) handles the injection and the checking together. It adds JSON-LD, Open Graph, and AI meta tags through a one-click theme extension, scans products and pages for missing or weak meta tags, and runs an AEO audit that reports a health score with prioritized fixes. It also tests whether the major AI crawlers can reach your store, which is the check that makes the rest of it worth doing.
+
+It's free to install on the [Shopify App Store](https://apps.shopify.com/bee-llms-seo). Bee Apps is built by our team at Capaxe Labs.
+
+If you're weighing options, we compared it against [LLM Rank](/shopify/compare/bee-ai-seo-vs-llm-rank), which goes deeper on crawler controls and AI file generation.
+
+## The Short Version
+
+Get `Product` complete and accurate, especially `availability`, `brand` as an entity, and variant pricing. Add `Organization` and `BreadcrumbList`. Use `FAQPage` only where real questions exist.
+
+Then check that exactly one block of each type is on the page, verify a few edge-case products rather than your bestseller, and confirm the AI crawlers can actually fetch the pages you just fixed.
+
+Accurate structured data won't get you cited on its own. Inaccurate structured data will reliably keep you out.
+
+---
+
+*Running a large catalogue where theme and app markup conflict? That cleanup is part of our [engineering capabilities](/capabilities).*
