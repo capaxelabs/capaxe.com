@@ -28,9 +28,9 @@ export const pseoServices: PSEOService[] = [
     uniqueValueProps: [
       "clean Liquid your next developer won't dread touching",
       "components built so you can move to headless Hydrogen later without a rebuild",
-      "sprints planned with you, so the build follows your revenue goals — not just a spec"
+      "sprints planned with you, so the build follows your revenue goals rather than a spec"
     ],
-    metaDescription: "Custom Shopify development — themes, new features, and fast, reliable storefronts. Clean code your team can actually maintain."
+    metaDescription: "Custom Shopify development: themes, new features, and fast, reliable storefronts. Clean code your team can actually maintain."
   },
   {
     slug: "migration",
@@ -41,7 +41,7 @@ export const pseoServices: PSEOService[] = [
       "redirect maps that protect your Google rankings through the switch",
       "every integration checked twice before you flip the switch"
     ],
-    metaDescription: "Shopify migration from Magento, WooCommerce, BigCommerce, or a custom build — all your data moved intact, with redirects that keep your SEO."
+    metaDescription: "Shopify migration from Magento, WooCommerce, BigCommerce, or a custom build. All your data moved intact, with redirects that keep your SEO."
   },
   {
     slug: "theme-customization",
@@ -52,7 +52,7 @@ export const pseoServices: PSEOService[] = [
       "flexible sections your team can rearrange without calling a developer",
       "a tidy theme that stays on-brand as you keep shipping changes"
     ],
-    metaDescription: "Shopify theme customization — UX reviews, custom sections, and a design system that keeps your brand consistent as you grow."
+    metaDescription: "Shopify theme customization: UX reviews, custom sections, and a design system that keeps your brand consistent as you grow."
   },
   {
     slug: "speed-optimization",
@@ -63,7 +63,7 @@ export const pseoServices: PSEOService[] = [
       "images compressed and served in modern formats without losing quality",
       "monitoring so you can see the speed gains, not just take our word for it"
     ],
-    metaDescription: "Shopify speed optimization — better Core Web Vitals, leaner Liquid, and faster asset delivery so your store loads quickly and converts."
+    metaDescription: "Shopify speed optimization: better Core Web Vitals, leaner Liquid, and faster asset delivery so your store loads quickly and converts."
   },
   {
     slug: "app-integration",
@@ -74,7 +74,7 @@ export const pseoServices: PSEOService[] = [
       "API setups that respect Shopify's rate limits and hold up under load",
       "automations that take the repetitive back-office tasks off your plate"
     ],
-    metaDescription: "Shopify app integration — connect your ERP, CRM, OMS, and marketing tools with reliable syncs and automations that cut manual work."
+    metaDescription: "Shopify app integration: connect your ERP, CRM, OMS, and marketing tools with reliable syncs and automations that cut manual work."
   }
 ];
 
@@ -142,7 +142,7 @@ export const pseoCities: PSEOCity[] = [
     currency: "USD",
     paymentGateways: ["Stripe", "Shop Pay", "PayPal", "Afterpay", "Affirm"],
     commerceStat: "Phoenix is one of the fastest-growing e-commerce markets in the Southwest, with online retail expanding alongside the metro's 4.9% annual population growth.",
-    marketContext: "Phoenix shoppers are mobile-first and heat-sensitive — outdoor and home goods categories surge seasonally. Stores optimised for 3G mobile perform significantly better here.",
+    marketContext: "Phoenix shoppers are mobile-first and heat-sensitive, and outdoor and home goods categories surge seasonally. Stores optimised for 3G mobile perform significantly better here.",
     population: "1.6 million (5 million metro)"
   },
   {
@@ -351,7 +351,7 @@ export const pseoCities: PSEOCity[] = [
     supportHours: "9 AM – 6 PM CET/CEST (UTC+1/+2)",
     currency: "EUR",
     paymentGateways: ["Stripe", "iDEAL", "Klarna", "Mollie", "PayPal"],
-    commerceStat: "The Netherlands has an 86% e-commerce adoption rate — the highest in continental Europe — with Amsterdam brands driving €28 billion in annual online retail.",
+    commerceStat: "The Netherlands has an 86% e-commerce adoption rate, the highest in continental Europe, with Amsterdam brands driving €28 billion in annual online retail.",
     marketContext: "iDEAL is the dominant payment method in the Netherlands, accounting for 69% of all Dutch online transactions. Stores without iDEAL integration lose the majority of Dutch shoppers at checkout.",
     population: "920,000 (2.5 million metro)"
   },
@@ -403,7 +403,7 @@ export const pseoCities: PSEOCity[] = [
     supportHours: "9 AM – 6 PM CET/CEST (UTC+1/+2)",
     currency: "SEK",
     paymentGateways: ["Stripe", "Klarna", "Swish", "PayPal", "Apple Pay"],
-    commerceStat: "Sweden invented Klarna — and Stockholm shoppers expect BNPL as a default. Swedish e-commerce is worth SEK 130 billion annually, with 94% internet penetration driving exceptional conversion rates.",
+    commerceStat: "Sweden invented Klarna, and Stockholm shoppers expect BNPL as a default. Swedish e-commerce is worth SEK 130 billion annually, with 94% internet penetration driving exceptional conversion rates.",
     marketContext: "Stockholm is Klarna's home city. Stores without native Klarna checkout integration are immediately at a disadvantage. Swish mobile payments are also widely expected by Swedish consumers.",
     population: "980,000 (2.4 million metro)"
   },
@@ -443,7 +443,7 @@ export const pseoCities: PSEOCity[] = [
     currency: "DKK",
     paymentGateways: ["Stripe", "MobilePay", "Klarna", "PayPal", "Apple Pay"],
     commerceStat: "Denmark has the highest e-commerce spending per capita in the Nordics at DKK 32,000 per household annually. Copenhagen brands in design, furniture, and fashion lead export volumes.",
-    marketContext: "MobilePay is used by 92% of Danish adults — making it the most important mobile payment integration for Copenhagen storefronts. Stores without it see a material drop in conversion.",
+    marketContext: "MobilePay is used by 92% of Danish adults, which makes it the most important mobile payment integration for Copenhagen storefronts. Stores without it see a material drop in conversion.",
     population: "810,000 (1.3 million metro)"
   },
   {
@@ -482,7 +482,7 @@ export const pseoCities: PSEOCity[] = [
     supportHours: "9 AM – 6 PM IST (UTC+5:30)",
     currency: "INR",
     paymentGateways: ["Razorpay", "Paytm", "UPI", "PayPal", "Cash on Delivery"],
-    commerceStat: "Mumbai generates approximately ₹2.4 trillion in annual e-commerce GMV — more than 18% of India's total online retail — driven by fashion, electronics, and FMCG brands.",
+    commerceStat: "Mumbai generates approximately ₹2.4 trillion in annual e-commerce GMV, more than 18% of India's total online retail, driven by fashion, electronics, and FMCG brands.",
     marketContext: "UPI accounts for 74% of all digital transactions in Mumbai. Brands without UPI and Razorpay integration lose the majority of mobile checkout attempts from Indian shoppers.",
     population: "12.5 million (21 million metro)"
   },
@@ -509,7 +509,7 @@ export const pseoCities: PSEOCity[] = [
     currency: "INR",
     paymentGateways: ["Razorpay", "Stripe", "UPI", "PayPal", "Apple Pay"],
     commerceStat: "Bangalore is India's startup capital and home to over 12,000 tech companies. Its e-commerce market is growing at 28% annually, the fastest of any Indian metro, driven by high disposable incomes.",
-    marketContext: "Bangalore shoppers are early adopters with high AOV. They expect instant checkout via UPI apps, Apple Pay on iOS, and Stripe for international purchases — often within the same session.",
+    marketContext: "Bangalore shoppers are early adopters with high AOV. They expect instant checkout via UPI apps, Apple Pay on iOS, and Stripe for international purchases, often within the same session.",
     population: "8.4 million (13 million metro)"
   },
   {
@@ -560,7 +560,7 @@ export const pseoCities: PSEOCity[] = [
     supportHours: "9 AM – 6 PM IST (UTC+5:30)",
     currency: "INR",
     paymentGateways: ["Razorpay", "Paytm", "UPI", "PayPal", "Cash on Delivery"],
-    commerceStat: "Kolkata's e-commerce penetration reached 29% in 2024 — up from 18% three years prior — driven by the city's traditional textile and handicraft trade moving online.",
+    commerceStat: "Kolkata's e-commerce penetration reached 29% in 2024, up from 18% three years prior, driven by the city's traditional textile and handicraft trade moving online.",
     marketContext: "Kolkata brands in sarees, sweets, and artisan goods are building national DTC channels. Product origin stories, artisan certification badges, and COD options are key conversion drivers for this market.",
     population: "4.5 million (15 million metro)"
   },

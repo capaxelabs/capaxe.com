@@ -21,7 +21,9 @@
 
 **Why:** Audit of the homepage and /engagements found the copy carries heavy LLM tells. Site-wide baseline before work started: **160 files, 509 em dashes, 218 "X, not Y" contrast constructions**, plus agency-speak banned words concentrated in the case studies.
 
-**Current baseline after Phase 1:** 105 files, 443 em dashes, 135 contrast constructions. Every marketing page a buyer actually lands on is now clean; what remains is blog, patterns, projects, and service pages.
+**Current baseline after Phase 3:** 104 files, 432 em dashes, 134 contrast constructions in source. What remains is blog, patterns, projects, and service pages.
+
+Note that the source count understates progress badly. Phase 3 touched only 4 source files but cleaned **318 rendered pages**, because the templates and their data files fan out. Judge remaining phases by pages affected rather than files edited.
 
 **Process for every batch:** load the `brand` and `seo-content` skills first, then apply the Humanize rules in `~/.claude/CLAUDE.md`. Never rewrite from memory.
 
@@ -72,11 +74,24 @@ Parallel rewriting surfaced repeated lines the original audit missed.
 - [ ] /services/shopify-hydrogen-development (3 em dashes)
 - [ ] /services/shopify/store-development, /services/shopify/shopify-design, /services (1 em dash each)
 
-### Phase 3: Programmatic templates (3 files, high leverage)
-One rewrite fixes every generated page.
-- [ ] pages/shopify/[service]/[city].astro (7 em dashes, 2 contrast)
-- [ ] pages/shopify/compare/[slug].astro (4 em dashes)
-- [ ] pages/projects/[id].astro (3 em dashes)
+### Phase 3: Programmatic templates and their data — DONE (318 generated pages)
+Promoted ahead of Phase 2 after counting what these actually render. 5 files fixed 318 pages, against 7 files for 7 pages in Phase 2.
+
+| Source | Pages it renders | Result |
+|---|---|---|
+| pages/shopify/[service]/[city].astro | 200 | clean |
+| pages/shopify/compare/[slug].astro | 62 | clean |
+| pages/shopify/apps/* (shares app-seo.ts) | 38 | clean |
+| pages/shopify/best/* (shares app-seo.ts) | 18 | clean |
+
+- [x] pages/shopify/[service]/[city].astro. 7 em dashes, 2 contrast constructions
+- [x] pages/shopify/compare/[slug].astro. 4 em dashes including the disclosure banner and pricing footnote
+- [x] **config/pseo.ts (16 em dashes).** The template was only half the job. Most visible em dashes came from the interpolated data, not the markup
+- [x] **config/app-seo.ts (37 em dashes).** Feeds compare, apps and best pages, so one file covered 118 pages
+- [x] Verified punctuation-only: all 241 numeric tokens in app-seo.ts and all 315 in pseo.ts survive unchanged, so no price, percentage or statistic was altered
+- [x] Reviewed every transformed line by hand; 17 comma splices created by the mechanical pass were rewritten properly
+
+**pages/projects/[id].astro needs no change.** Its 3 em dashes are code, not copy: the template splits `project.data.title` on `'—'` to separate title from subtitle, so the character never reaches the reader. Do not strip them. The em dashes visible on project pages come from the `.mdx` bodies and the frontmatter titles (which do surface in `<title>` tags), and both belong to Phase 4.
 
 ### Phase 4: Proof pages (17 files)
 Worst banned-word density on the site. These read like a template agency wrote them, which undercuts the whole positioning.

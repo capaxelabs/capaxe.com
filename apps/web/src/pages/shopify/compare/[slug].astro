@@ -73,7 +73,7 @@ const app2Reasons = getChooseReasons(app2, app1);
 const categoryLabel = comparison.category.replace(/-/g, " ");
 const faqs = [
   { question: `What is the main difference between ${app1.name} and ${app2.name}?`, answer: comparison.verdict },
-  { question: `How does ${app1.name} compare to ${app2.name}?`, answer: `${app1.name}: ${app1.shortDescription} ${app2.name}: ${app2.shortDescription} The right choice depends on your store's size, budget, and which features you'll actually use — the full breakdown above covers features, pricing, and who each app fits best.` },
+  { question: `How does ${app1.name} compare to ${app2.name}?`, answer: `${app1.name}: ${app1.shortDescription} ${app2.name}: ${app2.shortDescription} The right choice depends on your store's size, budget, and which features you'll actually use. The full breakdown above covers features, pricing, and who each app fits best.` },
   { question: `When should I choose ${app1.name} over ${app2.name}?`, answer: `Choose ${app1.name} if ${app1Reasons[0]?.toLowerCase() || `you need a strong ${categoryLabel} solution`}. It offers ${app1.features.slice(0, 2).join(' and ').toLowerCase()}.` },
   { question: `When should I choose ${app2.name} over ${app1.name}?`, answer: `Choose ${app2.name} if ${app2Reasons[0]?.toLowerCase() || `you need a strong ${categoryLabel} solution`}. It offers ${app2.features.slice(0, 2).join(' and ').toLowerCase()}.` },
   { question: `Can Capaxe Labs help me migrate between ${app1.name} and ${app2.name}?`, answer: `Yes, we handle full migrations between ${categoryLabel} platforms including data transfer, workflow rebuilding, and zero-downtime cutover.` },
@@ -105,7 +105,7 @@ const faqs = [
         <div class="max-w-7xl mx-auto">
           <div class="rounded-xl border border-border bg-muted/40 px-5 py-4">
             <p class="text-sm text-muted-foreground">
-              <strong class="text-foreground">Disclosure:</strong> {app1.isOwnApp ? app1.name : app2.name} is built by our team at Capaxe Labs. We've kept this comparison honest about where the alternative is the better fit — but you should weigh it knowing we have a stake in one of these apps.
+              <strong class="text-foreground">Disclosure:</strong> {app1.isOwnApp ? app1.name : app2.name} is built by our team at Capaxe Labs. We've kept this comparison honest about where the alternative is the better fit, though you should weigh it knowing we have a stake in one of these apps.
             </p>
           </div>
         </div>
@@ -121,7 +121,7 @@ const faqs = [
             {comparison.verdict}
           </p>
           <p class="text-sm text-muted-foreground mt-3">
-            Searching for {app2.name} vs {app1.name} instead? Same comparison — the trade-offs below apply either way.
+            Searching for {app2.name} vs {app1.name} instead? Same comparison. The trade-offs below apply either way.
           </p>
           {comparison.bestFor && (
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
@@ -153,7 +153,7 @@ const faqs = [
               <p class="text-sm text-muted-foreground">{comparison.pricing.app2}</p>
             </div>
           </div>
-          <p class="text-xs text-muted-foreground text-center mt-4">Pricing as of 2026 — both platforms adjust tiers regularly, so confirm on their pricing pages before committing.</p>
+          <p class="text-xs text-muted-foreground text-center mt-4">Pricing as of 2026. Both platforms adjust tiers regularly, so confirm on their pricing pages before committing.</p>
         </div>
       </section>
     )}
