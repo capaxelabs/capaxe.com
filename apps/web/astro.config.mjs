@@ -76,7 +76,7 @@ export default defineConfig({
       },
     }),
     sitemap({
-      filter: (page) => !['/color', '/health', '/plans', '/press'].some(p => page.includes(p)),
+      filter: (page) => !['/color', '/health', '/plans', '/press', '/internal'].some(p => page.includes(p)),
       serialize(item) {
         item.lastmod = new Date().toISOString().split('T')[0];
         return item;
