@@ -1,0 +1,118 @@
+---
+title: "AEO vs SEO: What Shopify Merchants Need to Know in 2026"
+description: "AEO and SEO overlap more than most guides admit. Here's what actually differs, what changes for a Shopify store, and how to split your time between them."
+category: 'AI & Modern Dev'
+tags: ["AEO", "AI search", "SEO"]
+pubDate: 'Aug 12 2026'
+heroImage: '/shopify-capaxe-labs.png'
+---
+
+Every few months a new acronym arrives and someone declares SEO dead. This time it's AEO, answer engine optimization, and the claim is that ranking in Google no longer matters because buyers ask ChatGPT instead.
+
+That framing sells courses. It also gets merchants to rebuild things that were working fine.
+
+Here's the honest version: AEO and SEO share most of the same work. The differences are real but narrower than the marketing suggests, and knowing exactly where they diverge tells you where to spend time.
+
+---
+
+## What Each One Optimizes For
+
+SEO optimizes for a **ranking**. The output is a list of links, and your goal is to appear high on that list so someone clicks through to your store.
+
+AEO optimizes for a **citation**. The output is a written answer, and your goal is to be the source the model quotes and links when it composes that answer.
+
+The distinction matters because the two outputs fail differently. A page can rank at position three and still never be cited, because the model couldn't extract a clean claim from it. A page can also get cited constantly while ranking at position twelve, because it happened to state one fact more clearly than anything above it.
+
+## Where They Overlap
+
+This is the part most AEO content skips, and it's the majority of the work.
+
+| Requirement | Matters for SEO | Matters for AEO |
+|---|---|---|
+| Crawlable, indexable pages | Yes | Yes |
+| Fast page loads | Yes | Yes |
+| Accurate product structured data | Yes | Yes |
+| Clear heading hierarchy | Yes | Yes |
+| Unique, non-duplicate content | Yes | Yes |
+| Internal links that show relationships | Yes | Yes |
+| Being linked to by other sites | Yes | Yes |
+
+If your store is a mess on those seven, no amount of AEO tactics will help. Language models are trained on and retrieve from the open web, and the open web is indexed by crawlers that care about exactly the same signals Google has cared about for a decade.
+
+The practical implication: **a store with bad technical SEO cannot have good AEO**. They are not parallel tracks. One sits on top of the other.
+
+## Where They Genuinely Differ
+
+Four differences are real.
+
+**1. Crawler access became two separate questions.**
+
+For years, "can bots reach my site" meant one thing: Googlebot. Now it's a list. GPTBot, ClaudeBot, PerplexityBot, Google-Extended, and Bingbot's AI variant each fetch independently, and each can be blocked independently.
+
+Plenty of Shopify stores block some of these without knowing it. It happens through a bot-protection app, an aggressive Cloudflare rule, or a `robots.txt` edit someone made in 2024 when the advice was to keep AI companies out of your content. Google can crawl you perfectly while three AI crawlers get a 403.
+
+This is the single most common cause of zero AI visibility, and it has nothing to do with your content.
+
+**2. Structured data carries more weight.**
+
+Google can rank a product page with no structured data at all. It has enough other signals. A model composing an answer has a smaller budget of attention and benefits far more from a machine-readable `Product` block that states price, availability, brand, and rating without needing to parse your theme's markup.
+
+Missing schema costs you a little in SEO. It costs you considerably more in AEO.
+
+**3. Content has to survive being quoted out of context.**
+
+Search rewards a page that satisfies a visitor who lands on it. Answer engines extract a sentence or two and show it somewhere else entirely, with none of your surrounding page for support.
+
+A paragraph like "our jackets are designed for serious conditions" is fine on a landing page and useless as a citation. "Rated to minus 30C, tested by the Norwegian ski patrol over two winters" survives the trip. Specifics travel. Adjectives don't.
+
+**4. Measurement is genuinely worse.**
+
+Search Console tells you impressions, position, and clicks. For AI citations there is no equivalent. You get partial referral traffic from ChatGPT and Perplexity in your analytics, and beyond that you're running manual prompts and hoping the sample is representative.
+
+Anyone selling you precise AI ranking numbers is estimating. Treat those dashboards as directional.
+
+## What This Actually Changes for a Shopify Store
+
+Shopify handles a lot of the SEO basics for you. It generates a sitemap, sets canonicals, and produces a reasonable URL structure. That's why the AEO gap on most Shopify stores sits in three specific places.
+
+**Bot accessibility.** Check whether the AI crawlers can fetch your pages. This takes minutes and fixes more visibility problems than anything else on this list.
+
+**Structured data completeness.** Shopify themes ship with some JSON-LD, and the quality varies a lot between themes. Many output a `Product` block missing `brand`, `aggregateRating`, or `availability`. Some output two conflicting blocks because a review app injects its own.
+
+**Product copy that states facts.** Most Shopify product descriptions are manufacturer boilerplate or brand-voice prose. Neither gets quoted. Materials, dimensions, care instructions, compatibility, and country of origin all get quoted, because they answer the question someone actually asked.
+
+Notice that all three help conventional SEO too. That's the point.
+
+## How to Split Your Time
+
+If you're starting from a normal Shopify store, the honest allocation looks something like this:
+
+1. **Fix technical SEO first.** Indexing, speed, duplicate content, internal links. This is the foundation both approaches stand on.
+2. **Then verify AI crawler access.** Cheap to check, high impact when it's broken.
+3. **Then complete your structured data.** Product, Organization, Breadcrumb, and FAQ where relevant.
+4. **Then rewrite your highest-traffic product and category copy to state facts.**
+5. **Then consider the AEO-specific extras**, like publishing an `llms.txt`. We wrote an [honest assessment of llms.txt on Shopify](/blog/llms-txt-shopify), including the evidence on whether crawlers currently read it. Short version: it's cheap to publish and the measured pickup is close to zero, so treat it as a hedge rather than a strategy.
+
+Steps one through four are things a good SEO consultant would have told you to do in 2019. That's not a criticism of AEO. It's the actual answer to what changed.
+
+## Where an App Helps
+
+Steps two and three are the tedious parts. Checking five crawlers by hand, auditing JSON-LD across a few hundred products, and keeping it correct as the catalogue changes is not a good use of a founder's afternoon.
+
+That's the job [Bee AI SEO](/shopify/apps/bee-ai-seo) does. It runs an AEO audit with a health score, tests whether GPTBot, ClaudeBot, PerplexityBot, Google-Extended, and Bingbot-AI can actually reach your store, scans products and pages for missing or weak meta tags, and injects JSON-LD, Open Graph, and AI meta tags through a theme extension. It also generates and refreshes an `llms.txt` that stays in sync with your catalogue, which is worth having for the cost even on the pessimistic read of the evidence.
+
+It's free to install on the [Shopify App Store](https://apps.shopify.com/bee-llms-seo). Bee Apps is built by our team at Capaxe Labs.
+
+If you want to see how that approach compares to tools built around measurement rather than fixes, we put [Bee AI SEO against FSEO](/shopify/compare/bee-ai-seo-vs-fseo), and against [Avada's AEO Optimizer](/shopify/compare/bee-ai-seo-vs-avada-aeo) for the file-generation angle.
+
+## The Short Version
+
+AEO is not a replacement for SEO. It's a set of additional requirements layered on top of one, and the layer is thinner than the discourse suggests.
+
+Get crawlable, fast, and structured. Let the AI bots in. Write product copy with facts in it. That covers most of what AEO asks for, and every item on the list was already worth doing.
+
+If your store still isn't showing up in AI answers after that, the problem is usually authority, which is the same problem it would have been for search.
+
+---
+
+*Working through this on a store with a large catalogue? Our [engineering capabilities](/capabilities) cover the structured data and performance work that sits underneath both.*

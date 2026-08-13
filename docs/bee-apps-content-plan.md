@@ -41,10 +41,13 @@ App: Bee AI SEO: AEO & ChatGPT (free). Comparisons: vs LLM Rank, vs Avada AEO, v
 | 2 | llms.txt for Shopify: What It Is and How to Set It Up | llms.txt shopify | How-to, high intent |
 
 **Positioning note (researched Aug 2026):** llms.txt has ~10% domain adoption but near-zero crawler pickup — a few hundred requests across hundreds of millions of AI bot visits; OpenAI/Google/Anthropic don't list it in crawler docs for search surfaces. Do NOT market Bee AI SEO primarily as an llms.txt generator. Lead with the AEO audit, AI bot accessibility testing, and JSON-LD injection — those affect real citation outcomes. Publishing llms.txt is a cheap hedge, framed as such. This honesty is a differentiator: competitors overclaim, and merchants who test the claims will trust the app that didn't.
-| 3 | AEO vs SEO: What Shopify Merchants Need to Know in 2026 | aeo vs seo | Informational |
-| 4 | How AI Shopping Agents Browse Your Store (And Why They Skip It) | ai shopping agents ecommerce | Thought leadership |
-| 5 | Schema Markup for AI Search: Product Data LLMs Can Read | schema markup ai search | How-to |
-| 6 | AI Visibility Tracking: See When ChatGPT Mentions Your Store | ai visibility tracking shopify | Commercial |
+| 3 | AEO vs SEO: What Shopify Merchants Need to Know in 2026 | aeo vs seo | Informational | **PUBLISHED** `aeo-vs-seo-shopify.mdx` |
+| 4 | How AI Shopping Agents Browse Your Store (And Why They Skip It) | ai shopping agents ecommerce | Thought leadership | Draft outline at `docs/drafts/ai-shopping-agents-ecommerce.md` |
+| 5 | Schema Markup for AI Search: Product Data LLMs Can Read | schema markup ai search | How-to | **PUBLISHED** `schema-markup-for-ai-search.mdx` |
+| 6 | AI Visibility Tracking: See When ChatGPT Mentions Your Store | ai visibility tracking shopify | Commercial | Draft outline at `docs/drafts/ai-visibility-tracking-shopify.md` |
+| 7 | Best Shopify AI SEO Apps Compared (2026) | shopify ai seo app | Commercial roundup | Added post-plan. Draft outline at `docs/drafts/best-shopify-ai-seo-apps-compared.md` |
+
+**Phase 1b status (Aug 2026):** posts 1, 2, 3 and 5 are live. Comparison pages `bee-ai-seo-vs-llm-rank`, `bee-ai-seo-vs-avada-aeo`, `bee-ai-seo-vs-fseo` and the 4-app roundup already exist in `src/config/app-seo.ts`. Remaining work is posts 4, 6 and 7, all of which need research before writing (see each draft file).
 
 Promo angle: use our own GSC evidence of AI-agent queries as first-hand proof in posts 1 and 4. Bee AI SEO is the one-click setup after each manual walkthrough.
 
