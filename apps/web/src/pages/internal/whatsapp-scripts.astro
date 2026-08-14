@@ -2,6 +2,21 @@
 // INTERNAL TOOL — not linked from anywhere, excluded from sitemap, noindex.
 // WhatsApp lead-handling scripts for the ₹5,000 anchored Shopify store offer.
 const updated = "13 August 2026";
+
+// Shopify App Store deep links that open the "write a review" box directly.
+const reviewApps = [
+  { name: "Bee Migration", slug: "bee-migration", blurb: "moving your store over" },
+  { name: "Bee LLMs SEO", slug: "bee-llms-seo", blurb: "getting your store AI-search ready" },
+  { name: "RankFlo", slug: "rankflo", blurb: "sorting your collections" },
+  { name: "ShootFlo Studio", slug: "shootflo-studio", blurb: "your ad creatives" },
+  { name: "Bee Secret Gift", slug: "bee-secret-gift", blurb: "your gifting setup" },
+  { name: "Bee Invoices", slug: "bee-invoices", blurb: "your invoicing" },
+  { name: "Bee Reviews", slug: "bee-reviews", blurb: "collecting your product reviews" },
+  { name: "Bee Subscriptions", slug: "bee-subscriptions", blurb: "your subscriptions" },
+];
+
+const reviewUrl = (slug: string) =>
+  `https://apps.shopify.com/${slug}#modal-show=WriteReviewModal`;
 ---
 
 <!doctype html>
@@ -64,6 +79,22 @@ const updated = "13 August 2026";
       ol.order { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 18px 18px 18px 38px; }
       ol.order li { margin-bottom: 6px; }
       ul.rules li { margin-bottom: 8px; }
+      .row {
+        display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+        background: #fff; border: 1px solid var(--line); border-radius: 12px;
+        padding: 12px 14px; margin: 0 0 10px;
+      }
+      .row .app { font-weight: 700; min-width: 150px; }
+      .row .url { flex: 1; min-width: 230px; font-size: 12.5px; color: var(--muted); word-break: break-all; }
+      .row .url a { color: var(--muted); }
+      .btn {
+        border: 1px solid var(--line); background: var(--cream); color: var(--charcoal);
+        font: inherit; font-size: 12px; font-weight: 600; padding: 5px 12px;
+        border-radius: 999px; cursor: pointer; white-space: nowrap;
+        transition: background .15s, color .15s, border-color .15s;
+      }
+      .btn:hover { background: var(--terracotta); color: #fff; border-color: var(--terracotta); }
+      .btn.done { background: #1f7a4d; color: #fff; border-color: #1f7a4d; }
       hr { border: 0; border-top: 1px solid var(--line); margin: 40px 0; }
       .tag {
         display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .06em;
@@ -308,6 +339,52 @@ https://renumumbai.com</pre>
 
       <hr />
 
+      <h2>9 · App review links</h2>
+      <p class="note">
+        These open the App Store listing with the review box already showing, so the merchant lands
+        one tap away from writing. They need to be signed in to the Shopify account that installed
+        the app, otherwise the box will not appear for them.
+      </p>
+      <p class="note">
+        <strong>Never offer anything in exchange for a review.</strong> No discounts, no free months,
+        no credits. Shopify removes incentivised reviews and it puts the listing at risk. Ask only
+        after the app has actually done something useful for them.
+      </p>
+
+      <h3>Per app <span style="font-weight:400;color:var(--muted);font-size:14px">(Link = bare URL, Message = ready to send)</span></h3>
+      {reviewApps.map((app) => (
+        <div class="row">
+          <span class="app">{app.name}</span>
+          <span class="url"><a href={reviewUrl(app.slug)} target="_blank" rel="noopener noreferrer">{reviewUrl(app.slug)}</a></span>
+          <button class="btn" type="button" data-copy={reviewUrl(app.slug)}>Link</button>
+          <button
+            class="btn"
+            type="button"
+            data-copy={`Hi! Glad ${app.name} has been useful for ${app.blurb} 🙏
+
+If you have a spare minute, a short review would genuinely help us:
+${reviewUrl(app.slug)}
+
+That link opens the review box directly. Thank you!`}
+          >Message</button>
+        </div>
+      ))}
+
+      <h3>All links at once <span style="font-weight:400;color:var(--muted);font-size:14px">(for a doc or team channel, never send this to a merchant)</span></h3>
+      <div class="msg">
+        <button class="copy" type="button">Copy</button>
+        <pre>{reviewApps.map((app) => `${app.name}:\n${reviewUrl(app.slug)}`).join("\n\n")}</pre>
+      </div>
+
+      <h3>Follow-up if they said yes but never did it</h3>
+      <p class="note">Once, then drop it. A second nudge costs more goodwill than the review is worth.</p>
+      <div class="msg">
+        <button class="copy" type="button">Copy</button>
+        <pre>No rush at all on that review, just floating the link back up in case it got buried 🙂</pre>
+      </div>
+
+      <hr />
+
       <h2>Rules</h2>
       <ul class="rules">
         <li><strong>Reply within 15 minutes.</strong> Speed beats wording.</li>
@@ -325,6 +402,32 @@ https://renumumbai.com</pre>
     </div>
 
     <script>
+      // Buttons carrying their own text (section 9 per-app links and messages).
+      document.querySelectorAll("[data-copy]").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          const text = btn.getAttribute("data-copy") || "";
+          try {
+            await navigator.clipboard.writeText(text);
+          } catch (e) {
+            const ta = document.createElement("textarea");
+            ta.value = text;
+            ta.style.position = "fixed";
+            ta.style.opacity = "0";
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand("copy");
+            document.body.removeChild(ta);
+          }
+          const original = btn.textContent;
+          btn.textContent = "Copied";
+          btn.classList.add("done");
+          setTimeout(() => {
+            btn.textContent = original;
+            btn.classList.remove("done");
+          }, 1500);
+        });
+      });
+
       document.querySelectorAll(".copy").forEach((btn) => {
         btn.addEventListener("click", async () => {
           const pre = btn.parentElement.querySelector("pre");
