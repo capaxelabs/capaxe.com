@@ -3,6 +3,7 @@ import LandingLayout from "@/layouts/LandingLayout.astro";
 import StoreSetupForm from "@/components/StoreSetupForm";
 import WorkShowcase from "@/components/WorkShowcase.astro";
 import { siteConfig } from "@/config/site";
+import { resolveRegion } from "@/lib/store-setup-region";
 
 export const prerender = false;
 
@@ -11,9 +12,16 @@ export const prerender = false;
    Every number below is a promise made to a stranger who is about to
    pay you. Check each one before this page goes live, and update it
    here rather than hunting through the markup.
+
+   Prices and region-specific copy live in src/lib/store-setup-region.ts.
+   The visitor's country picks the region (India → INR, rest → USD);
+   preview either variant with ?region=in or ?region=intl.
 ------------------------------------------------------------------ */
-const PRICE = "₹4,999";
-const FULL_RATE = "₹45,000";
+const cfCountry = (Astro.locals as any)?.runtime?.cf?.country as string | undefined;
+const region = resolveRegion(cfCountry, Astro.url.searchParams.get("region"));
+
+const PRICE = region.price;
+const FULL_RATE = region.fullRate;
 const STORES_BUILT = 9;          // live stores you can actually point to
 const DELIVERY_DAYS = 7;         // must be honoured, or lower it
 const PRODUCTS_INCLUDED = 25;    // products uploaded within the price
@@ -46,8 +54,8 @@ const includes = [
   "A premium Shopify theme installed and set up with your logo, colours and fonts",
   `Up to ${PRODUCTS_INCLUDED} products uploaded — images, descriptions, prices, variants, stock`,
   "Home, collection, product, cart and checkout pages properly configured",
-  "Indian payments live: UPI, cards, net banking and cash on delivery",
-  "Shipping zones and delivery rates set up for India",
+  region.includePayments,
+  region.includeShipping,
   "Your domain connected — or help buying one if you don't have it yet",
   "Shipping, returns, privacy and terms pages written for your store",
   "A WhatsApp chat button so customers can reach you the way they already do",
@@ -58,7 +66,7 @@ const includes = [
 const excludes = [
   {
     title: "Your Shopify subscription",
-    body: `Shopify bills you directly for their own plan — that is not something I can include or waive. At the time of writing the Basic plan is around ₹1,499/month plus GST, and Shopify normally runs a ₹20/month introductory rate for the first three months. I'll show you the current pricing before you commit to anything.`,
+    body: region.shopifyPlanNote,
   },
   {
     title: "Product photos and written descriptions",
@@ -109,19 +117,19 @@ const faqs = [
     q: "I don't have products or photos ready. Is that a problem?",
     a: "No, but it does set the timeline. I'll build the store structure and show you exactly what to send. Most people are ready within a week once they know what's needed.",
   },
-  {
-    q: "I'm not in Mumbai. Does that matter?",
-    a: "Not at all. Everything happens over WhatsApp and video call. Most of the stores I've built were for merchants I've never met in person.",
-  },
+  region.distanceFaq,
   {
     q: "How do I pay?",
-    a: "UPI or bank transfer, in two parts — half to start and half when the store goes live. Nothing is due until after we've spoken and you've agreed the scope.",
+    a: region.payAnswer,
   },
 ];
 
 const seo = {
   title: `Complete Shopify Store Setup for ${PRICE} | Capaxe Labs`,
-  description: `A Shopify Partner in Mumbai builds your full store — theme, products, UPI payments, shipping and launch — for ${PRICE}. Live in ${DELIVERY_DAYS} days. You own it outright.`,
+  description:
+    region.code === "IN"
+      ? `A Shopify Partner in Mumbai builds your full store — theme, products, UPI payments, shipping and launch — for ${PRICE}. Live in ${DELIVERY_DAYS} days. You own it outright.`
+      : `A Shopify Partner builds your complete store — theme, products, payments, shipping and launch — for ${PRICE}. Live in ${DELIVERY_DAYS} days. You own it outright.`,
   canonical: `${siteConfig.url}/shopify-store-setup`,
   structuredData: {
     "@context": "https://schema.org",
@@ -150,7 +158,7 @@ const seo = {
         </h1>
 
         <p class="mt-5 max-w-xl text-lg leading-relaxed text-muted-foreground">
-          Theme, products, UPI and cash on delivery, shipping, legal pages, launch.
+          Theme, products, {region.heroDeliverables}, shipping, legal pages, launch.
           Ready in {DELIVERY_DAYS} days. The store is yours outright — no monthly fee to me,
           nothing locked to my account.
         </p>
@@ -199,6 +207,9 @@ const seo = {
             client:load
             conversionSendTo={GOOGLE_ADS_CONVERSION_SEND_TO}
             whatsappHref={whatsappHref}
+            region={region.code}
+            country={cfCountry ?? ""}
+            copy={region.form}
           />
         </div>
       </div>

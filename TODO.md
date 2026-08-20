@@ -1,3 +1,16 @@
+## Shopify Store Setup Landing Page — August 2026
+
+### Features
+- [x] Build /shopify-store-setup landing page with lead form, WhatsApp CTA, work showcase
+- [x] Geo-priced regions: India sees ₹4,999 (UPI/COD copy), everyone else sees USD (cards/PayPal copy) via request.cf.country; preview with ?region=in / ?region=intl
+- [x] Store region + country with each lead (form → API → email + D1)
+
+### Pending
+- [ ] Confirm international pricing in src/lib/store-setup-region.ts — $99 / $599 are placeholders I set, not agreed numbers
+- [ ] Apply D1 migrations before deploying: `wrangler d1 execute shopify-leads --remote --file=apps/web/migrations/0001_store_setup_leads.sql` then `...0002_store_setup_leads_region.sql`
+- [ ] Set GOOGLE_ADS_CONVERSION_SEND_TO once the conversion action exists in Google Ads
+- [ ] Confirm each brand in the work showcase may be shown publicly before ads go live
+
 ## Features
 - [x] Fine-tune bento grid layouts on individual service pages for visual variety
 - [x] Add subtle entrance animations to bento tiles (intersection observer)

@@ -4,7 +4,25 @@ interface Props {
   /** Google Ads conversion label, e.g. "AW-123456789/AbC-D_efGh". Leave empty until the tag exists. */
   conversionSendTo?: string;
   whatsappHref: string;
+  /** Pricing region the visitor saw ("IN" | "INTL") — stored with the lead. */
+  region?: string;
+  /** Two-letter country from Cloudflare, when available. */
+  country?: string;
+  /** Region-specific labels and placeholders. */
+  copy?: {
+    namePlaceholder: string;
+    phoneLabel: string;
+    phonePlaceholder: string;
+    sellsPlaceholder: string;
+  };
 }
+
+const DEFAULT_COPY = {
+  namePlaceholder: "Priya Sharma",
+  phoneLabel: "WhatsApp number",
+  phonePlaceholder: "98765 43210",
+  sellsPlaceholder: "Handmade silver jewellery. I sell on Instagram right now and want a proper store.",
+};
 
 interface FormState {
   name: string;
@@ -18,7 +36,13 @@ const inputClass =
   "w-full rounded-xl border border-input bg-background px-3.5 py-3 text-base text-foreground " +
   "placeholder:text-muted-foreground/70 focus:outline-none focus:ring-2 focus:ring-ring transition";
 
-export default function StoreSetupForm({ conversionSendTo, whatsappHref }: Props) {
+export default function StoreSetupForm({
+  conversionSendTo,
+  whatsappHref,
+  region = "IN",
+  country = "",
+  copy = DEFAULT_COPY,
+}: Props) {
   const [form, setForm] = useState<FormState>(EMPTY);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -62,6 +86,8 @@ export default function StoreSetupForm({ conversionSendTo, whatsappHref }: Props
         body: JSON.stringify({
           ...form,
           ...attribution,
+          region,
+          country,
           company: honeypot.current?.value ?? "",
           elapsedMs: Date.now() - mountedAt.current,
         }),
@@ -135,7 +161,7 @@ export default function StoreSetupForm({ conversionSendTo, whatsappHref }: Props
           required
           value={form.name}
           onChange={change}
-          placeholder="Priya Sharma"
+          placeholder={copy.namePlaceholder}
           className={inputClass}
           aria-invalid={!!errors.name}
         />
@@ -144,7 +170,7 @@ export default function StoreSetupForm({ conversionSendTo, whatsappHref }: Props
 
       <div className="space-y-1.5">
         <label htmlFor="ss-phone" className="block text-sm font-medium">
-          WhatsApp number
+          {copy.phoneLabel}
         </label>
         <input
           id="ss-phone"
@@ -155,7 +181,7 @@ export default function StoreSetupForm({ conversionSendTo, whatsappHref }: Props
           required
           value={form.phone}
           onChange={change}
-          placeholder="98765 43210"
+          placeholder={copy.phonePlaceholder}
           className={inputClass}
           aria-invalid={!!errors.phone}
         />
@@ -173,7 +199,7 @@ export default function StoreSetupForm({ conversionSendTo, whatsappHref }: Props
           required
           value={form.sells}
           onChange={change}
-          placeholder="Handmade silver jewellery. I sell on Instagram right now and want a proper store."
+          placeholder={copy.sellsPlaceholder}
           className={`${inputClass} resize-none`}
           aria-invalid={!!errors.sells}
         />

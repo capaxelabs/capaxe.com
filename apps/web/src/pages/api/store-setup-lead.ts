@@ -30,6 +30,10 @@ const leadSchema = z.object({
   utmSource: z.string().max(120).optional().or(z.literal("")),
   utmCampaign: z.string().max(160).optional().or(z.literal("")),
   landingPath: z.string().max(300).optional().or(z.literal("")),
+
+  // The page is geo-priced, so record which offer this person actually saw.
+  region: z.string().max(12).optional().or(z.literal("")),
+  country: z.string().max(8).optional().or(z.literal("")),
 });
 
 type Lead = z.infer<typeof leadSchema>;
@@ -50,9 +54,14 @@ function digitsOnly(phone: string): string {
 
 function buildEmailHtml(lead: Lead): string {
   const wa = digitsOnly(lead.phone);
-  const waLink = wa.length >= 10 ? `https://wa.me/${wa.length === 10 ? "91" + wa : wa}` : "";
+  // Bare 10-digit numbers only get the 91 prefix for Indian leads;
+  // international visitors are asked for a number with country code.
+  const assumeIndia = (lead.region || "IN") === "IN";
+  const waLink =
+    wa.length >= 10 ? `https://wa.me/${wa.length === 10 && assumeIndia ? "91" + wa : wa}` : "";
 
   const attribution = [
+    lead.region ? `<p><strong>Pricing seen:</strong> ${esc(lead.region)}${lead.country ? ` (${esc(lead.country)})` : ""}</p>` : "",
     lead.gclid ? `<p><strong>Google click ID:</strong> ${esc(lead.gclid)}</p>` : "",
     lead.utmSource ? `<p><strong>Source:</strong> ${esc(lead.utmSource)}</p>` : "",
     lead.utmCampaign ? `<p><strong>Campaign:</strong> ${esc(lead.utmCampaign)}</p>` : "",
@@ -62,7 +71,7 @@ function buildEmailHtml(lead: Lead): string {
   return `
   <div style="font-family: -apple-system, Segoe UI, Arial, sans-serif; max-width: 600px; margin: 0 auto;">
     <h2 style="color:#D2542A; margin-bottom: 4px;">Store setup lead — ${esc(lead.name)}</h2>
-    <p style="color:#666; margin-top:0;">From the &pound;/&#8377;4,999 Shopify store setup landing page.</p>
+    <p style="color:#666; margin-top:0;">From the Shopify store setup landing page (${esc(lead.region || "IN")} pricing).</p>
     <p><strong>Name:</strong> ${esc(lead.name)}</p>
     <p><strong>WhatsApp:</strong> ${esc(lead.phone)}
       ${waLink ? ` &nbsp;<a href="${waLink}" style="color:#D2542A;">Open chat</a>` : ""}
@@ -121,8 +130,8 @@ export const POST: APIRoute = async ({ request, locals }) => {
       await db
         .prepare(
           `INSERT INTO store_setup_leads
-             (name, phone, sells, gclid, utm_source, utm_campaign, landing_path, created_at)
-           VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
+             (name, phone, sells, gclid, utm_source, utm_campaign, landing_path, region, country, created_at)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
         )
         .bind(
           lead.name,
@@ -132,6 +141,8 @@ export const POST: APIRoute = async ({ request, locals }) => {
           lead.utmSource || null,
           lead.utmCampaign || null,
           lead.landingPath || null,
+          lead.region || null,
+          lead.country || null,
           new Date().toISOString()
         )
         .run();
