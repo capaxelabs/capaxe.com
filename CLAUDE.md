@@ -107,7 +107,7 @@ The jobs now run in a Docker container (Hetzner):
   both runtimes unchanged.
 - `src/node/main.ts` — container entry: enrich loop + judgeme tick loop +
   sync loop + `GET /stats` health server.
-- `src/node/sqlite-d1.ts` — D1-compatible adapter over better-sqlite3; every
+- `src/node/sqlite-d1.ts` — D1-compatible adapter over bun:sqlite; every
   local write is also recorded in `_oplog`.
 - `src/node/d1-remote.ts` — replays `_oplog` to the real D1 via the
   Cloudflare HTTP API, in order, batched, at-least-once.

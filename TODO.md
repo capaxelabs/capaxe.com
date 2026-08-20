@@ -2,7 +2,7 @@
 
 ### Features
 - [x] Remove Worker cron triggers (the every-minute enrich pass scanned 455k rows against an empty queue — the D1 bill driver); Worker kept for manual HTTP endpoints
-- [x] Docker container (apps/scrapers/src/node) reusing the same enrich/judgeme code via a better-sqlite3 D1 adapter; writes captured in _oplog and replayed to D1 over the Cloudflare HTTP API
+- [x] Docker container (apps/scrapers/src/node) reusing the same enrich/judgeme code via a bun:sqlite D1 adapter (runs on Bun, no build step); writes captured in _oplog and replayed to D1 over the Cloudflare HTTP API
 - [x] Seed script (scripts/seed-from-d1.sh), Dockerfile, docker-compose.yml, health endpoint /stats; smoke-tested locally incl. the built image
 
 ### Pending
