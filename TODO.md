@@ -7,7 +7,7 @@
 
 ### Pending
 - [x] Confirm international pricing — $299 offer, $1,499 full rate (set in src/lib/store-setup-region.ts)
-- [ ] Apply D1 migrations before deploying, in order: `wrangler d1 execute shopify-leads --remote --file=apps/web/migrations/0001_store_setup_leads.sql`, then the same for `0002_store_setup_leads_region.sql` and `0003_store_setup_leads_email.sql`
+- [x] Apply D1 migrations 0001–0003 to remote shopify-leads (done 2026-08-20; table verified with all columns)
 - [ ] Set GOOGLE_ADS_CONVERSION_SEND_TO once the conversion action exists in Google Ads
 - [ ] Confirm each brand in the work showcase may be shown publicly before ads go live
 
