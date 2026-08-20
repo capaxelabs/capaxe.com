@@ -123,11 +123,14 @@ export const POST: APIRoute = async ({ request, locals }) => {
   }
 
   try {
+    // Straight to the founder — contact@ is not monitored closely enough
+    // for paid-traffic leads that expect a same-day reply.
     await sendEmail(
       buildEmailHtml(lead),
-      siteConfig.contact.contactEmail,
+      "mukesh@capaxe.com",
       `Store setup lead — ${lead.name} (${lead.email || lead.phone})`,
-      []
+      [],
+      siteConfig.contact.contactEmail
     );
   } catch (error) {
     console.error("store-setup-lead: email failed", error);
