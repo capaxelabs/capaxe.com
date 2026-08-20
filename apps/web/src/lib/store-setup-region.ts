@@ -8,9 +8,9 @@
  * there is no cf object).
  *
  * EDITABLE CLAIMS: every number below is a promise made to a stranger who
- * is about to pay you. Check each one before ads go live — especially the
- * USD prices, which are placeholders until you decide what the
- * international offer costs.
+ * is about to pay you. Check each one before ads go live. The $299
+ * international price is confirmed; the $599 full rate is an estimate of
+ * the ₹45,000 normal rate and still needs a decision.
  */
 
 export interface StoreSetupRegion {
@@ -59,7 +59,7 @@ const IN: StoreSetupRegion = {
 
 const INTL: StoreSetupRegion = {
   code: "INTL",
-  price: "$99",
+  price: "$299",
   fullRate: "$599",
   heroDeliverables: "payments",
   includePayments:
