@@ -3,13 +3,14 @@ import "@/styles/global.css";
 
 interface Props {
   title: string;
-  active?: "dashboard" | "leads" | "apps" | "themes" | "judgeme";
+  active?: "dashboard" | "leads" | "store-setup" | "apps" | "themes" | "judgeme";
 }
 const { title, active = "dashboard" } = Astro.props;
 
 const nav = [
-  { key: "dashboard", label: "Dashboard", href: "/admin" },
-  { key: "leads",     label: "Leads",     href: "/admin/leads" },
+  { key: "dashboard",   label: "Dashboard",   href: "/admin" },
+  { key: "leads",       label: "Leads",       href: "/admin/leads" },
+  { key: "store-setup", label: "Store setup", href: "/admin/store-setup" },
   { key: "apps",      label: "Apps",      href: "/admin/apps" },
   { key: "themes",    label: "Themes",    href: "/admin/themes" },
   { key: "judgeme",   label: "Judge.me",  href: "/admin/judgeme" },

@@ -1,0 +1,229 @@
+---
+/**
+ * Inbound leads from the /shopify-store-setup landing page.
+ * Read-only list; the reply happens on WhatsApp or email, not here.
+ */
+import AdminLayout from "@/layouts/AdminLayout.astro";
+
+export const prerender = false;
+
+interface LeadRow {
+  id: number;
+  name: string;
+  phone: string | null;
+  email: string | null;
+  sells: string;
+  gclid: string | null;
+  utm_source: string | null;
+  utm_campaign: string | null;
+  landing_path: string | null;
+  region: string | null;
+  country: string | null;
+  created_at: string;
+}
+
+const db = Astro.locals.runtime.env.LEADS_DB;
+const url = new URL(Astro.request.url);
+
+const q = url.searchParams.get("q")?.trim() || "";
+const region = url.searchParams.get("region")?.trim() || "";
+const page = Math.max(1, Number(url.searchParams.get("page") ?? "1"));
+const pageSize = 50;
+const offset = (page - 1) * pageSize;
+
+const where: string[] = ["1 = 1"];
+const binds: unknown[] = [];
+
+if (q) {
+  where.push("(name LIKE ? OR phone LIKE ? OR email LIKE ? OR sells LIKE ?)");
+  binds.push(`%${q}%`, `%${q}%`, `%${q}%`, `%${q}%`);
+}
+if (region) {
+  where.push("region = ?");
+  binds.push(region);
+}
+
+const whereSql = where.join(" AND ");
+
+const totalRow = await db
+  .prepare(`SELECT COUNT(*) AS n FROM store_setup_leads WHERE ${whereSql}`)
+  .bind(...binds)
+  .first<{ n: number }>();
+const total = totalRow?.n ?? 0;
+const pages = Math.max(1, Math.ceil(total / pageSize));
+
+const rows = await db
+  .prepare(
+    `SELECT id, name, phone, email, sells, gclid, utm_source, utm_campaign,
+            landing_path, region, country, created_at
+       FROM store_setup_leads
+      WHERE ${whereSql}
+      ORDER BY id DESC
+      LIMIT ? OFFSET ?`
+  )
+  .bind(...binds, pageSize, offset)
+  .all<LeadRow>();
+
+/* Same rule as the notification email: a bare 10-digit number is only
+   assumed Indian when the lead saw the Indian offer. */
+function waLink(lead: LeadRow): string {
+  const digits = (lead.phone ?? "").replace(/[^0-9]/g, "");
+  if (digits.length < 10) return "";
+  const assumeIndia = (lead.region ?? "IN") === "IN";
+  return `https://wa.me/${digits.length === 10 && assumeIndia ? "91" + digits : digits}`;
+}
+
+function when(iso: string): string {
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return iso;
+  return d.toLocaleString("en-IN", {
+    timeZone: "Asia/Kolkata",
+    day: "numeric",
+    month: "short",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  });
+}
+
+function source(lead: LeadRow): string {
+  const parts = [lead.utm_source, lead.utm_campaign].filter(Boolean);
+  if (parts.length) return parts.join(" / ");
+  return lead.gclid ? "google ads" : "direct";
+}
+
+function pageHref(p: number) {
+  const sp = new URLSearchParams(url.searchParams);
+  sp.set("page", String(p));
+  return `?${sp.toString()}`;
+}
+
+function fmt(n: number) {
+  return n.toLocaleString("en-US");
+}
+---
+
+<AdminLayout title="Store setup leads" active="store-setup">
+  <!-- Filter bar -->
+  <form method="GET" class="grid grid-cols-12 gap-3 rounded-lg border border-slate-200 bg-white p-3">
+    <input
+      name="q"
+      placeholder="Search name, phone, email, what they sell…"
+      value={q}
+      class="col-span-7 rounded-md border border-slate-300 px-3 py-1.5 text-sm focus:border-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900"
+    />
+    <select name="region" class="col-span-2 rounded-md border border-slate-300 px-2 py-1.5 text-sm">
+      <option value="">All regions</option>
+      <option value="IN" selected={region === "IN"}>India (₹4,999)</option>
+      <option value="INTL" selected={region === "INTL"}>International ($299)</option>
+    </select>
+    <button
+      type="submit"
+      class="col-span-1 rounded-md bg-slate-900 px-3 py-1.5 text-sm font-medium text-white hover:bg-slate-800"
+    >
+      Apply
+    </button>
+  </form>
+
+  <p class="mt-3 text-xs text-slate-500">
+    {fmt(total)} leads · page {page} of {fmt(pages)}
+  </p>
+
+  <!-- Table -->
+  <div class="mt-3 overflow-x-auto rounded-lg border border-slate-200 bg-white">
+    <table class="w-full text-sm">
+      <thead class="bg-slate-50 text-xs uppercase tracking-wider text-slate-500">
+        <tr>
+          <th class="px-4 py-2 text-left font-medium">When (IST)</th>
+          <th class="px-4 py-2 text-left font-medium">Name</th>
+          <th class="px-4 py-2 text-left font-medium">Contact</th>
+          <th class="px-4 py-2 text-left font-medium">What they sell</th>
+          <th class="px-4 py-2 text-left font-medium">Region</th>
+          <th class="px-4 py-2 text-left font-medium">Source</th>
+          <th class="px-4 py-2 text-left font-medium">Landed on</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows.results?.map((r) => (
+          <tr class="border-t border-slate-100 align-top hover:bg-slate-50">
+            <td class="whitespace-nowrap px-4 py-2 text-slate-500">{when(r.created_at)}</td>
+            <td class="px-4 py-2 font-medium text-slate-900">{r.name}</td>
+            <td class="px-4 py-2">
+              {r.phone && (
+                waLink(r) ? (
+                  <a
+                    href={waLink(r)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="block text-emerald-700 hover:underline"
+                  >
+                    {r.phone}
+                  </a>
+                ) : (
+                  <span class="block text-slate-700">{r.phone}</span>
+                )
+              )}
+              {r.email && (
+                <a href={`mailto:${r.email}`} class="block max-w-[200px] truncate text-slate-700 hover:underline">
+                  {r.email}
+                </a>
+              )}
+              {!r.phone && !r.email && <span class="text-slate-400">—</span>}
+            </td>
+            <td class="max-w-[320px] px-4 py-2 text-slate-700">{r.sells}</td>
+            <td class="px-4 py-2">
+              <span
+                class:list={[
+                  "rounded-full px-2 py-0.5 text-[11px] font-semibold",
+                  r.region === "INTL"
+                    ? "bg-sky-100 text-sky-800"
+                    : "bg-amber-100 text-amber-800",
+                ]}
+              >
+                {r.region === "INTL" ? `INTL${r.country ? ` · ${r.country}` : ""}` : "IN"}
+              </span>
+            </td>
+            <td class="px-4 py-2 text-xs text-slate-500">{source(r)}</td>
+            <td class="max-w-[200px] truncate px-4 py-2 text-xs text-slate-400">{r.landing_path ?? "—"}</td>
+          </tr>
+        ))}
+        {!rows.results?.length && (
+          <tr>
+            <td colspan="7" class="px-4 py-10 text-center text-sm text-slate-500">
+              No leads yet. They land here the moment someone submits the form on /shopify-store-setup.
+            </td>
+          </tr>
+        )}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  {pages > 1 && (
+    <div class="mt-3 flex items-center justify-between text-sm">
+      <p class="text-slate-500">
+        Showing {fmt(offset + 1)}–{fmt(Math.min(offset + pageSize, total))} of {fmt(total)}
+      </p>
+      <div class="flex gap-1">
+        <a
+          href={pageHref(Math.max(1, page - 1))}
+          class:list={[
+            "rounded-md border border-slate-200 bg-white px-3 py-1.5 hover:bg-slate-50",
+            page === 1 && "pointer-events-none opacity-50",
+          ]}
+        >
+          ← Prev
+        </a>
+        <a
+          href={pageHref(Math.min(pages, page + 1))}
+          class:list={[
+            "rounded-md border border-slate-200 bg-white px-3 py-1.5 hover:bg-slate-50",
+            page === pages && "pointer-events-none opacity-50",
+          ]}
+        >
+          Next →
+        </a>
+      </div>
+    </div>
+  )}
+</AdminLayout>
