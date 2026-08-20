@@ -6,8 +6,7 @@
 - [x] Store region + country with each lead (form → API → email + D1)
 
 ### Pending
-- [x] Confirm international price — $299 (set in src/lib/store-setup-region.ts)
-- [ ] Confirm the international "normal rate" shown next to $299 — $599 is an estimate of the ₹45,000 full rate, not an agreed number
+- [x] Confirm international pricing — $299 offer, $1,499 full rate (set in src/lib/store-setup-region.ts)
 - [ ] Apply D1 migrations before deploying: `wrangler d1 execute shopify-leads --remote --file=apps/web/migrations/0001_store_setup_leads.sql` then `...0002_store_setup_leads_region.sql`
 - [ ] Set GOOGLE_ADS_CONVERSION_SEND_TO once the conversion action exists in Google Ads
 - [ ] Confirm each brand in the work showcase may be shown publicly before ads go live

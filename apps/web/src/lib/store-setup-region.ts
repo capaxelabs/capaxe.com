@@ -8,9 +8,8 @@
  * there is no cf object).
  *
  * EDITABLE CLAIMS: every number below is a promise made to a stranger who
- * is about to pay you. Check each one before ads go live. The $299
- * international price is confirmed; the $599 full rate is an estimate of
- * the ₹45,000 normal rate and still needs a decision.
+ * is about to pay you. Check each one before ads go live. International
+ * pricing is confirmed: $299 offer, $1,499 full rate.
  */
 
 export interface StoreSetupRegion {
@@ -60,7 +59,7 @@ const IN: StoreSetupRegion = {
 const INTL: StoreSetupRegion = {
   code: "INTL",
   price: "$299",
-  fullRate: "$599",
+  fullRate: "$1,499",
   heroDeliverables: "payments",
   includePayments:
     "Payments live for your country: cards, Apple Pay and Google Pay through Shopify Payments, plus PayPal",
