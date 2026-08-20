@@ -8,6 +8,11 @@
  * fresh reach costs several times what it does in India.
  *
  * Move this into BaseHead.astro if you want site-wide retargeting.
+ *
+ * NOTE: the body below is plain JavaScript, deliberately. Astro treats the
+ * contents of a <script> tag as raw text, so a JSX-style {`...`} wrapper is
+ * emitted literally and the snippet silently never runs. `define:vars`
+ * injects `pixelId` as a const ahead of this code.
  */
 interface Props {
   pixelId?: string;
@@ -19,12 +24,24 @@ const { pixelId } = Astro.props;
   pixelId && (
     <>
       <script is:inline define:vars={{ pixelId }}>
-        {`!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-        document,'script','https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', pixelId); fbq('track', 'PageView');`}
+        !function (f, b, e, v, n, t, s) {
+          if (f.fbq) return;
+          n = f.fbq = function () {
+            n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+          };
+          if (!f._fbq) f._fbq = n;
+          n.push = n;
+          n.loaded = !0;
+          n.version = "2.0";
+          n.queue = [];
+          t = b.createElement(e);
+          t.async = !0;
+          t.src = v;
+          s = b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t, s);
+        }(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
+        fbq("init", pixelId);
+        fbq("track", "PageView");
       </script>
       <noscript>
         <img
