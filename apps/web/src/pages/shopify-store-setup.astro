@@ -21,6 +21,13 @@ const cfCountry = (Astro.locals as any)?.runtime?.cf?.country as
   string | undefined;
 const region = resolveRegion(cfCountry, Astro.url.searchParams.get("region"));
 
+/* This response varies by the visitor's IP, and no cache header can express
+   that — a stored copy would serve rupees to Americans, or dollars to Indians
+   who then see a price the ad never promised. Cheap page, expensive mistake:
+   never store it. */
+Astro.response.headers.set("Cache-Control", "private, no-store, must-revalidate");
+Astro.response.headers.set("Vary", "Accept-Encoding");
+
 const PRICE = region.price;
 const FULL_RATE = region.fullRate;
 const STORES_BUILT = 9; // live stores you can actually point to
@@ -31,6 +38,18 @@ const PRODUCTS_INCLUDED = 25; // products uploaded within the price
    Empty until the conversion action exists in the Google Ads account —
    the form still records the lead and pushes a dataLayer event. */
 const GOOGLE_ADS_CONVERSION_SEND_TO = "";
+
+/* Meta pixel — the existing "Shopify Bee Apps" dataset on the Capaxe Labs
+   business, shared deliberately. Bee Apps and Capaxe sell to the same people
+   (Shopify merchants), so one pooled pixel means one larger warm audience to
+   retarget and a single event stream that exits learning sooner, instead of
+   two thin ones that never do.
+
+   What needs separating is the EVENTS, not the pixel. The Lead fired from
+   this page carries content_name "shopify-store-setup" and the region as
+   content_category, so custom conversions in Events Manager can isolate this
+   funnel by URL and by region while the retargeting pool stays shared. */
+const META_PIXEL_ID = "1311274930987541";
 
 const phone = siteConfig.contact.phone.replace(/\s+/g, "");
 const waMessage = `Hi, I saw your ${PRICE} Shopify store offer. I want to sell `;
@@ -174,7 +193,7 @@ const seo = {
 };
 ---
 
-<LandingLayout seo={seo}>
+<LandingLayout seo={seo} metaPixelId={META_PIXEL_ID}>
   <!-- ================= HERO ================= -->
   <section class="mx-auto max-w-6xl px-5 pt-12 pb-16 sm:pt-16">
     <div class="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
@@ -245,7 +264,7 @@ const seo = {
         >
           <h2 class="text-xl font-bold tracking-tight">Start your store</h2>
           <p class="mt-1.5 mb-5 text-sm text-muted-foreground">
-            Three questions. I reply the same day, on WhatsApp.
+            {region.formIntro}
           </p>
           <StoreSetupForm
             client:load
@@ -254,6 +273,7 @@ const seo = {
             region={region.code}
             country={cfCountry ?? ""}
             copy={region.form}
+            metaPixelId={META_PIXEL_ID}
           />
         </div>
       </div>
@@ -409,8 +429,7 @@ const seo = {
       Tell me what you sell. I&rsquo;ll tell you what your store needs.
     </h2>
     <p class="mx-auto mt-4 max-w-xl text-muted-foreground">
-      No payment, no commitment, no sales call in a calendar you have to keep.
-      Just a WhatsApp message back, the same day.
+      {region.finalCtaNote}
     </p>
     <div
       class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row"
@@ -421,14 +440,18 @@ const seo = {
       >
         Start my store for {PRICE}
       </a>
-      <a
-        href={whatsappHref}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="w-full rounded-xl border border-border px-7 py-3.5 text-base font-semibold transition hover:bg-card sm:w-auto"
-      >
-        Message me on WhatsApp
-      </a>
+      {
+        region.form.showWhatsapp && (
+          <a
+            href={whatsappHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-full rounded-xl border border-border px-7 py-3.5 text-base font-semibold transition hover:bg-card sm:w-auto"
+          >
+            Message me on WhatsApp
+          </a>
+        )
+      }
     </div>
   </section>
 </LandingLayout>

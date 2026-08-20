@@ -11,26 +11,40 @@ interface Props {
   /** Region-specific labels and placeholders. */
   copy?: {
     namePlaceholder: string;
+    primaryContact: "phone" | "email";
     phoneLabel: string;
     phonePlaceholder: string;
+    emailLabel: string;
+    emailPlaceholder: string;
     sellsPlaceholder: string;
+    showWhatsapp: boolean;
+    replyPromise: string;
   };
+  /** Meta pixel id, so a form submit can be reported as a Lead. */
+  metaPixelId?: string;
 }
 
 const DEFAULT_COPY = {
   namePlaceholder: "Priya Sharma",
+  primaryContact: "phone" as const,
   phoneLabel: "WhatsApp number",
   phonePlaceholder: "98765 43210",
+  emailLabel: "Email (optional)",
+  emailPlaceholder: "you@example.com",
   sellsPlaceholder: "Handmade silver jewellery. I sell on Instagram right now and want a proper store.",
+  showWhatsapp: true,
+  replyPromise:
+    "I\u2019ll message you on WhatsApp at {contact} \u2014 usually within a few hours, and always the same day.",
 };
 
 interface FormState {
   name: string;
   phone: string;
+  email: string;
   sells: string;
 }
 
-const EMPTY: FormState = { name: "", phone: "", sells: "" };
+const EMPTY: FormState = { name: "", phone: "", email: "", sells: "" };
 
 const inputClass =
   "w-full rounded-xl border border-input bg-background px-3.5 py-3 text-base text-foreground " +
@@ -42,7 +56,9 @@ export default function StoreSetupForm({
   region = "IN",
   country = "",
   copy = DEFAULT_COPY,
+  metaPixelId = "",
 }: Props) {
+  const emailFirst = copy.primaryContact === "email";
   const [form, setForm] = useState<FormState>(EMPTY);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -101,15 +117,15 @@ export default function StoreSetupForm({
 
       if (res.ok && data.success) {
         setStatus("success");
-        fireConversion(conversionSendTo);
+        fireConversion(conversionSendTo, metaPixelId, region);
         return;
       }
 
       setErrors(data.errors ?? {});
-      setMessage(data.message ?? "Something went wrong. Please try WhatsApp instead.");
+      setMessage(data.message ?? "Something went wrong. Please email contact@capaxe.com instead.");
       setStatus("error");
     } catch {
-      setMessage("Network problem. Please try WhatsApp instead.");
+      setMessage("Network problem. Please try again, or email contact@capaxe.com.");
       setStatus("error");
     }
   };
@@ -131,18 +147,22 @@ export default function StoreSetupForm({
         </div>
         <p className="text-lg font-semibold">Got it, {form.name.split(" ")[0]}.</p>
         <p className="text-sm text-muted-foreground">
-          I&rsquo;ll message you on WhatsApp at{" "}
-          <span className="font-medium text-foreground">{form.phone}</span> — usually within a few
-          hours, and always the same day.
+          {copy.replyPromise.split("{contact}")[0]}
+          <span className="font-medium text-foreground">
+            {emailFirst ? form.email : form.phone}
+          </span>
+          {copy.replyPromise.split("{contact}")[1]}
         </p>
-        <a
-          href={whatsappHref}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center justify-center rounded-xl bg-[#25D366] px-5 py-3 text-sm font-semibold text-white transition hover:brightness-95"
-        >
-          Or start the chat yourself now
-        </a>
+        {copy.showWhatsapp && (
+          <a
+            href={whatsappHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center rounded-xl bg-[#25D366] px-5 py-3 text-sm font-semibold text-white transition hover:brightness-95"
+          >
+            Or start the chat yourself now
+          </a>
+        )}
       </div>
     );
   }
@@ -168,6 +188,29 @@ export default function StoreSetupForm({
         {errors.name && <p className="text-sm text-destructive">{errors.name}</p>}
       </div>
 
+      {/* Ordered so the field the visitor is most willing to give comes first. */}
+      {emailFirst && (
+        <div className="space-y-1.5">
+          <label htmlFor="ss-email" className="block text-sm font-medium">
+            {copy.emailLabel}
+          </label>
+          <input
+            id="ss-email"
+            name="email"
+            type="email"
+            inputMode="email"
+            autoComplete="email"
+            required
+            value={form.email}
+            onChange={change}
+            placeholder={copy.emailPlaceholder}
+            className={inputClass}
+            aria-invalid={!!errors.email}
+          />
+          {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
+        </div>
+      )}
+
       <div className="space-y-1.5">
         <label htmlFor="ss-phone" className="block text-sm font-medium">
           {copy.phoneLabel}
@@ -178,7 +221,7 @@ export default function StoreSetupForm({
           type="tel"
           inputMode="tel"
           autoComplete="tel"
-          required
+          required={!emailFirst}
           value={form.phone}
           onChange={change}
           placeholder={copy.phonePlaceholder}
@@ -187,6 +230,27 @@ export default function StoreSetupForm({
         />
         {errors.phone && <p className="text-sm text-destructive">{errors.phone}</p>}
       </div>
+
+      {!emailFirst && (
+        <div className="space-y-1.5">
+          <label htmlFor="ss-email" className="block text-sm font-medium">
+            {copy.emailLabel}
+          </label>
+          <input
+            id="ss-email"
+            name="email"
+            type="email"
+            inputMode="email"
+            autoComplete="email"
+            value={form.email}
+            onChange={change}
+            placeholder={copy.emailPlaceholder}
+            className={inputClass}
+            aria-invalid={!!errors.email}
+          />
+          {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
+        </div>
+      )}
 
       <div className="space-y-1.5">
         <label htmlFor="ss-sells" className="block text-sm font-medium">
@@ -232,6 +296,8 @@ export default function StoreSetupForm({
         decide anything.
       </p>
 
+      {copy.showWhatsapp && (
+        <>
       <div className="flex items-center gap-3 pt-1">
         <span className="h-px flex-1 bg-border" />
         <span className="text-xs text-muted-foreground">or</span>
@@ -249,18 +315,23 @@ export default function StoreSetupForm({
         </svg>
         Message me on WhatsApp
       </a>
+        </>
+      )}
     </form>
   );
 }
 
-/** Fires the Google Ads conversion, if a label has been configured. */
-function fireConversion(sendTo?: string) {
+/** Reports the lead to Google Ads and Meta, where each is configured. */
+function fireConversion(sendTo?: string, metaPixelId?: string, region?: string) {
   const w = window as any;
   try {
     w.dataLayer = w.dataLayer || [];
-    w.dataLayer.push({ event: "store_setup_lead" });
+    w.dataLayer.push({ event: "store_setup_lead", region });
     if (sendTo && typeof w.gtag === "function") {
       w.gtag("event", "conversion", { send_to: sendTo });
+    }
+    if (metaPixelId && typeof w.fbq === "function") {
+      w.fbq("track", "Lead", { content_name: "shopify-store-setup", content_category: region });
     }
   } catch {
     /* tracking must never break the thank-you state */

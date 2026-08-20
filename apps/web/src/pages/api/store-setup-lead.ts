@@ -15,10 +15,21 @@ export const prerender = false;
 
 const leadSchema = z.object({
   name: z.string().trim().min(2, "Please enter your name").max(80),
+  // One contact method is required, not both. India leads with WhatsApp,
+  // the rest of the world leads with email — see store-setup-region.ts.
   phone: z
     .string()
     .trim()
-    .regex(/^[0-9+][0-9+\-\s()]{6,19}$/, "Please enter a valid WhatsApp number"),
+    .regex(/^[0-9+][0-9+\-\s()]{6,19}$/, "Please enter a valid WhatsApp number")
+    .optional()
+    .or(z.literal("")),
+  email: z
+    .string()
+    .trim()
+    .email("Please enter a valid email address")
+    .max(160)
+    .optional()
+    .or(z.literal("")),
   sells: z.string().trim().min(2, "Tell me what you sell").max(400),
 
   // Anti-spam. `company` is a honeypot: it is hidden from humans and must stay empty.
@@ -34,7 +45,11 @@ const leadSchema = z.object({
   // The page is geo-priced, so record which offer this person actually saw.
   region: z.string().max(12).optional().or(z.literal("")),
   country: z.string().max(8).optional().or(z.literal("")),
-});
+})
+  .refine((d) => Boolean(d.phone) || Boolean(d.email), {
+    message: "Please leave an email address or a WhatsApp number",
+    path: ["email"],
+  });
 
 type Lead = z.infer<typeof leadSchema>;
 
@@ -53,7 +68,7 @@ function digitsOnly(phone: string): string {
 }
 
 function buildEmailHtml(lead: Lead): string {
-  const wa = digitsOnly(lead.phone);
+  const wa = digitsOnly(lead.phone ?? "");
   // Bare 10-digit numbers only get the 91 prefix for Indian leads;
   // international visitors are asked for a number with country code.
   const assumeIndia = (lead.region || "IN") === "IN";
@@ -73,9 +88,8 @@ function buildEmailHtml(lead: Lead): string {
     <h2 style="color:#D2542A; margin-bottom: 4px;">Store setup lead — ${esc(lead.name)}</h2>
     <p style="color:#666; margin-top:0;">From the Shopify store setup landing page (${esc(lead.region || "IN")} pricing).</p>
     <p><strong>Name:</strong> ${esc(lead.name)}</p>
-    <p><strong>WhatsApp:</strong> ${esc(lead.phone)}
-      ${waLink ? ` &nbsp;<a href="${waLink}" style="color:#D2542A;">Open chat</a>` : ""}
-    </p>
+    ${lead.email ? `<p><strong>Email:</strong> <a href="mailto:${esc(lead.email)}" style="color:#D2542A;">${esc(lead.email)}</a></p>` : ""}
+    ${lead.phone ? `<p><strong>WhatsApp:</strong> ${esc(lead.phone)}${waLink ? ` &nbsp;<a href="${waLink}" style="color:#D2542A;">Open chat</a>` : ""}</p>` : ""}
     <p><strong>What they sell:</strong><br>${esc(lead.sells).replace(/\n/g, "<br>")}</p>
     <hr style="border:none;border-top:1px solid #eee;margin:20px 0;">
     ${attribution || "<p style='color:#999;'>No attribution data captured.</p>"}
@@ -112,7 +126,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
     await sendEmail(
       buildEmailHtml(lead),
       siteConfig.contact.contactEmail,
-      `Store setup lead — ${lead.name} (${lead.phone})`,
+      `Store setup lead — ${lead.name} (${lead.email || lead.phone})`,
       []
     );
   } catch (error) {
@@ -130,12 +144,14 @@ export const POST: APIRoute = async ({ request, locals }) => {
       await db
         .prepare(
           `INSERT INTO store_setup_leads
-             (name, phone, sells, gclid, utm_source, utm_campaign, landing_path, region, country, created_at)
-           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+             (name, phone, email, sells, gclid, utm_source, utm_campaign, landing_path, region, country, created_at)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
         )
         .bind(
           lead.name,
-          lead.phone,
+          // phone is NOT NULL in the table; email-only leads store "".
+          lead.phone || "",
+          lead.email || null,
           lead.sells,
           lead.gclid || null,
           lead.utmSource || null,

@@ -7,15 +7,18 @@
  * is a way to leave without converting.
  */
 import BaseHead from "@/components/BaseHead.astro";
+import MetaPixel from "@/components/MetaPixel.astro";
 import { siteConfig } from "@/config/site";
 import "@/styles/global.css";
 import type { SEOProps } from "@/utils/seo";
 
 interface Props {
   seo?: SEOProps;
+  /** Meta pixel id. Omit and no Meta script loads at all. */
+  metaPixelId?: string;
 }
 
-const { seo } = Astro.props;
+const { seo, metaPixelId } = Astro.props;
 const year = new Date().getFullYear();
 ---
 
@@ -23,6 +26,7 @@ const year = new Date().getFullYear();
 <html lang="en">
   <head>
     <BaseHead seo={seo} />
+    <MetaPixel pixelId={metaPixelId} />
   </head>
   <body class="bg-background text-foreground antialiased">
     <header class="border-b border-border/60">

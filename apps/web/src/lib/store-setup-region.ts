@@ -24,11 +24,28 @@ export interface StoreSetupRegion {
   shopifyPlanNote: string;
   payAnswer: string;
   distanceFaq: { q: string; a: string };
+  /** Sub-headline above the form. */
+  formIntro: string;
+  /** Line under the final CTA. */
+  finalCtaNote: string;
   form: {
     namePlaceholder: string;
+    /**
+     * Which contact field leads the form and is required.
+     * India messages on WhatsApp as a matter of course; in the US/EU,
+     * handing a phone number to an unknown overseas business is a much
+     * bigger ask than giving an email address.
+     */
+    primaryContact: "phone" | "email";
     phoneLabel: string;
     phonePlaceholder: string;
+    emailLabel: string;
+    emailPlaceholder: string;
     sellsPlaceholder: string;
+    /** Show the WhatsApp button under the form and in the final CTA. */
+    showWhatsapp: boolean;
+    /** Thank-you line. {contact} is replaced with what they typed. */
+    replyPromise: string;
   };
 }
 
@@ -47,12 +64,21 @@ const IN: StoreSetupRegion = {
     q: "I'm not in Mumbai. Does that matter?",
     a: "Not at all. Everything happens over WhatsApp and video call. Most of the stores I've built were for merchants I've never met in person.",
   },
+  formIntro: "Three questions. I reply the same day, on WhatsApp.",
+  finalCtaNote:
+    "No payment, no commitment, no sales call in a calendar you have to keep. Just a WhatsApp message back, the same day.",
   form: {
     namePlaceholder: "Priya Sharma",
+    primaryContact: "phone",
     phoneLabel: "WhatsApp number",
     phonePlaceholder: "98765 43210",
+    emailLabel: "Email (optional)",
+    emailPlaceholder: "you@example.com",
     sellsPlaceholder:
       "Handmade silver jewellery. I sell on Instagram right now and want a proper store.",
+    showWhatsapp: true,
+    replyPromise:
+      "I\u2019ll message you on WhatsApp at {contact} \u2014 usually within a few hours, and always the same day.",
   },
 };
 
@@ -72,11 +98,20 @@ const INTL: StoreSetupRegion = {
     q: "You're in India and I'm not. Does that work?",
     a: "It works fine, and it's part of why the price is what it is. Everything happens over WhatsApp and video call, I overlap comfortably with US and European hours, and most of the stores I've built were for merchants I've never met in person.",
   },
+  formIntro: "Three questions. I reply the same working day, by email.",
+  finalCtaNote:
+    "No payment, no commitment, no sales call you have to book. Just a reply in your inbox, the same working day.",
   form: {
     namePlaceholder: "Sarah Mitchell",
-    phoneLabel: "WhatsApp number (with country code)",
+    primaryContact: "email",
+    phoneLabel: "WhatsApp number (optional, with country code)",
     phonePlaceholder: "+1 415 555 0132",
+    emailLabel: "Email",
+    emailPlaceholder: "sarah@yourbrand.com",
     sellsPlaceholder: "Handmade ceramics. I sell on Etsy right now and want my own store.",
+    showWhatsapp: false,
+    replyPromise:
+      "I\u2019ll email you at {contact} \u2014 same working day, with what your store needs and what it costs.",
   },
 };
 
