@@ -40,7 +40,7 @@ const IN: StoreSetupRegion = {
   includePayments: "Indian payments live: UPI, cards, net banking and cash on delivery",
   includeShipping: "Shipping zones and delivery rates set up for India",
   shopifyPlanNote:
-    "Shopify bills you directly for their own plan — that is not something I can include or waive. At the time of writing the Basic plan is around ₹1,499/month plus GST, and Shopify normally runs a ₹20/month introductory rate for the first three months. I'll show you the current pricing before you commit to anything.",
+    "Shopify bills you directly for their own plan that is not something I can include or waive. At the time of writing the Basic plan is around ₹1,499/month plus GST, and Shopify normally runs a ₹20/month introductory rate for the first three months. I'll show you the current pricing before you commit to anything.",
   payAnswer:
     "UPI or bank transfer, in two parts — half to start and half when the store goes live. Nothing is due until after we've spoken and you've agreed the scope.",
   distanceFaq: {
@@ -65,7 +65,7 @@ const INTL: StoreSetupRegion = {
     "Payments live for your country: cards, Apple Pay and Google Pay through Shopify Payments, plus PayPal",
   includeShipping: "Shipping zones and delivery rates set up for where you sell",
   shopifyPlanNote:
-    "Shopify bills you directly for their own plan — that is not something I can include or waive. At the time of writing the Basic plan is around $29–39/month depending on how you're billed, and Shopify usually runs a $1/month introductory offer to start. I'll show you the current pricing before you commit to anything.",
+    "Shopify bills you directly for their own plan that is not something I can include or waive. At the time of writing the Basic plan is around $29–39/month depending on how you're billed, and Shopify usually runs a $1/month introductory offer to start. I'll show you the current pricing before you commit to anything.",
   payAnswer:
     "PayPal, Wise or card, in two parts — half to start and half when the store goes live. Nothing is due until after we've spoken and you've agreed the scope.",
   distanceFaq: {
