@@ -95,21 +95,31 @@ Auth model TBD — for the first cut, a shared `ADMIN_TOKEN` (Worker secret +
 cookie) is the simplest. Cloudflare Access (zero auth code) is the upgrade
 path once we want per-user attribution.
 
-## apps/scrapers (cron Worker)
+## apps/scrapers (Worker + Docker container)
 
-Cron triggers in `wrangler.toml`:
+Scraping no longer runs on Worker crons — the every-minute cron dominated the
+D1 bill (full-table scans against an empty queue), so `wrangler.toml` has
+`crons = []` on purpose. Do not re-add crons.
 
-| Schedule | Job | What it does |
-|---|---|---|
-| `* * * * *` | `enrich` | Pick 20 unprocessed `parsed_stores`, fetch storefront HTML + `/products.json` + `/collections.json`, write fields back. |
-| `*/5 * * * *` | `judgeme` | Walk one page of judge.me search; new domains get probed and upserted. |
+The jobs now run in a Docker container (Hetzner):
 
-Manual HTTP triggers exist for ad-hoc runs (`POST /enrich`, `POST /judgeme`,
-`POST /import-storeleads`, `GET /lookup?domain=`). All write endpoints require
-the `x-admin-token` header.
+- `src/enrich.ts`, `src/judgeme.ts`, `src/lib/*` — shared job logic, runs in
+  both runtimes unchanged.
+- `src/node/main.ts` — container entry: enrich loop + judgeme tick loop +
+  sync loop + `GET /stats` health server.
+- `src/node/sqlite-d1.ts` — D1-compatible adapter over better-sqlite3; every
+  local write is also recorded in `_oplog`.
+- `src/node/d1-remote.ts` — replays `_oplog` to the real D1 via the
+  Cloudflare HTTP API, in order, batched, at-least-once.
 
-Each cron invocation is short (well under 30 s CPU). The DB is the queue;
-`processed_at IS NULL` is the work-to-do list.
+Container workflow (from `apps/scrapers/`): `cp .env.example .env` (set
+`CF_API_TOKEN`), `./scripts/seed-from-d1.sh` once, `docker compose up -d
+--build`. The DB is the queue; `processed_at IS NULL` is the work-to-do list;
+the judge.me cursor lives in `judgeme_progress`.
+
+The Worker still exists for manual HTTP triggers (`POST /enrich`,
+`POST /judgeme`, `POST /import-storeleads`, `GET /lookup?domain=`). All write
+endpoints require the `x-admin-token` header.
 
 ## packages/db (shared schema + types)
 

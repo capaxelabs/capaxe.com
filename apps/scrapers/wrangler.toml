@@ -13,12 +13,13 @@ database_id = "39f53b08-1ea9-4621-8704-e36b6b02ef27"
 [observability]
 enabled = true
 
-# Cron triggers
+# Crons removed on purpose (2026-08-21). The every-minute enrich pass kept
+# running full-table scans against an empty queue and dominated the D1 bill.
+# Scraping now runs in the Docker container (src/node/, deployed on Hetzner),
+# which scrapes into local SQLite and syncs to D1 in batches.
+# The Worker remains only for the manual HTTP endpoints below.
 [triggers]
-crons = [
-  "* * * * *",        # enrich pass every minute (20 stores/run)
-  "*/5 * * * *",      # judgeme crawler every 5 min (when not paused)
-]
+crons = []
 
 # Manual trigger endpoints (also exposed for ad-hoc runs):
 #   POST /enrich?limit=20

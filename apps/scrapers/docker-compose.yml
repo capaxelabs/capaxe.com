@@ -1,0 +1,33 @@
+# Shopify-leads scraper on the Hetzner box.
+#
+# First run:
+#   1. cp .env.example .env       # fill in CF_API_TOKEN (D1 edit permission)
+#   2. ./scripts/seed-from-d1.sh  # one-time: data/scraper.db from live D1
+#   3. docker compose up -d --build
+#   4. curl localhost:8787/stats
+#
+# The container scrapes into data/scraper.db and replays every write to the
+# real D1 in batches (SYNC_INTERVAL_MS). Stop with `docker compose down` —
+# it drains the pending oplog to D1 before exiting.
+
+services:
+  scraper:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8787:8787"
+    volumes:
+      - ./data:/data
+    env_file:
+      - .env
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:8787/stats').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))",
+        ]
+      interval: 60s
+      timeout: 5s
+      retries: 3

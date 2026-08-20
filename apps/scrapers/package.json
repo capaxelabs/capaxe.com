@@ -6,11 +6,19 @@
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
     "tail": "wrangler tail",
-    "check": "tsc --noEmit && wrangler deploy --dry-run",
-    "cf-typegen": "wrangler types"
+    "check": "tsc --noEmit && tsc --noEmit -p tsconfig.node.json && wrangler deploy --dry-run",
+    "cf-typegen": "wrangler types",
+    "build:node": "esbuild src/node/main.ts --bundle --platform=node --target=node22 --format=cjs --external:better-sqlite3 --outfile=dist/node/main.cjs",
+    "start:node": "node dist/node/main.cjs"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.2.0"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250617.0",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^22.15.0",
+    "esbuild": "^0.25.5",
     "typescript": "5.8.3",
     "wrangler": "4.21.x"
   }
