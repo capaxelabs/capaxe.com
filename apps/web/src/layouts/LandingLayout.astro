@@ -1,0 +1,59 @@
+---
+/**
+ * Minimal layout for paid-traffic landing pages.
+ *
+ * Deliberately does NOT include the site Header, Footer nav, TeardownPopup or the
+ * floating WhatsApp button. A landing page has exactly one job; every extra link
+ * is a way to leave without converting.
+ */
+import BaseHead from "@/components/BaseHead.astro";
+import { siteConfig } from "@/config/site";
+import "@/styles/global.css";
+import type { SEOProps } from "@/utils/seo";
+
+interface Props {
+  seo?: SEOProps;
+}
+
+const { seo } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead seo={seo} />
+  </head>
+  <body class="bg-background text-foreground antialiased">
+    <header class="border-b border-border/60">
+      <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
+        <a href="/" class="flex items-center gap-2.5" aria-label="Capaxe Labs home">
+          <img src="/logo.svg" alt="" class="h-8 w-auto" width="32" height="32" />
+          <span class="text-base font-semibold tracking-tight">Capaxe Labs</span>
+        </a>
+        <span class="hidden text-sm text-muted-foreground sm:inline">
+          Shopify Partner · Mumbai
+        </span>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="mt-24 border-t border-border/60">
+      <div
+        class="mx-auto flex max-w-6xl flex-col gap-2 px-5 py-8 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between"
+      >
+        <p>&copy; {year} {siteConfig.legalName}. {siteConfig.contact.address}</p>
+        <p>
+          <a href={`mailto:${siteConfig.contact.contactEmail}`} class="hover:text-foreground">
+            {siteConfig.contact.contactEmail}
+          </a>
+          <span class="mx-2 opacity-40">·</span>
+          <a href="/legal/privacy-policy" class="hover:text-foreground">Privacy</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,351 @@
+---
+import LandingLayout from "@/layouts/LandingLayout.astro";
+import StoreSetupForm from "@/components/StoreSetupForm";
+import WorkShowcase from "@/components/WorkShowcase.astro";
+import { siteConfig } from "@/config/site";
+
+export const prerender = false;
+
+/* ------------------------------------------------------------------
+   EDITABLE CLAIMS
+   Every number below is a promise made to a stranger who is about to
+   pay you. Check each one before this page goes live, and update it
+   here rather than hunting through the markup.
+------------------------------------------------------------------ */
+const PRICE = "₹4,999";
+const FULL_RATE = "₹45,000";
+const STORES_BUILT = 9;          // live stores you can actually point to
+const DELIVERY_DAYS = 7;         // must be honoured, or lower it
+const PRODUCTS_INCLUDED = 25;    // products uploaded within the price
+
+/* Google Ads conversion label, e.g. "AW-123456789/AbC-D_efGhIjKlMn".
+   Empty until the conversion action exists in the Google Ads account —
+   the form still records the lead and pushes a dataLayer event. */
+const GOOGLE_ADS_CONVERSION_SEND_TO = "";
+
+const phone = siteConfig.contact.phone.replace(/\s+/g, "");
+const waMessage = `Hi, I saw your ${PRICE} Shopify store offer. I want to sell `;
+const whatsappHref = `https://wa.me/${phone}?text=${encodeURIComponent(waMessage)}`;
+
+/* Screenshots of real work, cropped to 3:2 and living in public/lp/.
+   TAGS DEFAULT TO "Custom build" ON PURPOSE. Flip any that really were a
+   straightforward setup — erring the other way implies a big custom job is
+   what the cheap tier buys, which is the expectation you cannot meet.
+   Also confirm you may show each brand publicly before this goes live. */
+const work = [
+  { image: "/lp/cld9.jpg",      name: "CLD9",      blurb: "AI supplement builder on a headless storefront", tag: "Custom build" },
+  { image: "/lp/vaidique.jpg",  name: "Vaidique",  blurb: "Ayurvedic skincare, bundle merchandising",       tag: "Custom build" },
+  { image: "/lp/renu.jpg",      name: "Renu",      blurb: "Handloom sarees, shop by technique and colour",  tag: "Custom build" },
+  { image: "/lp/uniqstree.jpg", name: "Uniqstree", blurb: "Ethnic wear, plus-size range and video-call shopping", tag: "Custom build" },
+  { image: "/lp/locaboca.jpg",  name: "Loca Boca", blurb: "Bakery and gifting, WhatsApp ordering",          tag: "Custom build" },
+  { image: "/lp/dripcult.jpg",  name: "Dripcult",  blurb: "Streetwear, mobile-first storefront",            tag: "Custom build" },
+  // Spare, ready to swap in: /lp/kranium.jpg — "Kranium", "Menswear, best-seller merchandising"
+];
+
+const includes = [
+  "A premium Shopify theme installed and set up with your logo, colours and fonts",
+  `Up to ${PRODUCTS_INCLUDED} products uploaded — images, descriptions, prices, variants, stock`,
+  "Home, collection, product, cart and checkout pages properly configured",
+  "Indian payments live: UPI, cards, net banking and cash on delivery",
+  "Shipping zones and delivery rates set up for India",
+  "Your domain connected — or help buying one if you don't have it yet",
+  "Shipping, returns, privacy and terms pages written for your store",
+  "A WhatsApp chat button so customers can reach you the way they already do",
+  "Basic SEO: page titles, descriptions and a sitemap submitted to Google",
+  "A 30-minute handover call where I show you how to run it yourself",
+];
+
+const excludes = [
+  {
+    title: "Your Shopify subscription",
+    body: `Shopify bills you directly for their own plan — that is not something I can include or waive. At the time of writing the Basic plan is around ₹1,499/month plus GST, and Shopify normally runs a ₹20/month introductory rate for the first three months. I'll show you the current pricing before you commit to anything.`,
+  },
+  {
+    title: "Product photos and written descriptions",
+    body: "Send me what you have and I'll place it properly. If you don't have photos yet, I'll tell you exactly what to shoot and how — it's usually a phone and a window.",
+  },
+  {
+    title: "Running ads, and changes after handover",
+    body: "Both are available separately. Neither is bundled into this price, because bundling them is how a cheap build turns into an expensive surprise.",
+  },
+  {
+    title: "Custom apps, headless builds and Shopify Plus work",
+    body: `That's my normal engineering work and it starts around ${FULL_RATE}. If that's what you actually need, I'll tell you on the call instead of selling you this.`,
+  },
+];
+
+const steps = [
+  {
+    n: "1",
+    title: "Tell me what you sell",
+    body: "The form takes a minute. Or message me on WhatsApp if that's easier — most people do.",
+  },
+  {
+    n: "2",
+    title: "We talk for 20 minutes",
+    body: `I'll tell you exactly what your store needs and whether ${PRICE} covers it. If it doesn't, I say so before you pay anything.`,
+  },
+  {
+    n: "3",
+    title: "I build it, you review it",
+    body: `You get a private link to look at, we fix whatever you want changed, and it goes live. Usually within ${DELIVERY_DAYS} days of getting your products.`,
+  },
+];
+
+const faqs = [
+  {
+    q: `Is ${PRICE} really the whole price?`,
+    a: `Yes, for everything in the list above. The only other cost is Shopify's own monthly plan, which they bill you for directly — I never touch that money. If your store needs something outside the list, I'll quote it before starting, not after.`,
+  },
+  {
+    q: "Who owns the store?",
+    a: "You do, completely. It's created under your email, your Shopify account, your bank details and your domain. I get access as a collaborator while I build, and you can remove me the day it goes live. There is no lock-in and nothing to pay me monthly.",
+  },
+  {
+    q: "Why would you work for this little?",
+    a: `Because I'm building out my Shopify Partner portfolio and a live store is worth more to me than the difference in fee. That's the entire reason. It's a limited number of stores — ${STORES_BUILT} are live so far — and when the portfolio is full the price goes back to ${FULL_RATE}.`,
+  },
+  {
+    q: "I don't have products or photos ready. Is that a problem?",
+    a: "No, but it does set the timeline. I'll build the store structure and show you exactly what to send. Most people are ready within a week once they know what's needed.",
+  },
+  {
+    q: "I'm not in Mumbai. Does that matter?",
+    a: "Not at all. Everything happens over WhatsApp and video call. Most of the stores I've built were for merchants I've never met in person.",
+  },
+  {
+    q: "How do I pay?",
+    a: "UPI or bank transfer, in two parts — half to start and half when the store goes live. Nothing is due until after we've spoken and you've agreed the scope.",
+  },
+];
+
+const seo = {
+  title: `Complete Shopify Store Setup for ${PRICE} | Capaxe Labs`,
+  description: `A Shopify Partner in Mumbai builds your full store — theme, products, UPI payments, shipping and launch — for ${PRICE}. Live in ${DELIVERY_DAYS} days. You own it outright.`,
+  canonical: `${siteConfig.url}/shopify-store-setup`,
+  structuredData: {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  },
+};
+---
+
+<LandingLayout seo={seo}>
+  <!-- ================= HERO ================= -->
+  <section class="mx-auto max-w-6xl px-5 pt-12 pb-16 sm:pt-16">
+    <div class="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+      <div>
+        <p class="text-sm font-semibold uppercase tracking-widest text-primary-700">
+          Shopify Partner · Mumbai
+        </p>
+
+        <h1 class="mt-4 text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.4rem]">
+          A complete Shopify store,<br class="hidden sm:block" />
+          built for you — <span class="text-primary-600">{PRICE}</span>
+        </h1>
+
+        <p class="mt-5 max-w-xl text-lg leading-relaxed text-muted-foreground">
+          Theme, products, UPI and cash on delivery, shipping, legal pages, launch.
+          Ready in {DELIVERY_DAYS} days. The store is yours outright — no monthly fee to me,
+          nothing locked to my account.
+        </p>
+
+        <!-- The reason-why. This is load-bearing: without it the price reads as a scam. -->
+        <div class="mt-8 rounded-2xl border border-primary-200 bg-primary-100/50 p-5 sm:p-6">
+          <p class="text-base font-semibold">{PRICE}? What&rsquo;s the catch?</p>
+          <p class="mt-2 text-[15px] leading-relaxed text-muted-foreground">
+            There isn&rsquo;t one, but here&rsquo;s the honest reason. My normal rate for a store
+            build is <strong class="font-semibold text-foreground">{FULL_RATE}</strong>. I&rsquo;m a
+            Shopify Partner building out my partner portfolio, so I&rsquo;m taking on a limited
+            number of new stores at {PRICE} to do it.
+            <strong class="font-semibold text-foreground">{STORES_BUILT} are live so far.</strong>
+            When the portfolio is full, the price goes back to normal. You get the same work — I get
+            another real store to point at.
+          </p>
+        </div>
+
+        <dl class="mt-8 grid grid-cols-3 gap-4 border-t border-border pt-6">
+          <div>
+            <dt class="text-2xl font-bold sm:text-3xl">{STORES_BUILT}</dt>
+            <dd class="mt-0.5 text-sm text-muted-foreground">stores live</dd>
+          </div>
+          <div>
+            <dt class="text-2xl font-bold sm:text-3xl">{DELIVERY_DAYS} days</dt>
+            <dd class="mt-0.5 text-sm text-muted-foreground">typical build</dd>
+          </div>
+          <div>
+            <dt class="text-2xl font-bold sm:text-3xl">10+ yrs</dt>
+            <dd class="mt-0.5 text-sm text-muted-foreground">shipping software</dd>
+          </div>
+        </dl>
+      </div>
+
+      <!-- ================= FORM ================= -->
+      <div class="lg:pt-2">
+        <div
+          id="start"
+          class="rounded-3xl border border-border bg-card p-6 shadow-sm sm:p-7 lg:sticky lg:top-8"
+        >
+          <h2 class="text-xl font-bold tracking-tight">Start your store</h2>
+          <p class="mt-1.5 mb-5 text-sm text-muted-foreground">
+            Three questions. I reply the same day, on WhatsApp.
+          </p>
+          <StoreSetupForm
+            client:load
+            conversionSendTo={GOOGLE_ADS_CONVERSION_SEND_TO}
+            whatsappHref={whatsappHref}
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WHAT YOU GET ================= -->
+  <section class="border-y border-border bg-card/60">
+    <div class="mx-auto max-w-6xl px-5 py-16">
+      <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">What {PRICE} actually gets you</h2>
+      <p class="mt-3 max-w-2xl text-muted-foreground">
+        Not a template dumped in your lap. A store that is set up, filled in, tested and ready to
+        take a real order on the day it goes live.
+      </p>
+
+      <ul class="mt-9 grid gap-x-10 gap-y-4 sm:grid-cols-2">
+        {includes.map((item) => (
+          <li class="flex items-start gap-3">
+            <svg
+              class="mt-0.5 h-5 w-5 shrink-0 text-primary-600"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M16.7 5.3a1 1 0 0 1 0 1.4l-7.5 7.5a1 1 0 0 1-1.4 0l-3.5-3.5a1 1 0 1 1 1.4-1.4l2.8 2.79 6.8-6.79a1 1 0 0 1 1.4 0Z"
+                clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-[15px] leading-relaxed">{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= PROOF ================= -->
+  <WorkShowcase items={work} price={PRICE} />
+
+  <!-- ================= WHAT'S NOT INCLUDED ================= -->
+  <section class="mx-auto max-w-6xl px-5 py-16">
+    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">What it does <em>not</em> include</h2>
+    <p class="mt-3 max-w-2xl text-muted-foreground">
+      Worth reading before you message me. A cheap price with hidden extras is just an expensive
+      price you find out about later.
+    </p>
+
+    <div class="mt-9 grid gap-6 sm:grid-cols-2">
+      {excludes.map((item) => (
+        <div class="rounded-2xl border border-border bg-card p-6">
+          <h3 class="text-base font-semibold">{item.title}</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-muted-foreground">{item.body}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ================= HOW IT WORKS ================= -->
+  <section class="border-y border-border bg-card/60">
+    <div class="mx-auto max-w-6xl px-5 py-16">
+      <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">How it works</h2>
+      <div class="mt-10 grid gap-8 sm:grid-cols-3">
+        {steps.map((step) => (
+          <div>
+            <div
+              class="flex h-11 w-11 items-center justify-center rounded-full bg-primary-600 text-lg font-bold text-white"
+            >
+              {step.n}
+            </div>
+            <h3 class="mt-4 text-lg font-semibold">{step.title}</h3>
+            <p class="mt-2 text-[15px] leading-relaxed text-muted-foreground">{step.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WHO BUILDS IT ================= -->
+  <section class="mx-auto max-w-6xl px-5 py-16">
+    <div class="rounded-3xl border border-border bg-card p-8 sm:p-10">
+      <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">Who&rsquo;s actually building it</h2>
+      <p class="mt-4 max-w-3xl text-[15px] leading-relaxed text-muted-foreground">
+        Me. Not an agency floor, not a reseller passing your job down a chain. I&rsquo;ve spent over
+        ten years shipping production software, including financial products at Paytm, and I run
+        Capaxe Labs as a Shopify systems engineering studio from Mumbai. The rest of my work is
+        custom apps, headless storefronts and performance engineering for brands already doing
+        volume — which is exactly why I can set up a straightforward store quickly and not cut
+        corners doing it.
+      </p>
+      <p class="mt-4 max-w-3xl text-[15px] leading-relaxed text-muted-foreground">
+        You&rsquo;ll have my WhatsApp number from the first message to the last. Same person
+        throughout.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section class="border-t border-border bg-card/60">
+    <div class="mx-auto max-w-3xl px-5 py-16">
+      <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">Straight answers</h2>
+      <div class="mt-8 divide-y divide-border">
+        {faqs.map((faq) => (
+          <details class="group py-5">
+            <summary
+              class="flex cursor-pointer list-none items-center justify-between gap-4 text-left text-base font-semibold"
+            >
+              {faq.q}
+              <svg
+                class="h-5 w-5 shrink-0 text-muted-foreground transition-transform group-open:rotate-45"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M10 4a1 1 0 0 1 1 1v4h4a1 1 0 1 1 0 2h-4v4a1 1 0 1 1-2 0v-4H5a1 1 0 1 1 0-2h4V5a1 1 0 0 1 1-1Z"></path>
+              </svg>
+            </summary>
+            <p class="mt-3 text-[15px] leading-relaxed text-muted-foreground">{faq.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FINAL CTA ================= -->
+  <section class="mx-auto max-w-6xl px-5 py-20 text-center">
+    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+      Tell me what you sell. I&rsquo;ll tell you what your store needs.
+    </h2>
+    <p class="mx-auto mt-4 max-w-xl text-muted-foreground">
+      No payment, no commitment, no sales call in a calendar you have to keep. Just a WhatsApp
+      message back, the same day.
+    </p>
+    <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+      <a
+        href="#start"
+        class="w-full rounded-xl bg-primary-600 px-7 py-3.5 text-base font-semibold text-white transition hover:bg-primary-700 sm:w-auto"
+      >
+        Start my store for {PRICE}
+      </a>
+      <a
+        href={whatsappHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="w-full rounded-xl border border-border px-7 py-3.5 text-base font-semibold transition hover:bg-card sm:w-auto"
+      >
+        Message me on WhatsApp
+      </a>
+    </div>
+  </section>
+</LandingLayout>

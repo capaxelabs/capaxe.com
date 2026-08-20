@@ -1,0 +1,81 @@
+---
+/**
+ * Proof strip for the paid-traffic landing page.
+ *
+ * Each item needs a real screenshot in /public/lp/. Items whose image is left
+ * blank are skipped, so the section degrades gracefully while you gather them.
+ */
+export interface WorkItem {
+  /** Path under /public, e.g. "/lp/cld9.jpg" — leave "" to hide this item. */
+  image: string;
+  /** Client or store name as you're allowed to show it publicly. */
+  name: string;
+  /** One line on what it is. */
+  blurb: string;
+  /** Honest label so nobody thinks a headless build is what the cheap tier buys. */
+  tag: string;
+}
+
+interface Props {
+  items: WorkItem[];
+  price: string;
+}
+
+const { items, price } = Astro.props;
+const shown = items.filter((i) => i.image);
+---
+
+{
+  shown.length > 0 && (
+    <section class="border-t border-border">
+      <div class="mx-auto max-w-6xl px-5 py-16">
+        <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">Work I&rsquo;ve actually shipped</h2>
+        <p class="mt-3 max-w-2xl leading-relaxed text-muted-foreground">
+          Real stores and storefronts, not stock mockups. Some of these were much bigger jobs than
+          a {price} setup — they&rsquo;re here so you can see the standard of the work and that
+          there&rsquo;s a real person behind it. What {price} covers is the list further up this
+          page.
+        </p>
+
+        <div class="mt-10 grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
+          {shown.map((item) => (
+            <figure class="group">
+              <div class="overflow-hidden rounded-xl border border-border bg-card shadow-sm">
+                {/* Browser chrome — makes a flat screenshot read as a live site */}
+                <div class="flex items-center gap-1.5 border-b border-border bg-muted/60 px-3 py-2.5">
+                  <span class="h-2.5 w-2.5 rounded-full bg-foreground/15" />
+                  <span class="h-2.5 w-2.5 rounded-full bg-foreground/15" />
+                  <span class="h-2.5 w-2.5 rounded-full bg-foreground/15" />
+                </div>
+                <img
+                  src={item.image}
+                  alt={`${item.name} — ${item.blurb}`}
+                  width="1200"
+                  height="800"
+                  loading="lazy"
+                  decoding="async"
+                  class="aspect-[3/2] w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
+                />
+              </div>
+              <figcaption class="mt-3.5 flex items-start justify-between gap-3">
+                <div>
+                  <p class="text-[15px] font-semibold leading-tight">{item.name}</p>
+                  <p class="mt-1 text-sm leading-snug text-muted-foreground">{item.blurb}</p>
+                </div>
+                <span
+                  class={`shrink-0 rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide ${
+                    item.tag === "Store setup"
+                      ? "bg-primary-100 text-primary-800"
+                      : "bg-muted text-muted-foreground"
+                  }`}
+                >
+                  {item.tag}
+                </span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
